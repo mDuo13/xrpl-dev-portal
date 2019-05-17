@@ -26,6 +26,16 @@
 
 <!-- API object types -->
 [AccountRoot object]: accountroot.html
+[Amendments object]: amendments-object.html
+[Check object]: check.html
+[DepositPreauth object]: depositpreauth-object.html
+[Escrow object]: escrow-object.html
+[FeeSettings object]: feesettings.html
+[LedgerHashes object]: ledgerhashes.html
+[Offer object]: offer.html
+[PayChannel object]: paychannel.html
+[RippleState object]: ripplestate.html
+[SignerList object]: signerlist.html
 
 <!--{# Links to external sites #}-->
 [crypto-condition]: https://tools.ietf.org/html/draft-thomas-crypto-conditions-03
