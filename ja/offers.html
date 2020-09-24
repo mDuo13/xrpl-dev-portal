@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>オファー - XRP Ledger Dev Portal (日本語)</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="/ja/assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="/ja/assets/css/fonts-ja.css" rel="stylesheet" />
+    <link href="/ja/assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-ja ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/ja/" class="navbar-brand"><img src="/ja/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal (日本語)" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">学ぶ</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">オーバービュー</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">探る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">作る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">ドキュメント</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">コンセプト</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">チュートリアル</a>
+          <a class="dropdown-item top-level-2" href="references.html">リファレンス</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">開発者用ツール</a>
+          <a class="dropdown-item top-level-1" href="/blog/">ブログ</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/concepts/decentralized-exchange/offers.ja.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">サイトを検索</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="サイトを検索">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          日本語
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/offers.html">Eng</a>
+          <a class="dropdown-item" href="/ja/offers.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>目次</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#オファー">オファー</a></li>
+<li class="level-2"><a href="#オファーのライフサイクル">オファーのライフサイクル</a></li>
+<li class="level-3"><a href="#資金化されていないオファーの追跡">資金化されていないオファーの追跡</a></li>
+<li class="level-2"><a href="#オファーとトラスト">オファーとトラスト</a></li>
+<li class="level-2"><a href="#オファーの優先度">オファーの優先度</a></li>
+<li class="level-2"><a href="#オファーの有効期限">オファーの有効期限</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">ホーム</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">作る</a></li>
+    <li class="active breadcrumb-item"><a href="concepts.html">コンセプト</a></li>
+    <li class="active breadcrumb-item"><a href="decentralized-exchange.html">分散型取引所</a></li>
+    <li class="active breadcrumb-item">オファー</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="オファー">オファー</h1>
+<p>XRP Ledgerの分散型取引所では、通貨の取引注文は「オファー」と呼ばれます。オファーはXRPと発行済み通貨の取引、または発行済み通貨間の取引（同一通貨コードだがイシュアーが異なる発行済み通貨を含む）を行うことができます。（同一コードでイシュアーが異なる通貨は、<a href="rippling.html">rippling</a>によって取引することもできます。）</p>
+<ul>
+<li>オファーを作成するには、<a href="offercreate.html">OfferCreateトランザクション</a>を送信します。</li>
+<li>即時に履行されないオファーはレジャーデータの<a href="offer.html">Offerオブジェクト</a>になります。その後のオファーとPaymentにより、レジャーのOfferオブジェクトは消費されます。</li>
+<li><a href="cross-currency-payments.html">複数通貨間の支払い</a>はオファーを消費して流動性を提供します。</li>
+</ul>
+<h2 id="オファーのライフサイクル">オファーのライフサイクル</h2>
+<p>OfferCreateトランザクションの処理時に、このトランザクションは一致するオファーまたはクロスオファーを可能な限り自動的に消費します。（既存のオファーのレートが要求よりも良い場合には、オファーの作成者は<code>TakerGets</code>の全額よりも低い額を支払い、<code>TakerPays</code>を全額を受領できます。）それにより<code>TakerPays</code>の額を完全に満たせない場合、オファーはレジャーのOfferオブジェクトになります。（<a href="offercreate.html#offercreateフラグ">OfferCreateフラグ</a>を使用してこの動作を変更できます。）</p>
+<p>既存のオファーに対応する追加のOfferCreateトランザクション、またはオファーを使用してペイメントパスを接続する<a href="payment.html">Paymentトランザクション</a>のいずれかにより、レジャー上のオファーは履行されます。オファーの部分的な履行と、部分的な資金化が可能です。1つのトランザクションで、レジャーのオファーを最大850件まで消費できます。（この数を超えるとメタデータが大きくなり過ぎて、<a href="tec-codes.html"><code>tecOVERSIZE</code></a>となります。）</p>
+<p>オファーの<code>TakerGets</code>パラメーターで指定された通貨をいくらかでも（ゼロ以外のプラスの額）保有している限り、オファーを作成できます。オファーは、<code>TakerPays</code>の額が満たされるまで、<code>TakerGets</code>の額を上限として保有している通貨を売却します。オファーによって誰かに負債が発生することはありません。</p>
+<p>レジャーにすでに記録されているオファーにクロスするオファーを出した場合、関連する額に関係なく古いオファーは自動的に取り消されます。</p>
+<p>次の場合には、オファーは一時的または永久に <em>資金化されない</em> 可能性があります。</p>
+<ul>
+<li>作成者に<code>TakerGets</code>の通貨がない場合。<ul>
+<li>作成者がその通貨を取得すると、オファーに資金が再び供給されます。</li>
+</ul>
+</li>
+<li>オファーに資金を供給するために必要な通貨が<a href="freezes.html">凍結されたトラストライン</a>で保有されている場合。<ul>
+<li>トラストラインの凍結が解除されると、オファーに資金が再び供給されます。</li>
+</ul>
+</li>
+<li>オファーに必要な新しいトラストラインの準備金として十分な額のXRPを作成者が保有していない場合。（<a href="#オファーとトラスト">オファーとトラスト</a>を参照してください。）<ul>
+<li>作成者がXRPをさらに取得するか、または必要準備金が減額されると、オファーに資金が再び供給されます。</li>
+</ul>
+</li>
+<li>オファーに指定されている有効期限が最新の閉鎖済みレジャーの閉鎖時刻よりも前である場合。（<a href="#オファーの有効期限">オファーの有効期限</a>を参照してください。）</li>
+</ul>
+<p>資金化されないオファーはレジャーに無期限で残ることがありますが、特に影響はありません。次の方法でのみ、オファーはレジャーから<em>完全に</em>削除されます。</p>
+<ul>
+<li>Paymentトランザクションまたは対応するOfferCreateトランザクションにより全額が請求される。</li>
+<li>OfferCancelトランザクションまたはOfferCreateトランザクションによりオファーが明示的に取り消される。</li>
+<li>同じアカウントからのOfferCreateトランザクションが以前のオファーにクロスする。（この場合、古いオファーが自動的に取り消されます。）</li>
+<li>トランザクションの処理中にオファーへの資金が供給されていないことが判明する。一般的に、オファーがオーダーブックの先中で最も有利なレートであったことが原因です。<ul>
+<li>これには、オファーのいずれかの側が、<code>rippled</code>の精度でサポートされているよりも0に近いことが検出されるケースも含まれます。</li>
+</ul>
+</li>
+</ul>
+<h3 id="資金化されていないオファーの追跡">資金化されていないオファーの追跡</h3>
+<p>すべてのオファーの資金化状況の追跡は、コンピューターにとって負荷の高い処理となることがあります。特に積極的に取引しているアドレスでは大量のオファーがオープンです。1つの残高が、さまざまな通貨を購入する多数のオファーの資金化の状況に影響することがあります。このため、<code>rippled</code>ではオファーの検出と削除を積極的に行なっていません。</p>
+<p>クライアントアプリケーションでオファーの資金化の状況をローカルで追跡できます。このためには、最初に<a href="book_offers.html">book_offersメソッド</a>を使用してオーダーブックを取得し、次にオファーの<code>taker_gets_funded</code>フィールドを調べます。次に<code>transactions</code>ストリームを<a href="subscribe.html">サブスクライブ</a>し、トランザクションメタデータを監視してどのオファーが変更されるかを確認します。</p>
+<h2 id="オファーとトラスト">オファーとトラスト</h2>
+<p>トラストラインの限度額（<a href="trustset.html">TrustSet</a>を参照）はオファーに影響しません。つまり、オファーを使用して、イシュアーの信用できる最大精算額を上回る額を取得できます。</p>
+<p>ただし、XRP以外の残高を保有するには、それらの残高を発行するアドレスへのトラストラインが必要です。オファーが受け入れられると、必要なトラストラインが自動的に作成され、その限度額が0に設定されます。<a href="reserves.html">アカウントが保有する必要のある準備金はトラストラインによって増加する</a>ため、新しいトラストラインを必要とするオファーがある場合、そのトラストラインの準備金として十分なXRPをアドレスに保有する必要があります。</p>
+<p>トラストラインはあなたが信用するイシュア―を示し、限度額の範囲内でそのイシュア―のイシュアンスを支払いとして受領します。オファーは特定通貨を取得するための明示的な指示であるため、これらの限度額を超えることができます。</p>
+<h2 id="オファーの優先度">オファーの優先度</h2>
+<p>既存のオファーは為替レート（「オファークオリティ」とも呼ばれます）によってグループにまとめられます。為替レートは、<code>TakerGets</code>と<code>TakerPays</code>の比率として計算されます。為替レートが高いオファーが優先的に処理されます。（つまり、オファーを受け入れる人は、支払われる通貨額に対して可能な限り多くを受領します。）同じ為替レートのオファーは、最も古いレジャーバージョンで出されたオファーに基づいて受け入れられます。</p>
+<p>同じ為替レートのオファーが同じレジャーバージョンに記録されている場合、オファーの処理順序は<a class="external-link" href="https://github.com/ripple/rippled/blob/5425a90f160711e46b2c1f1c93d68e5941e4bfb6/src/ripple/app/consensus/LedgerConsensus.cpp#L1435-L1538" target="_blank" title="Source: Applying transactions">レジャーへトランザクションを適用する <i aria-hidden="true" class="fa fa-external-link"></i></a>ための<a class="external-link" href="https://github.com/ripple/rippled/blob/release/src/ripple/app/misc/CanonicalTXSet.cpp" target="_blank" title="Source: Transaction ordering">正規の順序 <i aria-hidden="true" class="fa fa-external-link"></i></a>によって決定します。この動作は確定的かつ効率的であり、操作することが困難であるように設計されています。</p>
+<h2 id="オファーの有効期限">オファーの有効期限</h2>
+<p>トランザクションの伝搬と確定には時間がかかることがあるため、レジャーのタイムスタンプからオファーの有効性を判断します。オファーが有効期限切れとなるのは、有効期限が最新の検証済みレジャーよりも前の場合だけです。つまり、<code>Expiration</code>フィールドが指定されているオファーが「アクティブ」であると見なされるのは、ローカルクロックに関係なく、その有効期限が最新の検証済みレジャーのタイムスタンプよりも後である場合です。</p>
+<p>閉鎖時刻が有効期限と同じかそれよりも後である完全な検証済みレジャーが作成されたら、<code>Expiration</code>が指定されているオファーの最終的な処理を即時に判断できます。</p>
+<p class="devportal-callout 注記"><strong>注記:</strong> レジャーを変更できるのは新しいトランザクションだけであることから、有効期限切れのオファーは、非アクティブになった後でもレジャーに残ることがあります。このオファーは資金化されていないと見なされ特に影響はありませんが、（<a href="ledger_entry.html">ledger_entry</a>コマンドなどの）実行結果に、引き続き表示される可能性があります。後に、サーバーが処理中に有効期限切れのオファーを検出すると、このオファーは別のトランザクション（別のOfferCreateなど）の結果として最終的に削除されることがあります。</p>
+<p>OfferCreateトランザクションが最初にレジャーに追加された時点で、このトランザクションに指定されている<code>Expiration</code>時刻をすでに経過していた場合は、トランザクションはオファーを実行しません。このようなトランザクションの結果コードは、<a href="known-amendments.html#checks">Checks Amendment</a>が有効であるかどうかによって異なります。Checks Amendmentが有効な場合、トランザクションの結果コードは<code>tecEXPIRED</code>です。それ以外の場合、トランザクションの結果コードは<code>tesSUCCESS</code>です。いずれの場合でも、このトランザクションには、<a href="transaction-cost.html">トランザクションコスト</a>として支払われたXRPを消却する以外に影響はありません。</p>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- rippled release notes links -->
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="concepts.html"> コンセプト</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_2">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_2" aria-expanded="true" aria-controls="sidenav_collapse_2"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="introduction.html">基本</a>
+                <!-- <a class="sidenav_cat_title" href="introduction.html">Introduction</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_2" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_2">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="xrp-ledger-overview.html">XRP Ledgerの概要</a></li>
+                      <li><a class="nosubcat-page" href="intro-to-consensus.html">コンセンサスについて</a></li>
+                      <li><a class="nosubcat-page" href="xrp.html">XRP</a></li>
+                      <li><a class="nosubcat-page" href="software-ecosystem.html">ソフトウェアエコシステム</a></li>
+                      <li><a class="nosubcat-page" href="technical-faq.html">技術に関するよくある質問</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse2 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_8">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_8" aria-expanded="true" aria-controls="sidenav_collapse_8"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="payment-system-basics.html">支払いシステムの基本</a>
+                <!-- <a class="sidenav_cat_title" href="payment-system-basics.html">Payment System Basics</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_8" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_8">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="accounts.html">アカウント</a></li>
+
+                          <li><a class="subpage" href="cryptographic-keys.html">暗号鍵</a></li>
+                          <li><a class="subpage" href="multi-signing.html">マルチ署名</a></li>
+                          <li><a class="subpage" href="reserves.html">準備金</a></li>
+                          <li><a class="subpage" href="depositauth.html">Deposit Authorization</a></li>
+
+                      <li><a class="nosubcat-page" href="fees.html">手数料（曖昧さの回避）</a></li>
+                      <li><a class="nosubcat-page" href="ledgers.html">レジャー</a></li>
+                      <li><a class="subcat-title" href="transaction-basics.html">トランザクションの基本</a></li>
+
+                          <li><a class="subpage" href="transaction-cost.html">トランザクションコスト</a></li>
+                          <li><a class="subpage" href="finality-of-results.html">結果のファイナリティー</a></li>
+                          <li><a class="subpage" href="source-and-destination-tags.html">Source and Destination Tags</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse8 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_20">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_20" aria-expanded="true" aria-controls="sidenav_collapse_20"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="payment-types.html">支払いのタイプ</a>
+                <!-- <a class="sidenav_cat_title" href="payment-types.html">Payment Types</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_20" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_20">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="direct-xrp-payments.html">XRPによる直接支払</a></li>
+                      <li><a class="nosubcat-page" href="cross-currency-payments.html">複数通貨間の支払い</a></li>
+                      <li><a class="nosubcat-page" href="checks.html">Checks</a></li>
+                      <li><a class="nosubcat-page" href="escrow.html">Escrow</a></li>
+                      <li><a class="nosubcat-page" href="partial-payments.html">Partial Payment</a></li>
+                      <li><a class="nosubcat-page" href="payment-channels.html">Payment Channel</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse20 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_28">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_28" aria-expanded="true" aria-controls="sidenav_collapse_28"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="issued-currencies.html">発行済み通貨</a>
+                <!-- <a class="sidenav_cat_title" href="issued-currencies.html">Issued Currencies</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_28" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_28">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="issued-currencies-overview.html">発行済み通貨の概要</a></li>
+                      <li><a class="nosubcat-page" href="trust-lines-and-issuing.html">トラストラインと発行</a></li>
+                      <li><a class="nosubcat-page" href="authorized-trust-lines.html">Authorized Trust Lines</a></li>
+                      <li><a class="nosubcat-page" href="freezes.html">発行済み通貨の凍結</a></li>
+                      <li><a class="nosubcat-page" href="rippling.html">Rippling</a></li>
+                      <li><a class="nosubcat-page" href="transfer-fees.html">送金手数料</a></li>
+                      <li><a class="nosubcat-page" href="issuing-and-operational-addresses.html">発行アドレスと運用アドレス</a></li>
+                      <li><a class="nosubcat-page" href="paths.html">パス</a></li>
+                      <li><a class="nosubcat-page" href="demurrage.html">Demurrage</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse28 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card active">
+            <div class="card-header" role="tab" id="sidenav_cat_head_38">
+                <a class="sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_38" aria-expanded="true" aria-controls="sidenav_collapse_38"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title active-parent" href="decentralized-exchange.html">分散型取引所</a>
+                <!-- <a class="sidenav_cat_title" href="decentralized-exchange.html">Decentralized Exchange</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_38" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_38">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="active nosubcat-page" href="offers.html">オファー</a></li>
+                      <li><a class="nosubcat-page" href="autobridging.html">オートブリッジング</a></li>
+                      <li><a class="nosubcat-page" href="ticksize.html">ティックサイズ</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse38 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_42">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_42" aria-expanded="true" aria-controls="sidenav_collapse_42"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="consensus-network.html">コンセンサスネットワーク</a>
+                <!-- <a class="sidenav_cat_title" href="consensus-network.html">Consensus Network</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_42" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_42">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="consensus.html">コンセンサス</a></li>
+                      <li><a class="nosubcat-page" href="consensus-principles-and-rules.html">コンセンサスの原理とルール</a></li>
+                      <li><a class="nosubcat-page" href="consensus-protections.html">攻撃および障害モードに対するコンセンサスの保護</a></li>
+                      <li><a class="nosubcat-page" href="invariant-checking.html">Invariant Checking</a></li>
+                      <li><a class="nosubcat-page" href="transaction-queue.html">トランザクションキュー</a></li>
+                      <li><a class="nosubcat-page" href="about-canceling-a-transaction.html">トランザクションの取消しについて</a></li>
+                      <li><a class="nosubcat-page" href="transaction-malleability.html">トランザクション展性</a></li>
+                      <li><a class="subcat-title" href="amendments.html">Amendment</a></li>
+
+                          <li><a class="subpage" href="known-amendments.html">既知のAmendment</a></li>
+
+                      <li><a class="nosubcat-page" href="fee-voting.html">手数料投票</a></li>
+                      <li><a class="nosubcat-page" href="consensus-research.html">コンセンサスの研究</a></li>
+                      <li><a class="nosubcat-page" href="parallel-networks.html">並列ネットワーク</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse42 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_55">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_55" aria-expanded="true" aria-controls="sidenav_collapse_55"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="the-rippled-server.html">rippledサーバー</a>
+                <!-- <a class="sidenav_cat_title" href="the-rippled-server.html">The rippled Server</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_55" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_55">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="rippled-server-modes.html">rippledサーバーのモード</a></li>
+                      <li><a class="nosubcat-page" href="clustering.html">クラスター化</a></li>
+                      <li><a class="subcat-title" href="ledger-history.html">レジャー履歴</a></li>
+
+                          <li><a class="subpage" href="online-deletion.html">オンライン削除</a></li>
+                          <li><a class="subpage" href="history-sharding.html">履歴シャーディング</a></li>
+
+                      <li><a class="nosubcat-page" href="peer-protocol.html">ピアプロトコル</a></li>
+                      <li><a class="nosubcat-page" href="transaction-censorship-detection.html">取引検閲の検知</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse55 -->
+
+          </div><!-- /.card -->
+
+    </div><!-- /#sidenav -->
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">学ぶ</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">探る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">作る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">コンセプト</a></li>
+          <li class="level-1"><a href="tutorials.html">チュートリアル</a></li>
+          <li class="level-1"><a href="references.html">リファレンス</a></li>
+          <li class="level-1"><a href="dev-tools.html">開発者用ツール</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">ライセンス</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="このページの先頭へ">先頭へ</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:ja"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>

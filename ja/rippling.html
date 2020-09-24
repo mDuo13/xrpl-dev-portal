@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Rippling - XRP Ledger Dev Portal (日本語)</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="/ja/assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="/ja/assets/css/fonts-ja.css" rel="stylesheet" />
+    <link href="/ja/assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-ja ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/ja/" class="navbar-brand"><img src="/ja/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal (日本語)" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">学ぶ</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">オーバービュー</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">探る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">作る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">ドキュメント</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">コンセプト</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">チュートリアル</a>
+          <a class="dropdown-item top-level-2" href="references.html">リファレンス</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">開発者用ツール</a>
+          <a class="dropdown-item top-level-1" href="/blog/">ブログ</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/concepts/issued-currencies/rippling.ja.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">サイトを検索</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="サイトを検索">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          日本語
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/rippling.html">Eng</a>
+          <a class="dropdown-item" href="/ja/rippling.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>目次</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#rippling">Rippling</a></li>
+<li class="level-2"><a href="#ripplingの例">Ripplingの例</a></li>
+<li class="level-2"><a href="#norippleフラグ">NoRippleフラグ</a></li>
+<li class="level-3"><a href="#詳細">詳細</a></li>
+<li class="level-2"><a href="#defaultrippleフラグ">DefaultRippleフラグ</a></li>
+<li class="level-2"><a href="#norippleを使用する">NoRippleを使用する</a></li>
+<li class="level-3"><a href="#norippleを有効無効にする">NoRippleを有効/無効にする</a></li>
+<li class="level-3"><a href="#norippleステータスの確認">NoRippleステータスの確認</a></li>
+<li class="level-2"><a href="#関連項目">関連項目</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">ホーム</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">作る</a></li>
+    <li class="active breadcrumb-item"><a href="concepts.html">コンセプト</a></li>
+    <li class="active breadcrumb-item"><a href="issued-currencies.html">発行済み通貨</a></li>
+    <li class="active breadcrumb-item">Rippling</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="rippling">Rippling</h1>
+<p>XRP Ledgerでは、「Rippling」とは同一通貨の<a href="trust-lines-and-issuing.html">トラストライン</a>を有する複数の接続当事者間での非可分なネット決済のプロセスを指しています。Ripplingは発行済み通貨の基幹的なプロセスです。Ripplingを利用すれば、同一イシュアーを信頼するユーザーは、そのイシュアーを受動的な仲介機関として発行済み残高を相互に送金できるようになります。Ripplingは、受動的かつ双方向の<a href="offers.html">通貨取引オーダー</a>のようなもので、制限がなく、通貨コードが同一でイシュアーが異なる2つの通貨間の為替レートは1:1です。</p>
+<p>Ripplingは、支払<a href="paths.html">パス</a>でのみ発生します。<a href="direct-xrp-payments.html">XRP間の直接決済</a>にはRipplingは使用されません。</p>
+<p>発行アカウント以外のアカウントでは、Ripplingが望ましくない場合があります。Ripplingを使えば、他のユーザーが同一通貨のイシュアー間で債権債務を移動できるようになるためです。このため、アカウントの<a href="#defaultrippleフラグ">DefaultRippleフラグ</a>を有効にして、アカウントがデフォルトでRipplingを有効にしない限り、デフォルトでは<a href="#norippleフラグ">NoRippleフラグ</a>により着信トラストラインでのRipplingが無効になっています。</p>
+<p class="devportal-callout 注意"><strong>注意:</strong> 別のアドレスへのトラストラインを作成する場合、そのトラストラインのあなたの側でRipplingをブロックするには、tfSetNoRippleフラグを明示的に有効にする必要があります。</p>
+<h2 id="ripplingの例">Ripplingの例</h2>
+<p>「Rippling」は、支払いを行うために複数のトラストラインが調整されたときに発生します。たとえば、AliceがCharlieにお金を借りており、さらにAliceはBobからもお金を借りている場合、XRP Ledgerではトラストラインは次のようになります:</p>
+<p><img alt="Charlie --（$10）-- Alice -- （$20） -- Bob" src="img/noripple-01.png"/></p>
+<p>BobがCharlieに$3を支払いたい場合、BobはAliceに対して「Alice、君に貸しているお金の中から$3をCharlieに支払ってくれ。」と言えます。AliceはBobに借りているお金の一部をCharlieに送金します。最終的にはトラストラインは次のようになります。</p>
+<p><img alt="Charlie --（$13）-- Alice --（$17）-- Bob" src="img/noripple-02.png"/></p>
+<p>2つのアドレスが、アドレス間のトラストライン上の残高を調整することで相互に支払うこのプロセスを「Rippling」と呼びます。これはXRP Ledgerの有用で重要な機能です。Ripplingは、同一の<a href="currency-formats.html#通貨コード">通貨コード</a>を使用するトラストラインによってアドレスがリンクされている場合に起こります。イシュアーが同一でなくてもかまいません。実際、大規模なチェーンでは常にイシュアーが変更されます。</p>
+<h2 id="norippleフラグ">NoRippleフラグ</h2>
+<p>発行アカウント以外のアカウント、特に手数料やポリシーが異なる複数のイシュアーの残高を保有している流動性プロバイダーは、一般的に残高がRipplingされることを望みません。</p>
+<p>「NoRipple」フラグは、トラストライン上の設定です。2つのトラストラインの両方で、同じアドレスによってNoRippleが有効に設定されている場合、第三者からの支払を、これらのトラストラインでこのアドレスを通じて「Rippling」することはできません。これにより、同一通貨の複数イシュアー間で流動性プロバイダーの残高が予期せず移動されるのを防ぎます。</p>
+<p>アカウントは1つのトラストラインでNoRippleを無効にできます。これにより、そのトラストラインを含む任意のペアを通じてのRipplingが可能になります。アカウントにてデフォルトでRipplingを有効にするには、<a href="#defaultrippleフラグ">DefaultRippleフラグ</a>を有効にします。</p>
+<p>たとえば、Emilyが2つの異なる金融機関から発行されたお金を保有しているとします。</p>
+<p><img alt="Charlie --（$10）-- 金融機関A --（$1）-- Emily --（$100）-- 金融機関B --（$2）-- Daniel" src="img/noripple-03.png"/></p>
+<p>CharlieはDanielに支払うため、Emilyのアドレスを通じてRipplingします。たとえば、CharlieがDanielに$10を支払うとします:</p>
+<p><img alt="Charlie --（$0）-- 金融機関A --（$11）-- Emily --（$90）-- 金融機関B --（$12）-- Daniel" src="img/noripple-04.png"/></p>
+<p>この場合、CharlieやDanielと面識のないEmilyは驚く可能性があります。さらに、金融機関Aが金融機関Bよりも高い出金手数料をEmilyに請求した場合、Emilyがコストを負担することになる可能性があります。NoRippleフラグはこの状況を回避するためのフラグです。Emilyが両方のトラストラインでNoRippleフラグを設定していれば、この2つのトラストラインを使用しているEmilyのアドレスを通じて、支払がRipplingされることはありません。</p>
+<p>例:</p>
+<p><img alt="Charlie --（$10）-- 金融機関A --（$1、NoRipple）-- Emily --（$100、NoRipple）-- 金融機関B --（$2）-- Daniel" src="img/noripple-05.png"/></p>
+<p>このように、CharlieがEmilyのアドレスを通じてRipplingし、Danielに支払うという上記のシナリオは、不可能になります。</p>
+<h3 id="詳細">詳細</h3>
+<p>NoRippleフラグにより特定のパスが無効になり、無効になったパスは支払に使用できなくなります。パスが無効であると見なされるのは、パスが、あるアドレスに対してNoRippleが有効となっているトラストラインを通じて、そのアドレスノードに入り<strong>かつ</strong>そのノードから出た場合に限られます。</p>
+<p><img alt="処理を行うためには同一アドレスによって両方のトラストラインにNoRippleが設定されている必要があることを示す図" src="img/noripple-06.png"/></p>
+<h2 id="defaultrippleフラグ">DefaultRippleフラグ</h2>
+<p>DefaultRippleフラグは、デフォルトで着信トラストラインでのRipplingを有効にするアカウント設定です。ゲートウェイやその他の通貨イシュアーは、顧客が通貨を相互に送金できるようにするには、このフラグを有効にする必要があります。</p>
+<p>アカウントのDefaultRipple設定は、他者があなたに対してオープンしたトラストラインにのみ影響し、あなたが作成するトラストラインには影響しません。アカウントのDefaultRipple設定を変更する場合、変更前に作成したトラストラインでは既存のNoRipple設定が維持されます。アドレスの新しいデフォルトに合わせてトラストラインのNoRipple設定を変更するには、<a href="trustset.html">TrustSetトランザクション</a>を使用します。</p>
+<p>詳細は、<a href="become-an-xrp-ledger-gateway.html#default-ripple">「XRP Ledgerゲートウェイの開設」のDefaultRipple</a>を参照してください。</p>
+<h2 id="norippleを使用する">NoRippleを使用する</h2>
+<!-- -->
+<h3 id="norippleを有効無効にする">NoRippleを有効/無効にする</h3>
+<p>トラストライン上のNoRippleフラグは、トラストライン上のアドレスの残高がプラスまたはゼロの場合に限り、有効にできます。これにより、この機能を悪用してトラストラインの残高に示される債務を不履行にすることができなくなります。（ただし、アドレスを放棄すれば債務を不履行にできます。）</p>
+<p><a href="rippled-api.html"><code>rippled</code> API</a>でNoRippleフラグを有効にするには、<code>tfSetNoRipple</code>フラグを設定した<a href="trustset.html">TrustSetトランザクション</a>を送信します。NoRippleを無効にする（Ripplingを有効にする）には、<code>tfClearNoRipple</code>フラグを使用します。</p>
+<p><a href="rippleapi-reference.html">RippleAPI</a>でNoRippleフラグを有効にするには、トラストラインの<code>ripplingDisabled</code> フィールドを<code>true</code>に設定して<a href="rippleapi-reference.html#preparetrustline">Trustlineトランザクション</a>を送信します。</p>
+<h3 id="norippleステータスの確認">NoRippleステータスの確認</h3>
+<p>相互に信頼し合っている2つのアカウントの場合、NoRippleフラグはアカウントごとに管理されます。</p>
+<p><a href="rippled-api.html"><code>rippled</code> API</a>でアドレスに関連付けられているトラストラインを確認するには、<a href="account_lines.html">account_linesメソッド</a>を使用します。各トラストラインの<code>no_ripple</code>フィールドには、現在のアドレスがそのトラストラインに対してNoRippleフラグを有効にしているか否かが表示され、<code>no_ripple_peer</code>フィールドには、取引相手がNoRippleフラグを有効にしているか否かが表示されます。</p>
+<p><a href="rippleapi-reference.html">RippleAPI</a>でアドレスに関連付けられているトラストラインを確認するには、<a href="rippleapi-reference.html#gettrustlines">getTrustlines</a>メソッドを使用します。各トラストラインの<code>ripplingDisabled</code>フィールドには、現在のアドレスがそのトラストラインに対してNoRippleフラグを有効にしているか否かが表示され、<code>counterparty.ripplingDisabled</code>フィールドには、取引相手がNoRippleフラグを有効にしているか否かが表示されます。</p>
+<h2 id="関連項目">関連項目</h2>
+<ul>
+<li><strong>コンセプト:</strong></li>
+<li><a href="paths.html">パス</a></li>
+<li><strong>チュートリアル:</strong></li>
+<li><a href="become-an-xrp-ledger-gateway.html">XRP Ledgerゲートウェイの開設</a></li>
+<li><strong>リファレンス:</strong></li>
+<li><a href="account_lines.html">account_linesメソッド</a></li>
+<li><a href="account_info.html">account_infoメソッド</a></li>
+<li><a href="accountset.html">AccountSetトランザクション</a></li>
+<li><a href="trustset.html">TrustSetトランザクション</a></li>
+<li><a href="accountroot.html#accountrootのフラグ">AccountRootのフラグ</a></li>
+<li><a href="ripplestate.html#ripplestateのフラグ">RippleState（トラストライン）のフラグ</a></li>
+</ul>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- rippled release notes links -->
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="concepts.html"> コンセプト</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_2">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_2" aria-expanded="true" aria-controls="sidenav_collapse_2"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="introduction.html">基本</a>
+                <!-- <a class="sidenav_cat_title" href="introduction.html">Introduction</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_2" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_2">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="xrp-ledger-overview.html">XRP Ledgerの概要</a></li>
+                      <li><a class="nosubcat-page" href="intro-to-consensus.html">コンセンサスについて</a></li>
+                      <li><a class="nosubcat-page" href="xrp.html">XRP</a></li>
+                      <li><a class="nosubcat-page" href="software-ecosystem.html">ソフトウェアエコシステム</a></li>
+                      <li><a class="nosubcat-page" href="technical-faq.html">技術に関するよくある質問</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse2 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_8">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_8" aria-expanded="true" aria-controls="sidenav_collapse_8"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="payment-system-basics.html">支払いシステムの基本</a>
+                <!-- <a class="sidenav_cat_title" href="payment-system-basics.html">Payment System Basics</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_8" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_8">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="accounts.html">アカウント</a></li>
+
+                          <li><a class="subpage" href="cryptographic-keys.html">暗号鍵</a></li>
+                          <li><a class="subpage" href="multi-signing.html">マルチ署名</a></li>
+                          <li><a class="subpage" href="reserves.html">準備金</a></li>
+                          <li><a class="subpage" href="depositauth.html">Deposit Authorization</a></li>
+
+                      <li><a class="nosubcat-page" href="fees.html">手数料（曖昧さの回避）</a></li>
+                      <li><a class="nosubcat-page" href="ledgers.html">レジャー</a></li>
+                      <li><a class="subcat-title" href="transaction-basics.html">トランザクションの基本</a></li>
+
+                          <li><a class="subpage" href="transaction-cost.html">トランザクションコスト</a></li>
+                          <li><a class="subpage" href="finality-of-results.html">結果のファイナリティー</a></li>
+                          <li><a class="subpage" href="source-and-destination-tags.html">Source and Destination Tags</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse8 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_20">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_20" aria-expanded="true" aria-controls="sidenav_collapse_20"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="payment-types.html">支払いのタイプ</a>
+                <!-- <a class="sidenav_cat_title" href="payment-types.html">Payment Types</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_20" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_20">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="direct-xrp-payments.html">XRPによる直接支払</a></li>
+                      <li><a class="nosubcat-page" href="cross-currency-payments.html">複数通貨間の支払い</a></li>
+                      <li><a class="nosubcat-page" href="checks.html">Checks</a></li>
+                      <li><a class="nosubcat-page" href="escrow.html">Escrow</a></li>
+                      <li><a class="nosubcat-page" href="partial-payments.html">Partial Payment</a></li>
+                      <li><a class="nosubcat-page" href="payment-channels.html">Payment Channel</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse20 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card active">
+            <div class="card-header" role="tab" id="sidenav_cat_head_28">
+                <a class="sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_28" aria-expanded="true" aria-controls="sidenav_collapse_28"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title active-parent" href="issued-currencies.html">発行済み通貨</a>
+                <!-- <a class="sidenav_cat_title" href="issued-currencies.html">Issued Currencies</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_28" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_28">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="issued-currencies-overview.html">発行済み通貨の概要</a></li>
+                      <li><a class="nosubcat-page" href="trust-lines-and-issuing.html">トラストラインと発行</a></li>
+                      <li><a class="nosubcat-page" href="authorized-trust-lines.html">Authorized Trust Lines</a></li>
+                      <li><a class="nosubcat-page" href="freezes.html">発行済み通貨の凍結</a></li>
+                      <li><a class="active nosubcat-page" href="rippling.html">Rippling</a></li>
+                      <li><a class="nosubcat-page" href="transfer-fees.html">送金手数料</a></li>
+                      <li><a class="nosubcat-page" href="issuing-and-operational-addresses.html">発行アドレスと運用アドレス</a></li>
+                      <li><a class="nosubcat-page" href="paths.html">パス</a></li>
+                      <li><a class="nosubcat-page" href="demurrage.html">Demurrage</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse28 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_38">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_38" aria-expanded="true" aria-controls="sidenav_collapse_38"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="decentralized-exchange.html">分散型取引所</a>
+                <!-- <a class="sidenav_cat_title" href="decentralized-exchange.html">Decentralized Exchange</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_38" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_38">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="offers.html">オファー</a></li>
+                      <li><a class="nosubcat-page" href="autobridging.html">オートブリッジング</a></li>
+                      <li><a class="nosubcat-page" href="ticksize.html">ティックサイズ</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse38 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_42">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_42" aria-expanded="true" aria-controls="sidenav_collapse_42"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="consensus-network.html">コンセンサスネットワーク</a>
+                <!-- <a class="sidenav_cat_title" href="consensus-network.html">Consensus Network</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_42" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_42">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="consensus.html">コンセンサス</a></li>
+                      <li><a class="nosubcat-page" href="consensus-principles-and-rules.html">コンセンサスの原理とルール</a></li>
+                      <li><a class="nosubcat-page" href="consensus-protections.html">攻撃および障害モードに対するコンセンサスの保護</a></li>
+                      <li><a class="nosubcat-page" href="invariant-checking.html">Invariant Checking</a></li>
+                      <li><a class="nosubcat-page" href="transaction-queue.html">トランザクションキュー</a></li>
+                      <li><a class="nosubcat-page" href="about-canceling-a-transaction.html">トランザクションの取消しについて</a></li>
+                      <li><a class="nosubcat-page" href="transaction-malleability.html">トランザクション展性</a></li>
+                      <li><a class="subcat-title" href="amendments.html">Amendment</a></li>
+
+                          <li><a class="subpage" href="known-amendments.html">既知のAmendment</a></li>
+
+                      <li><a class="nosubcat-page" href="fee-voting.html">手数料投票</a></li>
+                      <li><a class="nosubcat-page" href="consensus-research.html">コンセンサスの研究</a></li>
+                      <li><a class="nosubcat-page" href="parallel-networks.html">並列ネットワーク</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse42 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_55">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_55" aria-expanded="true" aria-controls="sidenav_collapse_55"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="the-rippled-server.html">rippledサーバー</a>
+                <!-- <a class="sidenav_cat_title" href="the-rippled-server.html">The rippled Server</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_55" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_55">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="rippled-server-modes.html">rippledサーバーのモード</a></li>
+                      <li><a class="nosubcat-page" href="clustering.html">クラスター化</a></li>
+                      <li><a class="subcat-title" href="ledger-history.html">レジャー履歴</a></li>
+
+                          <li><a class="subpage" href="online-deletion.html">オンライン削除</a></li>
+                          <li><a class="subpage" href="history-sharding.html">履歴シャーディング</a></li>
+
+                      <li><a class="nosubcat-page" href="peer-protocol.html">ピアプロトコル</a></li>
+                      <li><a class="nosubcat-page" href="transaction-censorship-detection.html">取引検閲の検知</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse55 -->
+
+          </div><!-- /.card -->
+
+    </div><!-- /#sidenav -->
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">学ぶ</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">探る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">作る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">コンセプト</a></li>
+          <li class="level-1"><a href="tutorials.html">チュートリアル</a></li>
+          <li class="level-1"><a href="references.html">リファレンス</a></li>
+          <li class="level-1"><a href="dev-tools.html">開発者用ツール</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">ライセンス</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="このページの先頭へ">先頭へ</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:ja"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>

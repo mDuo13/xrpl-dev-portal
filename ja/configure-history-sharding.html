@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>履歴シャーディングの設定 - XRP Ledger Dev Portal (日本語)</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="/ja/assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="/ja/assets/css/fonts-ja.css" rel="stylesheet" />
+    <link href="/ja/assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-ja ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/ja/" class="navbar-brand"><img src="/ja/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal (日本語)" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">学ぶ</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">オーバービュー</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">探る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">作る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">ドキュメント</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">コンセプト</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">チュートリアル</a>
+          <a class="dropdown-item top-level-2" href="references.html">リファレンス</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">開発者用ツール</a>
+          <a class="dropdown-item top-level-1" href="/blog/">ブログ</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/tutorials/manage-the-rippled-server/configuration/configure-history-sharding.ja.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">サイトを検索</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="サイトを検索">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          日本語
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/configure-history-sharding.html">Eng</a>
+          <a class="dropdown-item" href="/ja/configure-history-sharding.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>目次</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#履歴シャーディングの設定">履歴シャーディングの設定</a></li>
+<li class="level-2"><a href="#1-シャードストアーに割り当てる容量を決めます">1. シャードストアーに割り当てる容量を決めます。</a></li>
+<li class="level-2"><a href="#2-rippledcfgの編集">2. rippled.cfgの編集</a></li>
+<li class="level-2"><a href="#3-サーバーの再起動">3. サーバーの再起動</a></li>
+<li class="level-2"><a href="#4-シャードのダウンロードの待機">4. シャードのダウンロードの待機</a></li>
+<li class="level-2"><a href="#関連項目">関連項目</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">ホーム</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">作る</a></li>
+    <li class="active breadcrumb-item"><a href="tutorials.html">チュートリアル</a></li>
+    <li class="active breadcrumb-item"><a href="manage-the-rippled-server.html">rippledサーバの利用</a></li>
+    <li class="active breadcrumb-item"><a href="configure-rippled.html">rippledの設定</a></li>
+    <li class="active breadcrumb-item">履歴シャーディングの設定</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="履歴シャーディングの設定">履歴シャーディングの設定</h1>
+<p><a href="history-sharding.html">履歴シャーディング</a>では、各サーバーで完全な履歴を保管することなく、履歴XRP Ledgerデータを保存できます。デフォルトでは<code>rippled</code>サーバーは履歴シャードを保管しません。</p>
+<p class="devportal-callout ヒント"><strong>ヒント:</strong> バリデータおよび<code>rippled</code>追跡（またはストック）サーバーの両方で履歴シャードを保管するように設定できます。ただし<code>rippled</code>バリデータサーバーの経費を抑えるために、バリデータサーバーでシャードを保管するように設定 <em>しない</em> ことが推奨されます。バリデータを実行していて、XRP Ledger履歴を保管したい場合は、履歴シャーディングを有効にして別の<code>rippled</code>サーバーを実行することが推奨されます。</p>
+<p>レジャー履歴のシャードを保管できるよう<code>rippled</code>を設定するには、以下の手順を実行します。</p>
+<h2 id="1-シャードストアーに割り当てる容量を決めます">1. シャードストアーに割り当てる容量を決めます。</h2>
+<p>履歴シャードを保管できるように<code>rippled</code>サーバーを設定する前に、履歴シャードストアーに割り当てるディスク容量を決定する必要があります。これはまた、デフォルトのレジャーストアーに保持する履歴の量にも影響します。シャードストアーのサイズを設定する際には、以下の点を考慮してください。</p>
+<ul>
+<li>レジャーストアー（<code>[node_db]</code>スタンザにより定義される）は、履歴シャードストアーとは別のストアーです。レジャーストアーはすべてのサーバーに必要であり、そこには一定範囲の最近の履歴が保管されている必要があります。保管する範囲は、<code>online_delete</code>パラメーターに使用可能な状態で維持するレジャーの数によって定義されます。（デフォルトの設定では、最新のレジャー2000個が保管されます。）</li>
+<li>レジャーストアーに2<sup>15</sup>個以上のレジャー（32768）が保持されている場合は、レジャーストアーからシャードストアーへ最近の履歴のグループを効率的にインポートできます。</li>
+<li>履歴シャードストアー（<code>[shard_db]</code>スタンザにより定義される）は、履歴シャードを保管する場合にのみ必要です。履歴シャードを保管しないサーバーではこの構成スタンザを省略する必要があります。履歴シャードストアーのサイズは<code>max_size_gb</code>パラメーターでギガバイト単位で定義されます。サーバーは完全なシャードを保管するため、この容量を最大限利用します。履歴シャードストアーは、 <em>必ず</em> ソリッドステートディスクまたは同様の高速なメディアに保管します。従来の回転式ハードディスクでは不十分です。</li>
+<li>シャードには2<sup>14</sup>個のレジャー（16384）が含まれており、シャードの経過期間に応じて約200MB～4GBを専有します。古いシャードほどXRP Ledgerでのアクティビティが少ないため、サイズが小さくなります。</li>
+<li>履歴シャードストアーとレジャーストアーはファイルパスを分けて保管する <em>必要があります</em> 。必要に応じて、レジャーストアーと履歴ストアーをそれぞれ別のディスクやパーティションに配置するように設定できます。</li>
+<li>完全なレジャー履歴をレジャーストアーと履歴シャードストアーの両方に保持できますが、冗長な処理となります。</li>
+<li>シャードの取得にかかる時間、<code>rippled</code>サーバーに必要なファイルハンドル数、およびメモリーキャッシュ使用率は、シャードのサイズの影響を直接受けます。</li>
+</ul>
+<h2 id="2-rippledcfgの編集">2. rippled.cfgの編集</h2>
+<p><code>rippled.cfg</code>ファイルを編集し、<code>[shard_db]</code>スタンザを追加します。</p>
+<p>The <a href="install-rippled.html">recommended installation</a> uses the config file <code>/etc/opt/ripple/rippled.cfg</code> by default. Other places you can put a config file include <code>$HOME/.config/ripple/rippled.cfg</code> (where <code>$HOME</code> is the home directory of the user running <code>rippled</code>), <code>$HOME/.local/ripple/rippled.cfg</code>, or the current working directory from where you start <code>rippled</code>.<!--_ --></p>
+<p>以下のスニペットに、<code>[shard_db]</code>スタンザの例を示します。</p>
+<div class="codehilite"><pre><span></span><code><span class="k">[shard_db]</span>
+<span class="na">type</span><span class="o">=</span><span class="s">NuDB</span>
+<span class="na">path</span><span class="o">=</span><span class="s">/var/lib/rippled/db/shards/nudb</span>
+<span class="na">max_size_gb</span><span class="o">=</span><span class="s">50</span>
+</code></pre></div>
+<p><code>type</code>フィールドは省略できます。省略しない場合は、<code>NuDB</code>である <em>必要があります</em> 。<a class="external-link" href="https://github.com/ripple/rippled/releases/tag/1.3.1" target="_blank" title="新規: rippled 1.3.1"><img alt="新規: rippled 1.3.1" class="dactyl_badge" src="https://img.shields.io/badge/%E6%96%B0%E8%A6%8F-rippled%201.3.1-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></p>
+<p class="devportal-callout 注意"><strong>注意:</strong> <code>rippled</code>がシャードストアーパスで不適切なデータを検出すると、<a href="server-wont-start.html">起動できない</a>可能性があります。シャードストアーには新しいフォルダーを使用する必要があります。以前にRocksDBシャードストアー（<code>rippled</code> 1.2.x以前）を使用していた場合は、別のパスを使用するか、RocksDBシャードデータを削除します。</p>
+<p>詳細は、<a class="external-link" href="https://github.com/ripple/rippled/blob/master/cfg/rippled-example.cfg" target="_blank">rippled.cfgの設定例 <i aria-hidden="true" class="fa fa-external-link"></i></a>の<code>[shard_db]</code>の例を参照してください。</p>
+<h2 id="3-サーバーの再起動">3. サーバーの再起動</h2>
+<div class="codehilite"><pre><span></span><code><span class="err">systemctl restart rippled</span>
+</code></pre></div>
+<h2 id="4-シャードのダウンロードの待機">4. シャードのダウンロードの待機</h2>
+<p>サーバーはネットワークと同期すると、履歴シャードのダウンロードを自動的に開始し、シャードストアーの空き容量を埋めます。ダウンロード対象のシャードを確認するには、シャードストアーを設定したフォルダー内に作成されるフォルダーを確認します。（これは<code>rippled.cfg</code>ファイルの<code>[shard_db]</code>スタンザの<code>path</code>フィールドによって定義されます。）</p>
+<p>このフォルダーには、サーバーに保管されている各シャードのフォルダーが番号付きで保存されています。常に、最大で1つのフォルダーに、未完了であることを示す<code>control.txt</code>ファイルが保存されています。</p>
+<p><a href="download_shard.html">download_shardメソッド</a>を使用して、サーバーにアーカイブファイルからシャードをダウンロードしてインポートするように指示できます。</p>
+<p>サーバーとそのピアが使用できるシャードのリストを表示するには、<a href="crawl_shards.html">crawl_shardsメソッド</a>か<a href="peer-crawler.html">ピアクローラー</a>を使用します。</p>
+<h2 id="関連項目">関連項目</h2>
+<ul>
+<li><strong>コンセプト:</strong></li>
+<li><a href="ledger-history.html">レジャー履歴</a><ul>
+<li><a href="online-deletion.html">オンライン削除</a></li>
+</ul>
+</li>
+<li><strong>チュートリアル:</strong></li>
+<li><a href="configure-online-deletion.html">オンライン削除の設定</a></li>
+<li><a href="configure-the-peer-crawler.html">ピアクローラーの設定</a></li>
+<li><a href="capacity-planning.html">容量の計画</a></li>
+<li><strong>リファレンス:</strong></li>
+<li><a href="download_shard.html">download_shardメソッド</a></li>
+<li><a href="crawl_shards.html">crawl_shardsメソッド</a></li>
+<li><a href="ledger-data-formats.html">レジャーデータフォーマット</a></li>
+</ul>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- rippled release notes links -->
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="tutorials.html"> チュートリアル</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_2">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_2" aria-expanded="true" aria-controls="sidenav_collapse_2"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="get-started.html">使用開始</a>
+                <!-- <a class="sidenav_cat_title" href="get-started.html">Get Started</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_2" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_2">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="get-started-with-the-rippled-api.html">XRP Ledger APIの使用開始</a></li>
+                      <li><a class="nosubcat-page" href="get-started-with-rippleapi-for-javascript.html">RippleAPI入門ガイド</a></li>
+                      <li><a class="nosubcat-page" href="send-xrp.html">XRPの送金</a></li>
+                      <li><a class="nosubcat-page" href="monitor-incoming-payments-with-websocket.html">WebSocketを使用した着信ペイメントの監視</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse2 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_8">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_8" aria-expanded="true" aria-controls="sidenav_collapse_8"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="production-readiness.html">Production Readiness</a>
+                <!-- <a class="sidenav_cat_title" href="production-readiness.html">Production Readiness</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_8" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_8">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="set-up-secure-signing.html">安全な署名の設定</a></li>
+                      <li><a class="nosubcat-page" href="look-up-transaction-results.html">トランザクションの結果の確認</a></li>
+                      <li><a class="nosubcat-page" href="reliable-transaction-submission.html">信頼できるトランザクションの送信</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse8 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_13">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_13" aria-expanded="true" aria-controls="sidenav_collapse_13"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="manage-account-settings.html">アカウントの設定の利用</a>
+                <!-- <a class="sidenav_cat_title" href="manage-account-settings.html">Manage Account Settings</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_13" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_13">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="assign-a-regular-key-pair.html">レギュラーキーペアの割り当て</a></li>
+                      <li><a class="nosubcat-page" href="change-or-remove-a-regular-key-pair.html">レギュラーキーペアの変更または削除</a></li>
+                      <li><a class="nosubcat-page" href="disable-master-key-pair.html">Disable Master Key Pair</a></li>
+                      <li><a class="nosubcat-page" href="set-up-multi-signing.html">マルチ署名の設定</a></li>
+                      <li><a class="nosubcat-page" href="send-a-multi-signed-transaction.html">マルチ署名済みトランザクションの送信</a></li>
+                      <li><a class="nosubcat-page" href="require-destination-tags.html">宛先タグの要求</a></li>
+                      <li><a class="nosubcat-page" href="offline-account-setup.html">オフラインでのアカウント設定のチュートリアル</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse13 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_21">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_21" aria-expanded="true" aria-controls="sidenav_collapse_21"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="use-specialized-payment-types.html">専門化した支払いタイプの使用</a>
+                <!-- <a class="sidenav_cat_title" href="use-specialized-payment-types.html">Use Specialized Payment Types</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_21" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_21">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="use-escrows.html">Escrowの使用</a></li>
+
+                          <li><a class="subpage" href="send-a-time-held-escrow.html">時間に基づくEscrowの送信</a></li>
+                          <li><a class="subpage" href="send-a-conditionally-held-escrow.html">条件に基づくEscrowの送信</a></li>
+                          <li><a class="subpage" href="cancel-an-expired-escrow.html">有効期限切れEscrowの取消し</a></li>
+                          <li><a class="subpage" href="look-up-escrows.html">Escrowの検索</a></li>
+                          <li><a class="subpage" href="use-an-escrow-as-a-smart-contract.html">Use an Escrow as a Smart Contract</a></li>
+
+                      <li><a class="subcat-title" href="use-payment-channels.html">Payment Channelの使用</a></li>
+
+                          <li><a class="subpage" href="open-a-payment-channel-to-enable-an-inter-exchange-network.html">Open a Payment Channel to Enable an Inter-Exchange Network</a></li>
+
+                      <li><a class="subcat-title" href="use-checks.html">Checksの使用</a></li>
+
+                          <li><a class="subpage" href="send-a-check.html">Checkの送信</a></li>
+                          <li><a class="subpage" href="cash-a-check-for-an-exact-amount.html">Checkの正確な金額での換金</a></li>
+                          <li><a class="subpage" href="cash-a-check-for-a-flexible-amount.html">Checkの変動金額での換金</a></li>
+                          <li><a class="subpage" href="cancel-a-check.html">Checkの取消し</a></li>
+                          <li><a class="subpage" href="look-up-checks-by-sender.html">送金元に基づくCheckの検索</a></li>
+                          <li><a class="subpage" href="look-up-checks-by-recipient.html">受取人に基づくCheckの検索</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse21 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_38">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_38" aria-expanded="true" aria-controls="sidenav_collapse_38"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="xrp-ledger-businesses.html">XRP Ledgerが利用する会社について</a>
+                <!-- <a class="sidenav_cat_title" href="xrp-ledger-businesses.html">XRP Ledger Businesses</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_38" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_38">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="list-xrp-as-an-exchange.html">取引所としてのXRPの上場</a></li>
+                      <li><a class="nosubcat-page" href="list-your-exchange-on-xrp-charts.html">XRP Chartsへの取引所の登録</a></li>
+                      <li><a class="nosubcat-page" href="become-an-xrp-ledger-gateway.html">Become an XRP Ledger Gateway</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse38 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card active">
+            <div class="card-header" role="tab" id="sidenav_cat_head_42">
+                <a class="sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_42" aria-expanded="true" aria-controls="sidenav_collapse_42"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title active-parent" href="manage-the-rippled-server.html">rippledサーバの利用</a>
+                <!-- <a class="sidenav_cat_title" href="manage-the-rippled-server.html">Manage the rippled Server</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_42" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_42">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="install-rippled.html">rippledのインストール</a></li>
+
+                          <li><a class="subpage" href="system-requirements.html">システム要件</a></li>
+                          <li><a class="subpage" href="install-rippled-on-centos-rhel-with-yum.html">yumを使用したCentOS/Red Hatへのインストール</a></li>
+                          <li><a class="subpage" href="install-rippled-on-ubuntu.html">UbuntuまたはDebian Linuxへのインストール</a></li>
+                          <li><a class="subpage" href="update-rippled-automatically-on-linux.html">Linuxでの自動更新</a></li>
+                          <li><a class="subpage" href="update-rippled-manually-on-centos-rhel.html">CentOS/Red Hatでの手動更新</a></li>
+                          <li><a class="subpage" href="update-rippled-manually-on-ubuntu.html">UbuntuまたはDebianでの手動更新</a></li>
+                          <li><a class="subpage" href="build-run-rippled-ubuntu.html">Ubuntuでのrippledの構築と実行</a></li>
+                          <li><a class="subpage" href="build-run-rippled-macos.html">macOSでのrippledの構築と実行</a></li>
+                          <li><a class="subpage" href="capacity-planning.html">容量の計画</a></li>
+                          <li><a class="subpage" href="rippled-1-3-migration-instructions.html">rippled v1.3.xへの移行手順</a></li>
+
+                      <li><a class="subcat-title active-parent" href="configure-rippled.html">rippledの設定</a></li>
+
+                          <li><a class="subpage" href="run-rippled-as-a-validator.html">バリデータとしてのrippledの実行</a></li>
+                          <li><a class="subpage" href="run-rippled-as-a-wallet-server.html">Run rippled as a Wallet Server</a></li>
+                          <li><a class="subpage" href="configure-statsd.html">Configure StatsD</a></li>
+                          <li><a class="subpage" href="connect-your-rippled-to-the-xrp-test-net.html">XRPL Altnetへのrippledの接続</a></li>
+                          <li><a class="subpage" href="configure-online-deletion.html">オンライン削除の設定</a></li>
+                          <li><a class="subpage" href="configure-advisory-deletion.html">指示による削除の設定</a></li>
+                          <li><a class="active subpage" href="#main_content_body">履歴シャーディングの設定</a></li>
+                          <li><a class="subpage" href="configure-full-history.html">全履歴の設定</a></li>
+                          <li><a class="subpage" href="configure-grpc.html">Configure gRPC</a></li>
+                          <li><a class="subpage" href="enable-public-signing.html">パブリック署名の有効化</a></li>
+
+                      <li><a class="subcat-title" href="configure-peering.html">ピアリングの設定</a></li>
+
+                          <li><a class="subpage" href="cluster-rippled-servers.html">rippledサーバーのクラスター化</a></li>
+                          <li><a class="subpage" href="configure-a-private-server.html">プライベートサーバーの設定</a></li>
+                          <li><a class="subpage" href="configure-the-peer-crawler.html">Configure the Peer Crawler</a></li>
+                          <li><a class="subpage" href="enable-link-compression.html">Enable Link Compression</a></li>
+                          <li><a class="subpage" href="forward-ports-for-peering.html">ピアリングのポート転送</a></li>
+                          <li><a class="subpage" href="manually-connect-to-a-specific-peer.html">特定のピアへの手動接続</a></li>
+                          <li><a class="subpage" href="set-max-number-of-peers.html">ピアの最大数の設定</a></li>
+                          <li><a class="subpage" href="use-a-peer-reservation.html">ピアリザベーションの使用</a></li>
+
+                      <li><a class="subcat-title" href="use-stand-alone-mode.html">スタンドアロンモードでrippledをテスト</a></li>
+
+                          <li><a class="subpage" href="start-a-new-genesis-ledger-in-stand-alone-mode.html">スタンドアロンモードでの新しいジェネシスレジャーの開始</a></li>
+                          <li><a class="subpage" href="load-a-saved-ledger-in-stand-alone-mode.html">スタンドアロンモードでの保存済みレジャーの読み込み</a></li>
+                          <li><a class="subpage" href="advance-the-ledger-in-stand-alone-mode.html">スタンドアロンモードでレジャーを進める</a></li>
+
+                      <li><a class="subcat-title" href="troubleshoot-the-rippled-server.html">rippledのトラブルシューティング</a></li>
+
+                          <li><a class="subpage" href="health-check-interventions.html">Health Check Interventions</a></li>
+                          <li><a class="subpage" href="diagnosing-problems.html">rippledの問題の診断</a></li>
+                          <li><a class="subpage" href="understanding-log-messages.html">ログメッセージについて</a></li>
+                          <li><a class="subpage" href="server-doesnt-sync.html">rippledサーバーが同期しない</a></li>
+                          <li><a class="subpage" href="server-wont-start.html">rippledサーバーが起動しない</a></li>
+                          <li><a class="subpage" href="fix-sqlite-tx-db-page-size-issue.html">SQLiteトランザクションデータベースのページサイズの問題の解決</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse42 -->
+
+          </div><!-- /.card -->
+
+    </div><!-- /#sidenav -->
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">学ぶ</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">探る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">作る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">コンセプト</a></li>
+          <li class="level-1"><a href="tutorials.html">チュートリアル</a></li>
+          <li class="level-1"><a href="references.html">リファレンス</a></li>
+          <li class="level-1"><a href="dev-tools.html">開発者用ツール</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">ライセンス</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="このページの先頭へ">先頭へ</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:ja"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>

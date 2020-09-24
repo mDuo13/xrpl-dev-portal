@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Payment Channelの使用 - XRP Ledger Dev Portal (日本語)</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="/ja/assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="/ja/assets/css/fonts-ja.css" rel="stylesheet" />
+    <link href="/ja/assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-ja ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/ja/" class="navbar-brand"><img src="/ja/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal (日本語)" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">学ぶ</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">オーバービュー</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">探る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">作る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">ドキュメント</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">コンセプト</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">チュートリアル</a>
+          <a class="dropdown-item top-level-2" href="references.html">リファレンス</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">開発者用ツール</a>
+          <a class="dropdown-item top-level-1" href="/blog/">ブログ</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/tutorials/use-complex-payment-types/use-payment-channels.ja.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">サイトを検索</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="サイトを検索">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          日本語
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/use-payment-channels.html">Eng</a>
+          <a class="dropdown-item" href="/ja/use-payment-channels.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>目次</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#payment-channelの使用">Payment Channelの使用</a></li>
+<li class="level-2"><a href="#サンプルの値">サンプルの値</a></li>
+<li class="level-2"><a href="#フローチャート">フローチャート</a></li>
+<li class="level-2"><a href="#1-支払人が特定の受取人へのpayment-channelを作成します">1. 支払人が特定の受取人へのPayment Channelを作成します。</a></li>
+<li class="level-2"><a href="#2-受取人がpayment-channelの特性を確認します">2. 受取人がPayment Channelの特性を確認します。</a></li>
+<li class="level-2"><a href="#3-支払人がchannelのxrpに対して1つ以上の署名付き-クレーム-を作成します">3. 支払人がChannelのXRPに対して1つ以上の署名付き クレーム を作成します。</a></li>
+<li class="level-2"><a href="#4-支払人が商品またはサービスに対する支払いとしてクレームを受取人に送信します">4. 支払人が、商品またはサービスに対する支払いとしてクレームを受取人に送信します。</a></li>
+<li class="level-2"><a href="#5-受取人がクレームを検証します">5. 受取人がクレームを検証します。</a></li>
+<li class="level-2"><a href="#6-受取人が商品またはサービスを提供します">6. 受取人が商品またはサービスを提供します。</a></li>
+<li class="level-2"><a href="#7-必要に応じてステップ36を繰り返します">7. 必要に応じてステップ3～6を繰り返します。</a></li>
+<li class="level-2"><a href="#8-準備が完了すれば受取人は承認された額のクレームを清算します">8. 準備が完了すれば、受取人は承認された額のクレームを清算します。</a></li>
+<li class="level-2"><a href="#9-支払人と受取人の取引完了後支払人はchannelの閉鎖を要求します">9. 支払人と受取人の取引完了後、支払人はChannelの閉鎖を要求します。</a></li>
+<li class="level-2"><a href="#10-有効期限切れのchannelは誰でも閉鎖できます">10. 有効期限切れのChannelは誰でも閉鎖できます。</a></li>
+<li class="level-2"><a href="#結論">結論</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">ホーム</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">作る</a></li>
+    <li class="active breadcrumb-item"><a href="tutorials.html">チュートリアル</a></li>
+    <li class="active breadcrumb-item"><a href="use-specialized-payment-types.html">専門化した支払いタイプの使用</a></li>
+    <li class="active breadcrumb-item">Payment Channelの使用</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="payment-channelの使用">Payment Channelの使用</h1>
+<p>Payment Channelは、少額の単位に分割可能な「非同期」のXRPペイメントを送信し、後日決済する高度な機能です。このチュートリアルでは、全体的な<a href="payment-channels.html">Payment Channel</a>の使用方法を、ローカル<code>rippled</code>サーバーの<a href="rippled-api.html">JSON-RPC API</a>を使用する例を使って説明します。</p>
+<p>このチュートリアルを進めるにあたって<a href="accounts.html">資金供給されているXRP Ledgerアカウント</a>を所有するユーザーが2名いれば理想的です。ただし、2つのXRP Ledgerアドレスを管理する1名のユーザーとしてこのチュートリアルを進めることもできます。</p>
+<h2 id="サンプルの値">サンプルの値</h2>
+<p>このチュートリアルでは、例として以下のアドレスを使用します。</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>支払人のアドレス</strong></td>
+<td>rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH</td>
+</tr>
+<tr>
+<td><strong>Channelに使用する公開鍵（XRP Ledgerの<a href="base58-encodings.html">base58</a>エンコード文字列フォーマット）</strong></td>
+<td>aB44YfzW24VDEJQ2UuLPV2PvqcPCSoLnL7y5M1EzhdW4LnK5xMS3</td>
+</tr>
+<tr>
+<td><strong>Channelに使用する公開鍵（16進数）</strong></td>
+<td>023693F15967AE357D0327974AD46FE3C127113B1110D6044FD41E723689F81CC6</td>
+</tr>
+<tr>
+<td><strong>受取人のアドレス</strong></td>
+<td>rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn</td>
+</tr>
+</tbody>
+</table>
+<p class="devportal-callout ヒント"><strong>ヒント:</strong> この例では、Channelの公開鍵は支払人のマスターキーペアの公開鍵です。これは完全に安全であり有効です。また、支払人のみが異なるキーペアの公開鍵と秘密鍵を把握している場合に限り、そのキーペアを使用することも完全に安全であり有効です。 <!-- Editor's note: We don't have a good page to link to explain key pairs as of time of this writing. --></p>
+<p>また、トランザクションの送信先<code>rippled</code>サーバーも必要です。このチュートリアルの例では、<code>rippled</code>サーバーがテストマシン（<code>localhost</code>）で稼働しており、このテストマシンはポート<strong>5005</strong>で非暗号化JSON-RPC APIエンドポイントに接続しています。</p>
+<p>実際のXRPを送金せずにテストを実施するには、Test Net XRPを保有する<a href="xrp-testnet-faucet.html">XRP Ledger Testnet</a>のアドレスを使用できます。XRP Ledger Test Netを使用する場合、<code>http://localhost:5005/</code>ではなく<code>https://api.altnet.rippletest.net:51234</code>に接続することで、Test NetサーバーのJSON-RPC APIを使用できます。</p>
+<p>Payment Channelに使用できるXRPの額に制限はありません。このチュートリアルで使用されているサンプルの値では、Payment Channelで100 XRP（<code>100000000</code> drop）が少なくとも1日間は確保されます。</p>
+<h2 id="フローチャート">フローチャート</h2>
+<p>次の図は、Payment Channelのライフサイクルの概要を示します。</p>
+<p><a href="img/paychan-flow.ja.png"><img alt="Payment Channelフローチャート" src="img/paychan-flow.ja.png"/></a></p>
+<p>この図のステップの番号は、このチュートリアルのステップの番号に対応しています。</p>
+<ol>
+<li><a href="#1-支払人が特定の受取人へのpayment-channelを作成します">支払人: Channelの作成</a></li>
+<li><a href="#2-受取人がpayment-channelの特性を確認します">受取人: Channelの確認</a></li>
+<li><a href="#3-支払人がchannelのxrpに対して1つ以上の署名付き-クレーム-を作成します">支払人: クレームへの署名</a></li>
+<li><a href="#4-支払人が商品またはサービスに対する支払いとしてクレームを受取人に送信します">支払人: 受取人へのクレームの送信</a></li>
+<li><a href="#5-受取人がクレームを検証します">受取人: クレームの検証</a></li>
+<li><a href="#6-受取人が商品またはサービスを提供します">受取人: 商品またはサービスの提供</a></li>
+<li><a href="#7-必要に応じてステップ36を繰り返します">必要に応じてステップ3～6を繰り返す</a></li>
+<li><a href="#8-準備が完了すれば受取人は承認された額のクレームを清算します">受取人: クレームの清算</a></li>
+<li><a href="#9-支払人と受取人の取引完了後支払人はchannelの閉鎖を要求します">支払人: Channel閉鎖の要求</a></li>
+<li><a href="#10-有効期限切れのchannelは誰でも閉鎖できます">支払人（またはその他の担当者）: 有効期限切れChannelの閉鎖</a></li>
+</ol>
+<h2 id="1-支払人が特定の受取人へのpayment-channelを作成します">1. 支払人が特定の受取人へのPayment Channelを作成します。</h2>
+<p>これは<a href="paymentchannelcreate.html">PaymentChannelCreateトランザクション</a>です。このプロセスでは、支払人がChannelの特定の特性（有効期限、決済遅延など、Channelのクレームに関する保証に影響する特性）を設定します。支払人は、Channelに対するクレームの検証に使用する公開鍵も設定します。 <!-- STYLE_OVERRIDE: will --></p>
+<p class="devportal-callout ヒント"><strong>ヒント:</strong> 「決済遅延」の設定だけが決済を遅延するわけでわありません。レジャーバージョンが閉鎖すると即時に決済が遅延されます（3～5秒）。「決済遅延」とは、Channel閉鎖の強制的な遅延です。これにより、受取人が決済を完了できるようになります。</p>
+<p>以下の例は、JSON-RPC APIを使用してローカル<code>rippled</code>サーバーへ<a href="submit.html#署名と送信モード">送信</a>することでPayment Channelを作成する方法を示しています。Payment Channelは、決済を1日遅らせて<a href="#サンプルの値">サンプルの支払人</a>（rN7n7...）から<a href="#サンプルの値">サンプルの受取人</a>（rf1Bi...）に100 XRPを割り当てます。公開鍵はサンプルの支払人のマスター公開鍵（16進数）です。</p>
+<p class="devportal-callout 注記"><strong>注記:</strong> Payment Channelは1つのオブジェクトとして支払人の<a href="reserves.html#所有者準備金">所有者準備金</a>に反映されます。所有者は少なくとも、Payment Channelに割り当てられたXRPを差引き後に、準備金を維持するのに十分なXRPを保有している必要があります。</p>
+<p>要求:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span>
+<span class="n">Content</span><span class="o">-</span><span class="k">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+
+<span class="err">{</span>
+    <span class="ss">"method"</span><span class="p">:</span> <span class="ss">"submit"</span><span class="p">,</span>
+    <span class="ss">"params"</span><span class="p">:</span> <span class="p">[</span><span class="err">{</span>
+        <span class="ss">"secret"</span><span class="p">:</span> <span class="ss">"s████████████████████████████"</span><span class="p">,</span>
+        <span class="ss">"tx_json"</span><span class="p">:</span> <span class="err">{</span>
+            <span class="ss">"Account"</span><span class="p">:</span> <span class="ss">"rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH"</span><span class="p">,</span>
+            <span class="ss">"TransactionType"</span><span class="p">:</span> <span class="ss">"PaymentChannelCreate"</span><span class="p">,</span>
+            <span class="ss">"Amount"</span><span class="p">:</span> <span class="ss">"100000000"</span><span class="p">,</span>
+            <span class="ss">"Destination"</span><span class="p">:</span> <span class="ss">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+            <span class="ss">"SettleDelay"</span><span class="p">:</span> <span class="mi">86400</span><span class="p">,</span>
+            <span class="ss">"PublicKey"</span><span class="p">:</span> <span class="ss">"023693F15967AE357D0327974AD46FE3C127113B1110D6044FD41E723689F81CC6"</span><span class="p">,</span>
+            <span class="ss">"DestinationTag"</span><span class="p">:</span> <span class="mi">20170428</span>
+        <span class="err">}</span><span class="p">,</span>
+        <span class="ss">"fee_mult_max"</span><span class="p">:</span> <span class="mi">1000</span>
+    <span class="err">}</span><span class="p">]</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>応答:</p>
+<div class="codehilite"><pre><span></span><code><span class="mi">200</span> <span class="n">OK</span>
+
+<span class="err">{</span>
+    <span class="ss">"result"</span><span class="p">:</span> <span class="err">{</span>
+        <span class="ss">"engine_result"</span><span class="p">:</span> <span class="ss">"tesSUCCESS"</span><span class="p">,</span>
+        <span class="ss">"engine_result_code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="ss">"engine_result_message"</span><span class="p">:</span> <span class="ss">"The transaction was applied.Only final in a validated ledger."</span><span class="p">,</span>
+        <span class="p">...</span>
+        <span class="ss">"tx_json"</span><span class="p">:</span> <span class="err">{</span>
+            <span class="p">...</span>
+            <span class="ss">"TransactionType"</span><span class="p">:</span> <span class="ss">"PaymentChannelCreate"</span><span class="p">,</span>
+            <span class="ss">"hash"</span><span class="p">:</span> <span class="ss">"3F93C482C0BC2A1387D9E67DF60BECBB76CC2160AE98522C77AF0074D548F67D"</span>
+        <span class="err">}</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</code></pre></div>
+<p><code>submit</code>要求に対する直接の応答には、トランザクションを識別する<code>hash</code>値を含む <em>暫定的な</em> 結果が含まれています。支払人は、検証済みレジャーでトランザクションの <em>最終</em> 結果を確認し、メタデータからChannel IDを取得する必要があります。この処理は<code>tx</code>コマンドを使用して実行できます。</p>
+<p>要求:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span>
+<span class="n">Content</span><span class="o">-</span><span class="k">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+
+<span class="err">{</span>
+    <span class="ss">"method"</span><span class="p">:</span> <span class="ss">"tx"</span><span class="p">,</span>
+    <span class="ss">"params"</span><span class="p">:</span> <span class="p">[</span><span class="err">{</span>
+        <span class="ss">"transaction"</span><span class="p">:</span> <span class="ss">"3F93C482C0BC2A1387D9E67DF60BECBB76CC2160AE98522C77AF0074D548F67D"</span>
+    <span class="err">}</span><span class="p">]</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>応答:</p>
+<div class="codehilite"><pre><span></span><code><span class="mi">200</span> <span class="n">OK</span>
+
+<span class="err">{</span>
+    <span class="ss">"result"</span><span class="p">:</span> <span class="err">{</span>
+        <span class="ss">"Account"</span><span class="p">:</span> <span class="ss">"rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH"</span><span class="p">,</span>
+        <span class="ss">"Amount"</span><span class="p">:</span> <span class="ss">"100000000"</span><span class="p">,</span>
+        <span class="ss">"Destination"</span><span class="p">:</span> <span class="ss">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+        <span class="p">...</span>
+        <span class="ss">"TransactionType"</span><span class="p">:</span> <span class="ss">"PaymentChannelCreate"</span><span class="p">,</span>
+        <span class="p">...</span>
+        <span class="ss">"hash"</span><span class="p">:</span> <span class="ss">"3F93C482C0BC2A1387D9E67DF60BECBB76CC2160AE98522C77AF0074D548F67D"</span><span class="p">,</span>
+        <span class="ss">"inLedger"</span><span class="p">:</span> <span class="mi">29380080</span><span class="p">,</span>
+        <span class="ss">"ledger_index"</span><span class="p">:</span> <span class="mi">29380080</span><span class="p">,</span>
+        <span class="ss">"meta"</span><span class="p">:</span> <span class="err">{</span>
+            <span class="ss">"AffectedNodes"</span><span class="p">:</span> <span class="p">[</span>
+                <span class="p">...</span>
+                <span class="err">{</span>
+                    <span class="ss">"CreatedNode"</span><span class="p">:</span> <span class="err">{</span>
+                        <span class="ss">"LedgerEntryType"</span><span class="p">:</span> <span class="ss">"PayChannel"</span><span class="p">,</span>
+                        <span class="ss">"LedgerIndex"</span><span class="p">:</span> <span class="ss">"5DB01B7FFED6B67E6B0414DED11E051D2EE2B7619CE0EAA6286D67A3A4D5BDB3"</span><span class="p">,</span>
+                        <span class="ss">"NewFields"</span><span class="p">:</span> <span class="err">{</span>
+                            <span class="ss">"Account"</span><span class="p">:</span> <span class="ss">"rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH"</span><span class="p">,</span>
+                            <span class="ss">"Amount"</span><span class="p">:</span> <span class="ss">"100000000"</span><span class="p">,</span>
+                            <span class="ss">"Destination"</span><span class="p">:</span> <span class="ss">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+                            <span class="ss">"DestinationTag"</span><span class="p">:</span> <span class="mi">20170428</span><span class="p">,</span>
+                            <span class="ss">"PublicKey"</span><span class="p">:</span> <span class="ss">"023693F15967AE357D0327974AD46FE3C127113B1110D6044FD41E723689F81CC6"</span><span class="p">,</span>
+                            <span class="ss">"SettleDelay"</span><span class="p">:</span> <span class="mi">86400</span>
+                        <span class="err">}</span>
+                    <span class="err">}</span>
+                <span class="err">}</span><span class="p">,</span>
+                <span class="p">...</span>
+            <span class="p">],</span>
+            <span class="ss">"TransactionIndex"</span><span class="p">:</span> <span class="mi">16</span><span class="p">,</span>
+            <span class="ss">"TransactionResult"</span><span class="p">:</span> <span class="ss">"tesSUCCESS"</span>
+        <span class="err">}</span><span class="p">,</span>
+        <span class="ss">"status"</span><span class="p">:</span> <span class="ss">"success"</span><span class="p">,</span>
+        <span class="ss">"validated"</span><span class="p">:</span> <span class="k">true</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>支払人はJSON-RPCからの応答で以下を確認する必要があります。</p>
+<ul>
+<li>トランザクションの<code>meta</code>フィールドで、<code>TransactionResult</code>が<code>tesSUCCESS</code>であることを確認します。</li>
+<li>データが検証済みレジャーのデータであることを示す<code>"validated":true</code>が応答に含まれていることを確認します。（結果<code>tesSUCCESS</code>は、検証済みレジャーバージョンに記録されている場合にのみ<a href="finality-of-results.html">最終的な</a>結果です。）</li>
+<li>トランザクションの<code>meta</code>フィールドの<code>AffectedNodes</code>配列で、<code>LedgerEntryType</code>が<code>PayChannel</code>である<code>CreatedNode</code>オブジェクトを検索します。<code>CreatedNode</code>オブジェクトの<code>LedgerIndex</code>フィールドはChannel IDを示します。（上記の例では、これは「5DB0...」で始まる16進文字列です。）Channel IDは、後でクレームに署名する際に必要です。
+    PayChannelレジャーオブジェクトタイプの詳細については、<a href="paychannel.html">PayChannelレジャーオブジェクト</a>を参照してください。</li>
+</ul>
+<h2 id="2-受取人がpayment-channelの特性を確認します">2. 受取人がPayment Channelの特性を確認します。</h2>
+<p>Payment Channelを見つけるには、以下の例（JSON-RPC APIを使用）に示すようにChannelの支払人を指定した<a href="account_channels.html">account_channelsメソッド</a>を使用します。</p>
+<p>要求:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span>
+<span class="n">Content</span><span class="o">-</span><span class="k">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+
+<span class="err">{</span>
+    <span class="ss">"method"</span><span class="p">:</span> <span class="ss">"account_channels"</span><span class="p">,</span>
+    <span class="ss">"params"</span><span class="p">:</span> <span class="p">[</span><span class="err">{</span>
+        <span class="ss">"account"</span><span class="p">:</span> <span class="ss">"rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH"</span><span class="p">,</span>
+        <span class="ss">"destination_account"</span><span class="p">:</span> <span class="ss">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+        <span class="ss">"ledger_index"</span><span class="p">:</span> <span class="ss">"validated"</span>
+    <span class="err">}</span><span class="p">]</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>応答:</p>
+<div class="codehilite"><pre><span></span><code><span class="mi">200</span> <span class="n">OK</span>
+
+<span class="err">{</span>
+    <span class="ss">"result"</span><span class="p">:</span> <span class="err">{</span>
+        <span class="ss">"account"</span><span class="p">:</span> <span class="ss">"rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH"</span><span class="p">,</span>
+        <span class="ss">"channels"</span><span class="p">:</span> <span class="p">[</span><span class="err">{</span>
+            <span class="ss">"account"</span><span class="p">:</span> <span class="ss">"rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH"</span><span class="p">,</span>
+            <span class="ss">"amount"</span><span class="p">:</span> <span class="ss">"100000000"</span><span class="p">,</span>
+            <span class="ss">"balance"</span><span class="p">:</span> <span class="ss">"0"</span><span class="p">,</span>
+            <span class="ss">"channel_id"</span><span class="p">:</span> <span class="ss">"5DB01B7FFED6B67E6B0414DED11E051D2EE2B7619CE0EAA6286D67A3A4D5BDB3"</span><span class="p">,</span>
+            <span class="ss">"destination_account"</span><span class="p">:</span> <span class="ss">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+            <span class="ss">"destination_tag"</span><span class="p">:</span> <span class="mi">20170428</span><span class="p">,</span>
+            <span class="ss">"public_key"</span><span class="p">:</span> <span class="ss">"aB44YfzW24VDEJQ2UuLPV2PvqcPCSoLnL7y5M1EzhdW4LnK5xMS3"</span><span class="p">,</span>
+            <span class="ss">"public_key_hex"</span><span class="p">:</span> <span class="ss">"023693F15967AE357D0327974AD46FE3C127113B1110D6044FD41E723689F81CC6"</span><span class="p">,</span>
+            <span class="ss">"settle_delay"</span><span class="p">:</span> <span class="mi">86400</span>
+        <span class="err">}</span><span class="p">],</span>
+        <span class="ss">"status"</span><span class="p">:</span> <span class="ss">"success"</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>受取人は、以下のすべての点を含め、Payment Channelのパラメーターが特定のユースケースに適していることを確認します。</p>
+<ul>
+<li><code>destination_account</code>フィールドに受取人の正しいアドレスが指定されていることを確認します。</li>
+<li><code>settle_delay</code>フィールドに、受取人が未処理のクレームを清算するのに十分な決済遅延期間が秒単位で指定されていることを確認します。</li>
+<li><code>cancel_after</code>（変更できない有効期限）フィールドと<code>expiration</code>（変更できる有効期限）フィールドが含まれている場合は、これらのフィールドの値が早過ぎないことを確認します。受取人はこれらの時刻をメモして、それらの時刻より前にクレームを清算できるようにします。</li>
+<li><code>public_key</code>フィールドと<code>channel_id</code>フィールドをメモします。これらのフィールドは、後でクレームを検証、清算する際に必要です。</li>
+<li><em>（省略可）</em><code>destination_tag</code>フィールドが存在しており、必要な宛先タグが指定されていることを確認します。</li>
+</ul>
+<p>2名の当事者間に複数のChannelが存在している可能性があるため、受取人が正しいChannelのクオリティを確認することが重要です。混乱する場合は、使用するChannelのChannel ID（<code>channel_id</code>）を支払人が明確にする必要があります。</p>
+<h2 id="3-支払人がchannelのxrpに対して1つ以上の署名付き-クレーム-を作成します">3. 支払人がChannelのXRPに対して1つ以上の署名付き <em>クレーム</em> を作成します。</h2>
+<p>これらのクレームの額は、支払人が購入する具体的な商品またはサービスに応じて異なります。</p>
+<p>各クレームの額は累計額でなければなりません。つまり、2つのアイテムをそれぞれ10 XRPで購入する場合、1番目のクレームの額は10 XRPで、2番目のクレームの額は20 XRPである必要があります。クレームは、Channelに割り当てられているXRPの合計額を超えることはありません。（<a href="paymentchannelfund.html">PaymentChannelFund</a>トランザクションでは、Channelに割り当てられるXRPの合計額を増加できます。）</p>
+<p><a href="channel_authorize.html">channel_authorizeメソッド</a>を使用してクレームを作成できます。以下の例では、Channelから1 XRPが承認されます。</p>
+<p>要求:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span>
+<span class="n">Content</span><span class="o">-</span><span class="k">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+
+<span class="err">{</span>
+    <span class="ss">"method"</span><span class="p">:</span> <span class="ss">"channel_authorize"</span><span class="p">,</span>
+    <span class="ss">"params"</span><span class="p">:</span> <span class="p">[</span><span class="err">{</span>
+        <span class="ss">"channel_id"</span><span class="p">:</span> <span class="ss">"5DB01B7FFED6B67E6B0414DED11E051D2EE2B7619CE0EAA6286D67A3A4D5BDB3"</span><span class="p">,</span>
+        <span class="ss">"secret"</span><span class="p">:</span> <span class="ss">"s████████████████████████████"</span><span class="p">,</span>
+        <span class="ss">"amount"</span><span class="p">:</span> <span class="ss">"1000000"</span>
+    <span class="err">}</span><span class="p">]</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>応答:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">{</span>
+<span class="err">    "result": {</span>
+<span class="err">        "signature": "304402204EF0AFB78AC23ED1C472E74F4299C0C21F1B21D07EFC0A3838A420F76D783A400220154FB11B6F54320666E4C36CA7F686C16A3A0456800BBC43746F34AF50290064",</span>
+<span class="err">        "status": "success"</span>
+<span class="err">    }</span>
+<span class="err">}</span>
+</code></pre></div>
+<h2 id="4-支払人が商品またはサービスに対する支払いとしてクレームを受取人に送信します">4. 支払人が、商品またはサービスに対する支払いとしてクレームを受取人に送信します。</h2>
+<p>この通信は、支払人と受取人が合意できる通信システムで「レジャー外」で行われます。これには安全な通信を使用する必要がありますが、必須ではありません。Channelの支払人または受取人がそのChannelに対するクレームを清算できます。</p>
+<p>クレームで以下の情報が伝達される限り、クレームの厳密なフォーマットは重要ではありません。</p>
+<table>
+<thead>
+<tr>
+<th align="left">フィールド</th>
+<th align="left">例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Channel ID</td>
+<td align="left"><code>5DB01B7FFED6B67E6B0414DED11E051D2EE2B7619CE0EAA6286D67A3A4D5BDB3</code></td>
+</tr>
+<tr>
+<td align="left">XRPの額（drop単位）</td>
+<td align="left"><code>1000000</code></td>
+</tr>
+<tr>
+<td align="left">署名</td>
+<td align="left"><code>304402204EF0AFB78AC23ED1C472E74F4299C0C21F1B21D07EFC0A3838A420F76D783A</code> <br/> <code>400220154FB11B6F54320666E4C36CA7F686C16A3A0456800BBC43746F34AF50290064</code> <em>（注記: この長い文字列は1行に収まるように改行されています）</em></td>
+</tr>
+</tbody>
+</table>
+<p>受取人は、Channelに関連付けられている公開鍵も把握する必要があります。この鍵は、Channelの存続期間中変更されることはありません。</p>
+<h2 id="5-受取人がクレームを検証します">5. 受取人がクレームを検証します。</h2>
+<p><a href="channel_verify.html">channel_verifyメソッド</a>を使用してクレームを検証できます。受取人は、クレームの額が提供した商品およびサービスの合計価格以上であることを確認する必要があります。（金額は累計額であるため、これまでに購入されたすべての商品およびサービスの合計価格です。）</p>
+<p>JSON-RPC APIで<code>channel_verify</code>を使用する例:</p>
+<p>要求:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span>
+<span class="n">Content</span><span class="o">-</span><span class="k">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+
+<span class="err">{</span>
+    <span class="ss">"method"</span><span class="p">:</span> <span class="ss">"channel_verify"</span><span class="p">,</span>
+    <span class="ss">"params"</span><span class="p">:</span> <span class="p">[</span><span class="err">{</span>
+        <span class="ss">"channel_id"</span><span class="p">:</span> <span class="ss">"5DB01B7FFED6B67E6B0414DED11E051D2EE2B7619CE0EAA6286D67A3A4D5BDB3"</span><span class="p">,</span>
+        <span class="ss">"signature"</span><span class="p">:</span> <span class="ss">"304402204EF0AFB78AC23ED1C472E74F4299C0C21F1B21D07EFC0A3838A420F76D783A400220154FB11B6F54320666E4C36CA7F686C16A3A0456800BBC43746F34AF50290064"</span><span class="p">,</span>
+        <span class="ss">"public_key"</span><span class="p">:</span> <span class="ss">"aB44YfzW24VDEJQ2UuLPV2PvqcPCSoLnL7y5M1EzhdW4LnK5xMS3"</span><span class="p">,</span>
+        <span class="ss">"amount"</span><span class="p">:</span> <span class="ss">"1000000"</span>
+    <span class="err">}</span><span class="p">]</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>応答:</p>
+<div class="codehilite"><pre><span></span><code><span class="mi">200</span> <span class="n">OK</span>
+
+<span class="err">{</span>
+    <span class="ss">"result"</span><span class="p">:</span> <span class="err">{</span>
+        <span class="ss">"signature_verified"</span><span class="p">:</span><span class="k">true</span><span class="p">,</span>
+        <span class="ss">"status"</span><span class="p">:</span><span class="ss">"success"</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>応答に<code>"signature_verified": true</code>が含まれている場合、クレームの署名は真正です。受取人は、クレームを換金できる十分なXRPがChannelにあること<strong>も</strong>確認する必要があります。このためには、受取人は<a href="account_channels.html">account_channelsメソッド</a>を使用して、Payment Channelの最新の検証済み状態を確認します。</p>
+<p>要求:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span>
+<span class="n">Content</span><span class="o">-</span><span class="k">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+
+<span class="err">{</span>
+    <span class="ss">"method"</span><span class="p">:</span> <span class="ss">"account_channels"</span><span class="p">,</span>
+    <span class="ss">"params"</span><span class="p">:</span> <span class="p">[</span><span class="err">{</span>
+        <span class="ss">"account"</span><span class="p">:</span> <span class="ss">"rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH"</span><span class="p">,</span>
+        <span class="ss">"destination_account"</span><span class="p">:</span> <span class="ss">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+        <span class="ss">"ledger_index"</span><span class="p">:</span> <span class="ss">"validated"</span>
+    <span class="err">}</span><span class="p">]</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>応答:</p>
+<div class="codehilite"><pre><span></span><code><span class="mi">200</span> <span class="n">OK</span>
+
+<span class="err">{</span>
+    <span class="ss">"result"</span><span class="p">:</span> <span class="err">{</span>
+        <span class="ss">"account"</span><span class="p">:</span> <span class="ss">"rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH"</span><span class="p">,</span>
+        <span class="ss">"channels"</span><span class="p">:</span> <span class="p">[</span><span class="err">{</span>
+            <span class="ss">"account"</span><span class="p">:</span> <span class="ss">"rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH"</span><span class="p">,</span>
+            <span class="ss">"amount"</span><span class="p">:</span> <span class="ss">"100000000"</span><span class="p">,</span>
+            <span class="ss">"balance"</span><span class="p">:</span> <span class="ss">"0"</span><span class="p">,</span>
+            <span class="ss">"channel_id"</span><span class="p">:</span> <span class="ss">"5DB01B7FFED6B67E6B0414DED11E051D2EE2B7619CE0EAA6286D67A3A4D5BDB3"</span><span class="p">,</span>
+            <span class="ss">"destination_account"</span><span class="p">:</span> <span class="ss">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+            <span class="ss">"destination_tag"</span><span class="p">:</span> <span class="mi">20170428</span><span class="p">,</span>
+            <span class="ss">"public_key"</span><span class="p">:</span> <span class="ss">"aB44YfzW24VDEJQ2UuLPV2PvqcPCSoLnL7y5M1EzhdW4LnK5xMS3"</span><span class="p">,</span>
+            <span class="ss">"public_key_hex"</span><span class="p">:</span> <span class="ss">"023693F15967AE357D0327974AD46FE3C127113B1110D6044FD41E723689F81CC6"</span><span class="p">,</span>
+            <span class="ss">"settle_delay"</span><span class="p">:</span> <span class="mi">86400</span>
+        <span class="err">}</span><span class="p">],</span>
+        <span class="ss">"status"</span><span class="p">:</span> <span class="ss">"success"</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>受取人は以下の点を確認する必要があります:</p>
+<ul>
+<li><code>channel_id</code>がクレームのChannel IDと一致する<code>channels</code>配列のオブジェクトを見つけます。同一の当事者間であっても複数のPayment Channelが存在していることがありますが、クレームはIDが一致するChannelでのみ清算できます。</li>
+<li>Channelの<code>expiration</code>（変更可能な有効期限）がある場合は、この期限が早過ぎないことを確認します。受取人はこの期限の前にクレームを清算する必要があります。</li>
+<li>クレームの<code>amount</code>がChannelの<code>amount</code>以下であることを確認します。クレームの<code>amount</code>の方が大きい場合、支払人が<a href="paymentchannelfund.html">PaymentChannelFundトランザクション</a>を使用してChannelで使用可能なXRPの合計額を増加しない限り、クレームを清算できません。</li>
+<li>Channelの<code>balance</code>が、受取人がすでにChannelから受領していると予測している額と一致していることを確認します。これらの金額が一致しない場合、受取人はChannelのトランザクション履歴を再度確認する必要があります。不一致の原因として以下のものが考えられます。<ul>
+<li>支払人が<a href="paymentchannelclaim.html">PaymentChannelClaim</a>トランザクションを使用してChannelから受取人にXRPを送金したところ、受取人がこれに気付かず、着信トランザクションを記録していなかった。</li>
+<li>受取人のレコードに、「処理中」のトランザクションや、最新の検証済みレジャーバージョンにはまだ記録されていないトランザクションが含まれていた。受取人は<a href="tx.html">txメソッド</a>を使用して個々のトランザクションの状態を調べ、この点を確認できます。</li>
+<li><code>account_channels</code>要求に正しいレジャーバージョンが指定されていなかった。（最新の検証済みバージョンを確認するには、<code>"ledger_index":"validated”</code>を使用します）</li>
+<li>受取人は以前にXRPを清算したものの、記録し忘れていた。</li>
+<li>受取人がXRPの清算を試行し、暫定的な結果を記録したが、トランザクションの最終的な検証済みの結果がこれとは異なり、受取人はこの最終検証済み結果を記録し忘れていた。</li>
+<li>受取人が照会した<code>rippled</code>サーバーが、ネットワークの他の部分と同期していない状態であったか、または不明なバグが発生した。サーバーの状態を確認するには、<a href="server_info.html">server_infoメソッド</a>を使用します。（この状況を再現できる場合は、<a class="external-link" href="https://github.com/ripple/rippled/issues/" target="_blank">問題を報告してください <i aria-hidden="true" class="fa fa-external-link"></i></a>。）</li>
+</ul>
+</li>
+</ul>
+<p>受取人がPayment Channelの署名と現行状態の両方を確認した後で、XRPをまだ受領していない場合、XRPを清算するトランザクションがChannelの有効期限より前に処理される限り、XRPを確実に清算 <em>できます</em> 。</p>
+<h2 id="6-受取人が商品またはサービスを提供します">6. 受取人が商品またはサービスを提供します。</h2>
+<p>この時点で受取人は支払がすでに保証されていることを把握しているので、商品またはサービスを支払人に提供できます。</p>
+<p>このチュートリアルに関して、受取人は支払人に「商品およびサービス」としてハイタッチまたは同等のオンラインメッセージを送信できます。</p>
+<h2 id="7-必要に応じてステップ36を繰り返します">7. 必要に応じてステップ3～6を繰り返します。</h2>
+<p>支払人と受取人はXRP Ledger自体を待つことなく、ステップ3～6（商品およびサービスと交換するクレームの作成、送信、検証）を必要な回数と間隔で繰り返すことができます。この処理に関する2つの主な制限を以下に示します。</p>
+<ul>
+<li>
+<p>Payment ChannelのXRPの額。（支払人は必要に応じて<a href="paymentchannelfund.html">PaymentChannelFundトランザクション</a>を送信し、Channelで使用可能なXRPの合計額を増加できます。）</p>
+</li>
+<li>
+<p>Payment Channelの変更可能な有効期限（設定されている場合）。（これは<a href="account_channels.html">account_channelsメソッド</a>に対する応答の<code>cancel_after</code>フィールドに表示されます。）</p>
+</li>
+</ul>
+<h2 id="8-準備が完了すれば受取人は承認された額のクレームを清算します">8. 準備が完了すれば、受取人は承認された額のクレームを清算します。</h2>
+<p>この時点で受取人は最終的にChannelからXRPを受領します。</p>
+<p>これは、<code>Balance</code>、<code>Amount</code>、<code>Signature</code>、および<code>PublicKey</code>フィールドが指定された<a href="paymentchannelclaim.html">PaymentChannelClaimトランザクション</a>です。クレームの値は累計額であるため、受取人は最も高額な（最新の）クレームを清算するだけで全額を受領できます。受取人は、承認済みの額全額をクレームで清算する必要はありません。</p>
+<p>受取人は必要に応じて、取引継続中にこの手順を繰り返し実行して、一部の額を決済することができます。</p>
+<p>ChannelからXRPを清算する例:</p>
+<p>要求:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">POST</span> <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">5005</span><span class="o">/</span>
+<span class="n">Content</span><span class="o">-</span><span class="k">Type</span><span class="p">:</span> <span class="n">application</span><span class="o">/</span><span class="n">json</span>
+
+<span class="err">{</span>
+    <span class="ss">"method"</span><span class="p">:</span> <span class="ss">"submit"</span><span class="p">,</span>
+    <span class="ss">"params"</span><span class="p">:</span> <span class="p">[</span><span class="err">{</span>
+            <span class="ss">"secret"</span><span class="p">:</span> <span class="ss">"s████████████████████████████"</span><span class="p">,</span>
+            <span class="ss">"tx_json"</span><span class="p">:</span> <span class="err">{</span>
+                <span class="ss">"Account"</span><span class="p">:</span> <span class="ss">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+                <span class="ss">"TransactionType"</span><span class="p">:</span> <span class="ss">"PaymentChannelClaim"</span><span class="p">,</span>
+                <span class="ss">"Amount"</span><span class="p">:</span> <span class="ss">"1000000"</span><span class="p">,</span>
+                <span class="ss">"Balance"</span><span class="p">:</span> <span class="ss">"1000000"</span><span class="p">,</span>
+                <span class="ss">"Channel"</span><span class="p">:</span> <span class="ss">"5DB01B7FFED6B67E6B0414DED11E051D2EE2B7619CE0EAA6286D67A3A4D5BDB3"</span><span class="p">,</span>
+                <span class="ss">"PublicKey"</span><span class="p">:</span> <span class="ss">"023693F15967AE357D0327974AD46FE3C127113B1110D6044FD41E723689F81CC6"</span><span class="p">,</span>
+                <span class="ss">"Signature"</span><span class="p">:</span> <span class="ss">"304402204EF0AFB78AC23ED1C472E74F4299C0C21F1B21D07EFC0A3838A420F76D783A400220154FB11B6F54320666E4C36CA7F686C16A3A0456800BBC43746F34AF50290064"</span>
+            <span class="err">}</span><span class="p">,</span>
+            <span class="ss">"fee_mult_max"</span><span class="p">:</span> <span class="mi">1000</span>
+        <span class="err">}</span><span class="p">]</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>応答:</p>
+<div class="codehilite"><pre><span></span><code><span class="mi">200</span> <span class="n">OK</span>
+
+<span class="err">{</span>
+    <span class="ss">"result"</span><span class="p">:</span> <span class="err">{</span>
+        <span class="ss">"engine_result"</span><span class="p">:</span> <span class="ss">"tesSUCCESS"</span><span class="p">,</span>
+        <span class="ss">"engine_result_code"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="ss">"engine_result_message"</span><span class="p">:</span> <span class="ss">"The transaction was applied.Only final in a validated ledger."</span><span class="p">,</span>
+        <span class="ss">"status"</span><span class="p">:</span> <span class="ss">"success"</span><span class="p">,</span>
+        <span class="ss">"tx_blob"</span><span class="p">:</span> <span class="ss">"12000F2280000000240000017450165DB01B7FFED6B67E6B0414DED11E051D2EE2B7619CE0EAA6286D67A3A4D5BDB36140000000000F42406240000000000F424068400000000000000A7121023693F15967AE357D0327974AD46FE3C127113B1110D6044FD41E723689F81CC6732103AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB7447304502210096B933BC24DA77D8C4057B4780B282BA66C668DFE1ACF4EEC063AD6661725797022037C8823669CE91AACA8CC754C9F041359F85B0B32384AEA141EBC3603798A24C7646304402204EF0AFB78AC23ED1C472E74F4299C0C21F1B21D07EFC0A3838A420F76D783A400220154FB11B6F54320666E4C36CA7F686C16A3A0456800BBC43746F34AF5029006481144B4E9C06F24296074F7BC48F92A97916C6DC5EA9"</span><span class="p">,</span>
+        <span class="ss">"tx_json"</span><span class="p">:</span> <span class="err">{</span>
+            <span class="ss">"Account"</span><span class="p">:</span> <span class="ss">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+            <span class="ss">"Amount"</span><span class="p">:</span> <span class="ss">"1000000"</span><span class="p">,</span>
+            <span class="ss">"Balance"</span><span class="p">:</span> <span class="ss">"1000000"</span><span class="p">,</span>
+            <span class="ss">"Channel"</span><span class="p">:</span> <span class="ss">"5DB01B7FFED6B67E6B0414DED11E051D2EE2B7619CE0EAA6286D67A3A4D5BDB3"</span><span class="p">,</span>
+            <span class="ss">"Fee"</span><span class="p">:</span> <span class="ss">"10"</span><span class="p">,</span>
+            <span class="ss">"Flags"</span><span class="p">:</span> <span class="mi">2147483648</span><span class="p">,</span>
+            <span class="ss">"PublicKey"</span><span class="p">:</span> <span class="ss">"023693F15967AE357D0327974AD46FE3C127113B1110D6044FD41E723689F81CC6"</span><span class="p">,</span>
+            <span class="ss">"Sequence"</span><span class="p">:</span> <span class="mi">372</span><span class="p">,</span>
+            <span class="ss">"Signature"</span><span class="p">:</span> <span class="ss">"304402204EF0AFB78AC23ED1C472E74F4299C0C21F1B21D07EFC0A3838A420F76D783A400220154FB11B6F54320666E4C36CA7F686C16A3A0456800BBC43746F34AF50290064"</span><span class="p">,</span>
+            <span class="ss">"SigningPubKey"</span><span class="p">:</span> <span class="ss">"03AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB"</span><span class="p">,</span>
+            <span class="ss">"TransactionType"</span><span class="p">:</span> <span class="ss">"PaymentChannelClaim"</span><span class="p">,</span>
+            <span class="ss">"TxnSignature"</span><span class="p">:</span> <span class="ss">"304502210096B933BC24DA77D8C4057B4780B282BA66C668DFE1ACF4EEC063AD6661725797022037C8823669CE91AACA8CC754C9F041359F85B0B32384AEA141EBC3603798A24C"</span><span class="p">,</span>
+            <span class="ss">"hash"</span><span class="p">:</span> <span class="ss">"C9FE08FC88CF76C3B06622ADAA47AE99CABB3380E4D195E7751274CFD87910EB"</span>
+        <span class="err">}</span>
+    <span class="err">}</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>受取人は検証済みレジャーでこのトランザクションが正常に処理されたことを確認します。詳細は、<a href="reliable-transaction-submission.html">確実なトランザクションの送信</a>を参照してください。</p>
+<h2 id="9-支払人と受取人の取引完了後支払人はchannelの閉鎖を要求します">9. 支払人と受取人の取引完了後、支払人はChannelの閉鎖を要求します。</h2>
+<p>これは、<code>tfClose</code>フラグを設定した<a href="paymentchannelclaim.html">PaymentChannelClaimトランザクション</a>、または<code>Expiration</code>フィールドを設定した<a href="paymentchannelfund.html">PaymentChannelFundトランザクション</a>です。<em>（<a href="#フローチャート">フローチャート</a>の9a）</em>。</p>
+<p>支払人がChannelの閉鎖を要求した時点でChannelにXRPが残っていない場合は、Channelは即時に閉鎖されます。</p>
+<p>ChannelにXRPが <em>残っている</em> 場合は、このChannelの閉鎖要求は、受取人に対し未処理のクレームを速やかに清算することを求める最終警告となります。Channelの閉鎖までに、少なくとも決済遅延期間相当の時間が受取人に残されています。正確な秒数は、レジャーの閉鎖時刻に応じて多少異なります。</p>
+<p>また、受取人はクレームの処理完了直後にPayment Channelを閉鎖できます <em>（<a href="#フローチャート">フローチャート</a>の9b）</em>。</p>
+<p>Channelの閉鎖を要求する<a href="submit.html#署名と送信モード">トランザクションを送信する</a>例:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">{</span>
+<span class="err">    "method": "submit",</span>
+<span class="err">    "params": [{</span>
+<span class="err">        "secret": "s████████████████████████████",</span>
+<span class="err">        "tx_json": {</span>
+<span class="err">            "Account": "rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH",</span>
+<span class="err">            "TransactionType": "PaymentChannelClaim",</span>
+<span class="err">            "Channel": "5DB01B7FFED6B67E6B0414DED11E051D2EE2B7619CE0EAA6286D67A3A4D5BDB3",</span>
+<span class="err">            "Flags": 2147614720</span>
+<span class="err">        },</span>
+<span class="err">        "fee_mult_max": 1000</span>
+<span class="err">    }]</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>トランザクションが検証済みレジャーに記録されたら、いずれの当事者も<a href="account_channels.html">account_channelsメソッド</a>を使用して現在スケジュールされているChannelの有効期限を確認できます。最新の検証済みレジャーバージョンからデータを取得するには、<code>"ledger_index": "validated"</code>を必ず指定してください。</p>
+<p><code>account_channels</code>応答の例:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">{</span>
+<span class="err">    "result": {</span>
+<span class="err">        "account": "rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH",</span>
+<span class="err">        "channels": [</span>
+<span class="err">            {</span>
+<span class="err">                "account": "rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH",</span>
+<span class="err">                "amount": "100000000",</span>
+<span class="err">                "balance": "1000000",</span>
+<span class="err">                "channel_id": "5DB01B7FFED6B67E6B0414DED11E051D2EE2B7619CE0EAA6286D67A3A4D5BDB3",</span>
+<span class="err">                "destination_account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",</span>
+<span class="err">                "destination_tag": 20170428,</span>
+<span class="err">                "expiration": 547073182,</span>
+<span class="err">                "public_key": "aB44YfzW24VDEJQ2UuLPV2PvqcPCSoLnL7y5M1EzhdW4LnK5xMS3",</span>
+<span class="err">                "public_key_hex": "023693F15967AE357D0327974AD46FE3C127113B1110D6044FD41E723689F81CC6",</span>
+<span class="err">                "settle_delay": 86400</span>
+<span class="err">            }</span>
+<span class="err">        ],</span>
+<span class="err">        "status": "success"</span>
+<span class="err">    }</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>この例に示されている<code>expiration</code>の値547073182（<a href="basic-data-types.html#時間の指定">Rippleエポック以降の経過秒数</a>） は2017-05-02T20:46:22Zに対応しています。このため、この時刻までに決済されなかったクレームはすべて無効になります。</p>
+<h2 id="10-有効期限切れのchannelは誰でも閉鎖できます">10. 有効期限切れのChannelは誰でも閉鎖できます。</h2>
+<p>決済遅延が経過するか、またはChannelが予定されている有効期限に達したら、Channelは有効期限切れになります。それ以降に行われるこのChannelに影響するトランザクションはすべて、Channelを閉鎖するだけであり、未請求のXRPは支払人に返金されます。</p>
+<p>Channelは期限切れ状態で永久にレジャーに残ることがあります。これは、レジャーはトランザクションの結果によってのみ変わるので、<em>誰かが</em> 有効期限切れのChannelを閉鎖するトランザクションを送信する必要があるためです。Channelがレジャーに残っている限り、そのChannelは<a href="reserves.html#所有者準備金">所有者準備金</a>の点から支払人が所有するオブジェクトと見なされます。</p>
+<p>このため、支払人には<code>tfClose</code>フラグを指定した2番目の<a href="paymentchannelclaim.html">PaymentChannelClaimトランザクション</a>を送信することが推奨されます。ただしその他のアカウント（Payment Channelに関与するアカウントを含む）は有効期限切れのChannelを閉鎖できません。</p>
+<p>このトランザクションを送信するコマンドは、Channelの有効期限切れを要求する前述の例と同じです。（ただしコマンドの実行結果である<a href="transaction-common-fields.html#自動入力可能なフィールド">自動入力</a> <code>Sequence</code>番号、署名、識別用ハッシュは一意です。）</p>
+<p>有効期限切れのChannelを閉鎖するトランザクションを<a href="submit.html#署名と送信モード">送信する</a>例:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">{</span>
+<span class="err">    "method": "submit",</span>
+<span class="err">    "params": [{</span>
+<span class="err">        "secret": "s████████████████████████████",</span>
+<span class="err">        "tx_json": {</span>
+<span class="err">            "Account": "rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH",</span>
+<span class="err">            "TransactionType": "PaymentChannelClaim",</span>
+<span class="err">            "Channel": "5DB01B7FFED6B67E6B0414DED11E051D2EE2B7619CE0EAA6286D67A3A4D5BDB3",</span>
+<span class="err">            "Flags": 2147614720</span>
+<span class="err">        },</span>
+<span class="err">        "fee_mult_max": 1000</span>
+<span class="err">    }]</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>トランザクションが検証済みレジャーに記録されたら、そのトランザクションのメタデータを調べて、Channelが削除され、XRPが送金元に返金されたことを確認できます。</p>
+<p>このステップのトランザクションを検索する<a href="tx.html">txメソッド</a>を使用した場合の応答の例:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">{</span>
+<span class="err">    "result": {</span>
+<span class="err">        "Account": "rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH",</span>
+<span class="err">        "Channel": "5DB01B7FFED6B67E6B0414DED11E051D2EE2B7619CE0EAA6286D67A3A4D5BDB3",</span>
+<span class="err">        "Fee": "5606",</span>
+<span class="err">        "Flags": 2147614720,</span>
+<span class="err">        "Sequence": 41,</span>
+<span class="err">        "SigningPubKey": "023693F15967AE357D0327974AD46FE3C127113B1110D6044FD41E723689F81CC6",</span>
+<span class="err">        "TransactionType": "PaymentChannelClaim",</span>
+<span class="err">        "TxnSignature": "3044022008922FEB6F7D35D42006685BCBB007103D2A40AFAA69A7CFC10DF529F94BB6A402205D67816F50BBAEE0A2709AA3A93707304EC21133550FD2FF7436AD0C3CA6CE27",</span>
+<span class="err">        "date": 547091262,</span>
+<span class="err">        "hash": "9C0CAAC3DD1A74461132DA4451F9E53BDF4C93DFDBEFCE1B10021EC569013B33",</span>
+<span class="err">        "inLedger": 29480670,</span>
+<span class="err">        "ledger_index": 29480670,</span>
+<span class="err">        "meta": {</span>
+<span class="err">            "AffectedNodes": [</span>
+<span class="err">                {</span>
+<span class="err">                    "ModifiedNode": {</span>
+<span class="err">                        "LedgerEntryType": "AccountRoot",</span>
+<span class="err">                        "LedgerIndex": "13F1A95D7AAB7108D5CE7EEAF504B2894B8C674E6D68499076441C4837282BF8",</span>
+<span class="err">                        "PreviousTxnID": "C9FE08FC88CF76C3B06622ADAA47AE99CABB3380E4D195E7751274CFD87910EB",</span>
+<span class="err">                        "PreviousTxnLgrSeq": 29385089</span>
+<span class="err">                    }</span>
+<span class="err">                },</span>
+<span class="err">                {</span>
+<span class="err">                    "DeletedNode": {</span>
+<span class="err">                        "FinalFields": {</span>
+<span class="err">                            "Account": "rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH",</span>
+<span class="err">                            "Amount": "100000000",</span>
+<span class="err">                            "Balance": "1000000",</span>
+<span class="err">                            "Destination": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn",</span>
+<span class="err">                            "DestinationTag": 20170428,</span>
+<span class="err">                            "Expiration": 547073182,</span>
+<span class="err">                            "Flags": 0,</span>
+<span class="err">                            "OwnerNode": "0000000000000000",</span>
+<span class="err">                            "PreviousTxnID": "C5C70B2BCC515165B7F62ACC8126F8F8B655EB6E1D949A49B2358262BDA986B4",</span>
+<span class="err">                            "PreviousTxnLgrSeq": 29451256,</span>
+<span class="err">                            "PublicKey": "023693F15967AE357D0327974AD46FE3C127113B1110D6044FD41E723689F81CC6",</span>
+<span class="err">                            "SettleDelay": 86400</span>
+<span class="err">                        },</span>
+<span class="err">                        "LedgerEntryType": "PayChannel",</span>
+<span class="err">                        "LedgerIndex": "5DB01B7FFED6B67E6B0414DED11E051D2EE2B7619CE0EAA6286D67A3A4D5BDB3"</span>
+<span class="err">                    }</span>
+<span class="err">                },</span>
+<span class="err">                {</span>
+<span class="err">                    "ModifiedNode": {</span>
+<span class="err">                        "FinalFields": {</span>
+<span class="err">                            "Account": "rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH",</span>
+<span class="err">                            "Balance": "1041862844",</span>
+<span class="err">                            "Flags": 0,</span>
+<span class="err">                            "OwnerCount": 2,</span>
+<span class="err">                            "Sequence": 42</span>
+<span class="err">                        },</span>
+<span class="err">                        "LedgerEntryType": "AccountRoot",</span>
+<span class="err">                        "LedgerIndex": "B1CB040A17F9469BC00376EC8719535655824AD16CB5F539DD5765FEA88FDBE3",</span>
+<span class="err">                        "PreviousFields": {</span>
+<span class="err">                            "Balance": "942868450",</span>
+<span class="err">                            "OwnerCount": 3,</span>
+<span class="err">                            "Sequence": 41</span>
+<span class="err">                        },</span>
+<span class="err">                        "PreviousTxnID": "C5C70B2BCC515165B7F62ACC8126F8F8B655EB6E1D949A49B2358262BDA986B4",</span>
+<span class="err">                        "PreviousTxnLgrSeq": 29451256</span>
+<span class="err">                    }</span>
+<span class="err">                },</span>
+<span class="err">                {</span>
+<span class="err">                    "ModifiedNode": {</span>
+<span class="err">                        "FinalFields": {</span>
+<span class="err">                            "Flags": 0,</span>
+<span class="err">                            "Owner": "rN7n7otQDd6FczFgLdSqtcsAUxDkw6fzRH",</span>
+<span class="err">                            "RootIndex": "E590FC40B4F24D18341569BD3702A2D4E07E7BC04D11CE63608B67979E67030C"</span>
+<span class="err">                        },</span>
+<span class="err">                        "LedgerEntryType": "DirectoryNode",</span>
+<span class="err">                        "LedgerIndex": "E590FC40B4F24D18341569BD3702A2D4E07E7BC04D11CE63608B67979E67030C"</span>
+<span class="err">                    }</span>
+<span class="err">                }</span>
+<span class="err">            ],</span>
+<span class="err">            "TransactionIndex": 7,</span>
+<span class="err">            "TransactionResult": "tesSUCCESS"</span>
+<span class="err">        },</span>
+<span class="err">        "status": "success",</span>
+<span class="err">        "validated": true</span>
+<span class="err">    }</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>トランザクションメタデータで以下のエントリを検索します。</p>
+<ul>
+<li><code>"LedgerEntryType": "PayChannel"</code>が指定された<code>DeletedNode</code>。<code>LedgerIndex</code>フィールドはChannel IDと一致している必要があります。これはChannelが削除されたことを示します。</li>
+<li><code>"LedgerEntryType": "AccountRoot"</code>が指定された<code>ModifiedNode</code>。<code>PreviousFields</code>と<code>FinalFields</code>の<code>Balance</code>フィールドの変化は、支払人に返金される未使用のXRPを反映しています。</li>
+</ul>
+<p>これらのフィールドは、Payment Channelが閉鎖したことを示しています。</p>
+<h2 id="結論">結論</h2>
+<p>これでPayment Channelの使用法のチュートリアルを終了します。ユーザーが、Payment Channelのスピードと利便性を最大限に活用できる独特で興味深い用途を考えることが推奨されます。</p>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- rippled release notes links -->
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="tutorials.html"> チュートリアル</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_2">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_2" aria-expanded="true" aria-controls="sidenav_collapse_2"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="get-started.html">使用開始</a>
+                <!-- <a class="sidenav_cat_title" href="get-started.html">Get Started</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_2" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_2">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="get-started-with-the-rippled-api.html">XRP Ledger APIの使用開始</a></li>
+                      <li><a class="nosubcat-page" href="get-started-with-rippleapi-for-javascript.html">RippleAPI入門ガイド</a></li>
+                      <li><a class="nosubcat-page" href="send-xrp.html">XRPの送金</a></li>
+                      <li><a class="nosubcat-page" href="monitor-incoming-payments-with-websocket.html">WebSocketを使用した着信ペイメントの監視</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse2 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_8">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_8" aria-expanded="true" aria-controls="sidenav_collapse_8"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="production-readiness.html">Production Readiness</a>
+                <!-- <a class="sidenav_cat_title" href="production-readiness.html">Production Readiness</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_8" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_8">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="set-up-secure-signing.html">安全な署名の設定</a></li>
+                      <li><a class="nosubcat-page" href="look-up-transaction-results.html">トランザクションの結果の確認</a></li>
+                      <li><a class="nosubcat-page" href="reliable-transaction-submission.html">信頼できるトランザクションの送信</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse8 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_13">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_13" aria-expanded="true" aria-controls="sidenav_collapse_13"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="manage-account-settings.html">アカウントの設定の利用</a>
+                <!-- <a class="sidenav_cat_title" href="manage-account-settings.html">Manage Account Settings</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_13" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_13">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="assign-a-regular-key-pair.html">レギュラーキーペアの割り当て</a></li>
+                      <li><a class="nosubcat-page" href="change-or-remove-a-regular-key-pair.html">レギュラーキーペアの変更または削除</a></li>
+                      <li><a class="nosubcat-page" href="disable-master-key-pair.html">Disable Master Key Pair</a></li>
+                      <li><a class="nosubcat-page" href="set-up-multi-signing.html">マルチ署名の設定</a></li>
+                      <li><a class="nosubcat-page" href="send-a-multi-signed-transaction.html">マルチ署名済みトランザクションの送信</a></li>
+                      <li><a class="nosubcat-page" href="require-destination-tags.html">宛先タグの要求</a></li>
+                      <li><a class="nosubcat-page" href="offline-account-setup.html">オフラインでのアカウント設定のチュートリアル</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse13 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card active">
+            <div class="card-header" role="tab" id="sidenav_cat_head_21">
+                <a class="sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_21" aria-expanded="true" aria-controls="sidenav_collapse_21"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title active-parent" href="use-specialized-payment-types.html">専門化した支払いタイプの使用</a>
+                <!-- <a class="sidenav_cat_title" href="use-specialized-payment-types.html">Use Specialized Payment Types</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_21" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_21">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="use-escrows.html">Escrowの使用</a></li>
+
+                          <li><a class="subpage" href="send-a-time-held-escrow.html">時間に基づくEscrowの送信</a></li>
+                          <li><a class="subpage" href="send-a-conditionally-held-escrow.html">条件に基づくEscrowの送信</a></li>
+                          <li><a class="subpage" href="cancel-an-expired-escrow.html">有効期限切れEscrowの取消し</a></li>
+                          <li><a class="subpage" href="look-up-escrows.html">Escrowの検索</a></li>
+                          <li><a class="subpage" href="use-an-escrow-as-a-smart-contract.html">Use an Escrow as a Smart Contract</a></li>
+
+                      <li><a class="subcat-title active" href="#main_content_body">Payment Channelの使用</a></li>
+
+                          <li><a class="subpage" href="open-a-payment-channel-to-enable-an-inter-exchange-network.html">Open a Payment Channel to Enable an Inter-Exchange Network</a></li>
+
+                      <li><a class="subcat-title" href="use-checks.html">Checksの使用</a></li>
+
+                          <li><a class="subpage" href="send-a-check.html">Checkの送信</a></li>
+                          <li><a class="subpage" href="cash-a-check-for-an-exact-amount.html">Checkの正確な金額での換金</a></li>
+                          <li><a class="subpage" href="cash-a-check-for-a-flexible-amount.html">Checkの変動金額での換金</a></li>
+                          <li><a class="subpage" href="cancel-a-check.html">Checkの取消し</a></li>
+                          <li><a class="subpage" href="look-up-checks-by-sender.html">送金元に基づくCheckの検索</a></li>
+                          <li><a class="subpage" href="look-up-checks-by-recipient.html">受取人に基づくCheckの検索</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse21 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_38">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_38" aria-expanded="true" aria-controls="sidenav_collapse_38"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="xrp-ledger-businesses.html">XRP Ledgerが利用する会社について</a>
+                <!-- <a class="sidenav_cat_title" href="xrp-ledger-businesses.html">XRP Ledger Businesses</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_38" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_38">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="list-xrp-as-an-exchange.html">取引所としてのXRPの上場</a></li>
+                      <li><a class="nosubcat-page" href="list-your-exchange-on-xrp-charts.html">XRP Chartsへの取引所の登録</a></li>
+                      <li><a class="nosubcat-page" href="become-an-xrp-ledger-gateway.html">Become an XRP Ledger Gateway</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse38 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_42">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_42" aria-expanded="true" aria-controls="sidenav_collapse_42"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="manage-the-rippled-server.html">rippledサーバの利用</a>
+                <!-- <a class="sidenav_cat_title" href="manage-the-rippled-server.html">Manage the rippled Server</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_42" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_42">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="install-rippled.html">rippledのインストール</a></li>
+
+                          <li><a class="subpage" href="system-requirements.html">システム要件</a></li>
+                          <li><a class="subpage" href="install-rippled-on-centos-rhel-with-yum.html">yumを使用したCentOS/Red Hatへのインストール</a></li>
+                          <li><a class="subpage" href="install-rippled-on-ubuntu.html">UbuntuまたはDebian Linuxへのインストール</a></li>
+                          <li><a class="subpage" href="update-rippled-automatically-on-linux.html">Linuxでの自動更新</a></li>
+                          <li><a class="subpage" href="update-rippled-manually-on-centos-rhel.html">CentOS/Red Hatでの手動更新</a></li>
+                          <li><a class="subpage" href="update-rippled-manually-on-ubuntu.html">UbuntuまたはDebianでの手動更新</a></li>
+                          <li><a class="subpage" href="build-run-rippled-ubuntu.html">Ubuntuでのrippledの構築と実行</a></li>
+                          <li><a class="subpage" href="build-run-rippled-macos.html">macOSでのrippledの構築と実行</a></li>
+                          <li><a class="subpage" href="capacity-planning.html">容量の計画</a></li>
+                          <li><a class="subpage" href="rippled-1-3-migration-instructions.html">rippled v1.3.xへの移行手順</a></li>
+
+                      <li><a class="subcat-title" href="configure-rippled.html">rippledの設定</a></li>
+
+                          <li><a class="subpage" href="run-rippled-as-a-validator.html">バリデータとしてのrippledの実行</a></li>
+                          <li><a class="subpage" href="run-rippled-as-a-wallet-server.html">Run rippled as a Wallet Server</a></li>
+                          <li><a class="subpage" href="configure-statsd.html">Configure StatsD</a></li>
+                          <li><a class="subpage" href="connect-your-rippled-to-the-xrp-test-net.html">XRPL Altnetへのrippledの接続</a></li>
+                          <li><a class="subpage" href="configure-online-deletion.html">オンライン削除の設定</a></li>
+                          <li><a class="subpage" href="configure-advisory-deletion.html">指示による削除の設定</a></li>
+                          <li><a class="subpage" href="configure-history-sharding.html">履歴シャーディングの設定</a></li>
+                          <li><a class="subpage" href="configure-full-history.html">全履歴の設定</a></li>
+                          <li><a class="subpage" href="configure-grpc.html">Configure gRPC</a></li>
+                          <li><a class="subpage" href="enable-public-signing.html">パブリック署名の有効化</a></li>
+
+                      <li><a class="subcat-title" href="configure-peering.html">ピアリングの設定</a></li>
+
+                          <li><a class="subpage" href="cluster-rippled-servers.html">rippledサーバーのクラスター化</a></li>
+                          <li><a class="subpage" href="configure-a-private-server.html">プライベートサーバーの設定</a></li>
+                          <li><a class="subpage" href="configure-the-peer-crawler.html">Configure the Peer Crawler</a></li>
+                          <li><a class="subpage" href="enable-link-compression.html">Enable Link Compression</a></li>
+                          <li><a class="subpage" href="forward-ports-for-peering.html">ピアリングのポート転送</a></li>
+                          <li><a class="subpage" href="manually-connect-to-a-specific-peer.html">特定のピアへの手動接続</a></li>
+                          <li><a class="subpage" href="set-max-number-of-peers.html">ピアの最大数の設定</a></li>
+                          <li><a class="subpage" href="use-a-peer-reservation.html">ピアリザベーションの使用</a></li>
+
+                      <li><a class="subcat-title" href="use-stand-alone-mode.html">スタンドアロンモードでrippledをテスト</a></li>
+
+                          <li><a class="subpage" href="start-a-new-genesis-ledger-in-stand-alone-mode.html">スタンドアロンモードでの新しいジェネシスレジャーの開始</a></li>
+                          <li><a class="subpage" href="load-a-saved-ledger-in-stand-alone-mode.html">スタンドアロンモードでの保存済みレジャーの読み込み</a></li>
+                          <li><a class="subpage" href="advance-the-ledger-in-stand-alone-mode.html">スタンドアロンモードでレジャーを進める</a></li>
+
+                      <li><a class="subcat-title" href="troubleshoot-the-rippled-server.html">rippledのトラブルシューティング</a></li>
+
+                          <li><a class="subpage" href="health-check-interventions.html">Health Check Interventions</a></li>
+                          <li><a class="subpage" href="diagnosing-problems.html">rippledの問題の診断</a></li>
+                          <li><a class="subpage" href="understanding-log-messages.html">ログメッセージについて</a></li>
+                          <li><a class="subpage" href="server-doesnt-sync.html">rippledサーバーが同期しない</a></li>
+                          <li><a class="subpage" href="server-wont-start.html">rippledサーバーが起動しない</a></li>
+                          <li><a class="subpage" href="fix-sqlite-tx-db-page-size-issue.html">SQLiteトランザクションデータベースのページサイズの問題の解決</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse42 -->
+
+          </div><!-- /.card -->
+
+    </div><!-- /#sidenav -->
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">学ぶ</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">探る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">作る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">コンセプト</a></li>
+          <li class="level-1"><a href="tutorials.html">チュートリアル</a></li>
+          <li class="level-1"><a href="references.html">リファレンス</a></li>
+          <li class="level-1"><a href="dev-tools.html">開発者用ツール</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">ライセンス</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="このページの先頭へ">先頭へ</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:ja"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>

@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Direct XRP Payments - XRP Ledger Dev Portal</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/" class="navbar-brand"><img src="assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Learn</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">Overview</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Build</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">Docs</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">Concepts</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">Tutorials</a>
+          <a class="dropdown-item top-level-2" href="references.html">References</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">Dev Tools</a>
+          <a class="dropdown-item top-level-1" href="/blog/">Dev Blog</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/concepts/payment-types/direct-xrp-payments.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">Search site...</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="Search site...">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Eng
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/direct-xrp-payments.html">Eng</a>
+          <a class="dropdown-item" href="/ja/direct-xrp-payments.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>In this document</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#direct-xrp-payments">Direct XRP Payments</a></li>
+<li class="level-2"><a href="#about-direct-xrp-to-xrp-payments">About Direct XRP-to-XRP Payments</a></li>
+<li class="level-2"><a href="#funding-accounts">Funding Accounts</a></li>
+<li class="level-2"><a href="#address-reuse">Address Reuse</a></li>
+<li class="level-2"><a href="#how-direct-xrp-payments-are-processed">How Direct XRP Payments Are Processed</a></li>
+<li class="level-2"><a href="#comparison-to-other-payment-types">Comparison to Other Payment Types</a></li>
+<li class="level-2"><a href="#see-also">See Also</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">Build</a></li>
+    <li class="active breadcrumb-item"><a href="concepts.html">Concepts</a></li>
+    <li class="active breadcrumb-item"><a href="payment-types.html">Payment Types</a></li>
+    <li class="active breadcrumb-item">Direct XRP Payments</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="direct-xrp-payments">Direct XRP Payments</h1>
+<p>The basis of any financial system is <em>transferring value</em>: or, in one word, payments. The simplest type of payment in the XRP Ledger is a direct XRP-to-XRP payment, which transfers XRP directly from one account in the XRP Ledger to another.</p>
+<h2 id="about-direct-xrp-to-xrp-payments">About Direct XRP-to-XRP Payments</h2>
+<p>Generally, any address in the XRP Ledger can send XRP directly to any other address. The address on the receiving side is often called the <em>destination address</em>, and the address on the sending side is called the <em>source address</em>. To send XRP directly, the sender uses a <a href="payment.html">Payment transaction</a>, which can be as concise as the following:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">"TransactionType"</span><span class="p">:</span> <span class="s2">"Payment"</span><span class="p">,</span>
+  <span class="nt">"Account"</span><span class="p">:</span> <span class="s2">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+  <span class="nt">"Destination"</span><span class="p">:</span> <span class="s2">"ra5nK24KXen9AHvsdFTKHSANinZseWnPcX"</span><span class="p">,</span>
+  <span class="nt">"Amount"</span><span class="p">:</span> <span class="s2">"13000000"</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>These transaction instructions mean: Send a payment from <code>rf1Bi...</code> to <code>ra5nK...</code> delivering exactly 13 XRP. If the transaction is successfully processed, it does exactly that. Since it usually takes about 4 seconds for each new ledger version to become <a href="consensus.html">validated</a>, a successful transaction can be created, submitted, executed, and have a final outcome in 8 seconds or less, even if gets queued for the ledger version after the current in-progress one.</p>
+<p class="devportal-callout caution"><strong>Caution:</strong> The <a href="payment.html">Payment transaction type</a> can also be used for some more specialized kinds of payments, including <a href="cross-currency-payments.html">cross-currency payments</a> and <a href="partial-payments.html">partial payments</a>. In the case of partial payments, it is possible that the <code>Amount</code> shows a large amount of XRP even if the transaction only delivered a very small amount. See <a href="partial-payments.html#partial-payments-exploit">partial payments exploit</a> for how to avoid crediting a customer for the wrong amount.</p>
+<p>Direct XRP-to-XRP payments cannot be partial payments, but partial payments can deliver XRP after converting from a different source currency.</p>
+<h2 id="funding-accounts">Funding Accounts</h2>
+<p>Any mathematically-valid address can receive a payment, even if the XRP Ledger has no record of that address existing beforehand, as long as the payment delivers enough XRP to meet the minimum <a href="reserves.html">account reserve</a>. If the payment would not deliver enough XRP, it fails.</p>
+<p>For more information, see <a href="accounts.html#creating-accounts">Accounts</a>.</p>
+<h2 id="address-reuse">Address Reuse</h2>
+<p>In the XRP Ledger, addresses where you can receive payments are permanent, and have a non-trivial <a href="reserves.html">reserve requirement</a> of XRP that they cannot spend. This means that, contrary to some other blockchain systems, it is not a good idea to use a different, disposable address for every transaction. The best practice for the XRP Ledger is to reuse the same address for multiple transactions. If you use the address regularly (especially if it's managed by an internet-connected service), you should set a <a href="cryptographic-keys.html">regular key</a> and proactively change keys on a regular basis to reduce the risk of a key compromise.</p>
+<p>As a sender, it is best not to assume that your intended recipient is using the same address from the last time you sent them a payment. Inevitably, sometimes security compromises happen and a person or business has to change addresses. Before sending money, you should ask the recipient for their current receiving address, so you don't accidentally send money to a malicious user who has taken control of a compromised old address.</p>
+<h2 id="how-direct-xrp-payments-are-processed">How Direct XRP Payments Are Processed</h2>
+<p>From a relatively high level, the XRP Ledger's transaction processing engine applies a direct XRP payment as follows:</p>
+<ol>
+<li>
+<p>It validates the parameters of the <a href="payment.html">Payment transaction</a>. If the transaction is structured to send and deliver XRP, the transaction processing engine recognizes it as a direct XRP-to-XRP payment. Validation checks include:</p>
+<ul>
+<li>Checking that all fields are formatted correctly. For example, for direct XRP payments, the <code>Amount</code> field must be <a href="basic-data-types.html#specifying-currency-amounts">drops of XRP</a>.</li>
+<li>Checking that the sending address is a funded <a href="accounts.html">account</a> in the XRP Ledger.</li>
+<li>Checking that all provided signatures are valid for the sending address.</li>
+<li>Confirming that the destination address is different than the sender address. (It is not sufficient to send to the same address with a different <a href="source-and-destination-tags.html">destination tag</a>.)</li>
+<li>Confirming that the sender has a high enough XRP balance to send the payment.</li>
+</ul>
+<p>If any check fails, the payment fails.</p>
+</li>
+<li>
+<p>It checks whether the receiving address is a funded account.</p>
+<ul>
+<li>If the receiving address is funded, it checks whether the receiving address has any limitations on receiving payments, such as <a href="depositauth.html">Deposit Authorization</a> or <a href="source-and-destination-tags.html#requiring-tags"><code>RequireDest</code></a>. If the payment does not meet any such limitations, the payment fails.</li>
+<li>If the receiving address is not funded, it checks whether the payment would deliver enough XRP to meet the minimum <a href="reserves.html">account reserve</a>. If not, the payment fails.</li>
+</ul>
+</li>
+<li>
+<p>It debits the sending account by an amount of XRP specified by the <code>Amount</code> field plus the XRP to be destroyed for the <a href="transaction-cost.html">transaction cost</a> and credits the receiving account for the same amount.</p>
+<p>If necessary, it creates a new account (<a href="accountroot.html">AccountRoot object</a>) for the receiving address. The new account's starting balance is equal to the <code>Amount</code> of the payment.</p>
+<p>The engine adds a <code>delivered_amount</code> field to the <a href="transaction-metadata.html">transaction's metadata</a> to indicate how much was delivered. You should always use <code>delivered_amount</code>, <strong>not</strong> the <code>Amount</code> field, to avoid being tricked about how much XRP you received. (Cross-currency "Partial Payments" can deliver less XRP than stated in the <code>Amount</code> field.) For more information, see <a href="partial-payments.html">Partial Payments</a>.</p>
+</li>
+</ol>
+<h2 id="comparison-to-other-payment-types">Comparison to Other Payment Types</h2>
+<ul>
+<li><strong>Direct XRP Payments</strong> are the only way to both send and receive XRP in a single transaction. They are a good balance of speed, simplicity, and low cost.</li>
+<li><a href="cross-currency-payments.html">Cross-currency payments</a> also use the <a href="payment.html">Payment</a> transaction type, but can send any combination of XRP and non-XRP <a href="issued-currencies.html">issued currencies</a> except XRP-to-XRP. They can also be <a href="partial-payments.html">partial payments</a>. Cross-currency payments are good for payments not denominated in XRP or for taking arbitrage opportunities in the <a href="decentralized-exchange.html">decentralized exchange</a>.</li>
+<li><a href="checks.html">Checks</a> let the sender set up an obligation without transferring any money immediately. The recipient can cash it any time before it expires, but the amount is not guaranteed. Checks can send either XRP or issued currencies. Checks are good for giving the recipient the autonomy to claim the payment.</li>
+<li><a href="escrow.html">Escrow</a> sets aside XRP which can be claimed by its intended recipient when certain conditions are met. The XRP amount is fully guaranteed and cannot be otherwise used by the sender unless the Escrow expires. Escrow is good for smart contracts in large amounts.</li>
+<li><a href="payment-channels.html">Payment Channels</a> set aside XRP. The recipient can claim XRP from the channel in bulk using signed authorizations. Individual authorizations can be verified without sending a full XRP Ledger transaction. Payment channels are good for extremely high-volume micropayments or "streaming" payments.</li>
+</ul>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><strong>Concepts:</strong><ul>
+<li><a href="payment-system-basics.html">Payment System Basics</a></li>
+</ul>
+</li>
+<li><strong>Tutorials:</strong><ul>
+<li><a href="send-xrp.html">Send XRP (Interactive Tutorial)</a></li>
+<li><a href="monitor-incoming-payments-with-websocket.html">Monitor Incoming Payments with WebSocket</a></li>
+</ul>
+</li>
+<li><strong>References:</strong><ul>
+<li><a href="payment.html">Payment transaction</a></li>
+<li><a href="transaction-results.html">Transaction Results</a></li>
+<li><a href="account_info.html">account_info method</a> - for checking XRP balances</li>
+</ul>
+</li>
+</ul>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- rippled release notes links -->
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="concepts.html"> Concepts</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_2">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_2" aria-expanded="true" aria-controls="sidenav_collapse_2"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="introduction.html">Introduction</a>
+                <!-- <a class="sidenav_cat_title" href="introduction.html">Introduction</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_2" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_2">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="xrp-ledger-overview.html">XRP Ledger Overview</a></li>
+                      <li><a class="nosubcat-page" href="intro-to-consensus.html">Introduction to Consensus</a></li>
+                      <li><a class="nosubcat-page" href="xrp.html">XRP</a></li>
+                      <li><a class="nosubcat-page" href="software-ecosystem.html">Software Ecosystem</a></li>
+                      <li><a class="nosubcat-page" href="technical-faq.html">Technical FAQ</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse2 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_8">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_8" aria-expanded="true" aria-controls="sidenav_collapse_8"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="payment-system-basics.html">Payment System Basics</a>
+                <!-- <a class="sidenav_cat_title" href="payment-system-basics.html">Payment System Basics</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_8" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_8">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="accounts.html">Accounts</a></li>
+
+                          <li><a class="subpage" href="cryptographic-keys.html">Cryptographic Keys</a></li>
+                          <li><a class="subpage" href="multi-signing.html">Multi-Signing</a></li>
+                          <li><a class="subpage" href="reserves.html">Reserves</a></li>
+                          <li><a class="subpage" href="depositauth.html">Deposit Authorization</a></li>
+
+                      <li><a class="nosubcat-page" href="fees.html">Fees (Disambiguation)</a></li>
+                      <li><a class="nosubcat-page" href="ledgers.html">Ledgers</a></li>
+                      <li><a class="subcat-title" href="transaction-basics.html">Transaction Basics</a></li>
+
+                          <li><a class="subpage" href="transaction-cost.html">Transaction Cost</a></li>
+                          <li><a class="subpage" href="finality-of-results.html">Finality of Results</a></li>
+                          <li><a class="subpage" href="source-and-destination-tags.html">Source and Destination Tags</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse8 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card active">
+            <div class="card-header" role="tab" id="sidenav_cat_head_20">
+                <a class="sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_20" aria-expanded="true" aria-controls="sidenav_collapse_20"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title active-parent" href="payment-types.html">Payment Types</a>
+                <!-- <a class="sidenav_cat_title" href="payment-types.html">Payment Types</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_20" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_20">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="active nosubcat-page" href="direct-xrp-payments.html">Direct XRP Payments</a></li>
+                      <li><a class="nosubcat-page" href="cross-currency-payments.html">Cross-Currency Payments</a></li>
+                      <li><a class="nosubcat-page" href="checks.html">Checks</a></li>
+                      <li><a class="nosubcat-page" href="escrow.html">Escrow</a></li>
+                      <li><a class="nosubcat-page" href="partial-payments.html">Partial Payments</a></li>
+                      <li><a class="nosubcat-page" href="payment-channels.html">Payment Channels</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse20 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_28">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_28" aria-expanded="true" aria-controls="sidenav_collapse_28"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="issued-currencies.html">Issued Currencies</a>
+                <!-- <a class="sidenav_cat_title" href="issued-currencies.html">Issued Currencies</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_28" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_28">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="issued-currencies-overview.html">Issued Currencies Overview</a></li>
+                      <li><a class="nosubcat-page" href="trust-lines-and-issuing.html">Trust Lines and Issuing</a></li>
+                      <li><a class="nosubcat-page" href="authorized-trust-lines.html">Authorized Trust Lines</a></li>
+                      <li><a class="nosubcat-page" href="freezes.html">Freezing Issued Currencies</a></li>
+                      <li><a class="nosubcat-page" href="rippling.html">Rippling</a></li>
+                      <li><a class="nosubcat-page" href="transfer-fees.html">Transfer Fees</a></li>
+                      <li><a class="nosubcat-page" href="issuing-and-operational-addresses.html">Issuing and Operational Addresses</a></li>
+                      <li><a class="nosubcat-page" href="paths.html">Paths</a></li>
+                      <li><a class="nosubcat-page" href="demurrage.html">Demurrage</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse28 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_38">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_38" aria-expanded="true" aria-controls="sidenav_collapse_38"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="decentralized-exchange.html">Decentralized Exchange</a>
+                <!-- <a class="sidenav_cat_title" href="decentralized-exchange.html">Decentralized Exchange</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_38" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_38">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="offers.html">Offers</a></li>
+                      <li><a class="nosubcat-page" href="autobridging.html">Auto-Bridging</a></li>
+                      <li><a class="nosubcat-page" href="ticksize.html">Tick Size</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse38 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_42">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_42" aria-expanded="true" aria-controls="sidenav_collapse_42"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="consensus-network.html">Consensus Network</a>
+                <!-- <a class="sidenav_cat_title" href="consensus-network.html">Consensus Network</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_42" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_42">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="consensus.html">Consensus</a></li>
+                      <li><a class="nosubcat-page" href="consensus-principles-and-rules.html">Consensus Principles and Rules</a></li>
+                      <li><a class="nosubcat-page" href="consensus-protections.html">Consensus Protections Against Attacks and Failure Modes</a></li>
+                      <li><a class="nosubcat-page" href="invariant-checking.html">Invariant Checking</a></li>
+                      <li><a class="nosubcat-page" href="transaction-queue.html">Transaction Queue</a></li>
+                      <li><a class="nosubcat-page" href="about-canceling-a-transaction.html">About Canceling a Transaction</a></li>
+                      <li><a class="nosubcat-page" href="transaction-malleability.html">Transaction Malleability</a></li>
+                      <li><a class="subcat-title" href="amendments.html">Amendments</a></li>
+
+                          <li><a class="subpage" href="known-amendments.html">Known Amendments</a></li>
+
+                      <li><a class="nosubcat-page" href="fee-voting.html">Fee Voting</a></li>
+                      <li><a class="nosubcat-page" href="consensus-research.html">Consensus Research</a></li>
+                      <li><a class="nosubcat-page" href="parallel-networks.html">Parallel Networks</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse42 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_55">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_55" aria-expanded="true" aria-controls="sidenav_collapse_55"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="the-rippled-server.html">The rippled Server</a>
+                <!-- <a class="sidenav_cat_title" href="the-rippled-server.html">The rippled Server</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_55" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_55">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="rippled-server-modes.html">rippled Server Modes</a></li>
+                      <li><a class="nosubcat-page" href="clustering.html">Clustering</a></li>
+                      <li><a class="subcat-title" href="ledger-history.html">Ledger History</a></li>
+
+                          <li><a class="subpage" href="online-deletion.html">Online Deletion</a></li>
+                          <li><a class="subpage" href="history-sharding.html">History Sharding</a></li>
+
+                      <li><a class="nosubcat-page" href="peer-protocol.html">Peer Protocol</a></li>
+                      <li><a class="nosubcat-page" href="transaction-censorship-detection.html">Transaction Censorship Detection</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse55 -->
+
+          </div><!-- /.card -->
+
+    </div><!-- /#sidenav -->
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">Learn</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">Explore</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">Build</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">Concepts</a></li>
+          <li class="level-1"><a href="tutorials.html">Tutorials</a></li>
+          <li class="level-1"><a href="references.html">References</a></li>
+          <li class="level-1"><a href="dev-tools.html">Dev Tools</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">License</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="Jump to top of page">Top</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:en"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>

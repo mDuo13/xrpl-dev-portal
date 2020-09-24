@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Escrow - XRP Ledger Dev Portal</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/" class="navbar-brand"><img src="assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Learn</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">Overview</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Build</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">Docs</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">Concepts</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">Tutorials</a>
+          <a class="dropdown-item top-level-2" href="references.html">References</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">Dev Tools</a>
+          <a class="dropdown-item top-level-1" href="/blog/">Dev Blog</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/concepts/payment-types/escrow.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">Search site...</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="Search site...">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Eng
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/escrow.html">Eng</a>
+          <a class="dropdown-item" href="/ja/escrow.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>In this document</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#escrow">Escrow</a></li>
+<li class="level-2"><a href="#usage">Usage</a></li>
+<li class="level-3"><a href="#expiration-case">Expiration Case</a></li>
+<li class="level-2"><a href="#limitations">Limitations</a></li>
+<li class="level-2"><a href="#state-diagram">State Diagram</a></li>
+<li class="level-2"><a href="#availability-of-escrow">Availability of Escrow</a></li>
+<li class="level-2"><a href="#escrowfinish-transaction-cost">EscrowFinish Transaction Cost</a></li>
+<li class="level-2"><a href="#why-escrow">Why Escrow?</a></li>
+<li class="level-3"><a href="#use-case-time-based-lock-up">Use Case: Time-based Lock-Up</a></li>
+<li class="level-3"><a href="#use-case-interledger-payments">Use Case: Interledger Payments</a></li>
+<li class="level-2"><a href="#see-also">See Also</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">Build</a></li>
+    <li class="active breadcrumb-item"><a href="concepts.html">Concepts</a></li>
+    <li class="active breadcrumb-item"><a href="payment-types.html">Payment Types</a></li>
+    <li class="active breadcrumb-item">Escrow</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="escrow">Escrow</h1>
+<p>Escrow is a feature of the XRP Ledger that allows you to send conditional XRP payments. These conditional payments, called <em>escrows</em>, set aside XRP and deliver it later when certain conditions are met. Conditions to successfully finish an escrow include time-based unlocks and <a class="external-link" href="https://tools.ietf.org/html/draft-thomas-crypto-conditions-04" target="_blank">crypto-conditions <i aria-hidden="true" class="fa fa-external-link"></i></a>. Escrows can also be set to expire if not finished in time.</p>
+<p>The XRP set aside in an escrow is locked up. No one can use or destroy the XRP until the escrow has been successfully finished or canceled. Before the expiration time, only the intended receiver can get the XRP. After the expiration time, the XRP can only be returned to the sender.</p>
+<h2 id="usage">Usage</h2>
+<!-- -->
+<p><a href="img/escrow-success-flow.png"><img alt="Escrow Flow Diagram (Successful finish)" src="img/escrow-success-flow.png"/></a></p>
+<p><strong>Step 1:</strong> To send an escrow, the sender uses an <a href="escrowcreate.html">EscrowCreate transaction</a> to lock up some XRP. This transaction defines a finish time, an expiration time, or both. The transaction may also define a crypto-condition that must be fulfilled to finish the escrow. This transaction must define an intended recipient for the XRP; the recipient <em>may</em> be the same as the sender.</p>
+<p><strong>Step 2:</strong> After this transaction has been processed, the XRP Ledger has an <a href="escrow-object.html">Escrow object</a> that holds the escrowed XRP. This object contains the properties of the escrow as defined by the transaction that created it. If this escrow has a finish time, no one can access the XRP before then.</p>
+<p><strong>Step 3:</strong> The recipient, or any other XRP Ledger address, sends an <a href="escrowfinish.html">EscrowFinish transaction</a> to deliver the XRP. If the correct conditions are met, this destroys the Escrow object in the ledger and credits the XRP to the intended recipient. If the escrow has a crypto-condition, this transaction must include a fulfillment for that condition. If the escrow has an expiration time that has already passed, the EscrowFinish transaction instead fails with the code <a href="tec-codes.html"><code>tecNO_PERMISSION</code></a>.</p>
+<h3 id="expiration-case">Expiration Case</h3>
+<p><a href="img/escrow-cancel-flow.png"><img alt="Escrow Flow Diagram (Expired escrow)" src="img/escrow-cancel-flow.png"/></a></p>
+<p>All escrows start the same way, so <strong>Steps 1 and 2</strong> are the same as in the successful case.</p>
+<p><strong>Step 3a:</strong> If the escrow has an expiration time, and it has not been successfully finished before then, the escrow is considered expired. It continues to exist in the XRP Ledger, but can no longer successfully finish. (Expired objects remain in the ledger until a transaction modifies them. Time-based triggers cannot change the ledger contents.)</p>
+<p><strong>Step 4a:</strong> The sender, or any other XRP Ledger address, sends an <a href="escrowcancel.html">EscrowCancel transaction</a> to cancel the expired escrow. This destroys the <a href="escrow-object.html">Escrow object</a> in the ledger and returns the XRP to the sender.</p>
+<!-- SPELLING_IGNORE: 3a, 4a -->
+<h2 id="limitations">Limitations</h2>
+<p>Escrow is designed as a feature to enable the XRP Ledger to be used in the <a class="external-link" href="https://interledger.org/" target="_blank">Interledger Protocol <i aria-hidden="true" class="fa fa-external-link"></i></a> and with other smart contracts. The current version has a modest scope to avoid complexity.</p>
+<ul>
+<li>Escrow only works with XRP, not issued currencies.</li>
+<li>Escrow requires sending at least two transactions: one to create the escrow, and one to finish or cancel it. Thus, it may not be financially sensible to escrow payments for very small amounts, because the participants must destroy the <a href="transaction-cost.html">transaction cost</a> of the two transactions.<ul>
+<li>When using Crypto-Conditions, the <a href="#escrowfinish-transaction-cost">cost of the transaction to finish the escrow</a> is higher than usual.</li>
+</ul>
+</li>
+<li>
+<p>All escrows must be created with a "finish-after" time or a <a class="external-link" href="https://tools.ietf.org/html/draft-thomas-crypto-conditions-04" target="_blank">crypto-condition <i aria-hidden="true" class="fa fa-external-link"></i></a>, or both. If the escrow does not have a finish-after time, it must have an expiration time.</p>
+<p class="devportal-callout note"><strong>Note:</strong> The <a href="known-amendments.html#fix1571">fix1571 amendment</a> changed the requirements for creating an escrow. Escrows created before that amendment could provide an expiration time with no condition or finish-after time. Anyone can finish such escrows immediately (sending the funds to the intended recipient).</p>
+</li>
+<li>
+<p>None of the time values can be in the past when the escrow-creating transaction executes.</p>
+</li>
+<li>Timed releases and expirations are limited to the resolution of XRP Ledger closes. This means that, in practice, times may be rounded to approximately 5 second intervals, depending on exactly when the ledgers close.</li>
+<li>The only supported <a class="external-link" href="https://tools.ietf.org/html/draft-thomas-crypto-conditions-04" target="_blank">crypto-condition <i aria-hidden="true" class="fa fa-external-link"></i></a> type is PREIMAGE-SHA-256.</li>
+</ul>
+<p>Escrow provides strong guarantees that are best suited for high-value, low-quantity payments. <a href="use-payment-channels.html">Payment Channels</a> are better suited for fast, low-value payments. Of course, unconditional <a href="payment.html">Payments</a> are also preferable for many use cases.</p>
+<h2 id="state-diagram">State Diagram</h2>
+<p>The following diagram shows the states an Escrow can progress through:</p>
+<p><a href="img/escrow-states.png"><img alt="State diagram showing escrows going from Held → Ready/Conditionally Ready → Expired" src="img/escrow-states.png"/></a></p>
+<p>The diagram shows three different cases for three possible combinations of the escrow's "finish-after" time (<code>FinishAfter</code> field), crypto-condition (<code>Condition</code> field), and expiration time (<code>CancelAfter</code> field):</p>
+<ul>
+<li>
+<p><strong>Time-based Escrow (left):</strong> With only a finish-after time, the escrow is created in the <strong>Held</strong> state. After the specified time has passed, it becomes <strong>Ready</strong> and anyone can finish it. If the escrow has an expiration time and no one finishes it before that time passes, then the escrow becomes <strong>Expired</strong>. In the expired state, an escrow cannot be finished, and anyone can cancel it. If the escrow does not have a <code>CancelAfter</code> field, it never expires and cannot be canceled.</p>
+</li>
+<li>
+<p><strong>Combination Escrow (center):</strong> If the escrow specifies both a crypto-condition (<code>Condition</code> field) <em>and</em> a "finish-after" time (<code>FinishAfter</code> field), the escrow is <strong>Held</strong> until its finish-after time has passed. Then it becomes <strong>Conditionally Ready</strong>, and can finish it if they supply the correct fulfillment to the crypto-condition. If the escrow has an expiration time (<code>CancelAfter</code> field), and no one finishes it before that time passes, then the escrow becomes <strong>Expired</strong>. In the expired state, an escrow cannot be finished, and anyone can cancel it. If the escrow does not have a <code>CancelAfter</code> field, it never expires and cannot be canceled.</p>
+</li>
+<li>
+<p><strong>Conditional Escrow (right):</strong> If the escrow specifies a crypto-condition (<code>Condition</code> field) and not a finish-after time, the escrow becomes <strong>Conditionally Ready</strong> immediately when it is created. During this time, anyone can finish the escrow, but only if they supply the correct fulfillment to the crypto-condition. If no one finishes the escrow before its expiration time (<code>CancelAfter</code> field), the escrow becomes <strong>Expired</strong>. (An escrow without a finish-after time <em>must</em> have an expiration time.) In the expired state, the escrow can no longer be finished, and anyone can cancel it.</p>
+</li>
+</ul>
+<h2 id="availability-of-escrow">Availability of Escrow</h2>
+<p>Conditional payments have been enabled by the <a href="known-amendments.html#escrow">"Escrow" Amendment</a> to the XRP Ledger Consensus Protocol since 2017-03-31. A previous version of the same functionality was available on the <a href="xrp-test-net-faucet.html">XRP Ledger Test Net</a> by the name "Suspended Payments" (SusPay) in 2016.</p>
+<p>When testing in <a href="rippled-server-modes.html#reasons-to-run-a-rippled-server-in-stand-alone-mode">stand-alone mode</a>, you can force the Escrow feature to be enabled locally regardless of the amendment status. Add the following stanza to your <code>rippled.cfg</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">[features]</span>
+<span class="na">Escrow</span>
+</code></pre></div>
+<p>You can check the status of the Escrow amendment using the <a href="feature.html">feature method</a>.</p>
+<h2 id="escrowfinish-transaction-cost">EscrowFinish Transaction Cost</h2>
+<p>When using <a class="external-link" href="https://tools.ietf.org/html/draft-thomas-crypto-conditions-04" target="_blank">crypto-conditions <i aria-hidden="true" class="fa fa-external-link"></i></a>, the EscrowFinish transaction must pay a <a href="transaction-cost.html#special-transaction-costs">higher transaction cost</a> because of the higher processing load involved in verifying the crypto-condition fulfillment.</p>
+<p>If the escrow is purely time-locked with no crypto-condition, the EscrowFinish costs only the standard <a href="transaction-cost.html">transaction cost</a> for a reference transaction.</p>
+<p>The additional transaction cost required is proportional to the size of the fulfillment. Currently, an EscrowFinish with a fulfillment requires a minimum transaction cost of <strong>330 <a href="basic-data-types.html#specifying-currency-amounts">drops of XRP</a> plus 10 drops per 16 bytes in the size of the fulfillment</strong>. If the transaction is <a href="multi-signing.html">multi-signed</a>, the cost of multi-signing is added to the cost of the fulfillment.</p>
+<p class="devportal-callout note"><strong>Note:</strong> The above formula is based on the assumption that the reference cost of a transaction is 10 drops of XRP.</p>
+<p>If <a href="fee-voting.html">Fee Voting</a> changes the <code>reference_fee</code> value, the formula scales based on the new reference cost. The generalized formula for an EscrowFinish transaction with a fulfillment is as follows:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">reference_fee * (signer_count + 33 + (fulfillment_bytes / 16))</span>
+</code></pre></div>
+<h2 id="why-escrow">Why Escrow?</h2>
+<p>The age-old practice of <a class="external-link" href="https://en.wikipedia.org/wiki/Escrow" target="_blank">Escrow <i aria-hidden="true" class="fa fa-external-link"></i></a> enables many kinds of financial transactions that would be considered risky otherwise, especially online. By letting a trusted third party hold the money while a transaction or evaluation period is underway, both sides can be assured that the other must hold up their end of the bargain.</p>
+<p>The Escrow feature takes this idea further by replacing the third party with an automated system built into the XRP Ledger, so that the lock up and release of funds is impartial and can be automated.</p>
+<p>Fully automated escrow, backed by the integrity of the XRP Ledger itself, solves important problems for Ripple, and we think there are many other use cases that escrow enables. Ripple encourages the industry to find new and unique ways to put escrow to use.</p>
+<h3 id="use-case-time-based-lock-up">Use Case: Time-based Lock-Up</h3>
+<p><strong>Background:</strong> Ripple holds a large amount of the total XRP, which it sells methodically as a way to fund and incentivize the healthy development of the XRP Ledger and related technologies. At the same time, owning such a large chunk of XRP causes problems for the company, such as:</p>
+<ul>
+<li>Individuals and businesses who use the XRP Ledger worry that their investments in XRP could be diluted or devalued if Ripple were to flood the market by selling at a higher rate than usual.<ul>
+<li>Although flooding the market would be a long-term loss for Ripple, the possibility that the company could do so exerts downward pressure over the price of XRP, and thus decreases the value of the company's assets.</li>
+</ul>
+</li>
+<li>Ripple must carefully manage ownership of its accounts to protect against digital theft and other forms of malicious behavior, even by insiders.</li>
+</ul>
+<p><strong>Solution:</strong> By placing 55 billion XRP into time-based escrows, Ripple ensures that the supply of XRP in circulation is predictable and increases at a slow but steady rate. Others who hold XRP know that Ripple cannot flood the market, even if the company's priorities or strategy changes.</p>
+<p>Placing the money into escrow does not directly protect Ripple's holdings from malicious actors, but it sharply reduces the amount of XRP that can be quickly stolen or redirected if a malicious actor gains temporary control over Ripple's XRP accounts. This reduces the risk of catastrophic losses of XRP and increases the time for Ripple to detect, prevent, and track down unintended uses of Ripple's XRP assets.</p>
+<h3 id="use-case-interledger-payments">Use Case: Interledger Payments</h3>
+<p><strong>Background:</strong> In the quickly-developing world of financial technology, one of the core challenges is coordinating activities that cross multiple digital money systems, or ledgers. Many proposed solutions to this problem (including early views of the XRP Ledger!) can be reduced to creating "one ledger to rule them all." Ripple believes no single system can meet the needs of everyone in the world: in fact, some desirable features are mutually exclusive. Instead, Ripple believes that an interconnected network of ledgers—an <em>interledger</em>—is the true future of financial technology. The <a class="external-link" href="https://interledger.org/" target="_blank">Interledger Protocol <i aria-hidden="true" class="fa fa-external-link"></i></a> defines standards for making as many systems as possible connect securely and smoothly.</p>
+<p>The most fundamental principle of inter-ledger payments is <em>conditional transfers</em>. Multi-hop payments have a risk problem: the more hops in the middle, the more places the payment can fail. Interledger solves this with the financial equivalent of a "<a class="external-link" href="https://en.wikipedia.org/wiki/Two-phase_commit_protocol" target="_blank">two-phase commit <i aria-hidden="true" class="fa fa-external-link"></i></a>", where the two steps are (1) prepare conditional transfers, then (2) fulfill the conditions to execute the transfers. The Interledger project defined a <a class="external-link" href="https://tools.ietf.org/html/draft-thomas-crypto-conditions-04" target="_blank">crypto-conditions <i aria-hidden="true" class="fa fa-external-link"></i></a> specification to standardize automated ways to define and verify conditions, and settled on SHA-256 hashes as a "common denominator" of such conditions.</p>
+<p><strong>Solution:</strong> The Escrow feature makes the XRP Ledger ideal for bridging multi-hop payments using the Interledger Protocol, because it natively supports transfers that deliver XRP based on PREIMAGE-SHA-256 crypto-conditions, and it executes those transfers within seconds of being presented with the matching fulfillment.</p>
+<h2 id="see-also">See Also</h2>
+<p>For more information about Escrow in the XRP Ledger, see the following:</p>
+<ul>
+<li><a href="use-escrows.html">Escrow Tutorials</a><ul>
+<li><a href="send-a-time-held-escrow.html">Send a Time-Held Escrow</a></li>
+<li><a href="send-a-conditionally-held-escrow.html">Send a conditionally-held escrow</a></li>
+<li><a href="look-up-escrows.html">Look up escrows by sender or receiver</a></li>
+</ul>
+</li>
+<li><a href="transaction-formats.html">Transaction Reference</a><ul>
+<li><a href="escrowcreate.html">EscrowCreate transaction</a></li>
+<li><a href="escrowfinish.html">EscrowFinish transaction</a></li>
+<li><a href="escrowcancel.html">EscrowCancel transaction</a></li>
+</ul>
+</li>
+<li><a href="ledger-data-formats.html">Ledger Reference</a><ul>
+<li><a href="escrow-object.html">Escrow object</a></li>
+</ul>
+</li>
+</ul>
+<p>For more information on Interledger and how conditional transfers enable secure payments across multiple ledgers, see <a class="external-link" href="https://interledger.org/rfcs/0001-interledger-architecture/" target="_blank">Interledger Architecture <i aria-hidden="true" class="fa fa-external-link"></i></a>.</p>
+<p>For more information on Ripple's 55-billion XRP lock-up, see <a class="external-link" href="https://ripple.com/insights/ripple-to-place-55-billion-xrp-in-escrow-to-ensure-certainty-into-total-xrp-supply/" target="_blank">Ripple's Insights Blog <i aria-hidden="true" class="fa fa-external-link"></i></a>.</p>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- rippled release notes links -->
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="concepts.html"> Concepts</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_2">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_2" aria-expanded="true" aria-controls="sidenav_collapse_2"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="introduction.html">Introduction</a>
+                <!-- <a class="sidenav_cat_title" href="introduction.html">Introduction</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_2" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_2">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="xrp-ledger-overview.html">XRP Ledger Overview</a></li>
+                      <li><a class="nosubcat-page" href="intro-to-consensus.html">Introduction to Consensus</a></li>
+                      <li><a class="nosubcat-page" href="xrp.html">XRP</a></li>
+                      <li><a class="nosubcat-page" href="software-ecosystem.html">Software Ecosystem</a></li>
+                      <li><a class="nosubcat-page" href="technical-faq.html">Technical FAQ</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse2 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_8">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_8" aria-expanded="true" aria-controls="sidenav_collapse_8"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="payment-system-basics.html">Payment System Basics</a>
+                <!-- <a class="sidenav_cat_title" href="payment-system-basics.html">Payment System Basics</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_8" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_8">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="accounts.html">Accounts</a></li>
+
+                          <li><a class="subpage" href="cryptographic-keys.html">Cryptographic Keys</a></li>
+                          <li><a class="subpage" href="multi-signing.html">Multi-Signing</a></li>
+                          <li><a class="subpage" href="reserves.html">Reserves</a></li>
+                          <li><a class="subpage" href="depositauth.html">Deposit Authorization</a></li>
+
+                      <li><a class="nosubcat-page" href="fees.html">Fees (Disambiguation)</a></li>
+                      <li><a class="nosubcat-page" href="ledgers.html">Ledgers</a></li>
+                      <li><a class="subcat-title" href="transaction-basics.html">Transaction Basics</a></li>
+
+                          <li><a class="subpage" href="transaction-cost.html">Transaction Cost</a></li>
+                          <li><a class="subpage" href="finality-of-results.html">Finality of Results</a></li>
+                          <li><a class="subpage" href="source-and-destination-tags.html">Source and Destination Tags</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse8 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card active">
+            <div class="card-header" role="tab" id="sidenav_cat_head_20">
+                <a class="sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_20" aria-expanded="true" aria-controls="sidenav_collapse_20"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title active-parent" href="payment-types.html">Payment Types</a>
+                <!-- <a class="sidenav_cat_title" href="payment-types.html">Payment Types</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_20" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_20">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="direct-xrp-payments.html">Direct XRP Payments</a></li>
+                      <li><a class="nosubcat-page" href="cross-currency-payments.html">Cross-Currency Payments</a></li>
+                      <li><a class="nosubcat-page" href="checks.html">Checks</a></li>
+                      <li><a class="active nosubcat-page" href="escrow.html">Escrow</a></li>
+                      <li><a class="nosubcat-page" href="partial-payments.html">Partial Payments</a></li>
+                      <li><a class="nosubcat-page" href="payment-channels.html">Payment Channels</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse20 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_28">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_28" aria-expanded="true" aria-controls="sidenav_collapse_28"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="issued-currencies.html">Issued Currencies</a>
+                <!-- <a class="sidenav_cat_title" href="issued-currencies.html">Issued Currencies</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_28" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_28">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="issued-currencies-overview.html">Issued Currencies Overview</a></li>
+                      <li><a class="nosubcat-page" href="trust-lines-and-issuing.html">Trust Lines and Issuing</a></li>
+                      <li><a class="nosubcat-page" href="authorized-trust-lines.html">Authorized Trust Lines</a></li>
+                      <li><a class="nosubcat-page" href="freezes.html">Freezing Issued Currencies</a></li>
+                      <li><a class="nosubcat-page" href="rippling.html">Rippling</a></li>
+                      <li><a class="nosubcat-page" href="transfer-fees.html">Transfer Fees</a></li>
+                      <li><a class="nosubcat-page" href="issuing-and-operational-addresses.html">Issuing and Operational Addresses</a></li>
+                      <li><a class="nosubcat-page" href="paths.html">Paths</a></li>
+                      <li><a class="nosubcat-page" href="demurrage.html">Demurrage</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse28 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_38">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_38" aria-expanded="true" aria-controls="sidenav_collapse_38"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="decentralized-exchange.html">Decentralized Exchange</a>
+                <!-- <a class="sidenav_cat_title" href="decentralized-exchange.html">Decentralized Exchange</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_38" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_38">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="offers.html">Offers</a></li>
+                      <li><a class="nosubcat-page" href="autobridging.html">Auto-Bridging</a></li>
+                      <li><a class="nosubcat-page" href="ticksize.html">Tick Size</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse38 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_42">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_42" aria-expanded="true" aria-controls="sidenav_collapse_42"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="consensus-network.html">Consensus Network</a>
+                <!-- <a class="sidenav_cat_title" href="consensus-network.html">Consensus Network</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_42" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_42">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="consensus.html">Consensus</a></li>
+                      <li><a class="nosubcat-page" href="consensus-principles-and-rules.html">Consensus Principles and Rules</a></li>
+                      <li><a class="nosubcat-page" href="consensus-protections.html">Consensus Protections Against Attacks and Failure Modes</a></li>
+                      <li><a class="nosubcat-page" href="invariant-checking.html">Invariant Checking</a></li>
+                      <li><a class="nosubcat-page" href="transaction-queue.html">Transaction Queue</a></li>
+                      <li><a class="nosubcat-page" href="about-canceling-a-transaction.html">About Canceling a Transaction</a></li>
+                      <li><a class="nosubcat-page" href="transaction-malleability.html">Transaction Malleability</a></li>
+                      <li><a class="subcat-title" href="amendments.html">Amendments</a></li>
+
+                          <li><a class="subpage" href="known-amendments.html">Known Amendments</a></li>
+
+                      <li><a class="nosubcat-page" href="fee-voting.html">Fee Voting</a></li>
+                      <li><a class="nosubcat-page" href="consensus-research.html">Consensus Research</a></li>
+                      <li><a class="nosubcat-page" href="parallel-networks.html">Parallel Networks</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse42 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_55">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_55" aria-expanded="true" aria-controls="sidenav_collapse_55"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="the-rippled-server.html">The rippled Server</a>
+                <!-- <a class="sidenav_cat_title" href="the-rippled-server.html">The rippled Server</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_55" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_55">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="rippled-server-modes.html">rippled Server Modes</a></li>
+                      <li><a class="nosubcat-page" href="clustering.html">Clustering</a></li>
+                      <li><a class="subcat-title" href="ledger-history.html">Ledger History</a></li>
+
+                          <li><a class="subpage" href="online-deletion.html">Online Deletion</a></li>
+                          <li><a class="subpage" href="history-sharding.html">History Sharding</a></li>
+
+                      <li><a class="nosubcat-page" href="peer-protocol.html">Peer Protocol</a></li>
+                      <li><a class="nosubcat-page" href="transaction-censorship-detection.html">Transaction Censorship Detection</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse55 -->
+
+          </div><!-- /.card -->
+
+    </div><!-- /#sidenav -->
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">Learn</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">Explore</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">Build</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">Concepts</a></li>
+          <li class="level-1"><a href="tutorials.html">Tutorials</a></li>
+          <li class="level-1"><a href="references.html">References</a></li>
+          <li class="level-1"><a href="dev-tools.html">Dev Tools</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">License</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="Jump to top of page">Top</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:en"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>

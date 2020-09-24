@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>シリアル化フォーマット - XRP Ledger Dev Portal (日本語)</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="/ja/assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="/ja/assets/css/fonts-ja.css" rel="stylesheet" />
+    <link href="/ja/assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-ja ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/ja/" class="navbar-brand"><img src="/ja/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal (日本語)" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">学ぶ</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">オーバービュー</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">探る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">作る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">ドキュメント</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">コンセプト</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">チュートリアル</a>
+          <a class="dropdown-item top-level-2" href="references.html">リファレンス</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">開発者用ツール</a>
+          <a class="dropdown-item top-level-1" href="/blog/">ブログ</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/references/rippled-api/api-conventions/serialization.ja.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">サイトを検索</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="サイトを検索">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          日本語
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/serialization.html">Eng</a>
+          <a class="dropdown-item" href="/ja/serialization.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>目次</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#シリアル化フォーマット">シリアル化フォーマット</a></li>
+<li class="level-3"><a href="#例">例</a></li>
+<li class="level-2"><a href="#サンプルコード">サンプルコード</a></li>
+<li class="level-2"><a href="#内部フォーマット">内部フォーマット</a></li>
+<li class="level-3"><a href="#定義ファイル">定義ファイル</a></li>
+<li class="level-3"><a href="#フィールドid">フィールドID</a></li>
+<li class="level-3"><a href="#長さプレフィクスを付加する">長さプレフィクスを付加する</a></li>
+<li class="level-2"><a href="#フィールドの正規順序">フィールドの正規順序</a></li>
+<li class="level-3"><a href="#タイプコード">タイプコード</a></li>
+<li class="level-3"><a href="#フィールドコード">フィールドコード</a></li>
+<li class="level-2"><a href="#タイプリスト">タイプリスト</a></li>
+<li class="level-3"><a href="#accountidフィールド">AccountIDフィールド</a></li>
+<li class="level-3"><a href="#amountフィールド">Amountフィールド</a></li>
+<li class="level-3"><a href="#配列フィールド">配列フィールド</a></li>
+<li class="level-3"><a href="#ブロブフィールド">ブロブフィールド</a></li>
+<li class="level-3"><a href="#ハッシュフィールド">ハッシュフィールド</a></li>
+<li class="level-3"><a href="#オブジェクトフィールド">オブジェクトフィールド</a></li>
+<li class="level-3"><a href="#pathsetフィールド">PathSetフィールド</a></li>
+<li class="level-3"><a href="#uintフィールド">UIntフィールド</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">ホーム</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">作る</a></li>
+    <li class="active breadcrumb-item"><a href="references.html">リファレンス</a></li>
+    <li class="active breadcrumb-item"><a href="rippled-api.html">rippled API リファレンス</a></li>
+    <li class="active breadcrumb-item"><a href="api-conventions.html">APIの規則</a></li>
+    <li class="active breadcrumb-item">シリアル化フォーマット</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="シリアル化フォーマット">シリアル化フォーマット</h1>
+<p><a class="external-link" href="https://github.com/ripple/rippled/blob/develop/src/ripple/protocol/impl/STObject.cpp#L696-L718" target="_blank" title="Source">[ソース] <i aria-hidden="true" class="fa fa-external-link"></i></a></p>
+<p>このページでは、XRP Ledgerのトランザクションとその他のデータの正規バイナリフォーマットについて説明します。このバイナリフォーマットは、トランザクションの内容のデジタル署名を作成および検証するために必要であり、<a href="peer-protocol.html">サーバー間のピアツーピア通信</a>を含む他の用途にも使用されます。通常、<a href="rippled-api.html"><code>rippled</code> API</a>は、JSONを使用してクライアントアプリケーションと通信します。ただしJSONは、同じデータをさまざまな同等の方法で表現できるため、デジタル署名を付与するトランザクションをシリアル化するのに適したフォーマットではありません。</p>
+<p>トランザクションをJSONまたはその他の表現から正規バイナリフォーマットへシリアル化するプロセスのステップを、以下にまとめます。</p>
+<ol>
+<li>すべての必須フィールドが指定されていること（必須の<a href="transaction-common-fields.html#自動入力可能なフィールド">「自動入力可能」フィールド</a>を含む）を確認します。</li>
+</ol>
+<p><a href="transaction-formats.html">トランザクションフォーマットリファレンス</a>に、XRP Ledgerトランザクションの必須フィールドと省略可能なフィールドが定義されています。</p>
+<p class="devportal-callout 注記"><strong>注記:</strong> <code>SigningPubKey</code>もこのステップで指定する必要があります。署名の際に、署名用に指定された秘密鍵から<a href="cryptographic-keys.html#鍵導出">このキーを導出</a>できます。</p>
+<ol start="2">
+<li>
+<p>各フィールドのデータを<a href="#内部フォーマット">「内部」バイナリフォーマット</a>に変換します。</p>
+</li>
+<li>
+<p>フィールドを<a href="#フィールドの正規順序">正規順序</a>でソートします。</p>
+</li>
+<li>
+<p>各フィールドの前に<a href="#フィールドid">フィールドID</a>を付加します。</p>
+</li>
+<li>
+<p>フィールド（プレフィクスを含む）をソート順に連結します。</p>
+</li>
+</ol>
+<p>その結果、ECDSA（secp256k1楕円曲線を使用）やEd25519などの既知の署名アルゴリズムを使用して署名できるバイナリブロブが1つ作成されます。XRP Ledgerのために、適切なプレフィクス（シングル署名の場合は<code>0x53545800</code>、マルチ署名の場合は<code>0x534D5400</code>）を使用してデータを<a href="basic-data-types.html#ハッシュ">ハッシュ化</a>する必要があります。署名後に、指定されている<code>TxnSignature</code>フィールドを使用してトランザクションを再度シリアル化する必要があります。 <!-- --></p>
+<p class="devportal-callout 注記"><strong>注記:</strong> XRP Ledgerでは、<a href="ledger-object-types.html">レジャーオブジェクト</a>や処理済みのトランザクションなど他のタイプのデータを表す場合にも同じシリアル化フォーマットが使用されます。ただし、署名されるトランザクションに追加するのに適切なフィールドは限られています。（たとえば署名自体が指定されている<code>TxnSignature</code>フィールドは、署名するバイナリブロブに含まれていてはなりません。）このように、「署名」フィールドとされてオブジェクトに署名するときにオブジェクトに含まれるフィールドもあれば、「非署名」とされてオブジェクトに含まれないフィールドもあります。</p>
+<h3 id="例">例</h3>
+<p>署名済みトランザクションと未署名のトランザクションはいずれも、JSONフォーマットとバイナリフォーマットの両方で表すことができます。同じ署名済みトランザクションのJSONフォーマットとバイナリフォーマットの例を以下に示します。</p>
+<p><strong>JSON:</strong></p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">"Account"</span><span class="p">:</span> <span class="s2">"rMBzp8CgpE441cp5PVyA9rpVV7oT8hP3ys"</span><span class="p">,</span>
+  <span class="nt">"Expiration"</span><span class="p">:</span> <span class="mi">595640108</span><span class="p">,</span>
+  <span class="nt">"Fee"</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+  <span class="nt">"Flags"</span><span class="p">:</span> <span class="mi">524288</span><span class="p">,</span>
+  <span class="nt">"OfferSequence"</span><span class="p">:</span> <span class="mi">1752791</span><span class="p">,</span>
+  <span class="nt">"Sequence"</span><span class="p">:</span> <span class="mi">1752792</span><span class="p">,</span>
+  <span class="nt">"SigningPubKey"</span><span class="p">:</span> <span class="s2">"03EE83BB432547885C219634A1BC407A9DB0474145D69737D09CCDC63E1DEE7FE3"</span><span class="p">,</span>
+  <span class="nt">"TakerGets"</span><span class="p">:</span> <span class="s2">"15000000000"</span><span class="p">,</span>
+  <span class="nt">"TakerPays"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">"currency"</span><span class="p">:</span> <span class="s2">"USD"</span><span class="p">,</span>
+    <span class="nt">"issuer"</span><span class="p">:</span> <span class="s2">"rvYAfWj5gh67oV6fW32ZzP3Aw4Eubs59B"</span><span class="p">,</span>
+    <span class="nt">"value"</span><span class="p">:</span> <span class="s2">"7072.8"</span>
+  <span class="p">},</span>
+  <span class="nt">"TransactionType"</span><span class="p">:</span> <span class="s2">"OfferCreate"</span><span class="p">,</span>
+  <span class="nt">"TxnSignature"</span><span class="p">:</span> <span class="s2">"30440220143759437C04F7B61F012563AFE90D8DAFC46E86035E1D965A9CED282C97D4CE02204CFD241E86F17E011298FC1A39B63386C74306A5DE047E213B0F29EFA4571C2C"</span><span class="p">,</span>
+  <span class="nt">"hash"</span><span class="p">:</span> <span class="s2">"73734B611DDA23D3F5F62E20A173B78AB8406AC5015094DA53F53D39B9EDB06C"</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><strong>バイナリ（16進数として表現）:</strong></p>
+<div class="codehilite"><pre><span></span><code>120007220008000024001ABED82A2380BF2C2019001ABED764D55920AC9391400000000000000000000000000055534400000000000A20B3C85F482532A9578DBB3950B85CA06594D165400000037E11D60068400000000000000A732103EE83BB432547885C219634A1BC407A9DB0474145D69737D09CCDC63E1DEE7FE3744630440220143759437C04F7B61F012563AFE90D8DAFC46E86035E1D965A9CED282C97D4CE02204CFD241E86F17E011298FC1A39B63386C74306A5DE047E213B0F29EFA4571C2C8114DD76483FACDEE26E60D8A586BB58D09F27045C46
+</code></pre></div>
+<h2 id="サンプルコード">サンプルコード</h2>
+<p>ここで説明するシリアル化プロセスは複数の場所にさまざまなプログラミング言語で実装されています。</p>
+<ul>
+<li>C++: <a class="external-link" href="https://github.com/ripple/rippled/blob/develop/src/ripple/protocol/impl/STObject.cpp" target="_blank"><code>rippled</code>コードベース <i aria-hidden="true" class="fa fa-external-link"></i></a></li>
+<li>JavaScript: <a class="external-link" href="https://github.com/ripple/ripple-binary-codec/" target="_blank"><code>ripple-binary-codec</code> <i aria-hidden="true" class="fa fa-external-link"></i></a>パッケージ</li>
+<li>Python 3: <a class="external-link" href="https://github.com/ripple/xrpl-dev-portal/blob/master/content/_code-samples/tx-serialization/serialize.py" target="_blank">このリポジトリのコードサンプルセクション <i aria-hidden="true" class="fa fa-external-link"></i></a></li>
+</ul>
+<p>これらのすべての実装には、一般利用が可能なオープンソースライセンスが提供されているので、学習のためにドキュメントと合わせて使用するだけでなく、必要に応じてコードをインポート、使用、または変更することができます。</p>
+<h2 id="内部フォーマット">内部フォーマット</h2>
+<p>各フィールドには「内部」バイナリフォーマットがあります。このフォーマットは、<code>rippled</code>ソースコードで署名時に（およびその他のほとんどの場合に）そのフィールドを表示するのに使用されます。すべてのフィールドの内部フォーマットは、<a class="external-link" href="https://github.com/ripple/rippled/blob/master/src/ripple/protocol/impl/SField.cpp" target="_blank"><code>SField.cpp</code> <i aria-hidden="true" class="fa fa-external-link"></i></a>のソースコードに定義されています。（このフィールドには、トランザクションフィールド以外のフィールドも含まれています。）<a href="transaction-formats.html">トランザクションフォーマットリファレンス</a>にも、すべてのトランザクションフィールドの内部フォーマットが記載されています。</p>
+<p>たとえば<code>Flags</code><a href="transaction-common-fields.html">共通トランザクションフィールド</a>はUInt32（32ビット符号なし整数）になります。</p>
+<h3 id="定義ファイル">定義ファイル</h3>
+<p>以下のJSONファイルには、XRP Ledgerデータをそのバイナリフォーマットにシリアル化し、バイナリからシリアル化解除するのに必要な重要な定数が定義されています。</p>
+<p><strong><a class="external-link" href="https://github.com/ripple/ripple-binary-codec/blob/master/src/enums/definitions.json" target="_blank">https://github.com/ripple/ripple-binary-codec/blob/master/src/enums/definitions.json <i aria-hidden="true" class="fa fa-external-link"></i></a></strong></p>
+<p>この定義ファイルの最上位フィールドの定義を以下の表に示します。</p>
+<table>
+<thead>
+<tr>
+<th align="left">フィールド</th>
+<th align="left">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>TYPES</code></td>
+<td align="left">フィールドIDの作成と正規順序でのフィールドのソートのためのデータタイプからその<a href="#タイプコード">「タイプコード」</a>へのマップ。1未満のコードは実際のデータには含まれません。10000を超えるコードは、他のオブジェクト内部ではシリアル化できない「トランザクション」などの特殊な「上位」オブジェクトタイプを表します。各タイプのシリアル化方法についての詳細は、<a href="#タイプリスト">タイプリスト</a>を参照してください。</td>
+</tr>
+<tr>
+<td align="left"><code>LEDGER_ENTRY_TYPES</code></td>
+<td align="left"><a href="ledger-object-types.html">レジャーオブジェクト</a>から対応するデータタイプへのマップ。これはレジャー状態データと、処理されたトランザクションの<a href="transaction-metadata.html">メタデータ</a>の「affected nodes」セクションに含まれます。</td>
+</tr>
+<tr>
+<td align="left"><code>FIELDS</code></td>
+<td align="left">トランザクション、レジャーオブジェクト、あるいはその他のデータに含まれる可能性があるすべてのフィールドを表すタプルからなるソート済み配列。各タプルの1番目のメンバーはフィールドの文字列名であり、2番目のメンバーはそのフィールドのプロパティーが含まれているオブジェクトです。（これらのフィールドの定義については、以下の「フィールドプロパティー」の表を参照してください。）</td>
+</tr>
+<tr>
+<td align="left"><code>TRANSACTION_RESULTS</code></td>
+<td align="left"><a href="transaction-results.html">トランザクション結果コード</a>から対応する数値へのマップ。レジャーに含まれない結果タイプにはマイナスの値が含まれています。<code>tesSUCCESS</code>に数値0が含まれています。<a href="tec-codes.html"><code>tec</code>クラスコード</a>は、レジャーに含まれている失敗を示しています。</td>
+</tr>
+<tr>
+<td align="left"><code>TRANSACTION_TYPES</code></td>
+<td align="left"><a href="transaction-types.html">トランザクションのタイプ</a>から対応する数値へのマップ。</td>
+</tr>
+</tbody>
+</table>
+<p>署名と送信のためにトランザクションをシリアル化するという目的から、<code>FIELDS</code>、<code>TYPES</code>、および<code>TRANSACTION_TYPES</code>フィールドが必要です。</p>
+<p><code>FIELDS</code>配列のフィールド定義オブジェクトには以下のフィールドが含まれています。</p>
+<table>
+<thead>
+<tr>
+<th align="left">フィールド</th>
+<th align="left">型</th>
+<th align="left">内容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>nth</code></td>
+<td align="left">数値</td>
+<td align="left">このフィールドの<a href="#フィールドコード">フィールドコード</a>。このコードは、<a href="#フィールドid">フィールドID</a>の作成時と、同一データタイプの他のフィールドとのソート時に使用されます。</td>
+</tr>
+<tr>
+<td align="left"><code>isVLEncoded</code></td>
+<td align="left">ブール値</td>
+<td align="left"><code>true</code>の場合、このフィールドには<a href="#長さプレフィクスを付加する">長さプレフィクスが付加されています</a>。</td>
+</tr>
+<tr>
+<td align="left"><code>isSerialized</code></td>
+<td align="left">ブール値</td>
+<td align="left"><code>true</code>の場合、このフィールドはシリアル化バイナリデータにエンコードされる必要があります。このフィールドが<code>false</code>の場合、一般にフィールドは保管されず、オンデマンドで再作成されます。</td>
+</tr>
+<tr>
+<td align="left"><code>isSigningField</code></td>
+<td align="left">ブール値</td>
+<td align="left"><code>true</code>の場合、署名のためにトランザクションを準備する際にこのフィールドをシリアル化する必要があります。<code>false</code>の場合、このフィールドは署名対象データから省略する必要があります。（これはトランザクションに含まれていない可能性があります。）</td>
+</tr>
+<tr>
+<td align="left"><code>type</code></td>
+<td align="left">文字列</td>
+<td align="left">このフィールドの内部データタイプ。これは、このフィールドの<a href="#タイプコード">タイプコード</a>を示す<code>TYPES</code>マップのキーにマップします。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="フィールドid">フィールドID</h3>
+<p><a class="external-link" href="https://github.com/seelabs/rippled/blob/cecc0ad75849a1d50cc573188ad301ca65519a5b/src/ripple/protocol/impl/Serializer.cpp#L117-L148" target="_blank" title="Source">[ソース - エンコード] <i aria-hidden="true" class="fa fa-external-link"></i></a>
+<a class="external-link" href="https://github.com/seelabs/rippled/blob/cecc0ad75849a1d50cc573188ad301ca65519a5b/src/ripple/protocol/impl/Serializer.cpp#L484-L509" target="_blank" title="Source">[ソース - デコード] <i aria-hidden="true" class="fa fa-external-link"></i></a></p>
+<p>フィールドのタイプコードとフィールドコードを結合すると、フィールドの一意のIDになります。このIDは、最終的なシリアル化ブロブでこのフィールドの前に付加されます。フィールドIDのサイズは、タイプコードとその結合対象のフィールドコードに応じて1～3バイトとなります。以下の表を参照してください。</p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">タイプコード &lt; 16</th>
+<th align="left">タイプコード &gt;= 16</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><strong>フィールドコード &lt; 16</strong></td>
+<td align="left"><img alt="1バイト: 上位4ビットがタイプを定義し、下位4ビットがフィールドを定義します。" src="img/field-id-common-type-common-field.ja.png"/></td>
+<td align="left"><img alt="2バイト: 1番目のバイトの下位4ビットがフィールドを定義し、次のバイトがタイプを定義します。" src="img/field-id-uncommon-type-common-field.ja.png"/></td>
+</tr>
+<tr>
+<td align="left"><strong>フィールドコード &gt;= 16</strong></td>
+<td align="left"><img alt="2バイト: 1番目のバイトの上位4ビットがタイプを定義し、1番目のバイトの下位4ビットは0になります。次のバイトがフィールドを定義します。" src="img/field-id-common-type-uncommon-field.ja.png"/></td>
+<td align="left"><img alt="3バイト: 1番目のバイトは0x00、2番目のバイトはタイプを定義します。3番目のバイトはフィールドを定義します。" src="img/field-id-uncommon-type-uncommon-field.ja.png"/></td>
+</tr>
+</tbody>
+</table>
+<p>デコードの際には、<strong>1番目のバイト</strong>のどのビットがゼロであるかによって、フィールドIDのバイト数を把握できます。これは、上記の表の例に対応しています。</p>
+<table>
+<thead>
+<tr>
+<th align="left"></th>
+<th align="left">上位4ビットがゼロ以外である</th>
+<th align="left">上位4ビットがゼロである</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><strong>下位4ビットがゼロ以外である</strong></td>
+<td align="left">1バイト: 上位4ビットがタイプを定義し、下位4ビットがフィールドを定義します。</td>
+<td align="left">2バイト: 1番目のバイトの下位4ビットがフィールドを定義し、次のバイトがタイプを定義します。</td>
+</tr>
+<tr>
+<td align="left"><strong>下位4ビットがゼロである</strong></td>
+<td align="left">2バイト: 1番目のバイトの上位4ビットがタイプを定義し、1番目のバイトの下位4ビットは0になります。次のバイトがフィールドを定義します。</td>
+<td align="left">3バイト: 1番目のバイトは0x00、2番目のバイトはタイプを定義します。3番目のバイトはフィールドを定義します。</td>
+</tr>
+</tbody>
+</table>
+<p class="devportal-callout 注意"><strong>注意:</strong> フィールドIDは、フィールドのソートに使用される2つの要素で構成されますが、シリアル化されたフィールドID自体に基づいてソートを実行しないでください。これは、フィールドIDのバイト構造によってソート順序が変わるためです。</p>
+<h3 id="長さプレフィクスを付加する">長さプレフィクスを付加する</h3>
+<p>一部の可変長フィールドの前には、長さインディケーターが付加されています。<code>Blob</code>フィールド（任意のバイナリデータを含む）がこれに該当します。長さプレフィクスが付加されているタイプのリストについては、<a href="#タイプリスト">タイプリスト</a>の表を参照してください。</p>
+<p class="devportal-callout 注記"><strong>注記:</strong> 一部のタイプの可変長フィールドには、長さプレフィクスが付加されません。このようなタイプでは、他の方法で内容の終わりが示されます。</p>
+<p>長さプレフィクスはフィールドの長さを示す1～3バイトで構成され、タイププレフィクスと内容の間に挿入されます。</p>
+<ul>
+<li>
+<p>フィールドに0～192バイトのデータが含まれている場合、1番目のバイトは内容の長さを示し、長さバイトの直後にそのバイト数のデータが続きます。</p>
+</li>
+<li>
+<p>フィールドに193～12480バイトのデータが含まれている場合、最初の2バイトは以下の式で算出されるフィールドの長さを示します。</p>
+<div class="codehilite"><pre><span></span><code><span class="err">193 + ((byte1 - 193) * 256) + byte2</span>
+</code></pre></div>
+</li>
+<li>
+<p>フィールドに12481～918744バイトのデータが含まれている場合、最初の3バイトは以下の式で算出されるフィールドの長さを示します。</p>
+<div class="codehilite"><pre><span></span><code><span class="err">12481 + ((byte1 - 241) * 65536) + (byte2 * 256) + byte3</span>
+</code></pre></div>
+</li>
+<li>
+<p>長さプレフィクスが付加されているフィールドに格納できる最大データは918744バイトです。</p>
+</li>
+</ul>
+<p>デコード時に、1番目の長さバイトの値から、追加の長さバイト（0、1、または2）が存在するかどうかを把握できます。</p>
+<ul>
+<li>1番目の長さバイトの値が192以下の場合、これは唯一の長さバイトであり、フィールドの内容の長さはこのバイトが示すバイト数です。</li>
+<li>1番目の長さバイトの値が193～240の場合、2つの長さバイトがあります。</li>
+<li>1番目の長さバイトの値が241～254の場合、3つの長さバイトがあります。</li>
+</ul>
+<h2 id="フィールドの正規順序">フィールドの正規順序</h2>
+<p>トランザクションのすべてのフィールドは、まずフィールドのタイプ（特に各タイプに割り当てられている数値の「タイプコード」）に基づいて特定の順序でソートされ、次にフィールド自体（「フィールドコード」）に基づいてソートされます。（たとえば、姓がフィールドのタイプ、名前がフィールド自体とすると、姓で最初にソートし、次に名でソートすることになります。）</p>
+<h3 id="タイプコード">タイプコード</h3>
+<p>各フィールドタイプには任意のタイプコードが含まれており、番号が小さいコードから最初にソートされます。これらのコードは<a class="external-link" href="https://github.com/ripple/rippled/blob/master/src/ripple/protocol/SField.h#L57-L74" target="_blank"><code>SField.h</code> <i aria-hidden="true" class="fa fa-external-link"></i></a>で定義されています。</p>
+<p>たとえば <a class="external-link" href="https://github.com/ripple/rippled/blob/72e6005f562a8f0818bc94803d222ac9345e1e40/src/ripple/protocol/SField.h#L59" target="_blank">UInt32のタイプコードが2である <i aria-hidden="true" class="fa fa-external-link"></i></a>ので、すべてのUInt32フィールドは、すべての<a class="external-link" href="https://github.com/ripple/rippled/blob/72e6005f562a8f0818bc94803d222ac9345e1e40/src/ripple/protocol/SField.h#L63" target="_blank">Amountフィールド（タイプコード6） <i aria-hidden="true" class="fa fa-external-link"></i></a>よりも前に位置します。</p>
+<p><a href="#定義ファイル">定義ファイル</a>には、<code>TYPES</code>マップの各タイプのタイプコードがリストされています。</p>
+<h3 id="フィールドコード">フィールドコード</h3>
+<p>各フィールドにはフィールドコードが含まれています。フィールドコードは、同じタイプのフィールドをソートするときに使用され、番号が小さいコードが最初になるようにソートされます。これらのフィールドは<a class="external-link" href="https://github.com/ripple/rippled/blob/72e6005f562a8f0818bc94803d222ac9345e1e40/src/ripple/protocol/impl/SField.cpp#L72-L266" target="_blank"><code>SField.cpp</code> <i aria-hidden="true" class="fa fa-external-link"></i></a>で定義されています。</p>
+<p>たとえば<a href="payment.html">Paymentトランザクション</a>の<code>Account</code>フィールドの<a class="external-link" href="https://github.com/ripple/rippled/blob/72e6005f562a8f0818bc94803d222ac9345e1e40/src/ripple/protocol/impl/SField.cpp#L219" target="_blank">ソートコードが1である <i aria-hidden="true" class="fa fa-external-link"></i></a>場合、このフィールドは<code>Destination</code>フィールド（<a class="external-link" href="https://github.com/ripple/rippled/blob/72e6005f562a8f0818bc94803d222ac9345e1e40/src/ripple/protocol/impl/SField.cpp#L221" target="_blank">ソートコードが3である <i aria-hidden="true" class="fa fa-external-link"></i></a>フィールド）よりも前に位置します。</p>
+<p>フィールドコードは異なるフィールドタイプのフィールドで再利用されますが、同じタイプのフィールドに同じフィールドコードが含まれることはありません。タイプコードとフィールドコードを組み合わせると、フィールドの一意の<a href="#フィールドid">フィールドID</a>になります。</p>
+<h2 id="タイプリスト">タイプリスト</h2>
+<p>トランザクションの指示には、以下のタイプのフィールドを指定できます。</p>
+<table>
+<thead>
+<tr>
+<th align="left">タイプ名</th>
+<th align="left">タイプコード</th>
+<th align="left">ビット長</th>
+<th align="left"><a href="#長さプレフィクスを付加する">長さプレフィクスを付加する</a>?</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><a href="#accountidフィールド">AccountID</a></td>
+<td align="left">8</td>
+<td align="left">160</td>
+<td align="left">はい</td>
+<td><a href="accounts.html">アカウント</a>の一意のID。</td>
+</tr>
+<tr>
+<td align="left"><a href="#amountフィールド">Amount</a></td>
+<td align="left">6</td>
+<td align="left">64または384</td>
+<td align="left">いいえ</td>
+<td>XRPまたは発行済み通貨の額。フィールドの長さは、XRPの場合は64ビット、発行済み通貨の場合は384ビット（64+160+160）です。</td>
+</tr>
+<tr>
+<td align="left"><a href="#ブロブフィールド">Blob</a></td>
+<td align="left">7</td>
+<td align="left">可変</td>
+<td align="left">はい</td>
+<td>任意のバイナリデータ。このようなフィールドの中で重要なフィールドとして、<code>TxnSignature</code>（トランザクションを承認する署名）があります。</td>
+</tr>
+<tr>
+<td align="left"><a href="#ハッシュフィールド">Hash128</a></td>
+<td align="left">4</td>
+<td align="left">128</td>
+<td align="left">いいえ</td>
+<td>128ビットの任意のバイナリ値。該当する唯一のフィールドは<code>EmailHash</code>です。これは、<a class="external-link" href="https://www.gravatar.com/" target="_blank">Gravatar <i aria-hidden="true" class="fa fa-external-link"></i></a>を取得する目的でアカウント所有者のメールのMD-5ハッシュを保管するフィールドです。</td>
+</tr>
+<tr>
+<td align="left"><a href="#ハッシュフィールド">Hash160</a></td>
+<td align="left">17</td>
+<td align="left">160</td>
+<td align="left">いいえ</td>
+<td>160ビットの任意のバイナリ値。これにより通貨コードまたはイシュアーが定義されます。</td>
+</tr>
+<tr>
+<td align="left"><a href="#ハッシュフィールド">Hash256</a></td>
+<td align="left">5</td>
+<td align="left">256</td>
+<td align="left">いいえ</td>
+<td>256ビットの任意のバイナリ値。これは通常、トランザクション、レジャーバージョン、またはレジャーデータオブジェクトの「SHA-512ハーフ」ハッシュを表します。</td>
+</tr>
+<tr>
+<td align="left"><a href="#pathsetフィールド">PathSet</a></td>
+<td align="left">18</td>
+<td align="left">可変</td>
+<td align="left">いいえ</td>
+<td><a href="cross-currency-payments.html">複数通貨間ペイメント</a>の有効な<a href="paths.html">ペイメントパス</a>のセット。</td>
+</tr>
+<tr>
+<td align="left"><a href="#配列フィールド">STArray</a></td>
+<td align="left">15</td>
+<td align="left">可変</td>
+<td align="left">いいえ</td>
+<td>可変数のメンバーからなる配列。フィールドによってタイプが異なる場合があります。この例として、<a href="transaction-common-fields.html#memosフィールド">memos</a>や<a href="multi-signing.html">マルチ署名</a>で使用される署名者のリストがあります。</td>
+</tr>
+<tr>
+<td align="left"><a href="#オブジェクトフィールド">STObject</a></td>
+<td align="left">14</td>
+<td align="left">可変</td>
+<td align="left">いいえ</td>
+<td>1つ以上のネストされたフィールドを含むオブジェクト。</td>
+</tr>
+<tr>
+<td align="left"><a href="#uintフィールド">UInt8</a></td>
+<td align="left">16</td>
+<td align="left">8</td>
+<td align="left">いいえ</td>
+<td>8ビットの符号なし整数。</td>
+</tr>
+<tr>
+<td align="left"><a href="#uintフィールド">UInt16</a></td>
+<td align="left">1</td>
+<td align="left">16</td>
+<td align="left">いいえ</td>
+<td>16ビットの符号なし整数。<code>TransactionType</code>は、このタイプの特殊なフィールドで、特定の文字列から整数値へのマッピングを含みます。</td>
+</tr>
+<tr>
+<td align="left"><a href="#uintフィールド">UInt32</a></td>
+<td align="left">2</td>
+<td align="left">32</td>
+<td align="left">いいえ</td>
+<td>32ビットの符号なし整数。このタイプの例として、すべてのトランザクションの<code>Flags</code>フィールドと<code>Sequence</code>フィールドがあります。</td>
+</tr>
+</tbody>
+</table>
+<p>上記のフィールドタイプの他に、<a href="ledger-object-types.html">レジャーオブジェクト</a>や<a href="transaction-metadata.html">トランザクションメタデータ</a>などのコンテキストでは以下のタイプが含まれることがあります。</p>
+<table>
+<thead>
+<tr>
+<th align="left">タイプ名</th>
+<th align="left">タイプコード</th>
+<th align="left"><a href="#長さプレフィクスを付加する">長さプレフィクスを付加する</a>?</th>
+<th align="left">説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left">Transaction</td>
+<td align="left">10001</td>
+<td align="left">いいえ</td>
+<td align="left"><a href="transaction-formats.html">トランザクション</a>全体を含む「上位」タイプ。</td>
+</tr>
+<tr>
+<td align="left">LedgerEntry</td>
+<td align="left">10002</td>
+<td align="left">いいえ</td>
+<td align="left"><a href="ledger-object-types.html">レジャーオブジェクト</a>全体を含む「上位」タイプ。</td>
+</tr>
+<tr>
+<td align="left">Validation</td>
+<td align="left">10003</td>
+<td align="left">いいえ</td>
+<td align="left">ピアツーピア通信で<a href="consensus.html">コンセンサスプロセス</a>の検証投票を表すために使用される「上位」タイプ。</td>
+</tr>
+<tr>
+<td align="left">Metadata</td>
+<td align="left">10004</td>
+<td align="left">いいえ</td>
+<td align="left"><a href="transaction-metadata.html">1つのトランザクションのメタデータ</a>を含む「上位」タイプ。</td>
+</tr>
+<tr>
+<td align="left"><a href="#uintフィールド">UInt64</a></td>
+<td align="left">3</td>
+<td align="left">いいえ</td>
+<td align="left">64ビットの符号なし整数。このタイプはトランザクションの指示には含まれませんが、さまざまなレジャーオブジェクトでこのタイプのフィールドが使用されます。</td>
+</tr>
+<tr>
+<td align="left">Vector256</td>
+<td align="left">19</td>
+<td align="left">はい</td>
+<td align="left">このタイプはトランザクションの指示には含まれませんが、<a href="amendments-object.html">Amendmentレジャーオブジェクト</a>の<code>Amendments</code>フィールドでは、現在有効な<a href="amendments.html">Amendment</a>を示すためにこのタイプが使用されます。</td>
+</tr>
+</tbody>
+</table>
+<h3 id="accountidフィールド">AccountIDフィールド</h3>
+<p>このタイプのフィールドには、XRP Ledger<a href="accounts.html">アカウント</a>の160ビットのIDが含まれています。JSONではこれらのフィールドは<a href="base58-encodings.html">base58</a> XRP Ledger「アドレス」および追加のチェックサムデータとして表示されます。このため、スペルミスが有効なアドレスとなることがありません。（このエンコードは「Base58Check」とも呼ばれ、誤ったアドレスへの送金を防止します。）これらのフィールドのバイナリフォーマットにはチェックサムデータは含まれておらず、また<a href="accounts.html#アドレスのエンコード">アドレスのbase58エンコード</a>で使用される<code>0x00</code>「タイププレフィクス」も含まれていません。（ただし、バイナリフォーマットは主に署名済みトランザクションに使用されるため、署名済みトランザクションを転記する際にスペルミスなどのエラーが発生すると署名が無効となり、送金できなくなります。）</p>
+<p>スタンドアロンフィールドとして表示されるAccountID（<code>Account</code>や<code>Destination</code>など）の長さは固定長の160ビットですが、<a href="#長さプレフィクスを付加する">長さプレフィクスが付加</a>されます。その結果、これらのフィールドの長さインディケーターは常に<code>0x14</code>バイトになります。特殊フィールドの子として示されるAccountID（<a href="#amountフィールド">Amount <code>issuer</code></a>、<a href="#pathsetフィールド">PathSet <code>account</code></a>など）では長さプレフィクスは付加 <em>されません</em> 。</p>
+<h3 id="amountフィールド">Amountフィールド</h3>
+<p>「Amount」タイプは、通貨（XRPまたは発行済み通貨）の額を表す特殊なフィールドタイプです。このタイプは2つのサブタイプで構成されます。</p>
+<ul>
+<li><strong>XRP</strong></li>
+</ul>
+<p>XRPは64ビット符号なし整数（ビッグエンディアンオーダー）としてシリアル化されます。ただし、XRPであることを示すため最上位ビットが常に0であり、プラスの値であることを示す最上位から2番目のビットは<code>1</code>となります。XRPの最大額（10<sup>17</sup> drop）には57ビットが必要であるため、XRPのシリアル化フォーマットを計算するには、標準の64ビット符号なし整数をとり、<code>0x4000000000000000</code>のビットOR演算を行います。</p>
+<ul>
+<li><strong>発行済み通貨</strong></li>
+</ul>
+<p>発行済み通貨は以下の3つのセグメントで構成され、セグメントの順序は以下のとおりです。</p>
+<ol>
+<li><a href="currency-formats.html#発行済み通貨の計算">内部通貨フォーマット</a>の額を示す64ビット。1番目のビットは、これがXRPではないことを示す<code>1</code>です。</li>
+<li><a href="currency-formats.html#通貨コード">通貨コード</a>を示す160ビット。標準APIでは、<a href="currency-formats.html#標準通貨コード">標準通貨コードフォーマット</a>を使用して「USD」などの3文字のコードが160ビットのコードに変換されますが、160ビットのカスタムコードも使用できます。</li>
+<li>イシュアーのアカウントIDを示す160ビット。（関連項目: <a href="accounts.html#アドレスのエンコード">アカウントアドレスエンコード</a>)</li>
+</ol>
+<p>1番目のビットに基づいて2つのサブタイプのいずれに該当するかを確認できます。<code>0</code>の場合はXRP、<code>1</code>の場合は発行済み通貨です。</p>
+<p>以下の図に、XRPの額と発行済み通貨の額のシリアル化フォーマットを示します。</p>
+<p><img alt="「非XRP」ビット、符号ビット、および62ビットの精度で構成されるXRPの額。「非XRP」ビット、符号ビット、指数（8ビット）、仮数（54ビット）、通貨コード（160ビット）、イシュアー（160ビット）で構成される発行済み通貨の額。" src="img/serialization-amount.ja.png"/></p>
+<h3 id="配列フィールド">配列フィールド</h3>
+<p>一部のトランザクションフィールド（<a href="signerlistset.html">SignerListSetトランザクション</a>の<code>SignerEntries</code>や<a href="transaction-common-fields.html#memosフィールド"><code>Memos</code></a>など）はオブジェクトの配列です（「STArray」タイプと呼ばれます）。</p>
+<p>配列には、さまざまな<a href="#オブジェクトフィールド">オブジェクトフィールド</a>がそのネイティブバイナリフォーマットで特定の順序で含まれています。JSONでは、各配列メンバーが1つのフィールド（メンバーオブジェクトフィールドの名前）を含むJSON「ラッパー」オブジェクトです。そのフィールドの値は（「内部」）オブジェクト自体です。</p>
+<p>バイナリフォーマットでは、配列の各メンバーにはフィールドIDプレフィクス（ラッパーオブジェクトの単一キーに基づく）と内容（<a href="#オブジェクトフィールド">オブジェクトとしてシリアル化された</a>内部オブジェクトからなる）が含まれています。配列の終わりをマークするため、アイテムにフィールドID <code>0xf1</code>（配列のタイプコードとフィールドコード1）を付加し、内容は指定しません。</p>
+<p>以下の例は、配列のシリアル化フォーマットを示します（<code>SignerEntries</code>フィールド）。</p>
+<p><img alt="配列フィールドID、各配列要素のフィールドIDと内容、および「配列の終わり」を示すフィールドID" src="img/serialization-array.ja.png"/></p>
+<h3 id="ブロブフィールド">ブロブフィールド</h3>
+<p>ブロブタイプは、任意のデータを持つ<a href="#長さプレフィクスを付加する">長さプレフィクスが付加されている</a>フィールドです。このタイプを使用する2種類の一般的なフィールドとして、<code>SigningPubKey</code>と<code>TxnSignature</code>があります。これらのフィールドにはそれぞれ、トランザクションの実行を承認する公開鍵と署名が含まれています。</p>
+<p>両方のフィールドにはこれ以上の内容構造がないため、フィールドIDと長さプレフィクスの後に可変長エンコードで示される正確なバイト数で構成されます。</p>
+<h3 id="ハッシュフィールド">ハッシュフィールド</h3>
+<p>XRP LedgerのハッシュタイプにはHash128、Hash160、Hash256があります。これらのフィールドには特定のビット数のバイナリデータが含まれており、それらのデータはハッシュ演算の結果を表す場合とそうでない場合があります。</p>
+<p>これらのフィールドは、長さインディケーターを使用せずに、ビッグエンディアンバイトオーダーで特定数のビットとしてシリアル化されます。</p>
+<h3 id="オブジェクトフィールド">オブジェクトフィールド</h3>
+<p>トランザクションフィールドの一部（<a href="signerlistset.html">SignerListSetトランザクション</a>の<code>SignerEntry</code>や<code>Memos</code>配列の<code>Memo</code>など）はオブジェクトです（「STObject」タイプと呼ばれます）。オブジェクトのシリアル化は配列のシリアル化に似ていますが、唯一異なる点としてオブジェクトフィールド内では<strong>オブジェクトのメンバーを正規順序に従って配置する必要がある</strong>点があげられます。配列フィールドではすでに順序が明示的に設定されています。</p>
+<p>オブジェクトフィールドの<a href="#フィールドの正規順序">正規フィールド順序</a>は、すべての最上位フィールドの正規フィールド順序と同じですが、オブジェクトのメンバーはオブジェクト内でソートする必要があります。最終メンバーの後には、「オブジェクトの終わり」を示すフィールドID（<code>0xe1</code>）があり、このフィールドには内容がありません。</p>
+<p>以下の例は、オブジェクトのシリアル化フォーマットを示します（<code>Memos</code>配列内の1つの<code>Memo</code>オブジェクト）。</p>
+<p><img alt="オブジェクトフィールドID、各オブジェクトメンバーのオブジェクトIDと内容（正規順序）、および「オブジェクトの終わり」を示すフィールドID" src="img/serialization-object.ja.png"/></p>
+<h3 id="pathsetフィールド">PathSetフィールド</h3>
+<p>複数通貨間<a href="payment.html">Paymentトランザクション</a>の<code>Paths</code>フィールドは、JSONで配列からなる配列として表される「PathSet」です。使用されるパスについての詳細は、<a href="paths.html">パス</a>を参照してください。</p>
+<p>PathSetは、<strong>1～6</strong>の個別パスとして順序どおりにシリアル化されます<a class="external-link" href="https://github.com/ripple/rippled/blob/4cff94f7a4a05302bdf1a248515379da99c5bcd4/src/ripple/app/tx/impl/Payment.h#L35-L36" target="_blank" title="Source">[ソース] <i aria-hidden="true" class="fa fa-external-link"></i></a>。それぞれの完全なパスの後には、パスの後に続く内容を示すバイトが配置されます。</p>
+<ul>
+<li><code>0xff</code>は別のパスが続くことを示します。</li>
+<li><code>0x00</code>はPathSetの終わりを示します。</li>
+</ul>
+<p>各パスには<strong>1～8</strong>のパスステップがこの順序で含まれています<a class="external-link" href="https://github.com/ripple/rippled/blob/4cff94f7a4a05302bdf1a248515379da99c5bcd4/src/ripple/app/tx/impl/Payment.h#L38-L39" target="_blank" title="Source">[ソース] <i aria-hidden="true" class="fa fa-external-link"></i></a>。各ステップは<strong>タイプ</strong>を示すバイトで始まり、その後にパスステップを記述する1つ以上のフィールドが続きます。タイプは、ビット単位のフラグを使用してそのパスステップに含まれるフィールドを示します。（たとえば値が<code>0x30</code>の場合、通貨とイシュアーの両方が変更されます。）複数のフィールドが含まれている場合、フィールドは常に特定の順序で配置されます。</p>
+<p>以下の表に、有効なフィールドと、タイプバイトでフィールドを示すために設定されるビット単位のフラグを示します。</p>
+<table>
+<thead>
+<tr>
+<th align="left">タイプフラグ</th>
+<th align="left">含まれるフィールド</th>
+<th align="left">フィールドタイプ</th>
+<th align="left">ビットサイズ</th>
+<th align="left">順序</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>0x01</code></td>
+<td align="left"><code>account</code></td>
+<td align="left"><a href="#accountidフィールド">AccountID</a></td>
+<td align="left">160ビット</td>
+<td align="left">1番目</td>
+</tr>
+<tr>
+<td align="left"><code>0x10</code></td>
+<td align="left"><code>currency</code></td>
+<td align="left"><a href="currency-formats.html#通貨コード">通貨コード</a></td>
+<td align="left">160ビット</td>
+<td align="left">2番目</td>
+</tr>
+<tr>
+<td align="left"><code>0x20</code></td>
+<td align="left"><code>issuer</code></td>
+<td align="left"><a href="#accountidフィールド">AccountID</a></td>
+<td align="left">160ビット</td>
+<td align="left">3番目</td>
+</tr>
+</tbody>
+</table>
+<p>いくつかの組み合わせは無効です。詳細は、<a href="paths.html#パスの仕様">パスの仕様</a>を参照してください。</p>
+<p><code>account</code>フィールドと<code>issuer</code>フィールドのAccountIDには、長さプレフィクスは付加 <em>されていません</em> 。<code>currency</code>がXRPの場合、通貨コードは160ビットのゼロとして表されます。</p>
+<p>各ステップの直後にはパス上の次のステップが続きます。前述したように、パスの最終ステップの後には<code>0xff</code>（別のパスが続く場合）または<code>0x00</code>（これが最終パスの終わりの場合）が続きます。</p>
+<p>以下の例は、PathSetのシリアル化フォーマットを示します。</p>
+<p><img alt="PathSetは複数のパスからなり、各パスの後に継続または終了を示すバイトが続きます。各パスは複数のパスステップからなり、各パスステップはタイプバイトと、タイプバイトに基づく1つ以上の160ビットフィールドで構成されます。" src="img/serialization-pathset.ja.png"/></p>
+<h3 id="uintフィールド">UIntフィールド</h3>
+<p>XRP Ledgerには符号なし整数タイプUInt8、UInt16、UInt32、UInt64があります。これらのタイプはすべて、指定されたビット数の標準ビッグエンディアンバイナリー符号なし整数です。</p>
+<p>JSONオブジェクトにこれらのフィールドが含まれている場合、ほとんどはデフォルトでJSONの数値として表されます。例外として、UInt64は文字列として表されます。これは、一部のJSONデコーダーがこれらの整数を64ビットの「倍精度」浮動小数点数として表現しようとするためです。64ビットの「倍精度」浮動小数点数では、すべてのUInt64値を完全な精度で表現することができません。</p>
+<p>もう1つの特殊なケースとして<code>TransactionType</code>フィールドがあります。JSONではこのフィールドは便宜上、トランザクションタイプの名前の文字列として表現されますが、バイナリではこのフィールドはUInt16です。<a href="#定義ファイル">定義ファイル</a>内の<code>TRANSACTION_TYPES</code>オブジェクトにより、これらの文字列が特定の数値にマップされます。</p>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- rippled release notes links -->
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="rippled-api.html"> rippled API リファレンス</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+            <div class="card active">
+              <div class="card-header" role="tab" id="sidenav_cat_head_21">
+                <a class="sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_21" aria-expanded="true" aria-controls="sidenav_collapse_21"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title active-parent" href="api-conventions.html">APIの規則</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_21" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_21">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="nosubcat-page" href="basic-data-types.html">基本的なデータ型</a></li>
+                        <li><a class="nosubcat-page" href="base58-encodings.html">base58エンコード</a></li>
+                        <li><a class="nosubcat-page" href="currency-formats.html">通貨フォーマット</a></li>
+                        <li><a class="nosubcat-page" href="error-formatting.html">エラーのフォーマット</a></li>
+                        <li><a class="nosubcat-page" href="markers-and-pagination.html">マーカーとページネーション</a></li>
+                        <li><a class="nosubcat-page" href="modifying-the-ledger.html">レジャーの変更</a></li>
+                        <li><a class="nosubcat-page" href="rate-limiting.html">Rate Limiting</a></li>
+                        <li><a class="nosubcat-page" href="request-formatting.html">要求フォーマット</a></li>
+                        <li><a class="nosubcat-page" href="response-formatting.html">応答フォーマット</a></li>
+                        <li><a class="nosubcat-page" href="rippled-server-states.html">rippledサーバーの状態</a></li>
+                          <li><a class="active nosubcat-page" href="serialization.html">シリアル化フォーマット</a></li>
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse21 -->
+
+            </div><!-- /.panel -->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_22">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_22" aria-expanded="true" aria-controls="sidenav_collapse_22"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="public-rippled-methods.html">rippledのパブリックメソッド</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_22" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_22">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="subcat-title" href="account-methods.html">Account Methods</a></li>
+
+                            <li><a class="subpage" href="account_channels.html">account_channels</a></li>
+                            <li><a class="subpage" href="account_currencies.html">account_currencies</a></li>
+                            <li><a class="subpage" href="account_info.html">account_info</a></li>
+                            <li><a class="subpage" href="account_lines.html">account_lines</a></li>
+                            <li><a class="subpage" href="account_objects.html">account_objects</a></li>
+                            <li><a class="subpage" href="account_offers.html">account_offers</a></li>
+                            <li><a class="subpage" href="account_tx.html">account_tx</a></li>
+                            <li><a class="subpage" href="gateway_balances.html">gateway_balances</a></li>
+                            <li><a class="subpage" href="noripple_check.html">noripple_check</a></li>
+
+                        <li><a class="subcat-title" href="ledger-methods.html">Ledger Methods</a></li>
+
+                            <li><a class="subpage" href="ledger.html">ledger</a></li>
+                            <li><a class="subpage" href="ledger_closed.html">ledger_closed</a></li>
+                            <li><a class="subpage" href="ledger_current.html">ledger_current</a></li>
+                            <li><a class="subpage" href="ledger_data.html">ledger_data</a></li>
+                            <li><a class="subpage" href="ledger_entry.html">ledger_entry</a></li>
+
+                        <li><a class="subcat-title" href="transaction-methods.html">Transaction Methods</a></li>
+
+                            <li><a class="subpage" href="sign.html">sign</a></li>
+                            <li><a class="subpage" href="sign_for.html">sign_for</a></li>
+                            <li><a class="subpage" href="submit.html">submit</a></li>
+                            <li><a class="subpage" href="submit_multisigned.html">submit_multisigned</a></li>
+                            <li><a class="subpage" href="transaction_entry.html">transaction_entry</a></li>
+                            <li><a class="subpage" href="tx.html">tx</a></li>
+                            <li><a class="subpage" href="tx_history.html">tx_history</a></li>
+
+                        <li><a class="subcat-title" href="path-and-order-book-methods.html">Path and Order Book Methods</a></li>
+
+                            <li><a class="subpage" href="book_offers.html">book_offers</a></li>
+                            <li><a class="subpage" href="deposit_authorized.html">deposit_authorized</a></li>
+                            <li><a class="subpage" href="path_find.html">path_find</a></li>
+                            <li><a class="subpage" href="ripple_path_find.html">ripple_path_find</a></li>
+
+                        <li><a class="subcat-title" href="payment-channel-methods.html">Payment Channel Methods</a></li>
+
+                            <li><a class="subpage" href="channel_authorize.html">channel_authorize</a></li>
+                            <li><a class="subpage" href="channel_verify.html">channel_verify</a></li>
+
+                        <li><a class="subcat-title" href="subscription-methods.html">Subscription Methods</a></li>
+
+                            <li><a class="subpage" href="subscribe.html">subscribe</a></li>
+                            <li><a class="subpage" href="unsubscribe.html">unsubscribe</a></li>
+
+                        <li><a class="subcat-title" href="server-info-methods.html">Server Info Methods</a></li>
+
+                            <li><a class="subpage" href="fee.html">fee</a></li>
+                            <li><a class="subpage" href="server_info.html">server_info</a></li>
+                            <li><a class="subpage" href="server_state.html">server_state</a></li>
+
+                        <li><a class="subcat-title" href="utility-methods.html">Utility Methods</a></li>
+
+                            <li><a class="subpage" href="json.html">json</a></li>
+                            <li><a class="subpage" href="ping.html">ping</a></li>
+                            <li><a class="subpage" href="random.html">random</a></li>
+
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse22 -->
+
+            </div><!-- /.panel -->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_23">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_23" aria-expanded="true" aria-controls="sidenav_collapse_23"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="admin-rippled-methods.html">管理rippledメソッド</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_23" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_23">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="subcat-title" href="key-generation-methods.html">キー生成のメソッド</a></li>
+
+                            <li><a class="subpage" href="validation_create.html">validation_create</a></li>
+                            <li><a class="subpage" href="wallet_propose.html">wallet_propose</a></li>
+
+                        <li><a class="subcat-title" href="logging-and-data-management-methods.html">ログとデータ管理のメソッド</a></li>
+
+                            <li><a class="subpage" href="can_delete.html">can_delete</a></li>
+                            <li><a class="subpage" href="crawl_shards.html">crawl_shards</a></li>
+                            <li><a class="subpage" href="download_shard.html">download_shard</a></li>
+                            <li><a class="subpage" href="ledger_cleaner.html">ledger_cleaner</a></li>
+                            <li><a class="subpage" href="ledger_request.html">ledger_request</a></li>
+                            <li><a class="subpage" href="log_level.html">log_level</a></li>
+                            <li><a class="subpage" href="logrotate.html">logrotate</a></li>
+
+                        <li><a class="subcat-title" href="server-control-methods.html">Server Control Methods</a></li>
+
+                            <li><a class="subpage" href="ledger_accept.html">ledger_accept</a></li>
+                            <li><a class="subpage" href="stop.html">stop</a></li>
+                            <li><a class="subpage" href="validation_seed.html">validation_seed</a></li>
+
+                        <li><a class="subcat-title" href="peer-management-methods.html">ピア管理のメソッド</a></li>
+
+                            <li><a class="subpage" href="connect.html">connect</a></li>
+                            <li><a class="subpage" href="peer_reservations_add.html">peer_reservations_add</a></li>
+                            <li><a class="subpage" href="peer_reservations_del.html">peer_reservations_del</a></li>
+                            <li><a class="subpage" href="peer_reservations_list.html">peer_reservations_list</a></li>
+                            <li><a class="subpage" href="peers.html">peers</a></li>
+
+                        <li><a class="subcat-title" href="status-and-debugging-methods.html">ステータスとデバッグのメソッド</a></li>
+
+                            <li><a class="subpage" href="consensus_info.html">consensus_info</a></li>
+                            <li><a class="subpage" href="feature.html">feature</a></li>
+                            <li><a class="subpage" href="fetch_info.html">fetch_info</a></li>
+                            <li><a class="subpage" href="get_counts.html">get_counts</a></li>
+                            <li><a class="subpage" href="manifest.html">manifest</a></li>
+                            <li><a class="subpage" href="print.html">print</a></li>
+                            <li><a class="subpage" href="validator_info.html">validator_info</a></li>
+                            <li><a class="subpage" href="validator_list_sites.html">validator_list_sites</a></li>
+                            <li><a class="subpage" href="validators.html">validators</a></li>
+
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse23 -->
+
+            </div><!-- /.panel -->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_24">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_24" aria-expanded="true" aria-controls="sidenav_collapse_24"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="ledger-data-formats.html">レジャーのデータ型</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_24" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_24">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="nosubcat-page" href="ledger-header.html">レジャーヘッダー</a></li>
+                        <li><a class="nosubcat-page" href="ledger-object-ids.html">レジャーオブジェクトID</a></li>
+                        <li><a class="subcat-title" href="ledger-object-types.html">レジャーオブジェクトのタイプ</a></li>
+
+                            <li><a class="subpage" href="accountroot.html">AccountRoot</a></li>
+                            <li><a class="subpage" href="amendments-object.html">Amendments</a></li>
+                            <li><a class="subpage" href="check.html">Check</a></li>
+                            <li><a class="subpage" href="depositpreauth-object.html">DepositPreauth</a></li>
+                            <li><a class="subpage" href="directorynode.html">DirectoryNode</a></li>
+                            <li><a class="subpage" href="escrow-object.html">Escrow</a></li>
+                            <li><a class="subpage" href="feesettings.html">FeeSettings</a></li>
+                            <li><a class="subpage" href="ledgerhashes.html">LedgerHashes</a></li>
+                            <li><a class="subpage" href="offer.html">Offer</a></li>
+                            <li><a class="subpage" href="paychannel.html">PayChannel</a></li>
+                            <li><a class="subpage" href="ripplestate.html">RippleState</a></li>
+                            <li><a class="subpage" href="signerlist.html">SignerList</a></li>
+
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse24 -->
+
+            </div><!-- /.panel -->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_25">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_25" aria-expanded="true" aria-controls="sidenav_collapse_25"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="transaction-formats.html">トランザクションのフォーマット</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_25" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_25">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="nosubcat-page" href="transaction-common-fields.html">トランザクションの共通フィールド</a></li>
+                        <li><a class="subcat-title" href="transaction-types.html">トランザクションのタイプ</a></li>
+
+                            <li><a class="subpage" href="accountset.html">AccountSet</a></li>
+                            <li><a class="subpage" href="accountdelete.html">AccountDelete</a></li>
+                            <li><a class="subpage" href="checkcancel.html">CheckCancel</a></li>
+                            <li><a class="subpage" href="checkcash.html">CheckCash</a></li>
+                            <li><a class="subpage" href="checkcreate.html">CheckCreate</a></li>
+                            <li><a class="subpage" href="depositpreauth.html">DepositPreauth</a></li>
+                            <li><a class="subpage" href="escrowcancel.html">EscrowCancel</a></li>
+                            <li><a class="subpage" href="escrowcreate.html">EscrowCreate</a></li>
+                            <li><a class="subpage" href="escrowfinish.html">EscrowFinish</a></li>
+                            <li><a class="subpage" href="offercancel.html">OfferCancel</a></li>
+                            <li><a class="subpage" href="offercreate.html">OfferCreate</a></li>
+                            <li><a class="subpage" href="payment.html">Payment</a></li>
+                            <li><a class="subpage" href="paymentchannelclaim.html">PaymentChannelClaim</a></li>
+                            <li><a class="subpage" href="paymentchannelcreate.html">PaymentChannelCreate</a></li>
+                            <li><a class="subpage" href="paymentchannelfund.html">PaymentChannelFund</a></li>
+                            <li><a class="subpage" href="setregularkey.html">SetRegularKey</a></li>
+                            <li><a class="subpage" href="signerlistset.html">SignerListSet</a></li>
+                            <li><a class="subpage" href="trustset.html">TrustSet</a></li>
+
+                        <li><a class="subcat-title" href="pseudo-transaction-types.html">疑似トランザクション</a></li>
+
+                            <li><a class="subpage" href="enableamendment.html">EnableAmendment</a></li>
+                            <li><a class="subpage" href="setfee.html">SetFee</a></li>
+
+                        <li><a class="subcat-title" href="transaction-results.html">取引の結果</a></li>
+
+                            <li><a class="subpage" href="tec-codes.html">tecコード</a></li>
+                            <li><a class="subpage" href="tef-codes.html">tefコード</a></li>
+                            <li><a class="subpage" href="tel-codes.html">telコード</a></li>
+                            <li><a class="subpage" href="tem-codes.html">temコード</a></li>
+                            <li><a class="subpage" href="ter-codes.html">terコード</a></li>
+                            <li><a class="subpage" href="tes-success.html">tes Success</a></li>
+
+                        <li><a class="nosubcat-page" href="transaction-metadata.html">トランザクションのメタデータ</a></li>
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse25 -->
+
+            </div><!-- /.panel -->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_26">
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="commandline-usage.html">rippledコマンドライン使用リファレンス</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_26" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_26">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse26 -->
+
+            </div><!-- /.panel -->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_27">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_27" aria-expanded="true" aria-controls="sidenav_collapse_27"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="peer-port-methods.html">Peer Port Methods</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_27" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_27">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="nosubcat-page" href="health-check.html">Health Check</a></li>
+                        <li><a class="nosubcat-page" href="peer-crawler.html">Peer Crawler</a></li>
+                        <li><a class="nosubcat-page" href="validator-list.html">Validator List Method</a></li>
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse27 -->
+
+            </div><!-- /.panel -->
+    </div><!-- /#sidenav -->
+
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">学ぶ</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">探る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">作る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">コンセプト</a></li>
+          <li class="level-1"><a href="tutorials.html">チュートリアル</a></li>
+          <li class="level-1"><a href="references.html">リファレンス</a></li>
+          <li class="level-1"><a href="dev-tools.html">開発者用ツール</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">ライセンス</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="このページの先頭へ">先頭へ</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:ja"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>

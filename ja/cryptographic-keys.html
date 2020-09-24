@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>暗号鍵 - XRP Ledger Dev Portal (日本語)</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="/ja/assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="/ja/assets/css/fonts-ja.css" rel="stylesheet" />
+    <link href="/ja/assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-ja ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/ja/" class="navbar-brand"><img src="/ja/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal (日本語)" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">学ぶ</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">オーバービュー</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">探る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">作る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">ドキュメント</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">コンセプト</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">チュートリアル</a>
+          <a class="dropdown-item top-level-2" href="references.html">リファレンス</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">開発者用ツール</a>
+          <a class="dropdown-item top-level-1" href="/blog/">ブログ</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/concepts/payment-system-basics/accounts/cryptographic-keys.ja.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">サイトを検索</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="サイトを検索">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          日本語
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/cryptographic-keys.html">Eng</a>
+          <a class="dropdown-item" href="/ja/cryptographic-keys.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>目次</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#暗号鍵">暗号鍵</a></li>
+<li class="level-2"><a href="#キーの生成">キーの生成</a></li>
+<li class="level-2"><a href="#マスターキーペア">マスターキーペア</a></li>
+<li class="level-2"><a href="#レギュラーキーペア">レギュラーキーペア</a></li>
+<li class="level-2"><a href="#署名アルゴリズム">署名アルゴリズム</a></li>
+<li class="level-3"><a href="#将来のアルゴリズム">将来のアルゴリズム</a></li>
+<li class="level-2"><a href="#鍵導出">鍵導出</a></li>
+<li class="level-3"><a href="#サンプルコード">サンプルコード</a></li>
+<li class="level-3"><a href="#ed25519鍵導出">Ed25519鍵導出</a></li>
+<li class="level-3"><a href="#secp256k1鍵導出">secp256k1鍵導出</a></li>
+<li class="level-2"><a href="#関連項目">関連項目</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">ホーム</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">作る</a></li>
+    <li class="active breadcrumb-item"><a href="concepts.html">コンセプト</a></li>
+    <li class="active breadcrumb-item"><a href="payment-system-basics.html">支払いシステムの基本</a></li>
+    <li class="active breadcrumb-item"><a href="accounts.html">アカウント</a></li>
+    <li class="active breadcrumb-item">暗号鍵</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="暗号鍵">暗号鍵</h1>
+<p>XRP Ledgerでは、<a href="transaction-basics.html">トランザクション</a>による一連の具体的なアクションの実行が承認されていることを、デジタル署名によって証明します。署名されたトランザクションのみがネットワークに送信され、検証済みレジャーに含まれます。 <!-- STYLE_OVERRIDE: is authorized to --></p>
+<p>すべてのデジタル署名は、トランザクションの送信側アカウントに関連付けられている暗号鍵ペアに基づいています。キーペアはXRP Ledgerでサポートされている<a href="#署名アルゴリズム">暗号化署名アルゴリズム</a>を使用して生成できます。キーペアの生成に使用されたアルゴリズムの種類にかかわらず、キーペアは<a href="#マスターキーペア">マスターキーペア</a>、<a href="#レギュラーキーペア">レギュラーキーペア</a>、または<a href="multi-signing.html">署名者リスト</a>のメンバーとして使用できます。</p>
+<p class="devportal-callout 警告"><strong>警告:</strong> 秘密鍵のセキュリティを適切に維持することが重要です。デジタル署名は、あなたがトランザクション送信する権限を有していることをXRP Ledgerに対して検証できる唯一の手段であり、レジャーに提出されたトランザクションの取り消しや無効化を行う権限を有する管理者は存在しません。お使いのXRP Ledgerアカウントの秘密鍵があなた以外の何者かに知られた場合、その人物はあなたと同様にデジタル署名を作成し、トランザクションを承認することができます。</p>
+<h2 id="キーの生成">キーの生成</h2>
+<p><a href="wallet_propose.html"><code>wallet_propose</code></a>メソッドを使用してキーペアを生成します。以下は、<code>wallet_propose</code>の応答例です。</p>
+<div class="codehilite"><pre><span></span><code><span class="err">{</span>
+<span class="err">  "result": {</span>
+<span class="err">    "account_id": "rDGnaDqJczDAjrKHKdhGRJh2G7zJfZhj5q",</span>
+<span class="err">    "key_type": "secp256k1",</span>
+<span class="err">    "master_key": "COON WARN AWE LUCK TILE WIRE ELI SNUG TO COVE SHAM NAT",</span>
+<span class="err">    "master_seed": "sstV9YX8k7yTRzxkRFAHmX7EVqMfX",</span>
+<span class="err">    "master_seed_hex": "559EDD35041D3C11F9BBCED912F4DE6A",</span>
+<span class="err">    "public_key": "aBQXEw1vZD3guCX3rHL8qy8ooDomdFuxZcWrbRZKZjdDkUoUjGVS",</span>
+<span class="err">    "public_key_hex": "0351BDFB30E7924993C625687AE6127034C4A5EBA78A01E9C58B0C46E04E3A4948"</span>
+<span class="err">  },</span>
+<span class="err">  "status": "success",</span>
+<span class="err">  "type": "response"</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>この応答には、キーペア（さまざまなフォーマットのシードと公開鍵）と<code>account_id</code>が含まれています。</p>
+<p><strong>シード</strong></p>
+<p><em>シード</em> 値は、アカウントの実際の秘密鍵（および公開鍵）を<a href="#鍵導出">導出する</a>ために使用されるコンパクトな値です。<code>master_key</code>、<code>master_seed</code>、および<code>master_seed_hex</code>はすべて、同じシード値を表しますが、フォーマットが異なります。これらのいずれのフォーマットも、<a href="rippled-api.html"><code>rippled</code> API</a>や<a href="software-ecosystem.html">その他のXRPLソフトウェア</a>で<a href="transaction-basics.html#トランザクションへの署名とトランザクションの送信">トランザクションに署名</a>するときに使用することができます。キーの先頭に<code>master_</code>が付いていますが、このシードが表すキーが必ずしもアカウントのマスターキーであるとは限りません。キーペアは、レギュラーキーだけでなく、マルチ署名のリストのメンバーとしても使用できます。</p>
+<p>シード値はアカウントのその他のあらゆる情報の基盤であるため、慎重に保護する必要があります。アドレスのシード値を知っている人なら誰でも、事実上そのアドレスを完全に制御できます。</p>
+<p><strong>秘密鍵</strong></p>
+<p><code>wallet_propose</code>応答には、秘密鍵（ <em>プライベートキー</em> とも呼ばれます）の値が明示的に示されていません。トランザクションに署名できるソフトウェアであれば、シード値から<a href="#鍵導出">秘密鍵を導出</a>可能であると考えられます。</p>
+<p><strong>公開鍵</strong></p>
+<p><code>public_key</code>と<code>public_key_hex</code>はいずれも、同一値の公開鍵を表します。公開鍵は、鍵導出の一環として秘密鍵から導出されます。公開鍵を使用すると、トランザクション署名の真正性を検証できますが、それ以上の署名を作成することはできません。</p>
+<p><strong>account_id</strong></p>
+<p><code>account_id</code>は<a href="accounts.html#アドレスのエンコード">公開鍵から生成され</a>、アカウントがXRP Ledgerに作成される<em>可能性</em>を示します。<code>account_id</code>が存在していても、<code>account_id</code>が最初の XRPでの支払いを受領するまでは、実際のアカウントはXRP Ledgerに存在しません。さらに<code>account_id</code>は、資金を供給するトランザクションを受領して、アカウントが作成されるまでは、トランザクションを送信することができません。</p>
+<p>ただし、（資金供給されたアカウントのない）<code>account_id</code>は、既存の別のアカウントのトランザクションを承認する際に<a href="#レギュラーキーペア">レギュラーキー</a>または<a href="multi-signing.html">署名者リストのメンバー</a>として使用できます。</p>
+<p>資金供給されたアカウントを作成してレジャーに保管するには、<code>account_id</code>が、<a href="reserves.html">必要準備金</a>を満たすのに十分なXRPを供給する<a href="payment.html#アカウントの作成"><code>Payment</code>トランザクションを受領する</a>必要があります。</p>
+<p><code>wallet_propose</code>応答についての詳細は、<a href="wallet_propose.html"><code>wallet_propose</code></a>を参照してください。</p>
+<p>生成されたキーペアは、<a href="#マスターキーペア">マスターキーペア</a>、<a href="#レギュラーキーペア">レギュラーキーペア</a>、または<a href="multi-signing.html">署名者リストメンバー</a>のいずれかとして使用できます。</p>
+<p><strong>キータイプ</strong></p>
+<p><code>key_type</code>フィールドは、このキーペアの生成に使用された<a href="#署名アルゴリズム">暗号化署名アルゴリズム</a>を示します。<a href="wallet_propose.html">wallet_proposeメソッド</a>を使用したキーペアの生成を要求するときに、<code>key_type</code>を指定できます。</p>
+<h2 id="マスターキーペア">マスターキーペア</h2>
+<p>マスターキーペアは秘密鍵と公開鍵で構成されます。マスターキーペアの秘密鍵は、レギュラーキーペアで署名できるすべてのトランザクションに署名できるほか、以下の操作の実行に使用できる唯一の鍵でもあります。</p>
+<ul>
+<li>
+<p><a href="accountset.html">マスター公開鍵を無効にする</a>。</p>
+</li>
+<li>
+<p><a href="freezes.html#no-freeze">凍結</a>機能を永久に放棄する。</p>
+</li>
+<li>
+<p>トランザクションコストが0の<a href="transaction-cost.html#key-resetトランザクション">Key Resetトランザクション</a>を送信する。</p>
+</li>
+</ul>
+<p>アカウントのマスターキーペアは、マスターキーペアによるトランザクションへの署名が承認されているアカウントの<code>account_id</code>と同じ<a href="wallet_propose.html"><code>wallet_propose</code></a>応答にて生成されます。マスターキーペアは同じ応答内で生成されるため、アドレスに<a href="accounts.html#アドレスのエンコード">固有に関連付け</a>られています。このアドレスは、公開鍵から導出されます。</p>
+<p>これは、同様に<code>wallet_propose</code>メソッドを使用して生成されても、レギュラーキーペアとしてアカウントに明示的に割り当てられる必要があるレギュラーキーペアとは対照的です。レギュラーキーペアは明示的に割り当てられるため、トランザクションの署名が承認されているアカウントのアドレスには固有に関連付けられません。詳細は、<a href="#レギュラーキーペア">レギュラーキーペア</a>を参照してください。</p>
+<p class="devportal-callout 注意"><strong>注意:</strong> マスターキーペアは変更できませんが、無効にできます。つまり、マスターシードまたは秘密鍵が漏えいした場合は、変更するのではなく、<a href="accountset.html">無効にする</a>必要があります。</p>
+<p>マスターキーペアは変更できないため、漏えいが発生した場合には無効化せざるを得ません。<a href="offline-account-setup.html">マスターキーペアをオフラインで保管</a>し、代わりにアカウントのトランザクションの署名用にレギュラーキーペアを設定することを強くお勧めします。</p>
+<p>マスターキーペアをオフラインで保管する際には、不正使用者がアクセスできる場所にマスター秘密鍵を保管しないようにします。たとえば、インターネットに一切接続されない物理的に隔離されたマシンに保管したり、紙に記入して安全な場所に保管します。一般的には、インターネットと相互にやり取りをするコンピュータプログラムがアクセスできる範囲内には保管しません。マスターキーペアは、緊急時（漏えいの恐れがある場合や実際に漏えいが発生した場合にレギュラーキーペアを変更するなど）に限り、最も信頼できるデバイスでのみ使用することが理想的です。</p>
+<h2 id="レギュラーキーペア">レギュラーキーペア</h2>
+<p>XRP Ledgerでは、アカウントのマスターキーペアをオフラインで保管し、その後のトランザクションには <em>レギュラーキーペア</em> と呼ばれるセカンダリキーペアで署名することができます。レギュラーキーペアのシードまたは秘密鍵が漏えいした場合は、キーペアを削除または交換できます。その際に、アカウントのキーペア以外の設定を変更する必要はありません。これにより、アカウントの設定や他のアカウントとの関係を再設定する手間が省けます。レギュラーキーペアを積極的にローテーションすることも可能です。（アカウントのアドレスに固有に関連付けられているアカウントのマスターキーペアでは、このような操作は実行できません。）</p>
+<p>レギュラーキーペアとして使用するキーペアは、<a href="wallet_propose.html"><code>wallet_propose</code></a>メソッドを使用して生成します。ただし、サポートするアカウントの<code>account_id</code>と同時に生成され、それに固有に関連付けられている<a href="#マスターキーペア">マスターキーペア</a>とは異なり、レギュラーキーペアと、このキーペアがトランザクションの署名に使用されるアカウントとの関係を明示的に作成する必要があります。レギュラーキーペアをアカウントに割り当てるには、<a href="setregularkey.html"><code>SetRegularKey</code></a>メソッドを使用します。</p>
+<p>レギュラーキーペアの割り当てに関するチュートリアルについては、<a href="assign-a-regular-key-pair.html">レギュラーキーペアの割り当て</a>を参照してください。</p>
+<p>レギュラーキーペアを割り当てたアカウントには、次の2つのキーペアが関連付けられることになります。</p>
+<ul>
+<li>アカウントの<code>account_id</code>に固有に関連付けられるマスターキーペア。オフラインで保管します。</li>
+<li>アカウントに明示的に割り当てられ、アカウントのトランザクションの署名に使用されるレギュラーキーペア。</li>
+</ul>
+<p>レギュラーキーペアをアカウントに割り当てて、<a href="#マスターキーペア">マスターキーペア</a>で署名されるトランザクションを除く、すべてのトランザクションの署名にそのレギュラーキーペアを使用できます。</p>
+<p>レギュラーキーペアはいつでも削除または変更できます。つまり、レギュラーキーペアの秘密鍵が漏えいした（ただしマスターキーペアの秘密鍵の漏えいは発生していない）場合、レギュラーキーペアを削除または変更するだけでアカウントの制御を取り戻すことができます。</p>
+<p>レギュラーキーペアの変更または削除のチュートリアルについては、<a href="assign-a-regular-key-pair.html">レギュラーキーペアの割り当て</a>を参照してください。</p>
+<h2 id="署名アルゴリズム">署名アルゴリズム</h2>
+<p>暗号鍵ペアは常に特定の署名アルゴリズムに関連付けられています。署名アルゴリズムは、秘密鍵と公開鍵の間の数学的関係を定義します。暗号化署名アルゴリズムには、現在の暗号技術では、秘密鍵を使用して対応する公開鍵を「簡単に」計算できるものの、公開鍵から対応する秘密鍵を計算することは実質的に不可能であるという特性があります。</p>
+<p>XRP Ledgerでは次の暗号化署名アルゴリズムがサポートされています。</p>
+<table>
+<thead>
+<tr>
+<th>キータイプ</th>
+<th>アルゴリズム</th>
+<th>説明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>secp256k1</code></td>
+<td>楕円曲線<a class="external-link" href="https://en.bitcoin.it/wiki/Secp256k1" target="_blank">secp256k1 <i aria-hidden="true" class="fa fa-external-link"></i></a>を使用する<a class="external-link" href="https://en.wikipedia.org/wiki/Elliptic_Curve_Digital_Signature_Algorithm" target="_blank">ECDSA <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+<td>これはBitcoinで使用されているスキームです。XRP Ledgerではデフォルトでこのキータイプが使用されます。</td>
+</tr>
+<tr>
+<td><code>ed25519</code></td>
+<td>楕円曲線<a class="external-link" href="https://ed25519.cr.yp.to/" target="_blank">Ed25519 <i aria-hidden="true" class="fa fa-external-link"></i></a>を使用する<a class="external-link" href="https://tools.ietf.org/html/rfc8032" target="_blank">EdDSA <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+<td>パフォーマンスに優れ、その他の便利な特性を備えた新しいアルゴリズムです。Ed25519公開鍵はsecp256k1鍵よりも1バイト短いため、<code>rippled</code>ではEd25519公開鍵の先頭に<code>0xED</code>バイトが追加されます。これにより、両方の公開鍵タイプは33バイトになります。</td>
+</tr>
+</tbody>
+</table>
+<p><a href="wallet_propose.html">wallet_proposeメソッド</a>を使用してキーペアを生成するときには、キーの生成に使用する暗号化署名アルゴリズムを選択するため<code>key_type</code>を指定できます。デフォルト以外のキータイプを生成した場合は、トランザクションに署名する際に<code>key_type</code>も指定する必要があります。</p>
+<p>XRP Ledgerでは、サポートされているさまざまなタイプのキーペアは、マスターキーペア、レギュラーキーペア、署名者リストメンバーとして互換的に使用できます。<a href="accounts.html#アドレスのエンコード">アドレス生成</a>プロセスは、secp256k1キーペアとEd25519キーペアでは同一です。</p>
+<p class="devportal-callout 注記"><strong>注記:</strong> 現時点では、Ed25519キーで<a href="use-payment-channels.html">Payment Channelクレーム</a>に署名することはできません。これはバグです。</p>
+<h3 id="将来のアルゴリズム">将来のアルゴリズム</h3>
+<p>今後、暗号技術の発展に対応するため、XRP Ledgerには新しい暗号化署名アルゴリズムが必要になるでしょう。例えば、<a class="external-link" href="https://en.wikipedia.org/wiki/Shor's_algorithm" target="_blank">Shorのアルゴリズム <i aria-hidden="true" class="fa fa-external-link"></i></a>（または類似のアルゴリズム）を使用する量子コンピューターの実用化が間近となり、楕円曲線暗号が解読される可能性が生じた場合、XRP Ledger開発者は容易に解読できない暗号化署名アルゴリズムを追加できます。2019年半ばの時点で、確実な第一選択肢となる「耐量子」署名アルゴリズムはなく、量子コンピューターはまだ脅威となるほど実用的ではないため、現時点では特定のアルゴリズムを追加する予定はありません。<!-- STYLE_OVERRIDE: will --></p>
+<h2 id="鍵導出">鍵導出</h2>
+<p>キーペアを導出するプロセスは、署名アルゴリズムによって異なります。いずれの場合も、キーは長さが16バイト（128ビット）の <em>シード</em> 値から生成されます。シード値は完全にランダムにする（推奨）か、<a href="basic-data-types.html#ハッシュ">SHA-512ハッシュ</a>を取得して最初の16バイトを保持することで特定のパスフレーズから導出することができます（<a href="basic-data-types.html#ハッシュ">SHA-512ハーフ</a>と同様ですが、出力の256ビットではなく128ビットのみを保持します）。</p>
+<h3 id="サンプルコード">サンプルコード</h3>
+<p>ここで説明する鍵導出プロセスは、さまざまなプログラミング言語で複数の場所に実装されています。</p>
+<ul>
+<li>C++: <code>rippled</code>コードベース:</li>
+<li><a class="external-link" href="https://github.com/ripple/rippled/blob/develop/src/ripple/protocol/Seed.h" target="_blank">シード定義 <i aria-hidden="true" class="fa fa-external-link"></i></a></li>
+<li><a class="external-link" href="https://github.com/ripple/rippled/blob/develop/src/ripple/protocol/impl/SecretKey.cpp" target="_blank">汎用キー &amp; Ed25519鍵導出 <i aria-hidden="true" class="fa fa-external-link"></i></a></li>
+<li><a class="external-link" href="https://github.com/ripple/rippled/blob/develop/src/ripple/crypto/impl/GenerateDeterministicKey.cpp" target="_blank">secp256k1鍵導出 <i aria-hidden="true" class="fa fa-external-link"></i></a></li>
+<li>Python 3: <a class="external-link" href="https://github.com/ripple/xrpl-dev-portal/blob/master/content/_code-samples/key-derivation/key_derivation.py" target="_blank">このリポジトリのコードサンプルセクション <i aria-hidden="true" class="fa fa-external-link"></i></a>。</li>
+<li>JavaScript: <a class="external-link" href="https://github.com/ripple/ripple-keypairs/" target="_blank"><code>ripple-keypairs</code> <i aria-hidden="true" class="fa fa-external-link"></i></a>パッケージ。</li>
+</ul>
+<h3 id="ed25519鍵導出">Ed25519鍵導出</h3>
+<p><a class="external-link" href="https://github.com/ripple/rippled/blob/fc7ecd672a3b9748bfea52ce65996e324553c05f/src/ripple/protocol/impl/SecretKey.cpp#L203" target="_blank" title="Source">[ソース] <i aria-hidden="true" class="fa fa-external-link"></i></a></p>
+<p><a href="img/key-derivation-ed25519.ja.png"><img alt="パスフレーズ → シード → 秘密鍵 → プレフィクス + 公開鍵" src="img/key-derivation-ed25519.ja.png"/></a></p>
+<ol>
+<li>シード値の<a href="basic-data-types.html#ハッシュ">SHA-512ハーフ</a>を計算します。32バイトの秘密鍵が導出されます。</li>
+</ol>
+<p class="devportal-callout ヒント"><strong>ヒント:</strong> 32バイトの数値はすべて、有効なEd25519秘密鍵です。ただし、秘密鍵として使用する上で安全なのは、十分ランダムに選択された数値のみです。</p>
+<ol start="2">
+<li>Ed25519公開鍵を計算するには、<a class="external-link" href="https://ed25519.cr.yp.to/software.html" target="_blank">Ed25519 <i aria-hidden="true" class="fa fa-external-link"></i></a>の標準公開鍵を導出して、32バイトの公開鍵を導出します。</li>
+</ol>
+<p class="devportal-callout 注意"><strong>注意:</strong> 暗号化アルゴリズムの場合と同様に、可能な場合は必ず、公的に監査された既知の標準実装を使用します。例えば、<a class="external-link" href="https://www.openssl.org/" target="_blank">OpenSSL <i aria-hidden="true" class="fa fa-external-link"></i></a>には、コア関数であるEd25519やsecp256k1が実装されています。</p>
+<ol start="3">
+<li>Ed25519公開鍵を示すには、32バイトの公開鍵の前にシングルバイトのプレフィクス<code>0xED</code>を付加し、33バイトにします。</li>
+</ol>
+<p>トランザクションに署名するコードを実装している場合は、プレフィクス<code>0xED</code>を削除し、実際の署名プロセスに32バイトキーを使用します。</p>
+<ol start="4">
+<li>アカウントの公開鍵を<a href="base58-encodings.html">base58</a>にシリアル化する場合は、アカウントの公開鍵プレフィクス<code>0x23</code>を使用します。</li>
+</ol>
+<p>バリデータの一時キーにEd25519を使用することはできません。</p>
+<h3 id="secp256k1鍵導出">secp256k1鍵導出</h3>
+<p><a class="external-link" href="https://github.com/ripple/rippled/blob/develop/src/ripple/crypto/impl/GenerateDeterministicKey.cpp" target="_blank" title="Source">[ソース] <i aria-hidden="true" class="fa fa-external-link"></i></a></p>
+<p><a href="img/key-derivation-secp256k1.ja.png"><img alt="パスフレーズ → シード → ルートキーペア → 仲介銀行（機関）キーペア → マスターキーペア" src="img/key-derivation-secp256k1.ja.png"/></a></p>
+<p>XRP Ledgerアカウントキーでのsecp256k1鍵導出に、Ed25519鍵導出よりも多くの手順が含まれる理由は次のとおりです。</p>
+<ul>
+<li>32バイトの数値がすべて、有効なsecp256k1秘密鍵であるとは限りません。</li>
+<li>XRP Ledgerのリファレンス実装には、単一のシード値からキーペアのファミリーを導出するための、未使用の不完全なフレームワークがあります。</li>
+</ul>
+<p>シード値からXRP Ledgerのsecp256k1アカウントキーペアを導出する手順は次のとおりです。</p>
+<ol>
+<li>
+<p>次のように、シード値から「ルートキーペア」を計算します。</p>
+</li>
+<li>
+<p>以下を順番に連結して、合計20バイトにします。</p>
+<ul>
+<li>シード値（16バイト）</li>
+<li>「ルートシーケンス」値（4バイト）。ビッグエンディアンの符号なし整数。ルートシーケンスの開始値として0を使用します。</li>
+</ul>
+</li>
+<li>
+<p>連結された（シード+ルートシーケンス）値の<a href="basic-data-types.html#ハッシュ">SHA-512ハーフ</a>を計算します。</p>
+</li>
+<li>
+<p>結果が有効なsecp256k1秘密鍵でない場合は、ルートシーケンスを1増やして最初からやり直します。<a class="external-link" href="https://github.com/ripple/rippled/blob/fc7ecd672a3b9748bfea52ce65996e324553c05f/src/ripple/crypto/impl/GenerateDeterministicKey.cpp#L103" target="_blank" title="Source">[ソース] <i aria-hidden="true" class="fa fa-external-link"></i></a></p>
+<p>有効なsecp256k1鍵は0であってはならず、 <em>secp256k1グループ</em> の数値順よりも低くなければなりません。secp256k1グループの順序は、定数<code>0xFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFEBAAEDCE6AF48A03BBFD25E8CD0364141</code>です。</p>
+</li>
+<li>
+<p>有効なsecp256k1秘密鍵を使用して、secp256k1曲線で標準ECDSA公開鍵を導出し、ルート公開鍵を導出します。（暗号化アルゴリズムの場合と同様に、可能な場合は必ず、公的に監査された既知の標準実装を使用します。例えば、<a class="external-link" href="https://www.openssl.org/" target="_blank">OpenSSL <i aria-hidden="true" class="fa fa-external-link"></i></a>には、コア関数であるEd25519およびsecp256k1が実装されています。）</p>
+</li>
+</ol>
+<p class="devportal-callout ヒント"><strong>ヒント:</strong> バリデータではこのルートキーペアを使用します。バリデータのキーペアを計算する場合は、ここで停止できます。この2つのタイプの公開鍵を区別するには、バリデータの公開鍵の<a href="base58-encodings.html">base58</a>シリアル化でプレフィクス<code>0x1c</code>を使用します。</p>
+<ol start="2">
+<li>ルート公開鍵を33バイトの圧縮形式に変換します。</li>
+</ol>
+<p>ECDSA公開鍵の非圧縮形式は、32バイト整数のペア（X座標とY座標）で構成されます。圧縮形式は、X座標と1バイトのプレフィクスのみで構成されます。Y座標が偶数の場合は<code>0x02</code>、Y座標が奇数の場合は<code>0x03</code>です。</p>
+<p>非圧縮形式の公開鍵を圧縮形式に変換するには、<code>openssl</code>コマンドラインツールを使用します。例えば、非圧縮の公開鍵がファイル<code>ec-pub.pem</code>にある場合は、次のような圧縮形式を出力できます。</p>
+<div class="codehilite"><pre><span></span><code><span class="err">    $ openssl ec -in ec-pub.pem -pubin -text -noout -conv_form compressed</span>
+</code></pre></div>
+<ol start="3">
+<li>
+<p>次のように、圧縮されたルート公開鍵から「仲介銀行（機関）キーペア」を導出します。</p>
+</li>
+<li>
+<p>以下を順番に連結して、合計40バイトにします。</p>
+<ul>
+<li>圧縮されたルート公開鍵（33バイト）</li>
+<li><code>0x00000000000000000000000000000000</code> (4バイトのゼロ)（この値は、同じファミリーの異なるメンバーの導出に使用することを目的としていましたが、実際には値0のみが使用されます。）</li>
+<li>「キーシーケンス」値（4バイト）。ビッグエンディアンの符号なし整数。キーシーケンスの開始値として0を使用します。</li>
+</ul>
+</li>
+<li>
+<p>連結された値の<a href="basic-data-types.html#ハッシュ">SHA-512ハーフ</a>を計算します。</p>
+</li>
+<li>
+<p>結果が有効なsecp256k1秘密鍵でない場合は、キーシーケンスを1増やし、アカウントの仲介銀行（機関）キーペアの導出をやり直します。</p>
+</li>
+<li>
+<p>有効なsecp256k1秘密鍵を使用して、secp256k1曲線で標準ECDSA公開鍵を導出し、仲介銀行（機関）公開鍵を導出します。（暗号化アルゴリズムの場合と同様に、可能な場合は必ず、公的に監査された既知の標準実装を使用します。例えば、<a class="external-link" href="https://www.openssl.org/" target="_blank">OpenSSL <i aria-hidden="true" class="fa fa-external-link"></i></a>には、コア関数であるEd25519およびsecp256k1が実装されています。）</p>
+</li>
+<li>
+<p>仲介銀行（機関）公開鍵をルート公開鍵に追加して、マスター公開鍵ペアを導出します。同様に、仲介銀行（機関）秘密鍵をルート秘密鍵に追加して秘密鍵を導出します。</p>
+</li>
+</ol>
+<ul>
+<li>
+<p>ECDSA秘密鍵は非常に大きな整数値であるため、secp256k1グループ順序を法として2つの秘密鍵を合計することで、2つの秘密鍵の合計を計算できます。</p>
+</li>
+<li>
+<p>ECDSA公開鍵は楕円曲線上の点であるため、楕円曲線の数値を使用して点の合計値を計算する必要があります。</p>
+</li>
+</ul>
+<ol start="5">
+<li>
+<p>以前と同様に、マスター公開鍵を33バイトの圧縮形式に変換します。</p>
+</li>
+<li>
+<p>アカウントの公開鍵を<a href="base58-encodings.html">base58</a>形式にシリアル化する場合は、アカウントの公開鍵プレフィクス<code>0x23</code>を使用します。</p>
+</li>
+</ol>
+<p>アカウントの公開鍵からそのアドレスに変換するための情報とサンプルコードについては、<a href="accounts.html#アドレスのエンコード">アドレスのエンコード</a>を参照してください。</p>
+<h2 id="関連項目">関連項目</h2>
+<ul>
+<li><strong>コンセプト:</strong></li>
+<li><a href="issuing-and-operational-addresses.html">発行アドレスと運用アドレス</a></li>
+<li><strong>チュートリアル:</strong></li>
+<li><a href="assign-a-regular-key-pair.html">レギュラーキーペアの割り当て</a></li>
+<li><a href="change-or-remove-a-regular-key-pair.html">レギュラーキーペアの変更または削除</a></li>
+<li><strong>リファレンス:</strong></li>
+<li><a href="setregularkey.html">SetRegularKeyトランザクション</a></li>
+<li><a href="accountroot.html">AccountRootレジャーオブジェクト</a></li>
+<li><a href="wallet_propose.html">wallet_proposeメソッド</a></li>
+<li><a href="account_info.html">account_infoメソッド</a></li>
+</ul>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- rippled release notes links -->
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="concepts.html"> コンセプト</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_2">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_2" aria-expanded="true" aria-controls="sidenav_collapse_2"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="introduction.html">基本</a>
+                <!-- <a class="sidenav_cat_title" href="introduction.html">Introduction</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_2" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_2">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="xrp-ledger-overview.html">XRP Ledgerの概要</a></li>
+                      <li><a class="nosubcat-page" href="intro-to-consensus.html">コンセンサスについて</a></li>
+                      <li><a class="nosubcat-page" href="xrp.html">XRP</a></li>
+                      <li><a class="nosubcat-page" href="software-ecosystem.html">ソフトウェアエコシステム</a></li>
+                      <li><a class="nosubcat-page" href="technical-faq.html">技術に関するよくある質問</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse2 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card active">
+            <div class="card-header" role="tab" id="sidenav_cat_head_8">
+                <a class="sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_8" aria-expanded="true" aria-controls="sidenav_collapse_8"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title active-parent" href="payment-system-basics.html">支払いシステムの基本</a>
+                <!-- <a class="sidenav_cat_title" href="payment-system-basics.html">Payment System Basics</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_8" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_8">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title active-parent" href="accounts.html">アカウント</a></li>
+
+                          <li><a class="active subpage" href="#main_content_body">暗号鍵</a></li>
+                          <li><a class="subpage" href="multi-signing.html">マルチ署名</a></li>
+                          <li><a class="subpage" href="reserves.html">準備金</a></li>
+                          <li><a class="subpage" href="depositauth.html">Deposit Authorization</a></li>
+
+                      <li><a class="nosubcat-page" href="fees.html">手数料（曖昧さの回避）</a></li>
+                      <li><a class="nosubcat-page" href="ledgers.html">レジャー</a></li>
+                      <li><a class="subcat-title" href="transaction-basics.html">トランザクションの基本</a></li>
+
+                          <li><a class="subpage" href="transaction-cost.html">トランザクションコスト</a></li>
+                          <li><a class="subpage" href="finality-of-results.html">結果のファイナリティー</a></li>
+                          <li><a class="subpage" href="source-and-destination-tags.html">Source and Destination Tags</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse8 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_20">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_20" aria-expanded="true" aria-controls="sidenav_collapse_20"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="payment-types.html">支払いのタイプ</a>
+                <!-- <a class="sidenav_cat_title" href="payment-types.html">Payment Types</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_20" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_20">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="direct-xrp-payments.html">XRPによる直接支払</a></li>
+                      <li><a class="nosubcat-page" href="cross-currency-payments.html">複数通貨間の支払い</a></li>
+                      <li><a class="nosubcat-page" href="checks.html">Checks</a></li>
+                      <li><a class="nosubcat-page" href="escrow.html">Escrow</a></li>
+                      <li><a class="nosubcat-page" href="partial-payments.html">Partial Payment</a></li>
+                      <li><a class="nosubcat-page" href="payment-channels.html">Payment Channel</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse20 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_28">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_28" aria-expanded="true" aria-controls="sidenav_collapse_28"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="issued-currencies.html">発行済み通貨</a>
+                <!-- <a class="sidenav_cat_title" href="issued-currencies.html">Issued Currencies</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_28" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_28">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="issued-currencies-overview.html">発行済み通貨の概要</a></li>
+                      <li><a class="nosubcat-page" href="trust-lines-and-issuing.html">トラストラインと発行</a></li>
+                      <li><a class="nosubcat-page" href="authorized-trust-lines.html">Authorized Trust Lines</a></li>
+                      <li><a class="nosubcat-page" href="freezes.html">発行済み通貨の凍結</a></li>
+                      <li><a class="nosubcat-page" href="rippling.html">Rippling</a></li>
+                      <li><a class="nosubcat-page" href="transfer-fees.html">送金手数料</a></li>
+                      <li><a class="nosubcat-page" href="issuing-and-operational-addresses.html">発行アドレスと運用アドレス</a></li>
+                      <li><a class="nosubcat-page" href="paths.html">パス</a></li>
+                      <li><a class="nosubcat-page" href="demurrage.html">Demurrage</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse28 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_38">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_38" aria-expanded="true" aria-controls="sidenav_collapse_38"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="decentralized-exchange.html">分散型取引所</a>
+                <!-- <a class="sidenav_cat_title" href="decentralized-exchange.html">Decentralized Exchange</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_38" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_38">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="offers.html">オファー</a></li>
+                      <li><a class="nosubcat-page" href="autobridging.html">オートブリッジング</a></li>
+                      <li><a class="nosubcat-page" href="ticksize.html">ティックサイズ</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse38 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_42">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_42" aria-expanded="true" aria-controls="sidenav_collapse_42"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="consensus-network.html">コンセンサスネットワーク</a>
+                <!-- <a class="sidenav_cat_title" href="consensus-network.html">Consensus Network</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_42" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_42">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="consensus.html">コンセンサス</a></li>
+                      <li><a class="nosubcat-page" href="consensus-principles-and-rules.html">コンセンサスの原理とルール</a></li>
+                      <li><a class="nosubcat-page" href="consensus-protections.html">攻撃および障害モードに対するコンセンサスの保護</a></li>
+                      <li><a class="nosubcat-page" href="invariant-checking.html">Invariant Checking</a></li>
+                      <li><a class="nosubcat-page" href="transaction-queue.html">トランザクションキュー</a></li>
+                      <li><a class="nosubcat-page" href="about-canceling-a-transaction.html">トランザクションの取消しについて</a></li>
+                      <li><a class="nosubcat-page" href="transaction-malleability.html">トランザクション展性</a></li>
+                      <li><a class="subcat-title" href="amendments.html">Amendment</a></li>
+
+                          <li><a class="subpage" href="known-amendments.html">既知のAmendment</a></li>
+
+                      <li><a class="nosubcat-page" href="fee-voting.html">手数料投票</a></li>
+                      <li><a class="nosubcat-page" href="consensus-research.html">コンセンサスの研究</a></li>
+                      <li><a class="nosubcat-page" href="parallel-networks.html">並列ネットワーク</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse42 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_55">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_55" aria-expanded="true" aria-controls="sidenav_collapse_55"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="the-rippled-server.html">rippledサーバー</a>
+                <!-- <a class="sidenav_cat_title" href="the-rippled-server.html">The rippled Server</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_55" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_55">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="rippled-server-modes.html">rippledサーバーのモード</a></li>
+                      <li><a class="nosubcat-page" href="clustering.html">クラスター化</a></li>
+                      <li><a class="subcat-title" href="ledger-history.html">レジャー履歴</a></li>
+
+                          <li><a class="subpage" href="online-deletion.html">オンライン削除</a></li>
+                          <li><a class="subpage" href="history-sharding.html">履歴シャーディング</a></li>
+
+                      <li><a class="nosubcat-page" href="peer-protocol.html">ピアプロトコル</a></li>
+                      <li><a class="nosubcat-page" href="transaction-censorship-detection.html">取引検閲の検知</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse55 -->
+
+          </div><!-- /.card -->
+
+    </div><!-- /#sidenav -->
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">学ぶ</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">探る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">作る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">コンセプト</a></li>
+          <li class="level-1"><a href="tutorials.html">チュートリアル</a></li>
+          <li class="level-1"><a href="references.html">リファレンス</a></li>
+          <li class="level-1"><a href="dev-tools.html">開発者用ツール</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">ライセンス</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="このページの先頭へ">先頭へ</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:ja"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>

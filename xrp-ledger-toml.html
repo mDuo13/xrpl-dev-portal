@@ -1,0 +1,1868 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>xrp-ledger.toml File - XRP Ledger Dev Portal</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/" class="navbar-brand"><img src="assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Learn</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">Overview</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Build</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">Docs</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">Concepts</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">Tutorials</a>
+          <a class="dropdown-item top-level-2" href="references.html">References</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">Dev Tools</a>
+          <a class="dropdown-item top-level-1" href="/blog/">Dev Blog</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/references/xrp-ledger-toml.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">Search site...</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="Search site...">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Eng
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/xrp-ledger-toml.html">Eng</a>
+          <a class="dropdown-item" href="/ja/xrp-ledger-toml.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>In this document</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#xrp-ledgertoml-file">xrp-ledger.toml File</a></li>
+<li class="level-2"><a href="#serving-the-file">Serving the File</a></li>
+<li class="level-3"><a href="#protocol">Protocol</a></li>
+<li class="level-3"><a href="#domain">Domain</a></li>
+<li class="level-3"><a href="#path">Path</a></li>
+<li class="level-3"><a href="#headers">Headers</a></li>
+<li class="level-3"><a href="#generation">Generation</a></li>
+<li class="level-2"><a href="#contents">Contents</a></li>
+<li class="level-3"><a href="#metadata">Metadata</a></li>
+<li class="level-3"><a href="#validators">Validators</a></li>
+<li class="level-3"><a href="#accounts">Accounts</a></li>
+<li class="level-3"><a href="#principals">Principals</a></li>
+<li class="level-3"><a href="#servers">Servers</a></li>
+<li class="level-3"><a href="#currencies">Currencies</a></li>
+<li class="level-3"><a href="#custom-fields">Custom Fields</a></li>
+<li class="level-2"><a href="#cors-setup">CORS Setup</a></li>
+<li class="level-2"><a href="#domain-verification">Domain Verification</a></li>
+<li class="level-2"><a href="#account-verification">Account Verification</a></li>
+<li class="level-2"><a href="#acknowledgements">Acknowledgements</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">Build</a></li>
+    <li class="active breadcrumb-item"><a href="references.html">References</a></li>
+    <li class="active breadcrumb-item">xrp-ledger.toml File</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="xrp-ledgertoml-file">xrp-ledger.toml File</h1>
+<p>If you run an XRP Ledger validator or use the XRP Ledger for your business, you can provide information about your usage of the XRP Ledger to the world in a machine-readable <strong><code>xrp-ledger.toml</code></strong> file. Scripts and applications can use the information contained in your <code>xrp-ledger.toml</code> file to better understand and represent you in the XRP Ledger. In some cases, humans may also find it useful to read the same file.</p>
+<p>One of the primary use cases for the <code>xrp-ledger.toml</code> file is <a href="#domain-verification">domain verification</a>.</p>
+<h4 id="notational-conventions">Notational Conventions</h4>
+<p>The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <a class="external-link" href="https://tools.ietf.org/html/rfc2119" target="_blank">RFC 2119 <i aria-hidden="true" class="fa fa-external-link"></i></a>.</p>
+<h2 id="serving-the-file">Serving the File</h2>
+<p>The <code>xrp-ledger.toml</code> file is meant to be served by a web server. The file should be available at the following URL:</p>
+<div class="codehilite"><pre><span></span><code><span class="c">https://{DOMAIN}/.well-known/xrp-ledger.toml</span>
+</code></pre></div>
+<p>The <code>{DOMAIN}</code> is your domain name, including any subdomains. For example, you could serve the file from either of the following URLs:</p>
+<div class="codehilite"><pre><span></span><code><span class="c">https://example.com/.well-known/xrp-ledger.toml</span>
+<span class="c">https://xrp.services.example.com/.well-known/xrp-ledger.toml</span>
+</code></pre></div>
+<h3 id="protocol">Protocol</h3>
+<p>The contents MUST be served through the <strong>HTTPS protocol</strong> for security, using a current and secure version of <a class="external-link" href="https://tools.ietf.org/html/rfc8446" target="_blank">TLS <i aria-hidden="true" class="fa fa-external-link"></i></a>, using a valid certificate signed by a well-known certificate authority. (Note: TLS was formerly called SSL, but those versions are no longer secure.) In other words, a prerequisite for hosting an <code>xrp-ledger.toml</code> file is to have a properly-configured HTTPS web server.</p>
+<p>The plain HTTP protocol is vulnerable to man-in-the-middle attacks; for example, some internet services have been known to modify contents retrieved over plain HTTP to inject their own advertisements. To prevent similar techniques from misrepresenting the contents of the <code>xrp-ledger.toml</code> file and potentially causing scripts to behave incorrectly or deceptively, one SHOULD NOT trust the contents of an <code>xrp-ledger.toml</code> file that is served over plain HTTP.</p>
+<h3 id="domain">Domain</h3>
+<p>The domain where you serve the <code>xrp-ledger.toml</code> file is a statement of ownership. The file's contents are not as useful or trustworthy when they stand on their own. For practical reasons, it may be undesirable to serve the file from your main domain, so you MAY use any number of subdomains. When setting the <a href="accountset.html#domain"><code>Domain</code> field of XRP Ledger accounts</a>, you MUST provide the full domain, including all subdomains you used. See <a href="#account-verification">Account Verification</a> for details.</p>
+<p>You MAY serve the same file from multiple subdomains, if desired. For example, if the subdomain <code>www.example.com</code> goes to the same website as <code>example.com</code>, you can serve the file from both locations. If your website <em>requires</em> the <code>www</code> prefix, be sure to include it when you specify the domain (for example, when setting the <code>Domain</code> field of an XRP Ledger account).</p>
+<p>It is RECOMMENDED that you serve a human-readable website from the same domain as the <code>xrp-ledger.toml</code> file. The website can provide further information about your identity and how you use the XRP Ledger, which helps to build trust toward you and your services.</p>
+<h3 id="path">Path</h3>
+<p>In compliance with <a class="external-link" href="https://tools.ietf.org/html/rfc5785" target="_blank">RFC5785 <i aria-hidden="true" class="fa fa-external-link"></i></a>, the path MUST start with <code>/.well-known/</code>. The file MUST be available at the path <code>/.well-known/xrp-ledger.toml</code> exactly (case-sensitive, all lower case). <!-- SPELLING_IGNORE: rfc5785 --></p>
+<p>You MAY, if desired, serve the same file from paths with different capitalization, such as <code>/.well-known/XRP-Ledger.TOML</code>. You MUST NOT serve different contents depending on how the path is capitalized.</p>
+<h3 id="headers">Headers</h3>
+<h4 id="content-type">Content-Type</h4>
+<p>The recommended <strong>Content-Type</strong> for the <code>xrp-ledger.toml</code> file is <strong><code>application/toml</code></strong>. However, applications consuming the file SHOULD also accept a Content-Type value of <code>text/plain</code>.</p>
+<h4 id="cors">CORS</h4>
+<p>To allow scripts on other websites to query the file, <a class="external-link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank">CORS <i aria-hidden="true" class="fa fa-external-link"></i></a> should be enabled for the file. Specifically, the server should provide the following header when serving <code>xrp-ledger.toml</code>:</p>
+<div class="codehilite"><pre><span></span><code><span class="c">Access-Control-Allow-Origin: *</span>
+</code></pre></div>
+<p>For information on how to configure your server to provide this header, see <a href="#cors-setup">CORS setup</a>.</p>
+<h4 id="other-headers">Other Headers</h4>
+<p>The server MAY use other standard HTTP headers as desired, including ones for compression, cache control, redirection, and linking related resources.</p>
+<h3 id="generation">Generation</h3>
+<p>The <code>xrp-ledger.toml</code> file MAY be an actual file stored on the web server, or it MAY be generated on-demand by the web server. The latter case may be preferable depending on the contents provided in the file or the configuration of your website.</p>
+<h2 id="contents">Contents</h2>
+<p>The contents of the <code>xrp-ledger.toml</code> file MUST be formatted in <a class="external-link" href="https://github.com/toml-lang/toml" target="_blank">TOML <i aria-hidden="true" class="fa fa-external-link"></i></a>. <strong>All contents are optional.</strong> Comments are optional, but encouraged for readability.</p>
+<p>Example contents:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">#</span><span class="w"> </span><span class="n">Example</span><span class="w"> </span><span class="n">xrp</span><span class="o">-</span><span class="n">ledger</span><span class="p">.</span><span class="n">toml</span><span class="w"> </span><span class="k">file</span><span class="p">.</span><span class="w"> </span><span class="n">These</span><span class="w"> </span><span class="n">contents</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">considered</span><span class="w"></span>
+<span class="err">#</span><span class="w"> </span><span class="n">authoritative</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="ow">any</span><span class="w"> </span><span class="nc">real</span><span class="w"> </span><span class="n">entity</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">business</span><span class="p">.</span><span class="w"></span>
+<span class="err">#</span><span class="w"> </span><span class="nl">Note</span><span class="p">:</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">fields</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">sections</span><span class="w"> </span><span class="k">are</span><span class="w"> </span><span class="n">optional</span><span class="p">.</span><span class="w"></span>
+
+<span class="o">[</span><span class="n">METADATA</span><span class="o">]</span><span class="w"></span>
+<span class="n">modified</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2019</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">22</span><span class="nl">T00</span><span class="p">:</span><span class="mi">00</span><span class="err">:</span><span class="mf">00.000</span><span class="n">Z</span><span class="w"></span>
+<span class="n">expires</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2019</span><span class="o">-</span><span class="mi">03</span><span class="o">-</span><span class="mi">01</span><span class="nl">T00</span><span class="p">:</span><span class="mi">00</span><span class="err">:</span><span class="mf">00.000</span><span class="n">Z</span><span class="w"></span>
+
+<span class="o">[</span><span class="n">[VALIDATORS</span><span class="o">]</span><span class="err">]</span><span class="w"></span>
+<span class="n">public_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"nHBtDzdRDykxiuv7uSMPTcGexNm879RUUz5GW4h1qgjbtyvWZ1LE"</span><span class="w"></span>
+<span class="n">attestation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"A59AB577E14A7BEC053752ABFE78C3DED6DCEC81A7C41DF1931BC61742BB4FAEAA0D4F1C1EAE5BC74F6D68A3B26C8A223EA2492A5BD18D51F8AC7F4A97DFBE0C"</span><span class="w"></span>
+<span class="n">network</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"main"</span><span class="w"></span>
+<span class="n">owner_country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"us"</span><span class="w"></span>
+<span class="n">server_country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"us"</span><span class="w"></span>
+<span class="n">unl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"https://vl.ripple.com"</span><span class="w"></span>
+
+<span class="o">[</span><span class="n">[VALIDATORS</span><span class="o">]</span><span class="err">]</span><span class="w"></span>
+<span class="n">public_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"nHB57Sey9QgaB8CubTPvMZLkLAzfJzNMWBCCiDRgazWJujRdnz13"</span><span class="w"></span>
+<span class="n">attestation</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"A59AB577E14A7BEC053752FBFE78C3DED6DCEC81A7C41DF1931BC61742BB4FAEAA0D4F1C1EAE5BC74F6D68A3B26C8A223EA249BA5BD18D51F8AC7F4A97DFBE0C"</span><span class="w"></span>
+<span class="n">network</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"testnet"</span><span class="w"></span>
+<span class="n">owner_country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"us"</span><span class="w"></span>
+<span class="n">server_country</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"us"</span><span class="w"></span>
+<span class="n">unl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"https://vl.testnet.rippletest.net"</span><span class="w"></span>
+
+<span class="err">#</span><span class="w"> </span><span class="nl">Note</span><span class="p">:</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">attestions</span><span class="w"> </span><span class="n">above</span><span class="w"> </span><span class="k">are</span><span class="w"> </span><span class="k">only</span><span class="w"> </span><span class="n">examples</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="k">are</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="nc">real</span><span class="p">.</span><span class="w"></span>
+
+<span class="o">[</span><span class="n">[ACCOUNTS</span><span class="o">]</span><span class="err">]</span><span class="w"></span>
+<span class="n">address</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"r3kmLJN5D28dHuH8vZNUZpMC43pEHpaocV"</span><span class="w"></span>
+<span class="k">desc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"Ripple-owned address from old ripple.txt file"</span><span class="w"></span>
+<span class="err">#</span><span class="w"> </span><span class="nl">Note</span><span class="p">:</span><span class="w"> </span><span class="n">This</span><span class="w"> </span><span class="n">doesn</span><span class="err">'</span><span class="n">t</span><span class="w"> </span><span class="n">prove</span><span class="w"> </span><span class="n">ownership</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="n">unless</span><span class="w"> </span><span class="n">the</span><span class="w"></span>
+<span class="err">#</span><span class="w">   </span><span class="ss">"Domain"</span><span class="w"> </span><span class="n">field</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">account</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">XRP</span><span class="w"> </span><span class="n">Ledger</span><span class="w"> </span><span class="n">matches</span><span class="w"> </span><span class="n">the</span><span class="w"></span>
+<span class="err">#</span><span class="w">   </span><span class="k">domain</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="k">file</span><span class="w"> </span><span class="n">was</span><span class="w"> </span><span class="n">served</span><span class="w"> </span><span class="k">from</span><span class="p">.</span><span class="w"></span>
+
+<span class="o">[</span><span class="n">[SERVERS</span><span class="o">]</span><span class="err">]</span><span class="w"></span>
+<span class="n">json_rpc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"https://s1.ripple.com:51234/"</span><span class="w"></span>
+<span class="n">ws</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"wss://s1.ripple.com/"</span><span class="w"></span>
+<span class="n">peer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"https://s1.ripple.com:51235/"</span><span class="w"></span>
+<span class="k">desc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"General purpose server cluster"</span><span class="w"></span>
+
+<span class="o">[</span><span class="n">[SERVERS</span><span class="o">]</span><span class="err">]</span><span class="w"></span>
+<span class="n">json_rpc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"https://s2.ripple.com:51234/"</span><span class="w"></span>
+<span class="n">ws</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"wss://s2.ripple.com/"</span><span class="w"></span>
+<span class="n">peer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"https://s2.ripple.com:51235/"</span><span class="w"></span>
+<span class="k">desc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"Full-history server cluster"</span><span class="w"></span>
+
+<span class="o">[</span><span class="n">[SERVERS</span><span class="o">]</span><span class="err">]</span><span class="w"></span>
+<span class="n">json_rpc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"https://s.testnet.rippletest.net:51234/"</span><span class="w"></span>
+<span class="n">ws</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"wss://s.testnet.rippletest.net:51233/"</span><span class="w"></span>
+<span class="n">peer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"https://s.testnet.rippletest.net:51235/"</span><span class="w"></span>
+<span class="n">network</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"testnet"</span><span class="w"></span>
+<span class="k">desc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"Test Net public server cluster"</span><span class="w"></span>
+
+<span class="o">[</span><span class="n">[PRINCIPALS</span><span class="o">]</span><span class="err">]</span><span class="w"></span>
+<span class="n">name</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"Rome Reginelli"</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="k">Primary</span><span class="w"> </span><span class="n">spec</span><span class="w"> </span><span class="n">author</span><span class="w"></span>
+<span class="n">email</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"rome@example.com"</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="ow">Not</span><span class="w"> </span><span class="n">my</span><span class="w"> </span><span class="nc">real</span><span class="w"> </span><span class="n">email</span><span class="w"> </span><span class="n">address</span><span class="w"></span>
+
+<span class="o">[</span><span class="n">[CURRENCIES</span><span class="o">]</span><span class="err">]</span><span class="w"></span>
+<span class="n">code</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"LOL"</span><span class="w"></span>
+<span class="n">issuer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="w"></span>
+<span class="n">network</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"testnet"</span><span class="w"></span>
+<span class="n">display_decimals</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="w"></span>
+<span class="n">symbol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">"😆"</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="ow">In</span><span class="w"> </span><span class="n">practical</span><span class="w"> </span><span class="n">situations</span><span class="p">,</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">may</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">unwise</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">use</span><span class="w"> </span><span class="n">emoji</span><span class="w"></span>
+
+<span class="err">#</span><span class="w"> </span><span class="k">End</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="k">file</span><span class="w"></span>
+</code></pre></div>
+<h3 id="metadata">Metadata</h3>
+<p>The metadata section provides information about the <code>xrp-ledger.toml</code> file itself. If present, this section MUST BE presented as a single table, headed by the line  <code>[METADATA]</code>, using <em>single</em> square brackets. (Most other sections of the <code>xrp-ledger.toml</code> file use double brackets, for arrays of information, but there is at most one <code>[METADATA]</code> section.) You MAY provide any of the following fields (case-sensitive):</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>modified</code></td>
+<td align="left">Offset Date-Time</td>
+<td align="left">The time the <code>xrp-leder.toml</code> file was last modified.</td>
+</tr>
+<tr>
+<td align="left"><code>expires</code></td>
+<td align="left">Offset Date-Time</td>
+<td align="left">If the current time is equal or greater than this time, the <code>xrp-ledger.toml</code> file should be considered expired.</td>
+</tr>
+</tbody>
+</table>
+<p>The specification does not define a <code>domain</code> field; the field should be determined from the site serving the file.</p>
+<p class="devportal-callout tip"><strong>Tip:</strong> For Offset Date-Time values, Ripple RECOMMENDS that you use the offset <code>Z</code> and provide precision up to milliseconds. (For example, <code>2019-01-22T22:26:58.027Z</code>) If you edit the file by hand, you MAY approximate the time by providing zeroes for the hours, minutes, seconds, and milliseconds. (For example, <code>2019-01-22T00:00:00.000Z</code>)</p>
+<h3 id="validators">Validators</h3>
+<p>The validators list provides information about validating servers you run. If present, the validators list MUST BE presented as an array of tables, with each entry using the header <code>[[VALIDATORS]]</code>, including double square brackets. Each entry describes a separate validating server.</p>
+<p>The <em>first</em> <code>[[VALIDATORS]]</code> entry in the file is treated as your primary validator. If you run one or more validators for the production XRP Ledger, you should put the one you want others to trust first.</p>
+<p>For <em>each</em> <code>[[VALIDATORS]]</code> entry, you MAY provide any of the following fields:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>public_key</code></td>
+<td align="left">String</td>
+<td align="left">The master public key of your primary validator, encoded in the XRP Ledger's base58 format (typically, this starts with <code>n</code>).</td>
+</tr>
+<tr>
+<td align="left"><code>attestation</code></td>
+<td align="left">String</td>
+<td align="left">A signed message, in hexadecimal, indicating that the same entity runs this validator and the domain serving this TOML file. For more information, see <a href="xrp-ledger-toml.html#domain-verification">Domain Verification</a>.</td>
+</tr>
+<tr>
+<td align="left"><code>network</code></td>
+<td align="left">String</td>
+<td align="left">Which network chain this validator follows. If omitted, clients SHOULD assume that the validator follows the production XRP Ledger. Use <code>main</code> to explicitly specify the production XRP Ledger. Use <code>testnet</code> for Ripple's XRP Ledger Test Net. You MAY provide other values to describe other test nets or non-standard network chains.</td>
+</tr>
+<tr>
+<td align="left"><code>owner_country</code></td>
+<td align="left">String</td>
+<td align="left">The two-letter ISO-3166-2 country code describing the main legal jurisdiction that you (the validator's owner) are subject to.</td>
+</tr>
+<tr>
+<td align="left"><code>server_country</code></td>
+<td align="left">String</td>
+<td align="left">The two-letter ISO-3166-2 country code describing the physical location where this validating server is.</td>
+</tr>
+<tr>
+<td align="left"><code>unl</code></td>
+<td align="left">String</td>
+<td align="left">An HTTPS URL where one can find the list of other validators this validator trusts. If the validator is configured to use a validator list site for UNL recommendations, this MUST match the server's configuration. For the production XRP Ledger network, use <code>https://vl.ripple.com</code> (trailing slash optional).</td>
+</tr>
+</tbody>
+</table>
+<h3 id="accounts">Accounts</h3>
+<p>The accounts list provides information about XRP Ledger accounts you own. If present, the accounts list MUST BE presented as an array of tables, with each entry using the header <code>[[ACCOUNTS]]</code>, including double square brackets. Each entry describes a separate account. For <em>each</em> <code>[[ACCOUNTS]]</code> entry, you MAY provide any of the following fields:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>address</code></td>
+<td align="left">String</td>
+<td align="left">The public address of the account, encoded in the XRP Ledger's base58 format (typically, this starts with an <code>r</code>).</td>
+</tr>
+<tr>
+<td align="left"><code>network</code></td>
+<td align="left">String</td>
+<td align="left">The network chain where this account is primarily used. If omitted, clients SHOULD assume that the account is claimed on the production XRP Ledger <em>and</em> possibly other network chains. Use <code>main</code> for the production XRP Ledger. Use <code>testnet</code> for Ripple's XRP Ledger Test Net. You MAY provide other values to describe other test nets or non-standard network chains.</td>
+</tr>
+<tr>
+<td align="left"><code>desc</code></td>
+<td align="left">String</td>
+<td align="left">A human-readable description of this account's purpose or how you use it.</td>
+</tr>
+</tbody>
+</table>
+<p class="devportal-callout caution"><strong>Caution:</strong> Anyone could claim ownership of any account by hosting an <code>xrp-ledger.toml</code> file, so the presence of an account here SHOULD NOT be considered authoritative unless the <a href="accountset.html#domain"><code>Domain</code> field for these accounts in the XRP Ledger</a> also matches the domain that this <code>xrp-ledger.toml</code> file was served from. See <a href="#account-verification">Account Verification</a> for details.</p>
+<h3 id="principals">Principals</h3>
+<p>The principals list provides information about the people (or business entities) involved in your XRP Ledger businesses and services. If present, the principals list MUST BE presented as an array of tables, with each entry using the header <code>[[PRINCIPALS]]</code>, including double square brackets. Each entry describes a different point of contact. For <em>each</em> <code>[[PRINCIPALS]]</code> entry, you MAY provide any of the following fields:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>name</code></td>
+<td align="left">String</td>
+<td align="left">The name of this principal.</td>
+</tr>
+<tr>
+<td align="left"><code>email</code></td>
+<td align="left">String</td>
+<td align="left">The email address where this principal can be contacted.</td>
+</tr>
+</tbody>
+</table>
+<p>You may provide other contact information as desired. (See <a href="#custom-fields">Custom Fields</a> for information about custom fields.)</p>
+<h3 id="servers">Servers</h3>
+<p>The servers list provides information about XRP Ledger servers (<code>rippled</code>) you run with public access. If present, the servers list MUST BE presented as an array of tables, with each entry using the header <code>[[SERVERS]]</code>, including double square brackets. Each entry describes a different server or server cluster. For <em>each</em> <code>[[SERVERS]]</code> entry, you MAY provide any of the following fields:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>json_rpc</code></td>
+<td align="left">String (URL)</td>
+<td align="left">The URL where you serve a public JSON-RPC API. This MUST begin with either <code>http://</code> or <code>https://</code>. HTTPS is RECOMMENDED for public APIs.</td>
+</tr>
+<tr>
+<td align="left"><code>ws</code></td>
+<td align="left">String (URL)</td>
+<td align="left">The URL where you serve a public WebSocket API. This MUST begin with either <code>ws://</code> or <code>wss://</code>. WSS is RECOMMENDED for public APIs.</td>
+</tr>
+<tr>
+<td align="left"><code>peer</code></td>
+<td align="left">String (URL)</td>
+<td align="left">The URL where your server is listening for the XRP Ledger Peer Protocol. Other XRP Ledger servers can connect at this URL. If your server provides a Peer Crawler response, it is served from this URL with <code>crawl</code> appended.</td>
+</tr>
+<tr>
+<td align="left"><code>network</code></td>
+<td align="left">String</td>
+<td align="left">Which network chain this server follows. If omitted, clients SHOULD assume that the server follows the production XRP Ledger. Use <code>main</code> to explicitly specify the production XRP Ledger. Use <code>testnet</code> for Ripple's XRP Ledger Test Net. You MAY provide other values to describe other test nets or non-standard network chains.</td>
+</tr>
+</tbody>
+</table>
+<p>For all URLs in this section, the trailing slash is RECOMMENDED. If omitted, client applications SHOULD assume that there is a trailing slash implied.</p>
+<h3 id="currencies">Currencies</h3>
+<p>If you issue any assets, tokens, or currencies in the XRP Ledger, you can provide information about them in the <code>[[CURRENCIES]]</code> list. If present, the currencies list MUST BE presented as an array of tables, with each entry using the header <code>[[CURRENCIES]]</code>, including double square brackets. Each entry describes a separate issued currency or asset. For <em>each</em> <code>[[CURRENCIES]]</code> entry, you MAY provide any of the following fields:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>code</code></td>
+<td align="left">String</td>
+<td align="left">The (case-sensitive) ticker symbol of this currency in the XRP Ledger. This can be a three-digit code, a 40-character hex code, or a custom format (for clients that know how to represent the non-standard code in the XRP Ledger). See the <a href="currency-formats.html#currency-codes">Currency Code reference</a> for information on the XRP Ledger's currency code formats.</td>
+</tr>
+<tr>
+<td align="left"><code>display_decimals</code></td>
+<td align="left">Number</td>
+<td align="left">The number of decimals that a client application should use to display amounts of this currency.</td>
+</tr>
+<tr>
+<td align="left"><code>issuer</code></td>
+<td align="left">String</td>
+<td align="left">The address of the XRP Ledger account where you issue this currency, encoded in the XRP Ledger's base58 format (typically, this starts with an <code>r</code>). You SHOULD also list this address in the <code>[[ACCOUNTS]]</code> list. (Reminder: the presence of an address here is not authoritative on its own. See <a href="#account-verification">Account Verification</a> for details.)</td>
+</tr>
+<tr>
+<td align="left"><code>network</code></td>
+<td align="left">String</td>
+<td align="left">The network chain where you issue this currency. Use <code>main</code> to explicitly specify the production XRP Ledger. If omitted, clients SHOULD assume that the currency is issued on the production XRP Ledger. Use <code>testnet</code> for Ripple's XRP Ledger Test Net. You MAY provide other values to describe other test nets or non-standard network chains.</td>
+</tr>
+<tr>
+<td align="left"><code>symbol</code></td>
+<td align="left">String</td>
+<td align="left">The text symbol, such "$" or "€", that should be used with amounts of this asset or currency, if it has a symbol in the Unicode standard.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="custom-fields">Custom Fields</h3>
+<p>The <code>xrp-ledger.toml</code> file is intended for users of the XRP Ledger to provide information to other users, scripts, and applications. As such, there may be many kinds of information that are useful to convey but are not described in this specification. Users are encouraged to add other fields at any level of the <code>xrp-ledger.toml</code> file, as desired to convey relevant information.</p>
+<p>Tools that parse the <code>xrp-ledger.toml</code> file MUST accept documents that contain any other fields that the application is not familiar with. Those tools MAY make those additional fields available to higher-level applications that call them, or MAY discard those fields. To maintain forward-compatibility with future versions of this specification, tools MAY also discard fields specified in this standard. Tools MUST NOT return an error if an <code>xrp-ledger.toml</code> file contains an unrecognized field. To detect typos, tools MAY provide a warning on unrecognized fields, especially if those field names are similar to the names of standard fields.</p>
+<p>Tools MAY return an error if a field they recognize is not formatted as expected, even if that field is not defined in this specification.</p>
+<p>When creating custom fields, be mindful of the field name you choose. If you use a very generic field name, other users may use the same name to mean something different, or formatted in a conflicting way. If you use a custom field that you think others will find useful, please contribute a specification for your field to the maintainers of this document.</p>
+<h2 id="cors-setup">CORS Setup</h2>
+<p>You MUST configure your web server to allow Cross-Origin Resource Sharing (<a class="external-link" href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS" target="_blank">CORS <i aria-hidden="true" class="fa fa-external-link"></i></a>) for the <code>xrp-ledger.toml</code> file. This configuration depends on your web server.</p>
+<p>If you run an Apache HTTP Server, add the following to your config file:</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">&lt;Location</span> <span class="err">"/.well-known/xrp-ledger.toml"</span><span class="nt">&gt;</span>
+    Header set Access-Control-Allow-Origin "*"
+<span class="nt">&lt;/Location&gt;</span>
+</code></pre></div>
+<p>Alternatively, you can add the following to a <code>.htaccess</code> file in the <code>/.well-known/</code> directory of your server:</p>
+<div class="codehilite"><pre><span></span><code><span class="nt">&lt;Files</span> <span class="err">"xrp-ledger.toml"</span><span class="nt">&gt;</span>
+    Header set Access-Control-Allow-Origin "*"
+<span class="nt">&lt;/Files&gt;</span>
+</code></pre></div>
+<p>If you use nginx, add the following to your config file:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">location /.well-known/xrp-ledger.toml {</span>
+<span class="err">    add_header 'Access-Control-Allow-Origin' '*';</span>
+<span class="err">}</span>
+</code></pre></div>
+<p>For other web servers, see <a class="external-link" href="https://enable-cors.org/server.html" target="_blank">I want to add CORS support to my server <i aria-hidden="true" class="fa fa-external-link"></i></a>. If you use managed hosting, consult your web host's documentation for how to enable CORS on a specific path. (You probably do not want to enable CORS for your entire website.)</p>
+<h2 id="domain-verification">Domain Verification</h2>
+<p>One use for the <code>xrp-ledger.toml</code> file is verifying that the same entity that runs a particular domain also runs a particular validator, as identified by the validator's public key. Verifying that a domain and a validator are owned by the same entity provides greater assurances of the identity of the validator operator and is a recommended step for becoming a trusted validator. (For other recommendations, see <a href="run-rippled-as-a-validator.html#1-understand-the-traits-of-a-good-validator">Properties of a Good Validator</a>.)</p>
+<p>Domain verification requires establishing a two-way link between the domain operator and the validator:</p>
+<ol>
+<li>
+<p>The domain claims ownership of the validator:</p>
+<ul>
+<li>
+<p>Serve an <code>xrp-ledger.toml</code> file, following all the <a href="#serving-the-file">requirements described in this document</a>, from the domain in question.</p>
+</li>
+<li>
+<p>In that <code>xrp-ledger.toml</code> file, provide a <code>[[VALIDATORS]]</code> entry with the validator's master public key in the <code>public_key</code> field.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>The validator claims ownership of the domain:</p>
+<ul>
+<li>
+<p>Ensure that you have access to the validator-keys.json file that you created when first setting up your validator. If you have lost your keys or the keys have been compromised, please <a href="run-rippled-as-a-validator.html#revoke-validator-keys">revoke your keys</a> and generate new keys.</p>
+<p>Note: Recall that your validator-keys.json file should be stored <strong>in a location not on your validator</strong>.</p>
+</li>
+<li>
+<p><strong>In a location not on your validator</strong>, build the <a class="external-link" href="https://github.com/ripple/validator-keys-tool" target="_blank">validator-keys-tool <i aria-hidden="true" class="fa fa-external-link"></i></a>.  </p>
+</li>
+<li>
+<p>Run the following command to generate a new validator token that incorporates your domain and update your <code>xrp-ledger.toml</code> and <code>rippled.cfg</code> files:</p>
+<div class="codehilite"><pre><span></span><code><span class="err">$./validator-keys set_domain example.com</span>
+</code></pre></div>
+</li>
+</ul>
+</li>
+</ol>
+<p class="devportal-callout warning"><strong>Warning:</strong> This command updates your validator-keys.json file. Please be sure to store the <code>validator-keys.json</code> file in a secure location.</p>
+<p>Sample Output:</p>
+<div class="codehilite"><pre><span></span><code><span class="n">The</span><span class="w"> </span><span class="k">domain</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">has</span><span class="w"> </span><span class="n">been</span><span class="w"> </span><span class="k">set</span><span class="w"> </span><span class="k">to</span><span class="err">:</span><span class="w"> </span><span class="n">example</span><span class="p">.</span><span class="n">com</span><span class="w"></span>
+
+<span class="n">The</span><span class="w"> </span><span class="k">domain</span><span class="w"> </span><span class="n">attestation</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">validator</span><span class="w"> </span><span class="n">nHDG5CRUHp17ShsEdRweMc7WsA4csiL7qEjdZbRVTr74wa5QyqoF</span><span class="w"> </span><span class="k">is</span><span class="err">:</span><span class="w"></span>
+
+<span class="n">attestation</span><span class="o">=</span><span class="ss">"A59AB577E14A7BEC053752FBFE78C3DE</span>
+<span class="ss">             D6DCEC81A7C41DF1931BC61742BB4FAE</span>
+<span class="ss">             AA0D4F1C1EAE5BC74F6D68A3B26C8A22</span>
+<span class="ss">             3EA2492A5BD18D51F8AC7F4A97DFBE0C"</span><span class="w"></span>
+
+<span class="n">You</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="k">include</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">xrp</span><span class="o">-</span><span class="n">ledger</span><span class="p">.</span><span class="n">toml</span><span class="w"> </span><span class="k">file</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"></span>
+<span class="k">section</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">validator</span><span class="p">.</span><span class="w"></span>
+
+<span class="n">You</span><span class="w"> </span><span class="n">also</span><span class="w"> </span><span class="n">need</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">rippled</span><span class="p">.</span><span class="n">cfg</span><span class="w"> </span><span class="k">file</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">add</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">new</span><span class="w"></span>
+<span class="n">validator</span><span class="w"> </span><span class="n">token</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">restart</span><span class="w"> </span><span class="nl">rippled</span><span class="p">:</span><span class="w"></span>
+
+<span class="err">#</span><span class="w"> </span><span class="n">validator</span><span class="w"> </span><span class="k">public</span><span class="w"> </span><span class="k">key</span><span class="err">:</span><span class="w"> </span><span class="n">nHDG5CRUHp17ShsEdRweMc7WsA4csiL7qEjdZbRVTr74wa5QyqoF</span><span class="w"></span>
+
+<span class="o">[</span><span class="n">validator_token</span><span class="o">]</span><span class="w"></span>
+<span class="n">eyJ2YWxpZGF0aW9uX3NlY3J</span><span class="o">|</span><span class="n">dF9rZXkiOiI5ZWQ0NWY4NjYyNDFjYzE4YTI3NDdiNT</span><span class="w"></span>
+<span class="n">QzODdjMDYyNTkwNzk3MmY0ZTcxOTAyMzFmYWE5Mzc0NTdmYT</span><span class="o">|</span><span class="n">kYWY2IiwibWFuaWZl</span><span class="w"></span>
+<span class="n">c3QiOiJKQUFBQUFGeEllMUZ0d21pbXZHdEgyaUNjTUpxQzlnVkZLaWxHZncxL3ZDeE</span><span class="w"></span>
+<span class="n">hYWExwbGMyR25NaEFrRTFhZ3FYeEJ3RHdEYklENk9NU1l1TTBGREFscEFnTms4U0tG</span><span class="w"></span>
+<span class="n">bjdNTzJmZGtjd1JRSWhBT25ndTlzQUtxWFlvdUorbDJWMFcrc0FPa1ZCK1pSUzZQU2</span><span class="w"></span>
+<span class="n">hsSkFmVXNYZkFpQnNWSkdlc2FhZE9KYy9hQVpva1MxdnltR21WcmxIUEtXWDNZeXd1</span><span class="w"></span>
+<span class="n">NmluOEhBU1FLUHVnQkQ2N2tNYVJGR3ZtcEFUSGxHS0pkdkRGbFdQWXk1QXFEZWRGdj</span><span class="w"></span>
+<span class="n">VUSmEydzBpMjFlcTNNWXl3TFZKWm5GT3I3QzBrdzJBaVR6U0NqSXpkaXRROD0ifQ</span><span class="o">==</span><span class="w">     </span>
+</code></pre></div>
+<p>Update <a href="#contents">the contents of your <code>xrp-ledger.toml</code> file</a> with the <code>attestation</code> block, and update the <code>rippled.cfg</code> file with the <code>[validator_token]</code> block from the sample output.</p>
+<p class="devportal-callout warning"><strong>Warning:</strong> Your validator token is meant to be kept secret. Do not share it on your <code>xrp-ledger.toml</code> file or anywhere else.</p>
+<h2 id="account-verification">Account Verification</h2>
+<p>Similar to <a href="#domain-verification">Domain Verification</a>, account verification is the idea of proving that the same entity controls a particular domain and a particular XRP Ledger address. Account verification is not necessary for using the XRP Ledger or providing an <code>xrp-ledger.toml</code> file, but you may desire to verify your accounts in the name of transparency.</p>
+<p>Account verification requires establishing a two-way link between the domain operator and the address:</p>
+<ol>
+<li>
+<p>The domain claims ownership of the address.</p>
+<ul>
+<li>
+<p>Serve an <code>xrp-ledger.toml</code> file, following all the <a href="#serving-the-file">requirements described in this document</a>, from the domain in question.</p>
+</li>
+<li>
+<p>In that <code>xrp-ledger.toml</code> file, provide an <code>[[ACCOUNTS]]</code> entry with the address of the account you want to verify. If you issue currency from this address, you may also provide this account in the <code>issuer</code> field of a <code>[[CURRENCIES]]</code> entry.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>The address claims ownership by a domain.</p>
+<p><a href="accountset.html#domain">Set the account's <code>Domain</code> field</a> to match the domain that this <code>xrp-ledger.toml</code> file was served from. The domain value (when decoded from ASCII) MUST match <em>exactly</em>, including all subdomains such as <code>www.</code>. For internationalized domain names, set the <code>Domain</code> value to the Punycode of the domain, as described in <a class="external-link" href="https://tools.ietf.org/html/rfc3492" target="_blank">RFC3492 <i aria-hidden="true" class="fa fa-external-link"></i></a>. <!-- SPELLING_IGNORE: punycode, rfc3492 --></p>
+<p>Since setting the <code>Domain</code> requires sending a transaction, whoever set the <code>Domain</code> value must have possessed the account's secret key when the transaction was sent.</p>
+</li>
+</ol>
+<p>Either of these two links, on their own, SHOULD NOT be considered authoritative. Anyone could host an <code>xrp-ledger.toml</code> file claiming ownership of any account, and any account operator could set its <code>Domain</code> field to any string it wants. If the two match, it provides strong evidence that the same entity controls both.</p>
+<h2 id="acknowledgements">Acknowledgements</h2>
+<p>This specification is derived from the <a class="external-link" href="https://web.archive.org/web/20161007113240/https://wiki.ripple.com/Ripple.txt" target="_blank">original ripple.txt spec <i aria-hidden="true" class="fa fa-external-link"></i></a> and draws inspiration from the <a class="external-link" href="https://www.stellar.org/developers/guides/walkthroughs/how-to-complete-stellar-toml.html" target="_blank">stellar.toml file <i aria-hidden="true" class="fa fa-external-link"></i></a>. This specification also incorporates feedback from XRP community members and many past and current Ripple employees. <!-- SPELLING_IGNORE: txt --></p>
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="references.html"> References</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+          <!---->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_2">
+                  <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_2" aria-expanded="true" aria-controls="sidenav_collapse_2"></a>
+                <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="rippled-api.html">rippled API Reference</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_2" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_2">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="subcat-title" href="api-conventions.html">API Conventions</a></li>
+
+                            <li><a class="subpage" href="basic-data-types.html">Basic Data Types</a></li>
+                            <li><a class="subpage" href="base58-encodings.html">base58 Encodings</a></li>
+                            <li><a class="subpage" href="currency-formats.html">Currency Formats</a></li>
+                            <li><a class="subpage" href="error-formatting.html">Error Formatting</a></li>
+                            <li><a class="subpage" href="markers-and-pagination.html">Markers and Pagination</a></li>
+                            <li><a class="subpage" href="modifying-the-ledger.html">Modifying the Ledger</a></li>
+                            <li><a class="subpage" href="rate-limiting.html">Rate Limiting</a></li>
+                            <li><a class="subpage" href="request-formatting.html">Request Formatting</a></li>
+                            <li><a class="subpage" href="response-formatting.html">Response Formatting</a></li>
+                            <li><a class="subpage" href="rippled-server-states.html">rippled Server States</a></li>
+                            <li><a class="subpage" href="serialization.html">Serialization Format</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+                        <li><a class="subcat-title" href="public-rippled-methods.html">Public rippled Methods</a></li>
+
+                            <li><a class="subpage" href="account-methods.html">Account Methods</a></li>
+                            <li><a class="subpage" href="ledger-methods.html">Ledger Methods</a></li>
+                            <li><a class="subpage" href="transaction-methods.html">Transaction Methods</a></li>
+                            <li><a class="subpage" href="path-and-order-book-methods.html">Path and Order Book Methods</a></li>
+                            <li><a class="subpage" href="payment-channel-methods.html">Payment Channel Methods</a></li>
+                            <li><a class="subpage" href="subscription-methods.html">Subscription Methods</a></li>
+                            <li><a class="subpage" href="server-info-methods.html">Server Info Methods</a></li>
+                            <li><a class="subpage" href="utility-methods.html">Utility Methods</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <li><a class="subcat-title" href="admin-rippled-methods.html">Admin rippled Methods</a></li>
+
+                            <li><a class="subpage" href="key-generation-methods.html">Key Generation Methods</a></li>
+                            <li><a class="subpage" href="logging-and-data-management-methods.html">Logging and Data Management Methods</a></li>
+                            <li><a class="subpage" href="server-control-methods.html">Server Control Methods</a></li>
+                            <li><a class="subpage" href="peer-management-methods.html">Peer Management Methods</a></li>
+                            <li><a class="subpage" href="status-and-debugging-methods.html">Status and Debugging Methods</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <li><a class="subcat-title" href="ledger-data-formats.html">Ledger Data Formats</a></li>
+
+                            <li><a class="subpage" href="ledger-header.html">Ledger Header</a></li>
+                            <li><a class="subpage" href="ledger-object-ids.html">Ledger Object IDs</a></li>
+                            <li><a class="subpage" href="ledger-object-types.html">Ledger Object Types</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <li><a class="subcat-title" href="transaction-formats.html">Transaction Formats</a></li>
+
+                            <li><a class="subpage" href="transaction-common-fields.html">Transaction Common Fields</a></li>
+                            <li><a class="subpage" href="transaction-types.html">Transaction Types</a></li>
+                            <li><a class="subpage" href="pseudo-transaction-types.html">Pseudo-Transactions</a></li>
+                            <li><a class="subpage" href="transaction-results.html">Transaction Results</a></li>
+                            <li><a class="subpage" href="transaction-metadata.html">Transaction Metadata</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                        <li><a class="subcat-title" href="commandline-usage.html">rippled Commandline Usage Reference</a></li>
+
+
+                        <li><a class="subcat-title" href="peer-port-methods.html">Peer Port Methods</a></li>
+
+                            <li><a class="subpage" href="health-check.html">Health Check</a></li>
+                            <li><a class="subpage" href="peer-crawler.html">Peer Crawler</a></li>
+                            <li><a class="subpage" href="validator-list.html">Validator List Method</a></li>
+
+
+
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse2 -->
+
+            </div><!-- /.card -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <!---->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_144">
+                  <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_144" aria-expanded="true" aria-controls="sidenav_collapse_144"></a>
+                <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="xrp-api.html">XRP-API</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_144" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_144">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="subcat-title" href="xrp-api-methods.html">All XRP-API Methods</a></li>
+
+
+                        <li><a class="subcat-title" href="xrp-api-Query-methods.html">Query Methods</a></li>
+
+                            <li><a class="subpage" href="xrp-api-getAccountInfo.html">Get Account Info</a></li>
+                            <li><a class="subpage" href="xrp-api-getAccountSettings.html">Get Account Settings</a></li>
+                            <li><a class="subpage" href="xrp-api-getAccountTransactions.html">Get Account Transactions</a></li>
+                            <li><a class="subpage" href="xrp-api-getTransaction.html">Get Transaction</a></li>
+
+
+
+
+
+                        <li><a class="subcat-title" href="xrp-api-Transact-methods.html">Transact Methods</a></li>
+
+                            <li><a class="subpage" href="xrp-api-preparePayment.html">Prepare a Payment</a></li>
+                            <li><a class="subpage" href="xrp-api-signSubmitPayment.html">Sign and/or submit a payment</a></li>
+                            <li><a class="subpage" href="xrp-api-createSignSubmitPayment.html">Create, sign, and submit a payment</a></li>
+
+
+
+
+                        <li><a class="subcat-title" href="xrp-api-Meta-methods.html">Meta Methods</a></li>
+
+                            <li><a class="subpage" href="xrp-api-getServerInfo.html">Get Server Info</a></li>
+                            <li><a class="subpage" href="xrp-api-getApiDoc.html">Get API Docs</a></li>
+                            <li><a class="subpage" href="xrp-api-getPing.html">Ping</a></li>
+
+
+
+
+                        <li><a class="subcat-title" href="xrp-api-data-types.html">XRP-API Data Types</a></li>
+
+                            <li><a class="subpage" href="xrp-api-data-types-rippleapierror.html">RippleAPIError</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-erroritem.html">ErrorItem</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-serverinfo.html">ServerInfo</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-rippledserverinfo.html">RippledServerInfo</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-load.html">Load</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-lastclose.html">LastClose</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-serverstate.html">ServerState</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-validatedledger.html">ValidatedLedger</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-address.html">Address</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-transactionid.html">TransactionID</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-preparedpaymenttransaction.html">PreparedPaymentTransaction</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-appliedtransaction.html">AppliedTransaction</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-accountinfo.html">AccountInfo</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-accountsettings.html">AccountSettings</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-accounttransactions.html">AccountTransactions</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-accountdata.html">AccountData</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-ledgerindex.html">LedgerIndex</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-payment_object_and_instructions.html">Payment object and instructions</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-payment_object.html">Payment Object</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-amount.html">Amount</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-currency.html">Currency</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-transaction_instructions.html">Transaction Instructions</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-transactionstatus.html">TransactionStatus</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-transaction_common_fields.html">Transaction Common Fields</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-paymenttransaction.html">PaymentTransaction</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-signed_transaction.html">Signed Transaction</a></li>
+                            <li><a class="subpage" href="xrp-api-data-types-apidoc.html">ApiDoc</a></li>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse144 -->
+
+            </div><!-- /.card -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_187">
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="rippleapi-reference.html">RippleAPI Reference</a>
+                <!-- <a class="sidenav_cat_title" href="rippleapi-reference.html">RippleAPI for JavaScript</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_187" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_187">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse187 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_188">
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="data-api.html">Ripple Data API v2</a>
+                <!-- <a class="sidenav_cat_title" href="data-api.html">Data API</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_188" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_188">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse188 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card active">
+            <div class="card-header" role="tab" id="sidenav_cat_head_189">
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title active" href="xrp-ledger-toml.html">xrp-ledger.toml File</a>
+                <!-- <a class="sidenav_cat_title" href="xrp-ledger-toml.html">XRP Ledger TOML File</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_189" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_189">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse189 -->
+
+          </div><!-- /.card -->
+
+    </div><!-- /#sidenav -->
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">Learn</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">Explore</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">Build</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">Concepts</a></li>
+          <li class="level-1"><a href="tutorials.html">Tutorials</a></li>
+          <li class="level-1"><a href="references.html">References</a></li>
+          <li class="level-1"><a href="dev-tools.html">Dev Tools</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">License</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="Jump to top of page">Top</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:en"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>

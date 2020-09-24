@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Transaction Sender - XRP Ledger Dev Portal</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-en page-tx-sender">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/" class="navbar-brand"><img src="assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Learn</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">Overview</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Build</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">Docs</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">Concepts</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">Tutorials</a>
+          <a class="dropdown-item top-level-2" href="references.html">References</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">Dev Tools</a>
+          <a class="dropdown-item top-level-1" href="/blog/">Dev Blog</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/tool/template-tx-sender.html" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">Search site...</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="Search site...">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Eng
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/tx-sender.html">Eng</a>
+          <a class="dropdown-item" href="/ja/tx-sender.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+<div id="connection-status" class="card">
+  <div class="card-header">
+    <h4>Status</h4>
+  </div>
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item" id="connection-status-label">XRP Testnet:</li>
+      <li class="list-group-item disabled" id="connection-status-item">Not Connected</li>
+      <li class="list-group-item" id="sending-address-label">Sending Address:</li>
+      <li class="list-group-item disabled sending-address-item">(None)</li>
+      <li class="list-group-item" id="balance-label">Testnet XRP Available:</li>
+      <li class="list-group-item disabled" id="balance-item">(None)</li>
+    </ul>
+    <div id="tx-sender-history">
+      <h5 class="m-3">Transaction History</h5>
+      <ul class="list-group list-group-flush">
+      </ul>
+    </div>
+  </div>
+</div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">Build</a></li>
+    <li class="active breadcrumb-item"><a href="dev-tools.html">Dev Tools</a></li>
+    <li class="active breadcrumb-item">Transaction Sender</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap--><section class="container-fluid pt-3 p-md-3">
+  <h1>Transaction Sender</h1>
+
+  <div class="content">
+    <p>This tool sends transactions to the <a href="xrp-test-net-faucet.html">XRP Testnet</a> address of your choice so you can test how you monitor and respond to incoming transactions.</p>
+
+    <form>
+      <div class="form-group">
+        <button class="btn btn-primary form-control" type="button" id="init_button">Initialize</button>
+        <small class="form-text text-muted">Set up the necessary Testnet XRP addresses to send test payments.</small>
+      </div><!--/.form-group-->
+
+      <div class="form-group">
+        <label for="destination_address">Destination Address</label>
+        <input type="text" class="form-control" id="destination_address" aria-describedby="destination_address_help" value="rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe" />
+        <small id="destination_address_help" class="form-text text-muted">Send transactions to this XRP Testnet address</small>
+      </div>
+
+      <h3>Send Transaction</h3>
+
+      <div class="form-group" id="send_xrp_payment">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text loader" style="display: none"><img class="throbber" src="assets/img/xrp-loader-96.png" /></span>
+          </div>
+          <button class="btn btn-primary form-control disabled needs-connection" type="button" id="send_xrp_payment_btn" disabled="disabled">Send XRP Payment</button>
+          <input id="send_xrp_payment_amount" class="form-control" type="number" aria-describedby="send_xrp_payment_amount_help" value="100000" min="1" max="10000000000" />
+          <div class="input-group-append">
+            <span class="input-group-text" id="send_xrp_payment_amount_help">drops of XRP</span>
+          </div>
+          <!-- Future feature: Optional custom destination tag -->
+        </div>
+        <small class="form-text text-muted">Send a <a href="send-xrp.html">simple XRP-to-XRP payment</a>.</small>
+      </div><!-- /#send_xrp_payment -->
+
+      <hr />
+
+      <div class="form-group" id="send_partial_payment">
+        <div class="progress mb-1" id="pp_progress">
+          <div class="progress-bar progress-bar-striped w-0">&nbsp;</div>
+          <small class="justify-content-center d-flex position-absolute w-100">(Getting ready to send partial payments)</small>
+        </div>
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text loader" style="display: none"><img class="throbber" src="assets/img/xrp-loader-96.png" /></span>
+          </div>
+          <button class="btn btn-primary form-control" type="button" id="send_partial_payment_btn" disabled="disabled" autocomplete="off" title="(Please wait for partial payments setup to finish)">Send Partial Payment</button>
+        </div>
+        <small class="form-text text-muted">Deliver a small amount of XRP with a large <code>Amount</code> value, to test your handling of <a href="partial-payments.html">partial payments</a>.</small>
+      </div><!-- /.form group for partial payment -->
+
+      <hr />
+
+      <div class="form-group" id="create_escrow">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text loader" style="display: none"><img class="throbber" src="assets/img/xrp-loader-96.png" /></span>
+          </div>
+          <button class="btn btn-primary form-control disabled needs-connection" type="button" id="create_escrow_btn" disabled="disabled">Create Escrow</button>
+          <input class="form-control" type="number" value="60" min="5" max="10000" id="create_escrow_duration_seconds" />
+          <div class="input-group-append">
+            <span class="input-group-text">seconds</span>
+          </div>
+          <span class="input-group-text">
+            (
+            <input type="checkbox" id="create_escrow_release_automatically" value="1" />
+            <label class="form-check-label" for="create_escrow_release_automatically">Finish automatically</label>)
+          </span>
+        </div>
+        <small class="form-text text-muted">Create a <a href="escrow.html">time-based escrow</a> of 1 XRP for the specified number of seconds.</small>
+        <div class="progress mb-1" style="display:none" id="escrow_progress">
+          <div class="progress-bar progress-bar-striped w-0">&nbsp;</div>
+          <small class="justify-content-center d-flex position-absolute w-100">(Waiting to release Escrow when it's ready)</small>
+        </div>
+      </div><!-- /.form group for create escrow -->
+
+      <hr />
+
+      <div class="form-group" id="create_payment_channel">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text loader" style="display: none"><img class="throbber" src="assets/img/xrp-loader-96.png" /></span>
+          </div>
+          <button class="btn btn-primary form-control disabled needs-connection" type="button" id="create_payment_channel_btn" disabled="disabled">Create Payment Channel</button>
+          <input id="create_payment_channel_amount" class="form-control" type="number" aria-describedby="create_payment_channel_amount_help" value="100000" min="1" max="10000000000" />
+          <div class="input-group-append">
+            <span class="input-group-text" id="create_payment_channel_amount_help">drops of XRP</span>
+          </div>
+        </div>
+        <small class="form-text text-muted">Create a <a href="payment-channels.html">payment channel</a> and fund it with the specified amount of XRP.</small>
+      </div><!-- /.form group for create paychan -->
+
+      <hr />
+
+      <div class="form-group" id="send_issued_currency">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text loader" style="display: none"><img class="throbber" src="assets/img/xrp-loader-96.png" /></span>
+          </div>
+          <button class="btn btn-primary form-control disabled needs-connection" type="button" id="send_issued_currency_btn" disabled="disabled">Send Issued Currency</button>
+          <input id="send_issued_currency_amount" class="form-control" type="text" value="100" /><!-- Note: HTML limits "number" inputs to IEEE 764 double precision, which isn't enough for the full range of issued currency amounts -->
+          <div class="input-group-append">
+            <span class="input-group-text" id="send_issued_currency_code">FOO</span><!-- TODO: custom currency codes -->
+          </div>
+        </div>
+        <small class="form-text text-muted">Your destination address needs a <a href="trust-lines-and-issuing.html">trust line</a> to <span class="sending-address-item">(the test sender)</span> for the currency in question. Otherwise, you'll get tecPATH_DRY.</small>
+      </div><!-- /.form group for issued currency payment -->
+
+      <hr />
+
+      <div class="form-group" id="trust_for">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text loader" style="display: none"><img class="throbber" src="assets/img/xrp-loader-96.png" /></span>
+          </div>
+          <button class="btn btn-primary form-control disabled needs-connection" type="button" id="trust_for_btn" disabled="disabled">Trust for</button>
+          <input id="trust_for_amount" class="form-control disabled" type="number" value="100000" />
+          <div class="input-group-append">
+            <span class="input-group-text" id="trust_for_currency_code">FOO</span>
+          </div>
+        </div>
+        <small class="form-text text-muted">The test sender creates a <a href="trust-lines-and-issuing.html">trust line</a> to your account for the given currency.</small>
+      </div><!-- /.form group for create trust line -->
+
+    </form>
+  </div>
+</section>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="dev-tools.html"> Dev Tools</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" aria-multiselectable="true">
+      <div class="card active">
+        <div class="card-body card-body-single">
+          <ul class="sidebar_pagelist">
+            <li><a class="nosubcat-page" href="xrp-ledger-rpc-tool.html">RPC Tool</a></li>
+            <li><a class="nosubcat-page" href="websocket-api-tool.html">WebSocket API Tool</a></li>
+            <li><a class="nosubcat-page" href="data-api-v2-tool.html">Data API v2 Tool</a></li>
+            <li><a class="nosubcat-page" href="xrp-ledger-toml-checker.html">xrp-ledger.toml Checker</a></li>
+            <li><a class="nosubcat-page" href="validator-domain-verifier.html">Domain Verification Checker</a></li>
+            <li><a class="nosubcat-page" href="xrp-testnet-faucet.html">XRP Faucets</a></li>
+            <li><a class="active nosubcat-page" href="tx-sender.html">Transaction Sender</a></li>
+          <li><a class="nosubcat-page" href="https://livenet.xrpl.org/" target="_blank">XRP Ledger Explorer <i class="fa fa-external-link"></i></a></li>
+          </ul>
+        </div><!-- /.card-body -->
+      </div><!-- /.card -->
+    </div><!-- /#sidenav -->
+
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">Learn</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">Explore</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">Build</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">Concepts</a></li>
+          <li class="level-1"><a href="tutorials.html">Tutorials</a></li>
+          <li class="level-1"><a href="references.html">References</a></li>
+          <li class="level-1"><a href="dev-tools.html">Dev Tools</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">License</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="Jump to top of page">Top</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:en"] },
+debug: false
+});
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
+  <script type="application/javascript" src="assets/js/ripple-lib-1.8.0-min.js"></script>
+  <script type="application/javascript" src="assets/vendor/bootstrap-growl.jquery.js"></script>
+  <script type='application/javascript' src='assets/js/tx-sender.js'></script>
+
+  <script type="application/javascript">
+    gtag('config', 'UA-157720658-3', {'content_group1': 'API Tools'});
+  </script>
+</body>
+</html>

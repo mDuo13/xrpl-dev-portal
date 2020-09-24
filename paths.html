@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Paths - XRP Ledger Dev Portal</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/" class="navbar-brand"><img src="assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Learn</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">Overview</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Build</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">Docs</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">Concepts</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">Tutorials</a>
+          <a class="dropdown-item top-level-2" href="references.html">References</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">Dev Tools</a>
+          <a class="dropdown-item top-level-1" href="/blog/">Dev Blog</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/concepts/issued-currencies/paths.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">Search site...</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="Search site...">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Eng
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/paths.html">Eng</a>
+          <a class="dropdown-item" href="/ja/paths.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>In this document</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#paths">Paths</a></li>
+<li class="level-2"><a href="#path-steps">Path Steps</a></li>
+<li class="level-1"><a href="#technical-details">Technical Details</a></li>
+<li class="level-2"><a href="#pathfinding">Pathfinding</a></li>
+<li class="level-2"><a href="#implied-steps">Implied Steps</a></li>
+<li class="level-2"><a href="#default-paths">Default Paths</a></li>
+<li class="level-2"><a href="#path-specifications">Path Specifications</a></li>
+<li class="level-2"><a href="#see-also">See Also</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">Build</a></li>
+    <li class="active breadcrumb-item"><a href="concepts.html">Concepts</a></li>
+    <li class="active breadcrumb-item"><a href="issued-currencies.html">Issued Currencies</a></li>
+    <li class="active breadcrumb-item">Paths</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="paths">Paths</h1>
+<p>In the XRP Ledger, paths define a way for <a href="issued-currencies-overview.html">issued currency</a> payments to flow through intermediary steps on their way from sender to receiver. Paths enable <a href="cross-currency-payments.html">cross-currency payments</a> by connecting sender and receiver through orders in the XRP Ledger's <a href="decentralized-exchange.html">decentralized exchange</a>. Paths also enable complex settlement of offsetting debts.</p>
+<p>A single Payment transaction in the XRP Ledger can use multiple paths, combining liquidity from different sources to deliver the desired amount. Thus, a transaction includes a <em>path set</em>, which is a collection of possible paths to take. The paths in a path set must start and end with the same currency.</p>
+<p>Since XRP can be sent directly to any address, an <a href="direct-xrp-payments.html">XRP-to-XRP transaction</a> does not use any paths.</p>
+<h2 id="path-steps">Path Steps</h2>
+<p>A path is made of steps that connect the sender to the receiver of the payment. Every step is either:</p>
+<ul>
+<li>Rippling through another address with the same currency</li>
+<li>Exchanging currency at an order book</li>
+</ul>
+<p>Rippling through another address is the process of moving debt around. In the typical case, this involves reducing an issuer's obligation to one party and increasing the obligation to another party. Rippling can occur between any addresses that are connected by trust lines. See <a href="rippling.html">Understanding the No Ripple Flag</a> for more examples of rippling.</p>
+<p>In the case of a currency exchange step, the path step specifies which currency to change to, but does not record the state of the Offers in the order book. The canonical order of transactions is not final until a ledger is validated, so you cannot know for certain which Offers a transaction will take, until after the transaction has been validated. (You can make an educated guess, since each transaction takes the best available Offers at the time it executes in the final ledger.) <!-- STYLE_OVERRIDE: will --></p>
+<p>In both types of steps, each intermediate address gains and loses approximately equal value: either a balance ripples from a trust line to another trust line in the same currency, or they exchange currencies according to a previously-placed order. In some cases, the amounts gained and lost may not be exactly equivalent, due to <a href="transfer-fees.html">transfer fees</a>, trust line quality, or rounding.</p>
+<figure><a href="img/paths-examples.svg" title="Diagram of three example paths"><svg color-interpolation="auto" color-rendering="auto" fill="black" fill-opacity="1" font-family="'Dialog'" font-size="12px" font-style="normal" font-weight="normal" height="100%" image-rendering="auto" shape-rendering="auto" stroke="black" stroke-dasharray="none" stroke-dashoffset="0" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10" stroke-opacity="1" stroke-width="1" text-rendering="auto" viewbox="40 10 1170 530" width="1170" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><!--Generated by the Batik Graphics2D SVG Generator--><defs id="img/paths-examples.svg__genericDefs"></defs><g><defs id="img/paths-examples.svg__defs1"><clippath clippathunits="userSpaceOnUse" id="img/paths-examples.svg__clipPath1"><path d="M0 0 L2147483647 0 L2147483647 2147483647 L0 2147483647 L0 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/paths-examples.svg__clipPath2"><path d="M0 0 L0 50 L200 50 L200 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/paths-examples.svg__clipPath3"><path d="M0 0 L0 30 L30 30 L30 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/paths-examples.svg__clipPath4"><path d="M0 0 L0 30 L200 30 L200 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/paths-examples.svg__clipPath5"><path d="M0 0 L0 40 L230 40 L230 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/paths-examples.svg__clipPath6"><path d="M0 0 L0 180 L320 180 L320 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/paths-examples.svg__clipPath7"><path d="M0 0 L0 120 L140 120 L140 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/paths-examples.svg__clipPath8"><path d="M0 0 L0 100 L130 100 L130 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/paths-examples.svg__clipPath9"><path d="M0 0 L0 100 L100 100 L100 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/paths-examples.svg__clipPath10"><path d="M0 0 L0 30 L60 30 L60 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/paths-examples.svg__clipPath11"><path d="M0 0 L0 40 L70 40 L70 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/paths-examples.svg__clipPath12"><path d="M0 0 L0 30 L70 30 L70 0 Z"></path></clippath></defs><g font-family="sans-serif" font-size="14px" transform="translate(920,160)"><text clip-path="url(#img/paths-examples.svg__clipPath2)" stroke="none" x="5" xml:space="preserve" y="18.1094">Path step - order book</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(880,160)"><rect clip-path="url(#img/paths-examples.svg__clipPath3)" height="28.5" stroke="none" width="28.5" x="0.5" y="0.5"></rect></g><g transform="translate(880,160)"><rect clip-path="url(#img/paths-examples.svg__clipPath3)" fill="none" height="28.5" width="28.5" x="0.5" y="0.5"></rect></g><g font-family="sans-serif" font-size="14px" transform="translate(920,110)"><text clip-path="url(#img/paths-examples.svg__clipPath4)" stroke="none" x="5" xml:space="preserve" y="18.1094">Path step - account</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(880,110)"><circle clip-path="url(#img/paths-examples.svg__clipPath3)" cx="14.75" cy="14.75" r="14.25" stroke="none"></circle></g><g transform="translate(880,110)"><circle clip-path="url(#img/paths-examples.svg__clipPath3)" cx="14.75" cy="14.75" fill="none" r="14.25"></circle></g><g font-family="sans-serif" font-size="14px" transform="translate(920,70)"><text clip-path="url(#img/paths-examples.svg__clipPath5)" stroke="none" x="5" xml:space="preserve" y="18.1094">Implied path step/link</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(870,30)"><rect clip-path="url(#img/paths-examples.svg__clipPath6)" height="178.5" stroke="none" width="318.5" x="0.5" y="0.5"></rect></g><g transform="translate(870,30)"><rect clip-path="url(#img/paths-examples.svg__clipPath6)" fill="none" height="178.5" width="318.5" x="0.5" y="0.5"></rect><text clip-path="url(#img/paths-examples.svg__clipPath6)" font-family="sans-serif" font-size="14px" stroke="none" x="134" xml:space="preserve" y="18.1094">Legend</text><path clip-path="url(#img/paths-examples.svg__clipPath6)" d="M1 24.1094 L319 24.1094" fill="none"></path></g><g fill="yellow" stroke="yellow" transform="translate(1050,400)"><path clip-path="url(#img/paths-examples.svg__clipPath7)" d="M0.5 0.5 L128.5 0.5 L139 12.5 L139 119 L0.5 119 Z" stroke="none"></path><path clip-path="url(#img/paths-examples.svg__clipPath7)" d="M0.5 0.5 L128.5 0.5 L139 12.5 L139 119 L0.5 119 Z" fill="none" stroke="black"></path><path clip-path="url(#img/paths-examples.svg__clipPath7)" d="M128.5 0.5 L128.5 12.5 L139 12.5" fill="none" stroke="black"></path></g><g font-family="sans-serif" font-size="14px" transform="translate(1050,400)"><text clip-path="url(#img/paths-examples.svg__clipPath7)" stroke="none" x="5" xml:space="preserve" y="18.1094">XRP can bridge</text><text clip-path="url(#img/paths-examples.svg__clipPath7)" stroke="none" x="5" xml:space="preserve" y="34.2188">two order books</text></g><g fill="yellow" stroke="yellow" transform="translate(500,60)"><path clip-path="url(#img/paths-examples.svg__clipPath8)" d="M0.5 0.5 L118.5 0.5 L129 12.5 L129 99 L0.5 99 Z" stroke="none"></path><path clip-path="url(#img/paths-examples.svg__clipPath8)" d="M0.5 0.5 L118.5 0.5 L129 12.5 L129 99 L0.5 99 Z" fill="none" stroke="black"></path><path clip-path="url(#img/paths-examples.svg__clipPath8)" d="M118.5 0.5 L118.5 12.5 L129 12.5" fill="none" stroke="black"></path></g><g font-family="sans-serif" font-size="14px" transform="translate(500,60)"><text clip-path="url(#img/paths-examples.svg__clipPath8)" stroke="none" x="5" xml:space="preserve" y="18.1094">A simple path,</text><text clip-path="url(#img/paths-examples.svg__clipPath8)" stroke="none" x="5" xml:space="preserve" y="34.2188">which ripples</text><text clip-path="url(#img/paths-examples.svg__clipPath8)" stroke="none" x="5" xml:space="preserve" y="50.3281">through an</text><text clip-path="url(#img/paths-examples.svg__clipPath8)" stroke="none" x="5" xml:space="preserve" y="66.4375">issuer trusted</text><text clip-path="url(#img/paths-examples.svg__clipPath8)" stroke="none" x="5" xml:space="preserve" y="82.5469">by both parties</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(200,60)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g transform="translate(200,60)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="19" xml:space="preserve" y="36.4453">Account:</text><path clip-path="url(#img/paths-examples.svg__clipPath9)" d="M1.653 42.4453 L98.847 42.4453" fill="none"></path><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="15" xml:space="preserve" y="57.5547">rvYAfWj...</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="50" xml:space="preserve" y="73.6641"> </text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(340,60)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(340,60)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="17" xml:space="preserve" y="30.8906">Receiver:</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="13" xml:space="preserve" y="47">ra5nK24...</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="15" xml:space="preserve" y="63.1094">Currency:</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="35" xml:space="preserve" y="79.2188">USD</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(60,60)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(60,60)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="22" xml:space="preserve" y="30.8906">Sender:</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="11" xml:space="preserve" y="47">r9cZA1m...</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="15" xml:space="preserve" y="63.1094">Currency:</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="35" xml:space="preserve" y="79.2188">USD</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(480,410)"><rect clip-path="url(#img/paths-examples.svg__clipPath9)" height="98.5" stroke="none" width="98.5" x="0.5" y="0.5"></rect></g><g transform="translate(480,410)"><rect clip-path="url(#img/paths-examples.svg__clipPath9)" fill="none" height="98.5" width="98.5" x="0.5" y="0.5"></rect><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="7" xml:space="preserve" y="18.1094">Order Book:</text><path clip-path="url(#img/paths-examples.svg__clipPath9)" d="M1 24.1094 L99 24.1094" fill="none"></path><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="39.2188">XRP</text><path clip-path="url(#img/paths-examples.svg__clipPath9)" d="M1 45.2188 L99 45.2188" fill="none"></path><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="60.3281">USD</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="76.4375">rMwjYe...</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(900,410)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(900,410)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="17" xml:space="preserve" y="30.8906">Receiver:</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="13" xml:space="preserve" y="47">ra5nK24...</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="15" xml:space="preserve" y="63.1094">Currency:</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="35" xml:space="preserve" y="79.2188">USD</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(760,410)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g transform="translate(760,410)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="19" xml:space="preserve" y="36.4453">Account:</text><path clip-path="url(#img/paths-examples.svg__clipPath9)" d="M1.653 42.4453 L98.847 42.4453" fill="none"></path><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="17" xml:space="preserve" y="57.5547">rf1BiGe...</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="50" xml:space="preserve" y="73.6641"> </text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(620,410)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g transform="translate(620,410)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="19" xml:space="preserve" y="36.4453">Account:</text><path clip-path="url(#img/paths-examples.svg__clipPath9)" d="M1.653 42.4453 L98.847 42.4453" fill="none"></path><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="18" xml:space="preserve" y="57.5547">rMwjYe...</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="50" xml:space="preserve" y="73.6641"> </text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(340,410)"><rect clip-path="url(#img/paths-examples.svg__clipPath9)" height="98.5" stroke="none" width="98.5" x="0.5" y="0.5"></rect></g><g transform="translate(340,410)"><rect clip-path="url(#img/paths-examples.svg__clipPath9)" fill="none" height="98.5" width="98.5" x="0.5" y="0.5"></rect><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="7" xml:space="preserve" y="18.1094">Order Book:</text><path clip-path="url(#img/paths-examples.svg__clipPath9)" d="M1 24.1094 L99 24.1094" fill="none"></path><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="39.2188">USD</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="55.3281">rvYAfWj...</text><path clip-path="url(#img/paths-examples.svg__clipPath9)" d="M1 61.3281 L99 61.3281" fill="none"></path><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="76.4375">XRP</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(200,410)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g transform="translate(200,410)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="19" xml:space="preserve" y="36.4453">Account:</text><path clip-path="url(#img/paths-examples.svg__clipPath9)" d="M1.653 42.4453 L98.847 42.4453" fill="none"></path><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="15" xml:space="preserve" y="57.5547">rvYAfWj...</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="50" xml:space="preserve" y="73.6641"> </text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(60,410)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(60,410)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="22" xml:space="preserve" y="30.8906">Sender:</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="11" xml:space="preserve" y="47">r9cZA1m...</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="15" xml:space="preserve" y="63.1094">Currency:</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="35" xml:space="preserve" y="79.2188">USD</text></g><g fill="yellow" stroke="yellow" transform="translate(920,230)"><path clip-path="url(#img/paths-examples.svg__clipPath7)" d="M0.5 0.5 L128.5 0.5 L139 12.5 L139 119 L0.5 119 Z" stroke="none"></path><path clip-path="url(#img/paths-examples.svg__clipPath7)" d="M0.5 0.5 L128.5 0.5 L139 12.5 L139 119 L0.5 119 Z" fill="none" stroke="black"></path><path clip-path="url(#img/paths-examples.svg__clipPath7)" d="M128.5 0.5 L128.5 12.5 L139 12.5" fill="none" stroke="black"></path></g><g font-family="sans-serif" font-size="14px" transform="translate(920,230)"><text clip-path="url(#img/paths-examples.svg__clipPath7)" stroke="none" x="5" xml:space="preserve" y="18.1094">Same-currency</text><text clip-path="url(#img/paths-examples.svg__clipPath7)" stroke="none" x="5" xml:space="preserve" y="34.2188">paths can</text><text clip-path="url(#img/paths-examples.svg__clipPath7)" stroke="none" x="5" xml:space="preserve" y="50.3281">connect through</text><text clip-path="url(#img/paths-examples.svg__clipPath7)" stroke="none" x="5" xml:space="preserve" y="66.4375">rippling or</text><text clip-path="url(#img/paths-examples.svg__clipPath7)" stroke="none" x="5" xml:space="preserve" y="82.5469">through order</text><text clip-path="url(#img/paths-examples.svg__clipPath7)" stroke="none" x="5" xml:space="preserve" y="98.6562">books.</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(760,240)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(760,240)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="17" xml:space="preserve" y="30.8906">Receiver:</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="13" xml:space="preserve" y="47">ra5nK24...</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="15" xml:space="preserve" y="63.1094">Currency:</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="35" xml:space="preserve" y="79.2188">USD</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(480,240)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g transform="translate(480,240)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="19" xml:space="preserve" y="36.4453">Account:</text><path clip-path="url(#img/paths-examples.svg__clipPath9)" d="M1.653 42.4453 L98.847 42.4453" fill="none"></path><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="18" xml:space="preserve" y="57.5547">rMwjYe...</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="50" xml:space="preserve" y="73.6641"> </text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(340,240)"><rect clip-path="url(#img/paths-examples.svg__clipPath9)" height="98.5" stroke="none" width="98.5" x="0.5" y="0.5"></rect></g><g transform="translate(340,240)"><rect clip-path="url(#img/paths-examples.svg__clipPath9)" fill="none" height="98.5" width="98.5" x="0.5" y="0.5"></rect><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="7" xml:space="preserve" y="18.1094">Order Book:</text><path clip-path="url(#img/paths-examples.svg__clipPath9)" d="M1 24.1094 L99 24.1094" fill="none"></path><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="39.2188">USD</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="55.3281">rvYAfWj...</text><path clip-path="url(#img/paths-examples.svg__clipPath9)" d="M1 61.3281 L99 61.3281" fill="none"></path><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="76.4375">USD</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="92.5469">rMwjYe...</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(200,240)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g transform="translate(200,240)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="19" xml:space="preserve" y="36.4453">Account:</text><path clip-path="url(#img/paths-examples.svg__clipPath9)" d="M1.653 42.4453 L98.847 42.4453" fill="none"></path><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="15" xml:space="preserve" y="57.5547">rvYAfWj...</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="50" xml:space="preserve" y="73.6641"> </text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(60,240)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(60,240)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="22" xml:space="preserve" y="30.8906">Sender:</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="11" xml:space="preserve" y="47">r9cZA1m...</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="15" xml:space="preserve" y="63.1094">Currency:</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="35" xml:space="preserve" y="79.2188">USD</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(620,240)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g transform="translate(620,240)"><circle clip-path="url(#img/paths-examples.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="19" xml:space="preserve" y="36.4453">Account:</text><path clip-path="url(#img/paths-examples.svg__clipPath9)" d="M1.653 42.4453 L98.847 42.4453" fill="none"></path><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="17" xml:space="preserve" y="57.5547">rf1BiGe...</text><text clip-path="url(#img/paths-examples.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="50" xml:space="preserve" y="73.6641"> </text></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(870,70)"><path clip-path="url(#img/paths-examples.svg__clipPath10)" d="M40.5 10.5 L10.5 10.5" fill="none"></path></g><g transform="translate(290,90)"><path clip-path="url(#img/paths-examples.svg__clipPath11)" d="M50.5 20.5 L10.5 20.5" fill="none"></path></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(150,100)"><path clip-path="url(#img/paths-examples.svg__clipPath12)" d="M50.5 10.5 L10.5 10.5" fill="none"></path></g><g transform="translate(570,440)"><path clip-path="url(#img/paths-examples.svg__clipPath11)" d="M50.5 20.5 L10.5 20.5" fill="none"></path></g><g transform="translate(430,440)"><path clip-path="url(#img/paths-examples.svg__clipPath11)" d="M50.5 20.5 L10.5 20.5" fill="none"></path></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(850,450)"><path clip-path="url(#img/paths-examples.svg__clipPath12)" d="M50.5 10.5 L10.5 10.5" fill="none"></path></g><g transform="translate(710,440)"><path clip-path="url(#img/paths-examples.svg__clipPath11)" d="M50.5 20.5 L10.5 20.5" fill="none"></path></g><g transform="translate(290,440)"><path clip-path="url(#img/paths-examples.svg__clipPath11)" d="M50.5 20.5 L10.5 20.5" fill="none"></path></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(150,450)"><path clip-path="url(#img/paths-examples.svg__clipPath12)" d="M50.5 10.5 L10.5 10.5" fill="none"></path></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(150,280)"><path clip-path="url(#img/paths-examples.svg__clipPath12)" d="M50.5 10.5 L10.5 10.5" fill="none"></path></g><g transform="translate(290,270)"><path clip-path="url(#img/paths-examples.svg__clipPath11)" d="M50.5 20.5 L10.5 20.5" fill="none"></path></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(710,280)"><path clip-path="url(#img/paths-examples.svg__clipPath12)" d="M50.5 10.5 L10.5 10.5" fill="none"></path></g><g transform="translate(430,270)"><path clip-path="url(#img/paths-examples.svg__clipPath11)" d="M50.5 20.5 L10.5 20.5" fill="none"></path></g><g transform="translate(570,270)"><path clip-path="url(#img/paths-examples.svg__clipPath11)" d="M50.5 20.5 L10.5 20.5" fill="none"></path></g></g></svg></a></figure>
+<h1 id="technical-details">Technical Details</h1>
+<h2 id="pathfinding">Pathfinding</h2>
+<p>The <code>rippled</code> API has two methods that can be used for pathfinding. The <a href="ripple_path_find.html">ripple_path_find method</a> does a one-time lookup of possible path sets. The <a href="path_find.html">path_find method</a> (WebSocket only) expands on the search with follow-up responses whenever a ledger closes or the server finds a better path.</p>
+<p>You can have <code>rippled</code> automatically fill in paths when you sign it, by including the <code>build_path</code> field in a request to the <a href="sign.html">sign method</a> or <a href="submit.html#sign-and-submit-mode"><code>submit</code> command (sign-and-submit mode)</a>. However, we recommend pathfinding separately and confirming the results before signing, to avoid surprises.</p>
+<p class="devportal-callout caution"><strong>Caution:</strong> Although <code>rippled</code> is designed to search for the cheapest paths possible, it may not always find them. Untrustworthy <code>rippled</code> instances could also be modified to change this behavior for profit. The actual cost to execute a payment along a path can change between submission and transaction execution.</p>
+<p>Finding paths is a very challenging problem that changes slightly every few seconds as new ledgers are validated, so <code>rippled</code> is not designed to find the absolute best path. Still, you can find several possible paths and estimate the cost of delivering a particular amount.</p>
+<h2 id="implied-steps">Implied Steps</h2>
+<p>By convention, several steps of a path are implied by the <a href="payment.html">fields of the Payment transaction</a>: specifically, the <code>Account</code> (sender), <code>Destination</code> (receiver), <code>Amount</code> (currency and amount to be delivered) and <code>SendMax</code> (currency and amount to be sent, if specified). The implied steps are as follows:</p>
+<ul>
+<li>The first step of a path is always implied to be the sender of the transaction, as defined by the transaction's <code>Account</code> field.</li>
+<li>If the transaction includes a <code>SendMax</code> field with an <code>issuer</code> that is not the sender of the transaction, that issuer is implied to be the second step of the path.<ul>
+<li>If <code>issuer</code> of the <code>SendMax</code> <em>is</em> the sending address, then the path starts at the sending address, and may use any of that address's trust lines in the given currency. See <a href="payment.html#special-issuer-values-for-sendmax-and-amount">special values for <code>SendMax</code> and <code>Amount</code></a> for details.</li>
+</ul>
+</li>
+<li>If the <code>Amount</code> field of the transaction includes an <code>issuer</code> that is not the same as the <code>Destination</code> of the transaction, that issuer is implied to be the second-to-last step of the path.</li>
+<li>Finally, last step of a path is always implied to be the receiver of a transaction, as defined by the transaction's <code>Destination</code> field.</li>
+</ul>
+<h2 id="default-paths">Default Paths</h2>
+<p>In addition to explicitly specified paths, a transaction can execute along the <em>default path</em>. The default path is the simplest possible way to connect the <a href="#implied-steps">implied steps</a> of the transaction.</p>
+<p>The default path could be any of the following:</p>
+<ul>
+<li>If the transaction is uses only one currency (regardless of issuer), then the default path assumes the payment should ripple through the addresses involved. This path only works if those addresses are connected by trust lines.<ul>
+<li>If <code>SendMax</code> is omitted, or the <code>issuer</code> of the <code>SendMax</code> is the sender, the default path needs a trust line from the sending <code>Account</code> to the <code>issuer</code> of the destination <code>Amount</code> to work.</li>
+<li>If the <code>SendMax</code> and <code>Amount</code> have different <code>issuer</code> values, and neither are the sender or receiver, the default path is probably not useful because it would need to ripple across a trust line between the two issuers. Ripple (the company) typically discourages issuers from trusting one another directly.</li>
+</ul>
+</li>
+<li>For cross-currency transactions, the default path uses the order book between the source currency (as specified in the <code>SendMax</code> field) and the destination currency (as specified in the <code>Amount</code> field).</li>
+</ul>
+<p>The following diagram enumerates all possible default paths:</p>
+<figure><a href="img/default-paths.svg" title="Diagram of default paths"><svg color-interpolation="auto" color-rendering="auto" fill="black" fill-opacity="1" font-family="'Dialog'" font-size="12px" font-style="normal" font-weight="normal" height="100%" image-rendering="auto" shape-rendering="auto" stroke="black" stroke-dasharray="none" stroke-dashoffset="0" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10" stroke-opacity="1" stroke-width="1" text-rendering="auto" viewbox="20 20 1120 840" width="1120" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><!--Generated by the Batik Graphics2D SVG Generator--><defs id="img/default-paths.svg__genericDefs"></defs><g><defs id="img/default-paths.svg__defs1"><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath1"><path d="M0 0 L2147483647 0 L2147483647 2147483647 L0 2147483647 L0 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath2"><path d="M0 0 L0 90 L150 90 L150 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath3"><path d="M0 0 L0 30 L200 30 L200 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath4"><path d="M0 0 L0 30 L180 30 L180 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath5"><path d="M0 0 L0 30 L30 30 L30 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath6"><path d="M0 0 L0 30 L210 30 L210 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath7"><path d="M0 0 L0 30 L230 30 L230 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath8"><path d="M0 0 L0 210 L310 210 L310 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath9"><path d="M0 0 L0 100 L100 100 L100 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath10"><path d="M0 0 L0 80 L140 80 L140 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath11"><path d="M0 0 L0 90 L140 90 L140 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath12"><path d="M0 0 L0 40 L30 40 L30 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath13"><path d="M0 0 L0 20 L20 20 L20 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath14"><path d="M0 0 L0 160 L50 160 L50 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath15"><path d="M0 0 L0 30 L60 30 L60 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath16"><path d="M0 0 L0 30 L80 30 L80 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath17"><path d="M0 0 L0 240 L50 240 L50 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath18"><path d="M0 0 L0 30 L160 30 L160 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath19"><path d="M0 0 L0 30 L140 30 L140 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath20"><path d="M0 0 L0 30 L120 30 L120 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath21"><path d="M0 0 L0 30 L190 30 L190 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath22"><path d="M0 0 L0 30 L170 30 L170 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/default-paths.svg__clipPath23"><path d="M0 0 L0 30 L100 30 L100 0 Z"></path></clippath></defs><g fill="rgb(120,120,120)" stroke="rgb(120,120,120)" transform="translate(810,710)"><path clip-path="url(#img/default-paths.svg__clipPath2)" d="M0.5 0.5 L138.5 0.5 L149 12.5 L149 89 L0.5 89 Z" stroke="none"></path><path clip-path="url(#img/default-paths.svg__clipPath2)" d="M0.5 0.5 L138.5 0.5 L149 12.5 L149 89 L0.5 89 Z" fill="none" stroke="white"></path><path clip-path="url(#img/default-paths.svg__clipPath2)" d="M138.5 0.5 L138.5 12.5 L149 12.5" fill="none" stroke="white"></path></g><g fill="white" font-family="sans-serif" font-size="14px" stroke="white" transform="translate(810,710)"><text clip-path="url(#img/default-paths.svg__clipPath2)" stroke="none" x="5" xml:space="preserve" y="18.1094">Cross-currency:</text><text clip-path="url(#img/default-paths.svg__clipPath2)" stroke="none" x="5" xml:space="preserve" y="34.2188">Default path</text><text clip-path="url(#img/default-paths.svg__clipPath2)" stroke="none" x="5" xml:space="preserve" y="50.3281">automatically uses</text><text clip-path="url(#img/default-paths.svg__clipPath2)" stroke="none" x="5" xml:space="preserve" y="66.4375">an order book</text></g><g font-family="sans-serif" font-size="14px" transform="translate(860,210)"><text clip-path="url(#img/default-paths.svg__clipPath3)" stroke="none" x="5" xml:space="preserve" y="18.1094">path step - order book</text></g><g font-family="sans-serif" font-size="14px" transform="translate(860,160)"><text clip-path="url(#img/default-paths.svg__clipPath4)" stroke="none" x="5" xml:space="preserve" y="18.1094">path step - account</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(820,210)"><rect clip-path="url(#img/default-paths.svg__clipPath5)" height="28.5" stroke="none" width="28.5" x="0.5" y="0.5"></rect></g><g transform="translate(820,210)"><rect clip-path="url(#img/default-paths.svg__clipPath5)" fill="none" height="28.5" width="28.5" x="0.5" y="0.5"></rect></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(820,160)"><circle clip-path="url(#img/default-paths.svg__clipPath5)" cx="14.75" cy="14.75" r="14.25" stroke="none"></circle></g><g transform="translate(820,160)"><circle clip-path="url(#img/default-paths.svg__clipPath5)" cx="14.75" cy="14.75" fill="none" r="14.25"></circle></g><g font-family="sans-serif" font-size="14px" transform="translate(860,90)"><text clip-path="url(#img/default-paths.svg__clipPath6)" stroke="none" x="5" xml:space="preserve" y="18.1094">completes the default path</text></g><g font-family="sans-serif" font-size="14px" transform="translate(860,130)"><text clip-path="url(#img/default-paths.svg__clipPath7)" stroke="none" x="5" xml:space="preserve" y="18.1094">implied by transaction fields</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(810,50)"><rect clip-path="url(#img/default-paths.svg__clipPath8)" height="208.5" stroke="none" width="308.5" x="0.5" y="0.5"></rect></g><g transform="translate(810,50)"><rect clip-path="url(#img/default-paths.svg__clipPath8)" fill="none" height="208.5" width="308.5" x="0.5" y="0.5"></rect><text clip-path="url(#img/default-paths.svg__clipPath8)" font-family="sans-serif" font-size="14px" stroke="none" x="129" xml:space="preserve" y="18.1094">Legend</text><path clip-path="url(#img/default-paths.svg__clipPath8)" d="M1 24.1094 L309 24.1094" fill="none"></path></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(350,700)"><rect clip-path="url(#img/default-paths.svg__clipPath9)" height="98.5" stroke="none" width="98.5" x="0.5" y="0.5"></rect></g><g stroke-width="2.5" transform="translate(350,700)"><rect clip-path="url(#img/default-paths.svg__clipPath9)" fill="none" height="98.5" width="98.5" x="0.5" y="0.5"></rect><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="10" xml:space="preserve" y="18.1094">Order Book</text><path clip-path="url(#img/default-paths.svg__clipPath9)" d="M1 24.1094 L99 24.1094" fill="none"></path><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="39.2188">FOO</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="55.3281">(issuer)</text><path clip-path="url(#img/default-paths.svg__clipPath9)" d="M1 61.3281 L99 61.3281" fill="none"></path><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="76.4375">BAR</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="92.5469">(issuer)</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(50,700)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(50,700)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="21" xml:space="preserve" y="47">Account</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="19" xml:space="preserve" y="63.1094">(Sender)</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(200,700)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(200,700)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="15" xml:space="preserve" y="47">SendMax.</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="29" xml:space="preserve" y="63.1094">issuer</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(500,700)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(500,700)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="20" xml:space="preserve" y="47">Amount.</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="29" xml:space="preserve" y="63.1094">issuer</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(650,700)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(650,700)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="9" xml:space="preserve" y="47">Destination</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="13" xml:space="preserve" y="63.1094">(Receiver)</text></g><g fill="rgb(120,120,120)" stroke="rgb(120,120,120)" transform="translate(750,370)"><path clip-path="url(#img/default-paths.svg__clipPath10)" d="M0.5 0.5 L128.5 0.5 L139 12.5 L139 79 L0.5 79 Z" stroke="none"></path><path clip-path="url(#img/default-paths.svg__clipPath10)" d="M0.5 0.5 L128.5 0.5 L139 12.5 L139 79 L0.5 79 Z" fill="none" stroke="white"></path><path clip-path="url(#img/default-paths.svg__clipPath10)" d="M128.5 0.5 L128.5 12.5 L139 12.5" fill="none" stroke="white"></path></g><g fill="white" font-family="sans-serif" font-size="14px" stroke="white" transform="translate(750,370)"><text clip-path="url(#img/default-paths.svg__clipPath10)" stroke="none" x="5" xml:space="preserve" y="18.1094">Same currency:</text><text clip-path="url(#img/default-paths.svg__clipPath10)" stroke="none" x="5" xml:space="preserve" y="34.2188">Rippling through</text><text clip-path="url(#img/default-paths.svg__clipPath10)" stroke="none" x="5" xml:space="preserve" y="50.3281">one issuer</text></g><g fill="yellow" stroke="yellow" transform="translate(800,560)"><path clip-path="url(#img/default-paths.svg__clipPath2)" d="M0.5 0.5 L138.5 0.5 L149 12.5 L149 89 L0.5 89 Z" stroke="none"></path><path clip-path="url(#img/default-paths.svg__clipPath2)" d="M0.5 0.5 L138.5 0.5 L149 12.5 L149 89 L0.5 89 Z" fill="none" stroke="black"></path><path clip-path="url(#img/default-paths.svg__clipPath2)" d="M138.5 0.5 L138.5 12.5 L149 12.5" fill="none" stroke="black"></path></g><g font-family="sans-serif" font-size="14px" transform="translate(800,560)"><text clip-path="url(#img/default-paths.svg__clipPath2)" stroke="none" x="5" xml:space="preserve" y="18.1094">Same currency:</text><text clip-path="url(#img/default-paths.svg__clipPath2)" stroke="none" x="5" xml:space="preserve" y="34.2188">Rippling through</text><text clip-path="url(#img/default-paths.svg__clipPath2)" stroke="none" x="5" xml:space="preserve" y="50.3281">two issuers -</text><text clip-path="url(#img/default-paths.svg__clipPath2)" stroke="none" x="5" xml:space="preserve" y="66.4375">unlikely to work</text></g><g fill="rgb(120,120,120)" stroke="rgb(120,120,120)" transform="translate(610,120)"><path clip-path="url(#img/default-paths.svg__clipPath11)" d="M0.5 0.5 L128.5 0.5 L139 12.5 L139 89 L0.5 89 Z" stroke="none"></path><path clip-path="url(#img/default-paths.svg__clipPath11)" d="M0.5 0.5 L128.5 0.5 L139 12.5 L139 89 L0.5 89 Z" fill="none" stroke="white"></path><path clip-path="url(#img/default-paths.svg__clipPath11)" d="M128.5 0.5 L128.5 12.5 L139 12.5" fill="none" stroke="white"></path></g><g fill="white" font-family="sans-serif" font-size="14px" stroke="white" transform="translate(610,120)"><text clip-path="url(#img/default-paths.svg__clipPath11)" stroke="none" x="5" xml:space="preserve" y="18.1094">Same currency:</text><text clip-path="url(#img/default-paths.svg__clipPath11)" stroke="none" x="5" xml:space="preserve" y="34.2188">Direct trust line</text><text clip-path="url(#img/default-paths.svg__clipPath11)" stroke="none" x="5" xml:space="preserve" y="50.3281">from sender to</text><text clip-path="url(#img/default-paths.svg__clipPath11)" stroke="none" x="5" xml:space="preserve" y="66.4375">receiver</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(570,430)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(570,430)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="9" xml:space="preserve" y="47">Destination</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="13" xml:space="preserve" y="63.1094">(Receiver)</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(360,430)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(360,430)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="20" xml:space="preserve" y="38.9453">Amount.</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="29" xml:space="preserve" y="55.0547">issuer</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="19" xml:space="preserve" y="71.1641">currency</text></g><g font-family="sans-serif" font-size="14px" font-weight="bold" transform="translate(340,470)"><text clip-path="url(#img/default-paths.svg__clipPath12)" stroke="none" x="5" xml:space="preserve" y="18.1094">=</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(240,430)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(240,430)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="15" xml:space="preserve" y="38.9453">SendMax.</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="29" xml:space="preserve" y="55.0547">issuer</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="19" xml:space="preserve" y="71.1641">currency</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(50,430)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(50,430)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="21" xml:space="preserve" y="47">Account</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="19" xml:space="preserve" y="63.1094">(Sender)</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(160,40)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(160,40)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="20" xml:space="preserve" y="47">Amount.</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="29" xml:space="preserve" y="63.1094">issuer</text></g><g font-family="sans-serif" font-size="14px" transform="translate(140,80)"><text clip-path="url(#img/default-paths.svg__clipPath12)" stroke="none" x="5" xml:space="preserve" y="18.1094">=</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(410,40)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(410,40)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="9" xml:space="preserve" y="47">Destination</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="13" xml:space="preserve" y="63.1094">(Receiver)</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(40,40)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(40,40)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="21" xml:space="preserve" y="47">Account</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="19" xml:space="preserve" y="63.1094">(Sender)</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(310,300)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(310,300)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="20" xml:space="preserve" y="47">Amount.</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="29" xml:space="preserve" y="63.1094">issuer</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(570,300)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(570,300)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="9" xml:space="preserve" y="47">Destination</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="13" xml:space="preserve" y="63.1094">(Receiver)</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(50,300)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(50,300)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="21" xml:space="preserve" y="47">Account</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="19" xml:space="preserve" y="63.1094">(Sender)</text></g><g font-family="sans-serif" font-size="14px" transform="translate(390,210)"><text clip-path="url(#img/default-paths.svg__clipPath12)" stroke="none" x="5" xml:space="preserve" y="18.1094">=</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(290,170)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(290,170)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="20" xml:space="preserve" y="47">Amount.</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="29" xml:space="preserve" y="63.1094">issuer</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(410,170)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(410,170)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="9" xml:space="preserve" y="47">Destination</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="13" xml:space="preserve" y="63.1094">(Receiver)</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(50,170)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(50,170)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="21" xml:space="preserve" y="47">Account</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="19" xml:space="preserve" y="63.1094">(Sender)</text></g><g transform="translate(400,600)"><path clip-path="url(#img/default-paths.svg__clipPath13)" d="M0.5 0.5 L19 19" fill="none"></path><path clip-path="url(#img/default-paths.svg__clipPath13)" d="M19 0.5 L0.5 19" fill="none"></path></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(640,560)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(640,560)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="9" xml:space="preserve" y="47">Destination</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="13" xml:space="preserve" y="63.1094">(Receiver)</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(470,560)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(470,560)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="20" xml:space="preserve" y="47">Amount.</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="29" xml:space="preserve" y="63.1094">issuer</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(240,560)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(240,560)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="15" xml:space="preserve" y="47">SendMax.</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="29" xml:space="preserve" y="63.1094">issuer</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(50,560)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" r="49.25" stroke="none"></circle></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(50,560)"><circle clip-path="url(#img/default-paths.svg__clipPath9)" cx="49.75" cy="49.75" fill="none" r="49.25"></circle><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="21" xml:space="preserve" y="47">Account</text><text clip-path="url(#img/default-paths.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="19" xml:space="preserve" y="63.1094">(Sender)</text></g><g transform="translate(750,680)"><path clip-path="url(#img/default-paths.svg__clipPath14)" d="M10.5 140.5 L30.5 140.5" fill="none"></path><path clip-path="url(#img/default-paths.svg__clipPath14)" d="M30.5 140.5 L30.5 10.5" fill="none"></path><path clip-path="url(#img/default-paths.svg__clipPath14)" d="M30.5 10.5 L10.5 10.5" fill="none"></path></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(810,130)"><path clip-path="url(#img/default-paths.svg__clipPath15)" d="M40.5 10.5 L10.5 10.5" fill="none"></path></g><g stroke-width="2.5" transform="translate(810,90)"><path clip-path="url(#img/default-paths.svg__clipPath15)" d="M40.5 10.5 L10.5 10.5" fill="none"></path></g><g stroke-width="2.5" transform="translate(440,740)"><path clip-path="url(#img/default-paths.svg__clipPath16)" d="M60.5 10.5 L10.5 10.5" fill="none"></path></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(140,740)"><path clip-path="url(#img/default-paths.svg__clipPath16)" d="M60.5 10.5 L10.5 10.5" fill="none"></path></g><g stroke-width="2.5" transform="translate(290,740)"><path clip-path="url(#img/default-paths.svg__clipPath16)" d="M60.5 10.5 L10.5 10.5" fill="none"></path></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(590,740)"><path clip-path="url(#img/default-paths.svg__clipPath16)" d="M10.5 10.5 L60.5 10.5" fill="none"></path></g><g transform="translate(730,530)"><path clip-path="url(#img/default-paths.svg__clipPath14)" d="M10.5 140.5 L30.5 140.5" fill="none"></path><path clip-path="url(#img/default-paths.svg__clipPath14)" d="M30.5 140.5 L30.5 10.5" fill="none"></path><path clip-path="url(#img/default-paths.svg__clipPath14)" d="M30.5 10.5 L10.5 10.5" fill="none"></path></g><g transform="translate(680,300)"><path clip-path="url(#img/default-paths.svg__clipPath17)" d="M10.5 220.5 L30.5 220.5" fill="none"></path><path clip-path="url(#img/default-paths.svg__clipPath17)" d="M30.5 220.5 L30.5 10.5" fill="none"></path><path clip-path="url(#img/default-paths.svg__clipPath17)" d="M30.5 10.5 L10.5 10.5" fill="none"></path></g><g transform="translate(530,40)"><path clip-path="url(#img/default-paths.svg__clipPath17)" d="M10.5 220.5 L30.5 220.5" fill="none"></path><path clip-path="url(#img/default-paths.svg__clipPath17)" d="M30.5 220.5 L30.5 10.5" fill="none"></path><path clip-path="url(#img/default-paths.svg__clipPath17)" d="M30.5 10.5 L10.5 10.5" fill="none"></path></g><g stroke-width="2.5" transform="translate(330,600)"><path clip-path="url(#img/default-paths.svg__clipPath18)" d="M140.5 10.5 L10.5 10.5" fill="none"></path></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(450,470)"><path clip-path="url(#img/default-paths.svg__clipPath19)" d="M120.5 10.5 L10.5 10.5" fill="none"></path></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(140,470)"><path clip-path="url(#img/default-paths.svg__clipPath20)" d="M100.5 10.5 L10.5 10.5" fill="none"></path></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(400,340)"><path clip-path="url(#img/default-paths.svg__clipPath21)" d="M170.5 10.5 L10.5 10.5" fill="none"></path></g><g stroke-width="2.5" transform="translate(250,80)"><path clip-path="url(#img/default-paths.svg__clipPath4)" d="M160.5 10.5 L10.5 10.5" fill="none"></path></g><g stroke-width="2.5" transform="translate(140,340)"><path clip-path="url(#img/default-paths.svg__clipPath21)" d="M170.5 10.5 L10.5 10.5" fill="none"></path></g><g stroke-width="2.5" transform="translate(140,210)"><path clip-path="url(#img/default-paths.svg__clipPath22)" d="M150.5 10.5 L10.5 10.5" fill="none"></path></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(560,600)"><path clip-path="url(#img/default-paths.svg__clipPath23)" d="M10.5 10.5 L80.5 10.5" fill="none"></path></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(140,600)"><path clip-path="url(#img/default-paths.svg__clipPath20)" d="M100.5 10.5 L10.5 10.5" fill="none"></path></g></g></svg></a></figure>
+<p>You can use the <a href="payment.html#payment-flags"><code>tfNoDirectRipple</code> flag</a> to disable the default path. In this case, the transaction can only execute using the paths explicitly included in the transaction. Traders can use this option to take arbitrage opportunities.</p>
+<h2 id="path-specifications">Path Specifications</h2>
+<p>A path set is an array. Each member of the path set is another array that represents an individual <em>path</em>. Each member of a path is an object that specifies the step. A step has the following fields:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>account</code></td>
+<td align="left">String - Address</td>
+<td align="left"><em>(Optional)</em> If present, this path step represents rippling through the specified address. MUST NOT be provided if this step specifies the <code>currency</code> or <code>issuer</code> fields.</td>
+</tr>
+<tr>
+<td align="left"><code>currency</code></td>
+<td align="left">String - Currency Code</td>
+<td align="left"><em>(Optional)</em> If present, this path step represents changing currencies through an order book. The currency specified indicates the new currency. MUST NOT be provided if this step specifies the <code>account</code> field.</td>
+</tr>
+<tr>
+<td align="left"><code>issuer</code></td>
+<td align="left">String - Address</td>
+<td align="left"><em>(Optional)</em> If present, this path step represents changing currencies and this address defines the issuer of the new currency. If omitted in a step with a non-XRP <code>currency</code>, a previous step of the path defines the issuer. If present when <code>currency</code> is omitted, indicates a path step that uses an order book between same-named currencies with different issuers. MUST be omitted if the <code>currency</code> is XRP. MUST NOT be provided if this step specifies the <code>account</code> field.</td>
+</tr>
+<tr>
+<td align="left"><code>type</code></td>
+<td align="left">Integer</td>
+<td align="left"><strong>DEPRECATED</strong> <em>(Optional)</em> An indicator of which other fields are present.</td>
+</tr>
+<tr>
+<td align="left"><code>type_hex</code></td>
+<td align="left">String</td>
+<td align="left"><strong>DEPRECATED</strong>: <em>(Optional)</em> A hexadecimal representation of the <code>type</code> field.</td>
+</tr>
+</tbody>
+</table>
+<p>In summary, the following combination of fields are valid, optionally with <code>type</code>, <code>type_hex</code>, or both:</p>
+<ul>
+<li><code>account</code> by itself</li>
+<li><code>currency</code> by itself</li>
+<li><code>currency</code> and <code>issuer</code> as long as the <code>currency</code> is not XRP</li>
+<li><code>issuer</code> by itself</li>
+</ul>
+<p>Any other use of <code>account</code>, <code>currency</code>, and <code>issuer</code> fields in a path step is invalid.</p>
+<p>The <code>type</code> field, used for the binary serialization of a path set, is actually constructed through bitwise operations on a single integer. The bits are defined as follows:</p>
+<table>
+<thead>
+<tr>
+<th>Value (Hex)</th>
+<th>Value (Decimal)</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0x01</code></td>
+<td>1</td>
+<td>A change of address (rippling): the <code>account</code> field is present.</td>
+</tr>
+<tr>
+<td><code>0x10</code></td>
+<td>16</td>
+<td>A change of currency: the <code>currency</code> field is present.</td>
+</tr>
+<tr>
+<td><code>0x20</code></td>
+<td>32</td>
+<td>A change of issuer: the <code>issuer</code> field is present.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><strong>Concepts:</strong><ul>
+<li><a href="cross-currency-payments.html">Cross-Currency Payments</a></li>
+<li><a href="decentralized-exchange.html">Decentralized Exchange</a></li>
+<li><a href="partial-payments.html">Partial Payments</a></li>
+</ul>
+</li>
+<li><strong>References:</strong><ul>
+<li><a href="payment.html">Payment transaction</a></li>
+<li><a href="path_find.html">path_find method</a> (WebSocket only)</li>
+<li><a href="ripple_path_find.html">ripple_path_find method</a></li>
+</ul>
+</li>
+</ul>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- rippled release notes links -->
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="concepts.html"> Concepts</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_2">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_2" aria-expanded="true" aria-controls="sidenav_collapse_2"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="introduction.html">Introduction</a>
+                <!-- <a class="sidenav_cat_title" href="introduction.html">Introduction</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_2" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_2">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="xrp-ledger-overview.html">XRP Ledger Overview</a></li>
+                      <li><a class="nosubcat-page" href="intro-to-consensus.html">Introduction to Consensus</a></li>
+                      <li><a class="nosubcat-page" href="xrp.html">XRP</a></li>
+                      <li><a class="nosubcat-page" href="software-ecosystem.html">Software Ecosystem</a></li>
+                      <li><a class="nosubcat-page" href="technical-faq.html">Technical FAQ</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse2 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_8">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_8" aria-expanded="true" aria-controls="sidenav_collapse_8"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="payment-system-basics.html">Payment System Basics</a>
+                <!-- <a class="sidenav_cat_title" href="payment-system-basics.html">Payment System Basics</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_8" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_8">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="accounts.html">Accounts</a></li>
+
+                          <li><a class="subpage" href="cryptographic-keys.html">Cryptographic Keys</a></li>
+                          <li><a class="subpage" href="multi-signing.html">Multi-Signing</a></li>
+                          <li><a class="subpage" href="reserves.html">Reserves</a></li>
+                          <li><a class="subpage" href="depositauth.html">Deposit Authorization</a></li>
+
+                      <li><a class="nosubcat-page" href="fees.html">Fees (Disambiguation)</a></li>
+                      <li><a class="nosubcat-page" href="ledgers.html">Ledgers</a></li>
+                      <li><a class="subcat-title" href="transaction-basics.html">Transaction Basics</a></li>
+
+                          <li><a class="subpage" href="transaction-cost.html">Transaction Cost</a></li>
+                          <li><a class="subpage" href="finality-of-results.html">Finality of Results</a></li>
+                          <li><a class="subpage" href="source-and-destination-tags.html">Source and Destination Tags</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse8 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_20">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_20" aria-expanded="true" aria-controls="sidenav_collapse_20"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="payment-types.html">Payment Types</a>
+                <!-- <a class="sidenav_cat_title" href="payment-types.html">Payment Types</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_20" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_20">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="direct-xrp-payments.html">Direct XRP Payments</a></li>
+                      <li><a class="nosubcat-page" href="cross-currency-payments.html">Cross-Currency Payments</a></li>
+                      <li><a class="nosubcat-page" href="checks.html">Checks</a></li>
+                      <li><a class="nosubcat-page" href="escrow.html">Escrow</a></li>
+                      <li><a class="nosubcat-page" href="partial-payments.html">Partial Payments</a></li>
+                      <li><a class="nosubcat-page" href="payment-channels.html">Payment Channels</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse20 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card active">
+            <div class="card-header" role="tab" id="sidenav_cat_head_28">
+                <a class="sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_28" aria-expanded="true" aria-controls="sidenav_collapse_28"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title active-parent" href="issued-currencies.html">Issued Currencies</a>
+                <!-- <a class="sidenav_cat_title" href="issued-currencies.html">Issued Currencies</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_28" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_28">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="issued-currencies-overview.html">Issued Currencies Overview</a></li>
+                      <li><a class="nosubcat-page" href="trust-lines-and-issuing.html">Trust Lines and Issuing</a></li>
+                      <li><a class="nosubcat-page" href="authorized-trust-lines.html">Authorized Trust Lines</a></li>
+                      <li><a class="nosubcat-page" href="freezes.html">Freezing Issued Currencies</a></li>
+                      <li><a class="nosubcat-page" href="rippling.html">Rippling</a></li>
+                      <li><a class="nosubcat-page" href="transfer-fees.html">Transfer Fees</a></li>
+                      <li><a class="nosubcat-page" href="issuing-and-operational-addresses.html">Issuing and Operational Addresses</a></li>
+                      <li><a class="active nosubcat-page" href="paths.html">Paths</a></li>
+                      <li><a class="nosubcat-page" href="demurrage.html">Demurrage</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse28 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_38">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_38" aria-expanded="true" aria-controls="sidenav_collapse_38"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="decentralized-exchange.html">Decentralized Exchange</a>
+                <!-- <a class="sidenav_cat_title" href="decentralized-exchange.html">Decentralized Exchange</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_38" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_38">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="offers.html">Offers</a></li>
+                      <li><a class="nosubcat-page" href="autobridging.html">Auto-Bridging</a></li>
+                      <li><a class="nosubcat-page" href="ticksize.html">Tick Size</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse38 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_42">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_42" aria-expanded="true" aria-controls="sidenav_collapse_42"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="consensus-network.html">Consensus Network</a>
+                <!-- <a class="sidenav_cat_title" href="consensus-network.html">Consensus Network</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_42" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_42">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="consensus.html">Consensus</a></li>
+                      <li><a class="nosubcat-page" href="consensus-principles-and-rules.html">Consensus Principles and Rules</a></li>
+                      <li><a class="nosubcat-page" href="consensus-protections.html">Consensus Protections Against Attacks and Failure Modes</a></li>
+                      <li><a class="nosubcat-page" href="invariant-checking.html">Invariant Checking</a></li>
+                      <li><a class="nosubcat-page" href="transaction-queue.html">Transaction Queue</a></li>
+                      <li><a class="nosubcat-page" href="about-canceling-a-transaction.html">About Canceling a Transaction</a></li>
+                      <li><a class="nosubcat-page" href="transaction-malleability.html">Transaction Malleability</a></li>
+                      <li><a class="subcat-title" href="amendments.html">Amendments</a></li>
+
+                          <li><a class="subpage" href="known-amendments.html">Known Amendments</a></li>
+
+                      <li><a class="nosubcat-page" href="fee-voting.html">Fee Voting</a></li>
+                      <li><a class="nosubcat-page" href="consensus-research.html">Consensus Research</a></li>
+                      <li><a class="nosubcat-page" href="parallel-networks.html">Parallel Networks</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse42 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_55">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_55" aria-expanded="true" aria-controls="sidenav_collapse_55"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="the-rippled-server.html">The rippled Server</a>
+                <!-- <a class="sidenav_cat_title" href="the-rippled-server.html">The rippled Server</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_55" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_55">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="rippled-server-modes.html">rippled Server Modes</a></li>
+                      <li><a class="nosubcat-page" href="clustering.html">Clustering</a></li>
+                      <li><a class="subcat-title" href="ledger-history.html">Ledger History</a></li>
+
+                          <li><a class="subpage" href="online-deletion.html">Online Deletion</a></li>
+                          <li><a class="subpage" href="history-sharding.html">History Sharding</a></li>
+
+                      <li><a class="nosubcat-page" href="peer-protocol.html">Peer Protocol</a></li>
+                      <li><a class="nosubcat-page" href="transaction-censorship-detection.html">Transaction Censorship Detection</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse55 -->
+
+          </div><!-- /.card -->
+
+    </div><!-- /#sidenav -->
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">Learn</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">Explore</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">Build</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">Concepts</a></li>
+          <li class="level-1"><a href="tutorials.html">Tutorials</a></li>
+          <li class="level-1"><a href="references.html">References</a></li>
+          <li class="level-1"><a href="dev-tools.html">Dev Tools</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">License</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="Jump to top of page">Top</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:en"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>

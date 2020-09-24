@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>WebSocket API Tool - XRP Ledger Dev Portal (日本語)</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="/ja/assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="/ja/assets/css/fonts-ja.css" rel="stylesheet" />
+    <link href="/ja/assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-ja ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/ja/" class="navbar-brand"><img src="/ja/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal (日本語)" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">学ぶ</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">オーバービュー</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">探る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">作る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">ドキュメント</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">コンセプト</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">チュートリアル</a>
+          <a class="dropdown-item top-level-2" href="references.html">リファレンス</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">開発者用ツール</a>
+          <a class="dropdown-item top-level-1" href="/blog/">ブログ</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/tool/template-websocket-api-tool.html" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">サイトを検索</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="サイトを検索">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          日本語
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/websocket-api-tool.html">Eng</a>
+          <a class="dropdown-item" href="/ja/websocket-api-tool.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card">
+      <div class="card-header">
+        <h4>API Methods</h4>
+      </div>
+      <ul class="card-body command-list" id="command_list"></ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">ホーム</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">作る</a></li>
+    <li class="active breadcrumb-item"><a href="dev-tools.html">開発者用ツール</a></li>
+    <li class="active breadcrumb-item">WebSocket API Tool</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <section class="container-fluid pt-3 p-md-3 websocket-tool" id="wstool-1">
+    <h1>WebSocket Tool</h1>
+    <div class="api-method-description-wrapper">
+      <h3><a href="server_info.html" class="selected_command">server_info</a></h3>
+      <p class="blurb">Get information about the state of the server, formatted for human consumption.</p>
+      <a class="btn btn-outline-secondary api-readmore" href="server_info.html">Read more</a>
+    </div><!--/.api-method-description-wrapper-->
+
+    <div class="api-input-area pt-4">
+      <h4>Request</h4>
+      <div class="request-body"></div>
+      <div class="btn-toolbar justify-content-between" role="toolbar">
+        <div class="btn-group mr-3" role="group">
+          <button class="btn btn-outline-secondary send-request">Send request</button>
+          <div class="input-group loader send-loader" style="display:none;">
+            <span class="input-group-append">
+              <img src="assets/img/xrp-loader-96.png" height="24" width="24" />
+            </span><!--/.input-group-append-->
+          </div><!--/.input-group.loader-->
+        </div><!--/.btn-group-->
+        <div class="btn-group request-options" role="group">
+          <button class="btn btn-outline-secondary connection" data-toggle="modal" data-target="#wstool-1-connection-settings">Offline (Main Net)</button>
+          <div class="input-group loader connect-loader" style="display:none;">
+            <span class="input-group-append">
+              <img src="assets/img/xrp-loader-96.png" height="24" width="24" />
+            </span><!--/.input-group-append-->
+          </div><!--/.input-group.loader-->
+          <button class="btn btn-outline-secondary permalink" data-toggle="modal" data-target="#wstool-1-permalink" title="Permalink"><i class="fa fa-link"></i></button>
+          <button class="btn btn-outline-secondary curl" data-toggle="modal" data-target="#wstool-1-curl" title="cURL syntax"><i class="fa fa-terminal"></i></button>
+        </div><!--/.request-options.btn-group-->
+      </div><!--/.btn-toolbar-->
+    </div><!--/.api-input-area-->
+
+    <div class="api-response-area pt-4">
+      <h4>Responses</h4>
+
+      <div class="btn-toolbar justify-content-between response-options" role="toolbar">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <div class="input-group-text" id="wstool-1-keep-last-label">Keep last:</div>
+          </div><!--/.input-group-prepend-->
+          <input type="number" value="50" aria-label="Number of responses to keep at once" aria-describedby="wstool-1-keep-last-label" class="form-control keep-last">
+        </div><!--/.input-group-->
+
+        <div class="btn-group" role="group">
+          <button class="btn btn-outline-secondary stream-pause" title="Pause Subscriptions">
+            <i class="fa fa-pause"></i>
+          </button>
+          <button class="btn btn-outline-secondary stream-unpause" title="Unpause Subscriptions" style="display:none;">
+            <i class="fa fa-play"></i>
+          </button>
+          <button class="btn btn-outline-secondary wipe-responses" title="Delete All Responses">
+            <i class="fa fa-trash"></i>
+          </button>
+        </div><!--/.btn-group-->
+
+      </div><!--/.btn-toolbar.response-options-->
+
+      <div class="response-body-wrapper">
+      </div>
+    </div><!--/.api-response-area-->
+
+  </section>
+
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="dev-tools.html"> 開発者用ツール</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" aria-multiselectable="true">
+      <div class="card active">
+        <div class="card-body card-body-single">
+          <ul class="sidebar_pagelist">
+            <li><a class="nosubcat-page" href="xrp-ledger-rpc-tool.html">RPC Tool</a></li>
+            <li><a class="active nosubcat-page" href="websocket-api-tool.html">WebSocket API Tool</a></li>
+            <li><a class="nosubcat-page" href="data-api-v2-tool.html">Data API v2 Tool</a></li>
+            <li><a class="nosubcat-page" href="xrp-ledger-toml-checker.html">xrp-ledger.toml Checker</a></li>
+            <li><a class="nosubcat-page" href="validator-domain-verifier.html">Domain Verification Checker</a></li>
+            <li><a class="nosubcat-page" href="xrp-testnet-faucet.html">XRP Faucets</a></li>
+            <li><a class="nosubcat-page" href="tx-sender.html">Transaction Sender</a></li>
+          <li><a class="nosubcat-page" href="https://livenet.xrpl.org/" target="_blank">XRP Ledger Explorer <i class="fa fa-external-link"></i></a></li>
+          </ul>
+        </div><!-- /.card-body -->
+      </div><!-- /.card -->
+    </div><!-- /#sidenav -->
+
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">学ぶ</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">探る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">作る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">コンセプト</a></li>
+          <li class="level-1"><a href="tutorials.html">チュートリアル</a></li>
+          <li class="level-1"><a href="references.html">リファレンス</a></li>
+          <li class="level-1"><a href="dev-tools.html">開発者用ツール</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">ライセンス</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="このページの先頭へ">先頭へ</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:ja"] },
+debug: false
+});
+</script>
+
+  <!-- Modals for settings -->
+  <div class="modal fade" id="wstool-1-connection-settings" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Connection Settings</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="wstool-1-connection" id="wstool-1-connection-s1" value="wss://s1.ripple.com/" data-jsonrpcurl="https://s1.ripple.com:51234/" data-shortname="Mainnet" checked>
+            <label class="form-check-label" for="wstool-1-connection-s1">
+              s1.ripple.com (Mainnet Public Server)
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="wstool-1-connection" id="wstool-1-connection-s2" value="wss://s2.ripple.com/" data-jsonrpcurl="https://s2.ripple.com:51234/" data-shortname="Full History">
+            <label class="form-check-label" for="wstool-1-connection-s2">
+              s2.ripple.com (Full History Public Server)
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="wstool-1-connection" id="wstool-1-connection-testnet" value="wss://s.altnet.rippletest.net:51233/" data-jsonrpcurl="https://s.altnet.rippletest.net:51234/" data-shortname="Testnet">
+            <label class="form-check-label" for="wstool-1-connection-testnet">
+              s.altnet.rippletest.net (Testnet Public Server)
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="wstool-1-connection" id="wstool-1-connection-devnet" value="wss://s.devnet.rippletest.net:51233/" data-jsonrpcurl="https://s.devnet.rippletest.net:51234/" data-shortname="Devnet">
+            <label class="form-check-label" for="wstool-1-connection-devnet">
+              s.devnet.rippletest.net (Devnet Public Server)
+            </label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="radio" name="wstool-1-connection" id="wstool-1-connection-localhost" value="ws://localhost:6006/" data-jsonrpcurl="http://localhost:5005/" data-shortname="Local server">
+            <label class="form-check-label" for="wstool-1-connection-localhost">
+              localhost:6006 (Local <code>rippled</code> Server on port 6006) <br/>
+              <small>(Requires that you <a href="install-rippled.html">run <code>rippled</code></a> on this machine with default WebSocket settings)</small>
+            </label>
+          </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+        </div><!--/.modal-footer-->
+      </div><!--/.modal-content-->
+    </div><!--/.modal-dialog-->
+  </div><!--/.modal-->
+
+  <div class="modal fade" id="wstool-1-permalink" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Permalink</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form><div class="form-group">
+            <label for="permalink-box-1">Share the following link to load this page with the currently-loaded inputs:</label>
+            <textarea id="permalink-box-1" class="form-control">https://xrpl.org/websocket-api-tool.html?server=wss%3A%2F%2Fs1.ripple.com%2F&req=%7B%22id%22%3A1%2C%22command%22%3A%22server_info%22%7D</textarea>
+          </div></form>
+
+        </div><!--/.modal-body-->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+        </div><!--/.modal-footer-->
+      </div><!--/.modal-content-->
+    </div><!--/.modal-dialog-->
+  </div><!--/.modal-->
+
+  <div class="modal fade" id="wstool-1-curl" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">cURL Syntax</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form><div class="form-group">
+            <label for="curl-box-1">Use the following syntax to make the equivalent JSON-RPC request using <a href="https://curl.haxx.se/">cURL</a> from a commandline interface:</label>
+            <textarea id="curl-box-1" class="form-control" rows="8">curl -H 'Content-Type: application/json' -d '{"method":"server_info","params":[{}]}' https://s1.ripple.com:51234/</textarea>
+          </div></form>
+
+        </div><!--/.modal-body-->
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+        </div><!--/.modal-footer-->
+      </div><!--/.modal-content-->
+    </div><!--/.modal-dialog-->
+  </div><!--/.modal-->
+
+  <script type="text/javascript" src="assets/vendor/jsonlint.js"></script>
+  <!-- <link rel="stylesheet" type="text/css" href="assets/vendor/codemirror.css"/> -->
+  <script type="text/javascript" src="assets/vendor/codemirror-js-json-lint.min.js"></script>
+  <script type="text/javascript" src="assets/js/apitool-websocket.js"></script>
+  <script type="text/javascript" src="assets/js/apitool-methods-ws.js"></script>
+
+  <script type="application/javascript">
+    gtag('config', 'UA-157720658-3', {'content_group1': 'API Tools'});
+  </script>
+</body>
+</html>

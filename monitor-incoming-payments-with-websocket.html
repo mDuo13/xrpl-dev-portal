@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Monitor Incoming Payments with WebSocket - XRP Ledger Dev Portal</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/" class="navbar-brand"><img src="assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Learn</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">Overview</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Build</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">Docs</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">Concepts</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">Tutorials</a>
+          <a class="dropdown-item top-level-2" href="references.html">References</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">Dev Tools</a>
+          <a class="dropdown-item top-level-1" href="/blog/">Dev Blog</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/tutorials/get-started/monitor-incoming-payments-with-websocket.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">Search site...</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="Search site...">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Eng
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/monitor-incoming-payments-with-websocket.html">Eng</a>
+          <a class="dropdown-item" href="/ja/monitor-incoming-payments-with-websocket.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>In this document</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#monitor-incoming-payments-with-websocket">Monitor Incoming Payments with WebSocket</a></li>
+<li class="level-2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="level-2"><a href="#1-connect-to-the-xrp-ledger">1. Connect to the XRP Ledger</a></li>
+<li class="level-2"><a href="#2-dispatch-incoming-messages-to-handlers">2. Dispatch Incoming Messages to Handlers</a></li>
+<li class="level-2"><a href="#3-subscribe-to-the-account">3. Subscribe to the Account</a></li>
+<li class="level-2"><a href="#4-read-incoming-payments">4. Read Incoming Payments</a></li>
+<li class="level-2"><a href="#next-steps">Next Steps</a></li>
+<li class="level-2"><a href="#other-programming-languages">Other Programming Languages</a></li>
+<li class="level-2"><a href="#footnotes">Footnotes</a></li>
+<li class="level-2"><a href="#see-also">See Also</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">Build</a></li>
+    <li class="active breadcrumb-item"><a href="tutorials.html">Tutorials</a></li>
+    <li class="active breadcrumb-item"><a href="get-started.html">Get Started</a></li>
+    <li class="active breadcrumb-item">Monitor Incoming Payments with WebSocket</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="monitor-incoming-payments-with-websocket">Monitor Incoming Payments with WebSocket</h1>
+<p>This tutorial shows how to monitor for incoming <a href="payment-types.html">payments</a> using the <a href="rippled-api.html">WebSocket <code>rippled</code> API</a>. Since all XRP Ledger transactions are public, anyone can monitor incoming payments to any address.</p>
+<p>WebSocket follows a model where the client and server establish one connection, then send messages both ways through the same connection, which remains open until explicitly closed (or until the connection fails). This is in contrast to the HTTP-based API model (including JSON-RPC and RESTful APIs), where the client opens and closes a new connection for each request.<a href="#footnote-1">¹</a><a id="from-footnote-1"></a></p>
+<p class="devportal-callout tip"><strong>Tip:</strong> The examples in this page use JavaScript so that the examples can run natively in a web browser. If you are developing in JavaScript, you can also use the <a href="rippleapi-reference.html">RippleAPI library for JavaScript</a> to simplify some tasks. This tutorial shows how to monitor for transactions <em>without</em> using RippleAPI so that you can translate the steps to other programming languages that don't have RippleAPI.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<ul>
+<li>The examples in this page use JavaScript and the WebSocket protocol, which are available in all major modern browsers. If you have some JavaScript knowledge and expertise in another programming language with a WebSocket client, you can follow along while adapting the instructions to the language of your choice.</li>
+<li>You need a stable internet connection and access to a <code>rippled</code> server. The embedded examples connect to Ripple's pool of public servers. If you <a href="install-rippled.html">run your own <code>rippled</code> server</a>, you can also connect to that server locally.</li>
+<li>To properly handle XRP values without rounding errors, you need access to a number type that can do math on 64-bit unsigned integers. The examples in this tutorial use <a class="external-link" href="https://github.com/MikeMcl/big.js/" target="_blank">big.js <i aria-hidden="true" class="fa fa-external-link"></i></a>. If you are working with <a href="issued-currencies.html">issued currencies</a>, you need even more precision. For more information, see <a href="currency-formats.html#xrp-precision">Currency Precision</a>.</li>
+</ul>
+<!-- Helper for interactive tutorial breadcrumbs -->
+<script src="assets/vendor/big.min.js" type="application/javascript"></script>
+<script src="assets/js/interactive-tutorial.js" type="application/javascript"></script>
+<script type="application/javascript">
+// Helper stuff for this interactive tutorial specifically
+
+function writeToConsole(console_selector, message) {
+  let write_msg = "<div class='console-entry'>" + message + "</div>"
+  $(console_selector).find(".placeholder").remove()
+  $(console_selector).append(write_msg)
+  // TODO: JSON pretty-printing, maybe w/ multiple input args?
+}
+
+</script>
+<h2 id="1-connect-to-the-xrp-ledger">1. Connect to the XRP Ledger</h2>
+<p>The first step of monitoring for incoming payments is to connect to the XRP Ledger, specifically a <code>rippled</code> server.</p>
+<p>The following JavaScript code connects to one of Ripple's public server clusters. It then logs a message to the console, sends a request using the <a href="ping.html">ping method</a> and sets up a handler to log to the console again when it receives any message from the server side.</p>
+<div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s1">'wss://s.altnet.rippletest.net:51233'</span><span class="p">)</span>
+<span class="nx">socket</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'open'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// This callback runs when the connection is open</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Connected!"</span><span class="p">)</span>
+  <span class="kr">const</span> <span class="nx">command</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">"id"</span><span class="o">:</span> <span class="s2">"on_open_ping_1"</span><span class="p">,</span>
+    <span class="s2">"command"</span><span class="o">:</span> <span class="s2">"ping"</span>
+  <span class="p">}</span>
+  <span class="nx">socket</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">command</span><span class="p">))</span>
+<span class="p">})</span>
+<span class="nx">socket</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'message'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Got message from server:'</span><span class="p">,</span> <span class="nx">event</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
+<span class="p">})</span>
+<span class="nx">socket</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'close'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="c1">// Use this event to detect when you have become disconnected</span>
+  <span class="c1">// and respond appropriately.</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Disconnected...'</span><span class="p">)</span>
+<span class="p">})</span>
+</code></pre></div>
+<p>The above example opens a secure connection (<code>wss://</code>) to one of Ripple's public API servers on the <a href="xrp-test-net-faucet.html">Test Net</a>. To connect to a locally-running <code>rippled</code> server with the default configuration instead, open an <em>unsecured</em> connection (<code>ws://</code>) on port <strong>6006</strong> locally, using the following first line:</p>
+<div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">socket</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">WebSocket</span><span class="p">(</span><span class="s1">'ws://localhost:6006'</span><span class="p">)</span>
+</code></pre></div>
+<p class="devportal-callout tip"><strong>Tip:</strong> By default, connecting to a local <code>rippled</code> server gives you access to the full set of <a href="admin-rippled-methods.html">admin methods</a> and admin-only data in some responses such as <a href="server_info.html">server_info</a>, in addition to the <a href="public-rippled-methods.html">public methods</a> that are available when you connect to public servers over the internet.</p>
+<p>Example:</p>
+<div class="interactive-block" id="interactive-connect">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="connect" data-steplabel="Connect" id="bc-ul-connect">
+<li class="breadcrumb-item bc-connect current"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-dispatch_messages disabled"><a href="#interactive-dispatch_messages">Dispatch Messages</a></li><li class="breadcrumb-item bc-subscribe disabled"><a href="#interactive-subscribe">Subscribe</a></li><li class="breadcrumb-item bc-read_payments disabled"><a href="#interactive-read_payments">Read Payments</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary" id="connect-button">Connect</button>
+<strong>Connection status:</strong>
+<span id="connection-status">Not connected</span>
+<div id="loader-2" style="display: none;"><img class="throbber" src="assets/img/xrp-loader-96.png"/></div>
+<h5 id="console">Console:</h5>
+<div class="ws-console" id="monitor-console-connect"><span class="placeholder">(Log is empty)</span></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+let socket;
+$("#connect-button").click((event) => {
+  socket = new WebSocket('wss://s.altnet.rippletest.net:51233')
+  socket.addEventListener('open', (event) => {
+    // This callback runs when the connection is open
+    writeToConsole("#monitor-console-connect", "Connected!")
+    $("#connection-status").text("Connected")
+    const command = {
+      "id": "on_open_ping_1",
+      "command": "ping"
+    }
+    socket.send(JSON.stringify(command))
+
+    complete_step("Connect")
+    $("#connect-button").prop("disabled", "disabled")
+    $("#enable_dispatcher").prop("disabled",false)
+  })
+  socket.addEventListener('close', (event) => {
+    $("#connection-status").text("Disconnected")
+    $("#connect-button").prop("disabled", false)
+  })
+  socket.addEventListener('message', (event) => {
+    writeToConsole("#monitor-console-connect", "Got message from server: " +
+          JSON.stringify(event.data))
+  })
+})
+</script>
+<h2 id="2-dispatch-incoming-messages-to-handlers">2. Dispatch Incoming Messages to Handlers</h2>
+<p>Since WebSocket connections can have several messages going each way and there is not a strict 1:1 correlation between requests and responses, you need to identify what to do with each incoming message. A good model for coding this is to set up a "dispatcher" function that reads incoming messages and relays each message to the correct code path for handling it. To help dispatch messages appropriately, the <code>rippled</code> server provides a <code>type</code> field on every WebSocket message:</p>
+<ul>
+<li>
+<p>For any message that is a direct response to a request from the client side, the <code>type</code> is the string <code>response</code>. In this case, the server also provides the following:</p>
+<ul>
+<li>
+<p>An <code>id</code> field that matches the <code>id</code> provided in the request this is a response for. (This is important because responses may arrive out of order.)</p>
+</li>
+<li>
+<p>A <code>status</code> field that indicates whether the API successfully processed your request. The string value <code>success</code> indicates <a href="response-formatting.html">a successful response</a>. The string value <code>error</code> indicates <a href="error-formatting.html">an error</a>.</p>
+<p class="devportal-callout warning"><strong>Warning:</strong> When submitting transactions, a <code>status</code> of <code>success</code> at the top level of the WebSocket message does not mean that the transaction itself succeeded. It only indicates that the server understood your request. For looking up a transaction's actual outcome, see <a href="look-up-transaction-results.html">Look Up Transaction Results</a>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>For follow-up messages from <a href="subscribe.html">subscriptions</a>, the <code>type</code> indicates the type of follow-up message it is, such as the notification of a new transaction, ledger, or validation; or a follow-up to an ongoing <a href="path_find.html">pathfinding request</a>. Your client only receives these messages if it subscribes to them.</p>
+</li>
+</ul>
+<p class="devportal-callout tip"><strong>Tip:</strong> The <a href="rippleapi-reference.html">RippleAPI library for JavaScript</a> handles this step by default. All asynchronous API requests use Promises to provide the response, and you can listen to streams using the <a href="rippleapi-reference.html#listening-to-streams"><code>.on(event, callback)</code> method</a>.</p>
+<p>The following JavaScript code defines a helper function to make API requests into convenient asynchronous <a class="external-link" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises" target="_blank">Promises <i aria-hidden="true" class="fa fa-external-link"></i></a>, and sets up an interface to map other types of messages to global handlers:</p>
+<div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">AWAITING</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="kr">const</span> <span class="nx">handleResponse</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">data</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s2">"id"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">"Got response event without ID:"</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span>
+    <span class="k">return</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">AWAITING</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">id</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">AWAITING</span><span class="p">[</span><span class="nx">data</span><span class="p">.</span><span class="nx">id</span><span class="p">].</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">"Response to un-awaited request w/ ID "</span> <span class="o">+</span> <span class="nx">data</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">let</span> <span class="nx">autoid_n</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kd">function</span> <span class="nx">api_request</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">options</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s2">"id"</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">options</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">"autoid_"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">autoid_n</span><span class="o">++</span><span class="p">)</span>
+  <span class="p">}</span>
+
+  <span class="kd">let</span> <span class="nx">resolveHolder</span><span class="p">;</span>
+  <span class="nx">AWAITING</span><span class="p">[</span><span class="nx">options</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span> <span class="o">=</span> <span class="k">new</span> <span class="nb">Promise</span><span class="p">((</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Save the resolve func to be called by the handleResponse function later</span>
+    <span class="nx">resolveHolder</span> <span class="o">=</span> <span class="nx">resolve</span>
+    <span class="k">try</span> <span class="p">{</span>
+      <span class="c1">// Use the socket opened in the previous example...</span>
+      <span class="nx">socket</span><span class="p">.</span><span class="nx">send</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">options</span><span class="p">))</span>
+    <span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">reject</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+  <span class="nx">AWAITING</span><span class="p">[</span><span class="nx">options</span><span class="p">.</span><span class="nx">id</span><span class="p">].</span><span class="nx">resolve</span> <span class="o">=</span> <span class="nx">resolveHolder</span><span class="p">;</span>
+  <span class="k">return</span> <span class="nx">AWAITING</span><span class="p">[</span><span class="nx">options</span><span class="p">.</span><span class="nx">id</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="kr">const</span> <span class="nx">WS_HANDLERS</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s2">"response"</span><span class="o">:</span> <span class="nx">handleResponse</span>
+  <span class="c1">// Fill this out with your handlers in the following format:</span>
+  <span class="c1">// "type": function(event) { /* handle event of this type */ }</span>
+<span class="p">}</span>
+<span class="nx">socket</span><span class="p">.</span><span class="nx">addEventListener</span><span class="p">(</span><span class="s1">'message'</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">parsed_data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">data</span><span class="p">)</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">WS_HANDLERS</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">parsed_data</span><span class="p">.</span><span class="nx">type</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// Call the mapped handler</span>
+    <span class="nx">WS_HANDLERS</span><span class="p">[</span><span class="nx">parsed_data</span><span class="p">.</span><span class="nx">type</span><span class="p">](</span><span class="nx">parsed_data</span><span class="p">)</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Unhandled message from server"</span><span class="p">,</span> <span class="nx">event</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+
+<span class="c1">// Demonstrate api_request functionality</span>
+<span class="nx">async</span> <span class="kd">function</span> <span class="nx">pingpong</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Ping..."</span><span class="p">)</span>
+  <span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">api_request</span><span class="p">({</span><span class="nx">command</span><span class="o">:</span> <span class="s2">"ping"</span><span class="p">})</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Pong!"</span><span class="p">,</span> <span class="nx">response</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">pingpong</span><span class="p">()</span>
+</code></pre></div>
+<div class="interactive-block" id="interactive-dispatch_messages">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="dispatch_messages" data-steplabel="Dispatch Messages" id="bc-ul-dispatch_messages">
+<li class="breadcrumb-item bc-connect"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-dispatch_messages disabled current"><a href="#interactive-dispatch_messages">Dispatch Messages</a></li><li class="breadcrumb-item bc-subscribe disabled"><a href="#interactive-subscribe">Subscribe</a></li><li class="breadcrumb-item bc-read_payments disabled"><a href="#interactive-read_payments">Read Payments</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary" disabled="disabled" id="enable_dispatcher">Enable Dispatcher</button>
+<button class="btn btn-primary" disabled="disabled" id="dispatch_ping">Ping!</button>
+<h5 id="responses">Responses</h5>
+<div class="ws-console" id="monitor-console-ping"><span class="placeholder">(Log is empty)</span></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+const AWAITING = {}
+const handleResponse = function(data) {
+  if (!data.hasOwnProperty("id")) {
+    writeToConsole("#monitor-console-ping", "Got response event without ID:", data)
+    return
+  }
+  if (AWAITING.hasOwnProperty(data.id)) {
+    AWAITING[data.id].resolve(data)
+  } else {
+    writeToConsole("#monitor-console-ping", "Response to un-awaited request w/ ID " + data.id)
+  }
+}
+
+let autoid_n = 0
+function api_request(options) {
+  if (!options.hasOwnProperty("id")) {
+    options.id = "autoid_" + (autoid_n++)
+  }
+  let resolveFunc;
+  AWAITING[options.id] = new Promise((resolve, reject) => {
+    // Save the resolve func to be called by the handleResponse function later
+    resolveFunc = resolve
+    try {
+      // Use the socket opened in the previous example...
+      socket.send(JSON.stringify(options))
+    } catch(error) {
+      reject(error)
+    }
+  })
+  AWAITING[options.id].resolve = resolveFunc
+  return AWAITING[options.id]
+}
+
+const WS_HANDLERS = {
+  "response": handleResponse
+}
+$("#enable_dispatcher").click((clickEvent) => {
+  socket.addEventListener('message', (event) => {
+    const parsed_data = JSON.parse(event.data)
+    if (WS_HANDLERS.hasOwnProperty(parsed_data.type)) {
+      // Call the mapped handler
+      WS_HANDLERS[parsed_data.type](parsed_data)
+    } else {
+      writeToConsole("#monitor-console-ping", "Unhandled message from server: " + event)
+    }
+  })
+  complete_step("Dispatch Messages")
+  $("#dispatch_ping").prop("disabled", false)
+  $("#tx_subscribe").prop("disabled", false)
+})
+
+async function pingpong() {
+  const response = await api_request({command: "ping"})
+  writeToConsole("#monitor-console-ping", "Pong! " + JSON.stringify(response))
+}
+
+$("#dispatch_ping").click((event) => {
+  pingpong()
+})
+</script>
+<h2 id="3-subscribe-to-the-account">3. Subscribe to the Account</h2>
+<p>To get a live notification whenever a transaction affects your account, you can subscribe to the account with the <a href="subscribe.html">subscribe method</a>. In fact, it doesn't have to be your own account: since all transactions are public, you can subscribe to any account or even a combination of accounts.</p>
+<p>After you subscribe to one or more accounts, the server sends a message with <code>"type": "transaction"</code> on each <em>validated</em> transaction that affects any of the specified accounts in some way. To confirm this, look for <code>"validated": true</code> in the transaction messages.</p>
+<p>The following code sample subscribes to the Test Net Faucet's sending address. It logs a message on each such transaction by adding a handler to the dispatcher from the previous step.</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">async</span> <span class="kd">function</span> <span class="nx">do_subscribe</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">sub_response</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">api_request</span><span class="p">({</span>
+    <span class="nx">command</span><span class="o">:</span><span class="s2">"subscribe"</span><span class="p">,</span>
+    <span class="nx">accounts</span><span class="o">:</span> <span class="p">[</span><span class="s2">"rUCzEr6jrEyMpjhs4wSdQdz4g8Y382NxfM"</span><span class="p">]</span>
+  <span class="p">})</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">sub_response</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="s2">"success"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Successfully subscribed!"</span><span class="p">)</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s2">"Error subscribing: "</span><span class="p">,</span> <span class="nx">sub_response</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="nx">do_subscribe</span><span class="p">()</span>
+
+<span class="kr">const</span> <span class="nx">log_tx</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tx</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">tx</span><span class="p">.</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">TransactionType</span> <span class="o">+</span> <span class="s2">" transaction sent by "</span> <span class="o">+</span>
+              <span class="nx">tx</span><span class="p">.</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">Account</span> <span class="o">+</span>
+              <span class="s2">"\n  Result: "</span> <span class="o">+</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">TransactionResult</span> <span class="o">+</span>
+              <span class="s2">" in ledger "</span> <span class="o">+</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">ledger_index</span> <span class="o">+</span>
+              <span class="s2">"\n  Validated? "</span> <span class="o">+</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">validated</span><span class="p">)</span>
+<span class="p">}</span>
+<span class="nx">WS_HANDLERS</span><span class="p">[</span><span class="s2">"transaction"</span><span class="p">]</span> <span class="o">=</span> <span class="nx">log_tx</span>
+</code></pre></div>
+<p>For the following example, try opening the <a href="tx-sender.html">Transaction Sender</a> in a different window or even on a different device and sending transactions to the address you subscribed to:</p>
+<div class="interactive-block" id="interactive-subscribe">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="subscribe" data-steplabel="Subscribe" id="bc-ul-subscribe">
+<li class="breadcrumb-item bc-connect"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-dispatch_messages disabled"><a href="#interactive-dispatch_messages">Dispatch Messages</a></li><li class="breadcrumb-item bc-subscribe disabled current"><a href="#interactive-subscribe">Subscribe</a></li><li class="breadcrumb-item bc-read_payments disabled"><a href="#interactive-read_payments">Read Payments</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<label for="subscribe_address">Test Net Address:</label>
+<input class="form-control" id="subscribe_address" type="text" value="rUCzEr6jrEyMpjhs4wSdQdz4g8Y382NxfM"/>
+<button class="btn btn-primary" disabled="disabled" id="tx_subscribe">Subscribe</button>
+<h5 id="transactions">Transactions</h5>
+<div class="ws-console" id="monitor-console-subscribe"><span class="placeholder">(Log is empty)</span></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+async function do_subscribe() {
+  const sub_address = $("#subscribe_address").val()
+  const sub_response = await api_request({
+    command:"subscribe",
+    accounts: [sub_address]
+  })
+  if (sub_response.status === "success") {
+    writeToConsole("#monitor-console-subscribe", "Successfully subscribed!")
+  } else {
+    writeToConsole("#monitor-console-subscribe",
+                   "Error subscribing: " + JSON.stringify(sub_response))
+  }
+}
+$("#tx_subscribe").click((event) => {
+  do_subscribe()
+  complete_step("Subscribe")
+  $("#tx_read").prop("disabled", false)
+})
+
+const log_tx = function(tx) {
+  writeToConsole("#monitor-console-subscribe",
+                  tx.transaction.TransactionType + " transaction sent by " +
+                  tx.transaction.Account +
+                  "<br/>&nbsp;&nbsp;Result: " + tx.meta.TransactionResult +
+                  " in ledger " + tx.ledger_index +
+                  "<br/>&nbsp;&nbsp;Validated? " + tx.validated)
+}
+WS_HANDLERS["transaction"] = log_tx
+</script>
+<h2 id="4-read-incoming-payments">4. Read Incoming Payments</h2>
+<p>When you subscribe to an account, you get messages for <em>all transactions to or from the account</em>, as well as <em>transactions that affect the account indirectly</em>, such as trading its <a href="issued-currencies.html">issued currencies</a>. If your goal is to recognize when the account has received incoming payments, you must filter the transactions stream and process the payments based on the amount they actually delivered. Look for the following information:</p>
+<ul>
+<li>The <strong><code>validated</code> field</strong> indicates that the transaction's outcome is <a href="finality-of-results.html">final</a>. This should always be the case when you subscribe to <code>accounts</code>, but if you <em>also</em> subscribe to <code>accounts_proposed</code> or the <code>transactions_proposed</code> stream then the server sends similar messages on the same connection for unconfirmed transactions. As a precaution, it's best to always check the <code>validated</code> field.</li>
+<li>The <strong><code>meta.TransactionResult</code> field</strong> is the <a href="transaction-results.html">transaction result</a>. If the result is not <code>tesSUCCESS</code>, the transaction failed and cannot have delivered any value.</li>
+<li>The <strong><code>transaction.Account</code></strong> field is the sender of the transaction. If you are only looking for transactions sent by others, you can ignore any transactions where this field matches your account's address. (Keep in mind, it <em>is</em> possible to make a cross-currency payment to yourself.)</li>
+<li>
+<p>The <strong><code>transaction.TransactionType</code> field</strong> is the type of transaction. The transaction types that can possibly deliver currency to an account are as follows:</p>
+<ul>
+<li>
+<p><strong><a href="payment.html">Payment transactions</a></strong> can deliver XRP or <a href="issued-currencies.html">issued currencies</a>. Filter these by the <code>transaction.Destination</code> field, which contains the address of the recipient, and always use the <code>meta.delivered_amount</code> to see how much the payment actually delivered. XRP amounts are <a href="basic-data-types.html#specifying-currency-amounts">formatted as strings</a>.</p>
+<p class="devportal-callout warning"><strong>Warning:</strong> If you use the <code>transaction.Amount</code> field instead, you may be vulnerable to the <a href="partial-payments.html#partial-payments-exploit">partial payments exploit</a>. Malicious users can use this exploit to trick you into allowing the malicious user to trade or withdraw more money than they paid you.</p>
+</li>
+<li>
+<p><strong><a href="checkcash.html">CheckCash transactions</a></strong> allow an account to receive money authorized by a different account's <a href="checkcreate.html">CheckCreate transaction</a>. Look at the metadata of a <strong>CheckCash transaction</strong> to see how much currency the account received.</p>
+</li>
+<li>
+<p><strong><a href="escrowfinish.html">EscrowFinish transactions</a></strong> can deliver XRP by finishing an <a href="escrow.html">Escrow</a> created by a previous <a href="escrowcreate.html">EscrowCreate transaction</a>. Look at the metadata of the <strong>EscrowFinish transaction</strong> to see which account received XRP from the escrow and how much.</p>
+</li>
+<li>
+<p><strong><a href="offercreate.html">OfferCreate transactions</a></strong> can deliver XRP or issued currencies by consuming offers your account has previously placed in the XRP Ledger's <a href="decentralized-exchange.html">decentralized exchange</a>. If you never place offers, you cannot receive money this way. Look at the metadata to see what currency the account received, if any, and how much.</p>
+</li>
+<li>
+<p><strong><a href="paymentchannelclaim.html">PaymentChannelClaim transactions</a></strong> can deliver XRP from a <a href="payment-channels.html">payment channel</a>. Look at the metadata to see which accounts, if any, received XRP from the transaction.</p>
+</li>
+<li>
+<p><strong><a href="paymentchannelfund.html">PaymentChannelFund transactions</a></strong> can return XRP from a closed (expired) payment channel to the sender.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>The <strong><code>meta</code> field</strong> contains <a href="transaction-metadata.html">transaction metadata</a>, including exactly how much of which currency or currencies was delivered where. See <a href="look-up-transaction-results.html">Look Up transaction Results</a> for more information on how to understand transaction metadata.</p>
+</li>
+</ul>
+<p>The following sample code looks at transaction metadata of all the above transaction types to report how much XRP an account received:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">function</span> <span class="nx">CountXRPDifference</span><span class="p">(</span><span class="nx">affected_nodes</span><span class="p">,</span> <span class="nx">address</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Helper to find an account in an AffectedNodes array and see how much</span>
+  <span class="c1">// its balance changed, if at all. Fortunately, each account appears at most</span>
+  <span class="c1">// once in the AffectedNodes array, so we can return as soon as we find it.</span>
+
+  <span class="c1">// Note: this reports the net balance change. If the address is the sender,</span>
+  <span class="c1">// the transaction cost is deducted and combined with XRP sent/received</span>
+
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">affected_nodes</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">((</span><span class="nx">affected_nodes</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s2">"ModifiedNode"</span><span class="p">)))</span> <span class="p">{</span>
+      <span class="c1">// modifies an existing ledger entry</span>
+      <span class="kd">let</span> <span class="nx">ledger_entry</span> <span class="o">=</span> <span class="nx">affected_nodes</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">ModifiedNode</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">ledger_entry</span><span class="p">.</span><span class="nx">LedgerEntryType</span> <span class="o">===</span> <span class="s2">"AccountRoot"</span> <span class="o">&amp;&amp;</span>
+          <span class="nx">ledger_entry</span><span class="p">.</span><span class="nx">FinalFields</span><span class="p">.</span><span class="nx">Account</span> <span class="o">===</span> <span class="nx">address</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">ledger_entry</span><span class="p">.</span><span class="nx">PreviousFields</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s2">"Balance"</span><span class="p">))</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"XRP balance did not change."</span><span class="p">)</span>
+        <span class="p">}</span>
+        <span class="c1">// Balance is in PreviousFields, so it changed. Time for</span>
+        <span class="c1">// high-precision math!</span>
+        <span class="kr">const</span> <span class="nx">old_balance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Big</span><span class="p">(</span><span class="nx">ledger_entry</span><span class="p">.</span><span class="nx">PreviousFields</span><span class="p">.</span><span class="nx">Balance</span><span class="p">)</span>
+        <span class="kr">const</span> <span class="nx">new_balance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Big</span><span class="p">(</span><span class="nx">ledger_entry</span><span class="p">.</span><span class="nx">FinalFields</span><span class="p">.</span><span class="nx">Balance</span><span class="p">)</span>
+        <span class="kr">const</span> <span class="nx">diff_in_drops</span> <span class="o">=</span> <span class="nx">new_balance</span><span class="p">.</span><span class="nx">minus</span><span class="p">(</span><span class="nx">old_balance</span><span class="p">)</span>
+        <span class="kr">const</span> <span class="nx">xrp_amount</span> <span class="o">=</span> <span class="nx">diff_in_drops</span><span class="p">.</span><span class="nx">div</span><span class="p">(</span><span class="mi">1</span><span class="nx">e6</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">xrp_amount</span><span class="p">.</span><span class="nx">gte</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Received "</span> <span class="o">+</span> <span class="nx">xrp_amount</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">" XRP."</span><span class="p">)</span>
+          <span class="k">return</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Spent "</span> <span class="o">+</span> <span class="nx">xrp_amount</span><span class="p">.</span><span class="nx">abs</span><span class="p">().</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">" XRP."</span><span class="p">)</span>
+          <span class="k">return</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">((</span><span class="nx">affected_nodes</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s2">"CreatedNode"</span><span class="p">)))</span> <span class="p">{</span>
+      <span class="c1">// created a ledger entry. maybe the account just got funded?</span>
+      <span class="kd">let</span> <span class="nx">ledger_entry</span> <span class="o">=</span> <span class="nx">affected_nodes</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">CreatedNode</span>
+      <span class="k">if</span> <span class="p">(</span><span class="nx">ledger_entry</span><span class="p">.</span><span class="nx">LedgerEntryType</span> <span class="o">===</span> <span class="s2">"AccountRoot"</span> <span class="o">&amp;&amp;</span>
+          <span class="nx">ledger_entry</span><span class="p">.</span><span class="nx">NewFields</span><span class="p">.</span><span class="nx">Account</span> <span class="o">===</span> <span class="nx">address</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kr">const</span> <span class="nx">balance_drops</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Big</span><span class="p">(</span><span class="nx">ledger_entry</span><span class="p">.</span><span class="nx">NewFields</span><span class="p">.</span><span class="nx">Balance</span><span class="p">)</span>
+        <span class="kr">const</span> <span class="nx">xrp_amount</span> <span class="o">=</span> <span class="nx">balance_drops</span><span class="p">.</span><span class="nx">div</span><span class="p">(</span><span class="mi">1</span><span class="nx">e6</span><span class="p">)</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Received "</span> <span class="o">+</span> <span class="nx">xrp_amount</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">" XRP (account funded)."</span><span class="p">)</span>
+        <span class="k">return</span>
+      <span class="p">}</span>
+    <span class="p">}</span> <span class="c1">// accounts cannot be deleted at this time, so we ignore DeletedNode</span>
+  <span class="p">}</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Did not find address in affected nodes."</span><span class="p">)</span>
+  <span class="k">return</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">CountXRPReceived</span><span class="p">(</span><span class="nx">tx</span><span class="p">,</span> <span class="nx">address</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">tx</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">TransactionResult</span> <span class="o">!==</span> <span class="s2">"tesSUCCESS"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Transaction failed."</span><span class="p">)</span>
+    <span class="k">return</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">tx</span><span class="p">.</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">TransactionType</span> <span class="o">===</span> <span class="s2">"Payment"</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">tx</span><span class="p">.</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">Destination</span> <span class="o">!==</span> <span class="nx">address</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Not the destination of this payment."</span><span class="p">)</span>
+      <span class="k">return</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">delivered_amount</span> <span class="o">===</span> <span class="s2">"string"</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kr">const</span> <span class="nx">amount_in_drops</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Big</span><span class="p">(</span><span class="nx">tx</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">delivered_amount</span><span class="p">)</span>
+      <span class="kr">const</span> <span class="nx">xrp_amount</span> <span class="o">=</span> <span class="nx">amount_in_drops</span><span class="p">.</span><span class="nx">div</span><span class="p">(</span><span class="mi">1</span><span class="nx">e6</span><span class="p">)</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Received "</span> <span class="o">+</span> <span class="nx">xrp_amount</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">" XRP."</span><span class="p">)</span>
+      <span class="k">return</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Received non-XRP currency."</span><span class="p">)</span>
+      <span class="k">return</span>
+    <span class="p">}</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">([</span><span class="s2">"PaymentChannelClaim"</span><span class="p">,</span> <span class="s2">"PaymentChannelFund"</span><span class="p">,</span> <span class="s2">"OfferCreate"</span><span class="p">,</span>
+          <span class="s2">"CheckCash"</span><span class="p">,</span> <span class="s2">"EscrowFinish"</span><span class="p">].</span><span class="nx">includes</span><span class="p">(</span>
+          <span class="nx">tx</span><span class="p">.</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">TransactionType</span><span class="p">))</span> <span class="p">{</span>
+    <span class="nx">CountXRPDifference</span><span class="p">(</span><span class="nx">tx</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">AffectedNodes</span><span class="p">,</span> <span class="nx">address</span><span class="p">)</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Not a currency-delivering transaction type ("</span> <span class="o">+</span>
+                <span class="nx">tx</span><span class="p">.</span><span class="nx">transaction</span><span class="p">.</span><span class="nx">TransactionType</span> <span class="o">+</span> <span class="s2">")."</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<div class="interactive-block" id="interactive-read_payments">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="read_payments" data-steplabel="Read Payments" id="bc-ul-read_payments">
+<li class="breadcrumb-item bc-connect"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-dispatch_messages disabled"><a href="#interactive-dispatch_messages">Dispatch Messages</a></li><li class="breadcrumb-item bc-subscribe disabled"><a href="#interactive-subscribe">Subscribe</a></li><li class="breadcrumb-item bc-read_payments disabled current"><a href="#interactive-read_payments">Read Payments</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary" disabled="disabled" id="tx_read">Start Reading</button>
+<h5 id="transactions-1">Transactions</h5>
+<div class="ws-console" id="monitor-console-read"><span class="placeholder">(Log is empty)</span></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+function CountXRPDifference(affected_nodes, address) {
+  // Helper to find an account in an AffectedNodes array and see how much
+  // its balance changed, if at all. Fortunately, each account appears at most
+  // once in the AffectedNodes array, so we can return as soon as we find it.
+
+  // Note: this reports the net balance change. If the address is the sender,
+  // any XRP balance changes combined with the transaction cost.
+
+  for (let i=0; i<affected_nodes.length; i++) {
+    if ((affected_nodes[i].hasOwnProperty("ModifiedNode"))) {
+      // modifies an existing ledger entry
+      let ledger_entry = affected_nodes[i].ModifiedNode
+      if (ledger_entry.LedgerEntryType === "AccountRoot" &&
+          ledger_entry.FinalFields.Account === address) {
+        if (!ledger_entry.PreviousFields.hasOwnProperty("Balance")) {
+          writeToConsole("#monitor-console-read", "XRP balance did not change.")
+        }
+        // Balance is in PreviousFields, so it changed. Time for
+        // high-precision math!
+        const old_balance = new Big(ledger_entry.PreviousFields.Balance)
+        const new_balance = new Big(ledger_entry.FinalFields.Balance)
+        const diff_in_drops = new_balance.minus(old_balance)
+        const xrp_amount = diff_in_drops.div(1e6)
+        if (xrp_amount.gte(0)) {
+          writeToConsole("#monitor-console-read", "Received " + xrp_amount.toString()+" XRP.")
+          return
+        } else {
+          writeToConsole("#monitor-console-read", "Spent " + xrp_amount.abs().toString() + " XRP.")
+          return
+        }
+      }
+    } else if ((affected_nodes[i].hasOwnProperty("CreatedNode"))) {
+      // created a ledger entry. maybe the account got funded?
+      let ledger_entry = affected_nodes[i].CreatedNode
+      if (ledger_entry.LedgerEntryType === "AccountRoot" &&
+          ledger_entry.NewFields.Account === address) {
+        const balance_drops = new Big(ledger_entry.NewFields.Balance)
+        const xrp_amount = balance_drops.div(1e6)
+        writeToConsole("#monitor-console-read", "Received " + xrp_amount.toString() + " XRP (account funded).")
+        return
+      }
+    } // accounts cannot be deleted at this time, so we ignore DeletedNode
+  }
+
+  writeToConsole("#monitor-console-read", "Did not find address in affected nodes.")
+  return
+}
+
+function CountXRPReceived(tx, address) {
+  if (tx.meta.TransactionResult !== "tesSUCCESS") {
+    writeToConsole("#monitor-console-read", "Transaction failed.")
+    return
+  }
+  if (tx.transaction.TransactionType === "Payment") {
+    if (tx.transaction.Destination !== address) {
+      writeToConsole("#monitor-console-read", "Not the destination of this payment. (We're " +
+                      address + "; they're " + tx.transaction.Destination + ")")
+      return
+    }
+    if (typeof tx.meta.delivered_amount === "string") {
+      const amount_in_drops = new Big(tx.meta.delivered_amount)
+      const xrp_amount = amount_in_drops.div(1e6)
+      writeToConsole("#monitor-console-read", "Received " + xrp_amount.toString() + " XRP.")
+      return
+    } else {
+      writeToConsole("#monitor-console-read", "Received non-XRP currency.")
+      return
+    }
+  } else if (["PaymentChannelClaim", "PaymentChannelFund", "OfferCreate",
+          "CheckCash", "EscrowFinish"].includes(
+          tx.transaction.TransactionType)) {
+    CountXRPDifference(tx.meta.AffectedNodes, address)
+  } else {
+    writeToConsole("#monitor-console-read", "Not a currency-delivering transaction type (" +
+                tx.transaction.TransactionType + ").")
+  }
+}
+
+$("#tx_read").click((event) => {
+  // Wrap the existing "transaction" handler to do the old thing and also
+  // do the CountXRPReceived thing
+  const sub_address = $("#subscribe_address").val()
+  const old_handler = WS_HANDLERS["transaction"]
+  const new_handler = function(data) {
+    old_handler(data)
+    CountXRPReceived(data, sub_address)
+  }
+  WS_HANDLERS["transaction"] = new_handler
+  // Disable the button so you can't stack up multiple levels of the new handler
+  $("#tx_read").prop("disabled", "disabled")
+  complete_step("Read Payments")
+})
+</script>
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li><a href="look-up-transaction-results.html">Look Up Transaction Results</a> to see exactly what a transaction did, and build your software to react appropriately.</li>
+<li>Try <a href="send-xrp.html">Sending XRP</a> from your own address.</li>
+<li>Try monitoring for transactions of advanced types like <a href="escrow.html">Escrows</a>, <a href="checks.html">Checks</a>, or <a href="payment-channels.html">Payment Channels</a>, and responding to incoming notifications.
+<!-- --></li>
+</ul>
+<h2 id="other-programming-languages">Other Programming Languages</h2>
+<p>Many programming languages have libraries for sending and receiving data over a WebSocket connection. If you want a head-start on communicating with <code>rippled</code>'s WebSocket API in a language other than JavaScript, the following examples demonstrate similar functionality:</p>
+<div class="multicode" id="code-0"><ul class="codetabs"><li><a href="#code-0-0">Go</a></li></ul>
+
+<div class="code_sample" id="code-0-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="c1">// Connect to the XRPL Ledger using websocket and subscribe to an account</span>
+<span class="c1">// translation from the JavaScript example to Go</span>
+<span class="c1">// https://developers.ripple.com/monitor-incoming-payments-with-websocket.html</span>
+<span class="c1">// This example uses the Gorilla websocket library to create a websocket client</span>
+<span class="c1">// install: go get github.com/gorilla/websocket</span>
+
+<span class="kn">import</span> <span class="p">(</span>
+    <span class="s">"encoding/json"</span>
+    <span class="s">"flag"</span>
+    <span class="s">"log"</span>
+    <span class="s">"net/url"</span>
+    <span class="s">"os"</span>
+    <span class="s">"os/signal"</span>
+    <span class="s">"time"</span>
+
+    <span class="s">"github.com/gorilla/websocket"</span>
+<span class="p">)</span>
+
+<span class="c1">// websocket address</span>
+<span class="kd">var</span> <span class="nx">addr</span> <span class="p">=</span> <span class="nx">flag</span><span class="p">.</span><span class="nx">String</span><span class="p">(</span><span class="s">"addr"</span><span class="p">,</span> <span class="s">"s.altnet.rippletest.net:51233"</span><span class="p">,</span> <span class="s">"http service address"</span><span class="p">)</span>
+
+<span class="c1">// Payload object</span>
+<span class="kd">type</span> <span class="nx">message</span> <span class="kd">struct</span> <span class="p">{</span>
+    <span class="nx">Command</span>  <span class="kt">string</span>   <span class="s">`json:"command"`</span>
+    <span class="nx">Accounts</span> <span class="p">[]</span><span class="kt">string</span> <span class="s">`json:"accounts"`</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">flag</span><span class="p">.</span><span class="nx">Parse</span><span class="p">()</span>
+    <span class="nx">log</span><span class="p">.</span><span class="nx">SetFlags</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="kd">var</span> <span class="nx">m</span> <span class="nx">message</span>
+
+    <span class="c1">// check for interrupts and cleanly close the connection</span>
+    <span class="nx">interrupt</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="nx">os</span><span class="p">.</span><span class="nx">Signal</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="nx">signal</span><span class="p">.</span><span class="nx">Notify</span><span class="p">(</span><span class="nx">interrupt</span><span class="p">,</span> <span class="nx">os</span><span class="p">.</span><span class="nx">Interrupt</span><span class="p">)</span>
+
+    <span class="nx">u</span> <span class="o">:=</span> <span class="nx">url</span><span class="p">.</span><span class="nx">URL</span><span class="p">{</span><span class="nx">Scheme</span><span class="p">:</span> <span class="s">"ws"</span><span class="p">,</span> <span class="nx">Host</span><span class="p">:</span> <span class="o">*</span><span class="nx">addr</span><span class="p">,</span> <span class="nx">Path</span><span class="p">:</span> <span class="s">"/"</span><span class="p">}</span>
+    <span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"connecting to %s"</span><span class="p">,</span> <span class="nx">u</span><span class="p">.</span><span class="nx">String</span><span class="p">())</span>
+
+    <span class="c1">// make the connection</span>
+    <span class="nx">c</span><span class="p">,</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">websocket</span><span class="p">.</span><span class="nx">DefaultDialer</span><span class="p">.</span><span class="nx">Dial</span><span class="p">(</span><span class="nx">u</span><span class="p">.</span><span class="nx">String</span><span class="p">(),</span> <span class="kc">nil</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nx">Fatal</span><span class="p">(</span><span class="s">"dial:"</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+    <span class="p">}</span>
+    <span class="c1">// on exit close</span>
+    <span class="k">defer</span> <span class="nx">c</span><span class="p">.</span><span class="nx">Close</span><span class="p">()</span>
+
+    <span class="nx">done</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kd">struct</span><span class="p">{})</span>
+
+    <span class="c1">// send a subscribe command and a target XRPL account</span>
+    <span class="nx">m</span><span class="p">.</span><span class="nx">Command</span> <span class="p">=</span> <span class="s">"subscribe"</span>
+    <span class="nx">m</span><span class="p">.</span><span class="nx">Accounts</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">m</span><span class="p">.</span><span class="nx">Accounts</span><span class="p">,</span> <span class="s">"rUCzEr6jrEyMpjhs4wSdQdz4g8Y382NxfM"</span><span class="p">)</span>
+
+    <span class="c1">// struct to JSON marshalling</span>
+    <span class="nx">msg</span><span class="p">,</span> <span class="nx">_</span> <span class="o">:=</span> <span class="nx">json</span><span class="p">.</span><span class="nx">Marshal</span><span class="p">(</span><span class="nx">m</span><span class="p">)</span>
+    <span class="c1">// write to the websocket</span>
+    <span class="nx">err</span> <span class="p">=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">WriteMessage</span><span class="p">(</span><span class="nx">websocket</span><span class="p">.</span><span class="nx">TextMessage</span><span class="p">,</span> <span class="p">[]</span><span class="nb">byte</span><span class="p">(</span><span class="nb">string</span><span class="p">(</span><span class="nx">msg</span><span class="p">)))</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">"write:"</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+
+    <span class="c1">// read from the websocket</span>
+    <span class="nx">_</span><span class="p">,</span> <span class="nx">message</span><span class="p">,</span> <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">ReadMessage</span><span class="p">()</span>
+    <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+        <span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">"read:"</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+        <span class="k">return</span>
+    <span class="p">}</span>
+    <span class="c1">// print the response from the XRP Ledger</span>
+    <span class="nx">log</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">"recv: %s"</span><span class="p">,</span> <span class="nx">message</span><span class="p">)</span>
+
+    <span class="c1">// handle interrupt</span>
+    <span class="k">for</span> <span class="p">{</span>
+        <span class="k">select</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="o">&lt;-</span><span class="nx">done</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="k">case</span> <span class="o">&lt;-</span><span class="nx">interrupt</span><span class="p">:</span>
+            <span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">"interrupt"</span><span class="p">)</span>
+
+            <span class="c1">// Cleanly close the connection by sending a close message and then</span>
+            <span class="c1">// waiting (with timeout) for the server to close the connection.</span>
+            <span class="nx">err</span> <span class="o">:=</span> <span class="nx">c</span><span class="p">.</span><span class="nx">WriteMessage</span><span class="p">(</span><span class="nx">websocket</span><span class="p">.</span><span class="nx">CloseMessage</span><span class="p">,</span> <span class="nx">websocket</span><span class="p">.</span><span class="nx">FormatCloseMessage</span><span class="p">(</span><span class="nx">websocket</span><span class="p">.</span><span class="nx">CloseNormalClosure</span><span class="p">,</span> <span class="s">""</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nx">err</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+                <span class="nx">log</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">"write close:"</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="p">}</span>
+            <span class="k">select</span> <span class="p">{</span>
+            <span class="k">case</span> <span class="o">&lt;-</span><span class="nx">done</span><span class="p">:</span>
+            <span class="k">case</span> <span class="o">&lt;-</span><span class="nx">time</span><span class="p">.</span><span class="nx">After</span><span class="p">(</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">):</span>
+            <span class="p">}</span>
+            <span class="k">return</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+</div>
+<p class="devportal-callout tip"><strong>Tip:</strong> Don't see the programming language of your choice? Click the "Edit on GitHub" link at the top of this page and contribute your own sample code!</p>
+<h2 id="footnotes">Footnotes</h2>
+<p><a href="#from-footnote-1">1.</a> <a id="footnote-1"></a> In practice, when calling an HTTP-based API multiple times, the client and server may reuse the same connection for several requests and responses. This practice is called <a class="external-link" href="https://en.wikipedia.org/wiki/HTTP_persistent_connection" target="_blank">HTTP persistent connection, or keep-alive <i aria-hidden="true" class="fa fa-external-link"></i></a>. From a development standpoint, the code to use an HTTP-based API is the same regardless of whether the underlying connection is new or reused.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><strong>Concepts:</strong><ul>
+<li><a href="transaction-basics.html">Transaction Basics</a></li>
+<li><a href="finality-of-results.html">Finality of Results</a> - How to know when a transaction's success or failure is final. (Short version: if a transaction is in a validated ledger, its outcome and metadata are final.)</li>
+</ul>
+</li>
+<li><strong>Tutorials:</strong><ul>
+<li><a href="reliable-transaction-submission.html">Reliable Transaction Submission</a></li>
+<li><a href="look-up-transaction-results.html">Look Up Transaction Results</a></li>
+</ul>
+</li>
+<li><strong>References:</strong><ul>
+<li><a href="transaction-types.html">Transaction Types</a></li>
+<li><a href="transaction-metadata.html">Transaction Metadata</a> - Summary of the metadata format and fields that appear in metadata</li>
+<li><a href="transaction-results.html">Transaction Results</a> - Tables of all possible result codes for transactions.</li>
+</ul>
+</li>
+</ul>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- rippled release notes links -->
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="tutorials.html"> Tutorials</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+        <!---->
+          <div class="card active">
+            <div class="card-header" role="tab" id="sidenav_cat_head_2">
+                <a class="sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_2" aria-expanded="true" aria-controls="sidenav_collapse_2"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title active-parent" href="get-started.html">Get Started</a>
+                <!-- <a class="sidenav_cat_title" href="get-started.html">Get Started</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_2" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_2">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="get-started-with-the-rippled-api.html">Get Started with XRP Ledger APIs</a></li>
+                      <li><a class="nosubcat-page" href="get-started-with-rippleapi-for-javascript.html">Get Started with RippleAPI for Node.js</a></li>
+                      <li><a class="nosubcat-page" href="send-xrp.html">Send XRP</a></li>
+                      <li><a class="active nosubcat-page" href="monitor-incoming-payments-with-websocket.html">Monitor Incoming Payments with WebSocket</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse2 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_8">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_8" aria-expanded="true" aria-controls="sidenav_collapse_8"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="production-readiness.html">Production Readiness</a>
+                <!-- <a class="sidenav_cat_title" href="production-readiness.html">Production Readiness</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_8" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_8">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="set-up-secure-signing.html">Set Up Secure Signing</a></li>
+                      <li><a class="nosubcat-page" href="look-up-transaction-results.html">Look Up Transaction Results</a></li>
+                      <li><a class="nosubcat-page" href="reliable-transaction-submission.html">Reliable Transaction Submission</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse8 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_13">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_13" aria-expanded="true" aria-controls="sidenav_collapse_13"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="manage-account-settings.html">Manage Account Settings</a>
+                <!-- <a class="sidenav_cat_title" href="manage-account-settings.html">Manage Account Settings</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_13" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_13">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="assign-a-regular-key-pair.html">Assign a Regular Key Pair</a></li>
+                      <li><a class="nosubcat-page" href="change-or-remove-a-regular-key-pair.html">Change or Remove a Regular Key Pair</a></li>
+                      <li><a class="nosubcat-page" href="disable-master-key-pair.html">Disable Master Key Pair</a></li>
+                      <li><a class="nosubcat-page" href="set-up-multi-signing.html">Set Up Multi-Signing</a></li>
+                      <li><a class="nosubcat-page" href="send-a-multi-signed-transaction.html">Send a Multi-Signed Transaction</a></li>
+                      <li><a class="nosubcat-page" href="require-destination-tags.html">Require Destination Tags</a></li>
+                      <li><a class="nosubcat-page" href="offline-account-setup.html">Offline Account Setup Tutorial</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse13 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_21">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_21" aria-expanded="true" aria-controls="sidenav_collapse_21"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="use-specialized-payment-types.html">Use Specialized Payment Types</a>
+                <!-- <a class="sidenav_cat_title" href="use-specialized-payment-types.html">Use Specialized Payment Types</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_21" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_21">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="use-escrows.html">Use Escrows</a></li>
+
+                          <li><a class="subpage" href="send-a-time-held-escrow.html">Send a Time-Held Escrow</a></li>
+                          <li><a class="subpage" href="send-a-conditionally-held-escrow.html">Send a Conditionally-Held Escrow</a></li>
+                          <li><a class="subpage" href="cancel-an-expired-escrow.html">Cancel an Expired Escrow</a></li>
+                          <li><a class="subpage" href="look-up-escrows.html">Look up escrows</a></li>
+                          <li><a class="subpage" href="use-an-escrow-as-a-smart-contract.html">Use an Escrow as a Smart Contract</a></li>
+
+                      <li><a class="subcat-title" href="use-payment-channels.html">Use Payment Channels</a></li>
+
+                          <li><a class="subpage" href="open-a-payment-channel-to-enable-an-inter-exchange-network.html">Open a Payment Channel to Enable an Inter-Exchange Network</a></li>
+
+                      <li><a class="subcat-title" href="use-checks.html">Use Checks</a></li>
+
+                          <li><a class="subpage" href="send-a-check.html">Send a Check</a></li>
+                          <li><a class="subpage" href="cash-a-check-for-an-exact-amount.html">Cash a Check for an Exact Amount</a></li>
+                          <li><a class="subpage" href="cash-a-check-for-a-flexible-amount.html">Cash a Check for a Flexible Amount</a></li>
+                          <li><a class="subpage" href="cancel-a-check.html">Cancel a Check</a></li>
+                          <li><a class="subpage" href="look-up-checks-by-sender.html">Look Up Checks by Sender</a></li>
+                          <li><a class="subpage" href="look-up-checks-by-recipient.html">Look Up Checks by Recipient</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse21 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_38">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_38" aria-expanded="true" aria-controls="sidenav_collapse_38"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="xrp-ledger-businesses.html">XRP Ledger Businesses</a>
+                <!-- <a class="sidenav_cat_title" href="xrp-ledger-businesses.html">XRP Ledger Businesses</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_38" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_38">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="list-xrp-as-an-exchange.html">List XRP as an Exchange</a></li>
+                      <li><a class="nosubcat-page" href="list-your-exchange-on-xrp-charts.html">List Your Exchange on XRP Charts</a></li>
+                      <li><a class="nosubcat-page" href="become-an-xrp-ledger-gateway.html">Become an XRP Ledger Gateway</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse38 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_42">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_42" aria-expanded="true" aria-controls="sidenav_collapse_42"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="manage-the-rippled-server.html">Manage the rippled Server</a>
+                <!-- <a class="sidenav_cat_title" href="manage-the-rippled-server.html">Manage the rippled Server</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_42" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_42">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="install-rippled.html">Install rippled</a></li>
+
+                          <li><a class="subpage" href="system-requirements.html">System Requirements</a></li>
+                          <li><a class="subpage" href="install-rippled-on-centos-rhel-with-yum.html">Install on CentOS/Red Hat with yum</a></li>
+                          <li><a class="subpage" href="install-rippled-on-ubuntu.html">Install on Ubuntu or Debian Linux</a></li>
+                          <li><a class="subpage" href="update-rippled-automatically-on-linux.html">Update Automatically on Linux</a></li>
+                          <li><a class="subpage" href="update-rippled-manually-on-centos-rhel.html">Update Manually on CentOS/Red Hat</a></li>
+                          <li><a class="subpage" href="update-rippled-manually-on-ubuntu.html">Update Manually on Ubuntu or Debian</a></li>
+                          <li><a class="subpage" href="build-run-rippled-ubuntu.html">Build and Run rippled on Ubuntu</a></li>
+                          <li><a class="subpage" href="build-run-rippled-macos.html">Build and Run rippled on macOS</a></li>
+                          <li><a class="subpage" href="capacity-planning.html">Capacity Planning</a></li>
+                          <li><a class="subpage" href="rippled-1-3-migration-instructions.html">rippled v1.3.x Migration Instructions</a></li>
+
+                      <li><a class="subcat-title" href="configure-rippled.html">Configure rippled</a></li>
+
+                          <li><a class="subpage" href="run-rippled-as-a-validator.html">Run rippled as a Validator</a></li>
+                          <li><a class="subpage" href="run-rippled-as-a-wallet-server.html">Run rippled as a Wallet Server</a></li>
+                          <li><a class="subpage" href="configure-statsd.html">Configure StatsD</a></li>
+                          <li><a class="subpage" href="connect-your-rippled-to-the-xrp-test-net.html">Connect Your rippled to a Parallel Network</a></li>
+                          <li><a class="subpage" href="configure-online-deletion.html">Configure Online Deletion</a></li>
+                          <li><a class="subpage" href="configure-advisory-deletion.html">Configure Advisory Deletion</a></li>
+                          <li><a class="subpage" href="configure-history-sharding.html">Configure History Sharding</a></li>
+                          <li><a class="subpage" href="configure-full-history.html">Configure Full History</a></li>
+                          <li><a class="subpage" href="configure-grpc.html">Configure gRPC</a></li>
+                          <li><a class="subpage" href="enable-public-signing.html">Enable Public Signing</a></li>
+
+                      <li><a class="subcat-title" href="configure-peering.html">Configure Peering</a></li>
+
+                          <li><a class="subpage" href="cluster-rippled-servers.html">Cluster rippled Servers</a></li>
+                          <li><a class="subpage" href="configure-a-private-server.html">Configure a Private Server</a></li>
+                          <li><a class="subpage" href="configure-the-peer-crawler.html">Configure the Peer Crawler</a></li>
+                          <li><a class="subpage" href="enable-link-compression.html">Enable Link Compression</a></li>
+                          <li><a class="subpage" href="forward-ports-for-peering.html">Forward Ports for Peering</a></li>
+                          <li><a class="subpage" href="manually-connect-to-a-specific-peer.html">Manually Connect to a Specific Peer</a></li>
+                          <li><a class="subpage" href="set-max-number-of-peers.html">Set Maximum Number of Peers</a></li>
+                          <li><a class="subpage" href="use-a-peer-reservation.html">Use a Peer Reservation</a></li>
+
+                      <li><a class="subcat-title" href="use-stand-alone-mode.html">Test rippled Functionality in Stand-Alone Mode</a></li>
+
+                          <li><a class="subpage" href="start-a-new-genesis-ledger-in-stand-alone-mode.html">Start a New Genesis Ledger in Stand-Alone Mode</a></li>
+                          <li><a class="subpage" href="load-a-saved-ledger-in-stand-alone-mode.html">Load a Saved Ledger in Stand-Alone Mode</a></li>
+                          <li><a class="subpage" href="advance-the-ledger-in-stand-alone-mode.html">Advance the Ledger in Stand-Alone Mode</a></li>
+
+                      <li><a class="subcat-title" href="troubleshoot-the-rippled-server.html">Troubleshooting rippled</a></li>
+
+                          <li><a class="subpage" href="diagnosing-problems.html">Diagnosing Problems with rippled</a></li>
+                          <li><a class="subpage" href="health-check-interventions.html">Health Check Interventions</a></li>
+                          <li><a class="subpage" href="understanding-log-messages.html">Understanding Log Messages</a></li>
+                          <li><a class="subpage" href="server-doesnt-sync.html">rippled Server Doesn't Sync</a></li>
+                          <li><a class="subpage" href="server-wont-start.html">rippled Server Won't Start</a></li>
+                          <li><a class="subpage" href="fix-sqlite-tx-db-page-size-issue.html">Fix SQLite Transaction Database Page Size Issue</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse42 -->
+
+          </div><!-- /.card -->
+
+    </div><!-- /#sidenav -->
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">Learn</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">Explore</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">Build</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">Concepts</a></li>
+          <li class="level-1"><a href="tutorials.html">Tutorials</a></li>
+          <li class="level-1"><a href="references.html">References</a></li>
+          <li class="level-1"><a href="dev-tools.html">Dev Tools</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">License</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="Jump to top of page">Top</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:en"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>

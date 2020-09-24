@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>XRPの送金 - XRP Ledger Dev Portal (日本語)</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="/ja/assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="/ja/assets/css/fonts-ja.css" rel="stylesheet" />
+    <link href="/ja/assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-ja ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/ja/" class="navbar-brand"><img src="/ja/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal (日本語)" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">学ぶ</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">オーバービュー</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">探る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">作る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">ドキュメント</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">コンセプト</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">チュートリアル</a>
+          <a class="dropdown-item top-level-2" href="references.html">リファレンス</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">開発者用ツール</a>
+          <a class="dropdown-item top-level-1" href="/blog/">ブログ</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/tutorials/use-simple-xrp-payments/send-xrp.ja.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">サイトを検索</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="サイトを検索">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          日本語
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/send-xrp.html">Eng</a>
+          <a class="dropdown-item" href="/ja/send-xrp.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>目次</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#xrpの送金">XRPの送金</a></li>
+<li class="level-2"><a href="#前提条件">前提条件</a></li>
+<li class="level-2"><a href="#test-netでの送金">Test Netでの送金</a></li>
+<li class="level-3"><a href="#1-test-netサーバーへの接続">1. Test Netサーバーへの接続</a></li>
+<li class="level-3"><a href="#2-トランザクションの準備">2. トランザクションの準備</a></li>
+<li class="level-3"><a href="#3-トランザクションの指示への署名">3. トランザクションの指示への署名</a></li>
+<li class="level-3"><a href="#4-署名済みブロブの送信">4. 署名済みブロブの送信</a></li>
+<li class="level-3"><a href="#5-検証の待機">5. 検証の待機</a></li>
+<li class="level-3"><a href="#6-トランザクションステータスの確認">6. トランザクションステータスの確認</a></li>
+<li class="level-2"><a href="#本番環境の場合の相違点">本番環境の場合の相違点</a></li>
+<li class="level-3"><a href="#実際のxrpアカウントの取得">実際のXRPアカウントの取得</a></li>
+<li class="level-3"><a href="#本番xrp-ledgerへの接続">本番XRP Ledgerへの接続</a></li>
+<li class="level-2"><a href="#次のステップ">次のステップ</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">ホーム</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">作る</a></li>
+    <li class="active breadcrumb-item"><a href="tutorials.html">チュートリアル</a></li>
+    <li class="active breadcrumb-item"><a href="get-started.html">使用開始</a></li>
+    <li class="active breadcrumb-item">XRPの送金</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="xrpの送金">XRPの送金</h1>
+<p>このチュートリアルでは、RippleAPI for JavaScriptを使用してシンプルなXRP送金を行う方法について説明します。まずは、XRP Test Netを使用してプロセスを順に進めます。次に、そのプロセスと、本番で同様の処理を行う場合に発生する追加要件とを比較します。</p>
+<h2 id="前提条件">前提条件</h2>
+<!-- Interactive example use ripple-lib and its prerequisites -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
+<script src="assets/js/ripple-lib-1.8.0-min.js" type="application/javascript"></script>
+<!-- Helper for interactive tutorial breadcrumbs -->
+<script src="assets/js/interactive-tutorial.js" type="application/javascript"></script>
+<ul>
+<li>
+<p>このページでは、ripple-lib（RippleAPI）ライブラリーバージョン1.1.2を使用するJavaScriptの例を紹介します。<a href="get-started-with-rippleapi-for-javascript.html">RippleAPI入門ガイド</a>に、RippleAPIを使用してJavaScriptからXRP Ledgerデータにアクセスする方法の説明があります。</p>
+</li>
+<li>
+<p>XRP Ledgerでトランザクションを送信するには、まずアドレスと秘密鍵、そしていくらかのXRPが必要となります。次のインターフェイスを使用して、XRP Test NetにあるアドレスとTest Net XRPを入手できます。</p>
+</li>
+</ul>
+<div class="interactive-block" id="interactive-generate">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="generate" data-steplabel="Generate" id="bc-ul-generate">
+<li class="breadcrumb-item bc-generate current"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-connect disabled"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-prepare disabled"><a href="#interactive-prepare">Prepare</a></li><li class="breadcrumb-item bc-sign disabled"><a href="#interactive-sign">Sign</a></li><li class="breadcrumb-item bc-submit disabled"><a href="#interactive-submit">Submit</a></li><li class="breadcrumb-item bc-wait disabled"><a href="#interactive-wait">Wait</a></li><li class="breadcrumb-item bc-check disabled"><a href="#interactive-check">Check</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary" id="generate-creds-button">資格情報を作成する</button>
+<div id="loader-0" style="display: none;"><img class="throbber" src="assets/img/xrp-loader-96.png"/> Generating Keys...</div>
+<div id="address"></div>
+<div id="secret"></div>
+<div id="balance"></div>
+<div id="populate-creds-status"></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+$(document).ready( () => {
+
+  $("#generate-creds-button").click( () => {
+    // Wipe existing results
+    $("#address").html("")
+    $("#secret").html("")
+    $("#balance").html("")
+    $("#populate-creds-status").html("")
+
+    $("#loader-0").show()
+
+    $.ajax({
+      url: "https://faucet.altnet.rippletest.net/accounts",
+      type: 'POST',
+      dataType: 'json',
+      success: function(data) {
+        $("#loader-0").hide()
+        $("#address").hide().html("<strong>Address:</strong> " +
+          '<span id="test-net-faucet-address">' +
+          data.account.address
+          + "</span>").show()
+        $("#secret").hide().html('<strong>Secret:</strong> ' +
+          '<span id="test-net-faucet-secret">' +
+          data.account.secret +
+          "</span>").show()
+        $("#balance").hide().html('<strong>Balance:</strong> ' +
+          Number(data.balance).toLocaleString('en') +
+          ' XRP').show()
+
+        // Automatically populate examples with these credentials...
+        // Set sender address
+        let generated_addr = ""
+        $("code span:contains('"+EXAMPLE_ADDR+"')").each( function() {
+          let eltext = $(this).text()
+          $(this).text( eltext.replace(EXAMPLE_ADDR, data.account.address) )
+        })
+
+        // Set sender secret
+        $("code span:contains('"+EXAMPLE_SECRET+"')").each( function() {
+          let eltext = $(this).text()
+          $(this).text( eltext.replace(EXAMPLE_SECRET, data.account.secret) )
+        })
+
+        $("#populate-creds-status").text("Populated this page's examples with these credentials.")
+
+        complete_step("Generate")
+
+      },
+      error: function() {
+        $("#loader-0").hide();
+        alert("There was an error with the Ripple Test Net, please try again.");
+      }
+    })
+  })
+
+  const EXAMPLE_ADDR = "rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe"
+  const EXAMPLE_SECRET = "s████████████████████████████"
+  $("#populate-creds-button").click( () => {
+
+  })
+
+})
+</script>
+<p class="devportal-callout 注意"><strong>注意:</strong> RippleはXRP Test Netをテストの目的でのみ運用しており、Test Netの状態とすべての残高を定期的にリセットしています。予防措置として、Test Netと本番で同じアドレスを使用<strong>しない</strong>ことをお勧めします。</p>
+<h2 id="test-netでの送金">Test Netでの送金</h2>
+<h3 id="1-test-netサーバーへの接続">1. Test Netサーバーへの接続</h3>
+<p>必須の自動入力可能フィールドに入力されるようにするために、ripple-libを、アカウントの現在のステータスと共有レジャー自体を取得できるサーバーに接続する必要があります。（セキュリティを高めるために、トランザクションの署名はオフライン中に行うことを推奨します。ただしその場合は、自動入力可能フィールドに手動で入力する必要があります。）トランザクションの送信先となるネットワークに接続する必要があります。</p>
+<p>以下のサンプルコードでは、新しいRippleAPIインスタンスを作成し、Rippleが運用している公開XRP Test Netサーバーに接続します。</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">ripple</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ripple-lib'</span><span class="p">)</span>
+<span class="nx">api</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ripple</span><span class="p">.</span><span class="nx">RippleAPI</span><span class="p">({</span><span class="nx">server</span><span class="o">:</span> <span class="s1">'wss://s.altnet.rippletest.net:51233'</span><span class="p">})</span>
+<span class="nx">api</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
+</code></pre></div>
+<p>このチュートリアルでは、以下のボタンをクリックすることでブラウザーから直接接続できます。</p>
+<div class="interactive-block" id="interactive-connect">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="connect" data-steplabel="Connect" id="bc-ul-connect">
+<li class="breadcrumb-item bc-generate"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-connect disabled current"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-prepare disabled"><a href="#interactive-prepare">Prepare</a></li><li class="breadcrumb-item bc-sign disabled"><a href="#interactive-sign">Sign</a></li><li class="breadcrumb-item bc-submit disabled"><a href="#interactive-submit">Submit</a></li><li class="breadcrumb-item bc-wait disabled"><a href="#interactive-wait">Wait</a></li><li class="breadcrumb-item bc-check disabled"><a href="#interactive-check">Check</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary" id="connect-button">TestNetに接続する</button>
+<div>
+<strong>Connection status:</strong>
+<span id="connection-status">Not connected</span>
+<div id="loader-2" style="display: none;"><img class="throbber" src="assets/img/xrp-loader-96.png"/></div>
+</div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+api = new ripple.RippleAPI({server: 'wss://s.altnet.rippletest.net:51233'})
+api.on('connected', () => {
+  $("#connection-status").text("Connected")
+  $("#connect-button").prop("disabled", true)
+  $("#loader-2").hide()
+
+  // Update breadcrumbs & active next step
+  complete_step("Connect")
+  $("#interactive-prepare button").prop("disabled", false)
+  $("#interactive-prepare button").prop("title", "")
+})
+api.on('disconnected', (code) => {
+  $("#connection-status").text( "Disconnected ("+code+")" )
+  $("#connect-button").prop("disabled", false)
+  $(".connection-required").prop("disabled", true)
+  $(".connection-required").prop("title", "Connection to Test Net required")
+})
+$("#connect-button").click(() => {
+  $("#connection-status").text( "Connecting..." )
+  $("#loader-2").show()
+  api.connect()
+})
+</script>
+<h3 id="2-トランザクションの準備">2. トランザクションの準備</h3>
+<p>通常は、XRP LedgerトランザクションをオブジェクトとしてJSON<a href="transaction-formats.html">トランザクションフォーマット</a>で作成します。以下の例に、必要最小限の送金仕様を示します。</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">"TransactionType"</span><span class="p">:</span> <span class="s2">"Payment"</span><span class="p">,</span>
+  <span class="nt">"Account"</span><span class="p">:</span> <span class="s2">"rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe"</span><span class="p">,</span>
+  <span class="nt">"Amount"</span><span class="p">:</span> <span class="s2">"2000000"</span><span class="p">,</span>
+  <span class="nt">"Destination"</span><span class="p">:</span> <span class="s2">"rUCzEr6jrEyMpjhs4wSdQdz4g8Y382NxfM"</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>XRP送金に対して指定する必要がある必要最小限の指示は次のとおりです。</p>
+<ul>
+<li>これが送金であることを示すインディケーター（<code>"TransactionType": "Payment"</code>）</li>
+<li>送信元アドレス（<code>"Account"</code>）</li>
+<li>XRPを受け取るアドレス（<code>"Destination"</code>）。このアドレスは送信元アドレスと同じものではいけません。</li>
+<li>送金するXRP額（<code>"Amount"</code>）。通常、XRPの「drop数」を示す整数として指定します。1,000,000ドロップは1 XRPです。</li>
+</ul>
+<p>技術上、一部の追加のフィールドは実行可能なトランザクションに含める必要があり、また、省略可能なフィールドでも、<code>LastLedgerSequence</code>などは含めることを強く推奨します。<a href="rippleapi-reference.html#preparetransaction"><code>prepareTransaction()</code>メソッド</a>は、トランザクションの残りのフィールドに適切なデフォルトを自動的に入力します。上記の送金を準備する際の例を示します。</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Continuing after connecting to the API</span>
+<span class="nx">async</span> <span class="kd">function</span> <span class="nx">doPrepare</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">sender</span> <span class="o">=</span> <span class="s2">"rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe"</span>
+  <span class="kr">const</span> <span class="nx">preparedTx</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">api</span><span class="p">.</span><span class="nx">prepareTransaction</span><span class="p">({</span>
+    <span class="s2">"TransactionType"</span><span class="o">:</span> <span class="s2">"Payment"</span><span class="p">,</span>
+    <span class="s2">"Account"</span><span class="o">:</span> <span class="nx">sender</span><span class="p">,</span>
+    <span class="s2">"Amount"</span><span class="o">:</span> <span class="nx">api</span><span class="p">.</span><span class="nx">xrpToDrops</span><span class="p">(</span><span class="s2">"22"</span><span class="p">),</span> <span class="c1">// Same as "Amount": "22000000"</span>
+    <span class="s2">"Destination"</span><span class="o">:</span> <span class="s2">"rUCzEr6jrEyMpjhs4wSdQdz4g8Y382NxfM"</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="c1">// Expire this transaction if it doesn't execute within ~5 minutes:</span>
+    <span class="s2">"maxLedgerVersionOffset"</span><span class="o">:</span> <span class="mi">75</span>
+  <span class="p">})</span>
+  <span class="kr">const</span> <span class="nx">maxLedgerVersion</span> <span class="o">=</span> <span class="nx">preparedTx</span><span class="p">.</span><span class="nx">instructions</span><span class="p">.</span><span class="nx">maxLedgerVersion</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Prepared transaction instructions:"</span><span class="p">,</span> <span class="nx">preparedTx</span><span class="p">.</span><span class="nx">txJSON</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Transaction cost:"</span><span class="p">,</span> <span class="nx">preparedTx</span><span class="p">.</span><span class="nx">instructions</span><span class="p">.</span><span class="nx">fee</span><span class="p">,</span> <span class="s2">"XRP"</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Transaction expires after ledger:"</span><span class="p">,</span> <span class="nx">maxLedgerVersion</span><span class="p">)</span>
+  <span class="k">return</span> <span class="nx">preparedTx</span><span class="p">.</span><span class="nx">txJSON</span>
+<span class="p">}</span>
+<span class="nx">txJSON</span> <span class="o">=</span> <span class="nx">doPrepare</span><span class="p">()</span>
+</code></pre></div>
+<div class="interactive-block" id="interactive-prepare">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="prepare" data-steplabel="Prepare" id="bc-ul-prepare">
+<li class="breadcrumb-item bc-generate"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-connect disabled"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-prepare disabled current"><a href="#interactive-prepare">Prepare</a></li><li class="breadcrumb-item bc-sign disabled"><a href="#interactive-sign">Sign</a></li><li class="breadcrumb-item bc-submit disabled"><a href="#interactive-submit">Submit</a></li><li class="breadcrumb-item bc-wait disabled"><a href="#interactive-wait">Wait</a></li><li class="breadcrumb-item bc-check disabled"><a href="#interactive-check">Check</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary connection-required" disabled="" id="prepare-button" title="Connect to Test Net first">サンプルトランザクションを準備する</button>
+<div id="prepare-output"></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+  $("#prepare-button").click( async function() {
+    // Wipe existing results
+    $("#prepare-output").html("")
+
+    const sender = $("#test-net-faucet-address").text() || "rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe"
+    const preparedTx = await api.prepareTransaction({
+      "TransactionType": "Payment",
+      "Account": sender,
+      "Amount": api.xrpToDrops("22"), // Same as "Amount": "22000000"
+      "Destination": "rUCzEr6jrEyMpjhs4wSdQdz4g8Y382NxfM"
+    }, {
+      // Expire this transaction if it doesn't execute within ~5 minutes:
+      "maxLedgerVersionOffset": 75
+    })
+    const maxLedgerVersion = preparedTx.instructions.maxLedgerVersion
+    $("#tx-lls").text(maxLedgerVersion) //for the table in the later step
+
+    $("#prepare-output").html(
+      "<div><strong>Prepared transaction instructions:</strong> <pre><code id='prepared-tx-json'>" +
+      JSON.stringify(JSON.parse(preparedTx.txJSON), null, 2) + "</code></pre></div>" +
+      "<div><strong>Transaction cost:</strong> " +
+      preparedTx.instructions.fee + " XRP</div>" +
+      "<div><strong>Transaction expires after ledger:</strong> " +
+      maxLedgerVersion + "</div>"
+    )
+
+    // Update breadcrumbs & active next step
+    complete_step("Prepare")
+    $("#interactive-sign button").prop("disabled", false)
+    $("#interactive-sign button").prop("title", "")
+  })
+</script>
+<h3 id="3-トランザクションの指示への署名">3. トランザクションの指示への署名</h3>
+<p>RippleAPIの<a href="rippleapi-reference.html#sign">sign()メソッド</a>を使用して、トランザクションに署名します。最初の引数は、署名するJSONトランザクションの文字列バージョンです。</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Continuing from the previous step...</span>
+<span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span><span class="nx">txJSON</span><span class="p">,</span> <span class="s2">"s████████████████████████████"</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">txID</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">id</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Identifying hash:"</span><span class="p">,</span> <span class="nx">txID</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">txBlob</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">signedTransaction</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Signed blob:"</span><span class="p">,</span> <span class="nx">txBlob</span><span class="p">)</span>
+</code></pre></div>
+<p>署名処理の結果は、署名を含むトランザクションオブジェクトになります。通常、XRP Ledger APIは、署名済みトランザクションがトランザクションの正規の<a href="serialization.html">バイナリーフォーマット</a>（「ブロブ」と呼ばれる）の16進数表現になることを想定しています。</p>
+<p>署名APIは、トランザクションのID、つまり識別用ハッシュを返します。この識別用ハッシュは、後でトランザクションを検索する際に使用します。識別用ハッシュは、このトランザクションに固有の64文字の16進文字列です。</p>
+<div class="interactive-block" id="interactive-sign">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="sign" data-steplabel="Sign" id="bc-ul-sign">
+<li class="breadcrumb-item bc-generate"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-connect disabled"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-prepare disabled"><a href="#interactive-prepare">Prepare</a></li><li class="breadcrumb-item bc-sign disabled current"><a href="#interactive-sign">Sign</a></li><li class="breadcrumb-item bc-submit disabled"><a href="#interactive-submit">Submit</a></li><li class="breadcrumb-item bc-wait disabled"><a href="#interactive-wait">Wait</a></li><li class="breadcrumb-item bc-check disabled"><a href="#interactive-check">Check</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary connection-required" disabled="" id="sign-button" title="Complete all previous steps first">サンプルトランザクションに署名する</button>
+<div id="sign-output"></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+  $("#sign-button").click( function() {
+    // Wipe previous output
+    $("#sign-output").html("")
+
+    const preparedTxJSON = $("#prepared-tx-json").text()
+    const secret = $("#test-net-faucet-secret").text()
+
+    if (!secret) {
+      alert("Can't sign transaction without a real secret. Generate credentials first.")
+      return
+    }
+
+    signResponse = api.sign(preparedTxJSON, secret)
+
+    $("#sign-output").html(
+      "<div><strong>Signed Transaction blob:</strong> <code id='signed-tx-blob' style='overflow-wrap: anywhere; word-wrap: anywhere'>" +
+      signResponse.signedTransaction + "</code></div>" +
+      "<div><strong>Identifying hash:</strong> <span id='signed-tx-hash'>" +
+      signResponse.id + "</span></div>"
+    )
+
+    // Update all breadcrumbs & activate next step
+    complete_step("Sign")
+    $("#interactive-submit button").prop("disabled", false)
+  })
+</script>
+<h3 id="4-署名済みブロブの送信">4. 署名済みブロブの送信</h3>
+<p><a href="rippleapi-reference.html#submit">submit()メソッド</a>を使用して、トランザクションをネットワークに送信します。送信する前に、<a href="rippleapi-reference.html#getledgerversion">getLedgerVersion()メソッド</a>を使用して最新の検証済みレジャーインデックスを書き留めておくことをお勧めします。この送信の結果としてトランザクションが追加される可能性のある最も古いレジャーバージョンは、送信時に最新の検証済みレジャーより1つ大きなバージョンとなります。</p>
+<p>ただし、同じトランザクションが以前に送信されたことがある場合、そのトランザクションはすでに以前のレジャーに入っています。（2回目の送信は成功しませんが、正しいレジャーバージョンの中を確認しないと、すでに成功していたことに気付かない可能性があります。）</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// use txBlob from the previous example</span>
+<span class="nx">async</span> <span class="kd">function</span> <span class="nx">doSubmit</span><span class="p">(</span><span class="nx">txBlob</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">latestLedgerVersion</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">api</span><span class="p">.</span><span class="nx">getLedgerVersion</span><span class="p">()</span>
+
+  <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">api</span><span class="p">.</span><span class="nx">submit</span><span class="p">(</span><span class="nx">txBlob</span><span class="p">)</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Tentative result code:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">resultCode</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Tentative result message:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">resultMessage</span><span class="p">)</span>
+
+  <span class="c1">// Return the earliest ledger index this transaction could appear in</span>
+  <span class="c1">// as a result of this submission, which is the first one after the</span>
+  <span class="c1">// validated ledger at time of submission.</span>
+  <span class="k">return</span> <span class="nx">latestLedgerVersion</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">earliestLedgerVersion</span> <span class="o">=</span> <span class="nx">doSubmit</span><span class="p">(</span><span class="nx">txBlob</span><span class="p">)</span>
+</code></pre></div>
+<p>このメソッドは、ローカルでトランザクションを適用しようと試みたときの<strong>一時的な</strong>結果を返します。この結果は、トランザクションが検証済みレジャーに含まれた時点で変わる_可能性があります_。当初は成功していたトランザクションが最終的に失敗となったり、当初失敗していたトランザクションが最終的に成功する場合があります。しかしながら、一時的な結果はほとんどの場合は最終結果と一致するため、ここで<code>tesSUCCESS</code>が表示されたらひとまず安心しても問題ありません。😁</p>
+<p>他の結果が表示された場合は、以下の点を確認します。</p>
+<ul>
+<li>送信元および送信先の正しいアドレスを使用しているか。</li>
+<li>トランザクションの他のフィールドへの入力漏れ、ステップのスキップ、その他の入力ミスがないか。</li>
+<li>トランザクションの送信に必要なTest Net XRPが十分にあるか。送金できるXRPの額は、<a href="reserves.html">必要準備金</a>によって制限されています。現時点では、20XRPに加えて、レジャー内に保有している各「オブジェクト」につき5XRPずつ追加となります。（Test Net Faucetを使用して新しいアドレスを生成した場合は、保有するオブジェクトはありません。）</li>
+<li>テストネットワークのサーバーに接続しているか。</li>
+</ul>
+<p>他の可能性については、<a href="transaction-results.html">トランザクション結果</a>の完全なリストを参照してください。</p>
+<div class="interactive-block" id="interactive-submit">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="submit" data-steplabel="Submit" id="bc-ul-submit">
+<li class="breadcrumb-item bc-generate"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-connect disabled"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-prepare disabled"><a href="#interactive-prepare">Prepare</a></li><li class="breadcrumb-item bc-sign disabled"><a href="#interactive-sign">Sign</a></li><li class="breadcrumb-item bc-submit disabled current"><a href="#interactive-submit">Submit</a></li><li class="breadcrumb-item bc-wait disabled"><a href="#interactive-wait">Wait</a></li><li class="breadcrumb-item bc-check disabled"><a href="#interactive-check">Check</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary connection-required" disabled="" id="submit-button" title="Connection to Test Net required">サンプルトランザクションを送信する</button>
+<div id="loader-5" style="display: none;"><img class="throbber" src="assets/img/xrp-loader-96.png"/></div>
+<div id="submit-output"></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+  $("#submit-button").click( async function() {
+    $("#submit-output").html("") // Wipe previous output
+    $("#loader-5").show()
+
+    const txBlob = $("#signed-tx-blob").text()
+    const earliestLedgerVersion = await api.getLedgerVersion()
+    $("#earliest-ledger-version").text(earliestLedgerVersion)
+
+    try {
+      const result = await api.submit(txBlob)
+      $("#loader-5").hide()
+      $("#submit-output").html(
+        "<div><strong>Tentative result:</strong> " +
+        result.resultCode + " - " +
+        result.resultMessage +
+        "</div>"
+      )
+
+      // Update breadcrumbs & active next step
+      complete_step("Submit")
+    }
+    catch(error) {
+      $("#loader-5").hide()
+      $("#submit-output").text("Error: "+error)
+    }
+
+  })
+</script>
+<h3 id="5-検証の待機">5. 検証の待機</h3>
+<p>ほとんどのトランザクションは送信後の次のレジャーバージョンに承認されます。つまり、4～7秒でトランザクションの結果が最終的なものになる可能性があります。XRP Ledgerがビジーになっているか、ネットワーク接続の品質が悪いためにトランザクションをネットワーク内で中継する処理が遅延した場合は、トランザクション確定までにもう少し時間がかかることがあります。（トランザクションの有効期限を設定する方法については、<a href="reliable-transaction-submission.html">信頼できるトランザクションの送信</a>を参照してください。）</p>
+<p>RippleAPIの<code>ledger</code>イベントタイプを使用して、新しい検証済みレジャーバージョンがあるときにコードが実行されるようにしておきます。例:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'ledger'</span><span class="p">,</span> <span class="nx">ledger</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Ledger version"</span><span class="p">,</span> <span class="nx">ledger</span><span class="p">.</span><span class="nx">ledgerVersion</span><span class="p">,</span> <span class="s2">"was validated."</span><span class="p">)</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">ledger</span><span class="p">.</span><span class="nx">ledgerVersion</span> <span class="o">&gt;</span> <span class="nx">maxLedgerVersion</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"If the transaction hasn't succeeded by now, it's expired"</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+<div class="interactive-block" id="interactive-wait">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="wait" data-steplabel="Wait" id="bc-ul-wait">
+<li class="breadcrumb-item bc-generate"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-connect disabled"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-prepare disabled"><a href="#interactive-prepare">Prepare</a></li><li class="breadcrumb-item bc-sign disabled"><a href="#interactive-sign">Sign</a></li><li class="breadcrumb-item bc-submit disabled"><a href="#interactive-submit">Submit</a></li><li class="breadcrumb-item bc-wait disabled current"><a href="#interactive-wait">Wait</a></li><li class="breadcrumb-item bc-check disabled"><a href="#interactive-check">Check</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<table>
+<tr>
+<th>Latest Validated Ledger Version:</th>
+<td id="current-ledger-version">(Not connected)</td>
+</tr>
+<tr>
+<th>Ledger Version at Time of Submission:</th>
+<td id="earliest-ledger-version">(Not submitted)</td>
+</tr>
+<tr>
+<th>Transaction LastLedgerSequence:</th>
+<td id="tx-lls"></td>
+</tr>
+</table>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+api.on('ledger', ledger => {
+  $("#current-ledger-version").text(ledger.ledgerVersion)
+
+  if ( $(".breadcrumb-item.bc-wait").hasClass("active") ) {
+    // Advance to "Check" as soon as we see a ledger close
+    complete_step("Wait")
+    $("#get-tx-button").prop("disabled", false)
+  }
+})
+</script>
+<h3 id="6-トランザクションステータスの確認">6. トランザクションステータスの確認</h3>
+<p>トランザクションが行った内容を正確に把握するために、トランザクションが検証済みレジャーバージョンに記録されたときにトランザクションの結果を調べる必要があります。例えば、<a href="rippleapi-reference.html#gettransaction">getTransaction()メソッド</a>を使用して、トランザクションのステータスを確認できます。</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Continues from previous examples.</span>
+<span class="c1">// earliestLedgerVersion was noted when the transaction was submitted.</span>
+<span class="c1">// txID was noted when the transaction was signed.</span>
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nx">tx</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">api</span><span class="p">.</span><span class="nx">getTransaction</span><span class="p">(</span><span class="nx">txID</span><span class="p">,</span> <span class="p">{</span><span class="nx">minLedgerVersion</span><span class="o">:</span> <span class="nx">earliestLedgerVersion</span><span class="p">})</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Transaction result:"</span><span class="p">,</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">outcome</span><span class="p">.</span><span class="nx">result</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Balance changes:"</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">tx</span><span class="p">.</span><span class="nx">outcome</span><span class="p">.</span><span class="nx">balanceChanges</span><span class="p">))</span>
+<span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Couldn't get transaction outcome:"</span><span class="p">,</span> <span class="nx">error</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>RippleAPIの<code>getTransaction()</code>メソッドは、トランザクションが検証済みレジャーバージョンに登録された場合にのみ成功を返します。登録されなかった場合は、<code>await</code>式が例外を発生させます。</p>
+<p class="devportal-callout 注意"><strong>注意:</strong> 他のAPIは、まだ検証されていないレジャーバージョンからの暫定的な結果を返す場合があります。例えば、<code>rippled</code> APIの<a href="tx.html">txメソッド</a>を使用した場合は、応答内の<code>"validated": true</code>を探して、データが検証済みレジャーバージョンからのものであることを確認してください。検証済みレジャーバージョンからのものではないトランザクション結果は、変わる可能性があります。詳細は、<a href="finality-of-results.html">結果のファイナリティー</a>を参照してください。</p>
+<div class="interactive-block" id="interactive-check">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="check" data-steplabel="Check" id="bc-ul-check">
+<li class="breadcrumb-item bc-generate"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-connect disabled"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-prepare disabled"><a href="#interactive-prepare">Prepare</a></li><li class="breadcrumb-item bc-sign disabled"><a href="#interactive-sign">Sign</a></li><li class="breadcrumb-item bc-submit disabled"><a href="#interactive-submit">Submit</a></li><li class="breadcrumb-item bc-wait disabled"><a href="#interactive-wait">Wait</a></li><li class="breadcrumb-item bc-check disabled current"><a href="#interactive-check">Check</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary connection-required" disabled="" id="get-tx-button" title="Connection to Test Net required">トランザクションステータスを確認する</button>
+<div id="get-tx-output"></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+  $("#get-tx-button").click( async function() {
+    // Wipe previous output
+    $("#get-tx-output").html("")
+
+    const txID = $("#signed-tx-hash").text()
+    const earliestLedgerVersion = parseInt($("#earliest-ledger-version").text(), 10)
+
+    try {
+      const tx = await api.getTransaction(txID, {minLedgerVersion: earliestLedgerVersion})
+
+      $("#get-tx-output").html(
+        "<div><strong>Transaction result:</strong> " +
+        tx.outcome.result + "</div>" +
+        "<div><strong>Balance changes:</strong> <pre><code>" +
+        JSON.stringify(tx.outcome.balanceChanges, null, 2) +
+        "</pre></code></div>"
+      )
+
+      complete_step("Check")
+    } catch(error) {
+      $("#get-tx-output").text("Couldn't get transaction outcome:" + error)
+    }
+
+  })
+</script>
+<h2 id="本番環境の場合の相違点">本番環境の場合の相違点</h2>
+<p>本番XRP LedgerでXRPを送金する場合も、大部分の手順は同じです。ただし、必要なセットアップでは重要な相違点がいくつかあります。</p>
+<ul>
+<li><a href="#実際のxrpアカウントの取得">実際のXRPは無料で取得できません。</a></li>
+<li><a href="#本番xrp-ledgerへの接続">本番XRP Ledgerネットワークと同期されているサーバーに接続する必要があります。</a></li>
+</ul>
+<h3 id="実際のxrpアカウントの取得">実際のXRPアカウントの取得</h3>
+<p>このチュートリアルでは、Test Net XRPがすでに資金供給されているアドレスをボタンで取得しましたが、それが可能だったのはTest Net XRPに何の価値もないからです。実際のXRPでは、XRPを所有している他者からXRPを入手する必要があります。（たとえば、取引所で購入する方法など。）RippleAPIの<a href="rippleapi-reference.html#generateaddress">generateAddress()メソッド</a>を使用して、本番またはTest Netで機能するアドレスとシークレットを生成できます。</p>
+<div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">generated</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">generateAddress</span><span class="p">()</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">generated</span><span class="p">.</span><span class="nx">address</span><span class="p">)</span> <span class="c1">// Example: rGCkuB7PBr5tNy68tPEABEtcdno4hE6Y7f</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">generated</span><span class="p">.</span><span class="nx">secret</span><span class="p">)</span> <span class="c1">// Example: sp6JS7f14BuwFY8Mw6bTtLKWauoUs</span>
+</code></pre></div>
+<p class="devportal-callout 警告"><strong>警告:</strong> ローカルマシンで安全な方法で生成したアドレスとシークレットのみを使用してください。別のコンピューターでアドレスとシークレットを生成して、ネットワーク経由でそれらを自分に送信した場合は、ネットワーク上の他の人がその情報を見ることができる可能性があります。その情報見ることができる人は、あなたと同じようにあなたのXRPを操作できます。また、Test Netと本番で同じアドレスを使用しないことも推奨します。指定したパラメーターによっては、一方のネットワークに向けて作成したトランザクションが、もう一方のネットワークでも実行可能になるおそれがあるためです。</p>
+<p>アドレスとシークレットを生成しても、直接XRPを入手できるわけではありません。単に乱数を選択しているだけです。また、そのアドレスでXRPを受け取って<a href="accounts.html#アカウントの作成">アカウントに資金供給</a>する必要があります。XRPを取得する方法として最も一般的なのは、取引所から購入し、所有しているアドレスに入れる方法です。詳細は、Rippleの<a class="external-link" href="https://ripple.com/xrp/buy-xrp/" target="_blank">XRP購入ガイド <i aria-hidden="true" class="fa fa-external-link"></i></a>を参照してください。</p>
+<h3 id="本番xrp-ledgerへの接続">本番XRP Ledgerへの接続</h3>
+<p><code>RippleAPI</code>オブジェクトのインスタンスを作成するときに、適切なXRP Ledgerと同期しているサーバーを指定する必要があります。多くの場合はRippleの公開サーバーを、以下のスニペットなどで使用できます。</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">ripple</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ripple-lib'</span><span class="p">)</span>
+<span class="nx">api</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ripple</span><span class="p">.</span><span class="nx">RippleAPI</span><span class="p">({</span><span class="nx">server</span><span class="o">:</span> <span class="s1">'wss://s1.ripple.com:51233'</span><span class="p">})</span>
+<span class="nx">api</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
+</code></pre></div>
+<p>自分で<a href="install-rippled.html"><code>rippled</code>をインストール</a>した場合は、デフォルトで本番ネットワークに接続されます。（代わりに、<a href="connect-your-rippled-to-the-xrp-test-net.html">Test Netに接続するように構成</a>することもできます。）サーバーが同期されると（通常は起動から約15分以内）、RippleAPIをサーバーにローカルで接続することができます。そうすると、<a href="rippled-server-modes.html#ストックサーバーを運用する理由">さまざまなメリット</a>があります。以下の例は、RippleAPIをデフォルト構成で運用されているサーバーに接続する方法を示しています。</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">ripple</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ripple-lib'</span><span class="p">)</span>
+<span class="nx">api</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ripple</span><span class="p">.</span><span class="nx">RippleAPI</span><span class="p">({</span><span class="nx">server</span><span class="o">:</span> <span class="s1">'ws://localhost:6006'</span><span class="p">})</span>
+<span class="nx">api</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
+</code></pre></div>
+<p class="devportal-callout ヒント"><strong>ヒント:</strong> ローカル接続では、WebSocketプロトコルのTLSで暗号化されたバージョン（<code>wss</code>）ではなく、暗号化されていないバージョン（<code>ws</code>）を使用します。この方式は、通信が同じマシンの中だけで行われてマシンの外に出て行かないという点で安全で、TLS証明書が不要であるため設定が簡単です。外部ネットワークとの接続では、必ず<code>wss</code>を使用してください。</p>
+<h2 id="次のステップ">次のステップ</h2>
+<p>このチュートリアルを完了後は、以下を試してみてください。</p>
+<ul>
+<li>本番システム向けに<a href="reliable-transaction-submission.html">信頼できるトランザクションの送信</a>を構築する</li>
+<li><a href="rippleapi-reference.html">RippleAPI JavaScriptリファレンス</a>を参照して、XRP Ledgerの全機能を確認する</li>
+<li><a href="manage-account-settings.html">アカウント設定</a>をカスタマイズする</li>
+<li><a href="transaction-metadata.html">トランザクションのメタデータ</a>にトランザクションの結果の詳細がどのように記述されているかを知る</li>
+<li>escrowやPayment Channelなどの<a href="complex-payment-types.html">複雑な支払いタイプ</a>について調べる</li>
+<li><a href="xrp-ledger-businesses.html">XRP Ledgerビジネス</a>のベストプラクティスを読む</li>
+</ul>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- rippled release notes links -->
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="tutorials.html"> チュートリアル</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+        <!---->
+          <div class="card active">
+            <div class="card-header" role="tab" id="sidenav_cat_head_2">
+                <a class="sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_2" aria-expanded="true" aria-controls="sidenav_collapse_2"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title active-parent" href="get-started.html">使用開始</a>
+                <!-- <a class="sidenav_cat_title" href="get-started.html">Get Started</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_2" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_2">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="get-started-with-the-rippled-api.html">XRP Ledger APIの使用開始</a></li>
+                      <li><a class="nosubcat-page" href="get-started-with-rippleapi-for-javascript.html">RippleAPI入門ガイド</a></li>
+                      <li><a class="active nosubcat-page" href="send-xrp.html">XRPの送金</a></li>
+                      <li><a class="nosubcat-page" href="monitor-incoming-payments-with-websocket.html">WebSocketを使用した着信ペイメントの監視</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse2 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_8">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_8" aria-expanded="true" aria-controls="sidenav_collapse_8"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="production-readiness.html">Production Readiness</a>
+                <!-- <a class="sidenav_cat_title" href="production-readiness.html">Production Readiness</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_8" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_8">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="set-up-secure-signing.html">安全な署名の設定</a></li>
+                      <li><a class="nosubcat-page" href="look-up-transaction-results.html">トランザクションの結果の確認</a></li>
+                      <li><a class="nosubcat-page" href="reliable-transaction-submission.html">信頼できるトランザクションの送信</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse8 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_13">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_13" aria-expanded="true" aria-controls="sidenav_collapse_13"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="manage-account-settings.html">アカウントの設定の利用</a>
+                <!-- <a class="sidenav_cat_title" href="manage-account-settings.html">Manage Account Settings</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_13" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_13">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="assign-a-regular-key-pair.html">レギュラーキーペアの割り当て</a></li>
+                      <li><a class="nosubcat-page" href="change-or-remove-a-regular-key-pair.html">レギュラーキーペアの変更または削除</a></li>
+                      <li><a class="nosubcat-page" href="disable-master-key-pair.html">Disable Master Key Pair</a></li>
+                      <li><a class="nosubcat-page" href="set-up-multi-signing.html">マルチ署名の設定</a></li>
+                      <li><a class="nosubcat-page" href="send-a-multi-signed-transaction.html">マルチ署名済みトランザクションの送信</a></li>
+                      <li><a class="nosubcat-page" href="require-destination-tags.html">宛先タグの要求</a></li>
+                      <li><a class="nosubcat-page" href="offline-account-setup.html">オフラインでのアカウント設定のチュートリアル</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse13 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_21">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_21" aria-expanded="true" aria-controls="sidenav_collapse_21"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="use-specialized-payment-types.html">専門化した支払いタイプの使用</a>
+                <!-- <a class="sidenav_cat_title" href="use-specialized-payment-types.html">Use Specialized Payment Types</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_21" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_21">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="use-escrows.html">Escrowの使用</a></li>
+
+                          <li><a class="subpage" href="send-a-time-held-escrow.html">時間に基づくEscrowの送信</a></li>
+                          <li><a class="subpage" href="send-a-conditionally-held-escrow.html">条件に基づくEscrowの送信</a></li>
+                          <li><a class="subpage" href="cancel-an-expired-escrow.html">有効期限切れEscrowの取消し</a></li>
+                          <li><a class="subpage" href="look-up-escrows.html">Escrowの検索</a></li>
+                          <li><a class="subpage" href="use-an-escrow-as-a-smart-contract.html">Use an Escrow as a Smart Contract</a></li>
+
+                      <li><a class="subcat-title" href="use-payment-channels.html">Payment Channelの使用</a></li>
+
+                          <li><a class="subpage" href="open-a-payment-channel-to-enable-an-inter-exchange-network.html">Open a Payment Channel to Enable an Inter-Exchange Network</a></li>
+
+                      <li><a class="subcat-title" href="use-checks.html">Checksの使用</a></li>
+
+                          <li><a class="subpage" href="send-a-check.html">Checkの送信</a></li>
+                          <li><a class="subpage" href="cash-a-check-for-an-exact-amount.html">Checkの正確な金額での換金</a></li>
+                          <li><a class="subpage" href="cash-a-check-for-a-flexible-amount.html">Checkの変動金額での換金</a></li>
+                          <li><a class="subpage" href="cancel-a-check.html">Checkの取消し</a></li>
+                          <li><a class="subpage" href="look-up-checks-by-sender.html">送金元に基づくCheckの検索</a></li>
+                          <li><a class="subpage" href="look-up-checks-by-recipient.html">受取人に基づくCheckの検索</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse21 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_38">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_38" aria-expanded="true" aria-controls="sidenav_collapse_38"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="xrp-ledger-businesses.html">XRP Ledgerが利用する会社について</a>
+                <!-- <a class="sidenav_cat_title" href="xrp-ledger-businesses.html">XRP Ledger Businesses</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_38" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_38">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="list-xrp-as-an-exchange.html">取引所としてのXRPの上場</a></li>
+                      <li><a class="nosubcat-page" href="list-your-exchange-on-xrp-charts.html">XRP Chartsへの取引所の登録</a></li>
+                      <li><a class="nosubcat-page" href="become-an-xrp-ledger-gateway.html">Become an XRP Ledger Gateway</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse38 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_42">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_42" aria-expanded="true" aria-controls="sidenav_collapse_42"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="manage-the-rippled-server.html">rippledサーバの利用</a>
+                <!-- <a class="sidenav_cat_title" href="manage-the-rippled-server.html">Manage the rippled Server</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_42" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_42">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="install-rippled.html">rippledのインストール</a></li>
+
+                          <li><a class="subpage" href="system-requirements.html">システム要件</a></li>
+                          <li><a class="subpage" href="install-rippled-on-centos-rhel-with-yum.html">yumを使用したCentOS/Red Hatへのインストール</a></li>
+                          <li><a class="subpage" href="install-rippled-on-ubuntu.html">UbuntuまたはDebian Linuxへのインストール</a></li>
+                          <li><a class="subpage" href="update-rippled-automatically-on-linux.html">Linuxでの自動更新</a></li>
+                          <li><a class="subpage" href="update-rippled-manually-on-centos-rhel.html">CentOS/Red Hatでの手動更新</a></li>
+                          <li><a class="subpage" href="update-rippled-manually-on-ubuntu.html">UbuntuまたはDebianでの手動更新</a></li>
+                          <li><a class="subpage" href="build-run-rippled-ubuntu.html">Ubuntuでのrippledの構築と実行</a></li>
+                          <li><a class="subpage" href="build-run-rippled-macos.html">macOSでのrippledの構築と実行</a></li>
+                          <li><a class="subpage" href="capacity-planning.html">容量の計画</a></li>
+                          <li><a class="subpage" href="rippled-1-3-migration-instructions.html">rippled v1.3.xへの移行手順</a></li>
+
+                      <li><a class="subcat-title" href="configure-rippled.html">rippledの設定</a></li>
+
+                          <li><a class="subpage" href="run-rippled-as-a-validator.html">バリデータとしてのrippledの実行</a></li>
+                          <li><a class="subpage" href="run-rippled-as-a-wallet-server.html">Run rippled as a Wallet Server</a></li>
+                          <li><a class="subpage" href="configure-statsd.html">Configure StatsD</a></li>
+                          <li><a class="subpage" href="connect-your-rippled-to-the-xrp-test-net.html">XRPL Altnetへのrippledの接続</a></li>
+                          <li><a class="subpage" href="configure-online-deletion.html">オンライン削除の設定</a></li>
+                          <li><a class="subpage" href="configure-advisory-deletion.html">指示による削除の設定</a></li>
+                          <li><a class="subpage" href="configure-history-sharding.html">履歴シャーディングの設定</a></li>
+                          <li><a class="subpage" href="configure-full-history.html">全履歴の設定</a></li>
+                          <li><a class="subpage" href="configure-grpc.html">Configure gRPC</a></li>
+                          <li><a class="subpage" href="enable-public-signing.html">パブリック署名の有効化</a></li>
+
+                      <li><a class="subcat-title" href="configure-peering.html">ピアリングの設定</a></li>
+
+                          <li><a class="subpage" href="cluster-rippled-servers.html">rippledサーバーのクラスター化</a></li>
+                          <li><a class="subpage" href="configure-a-private-server.html">プライベートサーバーの設定</a></li>
+                          <li><a class="subpage" href="configure-the-peer-crawler.html">Configure the Peer Crawler</a></li>
+                          <li><a class="subpage" href="enable-link-compression.html">Enable Link Compression</a></li>
+                          <li><a class="subpage" href="forward-ports-for-peering.html">ピアリングのポート転送</a></li>
+                          <li><a class="subpage" href="manually-connect-to-a-specific-peer.html">特定のピアへの手動接続</a></li>
+                          <li><a class="subpage" href="set-max-number-of-peers.html">ピアの最大数の設定</a></li>
+                          <li><a class="subpage" href="use-a-peer-reservation.html">ピアリザベーションの使用</a></li>
+
+                      <li><a class="subcat-title" href="use-stand-alone-mode.html">スタンドアロンモードでrippledをテスト</a></li>
+
+                          <li><a class="subpage" href="start-a-new-genesis-ledger-in-stand-alone-mode.html">スタンドアロンモードでの新しいジェネシスレジャーの開始</a></li>
+                          <li><a class="subpage" href="load-a-saved-ledger-in-stand-alone-mode.html">スタンドアロンモードでの保存済みレジャーの読み込み</a></li>
+                          <li><a class="subpage" href="advance-the-ledger-in-stand-alone-mode.html">スタンドアロンモードでレジャーを進める</a></li>
+
+                      <li><a class="subcat-title" href="troubleshoot-the-rippled-server.html">rippledのトラブルシューティング</a></li>
+
+                          <li><a class="subpage" href="health-check-interventions.html">Health Check Interventions</a></li>
+                          <li><a class="subpage" href="diagnosing-problems.html">rippledの問題の診断</a></li>
+                          <li><a class="subpage" href="understanding-log-messages.html">ログメッセージについて</a></li>
+                          <li><a class="subpage" href="server-doesnt-sync.html">rippledサーバーが同期しない</a></li>
+                          <li><a class="subpage" href="server-wont-start.html">rippledサーバーが起動しない</a></li>
+                          <li><a class="subpage" href="fix-sqlite-tx-db-page-size-issue.html">SQLiteトランザクションデータベースのページサイズの問題の解決</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse42 -->
+
+          </div><!-- /.card -->
+
+    </div><!-- /#sidenav -->
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">学ぶ</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">探る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">作る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">コンセプト</a></li>
+          <li class="level-1"><a href="tutorials.html">チュートリアル</a></li>
+          <li class="level-1"><a href="references.html">リファレンス</a></li>
+          <li class="level-1"><a href="dev-tools.html">開発者用ツール</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">ライセンス</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="このページの先頭へ">先頭へ</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:ja"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>

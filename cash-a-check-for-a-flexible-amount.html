@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Cash a Check for a Flexible Amount - XRP Ledger Dev Portal</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/" class="navbar-brand"><img src="assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Learn</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">Overview</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Build</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">Docs</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">Concepts</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">Tutorials</a>
+          <a class="dropdown-item top-level-2" href="references.html">References</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">Dev Tools</a>
+          <a class="dropdown-item top-level-1" href="/blog/">Dev Blog</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/tutorials/use-complex-payment-types/use-checks/cash-a-check-for-a-flexible-amount.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">Search site...</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="Search site...">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Eng
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/cash-a-check-for-a-flexible-amount.html">Eng</a>
+          <a class="dropdown-item" href="/ja/cash-a-check-for-a-flexible-amount.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>In this document</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#cash-a-check-for-a-flexible-amount">Cash a Check for a Flexible Amount</a></li>
+<li class="level-2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="level-2"><a href="#1-prepare-the-checkcash-transaction">1. Prepare the CheckCash transaction</a></li>
+<li class="level-3"><a href="#example-checkcash-preparation-for-a-flexible-amount">Example CheckCash Preparation for a flexible amount</a></li>
+<li class="level-2"><a href="#2-sign-the-checkcash-transaction">2. Sign the CheckCash transaction</a></li>
+<li class="level-3"><a href="#example-request">Example Request</a></li>
+<li class="level-3"><a href="#example-response">Example Response</a></li>
+<li class="level-2"><a href="#3-submit-the-signed-checkcash-transaction">3. Submit the signed CheckCash transaction</a></li>
+<li class="level-3"><a href="#example-request-1">Example Request</a></li>
+<li class="level-3"><a href="#example-response-1">Example Response</a></li>
+<li class="level-2"><a href="#4-wait-for-validation">4. Wait for validation</a></li>
+<li class="level-2"><a href="#5-confirm-final-result">5. Confirm final result</a></li>
+<li class="level-3"><a href="#example-request-2">Example Request</a></li>
+<li class="level-3"><a href="#example-response-2">Example Response</a></li>
+<li class="level-3"><a href="#handling-errors">Handling Errors</a></li>
+<li class="level-2"><a href="#6-confirm-delivered-amount">6. Confirm delivered amount</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">Build</a></li>
+    <li class="active breadcrumb-item"><a href="tutorials.html">Tutorials</a></li>
+    <li class="active breadcrumb-item"><a href="use-specialized-payment-types.html">Use Specialized Payment Types</a></li>
+    <li class="active breadcrumb-item"><a href="use-checks.html">Use Checks</a></li>
+    <li class="active breadcrumb-item">Cash a Check for a Flexible Amount</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="cash-a-check-for-a-flexible-amount">Cash a Check for a Flexible Amount</h1>
+<p><em>Added by the <a href="known-amendments.html#checks">Checks amendment</a>.</em></p>
+<p>As long as the Check is in the ledger and not expired, the specified recipient can cash it to receive a flexible amount by sending a <a href="checkcash.html">CheckCash transaction</a> with a <code>DeliverMin</code> field. When cashing a Check in this way, the receiver gets as much as is possible to deliver, debiting the Check's sender for the Check's full <code>SendMax</code> amount or as much as is available. Cashing fails if it doesn't deliver at least the <code>DeliverMin</code> amount to the Check's recipient.</p>
+<p>You might cash a Check for a flexible amount if you want to get as much as possible from the Check.</p>
+<p>The specified recipient can also <a href="cash-a-check-for-a-flexible-amount.html">cash the check for an exact amount</a>.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>The prerequisites for cashing a check are the same whether you are cashing it for an exact amount or a flexible amount.</p>
+<ul>
+<li>You need the ID of a Check object currently in the ledger.<ul>
+<li>For example, the ID of one Check in these examples is <code>838766BA2B995C00744175F69A1B11E32C3DBC40E64801A4056FCBD657F57334</code>, although you must use a different ID to go through these steps yourself.</li>
+</ul>
+</li>
+<li>The <strong>address</strong> and <strong>secret key</strong> of the Check's stated recipient. The address must match the <code>Destination</code> address in the Check object.</li>
+<li>If the Check is for an issued currency, you (the recipient) must have a trust line to the issuer. Your limit on that trust line must be enough higher than the balance to add the amount you would receive.<ul>
+<li>For more information on trust lines and limits, see <a href="issued-currencies.html">Issued Currencies</a> and <a href="trust-lines-and-issuing.html">Trust Lines and Issuing</a>.</li>
+</ul>
+</li>
+<li>A secure way to sign transactions, such as <a href="rippleapi-reference.html">RippleAPI</a> or your own <a href="install-rippled.html"><code>rippled</code> server</a>.</li>
+<li>A client library that can connect to a <code>rippled</code> server, such as <a href="rippleapi-reference.html">RippleAPI</a> or any HTTP or WebSocket library.<ul>
+<li>For more information, see <a href="get-started-with-the-rippled-api.html">Get Started with the <code>rippled</code> API</a>.<!--#{ fix md highlighting_ #}--></li>
+</ul>
+</li>
+</ul>
+<h2 id="1-prepare-the-checkcash-transaction">1. Prepare the CheckCash transaction</h2>
+<p>Figure out the values of the <a href="checkcash.html">CheckCash transaction</a> fields. To cash a check for a flexible amount, the following fields are the bare minimum; everything else is either optional or can be <a href="transaction-common-fields.html#auto-fillable-fields">auto-filled</a> when signing:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="left">Value</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>TransactionType</code></td>
+<td align="left">String</td>
+<td align="left">The value <code>CheckCash</code> indicates this is a CheckCash transaction.</td>
+</tr>
+<tr>
+<td align="left"><code>Account</code></td>
+<td align="left">String (Address)</td>
+<td align="left">The address of the sender who is cashing the Check. (In other words, your address.)</td>
+</tr>
+<tr>
+<td align="left"><code>CheckID</code></td>
+<td align="left">String</td>
+<td align="left">The ID of the Check object in the ledger to cash. You can get this information by looking up the metadata of the CheckCreate transaction using the <a href="tx.html">tx method</a> or by looking for Checks using the <a href="account_objects.html">account_objects method</a>.</td>
+</tr>
+<tr>
+<td align="left"><code>DeliverMin</code></td>
+<td align="left">String or Object (Amount)</td>
+<td align="left">A minimum amount to receive from the Check. If you cannot receive at least this much, cashing the Check fails, leaving the Check in the ledger so you can try again. For XRP, this must be a string specifying drops of XRP. For issued currencies, this is an object with <code>currency</code>, <code>issuer</code>, and <code>value</code> fields. The <code>currency</code> and <code>issuer</code> fields must match the corresponding fields in the Check object, and the <code>value</code> must be less than or equal to the amount in the Check object. For more information on specifying currency amounts, see <a href="basic-data-types.html#specifying-currency-amounts">Specifying Currency Amounts</a>.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="example-checkcash-preparation-for-a-flexible-amount">Example CheckCash Preparation for a flexible amount</h3>
+<p>The following examples show how to prepare a transaction to cash a Check for a flexible amount.</p>
+<div class="multicode" id="code-0"><ul class="codetabs"><li><a href="#code-0-0">JSON-RPC, WebSocket, or Commandline</a></li><li><a href="#code-0-1">RippleAPI</a></li></ul>
+
+<div class="code_sample" id="code-0-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">"Account"</span><span class="p">:</span> <span class="s2">"rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis"</span><span class="p">,</span>
+  <span class="nt">"TransactionType"</span><span class="p">:</span> <span class="s2">"CheckCash"</span><span class="p">,</span>
+  <span class="nt">"DeliverMin"</span><span class="p">:</span> <span class="s2">"95000000"</span><span class="p">,</span>
+  <span class="nt">"CheckID"</span><span class="p">:</span> <span class="s2">"2E0AD0740B79BE0AAE5EDD1D5FC79E3C5C221D23C6A7F771D85569B5B91195C2"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-0-1" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="s1">'use strict'</span>
+<span class="kr">const</span> <span class="nx">RippleAPI</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ripple-lib'</span><span class="p">).</span><span class="nx">RippleAPI</span>
+
+<span class="c1">// This example connects to a public Test Net server</span>
+<span class="kr">const</span> <span class="nx">api</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RippleAPI</span><span class="p">({</span><span class="nx">server</span><span class="o">:</span> <span class="s1">'wss://s.altnet.rippletest.net:51233'</span><span class="p">})</span>
+<span class="nx">api</span><span class="p">.</span><span class="nx">connect</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Connected'</span><span class="p">)</span>
+
+  <span class="kr">const</span> <span class="nx">sender</span> <span class="o">=</span> <span class="s1">'rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis'</span>
+  <span class="kr">const</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// Allow up to 60 ledger versions (~5 min) instead of the default 3 versions</span>
+    <span class="c1">// before this transaction fails permanently.</span>
+    <span class="s2">"maxLedgerVersionOffset"</span><span class="o">:</span> <span class="mi">60</span>
+  <span class="p">}</span>
+  <span class="k">return</span> <span class="nx">api</span><span class="p">.</span><span class="nx">prepareCheckCash</span><span class="p">(</span><span class="nx">sender</span><span class="p">,</span> <span class="p">{</span>
+    <span class="s2">"checkID"</span><span class="o">:</span> <span class="s2">"C0B27D20669BAB837B3CDF4B8148B988F17CE1EF8EDF48C806AE9BF69E16F441"</span><span class="p">,</span>
+    <span class="s2">"deliverMin"</span><span class="o">:</span> <span class="p">{</span>
+      <span class="s2">"currency"</span><span class="o">:</span> <span class="s2">"XRP"</span><span class="p">,</span>
+      <span class="s2">"value"</span><span class="o">:</span> <span class="s2">"95"</span> <span class="c1">// Cash for at least 95 XRP</span>
+    <span class="p">}</span>
+  <span class="p">},</span> <span class="nx">options</span><span class="p">)</span>
+
+<span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">prepared</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"txJSON:"</span><span class="p">,</span> <span class="nx">prepared</span><span class="p">.</span><span class="nx">txJSON</span><span class="p">);</span>
+
+<span class="c1">// Disconnect and return</span>
+<span class="p">}).</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">api</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">().</span><span class="nx">then</span><span class="p">(()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Disconnected'</span><span class="p">)</span>
+    <span class="nx">process</span><span class="p">.</span><span class="nx">exit</span><span class="p">()</span>
+  <span class="p">})</span>
+<span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">)</span>
+
+
+<span class="c1">// Example output:</span>
+<span class="c1">//</span>
+<span class="c1">// Connected</span>
+<span class="c1">// txJSON: {"Account":"rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",</span>
+<span class="c1">//   "TransactionType":"CheckCash",</span>
+<span class="c1">//   "CheckID":"C0B27D20669BAB837B3CDF4B8148B988F17CE1EF8EDF48C806AE9BF69E16F441",</span>
+<span class="c1">//   "DeliverMin":"95000000",</span>
+<span class="c1">//   "Flags":2147483648,</span>
+<span class="c1">//   "LastLedgerSequence":8006858,</span>
+<span class="c1">//   "Fee":"12",</span>
+<span class="c1">//   "Sequence":5}</span>
+<span class="c1">// Disconnected</span>
+</code></pre></div></div>
+</div>
+<h2 id="2-sign-the-checkcash-transaction">2. Sign the CheckCash transaction</h2>
+<p>The most secure way to sign a transaction is to do it locally with a signing library, such as <a href="rippleapi-reference.html">RippleAPI</a>. Alternatively, you can sign the transaction using the <a href="sign.html">sign method</a>, but this must be done through a trusted and encrypted connection, or through a local connection, and only to a server you control.</p>
+<p>In all cases, note the signed transaction's identifying hash for later. <!--#{ fix md highlighting_ #}--></p>
+<h3 id="example-request">Example Request</h3>
+<div class="multicode" id="code-1"><ul class="codetabs"><li><a href="#code-1-0">Commandline</a></li></ul>
+
+<div class="code_sample" id="code-1-0" style="position: static;"><div class="codehilite"><pre><span></span><code>rippled sign s████████████████████████████ <span class="s1">'{</span>
+<span class="s1">  "Account": "rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",</span>
+<span class="s1">  "TransactionType": "CheckCash",</span>
+<span class="s1">  "DeliverMin": "95000000",</span>
+<span class="s1">  "CheckID": "84C61BE9B39B2C4A2267F67504404F1EC76678806C1B901EA781D1E3B4CE0CD9"</span>
+<span class="s1">}'</span>
+</code></pre></div></div>
+</div>
+<h3 id="example-response">Example Response</h3>
+<div class="multicode" id="code-2"><ul class="codetabs"><li><a href="#code-2-0">Commandline</a></li></ul>
+
+<div class="code_sample" id="code-2-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="err">Loading:</span> <span class="s2">"/etc/opt/ripple/rippled.cfg"</span>
+<span class="mi">2018</span><span class="err">-Apr</span><span class="mi">-03</span> <span class="mi">00</span><span class="err">:</span><span class="mi">09</span><span class="err">:</span><span class="mi">53</span> <span class="err">HTTPClient:NFO</span> <span class="err">Connecting</span> <span class="err">to</span> <span class="mf">127.0</span><span class="err">.</span><span class="mf">0.1</span><span class="err">:</span><span class="mi">5005</span>
+
+<span class="p">{</span>
+   <span class="nt">"result"</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">"status"</span> <span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+      <span class="nt">"tx_blob"</span> <span class="p">:</span> <span class="s2">"12001122800000002400000004501884C61BE9B39B2C4A2267F67504404F1EC76678806C1B901EA781D1E3B4CE0CD968400000000000000A6A4000000005A995C073210361ACFCB478BCAE01451F95060AF94F70365BF00D7B4661EC2C69EA383762516C7446304402203D7EC220D48AA040D6915C160275D202F7F808E2B58F11B1AB05FB5E5CFCC6C00220304BBD3AD32E13150E0ED7247F2ADFAE83D0ECE329E20CFE0F8DF352934DD2FC8114A8B6B9FF3246856CADC4A0106198C066EA1F9C39"</span><span class="p">,</span>
+      <span class="nt">"tx_json"</span> <span class="p">:</span> <span class="p">{</span>
+         <span class="nt">"Account"</span> <span class="p">:</span> <span class="s2">"rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis"</span><span class="p">,</span>
+         <span class="nt">"CheckID"</span> <span class="p">:</span> <span class="s2">"84C61BE9B39B2C4A2267F67504404F1EC76678806C1B901EA781D1E3B4CE0CD9"</span><span class="p">,</span>
+         <span class="nt">"DeliverMin"</span> <span class="p">:</span> <span class="s2">"95000000"</span><span class="p">,</span>
+         <span class="nt">"Fee"</span> <span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+         <span class="nt">"Flags"</span> <span class="p">:</span> <span class="mi">2147483648</span><span class="p">,</span>
+         <span class="nt">"Sequence"</span> <span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+         <span class="nt">"SigningPubKey"</span> <span class="p">:</span> <span class="s2">"0361ACFCB478BCAE01451F95060AF94F70365BF00D7B4661EC2C69EA383762516C"</span><span class="p">,</span>
+         <span class="nt">"TransactionType"</span> <span class="p">:</span> <span class="s2">"CheckCash"</span><span class="p">,</span>
+         <span class="nt">"TxnSignature"</span> <span class="p">:</span> <span class="s2">"304402203D7EC220D48AA040D6915C160275D202F7F808E2B58F11B1AB05FB5E5CFCC6C00220304BBD3AD32E13150E0ED7247F2ADFAE83D0ECE329E20CFE0F8DF352934DD2FC"</span><span class="p">,</span>
+         <span class="nt">"hash"</span> <span class="p">:</span> <span class="s2">"A0AFE572E4736CBF49FF4D0D3FF8FDB0C4D31BD10CB4EB542230F85F0F2DD222"</span>
+      <span class="p">}</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+</div>
+<h2 id="3-submit-the-signed-checkcash-transaction">3. Submit the signed CheckCash transaction</h2>
+<p>Take the signed transaction blob from the previous step and submit it to a <code>rippled</code> server. You can do this safely even if you do not run the <code>rippled</code> server. The response contains a provisional result, which should be <code>tesSUCCESS</code>, but this result is <a href="finality-of-results.html">usually not final</a>. A provisional response of <code>terQUEUED</code> is also OK, since <a href="transaction-cost.html#queued-transactions">queued transactions</a> are generally included in the next open ledger version (usually about 10 seconds after submission).</p>
+<p class="devportal-callout tip"><strong>Tip:</strong> If the preliminary result is <code>tefMAX_LEDGER</code>, the transaction has failed permanently because its <code>LastLedgerSequence</code> parameter is lower than the current ledger. This happens when you take longer than the expected number of ledger versions between preparing and submitting the transaction. If this occurs, <a href="#1-prepare-the-checkcash-transaction">start over from step 1</a> with a higher <code>LastLedgerSequence</code> value. <!--#{ fix md highlighting_ #}--></p>
+<h3 id="example-request-1">Example Request</h3>
+<div class="multicode" id="code-3"><ul class="codetabs"><li><a href="#code-3-0">Commandline</a></li></ul>
+
+<div class="code_sample" id="code-3-0" style="position: static;"><div class="codehilite"><pre><span></span><code>rippled submit 12001122800000002400000004501884C61BE9B39B2C4A2267F67504404F1EC76678806C1B901EA781D1E3B4CE0CD968400000000000000A6A4000000005A995C073210361ACFCB478BCAE01451F95060AF94F70365BF00D7B4661EC2C69EA383762516C7446304402203D7EC220D48AA040D6915C160275D202F7F808E2B58F11B1AB05FB5E5CFCC6C00220304BBD3AD32E13150E0ED7247F2ADFAE83D0ECE329E20CFE0F8DF352934DD2FC8114A8B6B9FF3246856CADC4A0106198C066EA1F9C39
+</code></pre></div></div>
+</div>
+<h3 id="example-response-1">Example Response</h3>
+<div class="multicode" id="code-4"><ul class="codetabs"><li><a href="#code-4-0">Commandline</a></li></ul>
+
+<div class="code_sample" id="code-4-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="err">Loading:</span> <span class="s2">"/etc/opt/ripple/rippled.cfg"</span>
+<span class="mi">2018</span><span class="err">-Apr</span><span class="mi">-03</span> <span class="mi">00</span><span class="err">:</span><span class="mi">10</span><span class="err">:</span><span class="mi">30</span> <span class="err">HTTPClient:NFO</span> <span class="err">Connecting</span> <span class="err">to</span> <span class="mf">127.0</span><span class="err">.</span><span class="mf">0.1</span><span class="err">:</span><span class="mi">5005</span>
+
+<span class="p">{</span>
+   <span class="nt">"result"</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">"engine_result"</span> <span class="p">:</span> <span class="s2">"tesSUCCESS"</span><span class="p">,</span>
+      <span class="nt">"engine_result_code"</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+      <span class="nt">"engine_result_message"</span> <span class="p">:</span> <span class="s2">"The transaction was applied. Only final in a validated ledger."</span><span class="p">,</span>
+      <span class="nt">"status"</span> <span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+      <span class="nt">"tx_blob"</span> <span class="p">:</span> <span class="s2">"12001122800000002400000004501884C61BE9B39B2C4A2267F67504404F1EC76678806C1B901EA781D1E3B4CE0CD968400000000000000A6A4000000005A995C073210361ACFCB478BCAE01451F95060AF94F70365BF00D7B4661EC2C69EA383762516C7446304402203D7EC220D48AA040D6915C160275D202F7F808E2B58F11B1AB05FB5E5CFCC6C00220304BBD3AD32E13150E0ED7247F2ADFAE83D0ECE329E20CFE0F8DF352934DD2FC8114A8B6B9FF3246856CADC4A0106198C066EA1F9C39"</span><span class="p">,</span>
+      <span class="nt">"tx_json"</span> <span class="p">:</span> <span class="p">{</span>
+         <span class="nt">"Account"</span> <span class="p">:</span> <span class="s2">"rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis"</span><span class="p">,</span>
+         <span class="nt">"CheckID"</span> <span class="p">:</span> <span class="s2">"84C61BE9B39B2C4A2267F67504404F1EC76678806C1B901EA781D1E3B4CE0CD9"</span><span class="p">,</span>
+         <span class="nt">"DeliverMin"</span> <span class="p">:</span> <span class="s2">"95000000"</span><span class="p">,</span>
+         <span class="nt">"Fee"</span> <span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+         <span class="nt">"Flags"</span> <span class="p">:</span> <span class="mi">2147483648</span><span class="p">,</span>
+         <span class="nt">"Sequence"</span> <span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+         <span class="nt">"SigningPubKey"</span> <span class="p">:</span> <span class="s2">"0361ACFCB478BCAE01451F95060AF94F70365BF00D7B4661EC2C69EA383762516C"</span><span class="p">,</span>
+         <span class="nt">"TransactionType"</span> <span class="p">:</span> <span class="s2">"CheckCash"</span><span class="p">,</span>
+         <span class="nt">"TxnSignature"</span> <span class="p">:</span> <span class="s2">"304402203D7EC220D48AA040D6915C160275D202F7F808E2B58F11B1AB05FB5E5CFCC6C00220304BBD3AD32E13150E0ED7247F2ADFAE83D0ECE329E20CFE0F8DF352934DD2FC"</span><span class="p">,</span>
+         <span class="nt">"hash"</span> <span class="p">:</span> <span class="s2">"A0AFE572E4736CBF49FF4D0D3FF8FDB0C4D31BD10CB4EB542230F85F0F2DD222"</span>
+      <span class="p">}</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+</div>
+<h2 id="4-wait-for-validation">4. Wait for validation</h2>
+<p>On the live network or the Ripple Test Net, you can wait 4-7 seconds for the ledger to close automatically.</p>
+<p>If you're running <code>rippled</code> in stand-alone mode, use the <a href="ledger_accept.html">ledger_accept method</a> to manually close the ledger. <!--#{ fix md highlighting_ #}--></p>
+<h2 id="5-confirm-final-result">5. Confirm final result</h2>
+<p>Use the <a href="tx.html">tx method</a> with the CheckCash transaction's identifying hash to check its status. Look for a <code>"TransactionResult": "tesSUCCESS"</code> field in the transaction's metadata, indicating that the transaction succeeded, and the field <code>"validated": true</code> in the result, indicating that this result is final.</p>
+<h3 id="example-request-2">Example Request</h3>
+<div class="multicode" id="code-5"><ul class="codetabs"><li><a href="#code-5-0">Commandline</a></li></ul>
+
+<div class="code_sample" id="code-5-0" style="position: static;"><div class="codehilite"><pre><span></span><code>rippled tx A0AFE572E4736CBF49FF4D0D3FF8FDB0C4D31BD10CB4EB542230F85F0F2DD222
+</code></pre></div></div>
+</div>
+<h3 id="example-response-2">Example Response</h3>
+<div class="multicode" id="code-6"><ul class="codetabs"><li><a href="#code-6-0">Commandline</a></li></ul>
+
+<div class="code_sample" id="code-6-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="err">Loading:</span> <span class="s2">"/etc/opt/ripple/rippled.cfg"</span>
+<span class="mi">2018</span><span class="err">-Apr</span><span class="mi">-03</span> <span class="mi">00</span><span class="err">:</span><span class="mi">11</span><span class="err">:</span><span class="mi">17</span> <span class="err">HTTPClient:NFO</span> <span class="err">Connecting</span> <span class="err">to</span> <span class="mf">127.0</span><span class="err">.</span><span class="mf">0.1</span><span class="err">:</span><span class="mi">5005</span>
+
+<span class="p">{</span>
+   <span class="nt">"result"</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">"Account"</span> <span class="p">:</span> <span class="s2">"rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis"</span><span class="p">,</span>
+      <span class="nt">"CheckID"</span> <span class="p">:</span> <span class="s2">"84C61BE9B39B2C4A2267F67504404F1EC76678806C1B901EA781D1E3B4CE0CD9"</span><span class="p">,</span>
+      <span class="nt">"DeliverMin"</span> <span class="p">:</span> <span class="s2">"95000000"</span><span class="p">,</span>
+      <span class="nt">"Fee"</span> <span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+      <span class="nt">"Flags"</span> <span class="p">:</span> <span class="mi">2147483648</span><span class="p">,</span>
+      <span class="nt">"Sequence"</span> <span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="nt">"SigningPubKey"</span> <span class="p">:</span> <span class="s2">"0361ACFCB478BCAE01451F95060AF94F70365BF00D7B4661EC2C69EA383762516C"</span><span class="p">,</span>
+      <span class="nt">"TransactionType"</span> <span class="p">:</span> <span class="s2">"CheckCash"</span><span class="p">,</span>
+      <span class="nt">"TxnSignature"</span> <span class="p">:</span> <span class="s2">"304402203D7EC220D48AA040D6915C160275D202F7F808E2B58F11B1AB05FB5E5CFCC6C00220304BBD3AD32E13150E0ED7247F2ADFAE83D0ECE329E20CFE0F8DF352934DD2FC"</span><span class="p">,</span>
+      <span class="nt">"date"</span> <span class="p">:</span> <span class="mi">576029432</span><span class="p">,</span>
+      <span class="nt">"hash"</span> <span class="p">:</span> <span class="s2">"A0AFE572E4736CBF49FF4D0D3FF8FDB0C4D31BD10CB4EB542230F85F0F2DD222"</span><span class="p">,</span>
+      <span class="nt">"inLedger"</span> <span class="p">:</span> <span class="mi">8005386</span><span class="p">,</span>
+      <span class="nt">"ledger_index"</span> <span class="p">:</span> <span class="mi">8005386</span><span class="p">,</span>
+      <span class="nt">"meta"</span> <span class="p">:</span> <span class="p">{</span>
+         <span class="nt">"AffectedNodes"</span> <span class="p">:</span> <span class="p">[</span>
+            <span class="p">{</span>
+               <span class="nt">"ModifiedNode"</span> <span class="p">:</span> <span class="p">{</span>
+                  <span class="nt">"FinalFields"</span> <span class="p">:</span> <span class="p">{</span>
+                     <span class="nt">"Flags"</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                     <span class="nt">"Owner"</span> <span class="p">:</span> <span class="s2">"rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za"</span><span class="p">,</span>
+                     <span class="nt">"RootIndex"</span> <span class="p">:</span> <span class="s2">"3F248A0715ECCAFC3BEE0C63C8F429ACE54ABC403AAF5F2885C2B65D62D1FAC1"</span>
+                  <span class="p">},</span>
+                  <span class="nt">"LedgerEntryType"</span> <span class="p">:</span> <span class="s2">"DirectoryNode"</span><span class="p">,</span>
+                  <span class="nt">"LedgerIndex"</span> <span class="p">:</span> <span class="s2">"3F248A0715ECCAFC3BEE0C63C8F429ACE54ABC403AAF5F2885C2B65D62D1FAC1"</span>
+               <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+               <span class="nt">"ModifiedNode"</span> <span class="p">:</span> <span class="p">{</span>
+                  <span class="nt">"FinalFields"</span> <span class="p">:</span> <span class="p">{</span>
+                     <span class="nt">"Account"</span> <span class="p">:</span> <span class="s2">"rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis"</span><span class="p">,</span>
+                     <span class="nt">"Balance"</span> <span class="p">:</span> <span class="s2">"10099999960"</span><span class="p">,</span>
+                     <span class="nt">"Flags"</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                     <span class="nt">"OwnerCount"</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                     <span class="nt">"Sequence"</span> <span class="p">:</span> <span class="mi">5</span>
+                  <span class="p">},</span>
+                  <span class="nt">"LedgerEntryType"</span> <span class="p">:</span> <span class="s2">"AccountRoot"</span><span class="p">,</span>
+                  <span class="nt">"LedgerIndex"</span> <span class="p">:</span> <span class="s2">"7939126A732EBBDEC715FD3CCB056EB31E65228CA17E3B2901E7D30B90FD03D3"</span><span class="p">,</span>
+                  <span class="nt">"PreviousFields"</span> <span class="p">:</span> <span class="p">{</span>
+                     <span class="nt">"Balance"</span> <span class="p">:</span> <span class="s2">"9999999970"</span><span class="p">,</span>
+                     <span class="nt">"Sequence"</span> <span class="p">:</span> <span class="mi">4</span>
+                  <span class="p">},</span>
+                  <span class="nt">"PreviousTxnID"</span> <span class="p">:</span> <span class="s2">"0283465F0D21BE6B1E91ABDE17266C24C1B4915BAAA9A88CC098A98D5ECD3E9E"</span><span class="p">,</span>
+                  <span class="nt">"PreviousTxnLgrSeq"</span> <span class="p">:</span> <span class="mi">8005334</span>
+               <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+               <span class="nt">"DeletedNode"</span> <span class="p">:</span> <span class="p">{</span>
+                  <span class="nt">"FinalFields"</span> <span class="p">:</span> <span class="p">{</span>
+                     <span class="nt">"Account"</span> <span class="p">:</span> <span class="s2">"rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za"</span><span class="p">,</span>
+                     <span class="nt">"Destination"</span> <span class="p">:</span> <span class="s2">"rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis"</span><span class="p">,</span>
+                     <span class="nt">"DestinationNode"</span> <span class="p">:</span> <span class="s2">"0000000000000000"</span><span class="p">,</span>
+                     <span class="nt">"DestinationTag"</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                     <span class="nt">"Flags"</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                     <span class="nt">"InvoiceID"</span> <span class="p">:</span> <span class="s2">"46060241FABCF692D4D934BA2A6C4427CD4279083E38C77CBE642243E43BE291"</span><span class="p">,</span>
+                     <span class="nt">"OwnerNode"</span> <span class="p">:</span> <span class="s2">"0000000000000000"</span><span class="p">,</span>
+                     <span class="nt">"PreviousTxnID"</span> <span class="p">:</span> <span class="s2">"09D992D4C89E2A24D4BA9BB57ED81C7003815940F39B7C87ADBF2E49034380BB"</span><span class="p">,</span>
+                     <span class="nt">"PreviousTxnLgrSeq"</span> <span class="p">:</span> <span class="mi">7841263</span><span class="p">,</span>
+                     <span class="nt">"SendMax"</span> <span class="p">:</span> <span class="s2">"100000000"</span><span class="p">,</span>
+                     <span class="nt">"Sequence"</span> <span class="p">:</span> <span class="mi">4</span>
+                  <span class="p">},</span>
+                  <span class="nt">"LedgerEntryType"</span> <span class="p">:</span> <span class="s2">"Check"</span><span class="p">,</span>
+                  <span class="nt">"LedgerIndex"</span> <span class="p">:</span> <span class="s2">"84C61BE9B39B2C4A2267F67504404F1EC76678806C1B901EA781D1E3B4CE0CD9"</span>
+               <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+               <span class="nt">"ModifiedNode"</span> <span class="p">:</span> <span class="p">{</span>
+                  <span class="nt">"FinalFields"</span> <span class="p">:</span> <span class="p">{</span>
+                     <span class="nt">"Account"</span> <span class="p">:</span> <span class="s2">"rBXsgNkPcDN2runsvWmwxk3Lh97zdgo9za"</span><span class="p">,</span>
+                     <span class="nt">"Balance"</span> <span class="p">:</span> <span class="s2">"9899999920"</span><span class="p">,</span>
+                     <span class="nt">"Flags"</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                     <span class="nt">"OwnerCount"</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                     <span class="nt">"Sequence"</span> <span class="p">:</span> <span class="mi">8</span>
+                  <span class="p">},</span>
+                  <span class="nt">"LedgerEntryType"</span> <span class="p">:</span> <span class="s2">"AccountRoot"</span><span class="p">,</span>
+                  <span class="nt">"LedgerIndex"</span> <span class="p">:</span> <span class="s2">"A9A591BA661F69433D5BEAA49F10BA2B8DEA5183EF414B9130BFE5E0328FE875"</span><span class="p">,</span>
+                  <span class="nt">"PreviousFields"</span> <span class="p">:</span> <span class="p">{</span>
+                     <span class="nt">"Balance"</span> <span class="p">:</span> <span class="s2">"9999999920"</span><span class="p">,</span>
+                     <span class="nt">"OwnerCount"</span> <span class="p">:</span> <span class="mi">3</span>
+                  <span class="p">},</span>
+                  <span class="nt">"PreviousTxnID"</span> <span class="p">:</span> <span class="s2">"54A7A917BE9AC13962251BCF1D09803C7BBE75882B8BFC987B5933A566A48215"</span><span class="p">,</span>
+                  <span class="nt">"PreviousTxnLgrSeq"</span> <span class="p">:</span> <span class="mi">8004870</span>
+               <span class="p">}</span>
+            <span class="p">},</span>
+            <span class="p">{</span>
+               <span class="nt">"ModifiedNode"</span> <span class="p">:</span> <span class="p">{</span>
+                  <span class="nt">"FinalFields"</span> <span class="p">:</span> <span class="p">{</span>
+                     <span class="nt">"Flags"</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+                     <span class="nt">"Owner"</span> <span class="p">:</span> <span class="s2">"rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis"</span><span class="p">,</span>
+                     <span class="nt">"RootIndex"</span> <span class="p">:</span> <span class="s2">"C6A30AD85346718C7148D161663F84A96A4F0CE7F4D68C3C74D176A6C50BA6B9"</span>
+                  <span class="p">},</span>
+                  <span class="nt">"LedgerEntryType"</span> <span class="p">:</span> <span class="s2">"DirectoryNode"</span><span class="p">,</span>
+                  <span class="nt">"LedgerIndex"</span> <span class="p">:</span> <span class="s2">"C6A30AD85346718C7148D161663F84A96A4F0CE7F4D68C3C74D176A6C50BA6B9"</span>
+               <span class="p">}</span>
+            <span class="p">}</span>
+         <span class="p">],</span>
+         <span class="nt">"TransactionIndex"</span> <span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+         <span class="nt">"TransactionResult"</span> <span class="p">:</span> <span class="s2">"tesSUCCESS"</span>
+      <span class="p">},</span>
+      <span class="nt">"status"</span> <span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+      <span class="nt">"validated"</span> <span class="p">:</span> <span class="kc">true</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+</div>
+<h3 id="handling-errors">Handling Errors</h3>
+<p>If cashing the Check failed with a <code>tec</code>-class code, look up the code in the <a href="transaction-results.html">Full Transaction Response List</a> and respond accordingly. Some common possibilities for CheckCash transactions:</p>
+<table>
+<thead>
+<tr>
+<th>Result Code</th>
+<th>Meaning</th>
+<th>How to Respond</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>tecEXPIRED</code></td>
+<td>The Check has expired.</td>
+<td>Cancel the Check and ask the sender to create a new Check with a later Expiration time.</td>
+</tr>
+<tr>
+<td><code>tecNO_ENTRY</code></td>
+<td>The Check ID doesn't exist.</td>
+<td>Confirm that the <code>CheckID</code> from the CheckCash transaction is correct. Confirm that the Check has not already been canceled or successfully cashed.</td>
+</tr>
+<tr>
+<td><code>tecNO_LINE</code></td>
+<td>The recipient doesn't have a trust line for the Check's currency.</td>
+<td>If you want to hold this currency from this issuer, create a trust line for the specified currency and issuer with a reasonable limit using a <a href="trustset.html">TrustSet transaction</a>, then try to cash the check again.</td>
+</tr>
+<tr>
+<td><code>tecNO_PERMISSION</code></td>
+<td>The sender of the CheckCash transaction isn't the <code>Destination</code> of the Check.</td>
+<td>Double-check the <code>Destination</code> of the Check.</td>
+</tr>
+<tr>
+<td><code>tecNO_AUTH</code></td>
+<td>The issuer of the currency from the check is using <a href="authorized-trust-lines.html">Authorized Trust Lines</a> but the recipient's trust line to the issuer is not approved.</td>
+<td>Ask the issuer to authorize this trust line, then try again to cash the Check after they do.</td>
+</tr>
+<tr>
+<td><code>tecPATH_PARTIAL</code></td>
+<td>The Check could not deliver enough issued currency, either due to trust line limits or because the sender does not have enough balance of the currency to send (after including the issuer's <a href="transfer-fees.html">transfer fee</a>, if there is one).</td>
+<td>If the problem is the trust line limit, send a <a href="trustset.html">TrustSet transaction</a> to increase your limit (if desired) or lower your balance by spending some of the currency, then try to cash the Check again. If the problem is the sender's balance, wait for the sender to have more of the Check's currency, or try again to cash the Check for a lesser amount.</td>
+</tr>
+<tr>
+<td><code>tecUNFUNDED_PAYMENT</code></td>
+<td>The Check could not deliver enough XRP.</td>
+<td>Wait for the sender to have more XRP, or try again to cash the Check for a lesser amount.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="6-confirm-delivered-amount">6. Confirm delivered amount</h2>
+<p>If the Check was cashed for a flexible <code>DeliverMin</code> amount and succeeded, you can assume that the Check was cashed for at least the <code>DeliverMin</code> amount. To get the exact amount delivered, check the transaction metadata. The <code>delivered_amount</code> field in the metadata shows the exact amount delivered. (This field is only provided if the Check was cashed for a flexible amount. If the check was successfully cashed for a fixed amount, then the delivered amount is equal to the <code>Amount</code> of the CheckCash transaction.)</p>
+<ul>
+<li>
+<p>For XRP, the <code>AccountRoot</code> object of the Check's sender has its XRP <code>Balance</code> field debited. The <code>AccountRoot</code> object of the Check's recipient (the one who sent the CheckCash transaction) has its XRP <code>Balance</code> credited for at least the <code>DeliverMin</code> of the CheckCash transaction minus the <a href="transaction-cost.html">transaction cost</a> of sending the transaction.</p>
+<p>For example, the following <code>ModifiedNode</code> shows that the account <code>rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis</code>, the Check's recipient and the sender of this CheckCash transaction, had its XRP balance change from <code>9999999970</code> drops to <code>10099999960</code> drops, meaning the recipient was credited a <em>net</em> of 99.99999 XRP as a result of processing the transaction.</p>
+<div class="codehilite"><pre><span></span><code><span class="err">  {</span>
+<span class="err">    "ModifiedNode": {</span>
+<span class="err">      "FinalFields": {</span>
+<span class="err">         "Account": "rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",</span>
+<span class="err">         "Balance": "10099999960",</span>
+<span class="err">         "Flags": 0,</span>
+<span class="err">         "OwnerCount": 2,</span>
+<span class="err">         "Sequence": 5</span>
+<span class="err">      },</span>
+<span class="err">      "LedgerEntryType": "AccountRoot",</span>
+<span class="err">      "LedgerIndex": "7939126A732EBBDEC715FD3CCB056EB31E65228CA17E3B2901E7D30B90FD03D3",</span>
+<span class="err">      "PreviousFields": {</span>
+<span class="err">         "Balance": "9999999970",</span>
+<span class="err">         "Sequence": 4</span>
+<span class="err">      },</span>
+<span class="err">      "PreviousTxnID": "0283465F0D21BE6B1E91ABDE17266C24C1B4915BAAA9A88CC098A98D5ECD3E9E",</span>
+<span class="err">      "PreviousTxnLgrSeq": 8005334</span>
+<span class="err">    }</span>
+<span class="err">  }</span>
+</code></pre></div>
+<p>The net amount of 99.99999 XRP includes deducting the transaction cost that is destroyed to pay for sending this CheckCash transaction. The following part of the transaction instructions shows that the transaction cost (the <code>Fee</code> field) was 10 drops of XRP. By adding this to the net balance change, we conclude that the recipient, <code>rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis</code>, was credited a <em>gross</em> amount of exactly 100 XRP for cashing the Check.</p>
+<div class="codehilite"><pre><span></span><code><span class="err">"Account" : "rGPnRH1EBpHeTF2QG8DCAgM7z5pb75LAis",</span>
+<span class="err">"TransactionType" : "CheckCash",</span>
+<span class="err">"DeliverMin" : "95000000",</span>
+<span class="err">"Fee" : "10",</span>
+</code></pre></div>
+</li>
+<li>
+<p>For issued currencies where the sender or recipient of the check is the issuer, the <code>RippleState</code> object representing the trust line between those accounts has its <code>Balance</code> adjusted in the favor of the Check's recipient.</p>
+<!-- -->
+</li>
+<li>
+<p>For issued currencies with a third-party issuer, there are changes to two <code>RippleState</code> objects, representing the trust lines connecting the sender to the issuer, and the issuer to the recipient. The <code>RippleState</code> object representing the relationship between the Check's sender and the issuer has its <code>Balance</code> changed in favor of the issuer, and the <code>RippleState</code> object representing the relationship between the issuer and the recipient has its <code>Balance</code> changed in favor of the recipient.</p>
+<!-- -->
+<ul>
+<li>If the issued currency has a <a href="transfer-fees.html">transfer fee</a>, the Check's sender may be debited more than the recipient is credited. (The difference is the transfer fee, which is returned to the issuer as a decreased net obligation.)</li>
+</ul>
+</li>
+</ul>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="tutorials.html"> Tutorials</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_2">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_2" aria-expanded="true" aria-controls="sidenav_collapse_2"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="get-started.html">Get Started</a>
+                <!-- <a class="sidenav_cat_title" href="get-started.html">Get Started</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_2" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_2">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="get-started-with-the-rippled-api.html">Get Started with XRP Ledger APIs</a></li>
+                      <li><a class="nosubcat-page" href="get-started-with-rippleapi-for-javascript.html">Get Started with RippleAPI for Node.js</a></li>
+                      <li><a class="nosubcat-page" href="send-xrp.html">Send XRP</a></li>
+                      <li><a class="nosubcat-page" href="monitor-incoming-payments-with-websocket.html">Monitor Incoming Payments with WebSocket</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse2 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_8">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_8" aria-expanded="true" aria-controls="sidenav_collapse_8"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="production-readiness.html">Production Readiness</a>
+                <!-- <a class="sidenav_cat_title" href="production-readiness.html">Production Readiness</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_8" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_8">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="set-up-secure-signing.html">Set Up Secure Signing</a></li>
+                      <li><a class="nosubcat-page" href="look-up-transaction-results.html">Look Up Transaction Results</a></li>
+                      <li><a class="nosubcat-page" href="reliable-transaction-submission.html">Reliable Transaction Submission</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse8 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_13">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_13" aria-expanded="true" aria-controls="sidenav_collapse_13"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="manage-account-settings.html">Manage Account Settings</a>
+                <!-- <a class="sidenav_cat_title" href="manage-account-settings.html">Manage Account Settings</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_13" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_13">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="assign-a-regular-key-pair.html">Assign a Regular Key Pair</a></li>
+                      <li><a class="nosubcat-page" href="change-or-remove-a-regular-key-pair.html">Change or Remove a Regular Key Pair</a></li>
+                      <li><a class="nosubcat-page" href="disable-master-key-pair.html">Disable Master Key Pair</a></li>
+                      <li><a class="nosubcat-page" href="set-up-multi-signing.html">Set Up Multi-Signing</a></li>
+                      <li><a class="nosubcat-page" href="send-a-multi-signed-transaction.html">Send a Multi-Signed Transaction</a></li>
+                      <li><a class="nosubcat-page" href="require-destination-tags.html">Require Destination Tags</a></li>
+                      <li><a class="nosubcat-page" href="offline-account-setup.html">Offline Account Setup Tutorial</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse13 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card active">
+            <div class="card-header" role="tab" id="sidenav_cat_head_21">
+                <a class="sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_21" aria-expanded="true" aria-controls="sidenav_collapse_21"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title active-parent" href="use-specialized-payment-types.html">Use Specialized Payment Types</a>
+                <!-- <a class="sidenav_cat_title" href="use-specialized-payment-types.html">Use Specialized Payment Types</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_21" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_21">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="use-escrows.html">Use Escrows</a></li>
+
+                          <li><a class="subpage" href="send-a-time-held-escrow.html">Send a Time-Held Escrow</a></li>
+                          <li><a class="subpage" href="send-a-conditionally-held-escrow.html">Send a Conditionally-Held Escrow</a></li>
+                          <li><a class="subpage" href="cancel-an-expired-escrow.html">Cancel an Expired Escrow</a></li>
+                          <li><a class="subpage" href="look-up-escrows.html">Look up escrows</a></li>
+                          <li><a class="subpage" href="use-an-escrow-as-a-smart-contract.html">Use an Escrow as a Smart Contract</a></li>
+
+                      <li><a class="subcat-title" href="use-payment-channels.html">Use Payment Channels</a></li>
+
+                          <li><a class="subpage" href="open-a-payment-channel-to-enable-an-inter-exchange-network.html">Open a Payment Channel to Enable an Inter-Exchange Network</a></li>
+
+                      <li><a class="subcat-title active-parent" href="use-checks.html">Use Checks</a></li>
+
+                          <li><a class="subpage" href="send-a-check.html">Send a Check</a></li>
+                          <li><a class="subpage" href="cash-a-check-for-an-exact-amount.html">Cash a Check for an Exact Amount</a></li>
+                          <li><a class="active subpage" href="#main_content_body">Cash a Check for a Flexible Amount</a></li>
+                          <li><a class="subpage" href="cancel-a-check.html">Cancel a Check</a></li>
+                          <li><a class="subpage" href="look-up-checks-by-sender.html">Look Up Checks by Sender</a></li>
+                          <li><a class="subpage" href="look-up-checks-by-recipient.html">Look Up Checks by Recipient</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse21 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_38">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_38" aria-expanded="true" aria-controls="sidenav_collapse_38"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="xrp-ledger-businesses.html">XRP Ledger Businesses</a>
+                <!-- <a class="sidenav_cat_title" href="xrp-ledger-businesses.html">XRP Ledger Businesses</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_38" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_38">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="list-xrp-as-an-exchange.html">List XRP as an Exchange</a></li>
+                      <li><a class="nosubcat-page" href="list-your-exchange-on-xrp-charts.html">List Your Exchange on XRP Charts</a></li>
+                      <li><a class="nosubcat-page" href="become-an-xrp-ledger-gateway.html">Become an XRP Ledger Gateway</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse38 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_42">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_42" aria-expanded="true" aria-controls="sidenav_collapse_42"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="manage-the-rippled-server.html">Manage the rippled Server</a>
+                <!-- <a class="sidenav_cat_title" href="manage-the-rippled-server.html">Manage the rippled Server</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_42" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_42">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="install-rippled.html">Install rippled</a></li>
+
+                          <li><a class="subpage" href="system-requirements.html">System Requirements</a></li>
+                          <li><a class="subpage" href="install-rippled-on-centos-rhel-with-yum.html">Install on CentOS/Red Hat with yum</a></li>
+                          <li><a class="subpage" href="install-rippled-on-ubuntu.html">Install on Ubuntu or Debian Linux</a></li>
+                          <li><a class="subpage" href="update-rippled-automatically-on-linux.html">Update Automatically on Linux</a></li>
+                          <li><a class="subpage" href="update-rippled-manually-on-centos-rhel.html">Update Manually on CentOS/Red Hat</a></li>
+                          <li><a class="subpage" href="update-rippled-manually-on-ubuntu.html">Update Manually on Ubuntu or Debian</a></li>
+                          <li><a class="subpage" href="build-run-rippled-ubuntu.html">Build and Run rippled on Ubuntu</a></li>
+                          <li><a class="subpage" href="build-run-rippled-macos.html">Build and Run rippled on macOS</a></li>
+                          <li><a class="subpage" href="capacity-planning.html">Capacity Planning</a></li>
+                          <li><a class="subpage" href="rippled-1-3-migration-instructions.html">rippled v1.3.x Migration Instructions</a></li>
+
+                      <li><a class="subcat-title" href="configure-rippled.html">Configure rippled</a></li>
+
+                          <li><a class="subpage" href="run-rippled-as-a-validator.html">Run rippled as a Validator</a></li>
+                          <li><a class="subpage" href="run-rippled-as-a-wallet-server.html">Run rippled as a Wallet Server</a></li>
+                          <li><a class="subpage" href="configure-statsd.html">Configure StatsD</a></li>
+                          <li><a class="subpage" href="connect-your-rippled-to-the-xrp-test-net.html">Connect Your rippled to a Parallel Network</a></li>
+                          <li><a class="subpage" href="configure-online-deletion.html">Configure Online Deletion</a></li>
+                          <li><a class="subpage" href="configure-advisory-deletion.html">Configure Advisory Deletion</a></li>
+                          <li><a class="subpage" href="configure-history-sharding.html">Configure History Sharding</a></li>
+                          <li><a class="subpage" href="configure-full-history.html">Configure Full History</a></li>
+                          <li><a class="subpage" href="configure-grpc.html">Configure gRPC</a></li>
+                          <li><a class="subpage" href="enable-public-signing.html">Enable Public Signing</a></li>
+
+                      <li><a class="subcat-title" href="configure-peering.html">Configure Peering</a></li>
+
+                          <li><a class="subpage" href="cluster-rippled-servers.html">Cluster rippled Servers</a></li>
+                          <li><a class="subpage" href="configure-a-private-server.html">Configure a Private Server</a></li>
+                          <li><a class="subpage" href="configure-the-peer-crawler.html">Configure the Peer Crawler</a></li>
+                          <li><a class="subpage" href="enable-link-compression.html">Enable Link Compression</a></li>
+                          <li><a class="subpage" href="forward-ports-for-peering.html">Forward Ports for Peering</a></li>
+                          <li><a class="subpage" href="manually-connect-to-a-specific-peer.html">Manually Connect to a Specific Peer</a></li>
+                          <li><a class="subpage" href="set-max-number-of-peers.html">Set Maximum Number of Peers</a></li>
+                          <li><a class="subpage" href="use-a-peer-reservation.html">Use a Peer Reservation</a></li>
+
+                      <li><a class="subcat-title" href="use-stand-alone-mode.html">Test rippled Functionality in Stand-Alone Mode</a></li>
+
+                          <li><a class="subpage" href="start-a-new-genesis-ledger-in-stand-alone-mode.html">Start a New Genesis Ledger in Stand-Alone Mode</a></li>
+                          <li><a class="subpage" href="load-a-saved-ledger-in-stand-alone-mode.html">Load a Saved Ledger in Stand-Alone Mode</a></li>
+                          <li><a class="subpage" href="advance-the-ledger-in-stand-alone-mode.html">Advance the Ledger in Stand-Alone Mode</a></li>
+
+                      <li><a class="subcat-title" href="troubleshoot-the-rippled-server.html">Troubleshooting rippled</a></li>
+
+                          <li><a class="subpage" href="diagnosing-problems.html">Diagnosing Problems with rippled</a></li>
+                          <li><a class="subpage" href="health-check-interventions.html">Health Check Interventions</a></li>
+                          <li><a class="subpage" href="understanding-log-messages.html">Understanding Log Messages</a></li>
+                          <li><a class="subpage" href="server-doesnt-sync.html">rippled Server Doesn't Sync</a></li>
+                          <li><a class="subpage" href="server-wont-start.html">rippled Server Won't Start</a></li>
+                          <li><a class="subpage" href="fix-sqlite-tx-db-page-size-issue.html">Fix SQLite Transaction Database Page Size Issue</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse42 -->
+
+          </div><!-- /.card -->
+
+    </div><!-- /#sidenav -->
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">Learn</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">Explore</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">Build</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">Concepts</a></li>
+          <li class="level-1"><a href="tutorials.html">Tutorials</a></li>
+          <li class="level-1"><a href="references.html">References</a></li>
+          <li class="level-1"><a href="dev-tools.html">Dev Tools</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">License</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="Jump to top of page">Top</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:en"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>

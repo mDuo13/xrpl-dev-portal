@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>RPC Tool - XRP Ledger Dev Portal (日本語)</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="/ja/assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="/ja/assets/css/fonts-ja.css" rel="stylesheet" />
+    <link href="/ja/assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-ja rpc-tool">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/ja/" class="navbar-brand"><img src="/ja/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal (日本語)" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">学ぶ</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">オーバービュー</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">探る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">作る</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">ドキュメント</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">コンセプト</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">チュートリアル</a>
+          <a class="dropdown-item top-level-2" href="references.html">リファレンス</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">開発者用ツール</a>
+          <a class="dropdown-item top-level-1" href="/blog/">ブログ</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/tool/template-xrp-ledger-rpc-tool.html" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">サイトを検索</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="サイトを検索">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          日本語
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/xrp-ledger-rpc-tool.html">Eng</a>
+          <a class="dropdown-item" href="/ja/xrp-ledger-rpc-tool.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">ホーム</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">作る</a></li>
+    <li class="active breadcrumb-item"><a href="dev-tools.html">開発者用ツール</a></li>
+    <li class="active breadcrumb-item">RPC Tool</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap--><section class="container-fluid pt-3 p-md-3">
+  <h1>RPC Tool</h1>
+  <div class="content">
+
+  <p>This is a debug tool for printing raw information about an account, a transaction (by hash) or a ledger (by sequence number).</p>
+
+  <form id="account-entry">
+  <fieldset><input id="target" class="form-control" required="" type="text" placeholder="XRP Ledger classic address or transaction ID" />
+  <span class="help-block"><small>Try an account like <em>r9kiSEUEw6iSCNksDVKf9k3AyxjW3r1qPf</em>.</small></span>
+  <button class="btn btn-primary">Get info</button></fieldset>
+  </form>
+  <div id="result">
+    <h2>Result</h2>
+    <div id="progress" class="progress">
+    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar"></div>
+    </div>
+    <div id="error" class="devportal-callout warning"></div>
+    <ul id="links" class="nav nav-pills">
+     	<li><a id="permalink" href="#" target="_blank" rel="noopener">Permalink</a></li>
+     	<li><a id="graphlink" href="#" target="_blank" rel="noopener">Graph</a></li>
+    </ul>
+    <div class="devportal-callout tip"><strong>Tip:</strong> This page features intelligent copy/paste. Any
+    nodes you expand will be copied, any that you don't expand will show up
+    as a little <code>/* */</code> comment in your copy/pasted text.</div>
+    <div class="group group-tx">
+    <h3>tx</h3>
+    <ul class="tools nav nav-pills">
+     	<li><a class="tx-expand">expand all</a></li>
+     	<li><a class="tx-collapse">collapse all</a></li>
+    </ul>
+    <pre id="tx_info" class="json"></pre>
+    <ul class="tools nav nav-pills">
+     	<li><a class="tx-expand">expand all</a></li>
+     	<li><a class="tx-collapse">collapse all</a></li>
+    </ul>
+    </div>
+
+    <div class="group group-account">
+    <h3>account_info</h3>
+    <pre id="account_info" class="json"></pre>
+    <h3>account_lines</h3>
+    <ul class="tools nav nav-pills">
+     	<li><a class="account-lines-expand">expand all</a></li>
+     	<li><a class="account-lines-collapse">collapse all</a></li>
+    </ul>
+    <pre id="account_lines" class="json"></pre>
+    <ul class="tools nav nav-pills">
+     	<li><a class="account-lines-expand">expand all</a></li>
+     	<li><a class="account-lines-collapse">collapse all</a></li>
+    </ul>
+    <h3>account_tx (last 20)</h3>
+    <ul class="tools nav nav-pills">
+     	<li><a class="account-tx-expand-tx">expand tx</a></li>
+     	<li><a class="account-tx-expand">expand all</a></li>
+     	<li><a class="account-tx-collapse">collapse all</a></li>
+     	<li><a class="account-tx-more">next 20</a></li>
+     	<li><a class="account-tx-back">prev 20</a></li>
+    </ul>
+    <pre id="account_tx" class="json"></pre>
+    <ul class="tools nav nav-pills">
+     	<li><a class="account-tx-expand-tx">expand tx</a></li>
+     	<li><a class="account-tx-expand">expand all</a></li>
+     	<li><a class="account-tx-collapse">collapse all</a></li>
+     	<li><a class="account-tx-more">next 20</a></li>
+     	<li><a class="account-tx-back">prev 20</a></li>
+    </ul>
+    <h3>account_offers</h3>
+    <ul class="tools nav nav-pills">
+     	<li><a class="account-offers-expand">expand all</a></li>
+     	<li><a class="account-offers-collapse">collapse all</a></li>
+    </ul>
+    <pre id="account_offers" class="json"></pre>
+    <ul class="tools nav nav-pills">
+     	<li><a class="account-offers-expand">expand all</a></li>
+     	<li><a class="account-offers-collapse">collapse all</a></li>
+    </ul>
+    </div>
+
+    <div class="group group-ledger">
+    <h3>ledger</h3>
+    <ul class="tools nav nav-pills">
+     	<li><a class="ledger-expand-tx">expand tx</a></li>
+     	<li><a class="ledger-tx-expand">expand all</a></li>
+     	<li><a class="ledger-tx-collapse">collapse all</a></li>
+    </ul>
+    <pre id="ledger_info" class="json"></pre>
+    <ul class="tools nav nav-pills">
+     	<li><a class="ledger-tx-expand-tx">expand tx</a></li>
+     	<li><a class="ledger-tx-expand">expand all</a></li>
+     	<li><a class="ledger-tx-collapse">collapse all</a></li>
+    </ul>
+    </div>
+
+    </div>
+  </div>
+</section>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="dev-tools.html"> 開発者用ツール</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" aria-multiselectable="true">
+      <div class="card active">
+        <div class="card-body card-body-single">
+          <ul class="sidebar_pagelist">
+            <li><a class="active nosubcat-page" href="xrp-ledger-rpc-tool.html">RPC Tool</a></li>
+            <li><a class="nosubcat-page" href="websocket-api-tool.html">WebSocket API Tool</a></li>
+            <li><a class="nosubcat-page" href="data-api-v2-tool.html">Data API v2 Tool</a></li>
+            <li><a class="nosubcat-page" href="xrp-ledger-toml-checker.html">xrp-ledger.toml Checker</a></li>
+            <li><a class="nosubcat-page" href="validator-domain-verifier.html">Domain Verification Checker</a></li>
+            <li><a class="nosubcat-page" href="xrp-testnet-faucet.html">XRP Faucets</a></li>
+            <li><a class="nosubcat-page" href="tx-sender.html">Transaction Sender</a></li>
+          <li><a class="nosubcat-page" href="https://livenet.xrpl.org/" target="_blank">XRP Ledger Explorer <i class="fa fa-external-link"></i></a></li>
+          </ul>
+        </div><!-- /.card-body -->
+      </div><!-- /.card -->
+    </div><!-- /#sidenav -->
+
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">学ぶ</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">探る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">作る</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">コンセプト</a></li>
+          <li class="level-1"><a href="tutorials.html">チュートリアル</a></li>
+          <li class="level-1"><a href="references.html">リファレンス</a></li>
+          <li class="level-1"><a href="dev-tools.html">開発者用ツール</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">ライセンス</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="このページの先頭へ">先頭へ</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:ja"] },
+debug: false
+});
+</script>
+
+  <script type='text/javascript' src='assets/js/es5-shim.js'></script>
+  <script type='text/javascript' src='assets/js/ripple-0.11.0-min.js'></script>
+  <script type='text/javascript' src='assets/vendor/async.min.js'></script>
+  <script type='text/javascript' src='assets/vendor/cm-javascript.min.js'></script>
+  <script type='text/javascript' src='assets/js/rpc-tool.js'></script>
+
+  <script type="application/javascript">
+    gtag('config', 'UA-157720658-3', {'content_group1': 'API Tools'});
+  </script>
+</body>
+</html>

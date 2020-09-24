@@ -1,0 +1,1308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>server_state - XRP Ledger Dev Portal</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/" class="navbar-brand"><img src="assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Learn</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">Overview</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Build</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">Docs</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">Concepts</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">Tutorials</a>
+          <a class="dropdown-item top-level-2" href="references.html">References</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">Dev Tools</a>
+          <a class="dropdown-item top-level-1" href="/blog/">Dev Blog</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/references/rippled-api/public-rippled-methods/server-info-methods/server_state.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">Search site...</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="Search site...">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Eng
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/server_state.html">Eng</a>
+          <a class="dropdown-item" href="/ja/server_state.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>In this document</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#server_state">server_state</a></li>
+<li class="level-2"><a href="#request-format">Request Format</a></li>
+<li class="level-2"><a href="#response-format">Response Format</a></li>
+<li class="level-2"><a href="#possible-errors">Possible Errors</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">Build</a></li>
+    <li class="active breadcrumb-item"><a href="references.html">References</a></li>
+    <li class="active breadcrumb-item"><a href="rippled-api.html">rippled API Reference</a></li>
+    <li class="active breadcrumb-item"><a href="public-rippled-methods.html">Public rippled Methods</a></li>
+    <li class="active breadcrumb-item"><a href="server-info-methods.html">Server Info Methods</a></li>
+    <li class="active breadcrumb-item">server_state</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="server_state">server_state</h1>
+<p><a class="external-link" href="https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/ServerState.cpp" target="_blank" title="Source">[Source] <i aria-hidden="true" class="fa fa-external-link"></i></a></p>
+<p>The <code>server_state</code> command asks the server for various machine-readable information about the <code>rippled</code> server's current state. The response is almost the same as the <a href="server_info.html">server_info method</a>, but uses units that are easier to process instead of easier to read. (For example, XRP values are given in integer drops instead of scientific notation or decimal values, and time is given in milliseconds instead of seconds.)</p>
+<h2 id="request-format">Request Format</h2>
+<p>An example of the request format:</p>
+<div class="multicode" id="code-0"><ul class="codetabs"><li><a href="#code-0-0">WebSocket</a></li><li><a href="#code-0-1">JSON-RPC</a></li><li><a href="#code-0-2">Commandline</a></li></ul>
+
+<div class="code_sample" id="code-0-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+  <span class="nt">"command"</span><span class="p">:</span> <span class="s2">"server_state"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-0-1" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">"method"</span><span class="p">:</span> <span class="s2">"server_state"</span><span class="p">,</span>
+    <span class="nt">"params"</span><span class="p">:</span> <span class="p">[</span>
+        <span class="p">{}</span>
+    <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-0-2" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="c1">#Syntax: server_state</span>
+rippled server_state
+</code></pre></div></div>
+</div>
+<p><a class="button" href="websocket-api-tool.html#server_state">Try it!</a></p>
+<p>The request does not takes any parameters.</p>
+<h2 id="response-format">Response Format</h2>
+<p>An example of a successful response:</p>
+<div class="multicode" id="code-1"><ul class="codetabs"><li><a href="#code-1-0">WebSocket</a></li><li><a href="#code-1-1">JSON-RPC</a></li><li><a href="#code-1-2">Commandline</a></li></ul>
+
+<div class="code_sample" id="code-1-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+  <span class="nt">"result"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">"state"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">"build_version"</span><span class="p">:</span> <span class="s2">"1.5.0-rc1"</span><span class="p">,</span>
+      <span class="nt">"complete_ledgers"</span><span class="p">:</span> <span class="s2">"54300020-54300697"</span><span class="p">,</span>
+      <span class="nt">"io_latency_ms"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">"jq_trans_overflow"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+      <span class="nt">"last_close"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"converge_time"</span><span class="p">:</span> <span class="mi">3001</span><span class="p">,</span>
+        <span class="nt">"proposers"</span><span class="p">:</span> <span class="mi">34</span>
+      <span class="p">},</span>
+      <span class="nt">"load"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"job_types"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="nt">"avg_time"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"untrustedValidation"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">21</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"ledgerRequest"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">3</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"untrustedProposal"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">26</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">45</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"avg_time"</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"ledgerData"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">105</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">1</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"in_progress"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"clientCommand"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">8</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"avg_time"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"transaction"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">35</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">8</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"batch"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">6</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"avg_time"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"advanceLedger"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">65</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">2</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"fetchTxnData"</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">3</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"avg_time"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"trustedValidation"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">49</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">6</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"trustedProposal"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">14</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"clusterReport"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">2</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"heartbeat"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">1</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"peerCommand"</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">1334</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"processTransaction"</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">8</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"SyncReadNode"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">35</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"AsyncReadNode"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">13</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">1104</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"WriteNode"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">976</span>
+          <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="nt">"threads"</span><span class="p">:</span> <span class="mi">6</span>
+      <span class="p">},</span>
+      <span class="nt">"load_base"</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+      <span class="nt">"load_factor"</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+      <span class="nt">"load_factor_fee_escalation"</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+      <span class="nt">"load_factor_fee_queue"</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+      <span class="nt">"load_factor_fee_reference"</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+      <span class="nt">"load_factor_server"</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+      <span class="nt">"peer_disconnects"</span><span class="p">:</span> <span class="s2">"55"</span><span class="p">,</span>
+      <span class="nt">"peer_disconnects_resources"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+      <span class="nt">"peers"</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
+      <span class="nt">"pubkey_node"</span><span class="p">:</span> <span class="s2">"n9KUjqxCr5FKThSNXdzb7oqN8rYwScB2dUnNqxQxbEA17JkaWy5x"</span><span class="p">,</span>
+      <span class="nt">"pubkey_validator"</span><span class="p">:</span> <span class="s2">"nHBk5DPexBjinXV8qHn7SEKzoxh2W92FxSbNTPgGtQYBzEF4msn9"</span><span class="p">,</span>
+      <span class="nt">"server_state"</span><span class="p">:</span> <span class="s2">"proposing"</span><span class="p">,</span>
+      <span class="nt">"server_state_duration_us"</span><span class="p">:</span> <span class="s2">"1727270915"</span><span class="p">,</span>
+      <span class="nt">"state_accounting"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"connected"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">"duration_us"</span><span class="p">:</span> <span class="s2">"128124609"</span><span class="p">,</span>
+          <span class="nt">"transitions"</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="nt">"disconnected"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">"duration_us"</span><span class="p">:</span> <span class="s2">"2290325"</span><span class="p">,</span>
+          <span class="nt">"transitions"</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="nt">"full"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">"duration_us"</span><span class="p">:</span> <span class="s2">"1727270915"</span><span class="p">,</span>
+          <span class="nt">"transitions"</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="nt">"syncing"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">"duration_us"</span><span class="p">:</span> <span class="s2">"3083023"</span><span class="p">,</span>
+          <span class="nt">"transitions"</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="nt">"tracking"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">"duration_us"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+          <span class="nt">"transitions"</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="nt">"time"</span><span class="p">:</span> <span class="s2">"2020-Mar-24 01:25:38.448364 UTC"</span><span class="p">,</span>
+      <span class="nt">"uptime"</span><span class="p">:</span> <span class="mi">1860</span><span class="p">,</span>
+      <span class="nt">"validated_ledger"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"base_fee"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="nt">"close_time"</span><span class="p">:</span> <span class="mi">638328331</span><span class="p">,</span>
+        <span class="nt">"hash"</span><span class="p">:</span> <span class="s2">"A63E850343B9F06CFE637648FF3D46DBAB7B1E41BA6B9A26FA72AA706D82233D"</span><span class="p">,</span>
+        <span class="nt">"reserve_base"</span><span class="p">:</span> <span class="mi">20000000</span><span class="p">,</span>
+        <span class="nt">"reserve_inc"</span><span class="p">:</span> <span class="mi">5000000</span><span class="p">,</span>
+        <span class="nt">"seq"</span><span class="p">:</span> <span class="mi">54300697</span>
+      <span class="p">},</span>
+      <span class="nt">"validation_quorum"</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
+      <span class="nt">"validator_list_expires"</span><span class="p">:</span> <span class="mi">639792000</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nt">"status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+  <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"response"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-1-1" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="mi">200</span> <span class="err">OK</span>
+
+<span class="p">{</span>
+  <span class="nt">"result"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">"state"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">"build_version"</span><span class="p">:</span> <span class="s2">"1.5.0-rc1"</span><span class="p">,</span>
+      <span class="nt">"complete_ledgers"</span><span class="p">:</span> <span class="s2">"54300020-54300761"</span><span class="p">,</span>
+      <span class="nt">"io_latency_ms"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="nt">"jq_trans_overflow"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+      <span class="nt">"last_close"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"converge_time"</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span>
+        <span class="nt">"proposers"</span><span class="p">:</span> <span class="mi">34</span>
+      <span class="p">},</span>
+      <span class="nt">"load"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"job_types"</span><span class="p">:</span> <span class="p">[</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"ledgerRequest"</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">2</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"untrustedProposal"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">41</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"avg_time"</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"ledgerData"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">42</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">1</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"in_progress"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"clientCommand"</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">7</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"transaction"</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">9</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"batch"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">7</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"advanceLedger"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">1</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"fetchTxnData"</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">5</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"trustedValidation"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">7</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"trustedProposal"</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">14</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"peerCommand"</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">1461</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"processTransaction"</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">9</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"SyncReadNode"</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">4</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"AsyncReadNode"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">124</span>
+          <span class="p">},</span>
+          <span class="p">{</span>
+            <span class="nt">"job_type"</span><span class="p">:</span> <span class="s2">"WriteNode"</span><span class="p">,</span>
+            <span class="nt">"peak_time"</span><span class="p">:</span> <span class="mi">7</span><span class="p">,</span>
+            <span class="nt">"per_second"</span><span class="p">:</span> <span class="mi">278</span>
+          <span class="p">}</span>
+        <span class="p">],</span>
+        <span class="nt">"threads"</span><span class="p">:</span> <span class="mi">6</span>
+      <span class="p">},</span>
+      <span class="nt">"load_base"</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+      <span class="nt">"load_factor"</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+      <span class="nt">"load_factor_fee_escalation"</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+      <span class="nt">"load_factor_fee_queue"</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+      <span class="nt">"load_factor_fee_reference"</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+      <span class="nt">"load_factor_server"</span><span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+      <span class="nt">"peer_disconnects"</span><span class="p">:</span> <span class="s2">"61"</span><span class="p">,</span>
+      <span class="nt">"peer_disconnects_resources"</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+      <span class="nt">"peers"</span><span class="p">:</span> <span class="mi">20</span><span class="p">,</span>
+      <span class="nt">"pubkey_node"</span><span class="p">:</span> <span class="s2">"n9KUjqxCr5FKThSNXdzb7oqN8rYwScB2dUnNqxQxbEA17JkaWy5x"</span><span class="p">,</span>
+      <span class="nt">"pubkey_validator"</span><span class="p">:</span> <span class="s2">"nHBk5DPexBjinXV8qHn7SEKzoxh2W92FxSbNTPgGtQYBzEF4msn9"</span><span class="p">,</span>
+      <span class="nt">"server_state"</span><span class="p">:</span> <span class="s2">"proposing"</span><span class="p">,</span>
+      <span class="nt">"server_state_duration_us"</span><span class="p">:</span> <span class="s2">"1974824750"</span><span class="p">,</span>
+      <span class="nt">"state_accounting"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"connected"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">"duration_us"</span><span class="p">:</span> <span class="s2">"128124609"</span><span class="p">,</span>
+          <span class="nt">"transitions"</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="nt">"disconnected"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">"duration_us"</span><span class="p">:</span> <span class="s2">"2290325"</span><span class="p">,</span>
+          <span class="nt">"transitions"</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="nt">"full"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">"duration_us"</span><span class="p">:</span> <span class="s2">"1974824750"</span><span class="p">,</span>
+          <span class="nt">"transitions"</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="nt">"syncing"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">"duration_us"</span><span class="p">:</span> <span class="s2">"3083023"</span><span class="p">,</span>
+          <span class="nt">"transitions"</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">},</span>
+        <span class="nt">"tracking"</span><span class="p">:</span> <span class="p">{</span>
+          <span class="nt">"duration_us"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+          <span class="nt">"transitions"</span><span class="p">:</span> <span class="mi">1</span>
+        <span class="p">}</span>
+      <span class="p">},</span>
+      <span class="nt">"time"</span><span class="p">:</span> <span class="s2">"2020-Mar-24 01:29:46.002417 UTC"</span><span class="p">,</span>
+      <span class="nt">"uptime"</span><span class="p">:</span> <span class="mi">2108</span><span class="p">,</span>
+      <span class="nt">"validated_ledger"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"base_fee"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+        <span class="nt">"close_time"</span><span class="p">:</span> <span class="mi">638328581</span><span class="p">,</span>
+        <span class="nt">"hash"</span><span class="p">:</span> <span class="s2">"E262523CB2579D3E1F66DEBBDCC3D7E9E7E3D88B0B45F9D5640C92766934C855"</span><span class="p">,</span>
+        <span class="nt">"reserve_base"</span><span class="p">:</span> <span class="mi">20000000</span><span class="p">,</span>
+        <span class="nt">"reserve_inc"</span><span class="p">:</span> <span class="mi">5000000</span><span class="p">,</span>
+        <span class="nt">"seq"</span><span class="p">:</span> <span class="mi">54300761</span>
+      <span class="p">},</span>
+      <span class="nt">"validation_quorum"</span><span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
+      <span class="nt">"validator_list_expires"</span><span class="p">:</span> <span class="mi">639792000</span>
+    <span class="p">},</span>
+    <span class="nt">"status"</span><span class="p">:</span> <span class="s2">"success"</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-1-2" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="err">Loading:</span> <span class="s2">"/etc/opt/ripple/rippled.cfg"</span>
+<span class="mi">2020</span><span class="err">-Mar</span><span class="mi">-24</span> <span class="mi">01</span><span class="err">:</span><span class="mi">30</span><span class="err">:</span><span class="mi">0</span><span class="mf">8.646201720</span> <span class="err">UTC</span> <span class="err">HTTPClient:NFO</span> <span class="err">Connecting</span> <span class="err">to</span> <span class="mf">127.0</span><span class="err">.</span><span class="mf">0.1</span><span class="err">:</span><span class="mi">5005</span>
+
+<span class="p">{</span>
+   <span class="nt">"result"</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">"state"</span> <span class="p">:</span> <span class="p">{</span>
+         <span class="nt">"build_version"</span> <span class="p">:</span> <span class="s2">"1.5.0-rc1"</span><span class="p">,</span>
+         <span class="nt">"complete_ledgers"</span> <span class="p">:</span> <span class="s2">"54300020-54300767"</span><span class="p">,</span>
+         <span class="nt">"io_latency_ms"</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+         <span class="nt">"jq_trans_overflow"</span> <span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+         <span class="nt">"last_close"</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">"converge_time"</span> <span class="p">:</span> <span class="mi">3143</span><span class="p">,</span>
+            <span class="nt">"proposers"</span> <span class="p">:</span> <span class="mi">34</span>
+         <span class="p">},</span>
+         <span class="nt">"load"</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">"job_types"</span> <span class="p">:</span> <span class="p">[</span>
+               <span class="p">{</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"untrustedProposal"</span><span class="p">,</span>
+                  <span class="nt">"peak_time"</span> <span class="p">:</span> <span class="mi">14</span><span class="p">,</span>
+                  <span class="nt">"per_second"</span> <span class="p">:</span> <span class="mi">44</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">"avg_time"</span> <span class="p">:</span> <span class="mi">6</span><span class="p">,</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"ledgerData"</span><span class="p">,</span>
+                  <span class="nt">"peak_time"</span> <span class="p">:</span> <span class="mi">252</span><span class="p">,</span>
+                  <span class="nt">"per_second"</span> <span class="p">:</span> <span class="mi">3</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">"in_progress"</span> <span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"clientCommand"</span><span class="p">,</span>
+                  <span class="nt">"peak_time"</span> <span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+                  <span class="nt">"per_second"</span> <span class="p">:</span> <span class="mi">10</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">"avg_time"</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"transaction"</span><span class="p">,</span>
+                  <span class="nt">"peak_time"</span> <span class="p">:</span> <span class="mi">61</span><span class="p">,</span>
+                  <span class="nt">"per_second"</span> <span class="p">:</span> <span class="mi">10</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"batch"</span><span class="p">,</span>
+                  <span class="nt">"peak_time"</span> <span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+                  <span class="nt">"per_second"</span> <span class="p">:</span> <span class="mi">7</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">"avg_time"</span> <span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"advanceLedger"</span><span class="p">,</span>
+                  <span class="nt">"peak_time"</span> <span class="p">:</span> <span class="mi">128</span><span class="p">,</span>
+                  <span class="nt">"per_second"</span> <span class="p">:</span> <span class="mi">10</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"fetchTxnData"</span><span class="p">,</span>
+                  <span class="nt">"per_second"</span> <span class="p">:</span> <span class="mi">4</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">"avg_time"</span> <span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"writeAhead"</span><span class="p">,</span>
+                  <span class="nt">"peak_time"</span> <span class="p">:</span> <span class="mi">43</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">"avg_time"</span> <span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"trustedValidation"</span><span class="p">,</span>
+                  <span class="nt">"peak_time"</span> <span class="p">:</span> <span class="mi">107</span><span class="p">,</span>
+                  <span class="nt">"per_second"</span> <span class="p">:</span> <span class="mi">11</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">"avg_time"</span> <span class="p">:</span> <span class="mi">41</span><span class="p">,</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"acceptLedger"</span><span class="p">,</span>
+                  <span class="nt">"peak_time"</span> <span class="p">:</span> <span class="mi">112</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"trustedProposal"</span><span class="p">,</span>
+                  <span class="nt">"per_second"</span> <span class="p">:</span> <span class="mi">14</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">"avg_time"</span> <span class="p">:</span> <span class="mi">131</span><span class="p">,</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"sweep"</span><span class="p">,</span>
+                  <span class="nt">"peak_time"</span> <span class="p">:</span> <span class="mi">523</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">"avg_time"</span> <span class="p">:</span> <span class="mi">36</span><span class="p">,</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"heartbeat"</span><span class="p">,</span>
+                  <span class="nt">"peak_time"</span> <span class="p">:</span> <span class="mi">144</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"peerCommand"</span><span class="p">,</span>
+                  <span class="nt">"per_second"</span> <span class="p">:</span> <span class="mi">1594</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"processTransaction"</span><span class="p">,</span>
+                  <span class="nt">"per_second"</span> <span class="p">:</span> <span class="mi">10</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"SyncReadNode"</span><span class="p">,</span>
+                  <span class="nt">"per_second"</span> <span class="p">:</span> <span class="mi">128</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"AsyncReadNode"</span><span class="p">,</span>
+                  <span class="nt">"per_second"</span> <span class="p">:</span> <span class="mi">3346</span>
+               <span class="p">},</span>
+               <span class="p">{</span>
+                  <span class="nt">"job_type"</span> <span class="p">:</span> <span class="s2">"WriteNode"</span><span class="p">,</span>
+                  <span class="nt">"per_second"</span> <span class="p">:</span> <span class="mi">2275</span>
+               <span class="p">}</span>
+            <span class="p">],</span>
+            <span class="nt">"threads"</span> <span class="p">:</span> <span class="mi">6</span>
+         <span class="p">},</span>
+         <span class="nt">"load_base"</span> <span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+         <span class="nt">"load_factor"</span> <span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+         <span class="nt">"load_factor_fee_escalation"</span> <span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+         <span class="nt">"load_factor_fee_queue"</span> <span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+         <span class="nt">"load_factor_fee_reference"</span> <span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+         <span class="nt">"load_factor_server"</span> <span class="p">:</span> <span class="mi">256</span><span class="p">,</span>
+         <span class="nt">"peer_disconnects"</span> <span class="p">:</span> <span class="s2">"61"</span><span class="p">,</span>
+         <span class="nt">"peer_disconnects_resources"</span> <span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>
+         <span class="nt">"peers"</span> <span class="p">:</span> <span class="mi">21</span><span class="p">,</span>
+         <span class="nt">"pubkey_node"</span> <span class="p">:</span> <span class="s2">"n9KUjqxCr5FKThSNXdzb7oqN8rYwScB2dUnNqxQxbEA17JkaWy5x"</span><span class="p">,</span>
+         <span class="nt">"pubkey_validator"</span> <span class="p">:</span> <span class="s2">"nHBk5DPexBjinXV8qHn7SEKzoxh2W92FxSbNTPgGtQYBzEF4msn9"</span><span class="p">,</span>
+         <span class="nt">"server_state"</span> <span class="p">:</span> <span class="s2">"proposing"</span><span class="p">,</span>
+         <span class="nt">"server_state_duration_us"</span> <span class="p">:</span> <span class="s2">"1997468900"</span><span class="p">,</span>
+         <span class="nt">"state_accounting"</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">"connected"</span> <span class="p">:</span> <span class="p">{</span>
+               <span class="nt">"duration_us"</span> <span class="p">:</span> <span class="s2">"128124609"</span><span class="p">,</span>
+               <span class="nt">"transitions"</span> <span class="p">:</span> <span class="mi">1</span>
+            <span class="p">},</span>
+            <span class="nt">"disconnected"</span> <span class="p">:</span> <span class="p">{</span>
+               <span class="nt">"duration_us"</span> <span class="p">:</span> <span class="s2">"2290325"</span><span class="p">,</span>
+               <span class="nt">"transitions"</span> <span class="p">:</span> <span class="mi">1</span>
+            <span class="p">},</span>
+            <span class="nt">"full"</span> <span class="p">:</span> <span class="p">{</span>
+               <span class="nt">"duration_us"</span> <span class="p">:</span> <span class="s2">"1997468900"</span><span class="p">,</span>
+               <span class="nt">"transitions"</span> <span class="p">:</span> <span class="mi">1</span>
+            <span class="p">},</span>
+            <span class="nt">"syncing"</span> <span class="p">:</span> <span class="p">{</span>
+               <span class="nt">"duration_us"</span> <span class="p">:</span> <span class="s2">"3083023"</span><span class="p">,</span>
+               <span class="nt">"transitions"</span> <span class="p">:</span> <span class="mi">1</span>
+            <span class="p">},</span>
+            <span class="nt">"tracking"</span> <span class="p">:</span> <span class="p">{</span>
+               <span class="nt">"duration_us"</span> <span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+               <span class="nt">"transitions"</span> <span class="p">:</span> <span class="mi">1</span>
+            <span class="p">}</span>
+         <span class="p">},</span>
+         <span class="nt">"time"</span> <span class="p">:</span> <span class="s2">"2020-Mar-24 01:30:08.646564 UTC"</span><span class="p">,</span>
+         <span class="nt">"uptime"</span> <span class="p">:</span> <span class="mi">2130</span><span class="p">,</span>
+         <span class="nt">"validated_ledger"</span> <span class="p">:</span> <span class="p">{</span>
+            <span class="nt">"base_fee"</span> <span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+            <span class="nt">"close_time"</span> <span class="p">:</span> <span class="mi">638328602</span><span class="p">,</span>
+            <span class="nt">"hash"</span> <span class="p">:</span> <span class="s2">"835B1EDFA0D4B7BDE1F5030D1B5FBE98C122ABB9C34FE8889B77CD635766C1B5"</span><span class="p">,</span>
+            <span class="nt">"reserve_base"</span> <span class="p">:</span> <span class="mi">20000000</span><span class="p">,</span>
+            <span class="nt">"reserve_inc"</span> <span class="p">:</span> <span class="mi">5000000</span><span class="p">,</span>
+            <span class="nt">"seq"</span> <span class="p">:</span> <span class="mi">54300767</span>
+         <span class="p">},</span>
+         <span class="nt">"validation_quorum"</span> <span class="p">:</span> <span class="mi">29</span><span class="p">,</span>
+         <span class="nt">"validator_list_expires"</span> <span class="p">:</span> <span class="mi">639792000</span>
+      <span class="p">},</span>
+      <span class="nt">"status"</span> <span class="p">:</span> <span class="s2">"success"</span>
+   <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+</div>
+<p>The response follows the <a href="response-formatting.html">standard format</a>, with a successful result containing a <code>state</code> object as its only field.</p>
+<p>The <code>state</code> object may have some arrangement of the following fields:</p>
+<table>
+<thead>
+<tr>
+<th align="left"><code>Field</code></th>
+<th align="left">Type</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>amendment_blocked</code></td>
+<td align="left">Boolean</td>
+<td align="left"><em>(May be omitted)</em> If <code>true</code>, this server is <a href="amendments.html#amendment-blocked">amendment blocked</a>. If the server is not amendment blocked, the response omits this field. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/0.80.0" target="_blank" title="New in: rippled 0.80.0"><img alt="New in: rippled 0.80.0" class="dactyl_badge" src="https://img.shields.io/badge/New%20in-rippled%200.80.0-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+</tr>
+<tr>
+<td align="left"><code>build_version</code></td>
+<td align="left">String</td>
+<td align="left">The version number of the running <code>rippled</code> version.</td>
+</tr>
+<tr>
+<td align="left"><code>complete_ledgers</code></td>
+<td align="left">String</td>
+<td align="left">Range expression indicating the sequence numbers of the ledger versions the local <code>rippled</code> has in its database. It is possible to be a disjoint sequence, e.g. "2500-5000,32570-7695432". If the server does not have any complete ledgers (for example, it recently started syncing with the network), this is the string <code>empty</code>.</td>
+</tr>
+<tr>
+<td align="left"><code>closed_ledger</code></td>
+<td align="left">Object</td>
+<td align="left"><em>(May be omitted)</em> Information on the most recently closed ledger that has not been validated by consensus. If the most recently validated ledger is available, the response omits this field and includes <code>validated_ledger</code> instead. The member fields are the same as the <code>validated_ledger</code> field.</td>
+</tr>
+<tr>
+<td align="left"><code>io_latency_ms</code></td>
+<td align="left">Number</td>
+<td align="left">Amount of time spent waiting for I/O operations, in milliseconds. If this number is not very, very low, then the <code>rippled</code> server is probably having serious load issues.</td>
+</tr>
+<tr>
+<td align="left"><code>jq_trans_overflow</code></td>
+<td align="left">String - Number</td>
+<td align="left">The number of times this server has had over 250 transactions waiting to be processed at once. A large number here may mean that your server is unable to handle the transaction load of the XRP Ledger network. For detailed recommendations of future-proof server specifications, see <a href="capacity-planning.html">Capacity Planning</a>. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/0.90.0" target="_blank" title="New in: rippled 0.90.0"><img alt="New in: rippled 0.90.0" class="dactyl_badge" src="https://img.shields.io/badge/New%20in-rippled%200.90.0-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+</tr>
+<tr>
+<td align="left"><code>load</code></td>
+<td align="left">Object</td>
+<td align="left"><em>(Admin only)</em> Detailed information about the current load state of the server.</td>
+</tr>
+<tr>
+<td align="left"><code>load.job_types</code></td>
+<td align="left">Array</td>
+<td align="left"><em>(Admin only)</em> Information about the rate of different types of jobs the server is doing and how much time it spends on each.</td>
+</tr>
+<tr>
+<td align="left"><code>load.threads</code></td>
+<td align="left">Number</td>
+<td align="left"><em>(Admin only)</em> The number of threads in the server's main job pool.</td>
+</tr>
+<tr>
+<td align="left"><code>load_base</code></td>
+<td align="left">Integer</td>
+<td align="left">This is the baseline amount of server load used in <a href="transaction-cost.html">transaction cost</a> calculations. If the <code>load_factor</code> is equal to the <code>load_base</code> then only the base transaction cost is enforced. If the <code>load_factor</code> is higher than the <code>load_base</code>, then transaction costs are multiplied by the ratio between them. For example, if the <code>load_factor</code> is double the <code>load_base</code>, then transaction costs are doubled.</td>
+</tr>
+<tr>
+<td align="left"><code>load_factor</code></td>
+<td align="left">Number</td>
+<td align="left">The load factor the server is currently enforcing. The ratio between this value and the <code>load_base</code> determines the multiplier for transaction costs. The load factor is determined by the highest of the individual server's load factor, cluster's load factor, the <a href="transaction-cost.html#open-ledger-cost">open ledger cost</a>, and the overall network's load factor. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/0.33.0" target="_blank" title="Updated in: rippled 0.33.0"><img alt="Updated in: rippled 0.33.0" class="dactyl_badge" src="https://img.shields.io/badge/Updated%20in-rippled%200.33.0-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+</tr>
+<tr>
+<td align="left"><code>load_factor_fee_escalation</code></td>
+<td align="left">Number</td>
+<td align="left"><em>(May be omitted)</em> The current multiplier to the <a href="transaction-cost.html">transaction cost</a> to get into the open ledger, in <a href="transaction-cost.html#fee-levels">fee levels</a>. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/0.32.0" target="_blank" title="New in: rippled 0.32.0"><img alt="New in: rippled 0.32.0" class="dactyl_badge" src="https://img.shields.io/badge/New%20in-rippled%200.32.0-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+</tr>
+<tr>
+<td align="left"><code>load_factor_fee_queue</code></td>
+<td align="left">Number</td>
+<td align="left"><em>(May be omitted)</em> The current multiplier to the <a href="transaction-cost.html">transaction cost</a> to get into the queue, if the queue is full, in <a href="transaction-cost.html#fee-levels">fee levels</a>. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/0.32.0" target="_blank" title="New in: rippled 0.32.0"><img alt="New in: rippled 0.32.0" class="dactyl_badge" src="https://img.shields.io/badge/New%20in-rippled%200.32.0-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+</tr>
+<tr>
+<td align="left"><code>load_factor_fee_reference</code></td>
+<td align="left">Number</td>
+<td align="left"><em>(May be omitted)</em> The <a href="transaction-cost.html">transaction cost</a> with no load scaling, in <a href="transaction-cost.html#fee-levels">fee levels</a>. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/0.32.0" target="_blank" title="New in: rippled 0.32.0"><img alt="New in: rippled 0.32.0" class="dactyl_badge" src="https://img.shields.io/badge/New%20in-rippled%200.32.0-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+</tr>
+<tr>
+<td align="left"><code>load_factor_server</code></td>
+<td align="left">Number</td>
+<td align="left"><em>(May be omitted)</em> The load factor the server is enforcing, not including the <a href="transaction-cost.html#open-ledger-cost">open ledger cost</a>. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/0.33.0" target="_blank" title="New in: rippled 0.33.0"><img alt="New in: rippled 0.33.0" class="dactyl_badge" src="https://img.shields.io/badge/New%20in-rippled%200.33.0-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+</tr>
+<tr>
+<td align="left"><code>peers</code></td>
+<td align="left">Number</td>
+<td align="left">How many other <code>rippled</code> servers this one is currently connected to.</td>
+</tr>
+<tr>
+<td align="left"><code>pubkey_node</code></td>
+<td align="left">String</td>
+<td align="left">Public key used to verify this server for peer-to-peer communications. This <em>node key pair</em> is automatically generated by the server the first time it starts up. (If deleted, the server can create a new pair of keys.) You can set a persistent value in the config file using the <code>[node_seed]</code> config option, which is useful for <a href="clustering.html">clustering</a>.</td>
+</tr>
+<tr>
+<td align="left"><code>pubkey_validator</code></td>
+<td align="left">String</td>
+<td align="left"><em>(Admin only)</em> Public key used by this node to sign ledger validations. This <em>validation key pair</em> is derived from the <code>[validator_token]</code> or <code>[validation_seed]</code> config field.</td>
+</tr>
+<tr>
+<td align="left"><code>server_state</code></td>
+<td align="left">String</td>
+<td align="left">A string indicating to what extent the server is participating in the network. See <a href="rippled-server-states.html">Possible Server States</a> for more details.</td>
+</tr>
+<tr>
+<td align="left"><code>server_state_duration_us</code></td>
+<td align="left">Number</td>
+<td align="left">The number of consecutive microseconds the server has been in the current state. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/1.2.0" target="_blank" title="New in: rippled 1.2.0"><img alt="New in: rippled 1.2.0" class="dactyl_badge" src="https://img.shields.io/badge/New%20in-rippled%201.2.0-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+</tr>
+<tr>
+<td align="left"><code>state_accounting</code></td>
+<td align="left">Object</td>
+<td align="left">A map of various <a href="rippled-server-states.html">server states</a> with information about the time the server spends in each. This can be useful for tracking the long-term health of your server's connectivity to the network. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/0.30.1" target="_blank" title="New in: rippled 0.30.1"><img alt="New in: rippled 0.30.1" class="dactyl_badge" src="https://img.shields.io/badge/New%20in-rippled%200.30.1-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+</tr>
+<tr>
+<td align="left"><code>state_accounting.*.duration_us</code></td>
+<td align="left">String</td>
+<td align="left">The number of microseconds the server has spent in this state. (This is updated whenever the server transitions into another state.) <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/0.30.1" target="_blank" title="New in: rippled 0.30.1"><img alt="New in: rippled 0.30.1" class="dactyl_badge" src="https://img.shields.io/badge/New%20in-rippled%200.30.1-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+</tr>
+<tr>
+<td align="left"><code>state_accounting.*.transitions</code></td>
+<td align="left">Number</td>
+<td align="left">The number of times the server has changed into this state. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/0.30.1" target="_blank" title="New in: rippled 0.30.1"><img alt="New in: rippled 0.30.1" class="dactyl_badge" src="https://img.shields.io/badge/New%20in-rippled%200.30.1-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+</tr>
+<tr>
+<td align="left"><code>time</code></td>
+<td align="left">String</td>
+<td align="left">The current time in UTC, according to the server's clock. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/1.5.0" target="_blank" title="Updated in: rippled 1.5.0"><img alt="Updated in: rippled 1.5.0" class="dactyl_badge" src="https://img.shields.io/badge/Updated%20in-rippled%201.5.0-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+</tr>
+<tr>
+<td align="left"><code>uptime</code></td>
+<td align="left">Number</td>
+<td align="left">Number of consecutive seconds that the server has been operational. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/0.30.1" target="_blank" title="New in: rippled 0.30.1"><img alt="New in: rippled 0.30.1" class="dactyl_badge" src="https://img.shields.io/badge/New%20in-rippled%200.30.1-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+</tr>
+<tr>
+<td align="left"><code>validated_ledger</code></td>
+<td align="left">Object</td>
+<td align="left"><em>(May be omitted)</em> Information about the most recent fully-validated ledger. If the most recent validated ledger is not available, the response omits this field and includes <code>closed_ledger</code> instead.</td>
+</tr>
+<tr>
+<td align="left"><code>validated_ledger.base_fee</code></td>
+<td align="left">Number</td>
+<td align="left">Base fee, in drops of XRP, for propagating a transaction to the network.</td>
+</tr>
+<tr>
+<td align="left"><code>validated_ledger.close_time</code></td>
+<td align="left">Number</td>
+<td align="left">Time this ledger was closed, in <a href="basic-data-types.html#specifying-time">seconds since the Ripple Epoch</a>.</td>
+</tr>
+<tr>
+<td align="left"><code>validated_ledger.hash</code></td>
+<td align="left">String</td>
+<td align="left">Unique hash of this ledger version, as hexadecimal.</td>
+</tr>
+<tr>
+<td align="left"><code>validated_ledger.reserve_base</code></td>
+<td align="left">Number</td>
+<td align="left">The minimum <a href="reserves.html">account reserve</a>, as of the most recent validated ledger version.</td>
+</tr>
+<tr>
+<td align="left"><code>validated_ledger.reserve_inc</code></td>
+<td align="left">Number</td>
+<td align="left">The <a href="reserves.html">owner reserve</a> for each item an account owns, as of the most recent validated ledger version.</td>
+</tr>
+<tr>
+<td align="left"><code>validated_ledger.seq</code></td>
+<td align="left">Number</td>
+<td align="left">The <a href="basic-data-types.html#ledger-index">ledger index</a> of the most recently validated ledger version.</td>
+</tr>
+<tr>
+<td align="left"><code>validation_quorum</code></td>
+<td align="left">Number</td>
+<td align="left">Minimum number of trusted validations required to validate a ledger version. Some circumstances may cause the server to require more validations.</td>
+</tr>
+<tr>
+<td align="left"><code>validator_list_expires</code></td>
+<td align="left">Number</td>
+<td align="left"><em>(Admin only)</em> When the current validator list will expire, in <a href="basic-data-types.html#specifying-time">seconds since the Ripple Epoch</a>, or 0 if the server has yet to load a published validator list. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/0.80.1" target="_blank" title="New in: rippled 0.80.1"><img alt="New in: rippled 0.80.1" class="dactyl_badge" src="https://img.shields.io/badge/New%20in-rippled%200.80.1-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="possible-errors">Possible Errors</h2>
+<ul>
+<li>Any of the <a href="error-formatting.html#universal-errors">universal error types</a>.</li>
+</ul>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- rippled release notes links -->
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="rippled-api.html"> rippled API Reference</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_21">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_21" aria-expanded="true" aria-controls="sidenav_collapse_21"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="api-conventions.html">API Conventions</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_21" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_21">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="nosubcat-page" href="basic-data-types.html">Basic Data Types</a></li>
+                        <li><a class="nosubcat-page" href="base58-encodings.html">base58 Encodings</a></li>
+                        <li><a class="nosubcat-page" href="currency-formats.html">Currency Formats</a></li>
+                        <li><a class="nosubcat-page" href="error-formatting.html">Error Formatting</a></li>
+                        <li><a class="nosubcat-page" href="markers-and-pagination.html">Markers and Pagination</a></li>
+                        <li><a class="nosubcat-page" href="modifying-the-ledger.html">Modifying the Ledger</a></li>
+                        <li><a class="nosubcat-page" href="rate-limiting.html">Rate Limiting</a></li>
+                        <li><a class="nosubcat-page" href="request-formatting.html">Request Formatting</a></li>
+                        <li><a class="nosubcat-page" href="response-formatting.html">Response Formatting</a></li>
+                        <li><a class="nosubcat-page" href="rippled-server-states.html">rippled Server States</a></li>
+                        <li><a class="nosubcat-page" href="serialization.html">Serialization Format</a></li>
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse21 -->
+
+            </div><!-- /.panel -->
+            <div class="card active">
+              <div class="card-header" role="tab" id="sidenav_cat_head_22">
+                <a class="sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_22" aria-expanded="true" aria-controls="sidenav_collapse_22"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title active-parent" href="public-rippled-methods.html">Public rippled Methods</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_22" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_22">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="subcat-title" href="account-methods.html">Account Methods</a></li>
+
+                            <li><a class="subpage" href="account_channels.html">account_channels</a></li>
+                            <li><a class="subpage" href="account_currencies.html">account_currencies</a></li>
+                            <li><a class="subpage" href="account_info.html">account_info</a></li>
+                            <li><a class="subpage" href="account_lines.html">account_lines</a></li>
+                            <li><a class="subpage" href="account_objects.html">account_objects</a></li>
+                            <li><a class="subpage" href="account_offers.html">account_offers</a></li>
+                            <li><a class="subpage" href="account_tx.html">account_tx</a></li>
+                            <li><a class="subpage" href="gateway_balances.html">gateway_balances</a></li>
+                            <li><a class="subpage" href="noripple_check.html">noripple_check</a></li>
+
+                        <li><a class="subcat-title" href="ledger-methods.html">Ledger Methods</a></li>
+
+                            <li><a class="subpage" href="ledger.html">ledger</a></li>
+                            <li><a class="subpage" href="ledger_closed.html">ledger_closed</a></li>
+                            <li><a class="subpage" href="ledger_current.html">ledger_current</a></li>
+                            <li><a class="subpage" href="ledger_data.html">ledger_data</a></li>
+                            <li><a class="subpage" href="ledger_entry.html">ledger_entry</a></li>
+
+                        <li><a class="subcat-title" href="transaction-methods.html">Transaction Methods</a></li>
+
+                            <li><a class="subpage" href="sign.html">sign</a></li>
+                            <li><a class="subpage" href="sign_for.html">sign_for</a></li>
+                            <li><a class="subpage" href="submit.html">submit</a></li>
+                            <li><a class="subpage" href="submit_multisigned.html">submit_multisigned</a></li>
+                            <li><a class="subpage" href="transaction_entry.html">transaction_entry</a></li>
+                            <li><a class="subpage" href="tx.html">tx</a></li>
+                            <li><a class="subpage" href="tx_history.html">tx_history</a></li>
+
+                        <li><a class="subcat-title" href="path-and-order-book-methods.html">Path and Order Book Methods</a></li>
+
+                            <li><a class="subpage" href="book_offers.html">book_offers</a></li>
+                            <li><a class="subpage" href="deposit_authorized.html">deposit_authorized</a></li>
+                            <li><a class="subpage" href="path_find.html">path_find</a></li>
+                            <li><a class="subpage" href="ripple_path_find.html">ripple_path_find</a></li>
+
+                        <li><a class="subcat-title" href="payment-channel-methods.html">Payment Channel Methods</a></li>
+
+                            <li><a class="subpage" href="channel_authorize.html">channel_authorize</a></li>
+                            <li><a class="subpage" href="channel_verify.html">channel_verify</a></li>
+
+                        <li><a class="subcat-title" href="subscription-methods.html">Subscription Methods</a></li>
+
+                            <li><a class="subpage" href="subscribe.html">subscribe</a></li>
+                            <li><a class="subpage" href="unsubscribe.html">unsubscribe</a></li>
+
+                        <li><a class="subcat-title active-parent" href="server-info-methods.html">Server Info Methods</a></li>
+
+                            <li><a class="subpage" href="fee.html">fee</a></li>
+                            <li><a class="subpage" href="server_info.html">server_info</a></li>
+                            <li><a class="active subpage" href="#main_content_body">server_state</a></li>
+
+                        <li><a class="subcat-title" href="utility-methods.html">Utility Methods</a></li>
+
+                            <li><a class="subpage" href="json.html">json</a></li>
+                            <li><a class="subpage" href="ping.html">ping</a></li>
+                            <li><a class="subpage" href="random.html">random</a></li>
+
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse22 -->
+
+            </div><!-- /.panel -->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_23">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_23" aria-expanded="true" aria-controls="sidenav_collapse_23"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="admin-rippled-methods.html">Admin rippled Methods</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_23" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_23">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="subcat-title" href="key-generation-methods.html">Key Generation Methods</a></li>
+
+                            <li><a class="subpage" href="validation_create.html">validation_create</a></li>
+                            <li><a class="subpage" href="wallet_propose.html">wallet_propose</a></li>
+
+                        <li><a class="subcat-title" href="logging-and-data-management-methods.html">Logging and Data Management Methods</a></li>
+
+                            <li><a class="subpage" href="can_delete.html">can_delete</a></li>
+                            <li><a class="subpage" href="crawl_shards.html">crawl_shards</a></li>
+                            <li><a class="subpage" href="download_shard.html">download_shard</a></li>
+                            <li><a class="subpage" href="ledger_cleaner.html">ledger_cleaner</a></li>
+                            <li><a class="subpage" href="ledger_request.html">ledger_request</a></li>
+                            <li><a class="subpage" href="log_level.html">log_level</a></li>
+                            <li><a class="subpage" href="logrotate.html">logrotate</a></li>
+
+                        <li><a class="subcat-title" href="server-control-methods.html">Server Control Methods</a></li>
+
+                            <li><a class="subpage" href="ledger_accept.html">ledger_accept</a></li>
+                            <li><a class="subpage" href="stop.html">stop</a></li>
+                            <li><a class="subpage" href="validation_seed.html">validation_seed</a></li>
+
+                        <li><a class="subcat-title" href="peer-management-methods.html">Peer Management Methods</a></li>
+
+                            <li><a class="subpage" href="connect.html">connect</a></li>
+                            <li><a class="subpage" href="peer_reservations_add.html">peer_reservations_add</a></li>
+                            <li><a class="subpage" href="peer_reservations_del.html">peer_reservations_del</a></li>
+                            <li><a class="subpage" href="peer_reservations_list.html">peer_reservations_list</a></li>
+                            <li><a class="subpage" href="peers.html">peers</a></li>
+
+                        <li><a class="subcat-title" href="status-and-debugging-methods.html">Status and Debugging Methods</a></li>
+
+                            <li><a class="subpage" href="consensus_info.html">consensus_info</a></li>
+                            <li><a class="subpage" href="feature.html">feature</a></li>
+                            <li><a class="subpage" href="fetch_info.html">fetch_info</a></li>
+                            <li><a class="subpage" href="get_counts.html">get_counts</a></li>
+                            <li><a class="subpage" href="manifest.html">manifest</a></li>
+                            <li><a class="subpage" href="print.html">print</a></li>
+                            <li><a class="subpage" href="validator_info.html">validator_info</a></li>
+                            <li><a class="subpage" href="validator_list_sites.html">validator_list_sites</a></li>
+                            <li><a class="subpage" href="validators.html">validators</a></li>
+
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse23 -->
+
+            </div><!-- /.panel -->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_24">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_24" aria-expanded="true" aria-controls="sidenav_collapse_24"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="ledger-data-formats.html">Ledger Data Formats</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_24" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_24">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="nosubcat-page" href="ledger-header.html">Ledger Header</a></li>
+                        <li><a class="nosubcat-page" href="ledger-object-ids.html">Ledger Object IDs</a></li>
+                        <li><a class="subcat-title" href="ledger-object-types.html">Ledger Object Types</a></li>
+
+                            <li><a class="subpage" href="accountroot.html">AccountRoot</a></li>
+                            <li><a class="subpage" href="amendments-object.html">Amendments</a></li>
+                            <li><a class="subpage" href="check.html">Check</a></li>
+                            <li><a class="subpage" href="depositpreauth-object.html">DepositPreauth</a></li>
+                            <li><a class="subpage" href="directorynode.html">DirectoryNode</a></li>
+                            <li><a class="subpage" href="escrow-object.html">Escrow</a></li>
+                            <li><a class="subpage" href="feesettings.html">FeeSettings</a></li>
+                            <li><a class="subpage" href="ledgerhashes.html">LedgerHashes</a></li>
+                            <li><a class="subpage" href="offer.html">Offer</a></li>
+                            <li><a class="subpage" href="paychannel.html">PayChannel</a></li>
+                            <li><a class="subpage" href="ripplestate.html">RippleState</a></li>
+                            <li><a class="subpage" href="signerlist.html">SignerList</a></li>
+
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse24 -->
+
+            </div><!-- /.panel -->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_25">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_25" aria-expanded="true" aria-controls="sidenav_collapse_25"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="transaction-formats.html">Transaction Formats</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_25" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_25">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="nosubcat-page" href="transaction-common-fields.html">Transaction Common Fields</a></li>
+                        <li><a class="subcat-title" href="transaction-types.html">Transaction Types</a></li>
+
+                            <li><a class="subpage" href="accountset.html">AccountSet</a></li>
+                            <li><a class="subpage" href="accountdelete.html">AccountDelete</a></li>
+                            <li><a class="subpage" href="checkcancel.html">CheckCancel</a></li>
+                            <li><a class="subpage" href="checkcash.html">CheckCash</a></li>
+                            <li><a class="subpage" href="checkcreate.html">CheckCreate</a></li>
+                            <li><a class="subpage" href="depositpreauth.html">DepositPreauth</a></li>
+                            <li><a class="subpage" href="escrowcancel.html">EscrowCancel</a></li>
+                            <li><a class="subpage" href="escrowcreate.html">EscrowCreate</a></li>
+                            <li><a class="subpage" href="escrowfinish.html">EscrowFinish</a></li>
+                            <li><a class="subpage" href="offercancel.html">OfferCancel</a></li>
+                            <li><a class="subpage" href="offercreate.html">OfferCreate</a></li>
+                            <li><a class="subpage" href="payment.html">Payment</a></li>
+                            <li><a class="subpage" href="paymentchannelclaim.html">PaymentChannelClaim</a></li>
+                            <li><a class="subpage" href="paymentchannelcreate.html">PaymentChannelCreate</a></li>
+                            <li><a class="subpage" href="paymentchannelfund.html">PaymentChannelFund</a></li>
+                            <li><a class="subpage" href="setregularkey.html">SetRegularKey</a></li>
+                            <li><a class="subpage" href="signerlistset.html">SignerListSet</a></li>
+                            <li><a class="subpage" href="trustset.html">TrustSet</a></li>
+
+                        <li><a class="subcat-title" href="pseudo-transaction-types.html">Pseudo-Transactions</a></li>
+
+                            <li><a class="subpage" href="enableamendment.html">EnableAmendment</a></li>
+                            <li><a class="subpage" href="setfee.html">SetFee</a></li>
+
+                        <li><a class="subcat-title" href="transaction-results.html">Transaction Results</a></li>
+
+                            <li><a class="subpage" href="tec-codes.html">tec Codes</a></li>
+                            <li><a class="subpage" href="tef-codes.html">tef Codes</a></li>
+                            <li><a class="subpage" href="tel-codes.html">tel Codes</a></li>
+                            <li><a class="subpage" href="tem-codes.html">tem Codes</a></li>
+                            <li><a class="subpage" href="ter-codes.html">ter Codes</a></li>
+                            <li><a class="subpage" href="tes-success.html">tes Success</a></li>
+
+                        <li><a class="nosubcat-page" href="transaction-metadata.html">Transaction Metadata</a></li>
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse25 -->
+
+            </div><!-- /.panel -->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_26">
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="commandline-usage.html">rippled Commandline Usage Reference</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_26" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_26">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse26 -->
+
+            </div><!-- /.panel -->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_27">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_27" aria-expanded="true" aria-controls="sidenav_collapse_27"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="peer-port-methods.html">Peer Port Methods</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_27" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_27">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="nosubcat-page" href="health-check.html">Health Check</a></li>
+                        <li><a class="nosubcat-page" href="peer-crawler.html">Peer Crawler</a></li>
+                        <li><a class="nosubcat-page" href="validator-list.html">Validator List Method</a></li>
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse27 -->
+
+            </div><!-- /.panel -->
+    </div><!-- /#sidenav -->
+
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">Learn</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">Explore</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">Build</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">Concepts</a></li>
+          <li class="level-1"><a href="tutorials.html">Tutorials</a></li>
+          <li class="level-1"><a href="references.html">References</a></li>
+          <li class="level-1"><a href="dev-tools.html">Dev Tools</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">License</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="Jump to top of page">Top</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:en"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>

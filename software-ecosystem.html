@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Software Ecosystem - XRP Ledger Dev Portal</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/" class="navbar-brand"><img src="assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Learn</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">Overview</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Build</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">Docs</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">Concepts</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">Tutorials</a>
+          <a class="dropdown-item top-level-2" href="references.html">References</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">Dev Tools</a>
+          <a class="dropdown-item top-level-1" href="/blog/">Dev Blog</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/concepts/introduction/software-ecosystem.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">Search site...</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="Search site...">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Eng
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/software-ecosystem.html">Eng</a>
+          <a class="dropdown-item" href="/ja/software-ecosystem.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>In this document</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#software-ecosystem">Software Ecosystem</a></li>
+<li class="level-2"><a href="#stack-levels">Stack Levels</a></li>
+<li class="level-3"><a href="#rippled-the-core-server">rippled: The Core Server</a></li>
+<li class="level-3"><a href="#programming-libraries">Programming Libraries</a></li>
+<li class="level-3"><a href="#middleware">Middleware</a></li>
+<li class="level-3"><a href="#apps-and-services">Apps and Services</a></li>
+<li class="level-2"><a href="#see-also">See Also</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">Build</a></li>
+    <li class="active breadcrumb-item"><a href="concepts.html">Concepts</a></li>
+    <li class="active breadcrumb-item"><a href="introduction.html">Introduction</a></li>
+    <li class="active breadcrumb-item">Software Ecosystem</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="software-ecosystem">Software Ecosystem</h1>
+<p>The XRP Ledger is home to a deep, layered ecosystem of software projects powering and enabling an Internet of Value. It's impossible to list every project, tool, and business that interacts with the XRP Ledger, so this page only lists a few categories and highlights some central projects that are documented here on <a class="external-link" href="https://xrpl.org" target="_blank">xrpl.org <i aria-hidden="true" class="fa fa-external-link"></i></a>. <!-- SPELLING_IGNORE: xrpl --></p>
+<h2 id="stack-levels">Stack Levels</h2>
+<figure><a href="img/ecosystem.svg" title="Ecosystem diagram with the four layers: XRP Ledger peer-to-peer network on the bottom, Programming Libraries above that, Middleware next, and Apps and Services at the top"><svg color-interpolation="auto" color-rendering="auto" fill="black" fill-opacity="1" font-family="'Dialog'" font-size="12px" font-style="normal" font-weight="normal" height="100%" image-rendering="auto" shape-rendering="auto" stroke="black" stroke-dasharray="none" stroke-dashoffset="0" stroke-linecap="square" stroke-linejoin="miter" stroke-miterlimit="10" stroke-opacity="1" stroke-width="1" text-rendering="auto" viewbox="20 50 870 630" width="870" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><!--Generated by the Batik Graphics2D SVG Generator--><defs id="img/ecosystem.svg__genericDefs"></defs><g><defs id="img/ecosystem.svg__defs1"><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath1"><path d="M0 0 L2147483647 0 L2147483647 2147483647 L0 2147483647 L0 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath2"><path d="M0 0 L0 30 L130 30 L130 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath3"><path d="M0 0 L0 150 L500 150 L500 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath4"><path d="M0 0 L0 70 L160 70 L160 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath5"><path d="M0 0 L0 40 L160 40 L160 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath6"><path d="M0 0 L0 70 L200 70 L200 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath7"><path d="M0 0 L0 50 L50 50 L50 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath8"><path d="M0 0 L0 70 L480 70 L480 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath9"><path d="M0 0 L0 70 L130 70 L130 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath10"><path d="M0 0 L0 70 L170 70 L170 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath11"><path d="M0 0 L0 90 L200 90 L200 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath12"><path d="M0 0 L0 30 L830 30 L830 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath13"><path d="M0 0 L0 40 L40 40 L40 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath14"><path d="M0 0 L0 90 L220 90 L220 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath15"><path d="M0 0 L0 30 L120 30 L120 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath16"><path d="M0 0 L0 350 L50 350 L50 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath17"><path d="M0 0 L0 230 L140 230 L140 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath18"><path d="M0 0 L0 60 L50 60 L50 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath19"><path d="M0 0 L0 70 L90 70 L90 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath20"><path d="M0 0 L0 80 L120 80 L120 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath21"><path d="M0 0 L0 80 L210 80 L210 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath22"><path d="M0 0 L0 80 L90 80 L90 0 Z"></path></clippath><clippath clippathunits="userSpaceOnUse" id="img/ecosystem.svg__clipPath23"><path d="M0 0 L0 80 L50 80 L50 0 Z"></path></clippath></defs><g font-family="sans-serif" font-size="8px" transform="translate(350,280)"><text clip-path="url(#img/ecosystem.svg__clipPath2)" stroke="none" x="5" xml:space="preserve" y="12.5">*Do not use for</text><text clip-path="url(#img/ecosystem.svg__clipPath2)" stroke="none" x="5" xml:space="preserve" y="23">mission-critical services.</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(270,510)"><rect clip-path="url(#img/ecosystem.svg__clipPath3)" height="148.5" stroke="none" width="498.5" x="0.5" y="0.5"></rect></g><g stroke-dasharray="8,5" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(270,510)"><rect clip-path="url(#img/ecosystem.svg__clipPath3)" fill="none" height="148.5" width="498.5" x="0.5" y="0.5"></rect><text clip-path="url(#img/ecosystem.svg__clipPath3)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="18.1094"> XRP Ledger</text></g><g font-family="sans-serif" font-size="14px" font-weight="bold" transform="translate(80,510)"><text clip-path="url(#img/ecosystem.svg__clipPath4)" stroke="none" x="5" xml:space="preserve" y="18.1094">Peer-to-Peer</text><text clip-path="url(#img/ecosystem.svg__clipPath4)" stroke="none" x="5" xml:space="preserve" y="34.2188">Network</text></g><g font-family="sans-serif" font-size="14px" font-weight="bold" transform="translate(80,370)"><text clip-path="url(#img/ecosystem.svg__clipPath5)" stroke="none" x="5" xml:space="preserve" y="18.1094">Programming</text><text clip-path="url(#img/ecosystem.svg__clipPath5)" stroke="none" x="5" xml:space="preserve" y="34.2188">Libraries</text></g><g font-family="sans-serif" font-size="14px" font-weight="bold" transform="translate(80,250)"><text clip-path="url(#img/ecosystem.svg__clipPath5)" stroke="none" x="5" xml:space="preserve" y="18.1094">Middleware APIs</text></g><g font-family="sans-serif" font-size="14px" font-weight="bold" transform="translate(80,90)"><text clip-path="url(#img/ecosystem.svg__clipPath5)" stroke="none" x="5" xml:space="preserve" y="18.1094">Apps &amp; Services</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(300,560)"><rect clip-path="url(#img/ecosystem.svg__clipPath6)" height="68.5" stroke="none" width="198.5" x="0.5" y="0.5"></rect></g><g transform="translate(300,560)"><rect clip-path="url(#img/ecosystem.svg__clipPath6)" fill="none" height="68.5" width="198.5" x="0.5" y="0.5"></rect><text clip-path="url(#img/ecosystem.svg__clipPath6)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="18.1094">rippled servers</text><text clip-path="url(#img/ecosystem.svg__clipPath6)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="34.2188">(direct &amp; indirect peers)</text></g><g fill="white" stroke="white" transform="translate(290,250)"><path clip-path="url(#img/ecosystem.svg__clipPath7)" d="M49 10.5 A24.25 10 0 0 0 0.5 10.5" stroke="none"></path><path clip-path="url(#img/ecosystem.svg__clipPath7)" d="M49 10.5 A24.25 10 0 0 0 0.5 10.5" fill="none" stroke="black"></path><path clip-path="url(#img/ecosystem.svg__clipPath7)" d="M0.5 10.5 A24.25 10 0 0 0 49 10.5" stroke="none"></path><path clip-path="url(#img/ecosystem.svg__clipPath7)" d="M0.5 10.5 A24.25 10 0 0 0 49 10.5" fill="none" stroke="black"></path><path clip-path="url(#img/ecosystem.svg__clipPath7)" d="M0.5 10.5 L0.5 40.5" fill="none" stroke="black"></path><path clip-path="url(#img/ecosystem.svg__clipPath7)" d="M49 10.5 L49 40.5" fill="none" stroke="black"></path><path clip-path="url(#img/ecosystem.svg__clipPath7)" d="M0.5 39.75 A24.25 9.25 0 0 0 49 39.75" stroke="none"></path><path clip-path="url(#img/ecosystem.svg__clipPath7)" d="M0.5 39.75 A24.25 9.25 0 0 0 49 39.75" fill="none" stroke="black"></path></g><g font-family="sans-serif" font-size="7.5px" transform="translate(290,250)"><text clip-path="url(#img/ecosystem.svg__clipPath7)" stroke="none" x="6" xml:space="preserve" y="32.0312">Relational</text><text clip-path="url(#img/ecosystem.svg__clipPath7)" stroke="none" x="17" xml:space="preserve" y="42.0625">DBs</text></g><g fill="white" stroke="white" transform="translate(270,70)"><rect clip-path="url(#img/ecosystem.svg__clipPath8)" height="68.5" stroke="none" width="478.5" x="0.5" y="0.5"></rect><rect clip-path="url(#img/ecosystem.svg__clipPath8)" fill="none" height="68.5" stroke="black" width="478.5" x="0.5" y="0.5"></rect></g><g fill="white" stroke="white" transform="translate(670,570)"><path clip-path="url(#img/ecosystem.svg__clipPath7)" d="M49 10.5 A24.25 10 0 0 0 0.5 10.5" stroke="none"></path><path clip-path="url(#img/ecosystem.svg__clipPath7)" d="M49 10.5 A24.25 10 0 0 0 0.5 10.5" fill="none" stroke="black"></path><path clip-path="url(#img/ecosystem.svg__clipPath7)" d="M0.5 10.5 A24.25 10 0 0 0 49 10.5" stroke="none"></path><path clip-path="url(#img/ecosystem.svg__clipPath7)" d="M0.5 10.5 A24.25 10 0 0 0 49 10.5" fill="none" stroke="black"></path><path clip-path="url(#img/ecosystem.svg__clipPath7)" d="M0.5 10.5 L0.5 40.5" fill="none" stroke="black"></path><path clip-path="url(#img/ecosystem.svg__clipPath7)" d="M49 10.5 L49 40.5" fill="none" stroke="black"></path><path clip-path="url(#img/ecosystem.svg__clipPath7)" d="M0.5 39.75 A24.25 9.25 0 0 0 49 39.75" stroke="none"></path><path clip-path="url(#img/ecosystem.svg__clipPath7)" d="M0.5 39.75 A24.25 9.25 0 0 0 49 39.75" fill="none" stroke="black"></path></g><g font-family="sans-serif" font-size="7.5px" transform="translate(670,570)"><text clip-path="url(#img/ecosystem.svg__clipPath7)" stroke="none" x="10" xml:space="preserve" y="32.0312">Internal</text><text clip-path="url(#img/ecosystem.svg__clipPath7)" stroke="none" x="17" xml:space="preserve" y="42.0625">DBs</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(350,240)"><rect clip-path="url(#img/ecosystem.svg__clipPath9)" height="68.5" stroke="none" width="128.5" x="0.5" y="0.5"></rect></g><g transform="translate(350,240)"><rect clip-path="url(#img/ecosystem.svg__clipPath9)" fill="none" height="68.5" width="128.5" x="0.5" y="0.5"></rect><text clip-path="url(#img/ecosystem.svg__clipPath9)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="34.2188">Data API*</text></g><g fill="white" stroke="white" transform="translate(280,80)"><rect clip-path="url(#img/ecosystem.svg__clipPath8)" height="68.5" stroke="none" width="478.5" x="0.5" y="0.5"></rect><rect clip-path="url(#img/ecosystem.svg__clipPath8)" fill="none" height="68.5" stroke="black" width="478.5" x="0.5" y="0.5"></rect></g><g fill="white" stroke="white" transform="translate(290,90)"><rect clip-path="url(#img/ecosystem.svg__clipPath8)" height="68.5" stroke="none" width="478.5" x="0.5" y="0.5"></rect><rect clip-path="url(#img/ecosystem.svg__clipPath8)" fill="none" height="68.5" stroke="black" width="478.5" x="0.5" y="0.5"></rect></g><g font-family="sans-serif" font-size="14px" transform="translate(290,90)"><text clip-path="url(#img/ecosystem.svg__clipPath8)" stroke="none" x="183" xml:space="preserve" y="18.1094">Apps &amp; Services</text><text clip-path="url(#img/ecosystem.svg__clipPath8)" stroke="none" x="112" xml:space="preserve" y="34.2188">(Exchanges, wallets, explorers, etc.)</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(350,360)"><rect clip-path="url(#img/ecosystem.svg__clipPath10)" height="68.5" stroke="none" width="168.5" x="0.5" y="0.5"></rect></g><g transform="translate(350,360)"><rect clip-path="url(#img/ecosystem.svg__clipPath10)" fill="none" height="68.5" width="168.5" x="0.5" y="0.5"></rect><text clip-path="url(#img/ecosystem.svg__clipPath10)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="34.2188">ripple-lib (JavaScript)</text></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(550,540)"><rect clip-path="url(#img/ecosystem.svg__clipPath11)" height="88.5" stroke="none" width="198.5" x="0.5" y="0.5"></rect></g><g transform="translate(550,540)"><rect clip-path="url(#img/ecosystem.svg__clipPath11)" fill="none" height="88.5" width="198.5" x="0.5" y="0.5"></rect><text clip-path="url(#img/ecosystem.svg__clipPath11)" font-family="sans-serif" font-size="14px" stroke="none" x="5" xml:space="preserve" y="34.2188">rippled server</text></g><g stroke-dasharray="1,2" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(40,480)"><path clip-path="url(#img/ecosystem.svg__clipPath12)" d="M10.5 10.5 L810.5 10.5" fill="none"></path></g><g stroke-dasharray="1,2" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(40,320)"><path clip-path="url(#img/ecosystem.svg__clipPath12)" d="M10.5 10.5 L810.5 10.5" fill="none"></path></g><g stroke-dasharray="1,2" stroke-linecap="butt" stroke-miterlimit="5" transform="translate(40,190)"><path clip-path="url(#img/ecosystem.svg__clipPath12)" d="M10.5 10.5 L810.5 10.5" fill="none"></path></g><g transform="translate(330,260)"><path clip-path="url(#img/ecosystem.svg__clipPath13)" d="M10.5 20.5 L20.5 20.5" fill="none"></path></g><g transform="translate(270,530)"><path clip-path="url(#img/ecosystem.svg__clipPath14)" d="M20.5 70.5 L10.5 70.5" fill="none"></path><path clip-path="url(#img/ecosystem.svg__clipPath14)" d="M10.5 70.5 L10.5 10.5" fill="none"></path><path clip-path="url(#img/ecosystem.svg__clipPath14)" d="M10.5 10.5 L200.5 10.5" fill="none"></path><path clip-path="url(#img/ecosystem.svg__clipPath14)" d="M200.5 10.5 L200.5 20.5" fill="none"></path></g><g transform="translate(280,540)"><path clip-path="url(#img/ecosystem.svg__clipPath14)" d="M20.5 70.5 L10.5 70.5" fill="none"></path><path clip-path="url(#img/ecosystem.svg__clipPath14)" d="M10.5 70.5 L10.5 10.5" fill="none"></path><path clip-path="url(#img/ecosystem.svg__clipPath14)" d="M10.5 10.5 L200.5 10.5" fill="none"></path><path clip-path="url(#img/ecosystem.svg__clipPath14)" d="M200.5 10.5 L200.5 20.5" fill="none"></path></g><g transform="translate(470,600)"><path clip-path="url(#img/ecosystem.svg__clipPath15)" d="M89.5 10.5 L20.5 10.5" fill="none"></path><rect clip-path="url(#img/ecosystem.svg__clipPath15)" fill="white" height="20" stroke="none" width="36" x="72.5" y="0.5"></rect><rect clip-path="url(#img/ecosystem.svg__clipPath15)" fill="none" height="20" width="36" x="72.5" y="0.5"></rect><text clip-path="url(#img/ecosystem.svg__clipPath15)" font-family="sans-serif" stroke="none" x="77.1162" xml:space="preserve" y="15.625">Peer</text><rect clip-path="url(#img/ecosystem.svg__clipPath15)" fill="white" height="20" stroke="none" width="36" x="2.5" y="0.5"></rect><rect clip-path="url(#img/ecosystem.svg__clipPath15)" fill="none" height="20" width="36" x="2.5" y="0.5"></rect><text clip-path="url(#img/ecosystem.svg__clipPath15)" font-family="sans-serif" stroke="none" x="7.1162" xml:space="preserve" y="15.625">Peer</text></g><g transform="translate(660,150)"><path clip-path="url(#img/ecosystem.svg__clipPath16)" d="M20.5 319.5 L20.5 10.5" fill="none"></path></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(660,150)"><path clip-path="url(#img/ecosystem.svg__clipPath16)" d="M35.5 334.75 A15 14.25 0 0 0 5.5 334.75" stroke="none"></path></g><g transform="translate(660,150)"><path clip-path="url(#img/ecosystem.svg__clipPath16)" d="M35.5 334.75 A15 14.25 0 0 0 5.5 334.75" fill="none"></path></g><g transform="translate(400,150)"><path clip-path="url(#img/ecosystem.svg__clipPath17)" d="M10.5 210.5 L120.5 180.5" fill="none"></path><path clip-path="url(#img/ecosystem.svg__clipPath17)" d="M120.5 180.5 L120.5 10.5" fill="none"></path></g><g transform="translate(380,150)"><path clip-path="url(#img/ecosystem.svg__clipPath18)" d="M20.5 29.5 L20.5 10.5" fill="none"></path></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(380,150)"><path clip-path="url(#img/ecosystem.svg__clipPath18)" d="M35.5 44.75 A15 14.25 0 0 0 5.5 44.75" stroke="none"></path></g><g transform="translate(380,150)"><path clip-path="url(#img/ecosystem.svg__clipPath18)" d="M35.5 44.75 A15 14.25 0 0 0 5.5 44.75" fill="none"></path></g><g transform="translate(360,190)"><path clip-path="url(#img/ecosystem.svg__clipPath19)" d="M40.5 11.5 L40.5 50.5" fill="none"></path><circle clip-path="url(#img/ecosystem.svg__clipPath19)" cx="40.5" cy="10.5" fill="white" r="10" stroke="none"></circle><circle clip-path="url(#img/ecosystem.svg__clipPath19)" cx="40.5" cy="10.5" fill="none" r="10"></circle><rect clip-path="url(#img/ecosystem.svg__clipPath19)" fill="white" height="20" stroke="none" width="64" x="8.5" y="40.5"></rect><rect clip-path="url(#img/ecosystem.svg__clipPath19)" fill="none" height="20" width="64" x="8.5" y="40.5"></rect><text clip-path="url(#img/ecosystem.svg__clipPath19)" font-family="sans-serif" stroke="none" x="12.8037" xml:space="preserve" y="55.625">REST-like</text></g><g transform="translate(360,300)"><path clip-path="url(#img/ecosystem.svg__clipPath20)" d="M69.6056 60.0528 L10.5 30.5" fill="none"></path><path clip-path="url(#img/ecosystem.svg__clipPath20)" d="M10.5 30.5 L10.5 10.5" fill="none"></path><rect clip-path="url(#img/ecosystem.svg__clipPath20)" fill="white" height="20" stroke="none" width="64" x="38.5" y="50.5"></rect><rect clip-path="url(#img/ecosystem.svg__clipPath20)" fill="none" height="20" width="64" x="38.5" y="50.5"></rect><text clip-path="url(#img/ecosystem.svg__clipPath20)" font-family="sans-serif" stroke="none" x="42.8721" xml:space="preserve" y="65.625">RippleAPI</text></g><g transform="translate(580,150)"><path clip-path="url(#img/ecosystem.svg__clipPath16)" d="M20.5 319.5 L20.5 10.5" fill="none"></path></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(580,150)"><path clip-path="url(#img/ecosystem.svg__clipPath16)" d="M35.5 334.75 A15 14.25 0 0 0 5.5 334.75" stroke="none"></path></g><g transform="translate(580,150)"><path clip-path="url(#img/ecosystem.svg__clipPath16)" d="M35.5 334.75 A15 14.25 0 0 0 5.5 334.75" fill="none"></path></g><g transform="translate(420,420)"><path clip-path="url(#img/ecosystem.svg__clipPath21)" d="M180.5 49.5 L180.5 30.5" fill="none"></path><path clip-path="url(#img/ecosystem.svg__clipPath21)" d="M180.5 30.5 L10.5 10.5" fill="none"></path></g><g fill="rgb(255,255,255)" fill-opacity="0" stroke="rgb(255,255,255)" stroke-opacity="0" transform="translate(420,420)"><path clip-path="url(#img/ecosystem.svg__clipPath21)" d="M195.5 64.75 A15 14.25 0 0 0 165.5 64.75" stroke="none"></path></g><g transform="translate(420,420)"><path clip-path="url(#img/ecosystem.svg__clipPath21)" d="M195.5 64.75 A15 14.25 0 0 0 165.5 64.75" fill="none"></path></g><g transform="translate(640,480)"><path clip-path="url(#img/ecosystem.svg__clipPath22)" d="M40.5 11.5 L40.5 60.5" fill="none"></path><circle clip-path="url(#img/ecosystem.svg__clipPath22)" cx="40.5" cy="10.5" fill="white" r="10" stroke="none"></circle><circle clip-path="url(#img/ecosystem.svg__clipPath22)" cx="40.5" cy="10.5" fill="none" r="10"></circle><rect clip-path="url(#img/ecosystem.svg__clipPath22)" fill="white" height="20" stroke="none" width="68" x="6.5" y="50.5"></rect><rect clip-path="url(#img/ecosystem.svg__clipPath22)" fill="none" height="20" width="68" x="6.5" y="50.5"></rect><text clip-path="url(#img/ecosystem.svg__clipPath22)" font-family="sans-serif" stroke="none" x="11.0791" xml:space="preserve" y="65.625">JSON-RPC</text></g><g transform="translate(580,480)"><path clip-path="url(#img/ecosystem.svg__clipPath23)" d="M20.5 11.5 L20.5 60.5" fill="none"></path><circle clip-path="url(#img/ecosystem.svg__clipPath23)" cx="20.5" cy="10.5" fill="white" r="10" stroke="none"></circle><circle clip-path="url(#img/ecosystem.svg__clipPath23)" cx="20.5" cy="10.5" fill="none" r="10"></circle><rect clip-path="url(#img/ecosystem.svg__clipPath23)" fill="white" height="20" stroke="none" width="28" x="6.5" y="50.5"></rect><rect clip-path="url(#img/ecosystem.svg__clipPath23)" fill="none" height="20" width="28" x="6.5" y="50.5"></rect><text clip-path="url(#img/ecosystem.svg__clipPath23)" font-family="sans-serif" stroke="none" x="10.7939" xml:space="preserve" y="65.625">WS</text></g></g></svg></a></figure>
+<ul>
+<li>
+<p>The <a href="#rippled-the-core-server">basis of the XRP Ledger</a> is a peer-to-peer network of always-on servers sharing transactions, engaging in the <a href="consensus.html">consensus process</a> and processing <a href="transaction-basics.html">transactions</a>. Everything else in the XRP Ledger ecosystem is ultimately built on top of this peer-to-peer network, directly or indirectly.</p>
+</li>
+<li>
+<p><a href="#programming-libraries"><em>Programming Libraries</em></a> exist in higher level software, where they are imported directly into program code, and contain methods to access the XRP Ledger.</p>
+</li>
+<li>
+<p><a href="#middleware"><em>Middleware</em></a> provides indirect access to XRP Ledger data. Applications in this layer often have their own data storage and processing.</p>
+</li>
+<li>
+<p><a href="#apps-and-services"><em>Apps and Services</em></a> provide user-level interaction with the XRP Ledger, or provide a basis for even higher-level apps and services.</p>
+</li>
+</ul>
+<h3 id="rippled-the-core-server">rippled: The Core Server</h3>
+<p>The peer-to-peer network at the heart of the XRP Ledger requires a highly-reliable, efficient server to enforce the rules of consensus and transaction processing. Ripple manages and publishes a reference implementation of this server software, called <a href="the-rippled-server.html"><strong><code>rippled</code></strong></a> (pronounced "ripple-dee"). The server is available under <a class="external-link" href="https://github.com/ripple/rippled/blob/develop/LICENSE" target="_blank">a permissive open-source license <i aria-hidden="true" class="fa fa-external-link"></i></a>, so anyone can inspect and modify their own instance of the server, and re-publish with few restrictions.</p>
+<p>Every instance of <code>rippled</code> syncs to the same network (unless it's configured to follow a <a href="parallel-networks.html">parallel network such as a test net</a>) and has access to all communications across the network. Every <code>rippled</code> server on the network keeps a complete copy of the latest state data for the entire XRP Ledger, along with a slice of recent transactions and a record of the changes those transactions made, and every server processes every transaction independently while verifying that its outcome matches the rest of the network. Servers can be configured to keep more <a href="ledger-history.html">ledger history</a> and to participate in the consensus process as a <a href="rippled-server-modes.html#reasons-to-run-a-validator">validator</a>.</p>
+<p>This server exposes <a href="rippled-api.html"><code>rippled</code> APIs</a> for users to look up data, administer the server, and submit transactions.</p>
+<h3 id="programming-libraries">Programming Libraries</h3>
+<p>Programming libraries are not strictly required to access XRP Ledger data, since you can use HTTP or WebSocket to connect to the <a href="rippled-api.html"><code>rippled</code> APIs</a> directly. Libraries simplify some of the common work of accessing the <code>rippled</code> APIs, and convert the data into forms that are easier to understand and program with in the programming language of the library.</p>
+<p><a href="get-started-with-rippleapi-for-javascript.html">RippleAPI for JavaScript</a> (also called "ripple-lib") is the longest-standing, most well-supported library for accessing the XRP Ledger. Many <a href="#middleware">middleware services</a> use programming libraries like RippleAPI internally.</p>
+<h3 id="middleware">Middleware</h3>
+<p>Middleware services are programs that consume the XRP Ledger APIs on one side and provide their own APIs on the other side. They provide a layer of abstraction to make it easier to build higher-level applications by providing some common functionality as a service.</p>
+<p>Unlike <a href="#programming-libraries">programming libraries</a>, which are instantiated fresh and shut down with the program that imports them, middleware services typically stay running indefinitely, and may have their own databases (relational SQL databases or otherwise) and configuration files.</p>
+<p>The <a href="data-api.html">Data API</a> is an example of a middleware service on top of the XRP Ledger. The Data API collects and transforms XRP Ledger data, so that you can query by time, filter by data type, or perform data analysis.</p>
+<p><a href="xrp-api.html">XRP-API</a> is another middleware service. XRP-API manages secret keys and provides a more convenient RESTful interface to the XRP Ledger for apps in any programming language.</p>
+<h3 id="apps-and-services">Apps and Services</h3>
+<p>Atop the stack is where the truly exciting things happen. Apps and services provide a way for users and devices to connect to the XRP Ledger. At this level, <a href="list-xrp-as-an-exchange.html">exchanges list XRP</a>, <a href="become-an-xrp-ledger-gateway.html">gateways issue other currencies</a> for use in the decentralized exchange, and wallets provide user interfaces for buying, selling, or <s>HODLing</s> holding XRP. Many other possibilities exist, including additional services layered even higher. <!-- SPELLING_IGNORE: hodling --></p>
+<p>A great way to build applications that are compatible with not only XRP but lots of other ways of denominating value is to use the <a class="external-link" href="https://interledger.org/" target="_blank">Interledger Protocol <i aria-hidden="true" class="fa fa-external-link"></i></a> with settlement in XRP.</p>
+<p>There are many other examples of projects using XRP and adjacent technologies to interact with users. Ripple's enterprise customers already have the option to use XRP through <a class="external-link" href="https://www.ripple.com/ripplenet/on-demand-liquidity/" target="_blank">on-demand liquidity services <i aria-hidden="true" class="fa fa-external-link"></i></a>. For more examples of businesses and software built on the XRP Ledger, see <a class="external-link" href="https://xpring.io/#partners" target="_blank">Xpring Partners <i aria-hidden="true" class="fa fa-external-link"></i></a> or XRPChat's excellent <a class="external-link" href="https://www.xrpchat.com/links/" target="_blank">Links &amp; Resources <i aria-hidden="true" class="fa fa-external-link"></i></a> listing.</p>
+<h2 id="see-also">See Also</h2>
+<ul>
+<li><a class="external-link" href="https://xpring.io/#partners" target="_blank">Xpring Partners <i aria-hidden="true" class="fa fa-external-link"></i></a></li>
+<li><a href="technical-faq.html">Technical FAQ</a></li>
+<li><a class="external-link" href="https://www.xrpchat.com/links/" target="_blank">XRPChat Links &amp; Resources <i aria-hidden="true" class="fa fa-external-link"></i></a> - Includes updated lists of gateways and exchanges, wallets and storage, apps, and more.</li>
+</ul>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- rippled release notes links -->
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="concepts.html"> Concepts</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+        <!---->
+          <div class="card active">
+            <div class="card-header" role="tab" id="sidenav_cat_head_2">
+                <a class="sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_2" aria-expanded="true" aria-controls="sidenav_collapse_2"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title active-parent" href="introduction.html">Introduction</a>
+                <!-- <a class="sidenav_cat_title" href="introduction.html">Introduction</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_2" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_2">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="xrp-ledger-overview.html">XRP Ledger Overview</a></li>
+                      <li><a class="nosubcat-page" href="intro-to-consensus.html">Introduction to Consensus</a></li>
+                      <li><a class="nosubcat-page" href="xrp.html">XRP</a></li>
+                      <li><a class="active nosubcat-page" href="software-ecosystem.html">Software Ecosystem</a></li>
+                      <li><a class="nosubcat-page" href="technical-faq.html">Technical FAQ</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse2 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_8">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_8" aria-expanded="true" aria-controls="sidenav_collapse_8"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="payment-system-basics.html">Payment System Basics</a>
+                <!-- <a class="sidenav_cat_title" href="payment-system-basics.html">Payment System Basics</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_8" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_8">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="accounts.html">Accounts</a></li>
+
+                          <li><a class="subpage" href="cryptographic-keys.html">Cryptographic Keys</a></li>
+                          <li><a class="subpage" href="multi-signing.html">Multi-Signing</a></li>
+                          <li><a class="subpage" href="reserves.html">Reserves</a></li>
+                          <li><a class="subpage" href="depositauth.html">Deposit Authorization</a></li>
+
+                      <li><a class="nosubcat-page" href="fees.html">Fees (Disambiguation)</a></li>
+                      <li><a class="nosubcat-page" href="ledgers.html">Ledgers</a></li>
+                      <li><a class="subcat-title" href="transaction-basics.html">Transaction Basics</a></li>
+
+                          <li><a class="subpage" href="transaction-cost.html">Transaction Cost</a></li>
+                          <li><a class="subpage" href="finality-of-results.html">Finality of Results</a></li>
+                          <li><a class="subpage" href="source-and-destination-tags.html">Source and Destination Tags</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse8 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_20">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_20" aria-expanded="true" aria-controls="sidenav_collapse_20"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="payment-types.html">Payment Types</a>
+                <!-- <a class="sidenav_cat_title" href="payment-types.html">Payment Types</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_20" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_20">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="direct-xrp-payments.html">Direct XRP Payments</a></li>
+                      <li><a class="nosubcat-page" href="cross-currency-payments.html">Cross-Currency Payments</a></li>
+                      <li><a class="nosubcat-page" href="checks.html">Checks</a></li>
+                      <li><a class="nosubcat-page" href="escrow.html">Escrow</a></li>
+                      <li><a class="nosubcat-page" href="partial-payments.html">Partial Payments</a></li>
+                      <li><a class="nosubcat-page" href="payment-channels.html">Payment Channels</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse20 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_28">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_28" aria-expanded="true" aria-controls="sidenav_collapse_28"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="issued-currencies.html">Issued Currencies</a>
+                <!-- <a class="sidenav_cat_title" href="issued-currencies.html">Issued Currencies</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_28" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_28">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="issued-currencies-overview.html">Issued Currencies Overview</a></li>
+                      <li><a class="nosubcat-page" href="trust-lines-and-issuing.html">Trust Lines and Issuing</a></li>
+                      <li><a class="nosubcat-page" href="authorized-trust-lines.html">Authorized Trust Lines</a></li>
+                      <li><a class="nosubcat-page" href="freezes.html">Freezing Issued Currencies</a></li>
+                      <li><a class="nosubcat-page" href="rippling.html">Rippling</a></li>
+                      <li><a class="nosubcat-page" href="transfer-fees.html">Transfer Fees</a></li>
+                      <li><a class="nosubcat-page" href="issuing-and-operational-addresses.html">Issuing and Operational Addresses</a></li>
+                      <li><a class="nosubcat-page" href="paths.html">Paths</a></li>
+                      <li><a class="nosubcat-page" href="demurrage.html">Demurrage</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse28 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_38">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_38" aria-expanded="true" aria-controls="sidenav_collapse_38"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="decentralized-exchange.html">Decentralized Exchange</a>
+                <!-- <a class="sidenav_cat_title" href="decentralized-exchange.html">Decentralized Exchange</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_38" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_38">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="offers.html">Offers</a></li>
+                      <li><a class="nosubcat-page" href="autobridging.html">Auto-Bridging</a></li>
+                      <li><a class="nosubcat-page" href="ticksize.html">Tick Size</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse38 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_42">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_42" aria-expanded="true" aria-controls="sidenav_collapse_42"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="consensus-network.html">Consensus Network</a>
+                <!-- <a class="sidenav_cat_title" href="consensus-network.html">Consensus Network</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_42" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_42">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="consensus.html">Consensus</a></li>
+                      <li><a class="nosubcat-page" href="consensus-principles-and-rules.html">Consensus Principles and Rules</a></li>
+                      <li><a class="nosubcat-page" href="consensus-protections.html">Consensus Protections Against Attacks and Failure Modes</a></li>
+                      <li><a class="nosubcat-page" href="invariant-checking.html">Invariant Checking</a></li>
+                      <li><a class="nosubcat-page" href="transaction-queue.html">Transaction Queue</a></li>
+                      <li><a class="nosubcat-page" href="about-canceling-a-transaction.html">About Canceling a Transaction</a></li>
+                      <li><a class="nosubcat-page" href="transaction-malleability.html">Transaction Malleability</a></li>
+                      <li><a class="subcat-title" href="amendments.html">Amendments</a></li>
+
+                          <li><a class="subpage" href="known-amendments.html">Known Amendments</a></li>
+
+                      <li><a class="nosubcat-page" href="fee-voting.html">Fee Voting</a></li>
+                      <li><a class="nosubcat-page" href="consensus-research.html">Consensus Research</a></li>
+                      <li><a class="nosubcat-page" href="parallel-networks.html">Parallel Networks</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse42 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_55">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_55" aria-expanded="true" aria-controls="sidenav_collapse_55"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="the-rippled-server.html">The rippled Server</a>
+                <!-- <a class="sidenav_cat_title" href="the-rippled-server.html">The rippled Server</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_55" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_55">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="rippled-server-modes.html">rippled Server Modes</a></li>
+                      <li><a class="nosubcat-page" href="clustering.html">Clustering</a></li>
+                      <li><a class="subcat-title" href="ledger-history.html">Ledger History</a></li>
+
+                          <li><a class="subpage" href="online-deletion.html">Online Deletion</a></li>
+                          <li><a class="subpage" href="history-sharding.html">History Sharding</a></li>
+
+                      <li><a class="nosubcat-page" href="peer-protocol.html">Peer Protocol</a></li>
+                      <li><a class="nosubcat-page" href="transaction-censorship-detection.html">Transaction Censorship Detection</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse55 -->
+
+          </div><!-- /.card -->
+
+    </div><!-- /#sidenav -->
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">Learn</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">Explore</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">Build</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">Concepts</a></li>
+          <li class="level-1"><a href="tutorials.html">Tutorials</a></li>
+          <li class="level-1"><a href="references.html">References</a></li>
+          <li class="level-1"><a href="dev-tools.html">Dev Tools</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">License</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="Jump to top of page">Top</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:en"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>

@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>rippled Commandline Usage Reference - XRP Ledger Dev Portal</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/" class="navbar-brand"><img src="assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Learn</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">Overview</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Build</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">Docs</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">Concepts</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">Tutorials</a>
+          <a class="dropdown-item top-level-2" href="references.html">References</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">Dev Tools</a>
+          <a class="dropdown-item top-level-1" href="/blog/">Dev Blog</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/references/rippled-api/commandline-usage.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">Search site...</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="Search site...">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Eng
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/commandline-usage.html">Eng</a>
+          <a class="dropdown-item" href="/ja/commandline-usage.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>In this document</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#rippled-commandline-usage-reference">rippled Commandline Usage Reference</a></li>
+<li class="level-2"><a href="#available-modes">Available Modes</a></li>
+<li class="level-2"><a href="#generic-options">Generic Options</a></li>
+<li class="level-3"><a href="#verbosity-options">Verbosity Options</a></li>
+<li class="level-2"><a href="#daemon-mode-options">Daemon Mode Options</a></li>
+<li class="level-2"><a href="#stand-alone-mode-options">Stand-Alone Mode Options</a></li>
+<li class="level-3"><a href="#initial-ledger-options">Initial Ledger Options</a></li>
+<li class="level-2"><a href="#client-mode-options">Client Mode Options</a></li>
+<li class="level-2"><a href="#unit-tests">Unit Tests</a></li>
+<li class="level-3"><a href="#specific-unit-tests">Specific Unit Tests</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">Build</a></li>
+    <li class="active breadcrumb-item"><a href="references.html">References</a></li>
+    <li class="active breadcrumb-item"><a href="rippled-api.html">rippled API Reference</a></li>
+    <li class="active breadcrumb-item">rippled Commandline Usage Reference</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="rippled-commandline-usage-reference">rippled Commandline Usage Reference</h1>
+<p>The <code>rippled</code> executable usually runs as a daemon that powers the XRP Ledger, although it can also run in other modes. This page describes all the options you can pass to <code>rippled</code> when running it from the command line.</p>
+<h2 id="available-modes">Available Modes</h2>
+<ul>
+<li><strong>Daemon Mode</strong> - The default. Connect to the XRP Ledger to process transactions and build a ledger database.</li>
+<li><strong>Stand-Alone Mode</strong> - Use the <code>-a</code> or <code>--standalone</code> option. Like daemon mode, except it does not connect to other servers. You can use this mode to test transaction processing or other features.</li>
+<li><strong>Client Mode</strong> - Specify an API method name to connect to another <code>rippled</code> server as a JSON-RPC client, then exit. You can use this to look up server status and ledger data if the executable is already running in another process.</li>
+<li><strong>Other Usage</strong> - Each of the following commands causes the <code>rippled</code> executable to print some information, then exit:<ul>
+<li><strong>Help</strong> - Use <code>-h</code> or <code>--help</code> to print a usage statement.</li>
+<li><strong>Unit Tests</strong> - Use <code>-u</code> or <code>--unittest</code> to run unit tests and print a summary of results. This can be helpful to confirm that you have compiled <code>rippled</code> successfully.</li>
+<li><strong>Version statement</strong> - Use <code>--version</code> to have <code>rippled</code> print its version number, then exit.</li>
+</ul>
+</li>
+</ul>
+<h2 id="generic-options">Generic Options</h2>
+<p>These options apply to most modes:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Option</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>--conf {FILE}</code></td>
+<td align="left">Use <code>{FILE}</code> as the config file instead of looking for config files in the default locations. If not specified, <code>rippled</code> first checks the local working directory for a <code>rippled.cfg</code> file. On Linux, if that file is not found, <code>rippled</code> next checks for <code>$XDG_CONFIG_HOME/ripple/ripple.cfg</code>. (Typically, <code>$XDG_CONFIG_HOME</code> maps to <code>$HOME/.config</code>.)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="verbosity-options">Verbosity Options</h3>
+<p>The following generic options affect the amount of information written to standard output and log files:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Option</th>
+<th align="left">Short Version</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>--debug</code></td>
+<td align="left"></td>
+<td align="left"><strong>DEPRECATED</strong> Enables trace-level debugging (alias for <code>--verbose</code>). Use the <a href="log_level.html">log_level method</a> instead.</td>
+</tr>
+<tr>
+<td align="left"><code>--silent</code></td>
+<td align="left"></td>
+<td align="left">Don't write logs to standard out and standard error during startup. Recommended when starting <code>rippled</code> as a systemd unit to reduce redundant logging.</td>
+</tr>
+<tr>
+<td align="left"><code>--verbose</code></td>
+<td align="left"><code>-v</code></td>
+<td align="left"><strong>DEPRECATED</strong> Enables trace-level debugging. Use the <a href="log_level.html">log_level method</a> instead.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="daemon-mode-options">Daemon Mode Options</h2>
+<div class="codehilite"><pre><span></span><code>rippled <span class="o">[</span>OPTIONS<span class="o">]</span>
+</code></pre></div>
+<p>Daemon mode is the default mode of operation for <code>rippled</code>. In addition to the <a href="#generic-options">Generic Options</a>, you can provide any of the following:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Option</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>--fg</code></td>
+<td align="left">Run the daemon as a single process in the foreground. Otherwise, <code>rippled</code> forks a second process for the daemon while the first process runs as a monitor.</td>
+</tr>
+<tr>
+<td align="left"><code>--import</code></td>
+<td align="left">Before fully starting, import ledger data from another <code>rippled</code> server's ledger store. Requires a valid <code>[import_db]</code> stanza in the config file.</td>
+</tr>
+<tr>
+<td align="left"><code>--net</code></td>
+<td align="left"><strong>DEPRECATED</strong> Intended for debugging: do not build a local ledger until one can be obtained from the network.</td>
+</tr>
+<tr>
+<td align="left"><code>--nodetoshard</code></td>
+<td align="left">Before fully starting, copy any complete <a href="history-sharding.html">history shards</a> from the ledger store into the shard store, up to the shard store's configured maximum disk space. Uses large amounts of CPU and I/O. Caution: this command copies data (instead of moving it), so you must have enough disk space to store the data in both the shard store and the ledger store. <!-- --></td>
+</tr>
+<tr>
+<td align="left"><code>--quorum {QUORUM}</code></td>
+<td align="left">This option is intended for starting <a href="parallel-networks.html">test networks</a>. Override the minimum quorum for validation by requiring an agreement of <code>{QUORUM}</code> trusted validators. By default, the quorum for validation is automatically set to a safe number of trusted validators based on how many there are. If some validators are not online, this option can allow progress with a lower than normal quorum. <strong>Warning:</strong> If you set the quorum manually, it may be too low to prevent your server from diverging from the rest of the network. Only use this option if you have a deep understanding of consensus and have a need to use a non-standard configuration.</td>
+</tr>
+<tr>
+<td align="left"><code>--validateShards</code></td>
+<td align="left">Check that the data in the shard store is valid and consistent with the network history. For more information on the shard store, see <a href="history-sharding.html">History Sharding</a>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="stand-alone-mode-options">Stand-Alone Mode Options</h2>
+<div class="codehilite"><pre><span></span><code>rippled --standalone <span class="o">[</span>OPTIONS<span class="o">]</span>
+rippled -a <span class="o">[</span>OPTIONS<span class="o">]</span>
+</code></pre></div>
+<p>Run in <a href="rippled-server-modes.html">stand-alone mode</a>. In this mode, <code>rippled</code> does not connect to the network or perform consensus. (Otherwise, <code>rippled</code> runs in daemon mode.)</p>
+<h3 id="initial-ledger-options">Initial Ledger Options</h3>
+<p>The following options determine which ledger to load first when starting up. These options are intended for replaying historical ledgers or starting test networks.</p>
+<table>
+<thead>
+<tr>
+<th align="left">Option</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>--ledger {LEDGER}</code></td>
+<td align="left">Load the ledger version identified by <code>{LEDGER}</code> (either a ledger hash or a ledger index) as the initial ledger. The specified ledger version must be in the server's ledger store.</td>
+</tr>
+<tr>
+<td align="left"><code>--ledgerfile {FILE}</code></td>
+<td align="left">Load the ledger version from the specified <code>{FILE}</code>, which must contain a complete ledger in JSON format. For an example of such a file, see the provided <a class="external-link" href="https://github.com/ripple/xrpl-dev-portal/blob/master/content/_code-samples/rippled-cli/ledger-file.json" target="_blank"><code>ledger-file.json</code> <i aria-hidden="true" class="fa fa-external-link"></i></a>.</td>
+</tr>
+<tr>
+<td align="left"><code>--load</code></td>
+<td align="left"><strong>DEPRECATED</strong> Intended for debugging. Only load the initial ledger from the ledger store on disk.</td>
+</tr>
+<tr>
+<td align="left"><code>--replay</code></td>
+<td align="left">Intended for debugging. Use with <code>--ledger</code> to replay a ledger close. Your server must have the ledger in question and its direct ancestor already in the ledger store. Using the previous ledger as a base, the server processes all the transactions in the specified ledger, resulting in a re-creation of the specified ledger. With a debugger, you can add breakpoints to analyze specific transaction processing logic.</td>
+</tr>
+<tr>
+<td align="left"><code>--start</code></td>
+<td align="left">Intended for debugging. Start with a new genesis ledger that has all known amendments (except those the server is configured to vote against) enabled. The functionality of those amendments is therefore available starting from the second ledger, rather than going through the full two-week <a href="amendments.html">Amendment Process</a>.</td>
+</tr>
+<tr>
+<td align="left"><code>--valid</code></td>
+<td align="left"><strong>DEPRECATED</strong> Intended for debugging. Consider the initial ledger a valid network ledger even before fully syncing with the network.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="client-mode-options">Client Mode Options</h2>
+<div class="codehilite"><pre><span></span><code>rippled <span class="o">[</span>OPTIONS<span class="o">]</span> -- <span class="o">{</span>COMMAND<span class="o">}</span> <span class="o">{</span>COMMAND_PARAMETERS<span class="o">}</span>
+</code></pre></div>
+<p>In client mode, the <code>rippled</code> executable acts as a client to another <code>rippled</code> service. (The service may be the same executable running in a separate process locally, or it could be a <code>rippled</code> server on another server.)</p>
+<p>To run in client mode, provide the <a href="request-formatting.html#commandline-format">commandline syntax</a> for one of the <a href="rippled-api.html"><code>rippled</code> API</a> methods.</p>
+<p>In addition to the individual command syntax, client mode accepts the <a href="#generic-options">Generic Options</a> and the following options:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Option</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>--rpc</code></td>
+<td align="left">Explicitly specify that the server should run in client mode. Not required.</td>
+</tr>
+<tr>
+<td align="left"><code>--rpc_ip {IP_ADDRESS}</code></td>
+<td align="left">Connect to the <code>rippled</code> server at the specified IP Address, optionally including a port number.</td>
+</tr>
+<tr>
+<td align="left"><code>--rpc_port {PORT}</code></td>
+<td align="left"><strong>DEPRECATED</strong> Connect to the <code>rippled</code> server on the specified port. Specify the port alongside the IP address using <code>--rpc_ip</code> instead.</td>
+</tr>
+</tbody>
+</table>
+<p class="devportal-callout tip"><strong>Tip:</strong> Some arguments accept negative numbers as values. To ensure that arguments to API commands are not interpreted as options instead, pass the <code>--</code> argument before the command name.</p>
+<p>Example usage (get account transaction history from the earliest available to latest available ledger versions):</p>
+<div class="codehilite"><pre><span></span><code>rippled -- account_tx r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59 -1 -1
+</code></pre></div>
+<h2 id="unit-tests">Unit Tests</h2>
+<div class="codehilite"><pre><span></span><code>rippled --unittest <span class="o">[</span>OPTIONS<span class="o">]</span>
+rippled -u <span class="o">[</span>OPTIONS<span class="o">]</span>
+</code></pre></div>
+<p>Unit testing runs tests built into the <code>rippled</code> source code to confirm that the executable performs as expected. After running unit tests, the process displays a summary of results and exits. Unit tests cover functionality such as built-in data types and transaction processing routines.</p>
+<p>If unit testing reports a failure, that generally indicates one of the following:</p>
+<ul>
+<li>A problem occurred when compiling <code>rippled</code> and it is not functioning as intended</li>
+<li>The source code for <code>rippled</code> contains a bug</li>
+<li>A unit test has a bug or has not been updated to account for new behavior</li>
+</ul>
+<p>While running unit tests, you can specify the <a href="#generic-options">Generic Options</a> in addition to any of the following options:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Option</th>
+<th align="left">Short Version</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>--unittest-ipv6</code></td>
+<td align="left"></td>
+<td align="left">Use <a class="external-link" href="https://en.wikipedia.org/wiki/IPv6" target="_blank">IPv6 <i aria-hidden="true" class="fa fa-external-link"></i></a> to connect to the local server when running unit tests. If not provided, unit tests use IPv4 instead. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/1.1.0" target="_blank" title="New in: rippled 1.1.0"><img alt="New in: rippled 1.1.0" class="dactyl_badge" src="https://img.shields.io/badge/New%20in-rippled%201.1.0-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+</tr>
+<tr>
+<td align="left"><code>--unittest-jobs {NUMBER_OF_JOBS}</code></td>
+<td align="left"></td>
+<td align="left">Use the specified number of processes to run unit tests. This can finish running tests faster on multi-core systems. The <code>{NUMBER_OF_JOBS}</code> should be a positive integer indicating the number of processes to use.</td>
+</tr>
+<tr>
+<td align="left"><code>--unittest-log</code></td>
+<td align="left"></td>
+<td align="left">Allow unit tests to write to logs even if <code>--quiet</code> is specified. (No effect otherwise.)</td>
+</tr>
+<tr>
+<td align="left"><code>--quiet</code></td>
+<td align="left"><code>-q</code></td>
+<td align="left">Print fewer diagnostic messages when running unit tests.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="specific-unit-tests">Specific Unit Tests</h3>
+<div class="codehilite"><pre><span></span><code>rippled --unittest<span class="o">={</span>TEST_OR_PACKAGE_NAME<span class="o">}</span>
+</code></pre></div>
+<p>By default, <code>rippled</code> runs all unit tests except ones that are classified as "manual". You can run an individual test by specifying its name, or run a subset of tests by specifying a package name.</p>
+<p>Tests are grouped into a hierarchy of packages separated by <code>.</code> characters and ending in the test case name.</p>
+<h4 id="printing-unit-tests">Printing Unit Tests</h4>
+<div class="codehilite"><pre><span></span><code>rippled --unittest<span class="o">=</span>print
+</code></pre></div>
+<p>The <code>print</code> unit test is a special case that prints a list of available tests with their packages.</p>
+<h4 id="manual-unit-tests">Manual Unit Tests</h4>
+<p>Certain unit tests are classified as "manual" because they take a long time to complete. These tests are marked with <code>|M|</code> in the output of the <code>print</code> unit test. Manual tests do not run by default when you run all unit tests or a package of unit tests. You can run manual tests individually by specifying the name of the test. For example:</p>
+<div class="codehilite"><pre><span></span><code>$ ./rippled --unittest<span class="o">=</span>ripple.tx.OversizeMeta
+ripple.tx.OversizeMeta
+Longest suite times:
+   <span class="m">60</span>.9s ripple.tx.OversizeMeta
+<span class="m">60</span>.9s, <span class="m">1</span> suite, <span class="m">1</span> <span class="k">case</span>, <span class="m">9016</span> tests total, <span class="m">0</span> failures
+</code></pre></div>
+<h4 id="providing-arguments-to-unit-tests">Providing Arguments to Unit Tests</h4>
+<p>Certain manual unit tests accept an argument. You can provide the argument with the following option:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Option</th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>--unittest-arg {ARG}</code></td>
+<td align="left">Provide the argument <code>{ARG}</code> to the unit test(s) currently being run. Each unit test that accepts arguments defines its own argument format.</td>
+</tr>
+</tbody>
+</table>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- rippled release notes links -->
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="rippled-api.html"> rippled API Reference</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_21">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_21" aria-expanded="true" aria-controls="sidenav_collapse_21"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="api-conventions.html">API Conventions</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_21" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_21">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="nosubcat-page" href="basic-data-types.html">Basic Data Types</a></li>
+                        <li><a class="nosubcat-page" href="base58-encodings.html">base58 Encodings</a></li>
+                        <li><a class="nosubcat-page" href="currency-formats.html">Currency Formats</a></li>
+                        <li><a class="nosubcat-page" href="error-formatting.html">Error Formatting</a></li>
+                        <li><a class="nosubcat-page" href="markers-and-pagination.html">Markers and Pagination</a></li>
+                        <li><a class="nosubcat-page" href="modifying-the-ledger.html">Modifying the Ledger</a></li>
+                        <li><a class="nosubcat-page" href="rate-limiting.html">Rate Limiting</a></li>
+                        <li><a class="nosubcat-page" href="request-formatting.html">Request Formatting</a></li>
+                        <li><a class="nosubcat-page" href="response-formatting.html">Response Formatting</a></li>
+                        <li><a class="nosubcat-page" href="rippled-server-states.html">rippled Server States</a></li>
+                        <li><a class="nosubcat-page" href="serialization.html">Serialization Format</a></li>
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse21 -->
+
+            </div><!-- /.panel -->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_22">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_22" aria-expanded="true" aria-controls="sidenav_collapse_22"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="public-rippled-methods.html">Public rippled Methods</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_22" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_22">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="subcat-title" href="account-methods.html">Account Methods</a></li>
+
+                            <li><a class="subpage" href="account_channels.html">account_channels</a></li>
+                            <li><a class="subpage" href="account_currencies.html">account_currencies</a></li>
+                            <li><a class="subpage" href="account_info.html">account_info</a></li>
+                            <li><a class="subpage" href="account_lines.html">account_lines</a></li>
+                            <li><a class="subpage" href="account_objects.html">account_objects</a></li>
+                            <li><a class="subpage" href="account_offers.html">account_offers</a></li>
+                            <li><a class="subpage" href="account_tx.html">account_tx</a></li>
+                            <li><a class="subpage" href="gateway_balances.html">gateway_balances</a></li>
+                            <li><a class="subpage" href="noripple_check.html">noripple_check</a></li>
+
+                        <li><a class="subcat-title" href="ledger-methods.html">Ledger Methods</a></li>
+
+                            <li><a class="subpage" href="ledger.html">ledger</a></li>
+                            <li><a class="subpage" href="ledger_closed.html">ledger_closed</a></li>
+                            <li><a class="subpage" href="ledger_current.html">ledger_current</a></li>
+                            <li><a class="subpage" href="ledger_data.html">ledger_data</a></li>
+                            <li><a class="subpage" href="ledger_entry.html">ledger_entry</a></li>
+
+                        <li><a class="subcat-title" href="transaction-methods.html">Transaction Methods</a></li>
+
+                            <li><a class="subpage" href="sign.html">sign</a></li>
+                            <li><a class="subpage" href="sign_for.html">sign_for</a></li>
+                            <li><a class="subpage" href="submit.html">submit</a></li>
+                            <li><a class="subpage" href="submit_multisigned.html">submit_multisigned</a></li>
+                            <li><a class="subpage" href="transaction_entry.html">transaction_entry</a></li>
+                            <li><a class="subpage" href="tx.html">tx</a></li>
+                            <li><a class="subpage" href="tx_history.html">tx_history</a></li>
+
+                        <li><a class="subcat-title" href="path-and-order-book-methods.html">Path and Order Book Methods</a></li>
+
+                            <li><a class="subpage" href="book_offers.html">book_offers</a></li>
+                            <li><a class="subpage" href="deposit_authorized.html">deposit_authorized</a></li>
+                            <li><a class="subpage" href="path_find.html">path_find</a></li>
+                            <li><a class="subpage" href="ripple_path_find.html">ripple_path_find</a></li>
+
+                        <li><a class="subcat-title" href="payment-channel-methods.html">Payment Channel Methods</a></li>
+
+                            <li><a class="subpage" href="channel_authorize.html">channel_authorize</a></li>
+                            <li><a class="subpage" href="channel_verify.html">channel_verify</a></li>
+
+                        <li><a class="subcat-title" href="subscription-methods.html">Subscription Methods</a></li>
+
+                            <li><a class="subpage" href="subscribe.html">subscribe</a></li>
+                            <li><a class="subpage" href="unsubscribe.html">unsubscribe</a></li>
+
+                        <li><a class="subcat-title" href="server-info-methods.html">Server Info Methods</a></li>
+
+                            <li><a class="subpage" href="fee.html">fee</a></li>
+                            <li><a class="subpage" href="server_info.html">server_info</a></li>
+                            <li><a class="subpage" href="server_state.html">server_state</a></li>
+
+                        <li><a class="subcat-title" href="utility-methods.html">Utility Methods</a></li>
+
+                            <li><a class="subpage" href="json.html">json</a></li>
+                            <li><a class="subpage" href="ping.html">ping</a></li>
+                            <li><a class="subpage" href="random.html">random</a></li>
+
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse22 -->
+
+            </div><!-- /.panel -->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_23">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_23" aria-expanded="true" aria-controls="sidenav_collapse_23"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="admin-rippled-methods.html">Admin rippled Methods</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_23" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_23">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="subcat-title" href="key-generation-methods.html">Key Generation Methods</a></li>
+
+                            <li><a class="subpage" href="validation_create.html">validation_create</a></li>
+                            <li><a class="subpage" href="wallet_propose.html">wallet_propose</a></li>
+
+                        <li><a class="subcat-title" href="logging-and-data-management-methods.html">Logging and Data Management Methods</a></li>
+
+                            <li><a class="subpage" href="can_delete.html">can_delete</a></li>
+                            <li><a class="subpage" href="crawl_shards.html">crawl_shards</a></li>
+                            <li><a class="subpage" href="download_shard.html">download_shard</a></li>
+                            <li><a class="subpage" href="ledger_cleaner.html">ledger_cleaner</a></li>
+                            <li><a class="subpage" href="ledger_request.html">ledger_request</a></li>
+                            <li><a class="subpage" href="log_level.html">log_level</a></li>
+                            <li><a class="subpage" href="logrotate.html">logrotate</a></li>
+
+                        <li><a class="subcat-title" href="server-control-methods.html">Server Control Methods</a></li>
+
+                            <li><a class="subpage" href="ledger_accept.html">ledger_accept</a></li>
+                            <li><a class="subpage" href="stop.html">stop</a></li>
+                            <li><a class="subpage" href="validation_seed.html">validation_seed</a></li>
+
+                        <li><a class="subcat-title" href="peer-management-methods.html">Peer Management Methods</a></li>
+
+                            <li><a class="subpage" href="connect.html">connect</a></li>
+                            <li><a class="subpage" href="peer_reservations_add.html">peer_reservations_add</a></li>
+                            <li><a class="subpage" href="peer_reservations_del.html">peer_reservations_del</a></li>
+                            <li><a class="subpage" href="peer_reservations_list.html">peer_reservations_list</a></li>
+                            <li><a class="subpage" href="peers.html">peers</a></li>
+
+                        <li><a class="subcat-title" href="status-and-debugging-methods.html">Status and Debugging Methods</a></li>
+
+                            <li><a class="subpage" href="consensus_info.html">consensus_info</a></li>
+                            <li><a class="subpage" href="feature.html">feature</a></li>
+                            <li><a class="subpage" href="fetch_info.html">fetch_info</a></li>
+                            <li><a class="subpage" href="get_counts.html">get_counts</a></li>
+                            <li><a class="subpage" href="manifest.html">manifest</a></li>
+                            <li><a class="subpage" href="print.html">print</a></li>
+                            <li><a class="subpage" href="validator_info.html">validator_info</a></li>
+                            <li><a class="subpage" href="validator_list_sites.html">validator_list_sites</a></li>
+                            <li><a class="subpage" href="validators.html">validators</a></li>
+
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse23 -->
+
+            </div><!-- /.panel -->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_24">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_24" aria-expanded="true" aria-controls="sidenav_collapse_24"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="ledger-data-formats.html">Ledger Data Formats</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_24" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_24">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="nosubcat-page" href="ledger-header.html">Ledger Header</a></li>
+                        <li><a class="nosubcat-page" href="ledger-object-ids.html">Ledger Object IDs</a></li>
+                        <li><a class="subcat-title" href="ledger-object-types.html">Ledger Object Types</a></li>
+
+                            <li><a class="subpage" href="accountroot.html">AccountRoot</a></li>
+                            <li><a class="subpage" href="amendments-object.html">Amendments</a></li>
+                            <li><a class="subpage" href="check.html">Check</a></li>
+                            <li><a class="subpage" href="depositpreauth-object.html">DepositPreauth</a></li>
+                            <li><a class="subpage" href="directorynode.html">DirectoryNode</a></li>
+                            <li><a class="subpage" href="escrow-object.html">Escrow</a></li>
+                            <li><a class="subpage" href="feesettings.html">FeeSettings</a></li>
+                            <li><a class="subpage" href="ledgerhashes.html">LedgerHashes</a></li>
+                            <li><a class="subpage" href="offer.html">Offer</a></li>
+                            <li><a class="subpage" href="paychannel.html">PayChannel</a></li>
+                            <li><a class="subpage" href="ripplestate.html">RippleState</a></li>
+                            <li><a class="subpage" href="signerlist.html">SignerList</a></li>
+
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse24 -->
+
+            </div><!-- /.panel -->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_25">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_25" aria-expanded="true" aria-controls="sidenav_collapse_25"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="transaction-formats.html">Transaction Formats</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_25" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_25">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="nosubcat-page" href="transaction-common-fields.html">Transaction Common Fields</a></li>
+                        <li><a class="subcat-title" href="transaction-types.html">Transaction Types</a></li>
+
+                            <li><a class="subpage" href="accountset.html">AccountSet</a></li>
+                            <li><a class="subpage" href="accountdelete.html">AccountDelete</a></li>
+                            <li><a class="subpage" href="checkcancel.html">CheckCancel</a></li>
+                            <li><a class="subpage" href="checkcash.html">CheckCash</a></li>
+                            <li><a class="subpage" href="checkcreate.html">CheckCreate</a></li>
+                            <li><a class="subpage" href="depositpreauth.html">DepositPreauth</a></li>
+                            <li><a class="subpage" href="escrowcancel.html">EscrowCancel</a></li>
+                            <li><a class="subpage" href="escrowcreate.html">EscrowCreate</a></li>
+                            <li><a class="subpage" href="escrowfinish.html">EscrowFinish</a></li>
+                            <li><a class="subpage" href="offercancel.html">OfferCancel</a></li>
+                            <li><a class="subpage" href="offercreate.html">OfferCreate</a></li>
+                            <li><a class="subpage" href="payment.html">Payment</a></li>
+                            <li><a class="subpage" href="paymentchannelclaim.html">PaymentChannelClaim</a></li>
+                            <li><a class="subpage" href="paymentchannelcreate.html">PaymentChannelCreate</a></li>
+                            <li><a class="subpage" href="paymentchannelfund.html">PaymentChannelFund</a></li>
+                            <li><a class="subpage" href="setregularkey.html">SetRegularKey</a></li>
+                            <li><a class="subpage" href="signerlistset.html">SignerListSet</a></li>
+                            <li><a class="subpage" href="trustset.html">TrustSet</a></li>
+
+                        <li><a class="subcat-title" href="pseudo-transaction-types.html">Pseudo-Transactions</a></li>
+
+                            <li><a class="subpage" href="enableamendment.html">EnableAmendment</a></li>
+                            <li><a class="subpage" href="setfee.html">SetFee</a></li>
+
+                        <li><a class="subcat-title" href="transaction-results.html">Transaction Results</a></li>
+
+                            <li><a class="subpage" href="tec-codes.html">tec Codes</a></li>
+                            <li><a class="subpage" href="tef-codes.html">tef Codes</a></li>
+                            <li><a class="subpage" href="tel-codes.html">tel Codes</a></li>
+                            <li><a class="subpage" href="tem-codes.html">tem Codes</a></li>
+                            <li><a class="subpage" href="ter-codes.html">ter Codes</a></li>
+                            <li><a class="subpage" href="tes-success.html">tes Success</a></li>
+
+                        <li><a class="nosubcat-page" href="transaction-metadata.html">Transaction Metadata</a></li>
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse25 -->
+
+            </div><!-- /.panel -->
+            <div class="card active">
+              <div class="card-header" role="tab" id="sidenav_cat_head_26">
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title active" href="commandline-usage.html">rippled Commandline Usage Reference</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_26" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_26">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse26 -->
+
+            </div><!-- /.panel -->
+            <div class="card">
+              <div class="card-header" role="tab" id="sidenav_cat_head_27">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_27" aria-expanded="true" aria-controls="sidenav_collapse_27"></a>
+                <h5 class="card-title">
+                    <a class="sidenav_cat_title" href="peer-port-methods.html">Peer Port Methods</a>
+                </h5>
+              </div><!-- /.card-header -->
+
+              <div id="sidenav_collapse_27" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_27">
+                <div class="card-body">
+                  <ul class="sidebar_pagelist">
+                        <li><a class="nosubcat-page" href="health-check.html">Health Check</a></li>
+                        <li><a class="nosubcat-page" href="peer-crawler.html">Peer Crawler</a></li>
+                        <li><a class="nosubcat-page" href="validator-list.html">Validator List Method</a></li>
+
+                  </ul>
+                </div><!-- /.card-body -->
+              </div><!-- /#sidenav_collapse27 -->
+
+            </div><!-- /.panel -->
+    </div><!-- /#sidenav -->
+
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">Learn</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">Explore</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">Build</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">Concepts</a></li>
+          <li class="level-1"><a href="tutorials.html">Tutorials</a></li>
+          <li class="level-1"><a href="references.html">References</a></li>
+          <li class="level-1"><a href="dev-tools.html">Dev Tools</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">License</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="Jump to top of page">Top</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:en"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>

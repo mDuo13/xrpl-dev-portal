@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Disable Master Key Pair - XRP Ledger Dev Portal</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/" class="navbar-brand"><img src="assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Learn</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">Overview</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Build</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">Docs</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">Concepts</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">Tutorials</a>
+          <a class="dropdown-item top-level-2" href="references.html">References</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">Dev Tools</a>
+          <a class="dropdown-item top-level-1" href="/blog/">Dev Blog</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/tutorials/manage-account-settings/disable-master-key-pair.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">Search site...</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="Search site...">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Eng
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/disable-master-key-pair.html">Eng</a>
+          <a class="dropdown-item" href="/ja/disable-master-key-pair.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>In this document</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#disable-master-key-pair">Disable Master Key Pair</a></li>
+<li class="level-2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="level-2"><a href="#steps">Steps</a></li>
+<li class="level-3"><a href="#1-construct-transaction-json">1. Construct Transaction JSON</a></li>
+<li class="level-3"><a href="#2-sign-transaction">2. Sign Transaction</a></li>
+<li class="level-3"><a href="#3-submit-transaction">3. Submit Transaction</a></li>
+<li class="level-3"><a href="#4-wait-for-validation">4. Wait for validation</a></li>
+<li class="level-3"><a href="#5-confirm-account-flags">5. Confirm Account Flags</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">Build</a></li>
+    <li class="active breadcrumb-item"><a href="tutorials.html">Tutorials</a></li>
+    <li class="active breadcrumb-item"><a href="manage-account-settings.html">Manage Account Settings</a></li>
+    <li class="active breadcrumb-item">Disable Master Key Pair</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="disable-master-key-pair">Disable Master Key Pair</h1>
+<p>This page describes how to disable the <a href="cryptographic-keys.html">master key pair</a> that is mathematically associated with an <a href="accounts.html">account</a>'s address. You should do this if your account's master key pair may have been compromised, or if you want to make <a href="multi-signing.html">multi-signing</a> the <em>only</em> way to submit transactions from your account.</p>
+<p class="devportal-callout warning"><strong>Warning:</strong> Disabling the master key pair removes one method of <a href="transaction-basics.html#authorizing-transactions">authorizing transactions</a>. You should be sure you can use one of the other ways of authorizing transactions, such as with a regular key or by multi-signing, before you disable the master key pair. (For example, if you <a href="assign-a-regular-key-pair.html">assigned a regular key pair</a>, make sure that you can successfully submit transactions with that regular key.) Due to the decentralized nature of the XRP Ledger, no one can restore access to your account if you cannot use the remaining ways of authorizing transactions.</p>
+<p><strong>To disable the master key pair, you must use the master key pair.</strong> However, you can <em>re-enable</em> the master key pair using any other method of authorizing transactions.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<p>To disable the master key pair for an account, you must meet the following prerequisites:</p>
+<ul>
+<li>You must have an XRP Ledger <a href="accounts.html">account</a> and you must be able to sign and submit transactions from that account using the master key pair. See also: <a href="set-up-secure-signing.html">Set Up Secure Signing</a>. Two common ways this can work are:<ul>
+<li>You know the account's master seed value. A seed value is commonly represented as a <a href="base58-encodings.html">base58</a> value starting with "s", such as <code>sn3nxiW7v8KXzPzAqzyHXbSSKNuN9</code>.</li>
+<li>Or, you use a <a href="set-up-secure-signing.html#use-a-dedicated-signing-device">dedicated signing device</a> that stores the seed value securely, so you don't need to know it.</li>
+</ul>
+</li>
+<li>Your account must have at least one method of authorizing transactions other than the master key pair. In other words, you must do one or both of the following:<ul>
+<li><a href="assign-a-regular-key-pair.html">Assign a Regular Key Pair</a>.</li>
+<li><a href="set-up-multi-signing.html">Set Up Multi-Signing</a>.</li>
+</ul>
+</li>
+</ul>
+<h2 id="steps">Steps</h2>
+<h3 id="1-construct-transaction-json">1. Construct Transaction JSON</h3>
+<p>Prepare an <a href="accountset.html">AccountSet transaction</a> from your account with the field <code>"SetValue": 4</code>. This is the value for the AccountSet flag "Disable Master" (<code>asfDisableMaster</code>). The only other required fields for this transaction are the required <a href="transaction-common-fields.html">common fields</a>. For example, if you leave off the <a href="transaction-common-fields.html#auto-fillable-fields">auto-fillable fields</a>, the following transaction instructions are enough:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">"TransactionType"</span><span class="p">:</span> <span class="s2">"AccountSet"</span><span class="p">,</span>
+  <span class="nt">"Account"</span><span class="p">:</span> <span class="s2">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+  <span class="nt">"SetFlag"</span><span class="p">:</span> <span class="mi">4</span>
+<span class="p">}</span>
+</code></pre></div>
+<p class="devportal-callout tip"><strong>Tip:</strong> It is strongly recommended to also provide the <code>LastLedgerSequence</code> field so that you can <a href="reliable-transaction-submission.html">reliably get the outcome of the transaction in a predictable amount of time</a>.</p>
+<h3 id="2-sign-transaction">2. Sign Transaction</h3>
+<p>You must use the <strong>master key pair</strong> to sign the transaction.</p>
+<p class="devportal-callout warning"><strong>Warning:</strong> Do not submit your secret to a server you don't control, and do not transmit it over the network unencrypted. These examples assume you are using a <a href="set-up-secure-signing.html#run-rippled-locally">local <code>rippled</code> server</a>. You should adapt these instructions if you are using another <a href="set-up-secure-signing.html">secure signing configuration</a>.</p>
+<h4 id="example-request">Example Request</h4>
+<div class="multicode" id="code-0"><ul class="codetabs"><li><a href="#code-0-0">WebSocket</a></li><li><a href="#code-0-1">JSON-RPC</a></li><li><a href="#code-0-2">Commandline</a></li></ul>
+
+<div class="code_sample" id="code-0-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">"command"</span><span class="p">:</span> <span class="s2">"sign"</span><span class="p">,</span>
+  <span class="nt">"tx_json"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">"TransactionType"</span><span class="p">:</span> <span class="s2">"AccountSet"</span><span class="p">,</span>
+    <span class="nt">"Account"</span><span class="p">:</span> <span class="s2">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+    <span class="nt">"SetFlag"</span><span class="p">:</span> <span class="mi">4</span>
+  <span class="p">},</span>
+  <span class="nt">"secret"</span><span class="p">:</span> <span class="s2">"s████████████████████████████"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-0-1" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="p">{</span>
+   <span class="nt">"method"</span><span class="p">:</span> <span class="s2">"sign"</span><span class="p">,</span>
+   <span class="nt">"params"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+         <span class="nt">"tx_json"</span><span class="p">:</span> <span class="p">{</span>
+           <span class="nt">"TransactionType"</span><span class="p">:</span> <span class="s2">"AccountSet"</span><span class="p">,</span>
+           <span class="nt">"Account"</span><span class="p">:</span> <span class="s2">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+           <span class="nt">"SetFlag"</span><span class="p">:</span> <span class="mi">4</span>
+         <span class="p">},</span>
+         <span class="nt">"secret"</span><span class="p">:</span> <span class="s2">"s████████████████████████████"</span>
+      <span class="p">}</span>
+   <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-0-2" style="position: static;"><div class="codehilite"><pre><span></span><code>$ rippled sign s████████████████████████████ <span class="s1">'{"TransactionType":"AccountSet",</span>
+<span class="s1">    "Account":"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn", "SetFlag":4}'</span>
+</code></pre></div></div>
+</div>
+<h4 id="example-response">Example Response</h4>
+<div class="multicode" id="code-1"><ul class="codetabs"><li><a href="#code-1-0">WebSocket</a></li><li><a href="#code-1-1">JSON-RPC</a></li><li><a href="#code-1-2">Commandline</a></li></ul>
+
+<div class="code_sample" id="code-1-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">"result"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">"deprecated"</span><span class="p">:</span> <span class="s2">"This command has been deprecated and will be removed in a future version of the server. Please migrate to a standalone signing tool."</span><span class="p">,</span>
+    <span class="nt">"tx_blob"</span><span class="p">:</span> <span class="s2">"1200032280000000240000017C20210000000468400000000000000A732103AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB7446304402204457A890BC06F48061F8D61042975702B57EBEF3EA2C7C484DFE38CFD42EA11102202505A7C62FF41E68FDE10271BADD75BD66D54B2F96A326BE487A2728A352442D81144B4E9C06F24296074F7BC48F92A97916C6DC5EA9"</span><span class="p">,</span>
+    <span class="nt">"tx_json"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">"Account"</span><span class="p">:</span> <span class="s2">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+      <span class="nt">"Fee"</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+      <span class="nt">"Flags"</span><span class="p">:</span> <span class="mi">2147483648</span><span class="p">,</span>
+      <span class="nt">"Sequence"</span><span class="p">:</span> <span class="mi">380</span><span class="p">,</span>
+      <span class="nt">"SetFlag"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="nt">"SigningPubKey"</span><span class="p">:</span> <span class="s2">"03AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB"</span><span class="p">,</span>
+      <span class="nt">"TransactionType"</span><span class="p">:</span> <span class="s2">"AccountSet"</span><span class="p">,</span>
+      <span class="nt">"TxnSignature"</span><span class="p">:</span> <span class="s2">"304402204457A890BC06F48061F8D61042975702B57EBEF3EA2C7C484DFE38CFD42EA11102202505A7C62FF41E68FDE10271BADD75BD66D54B2F96A326BE487A2728A352442D"</span><span class="p">,</span>
+      <span class="nt">"hash"</span><span class="p">:</span> <span class="s2">"327FD263132A4D08170E1B01FE1BB2E21D0126CE58165C97A9173CA9551BCD70"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nt">"status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+  <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"response"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-1-1" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">"result"</span><span class="p">:</span> <span class="p">{</span>
+        <span class="nt">"deprecated"</span><span class="p">:</span> <span class="s2">"This command has been deprecated and will be removed in a future version of the server. Please migrate to a standalone signing tool."</span><span class="p">,</span>
+        <span class="nt">"status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+        <span class="nt">"tx_blob"</span><span class="p">:</span> <span class="s2">"1200032280000000240000017C20210000000468400000000000000A732103AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB7446304402204457A890BC06F48061F8D61042975702B57EBEF3EA2C7C484DFE38CFD42EA11102202505A7C62FF41E68FDE10271BADD75BD66D54B2F96A326BE487A2728A352442D81144B4E9C06F24296074F7BC48F92A97916C6DC5EA9"</span><span class="p">,</span>
+        <span class="nt">"tx_json"</span><span class="p">:</span> <span class="p">{</span>
+            <span class="nt">"Account"</span><span class="p">:</span> <span class="s2">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+            <span class="nt">"Fee"</span><span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+            <span class="nt">"Flags"</span><span class="p">:</span> <span class="mi">2147483648</span><span class="p">,</span>
+            <span class="nt">"Sequence"</span><span class="p">:</span> <span class="mi">380</span><span class="p">,</span>
+            <span class="nt">"SetFlag"</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+            <span class="nt">"SigningPubKey"</span><span class="p">:</span> <span class="s2">"03AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB"</span><span class="p">,</span>
+            <span class="nt">"TransactionType"</span><span class="p">:</span> <span class="s2">"AccountSet"</span><span class="p">,</span>
+            <span class="nt">"TxnSignature"</span><span class="p">:</span> <span class="s2">"304402204457A890BC06F48061F8D61042975702B57EBEF3EA2C7C484DFE38CFD42EA11102202505A7C62FF41E68FDE10271BADD75BD66D54B2F96A326BE487A2728A352442D"</span><span class="p">,</span>
+            <span class="nt">"hash"</span><span class="p">:</span> <span class="s2">"327FD263132A4D08170E1B01FE1BB2E21D0126CE58165C97A9173CA9551BCD70"</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-1-2" style="position: static;"><div class="codehilite"><pre><span></span><code>Loading: <span class="s2">"/etc/opt/ripple/rippled.cfg"</span>
+<span class="m">2020</span>-Feb-13 <span class="m">00</span>:13:24.783570867 HTTPClient:NFO Connecting to <span class="m">127</span>.0.0.1:5005
+
+<span class="o">{</span>
+   <span class="s2">"result"</span> : <span class="o">{</span>
+      <span class="s2">"deprecated"</span> : <span class="s2">"This command has been deprecated and will be removed in a future version of the server. Please migrate to a standalone signing tool."</span>,
+      <span class="s2">"status"</span> : <span class="s2">"success"</span>,
+      <span class="s2">"tx_blob"</span> : <span class="s2">"1200032280000000240000017C20210000000468400000000000000A732103AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB7446304402204457A890BC06F48061F8D61042975702B57EBEF3EA2C7C484DFE38CFD42EA11102202505A7C62FF41E68FDE10271BADD75BD66D54B2F96A326BE487A2728A352442D81144B4E9C06F24296074F7BC48F92A97916C6DC5EA9"</span>,
+      <span class="s2">"tx_json"</span> : <span class="o">{</span>
+         <span class="s2">"Account"</span> : <span class="s2">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span>,
+         <span class="s2">"Fee"</span> : <span class="s2">"10"</span>,
+         <span class="s2">"Flags"</span> : <span class="m">2147483648</span>,
+         <span class="s2">"Sequence"</span> : <span class="m">380</span>,
+         <span class="s2">"SetFlag"</span> : <span class="m">4</span>,
+         <span class="s2">"SigningPubKey"</span> : <span class="s2">"03AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB"</span>,
+         <span class="s2">"TransactionType"</span> : <span class="s2">"AccountSet"</span>,
+         <span class="s2">"TxnSignature"</span> : <span class="s2">"304402204457A890BC06F48061F8D61042975702B57EBEF3EA2C7C484DFE38CFD42EA11102202505A7C62FF41E68FDE10271BADD75BD66D54B2F96A326BE487A2728A352442D"</span>,
+         <span class="s2">"hash"</span> : <span class="s2">"327FD263132A4D08170E1B01FE1BB2E21D0126CE58165C97A9173CA9551BCD70"</span>
+      <span class="o">}</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+</div>
+<p>Look for <code>"status": "success"</code> to indicate that the server successfully signed the transaction. If you get <code>"status": "error"</code> instead, check the <code>error</code> and <code>error_message</code> fields for more information. Some common possibilities include:</p>
+<ul>
+<li><code>"error": "badSecret"</code> usually means you made a typo in the <code>secret</code> of the request.</li>
+<li><code>"error": "masterDisabled"</code> means this address's master key pair is <em>already</em> disabled.</li>
+</ul>
+<p>Take note of the <code>tx_blob</code> value from the response. This is a signed transaction binary you can submit to the network.</p>
+<h3 id="3-submit-transaction">3. Submit Transaction</h3>
+<p>Submit the signed transaction blob from the previous step to the XRP Ledger.</p>
+<h4 id="example-request-1">Example Request</h4>
+<div class="multicode" id="code-2"><ul class="codetabs"><li><a href="#code-2-0">WebSocket</a></li><li><a href="#code-2-1">JSON-RPC</a></li><li><a href="#code-2-2">Commandline</a></li></ul>
+
+<div class="code_sample" id="code-2-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">"command"</span><span class="p">:</span> <span class="s2">"submit"</span><span class="p">,</span>
+    <span class="nt">"tx_blob"</span><span class="p">:</span> <span class="s2">"1200032280000000240000017C20210000000468400000000000000A732103AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB7446304402204457A890BC06F48061F8D61042975702B57EBEF3EA2C7C484DFE38CFD42EA11102202505A7C62FF41E68FDE10271BADD75BD66D54B2F96A326BE487A2728A352442D81144B4E9C06F24296074F7BC48F92A97916C6DC5EA9"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-2-1" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="p">{</span>
+   <span class="nt">"method"</span><span class="p">:</span><span class="s2">"submit"</span><span class="p">,</span>
+   <span class="nt">"params"</span><span class="p">:</span> <span class="p">[</span>
+      <span class="p">{</span>
+         <span class="nt">"tx_blob"</span><span class="p">:</span> <span class="s2">"1200032280000000240000017C20210000000468400000000000000A732103AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB7446304402204457A890BC06F48061F8D61042975702B57EBEF3EA2C7C484DFE38CFD42EA11102202505A7C62FF41E68FDE10271BADD75BD66D54B2F96A326BE487A2728A352442D81144B4E9C06F24296074F7BC48F92A97916C6DC5EA9"</span>
+      <span class="p">}</span>
+   <span class="p">]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-2-2" style="position: static;"><div class="codehilite"><pre><span></span><code>$ rippled submit 1200032280000000240000017C20210000000468400000000000000A732103AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB7446304402204457A890BC06F48061F8D61042975702B57EBEF3EA2C7C484DFE38CFD42EA11102202505A7C62FF41E68FDE10271BADD75BD66D54B2F96A326BE487A2728A352442D81144B4E9C06F24296074F7BC48F92A97916C6DC5EA9
+</code></pre></div></div>
+</div>
+<h4 id="example-response-1">Example Response</h4>
+<div class="multicode" id="code-3"><ul class="codetabs"><li><a href="#code-3-0">WebSocket</a></li><li><a href="#code-3-1">JSON-RPC</a></li><li><a href="#code-3-2">Commandline</a></li></ul>
+
+<div class="code_sample" id="code-3-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">"result"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">"engine_result"</span> <span class="p">:</span> <span class="s2">"tesSUCCESS"</span><span class="p">,</span>
+    <span class="nt">"engine_result_code"</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">"engine_result_message"</span> <span class="p">:</span> <span class="s2">"The transaction was applied. Only final in a validated ledger."</span><span class="p">,</span>
+    <span class="nt">"tx_blob"</span> <span class="p">:</span> <span class="s2">"1200032280000000240000017C20210000000468400000000000000A732103AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB7446304402204457A890BC06F48061F8D61042975702B57EBEF3EA2C7C484DFE38CFD42EA11102202505A7C62FF41E68FDE10271BADD75BD66D54B2F96A326BE487A2728A352442D81144B4E9C06F24296074F7BC48F92A97916C6DC5EA9"</span><span class="p">,</span>
+    <span class="nt">"tx_json"</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">"Account"</span> <span class="p">:</span> <span class="s2">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+      <span class="nt">"Fee"</span> <span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+      <span class="nt">"Flags"</span> <span class="p">:</span> <span class="mi">2147483648</span><span class="p">,</span>
+      <span class="nt">"Sequence"</span> <span class="p">:</span> <span class="mi">380</span><span class="p">,</span>
+      <span class="nt">"SetFlag"</span> <span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="nt">"SigningPubKey"</span> <span class="p">:</span> <span class="s2">"03AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB"</span><span class="p">,</span>
+      <span class="nt">"TransactionType"</span> <span class="p">:</span> <span class="s2">"AccountSet"</span><span class="p">,</span>
+      <span class="nt">"TxnSignature"</span> <span class="p">:</span> <span class="s2">"304402204457A890BC06F48061F8D61042975702B57EBEF3EA2C7C484DFE38CFD42EA11102202505A7C62FF41E68FDE10271BADD75BD66D54B2F96A326BE487A2728A352442D"</span><span class="p">,</span>
+      <span class="nt">"hash"</span> <span class="p">:</span> <span class="s2">"327FD263132A4D08170E1B01FE1BB2E21D0126CE58165C97A9173CA9551BCD70"</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+  <span class="nt">"status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+  <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"response"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-3-1" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">"result"</span> <span class="p">:</span> <span class="p">{</span>
+    <span class="nt">"engine_result"</span> <span class="p">:</span> <span class="s2">"tesSUCCESS"</span><span class="p">,</span>
+    <span class="nt">"engine_result_code"</span> <span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">"engine_result_message"</span> <span class="p">:</span> <span class="s2">"The transaction was applied. Only final in a validated ledger."</span><span class="p">,</span>
+    <span class="nt">"status"</span> <span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+    <span class="nt">"tx_blob"</span> <span class="p">:</span> <span class="s2">"1200032280000000240000017C20210000000468400000000000000A732103AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB7446304402204457A890BC06F48061F8D61042975702B57EBEF3EA2C7C484DFE38CFD42EA11102202505A7C62FF41E68FDE10271BADD75BD66D54B2F96A326BE487A2728A352442D81144B4E9C06F24296074F7BC48F92A97916C6DC5EA9"</span><span class="p">,</span>
+    <span class="nt">"tx_json"</span> <span class="p">:</span> <span class="p">{</span>
+      <span class="nt">"Account"</span> <span class="p">:</span> <span class="s2">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+      <span class="nt">"Fee"</span> <span class="p">:</span> <span class="s2">"10"</span><span class="p">,</span>
+      <span class="nt">"Flags"</span> <span class="p">:</span> <span class="mi">2147483648</span><span class="p">,</span>
+      <span class="nt">"Sequence"</span> <span class="p">:</span> <span class="mi">380</span><span class="p">,</span>
+      <span class="nt">"SetFlag"</span> <span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+      <span class="nt">"SigningPubKey"</span> <span class="p">:</span> <span class="s2">"03AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB"</span><span class="p">,</span>
+      <span class="nt">"TransactionType"</span> <span class="p">:</span> <span class="s2">"AccountSet"</span><span class="p">,</span>
+      <span class="nt">"TxnSignature"</span> <span class="p">:</span> <span class="s2">"304402204457A890BC06F48061F8D61042975702B57EBEF3EA2C7C484DFE38CFD42EA11102202505A7C62FF41E68FDE10271BADD75BD66D54B2F96A326BE487A2728A352442D"</span><span class="p">,</span>
+      <span class="nt">"hash"</span> <span class="p">:</span> <span class="s2">"327FD263132A4D08170E1B01FE1BB2E21D0126CE58165C97A9173CA9551BCD70"</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-3-2" style="position: static;"><div class="codehilite"><pre><span></span><code>Loading: <span class="s2">"/etc/opt/ripple/rippled.cfg"</span>
+<span class="m">2020</span>-Feb-13 <span class="m">00</span>:25:49.361743460 HTTPClient:NFO Connecting to <span class="m">127</span>.0.0.1:5005
+
+<span class="o">{</span>
+   <span class="s2">"result"</span> : <span class="o">{</span>
+      <span class="s2">"engine_result"</span> : <span class="s2">"tesSUCCESS"</span>,
+      <span class="s2">"engine_result_code"</span> : <span class="m">0</span>,
+      <span class="s2">"engine_result_message"</span> : <span class="s2">"The transaction was applied. Only final in a validated ledger."</span>,
+      <span class="s2">"status"</span> : <span class="s2">"success"</span>,
+      <span class="s2">"tx_blob"</span> : <span class="s2">"1200032280000000240000017C20210000000468400000000000000A732103AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB7446304402204457A890BC06F48061F8D61042975702B57EBEF3EA2C7C484DFE38CFD42EA11102202505A7C62FF41E68FDE10271BADD75BD66D54B2F96A326BE487A2728A352442D81144B4E9C06F24296074F7BC48F92A97916C6DC5EA9"</span>,
+      <span class="s2">"tx_json"</span> : <span class="o">{</span>
+         <span class="s2">"Account"</span> : <span class="s2">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span>,
+         <span class="s2">"Fee"</span> : <span class="s2">"10"</span>,
+         <span class="s2">"Flags"</span> : <span class="m">2147483648</span>,
+         <span class="s2">"Sequence"</span> : <span class="m">380</span>,
+         <span class="s2">"SetFlag"</span> : <span class="m">4</span>,
+         <span class="s2">"SigningPubKey"</span> : <span class="s2">"03AB40A0490F9B7ED8DF29D246BF2D6269820A0EE7742ACDD457BEA7C7D0931EDB"</span>,
+         <span class="s2">"TransactionType"</span> : <span class="s2">"AccountSet"</span>,
+         <span class="s2">"TxnSignature"</span> : <span class="s2">"304402204457A890BC06F48061F8D61042975702B57EBEF3EA2C7C484DFE38CFD42EA11102202505A7C62FF41E68FDE10271BADD75BD66D54B2F96A326BE487A2728A352442D"</span>,
+         <span class="s2">"hash"</span> : <span class="s2">"327FD263132A4D08170E1B01FE1BB2E21D0126CE58165C97A9173CA9551BCD70"</span>
+      <span class="o">}</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+</div>
+<p>If the transaction fails with the result <code>tecNO_ALTERNATIVE_KEY</code>, your account does not have another method of authorizing transactions currently enabled. You must <a href="assign-a-regular-key-pair.html">assign a regular key pair</a> or <a href="set-up-multi-signing.html">set up multi-signing</a>, then try again to disable the master key pair.</p>
+<h3 id="4-wait-for-validation">4. Wait for validation</h3>
+<p>On the live network or the Ripple Test Net, you can wait 4-7 seconds for the ledger to close automatically.</p>
+<p>If you're running <code>rippled</code> in stand-alone mode, use the <a href="ledger_accept.html">ledger_accept method</a> to manually close the ledger. <!--#{ fix md highlighting_ #}--></p>
+<h3 id="5-confirm-account-flags">5. Confirm Account Flags</h3>
+<p>Confirm that your account's master key is disabled using the <a href="account_info.html">account_info method</a>. Be sure to specify the following parameters:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="left">Value</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>account</code></td>
+<td align="left">The address of your account.</td>
+</tr>
+<tr>
+<td align="left"><code>ledger_index</code></td>
+<td align="left"><code>"validated"</code> to get results from the latest validated ledger version.</td>
+</tr>
+</tbody>
+</table>
+<h4 id="example-request-2">Example Request</h4>
+<div class="multicode" id="code-4"><ul class="codetabs"><li><a href="#code-4-0">WebSocket</a></li><li><a href="#code-4-1">JSON-RPC</a></li><li><a href="#code-4-2">Commandline</a></li></ul>
+
+<div class="code_sample" id="code-4-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">"command"</span><span class="p">:</span> <span class="s2">"account_info"</span><span class="p">,</span>
+  <span class="nt">"account"</span><span class="p">:</span> <span class="s2">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+  <span class="nt">"ledger_index"</span><span class="p">:</span> <span class="s2">"validated"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-4-1" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">"method"</span><span class="p">:</span> <span class="s2">"account_info"</span><span class="p">,</span>
+    <span class="nt">"params"</span><span class="p">:</span> <span class="p">[{</span>
+        <span class="nt">"account"</span><span class="p">:</span> <span class="s2">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+        <span class="nt">"ledger_index"</span><span class="p">:</span> <span class="s2">"validated"</span>
+    <span class="p">}]</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-4-2" style="position: static;"><div class="codehilite"><pre><span></span><code>rippled account_info rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn validated
+</code></pre></div></div>
+</div>
+<h4 id="example-response-2">Example Response</h4>
+<div class="multicode" id="code-5"><ul class="codetabs"><li><a href="#code-5-0">WebSocket</a></li><li><a href="#code-5-1">JSON-RPC</a></li><li><a href="#code-5-2">Commandline</a></li></ul>
+
+<div class="code_sample" id="code-5-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">"result"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">"account_data"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">"Account"</span><span class="p">:</span> <span class="s2">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+      <span class="nt">"AccountTxnID"</span><span class="p">:</span> <span class="s2">"327FD263132A4D08170E1B01FE1BB2E21D0126CE58165C97A9173CA9551BCD70"</span><span class="p">,</span>
+      <span class="nt">"Balance"</span><span class="p">:</span> <span class="s2">"423013688"</span><span class="p">,</span>
+      <span class="nt">"Domain"</span><span class="p">:</span> <span class="s2">"6D64756F31332E636F6D"</span><span class="p">,</span>
+      <span class="nt">"EmailHash"</span><span class="p">:</span> <span class="s2">"98B4375E1D753E5B91627516F6D70977"</span><span class="p">,</span>
+      <span class="nt">"Flags"</span><span class="p">:</span> <span class="mi">9633792</span><span class="p">,</span>
+      <span class="nt">"LedgerEntryType"</span><span class="p">:</span> <span class="s2">"AccountRoot"</span><span class="p">,</span>
+      <span class="nt">"MessageKey"</span><span class="p">:</span> <span class="s2">"0000000000000000000000070000000300"</span><span class="p">,</span>
+      <span class="nt">"OwnerCount"</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+      <span class="nt">"PreviousTxnID"</span><span class="p">:</span> <span class="s2">"327FD263132A4D08170E1B01FE1BB2E21D0126CE58165C97A9173CA9551BCD70"</span><span class="p">,</span>
+      <span class="nt">"PreviousTxnLgrSeq"</span><span class="p">:</span> <span class="mi">53391321</span><span class="p">,</span>
+      <span class="nt">"RegularKey"</span><span class="p">:</span> <span class="s2">"rD9iJmieYHn8jTtPjwwkW2Wm9sVDvPXLoJ"</span><span class="p">,</span>
+      <span class="nt">"Sequence"</span><span class="p">:</span> <span class="mi">381</span><span class="p">,</span>
+      <span class="nt">"TransferRate"</span><span class="p">:</span> <span class="mi">4294967295</span><span class="p">,</span>
+      <span class="nt">"index"</span><span class="p">:</span> <span class="s2">"13F1A95D7AAB7108D5CE7EEAF504B2894B8C674E6D68499076441C4837282BF8"</span><span class="p">,</span>
+      <span class="nt">"urlgravatar"</span><span class="p">:</span> <span class="s2">"http://www.gravatar.com/avatar/98b4375e1d753e5b91627516f6d70977"</span>
+    <span class="p">},</span>
+    <span class="nt">"ledger_hash"</span><span class="p">:</span> <span class="s2">"A90CEBD4AEDA24470AAC5CD307B6D26267ACE79C03669A0A0B8C41ACAEDAA6F0"</span><span class="p">,</span>
+    <span class="nt">"ledger_index"</span><span class="p">:</span> <span class="mi">53391576</span><span class="p">,</span>
+    <span class="nt">"validated"</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">},</span>
+  <span class="nt">"status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+  <span class="nt">"type"</span><span class="p">:</span> <span class="s2">"response"</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-5-1" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">"result"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="nt">"account_data"</span><span class="p">:</span> <span class="p">{</span>
+      <span class="nt">"Account"</span><span class="p">:</span> <span class="s2">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span><span class="p">,</span>
+      <span class="nt">"AccountTxnID"</span><span class="p">:</span> <span class="s2">"327FD263132A4D08170E1B01FE1BB2E21D0126CE58165C97A9173CA9551BCD70"</span><span class="p">,</span>
+      <span class="nt">"Balance"</span><span class="p">:</span> <span class="s2">"423013688"</span><span class="p">,</span>
+      <span class="nt">"Domain"</span><span class="p">:</span> <span class="s2">"6D64756F31332E636F6D"</span><span class="p">,</span>
+      <span class="nt">"EmailHash"</span><span class="p">:</span> <span class="s2">"98B4375E1D753E5B91627516F6D70977"</span><span class="p">,</span>
+      <span class="nt">"Flags"</span><span class="p">:</span> <span class="mi">9633792</span><span class="p">,</span>
+      <span class="nt">"LedgerEntryType"</span><span class="p">:</span> <span class="s2">"AccountRoot"</span><span class="p">,</span>
+      <span class="nt">"MessageKey"</span><span class="p">:</span> <span class="s2">"0000000000000000000000070000000300"</span><span class="p">,</span>
+      <span class="nt">"OwnerCount"</span><span class="p">:</span> <span class="mi">9</span><span class="p">,</span>
+      <span class="nt">"PreviousTxnID"</span><span class="p">:</span> <span class="s2">"327FD263132A4D08170E1B01FE1BB2E21D0126CE58165C97A9173CA9551BCD70"</span><span class="p">,</span>
+      <span class="nt">"PreviousTxnLgrSeq"</span><span class="p">:</span> <span class="mi">53391321</span><span class="p">,</span>
+      <span class="nt">"RegularKey"</span><span class="p">:</span> <span class="s2">"rD9iJmieYHn8jTtPjwwkW2Wm9sVDvPXLoJ"</span><span class="p">,</span>
+      <span class="nt">"Sequence"</span><span class="p">:</span> <span class="mi">381</span><span class="p">,</span>
+      <span class="nt">"TransferRate"</span><span class="p">:</span> <span class="mi">4294967295</span><span class="p">,</span>
+      <span class="nt">"index"</span><span class="p">:</span> <span class="s2">"13F1A95D7AAB7108D5CE7EEAF504B2894B8C674E6D68499076441C4837282BF8"</span><span class="p">,</span>
+      <span class="nt">"urlgravatar"</span><span class="p">:</span> <span class="s2">"http://www.gravatar.com/avatar/98b4375e1d753e5b91627516f6d70977"</span>
+    <span class="p">},</span>
+    <span class="nt">"ledger_hash"</span><span class="p">:</span> <span class="s2">"4C4AC95149B13B539369998675FE6860C52695E83658366F18872181C9F1AEBF"</span><span class="p">,</span>
+    <span class="nt">"ledger_index"</span><span class="p">:</span> <span class="mi">53391589</span><span class="p">,</span>
+    <span class="nt">"status"</span><span class="p">:</span> <span class="s2">"success"</span><span class="p">,</span>
+    <span class="nt">"validated"</span><span class="p">:</span> <span class="kc">true</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-5-2" style="position: static;"><div class="codehilite"><pre><span></span><code>Loading: <span class="s2">"/etc/opt/ripple/rippled.cfg"</span>
+<span class="m">2020</span>-Feb-13 <span class="m">00</span>:41:38.642710734 HTTPClient:NFO Connecting to <span class="m">127</span>.0.0.1:5005
+
+<span class="o">{</span>
+   <span class="s2">"result"</span> : <span class="o">{</span>
+      <span class="s2">"account_data"</span> : <span class="o">{</span>
+         <span class="s2">"Account"</span> : <span class="s2">"rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"</span>,
+         <span class="s2">"AccountTxnID"</span> : <span class="s2">"327FD263132A4D08170E1B01FE1BB2E21D0126CE58165C97A9173CA9551BCD70"</span>,
+         <span class="s2">"Balance"</span> : <span class="s2">"423013688"</span>,
+         <span class="s2">"Domain"</span> : <span class="s2">"6D64756F31332E636F6D"</span>,
+         <span class="s2">"EmailHash"</span> : <span class="s2">"98B4375E1D753E5B91627516F6D70977"</span>,
+         <span class="s2">"Flags"</span> : <span class="m">9633792</span>,
+         <span class="s2">"LedgerEntryType"</span> : <span class="s2">"AccountRoot"</span>,
+         <span class="s2">"MessageKey"</span> : <span class="s2">"0000000000000000000000070000000300"</span>,
+         <span class="s2">"OwnerCount"</span> : <span class="m">9</span>,
+         <span class="s2">"PreviousTxnID"</span> : <span class="s2">"327FD263132A4D08170E1B01FE1BB2E21D0126CE58165C97A9173CA9551BCD70"</span>,
+         <span class="s2">"PreviousTxnLgrSeq"</span> : <span class="m">53391321</span>,
+         <span class="s2">"RegularKey"</span> : <span class="s2">"rD9iJmieYHn8jTtPjwwkW2Wm9sVDvPXLoJ"</span>,
+         <span class="s2">"Sequence"</span> : <span class="m">381</span>,
+         <span class="s2">"TransferRate"</span> : <span class="m">4294967295</span>,
+         <span class="s2">"index"</span> : <span class="s2">"13F1A95D7AAB7108D5CE7EEAF504B2894B8C674E6D68499076441C4837282BF8"</span>,
+         <span class="s2">"urlgravatar"</span> : <span class="s2">"http://www.gravatar.com/avatar/98b4375e1d753e5b91627516f6d70977"</span>
+      <span class="o">}</span>,
+      <span class="s2">"ledger_hash"</span> : <span class="s2">"BBA4034FB5D5D89987E0987A9491E7B62B16708EECFF04CDB0367BD4D28EB1B5"</span>,
+      <span class="s2">"ledger_index"</span> : <span class="m">53391568</span>,
+      <span class="s2">"status"</span> : <span class="s2">"success"</span>,
+      <span class="s2">"validated"</span> : <span class="nb">true</span>
+   <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+</div>
+<p>In the response's <code>account_data</code> object, compare the <code>Flags</code> field with the <code>lsfDisableMaster</code> flag value (<code>0x00100000</code> in hex, or <code>1048576</code> in decimal) using bitwise-AND (the <code>&amp;</code> operator in most common programming languages).</p>
+<p>Example code:</p>
+<div class="multicode" id="code-6"><ul class="codetabs"><li><a href="#code-6-0">JavaScript</a></li><li><a href="#code-6-1">Python</a></li></ul>
+
+<div class="code_sample" id="code-6-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="c1">// Assuming the JSON-RPC response above is saved as account_info_response</span>
+<span class="kr">const</span> <span class="nx">lsfDisableMaster</span> <span class="o">=</span> <span class="mh">0x00100000</span><span class="p">;</span>
+<span class="kd">let</span> <span class="nx">acct_flags</span> <span class="o">=</span> <span class="nx">account_info_response</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">account_data</span><span class="p">.</span><span class="nx">Flags</span><span class="p">;</span>
+<span class="k">if</span> <span class="p">((</span><span class="nx">lsfDisableMaster</span> <span class="o">&amp;</span> <span class="nx">acct_flags</span><span class="p">)</span> <span class="o">===</span> <span class="nx">lsfDisableMaster</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Master key pair is DISABLED"</span><span class="p">);</span>
+<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Master key pair is available for use"</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<div class="code_sample" id="code-6-1" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="c1"># Assuming the JSON-RPC response above is parsed from JSON</span>
+<span class="c1">#  and saved as the variable account_info_response</span>
+<span class="n">lsfDisableMaster</span> <span class="o">=</span> <span class="mh">0x00100000</span>
+<span class="n">acct_flags</span> <span class="o">=</span> <span class="n">account_info_response</span><span class="p">[</span><span class="s2">"result"</span><span class="p">][</span><span class="s2">"account_data"</span><span class="p">][</span><span class="s2">"Flags"</span><span class="p">]</span>
+<span class="k">if</span> <span class="n">lsfDisableMaster</span> <span class="o">&amp;</span> <span class="n">acct_flags</span> <span class="o">==</span> <span class="n">lsfDisableMaster</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Master key pair is DISABLED"</span><span class="p">)</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Master key pair is available for use"</span><span class="p">)</span>
+</code></pre></div></div>
+</div>
+<p>This operation has only two possible outcomes:</p>
+<ul>
+<li>A nonzero result, equal to the <code>lsfDisableMaster</code> value, indicates <strong>the master key has been successfully disabled</strong>.</li>
+<li>A zero result indicates the account's master key is not disabled.</li>
+</ul>
+<p>If the result does not match your expectations, check whether the transaction you sent in the previous steps has executed successfully. It should be the most recent entry in the account's transaction history (<a href="account_tx.html">account_tx method</a>) and it should have the result code <code>tesSUCCESS</code>. If you see any other <a href="transaction-results.html">result code</a>, the transaction was not executed successfully. Depending on the cause of the error, you may want to restart these steps from the beginning.</p>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- rippled release notes links -->
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="tutorials.html"> Tutorials</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_2">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_2" aria-expanded="true" aria-controls="sidenav_collapse_2"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="get-started.html">Get Started</a>
+                <!-- <a class="sidenav_cat_title" href="get-started.html">Get Started</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_2" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_2">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="get-started-with-the-rippled-api.html">Get Started with XRP Ledger APIs</a></li>
+                      <li><a class="nosubcat-page" href="get-started-with-rippleapi-for-javascript.html">Get Started with RippleAPI for Node.js</a></li>
+                      <li><a class="nosubcat-page" href="send-xrp.html">Send XRP</a></li>
+                      <li><a class="nosubcat-page" href="monitor-incoming-payments-with-websocket.html">Monitor Incoming Payments with WebSocket</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse2 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_8">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_8" aria-expanded="true" aria-controls="sidenav_collapse_8"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="production-readiness.html">Production Readiness</a>
+                <!-- <a class="sidenav_cat_title" href="production-readiness.html">Production Readiness</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_8" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_8">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="set-up-secure-signing.html">Set Up Secure Signing</a></li>
+                      <li><a class="nosubcat-page" href="look-up-transaction-results.html">Look Up Transaction Results</a></li>
+                      <li><a class="nosubcat-page" href="reliable-transaction-submission.html">Reliable Transaction Submission</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse8 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card active">
+            <div class="card-header" role="tab" id="sidenav_cat_head_13">
+                <a class="sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_13" aria-expanded="true" aria-controls="sidenav_collapse_13"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title active-parent" href="manage-account-settings.html">Manage Account Settings</a>
+                <!-- <a class="sidenav_cat_title" href="manage-account-settings.html">Manage Account Settings</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_13" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_13">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="assign-a-regular-key-pair.html">Assign a Regular Key Pair</a></li>
+                      <li><a class="nosubcat-page" href="change-or-remove-a-regular-key-pair.html">Change or Remove a Regular Key Pair</a></li>
+                      <li><a class="active nosubcat-page" href="disable-master-key-pair.html">Disable Master Key Pair</a></li>
+                      <li><a class="nosubcat-page" href="set-up-multi-signing.html">Set Up Multi-Signing</a></li>
+                      <li><a class="nosubcat-page" href="send-a-multi-signed-transaction.html">Send a Multi-Signed Transaction</a></li>
+                      <li><a class="nosubcat-page" href="require-destination-tags.html">Require Destination Tags</a></li>
+                      <li><a class="nosubcat-page" href="offline-account-setup.html">Offline Account Setup Tutorial</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse13 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_21">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_21" aria-expanded="true" aria-controls="sidenav_collapse_21"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="use-specialized-payment-types.html">Use Specialized Payment Types</a>
+                <!-- <a class="sidenav_cat_title" href="use-specialized-payment-types.html">Use Specialized Payment Types</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_21" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_21">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="use-escrows.html">Use Escrows</a></li>
+
+                          <li><a class="subpage" href="send-a-time-held-escrow.html">Send a Time-Held Escrow</a></li>
+                          <li><a class="subpage" href="send-a-conditionally-held-escrow.html">Send a Conditionally-Held Escrow</a></li>
+                          <li><a class="subpage" href="cancel-an-expired-escrow.html">Cancel an Expired Escrow</a></li>
+                          <li><a class="subpage" href="look-up-escrows.html">Look up escrows</a></li>
+                          <li><a class="subpage" href="use-an-escrow-as-a-smart-contract.html">Use an Escrow as a Smart Contract</a></li>
+
+                      <li><a class="subcat-title" href="use-payment-channels.html">Use Payment Channels</a></li>
+
+                          <li><a class="subpage" href="open-a-payment-channel-to-enable-an-inter-exchange-network.html">Open a Payment Channel to Enable an Inter-Exchange Network</a></li>
+
+                      <li><a class="subcat-title" href="use-checks.html">Use Checks</a></li>
+
+                          <li><a class="subpage" href="send-a-check.html">Send a Check</a></li>
+                          <li><a class="subpage" href="cash-a-check-for-an-exact-amount.html">Cash a Check for an Exact Amount</a></li>
+                          <li><a class="subpage" href="cash-a-check-for-a-flexible-amount.html">Cash a Check for a Flexible Amount</a></li>
+                          <li><a class="subpage" href="cancel-a-check.html">Cancel a Check</a></li>
+                          <li><a class="subpage" href="look-up-checks-by-sender.html">Look Up Checks by Sender</a></li>
+                          <li><a class="subpage" href="look-up-checks-by-recipient.html">Look Up Checks by Recipient</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse21 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_38">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_38" aria-expanded="true" aria-controls="sidenav_collapse_38"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="xrp-ledger-businesses.html">XRP Ledger Businesses</a>
+                <!-- <a class="sidenav_cat_title" href="xrp-ledger-businesses.html">XRP Ledger Businesses</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_38" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_38">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="list-xrp-as-an-exchange.html">List XRP as an Exchange</a></li>
+                      <li><a class="nosubcat-page" href="list-your-exchange-on-xrp-charts.html">List Your Exchange on XRP Charts</a></li>
+                      <li><a class="nosubcat-page" href="become-an-xrp-ledger-gateway.html">Become an XRP Ledger Gateway</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse38 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_42">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_42" aria-expanded="true" aria-controls="sidenav_collapse_42"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="manage-the-rippled-server.html">Manage the rippled Server</a>
+                <!-- <a class="sidenav_cat_title" href="manage-the-rippled-server.html">Manage the rippled Server</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_42" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_42">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="install-rippled.html">Install rippled</a></li>
+
+                          <li><a class="subpage" href="system-requirements.html">System Requirements</a></li>
+                          <li><a class="subpage" href="install-rippled-on-centos-rhel-with-yum.html">Install on CentOS/Red Hat with yum</a></li>
+                          <li><a class="subpage" href="install-rippled-on-ubuntu.html">Install on Ubuntu or Debian Linux</a></li>
+                          <li><a class="subpage" href="update-rippled-automatically-on-linux.html">Update Automatically on Linux</a></li>
+                          <li><a class="subpage" href="update-rippled-manually-on-centos-rhel.html">Update Manually on CentOS/Red Hat</a></li>
+                          <li><a class="subpage" href="update-rippled-manually-on-ubuntu.html">Update Manually on Ubuntu or Debian</a></li>
+                          <li><a class="subpage" href="build-run-rippled-ubuntu.html">Build and Run rippled on Ubuntu</a></li>
+                          <li><a class="subpage" href="build-run-rippled-macos.html">Build and Run rippled on macOS</a></li>
+                          <li><a class="subpage" href="capacity-planning.html">Capacity Planning</a></li>
+                          <li><a class="subpage" href="rippled-1-3-migration-instructions.html">rippled v1.3.x Migration Instructions</a></li>
+
+                      <li><a class="subcat-title" href="configure-rippled.html">Configure rippled</a></li>
+
+                          <li><a class="subpage" href="run-rippled-as-a-validator.html">Run rippled as a Validator</a></li>
+                          <li><a class="subpage" href="run-rippled-as-a-wallet-server.html">Run rippled as a Wallet Server</a></li>
+                          <li><a class="subpage" href="configure-statsd.html">Configure StatsD</a></li>
+                          <li><a class="subpage" href="connect-your-rippled-to-the-xrp-test-net.html">Connect Your rippled to a Parallel Network</a></li>
+                          <li><a class="subpage" href="configure-online-deletion.html">Configure Online Deletion</a></li>
+                          <li><a class="subpage" href="configure-advisory-deletion.html">Configure Advisory Deletion</a></li>
+                          <li><a class="subpage" href="configure-history-sharding.html">Configure History Sharding</a></li>
+                          <li><a class="subpage" href="configure-full-history.html">Configure Full History</a></li>
+                          <li><a class="subpage" href="configure-grpc.html">Configure gRPC</a></li>
+                          <li><a class="subpage" href="enable-public-signing.html">Enable Public Signing</a></li>
+
+                      <li><a class="subcat-title" href="configure-peering.html">Configure Peering</a></li>
+
+                          <li><a class="subpage" href="cluster-rippled-servers.html">Cluster rippled Servers</a></li>
+                          <li><a class="subpage" href="configure-a-private-server.html">Configure a Private Server</a></li>
+                          <li><a class="subpage" href="configure-the-peer-crawler.html">Configure the Peer Crawler</a></li>
+                          <li><a class="subpage" href="enable-link-compression.html">Enable Link Compression</a></li>
+                          <li><a class="subpage" href="forward-ports-for-peering.html">Forward Ports for Peering</a></li>
+                          <li><a class="subpage" href="manually-connect-to-a-specific-peer.html">Manually Connect to a Specific Peer</a></li>
+                          <li><a class="subpage" href="set-max-number-of-peers.html">Set Maximum Number of Peers</a></li>
+                          <li><a class="subpage" href="use-a-peer-reservation.html">Use a Peer Reservation</a></li>
+
+                      <li><a class="subcat-title" href="use-stand-alone-mode.html">Test rippled Functionality in Stand-Alone Mode</a></li>
+
+                          <li><a class="subpage" href="start-a-new-genesis-ledger-in-stand-alone-mode.html">Start a New Genesis Ledger in Stand-Alone Mode</a></li>
+                          <li><a class="subpage" href="load-a-saved-ledger-in-stand-alone-mode.html">Load a Saved Ledger in Stand-Alone Mode</a></li>
+                          <li><a class="subpage" href="advance-the-ledger-in-stand-alone-mode.html">Advance the Ledger in Stand-Alone Mode</a></li>
+
+                      <li><a class="subcat-title" href="troubleshoot-the-rippled-server.html">Troubleshooting rippled</a></li>
+
+                          <li><a class="subpage" href="diagnosing-problems.html">Diagnosing Problems with rippled</a></li>
+                          <li><a class="subpage" href="health-check-interventions.html">Health Check Interventions</a></li>
+                          <li><a class="subpage" href="understanding-log-messages.html">Understanding Log Messages</a></li>
+                          <li><a class="subpage" href="server-doesnt-sync.html">rippled Server Doesn't Sync</a></li>
+                          <li><a class="subpage" href="server-wont-start.html">rippled Server Won't Start</a></li>
+                          <li><a class="subpage" href="fix-sqlite-tx-db-page-size-issue.html">Fix SQLite Transaction Database Page Size Issue</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse42 -->
+
+          </div><!-- /.card -->
+
+    </div><!-- /#sidenav -->
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">Learn</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">Explore</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">Build</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">Concepts</a></li>
+          <li class="level-1"><a href="tutorials.html">Tutorials</a></li>
+          <li class="level-1"><a href="references.html">References</a></li>
+          <li class="level-1"><a href="dev-tools.html">Dev Tools</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">License</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="Jump to top of page">Top</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:en"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>

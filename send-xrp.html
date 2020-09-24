@@ -1,0 +1,1051 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+
+    <title>Send XRP - XRP Ledger Dev Portal</title>
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+
+    <!-- jQuery -->
+    <script src="assets/vendor/jquery-1.11.1.min.js"></script>
+
+    <!-- Stylesheet -->
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="assets/css/devportal.css" rel="stylesheet" />
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-45576805-2');
+      gtag('config', 'UA-157720658-3', { 'linker': {
+        'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
+        } }
+      );
+    </script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
+
+
+
+
+    <!-- expandable code samples -->
+    <script src="assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="assets/js/multicodetab.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
+
+<div class="container-fluid">
+<nav class="top-nav navbar navbar-expand-lg navbar-dark row">
+  <a href="/" class="navbar-brand"><img src="assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse justify-content-end" id="navbarHolder">
+    <ul class="nav navbar-nav">
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_overview.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Learn</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_overview.html">
+          <a class="dropdown-item top-level-1" href="overview.html">Overview</a>
+          <a class="dropdown-item top-level-1" href="uses.html">Uses</a>
+          <a class="dropdown-item top-level-1" href="history.html">History</a>
+          <a class="dropdown-item top-level-1" href="impact.html">Impact</a>
+          <a class="dropdown-item top-level-1" href="carbon-calculator.html">Carbon Calculator</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_explore.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Explore</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_explore.html">
+          <a class="dropdown-item top-level-1" href="wallets.html">Wallets</a>
+          <a class="dropdown-item top-level-1" href="exchanges.html">Exchanges</a>
+          <a class="dropdown-item top-level-1" href="businesses.html">Businesses</a>
+          <a class="dropdown-item top-level-1" href="https://livenet.xrpl.org/">Ledger Explorer</a>
+        </div>
+      </li>
+
+
+            <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="topnav_docs.html" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Build</a>
+        <div class="dropdown-menu" aria-labelledby="topnav_docs.html">
+          <a class="dropdown-item top-level-1" href="docs.html">Docs</a>
+          <a class="dropdown-item top-level-2" href="concepts.html">Concepts</a>
+          <a class="dropdown-item top-level-2" href="tutorials.html">Tutorials</a>
+          <a class="dropdown-item top-level-2" href="references.html">References</a>
+          <a class="dropdown-item top-level-1" href="dev-tools.html">Dev Tools</a>
+          <a class="dropdown-item top-level-1" href="/blog/">Dev Blog</a>
+        </div>
+      </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" href="contribute.html">Contribute</a>
+      </li>
+
+<div class="nav-item github-edit-wrap">
+    <a href="https://github.com/ripple/xrpl-dev-portal/edit/master/content/tutorials/use-simple-xrp-payments/send-xrp.md" target="_blank" class="nav-link github-edit">Edit</a>
+</div><!-- /.github-edit -->
+      <li class="nav-item dropdown" id="navbar-search">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" id="topnav-search-dropdown-toggle"><i class="fa fa-search"></i><span class="sr-only">Open Search</span></a>
+        <div class="dropdown-menu">
+          <form class="navbar-form navbar-right" role="search">
+            <div class="form-inline">
+              <div class="input-group">
+                <label class="input-group-prepend" for="topsearchbar"><i class="fa fa-search input-group-text"></i><span class="sr-only">Search site...</span></label>
+                <input id="topsearchbox" name="q" type="text" class="form-control" placeholder="Search site...">
+                <div class="input-group-append d-none d-lg-flex">
+                  <button type="button" class="btn btn-default" data-toggle="dropdown" data-target="topnav-search-dropdown-toggle"><i class="fa fa-times"></i><span class="sr-only">Close Search</span></button>
+                </div>
+              </div><!--/.input-group-->
+            </div>
+          </form>
+        </div><!--/.dropdown-menu-->
+      </li><!--/.dropdown-->
+
+      <li class="nav-item wrap-button">
+        <a class="btn btn-outline-secondary nav-link" href="get-started.html">Get Started</a>
+      </li>
+
+    </ul><!-- /.navbar-nav -->
+
+    <div class="nav navbar-nav language-selector">
+      <div class="dropdown">
+        <a class="nav-link dropdown-toggle with-caret" type="button" id="language_selector_header_btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Eng
+        </a>
+        <div class="dropdown-menu smaller-dropdown" aria-labelledby="language_selector_header_btn">
+          <a class="dropdown-item" href="/send-xrp.html">Eng</a>
+          <a class="dropdown-item" href="/ja/send-xrp.html">日本語</a>
+        </div><!--/.dropdown-menu-->
+      </div><!--/.dropdown-->
+    </div><!--/.language-selector-->
+  </div><!--/#navbarHolder-->
+</nav>
+</div>
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <div class="card" id="page-toc-wrapper">
+    <div class="card-header">
+      <h4>In this document</h4>
+    </div>
+    <ul class="card-body page-toc">
+      <li class="level-1"><a href="#send-xrp">Send XRP</a></li>
+<li class="level-2"><a href="#prerequisites">Prerequisites</a></li>
+<li class="level-2"><a href="#send-a-payment-on-the-test-net">Send a Payment on the Test Net</a></li>
+<li class="level-3"><a href="#1-connect-to-a-test-net-server">1. Connect to a Test Net Server</a></li>
+<li class="level-3"><a href="#2-prepare-transaction">2. Prepare Transaction</a></li>
+<li class="level-3"><a href="#3-sign-the-transaction-instructions">3. Sign the Transaction Instructions</a></li>
+<li class="level-3"><a href="#4-submit-the-signed-blob">4. Submit the Signed Blob</a></li>
+<li class="level-3"><a href="#5-wait-for-validation">5. Wait for Validation</a></li>
+<li class="level-3"><a href="#6-check-transaction-status">6. Check Transaction Status</a></li>
+<li class="level-2"><a href="#differences-for-production">Differences for Production</a></li>
+<li class="level-3"><a href="#getting-a-real-xrp-account">Getting a Real XRP Account</a></li>
+<li class="level-3"><a href="#connecting-to-the-production-xrp-ledger">Connecting to the Production XRP Ledger</a></li>
+<li class="level-2"><a href="#next-steps">Next Steps</a></li>
+
+    </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-6 order-md-3  " role="main" id="main_content_body">
+<nav class="breadcrumbs-wrap p-0 p-md-3" aria-label="breadcrumb">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+    <li class="active breadcrumb-item"><a href="docs.html">Build</a></li>
+    <li class="active breadcrumb-item"><a href="tutorials.html">Tutorials</a></li>
+    <li class="active breadcrumb-item"><a href="get-started.html">Get Started</a></li>
+    <li class="active breadcrumb-item">Send XRP</li>
+  </ul>
+</nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="send-xrp">Send XRP</h1>
+<p>This tutorial explains how to send a simple XRP Payment using RippleAPI for JavaScript. First, we step through the process with the XRP Test Net. Then, we compare that to the additional requirements for doing the equivalent in production.</p>
+<h2 id="prerequisites">Prerequisites</h2>
+<!-- Interactive example use ripple-lib and its prerequisites -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.11/lodash.js"></script>
+<script src="assets/js/ripple-lib-1.8.0-min.js" type="application/javascript"></script>
+<!-- Helper for interactive tutorial breadcrumbs -->
+<script src="assets/js/interactive-tutorial.js" type="application/javascript"></script>
+<ul>
+<li>
+<p>This page provides JavaScript examples that use the ripple-lib (RippleAPI) library version 1.1.2. The <a href="get-started-with-rippleapi-for-javascript.html">RippleAPI Beginners Guide</a> describes how to get started using RippleAPI to access XRP Ledger data from JavaScript.</p>
+</li>
+<li>
+<p>To send transactions in the XRP Ledger, you first need an address and secret key, and some XRP. You can get an address in the XRP Test Net with a supply of Test Net XRP using the following interface:</p>
+</li>
+</ul>
+<div class="interactive-block" id="interactive-generate">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="generate" data-steplabel="Generate" id="bc-ul-generate">
+<li class="breadcrumb-item bc-generate current"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-connect disabled"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-prepare disabled"><a href="#interactive-prepare">Prepare</a></li><li class="breadcrumb-item bc-sign disabled"><a href="#interactive-sign">Sign</a></li><li class="breadcrumb-item bc-submit disabled"><a href="#interactive-submit">Submit</a></li><li class="breadcrumb-item bc-wait disabled"><a href="#interactive-wait">Wait</a></li><li class="breadcrumb-item bc-check disabled"><a href="#interactive-check">Check</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary" id="generate-creds-button">Generate credentials</button>
+<div id="loader-0" style="display: none;"><img class="throbber" src="assets/img/xrp-loader-96.png"/> Generating Keys...</div>
+<div id="address"></div>
+<div id="secret"></div>
+<div id="balance"></div>
+<div id="populate-creds-status"></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+$(document).ready( () => {
+
+  $("#generate-creds-button").click( () => {
+    // Wipe existing results
+    $("#address").html("")
+    $("#secret").html("")
+    $("#balance").html("")
+    $("#populate-creds-status").html("")
+
+    $("#loader-0").show()
+
+    $.ajax({
+      url: "https://faucet.altnet.rippletest.net/accounts",
+      type: 'POST',
+      dataType: 'json',
+      success: function(data) {
+        $("#loader-0").hide()
+        $("#address").hide().html("<strong>Address:</strong> " +
+          '<span id="test-net-faucet-address">' +
+          data.account.address
+          + "</span>").show()
+        $("#secret").hide().html('<strong>Secret:</strong> ' +
+          '<span id="test-net-faucet-secret">' +
+          data.account.secret +
+          "</span>").show()
+        $("#balance").hide().html('<strong>Balance:</strong> ' +
+          Number(data.balance).toLocaleString('en') +
+          ' XRP').show()
+
+        // Automatically populate examples with these credentials...
+        // Set sender address
+        let generated_addr = ""
+        $("code span:contains('"+EXAMPLE_ADDR+"')").each( function() {
+          let eltext = $(this).text()
+          $(this).text( eltext.replace(EXAMPLE_ADDR, data.account.address) )
+        })
+
+        // Set sender secret
+        $("code span:contains('"+EXAMPLE_SECRET+"')").each( function() {
+          let eltext = $(this).text()
+          $(this).text( eltext.replace(EXAMPLE_SECRET, data.account.secret) )
+        })
+
+        $("#populate-creds-status").text("Populated this page's examples with these credentials.")
+
+        complete_step("Generate")
+
+      },
+      error: function() {
+        $("#loader-0").hide();
+        alert("There was an error with the Ripple Test Net, please try again.");
+      }
+    })
+  })
+
+  const EXAMPLE_ADDR = "rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe"
+  const EXAMPLE_SECRET = "s████████████████████████████"
+  $("#populate-creds-button").click( () => {
+
+  })
+
+})
+</script>
+<p class="devportal-callout caution"><strong>Caution:</strong> Ripple provides the XRP Test Net for testing purposes only, and regularly resets the state of the test net along with all balances. As a precaution, Ripple recommends <strong>not</strong> using the same addresses on the test net and production.</p>
+<h2 id="send-a-payment-on-the-test-net">Send a Payment on the Test Net</h2>
+<h3 id="1-connect-to-a-test-net-server">1. Connect to a Test Net Server</h3>
+<p>To provide the necessary auto-fillable fields, ripple-lib must be connected to a server where it can get the current status of your account and the shared ledger itself. (For more security, you should sign transactions while being offline, but you must provide the auto-fillable fields manually if you do so.) You must be connected to the network to submit transactions to it.</p>
+<p>The following code sample instantiates a new RippleAPI instance and connects to one of the public XRP Test Net servers that Ripple runs:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">ripple</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ripple-lib'</span><span class="p">)</span>
+<span class="nx">api</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ripple</span><span class="p">.</span><span class="nx">RippleAPI</span><span class="p">({</span><span class="nx">server</span><span class="o">:</span> <span class="s1">'wss://s.altnet.rippletest.net:51233'</span><span class="p">})</span>
+<span class="nx">api</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
+</code></pre></div>
+<p>For this tutorial, you can connect directly from your browser by pressing the following button:</p>
+<div class="interactive-block" id="interactive-connect">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="connect" data-steplabel="Connect" id="bc-ul-connect">
+<li class="breadcrumb-item bc-generate"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-connect disabled current"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-prepare disabled"><a href="#interactive-prepare">Prepare</a></li><li class="breadcrumb-item bc-sign disabled"><a href="#interactive-sign">Sign</a></li><li class="breadcrumb-item bc-submit disabled"><a href="#interactive-submit">Submit</a></li><li class="breadcrumb-item bc-wait disabled"><a href="#interactive-wait">Wait</a></li><li class="breadcrumb-item bc-check disabled"><a href="#interactive-check">Check</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary" id="connect-button">Connect to TestNet</button>
+<div>
+<strong>Connection status:</strong>
+<span id="connection-status">Not connected</span>
+<div id="loader-2" style="display: none;"><img class="throbber" src="assets/img/xrp-loader-96.png"/></div>
+</div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+api = new ripple.RippleAPI({server: 'wss://s.altnet.rippletest.net:51233'})
+api.on('connected', () => {
+  $("#connection-status").text("Connected")
+  $("#connect-button").prop("disabled", true)
+  $("#loader-2").hide()
+
+  // Update breadcrumbs & active next step
+  complete_step("Connect")
+  $("#interactive-prepare button").prop("disabled", false)
+  $("#interactive-prepare button").prop("title", "")
+})
+api.on('disconnected', (code) => {
+  $("#connection-status").text( "Disconnected ("+code+")" )
+  $("#connect-button").prop("disabled", false)
+  $(".connection-required").prop("disabled", true)
+  $(".connection-required").prop("title", "Connection to Test Net required")
+})
+$("#connect-button").click(() => {
+  $("#connection-status").text( "Connecting..." )
+  $("#loader-2").show()
+  api.connect()
+})
+</script>
+<h3 id="2-prepare-transaction">2. Prepare Transaction</h3>
+<p>Typically, we create XRP Ledger transactions as objects in the JSON <a href="transaction-formats.html">transaction format</a>. The following example shows a minimal Payment specification:</p>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+  <span class="nt">"TransactionType"</span><span class="p">:</span> <span class="s2">"Payment"</span><span class="p">,</span>
+  <span class="nt">"Account"</span><span class="p">:</span> <span class="s2">"rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe"</span><span class="p">,</span>
+  <span class="nt">"Amount"</span><span class="p">:</span> <span class="s2">"2000000"</span><span class="p">,</span>
+  <span class="nt">"Destination"</span><span class="p">:</span> <span class="s2">"rUCzEr6jrEyMpjhs4wSdQdz4g8Y382NxfM"</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The bare minimum set of instructions you must provide for an XRP Payment is:</p>
+<ul>
+<li>An indicator that this is a payment. (<code>"TransactionType": "Payment"</code>)</li>
+<li>The sending address. (<code>"Account"</code>)</li>
+<li>The address that should receive the XRP (<code>"Destination"</code>). This can't be the same as the sending address.</li>
+<li>The amount of XRP to send (<code>"Amount"</code>). Typically, this is specified as an integer in "drops" of XRP, where 1,000,000 drops equals 1 XRP.</li>
+</ul>
+<p>Technically, a viable transaction must contain some additional fields, and certain optional fields such as <code>LastLedgerSequence</code> are strongly recommended. The <a href="rippleapi-reference.html#preparetransaction"><code>prepareTransaction()</code> method</a> automatically fills in good defaults for the remaining fields of a transaction. Here's an example of preparing the above payment:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Continuing after connecting to the API</span>
+<span class="nx">async</span> <span class="kd">function</span> <span class="nx">doPrepare</span><span class="p">()</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">sender</span> <span class="o">=</span> <span class="s2">"rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe"</span>
+  <span class="kr">const</span> <span class="nx">preparedTx</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">api</span><span class="p">.</span><span class="nx">prepareTransaction</span><span class="p">({</span>
+    <span class="s2">"TransactionType"</span><span class="o">:</span> <span class="s2">"Payment"</span><span class="p">,</span>
+    <span class="s2">"Account"</span><span class="o">:</span> <span class="nx">sender</span><span class="p">,</span>
+    <span class="s2">"Amount"</span><span class="o">:</span> <span class="nx">api</span><span class="p">.</span><span class="nx">xrpToDrops</span><span class="p">(</span><span class="s2">"22"</span><span class="p">),</span> <span class="c1">// Same as "Amount": "22000000"</span>
+    <span class="s2">"Destination"</span><span class="o">:</span> <span class="s2">"rUCzEr6jrEyMpjhs4wSdQdz4g8Y382NxfM"</span>
+  <span class="p">},</span> <span class="p">{</span>
+    <span class="c1">// Expire this transaction if it doesn't execute within ~5 minutes:</span>
+    <span class="s2">"maxLedgerVersionOffset"</span><span class="o">:</span> <span class="mi">75</span>
+  <span class="p">})</span>
+  <span class="kr">const</span> <span class="nx">maxLedgerVersion</span> <span class="o">=</span> <span class="nx">preparedTx</span><span class="p">.</span><span class="nx">instructions</span><span class="p">.</span><span class="nx">maxLedgerVersion</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Prepared transaction instructions:"</span><span class="p">,</span> <span class="nx">preparedTx</span><span class="p">.</span><span class="nx">txJSON</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Transaction cost:"</span><span class="p">,</span> <span class="nx">preparedTx</span><span class="p">.</span><span class="nx">instructions</span><span class="p">.</span><span class="nx">fee</span><span class="p">,</span> <span class="s2">"XRP"</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Transaction expires after ledger:"</span><span class="p">,</span> <span class="nx">maxLedgerVersion</span><span class="p">)</span>
+  <span class="k">return</span> <span class="nx">preparedTx</span><span class="p">.</span><span class="nx">txJSON</span>
+<span class="p">}</span>
+<span class="nx">txJSON</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">doPrepare</span><span class="p">())</span>
+</code></pre></div>
+<div class="interactive-block" id="interactive-prepare">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="prepare" data-steplabel="Prepare" id="bc-ul-prepare">
+<li class="breadcrumb-item bc-generate"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-connect disabled"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-prepare disabled current"><a href="#interactive-prepare">Prepare</a></li><li class="breadcrumb-item bc-sign disabled"><a href="#interactive-sign">Sign</a></li><li class="breadcrumb-item bc-submit disabled"><a href="#interactive-submit">Submit</a></li><li class="breadcrumb-item bc-wait disabled"><a href="#interactive-wait">Wait</a></li><li class="breadcrumb-item bc-check disabled"><a href="#interactive-check">Check</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary connection-required" disabled="" id="prepare-button" title="Connect to Test Net first">Prepare
+    example transaction</button>
+<div id="prepare-output"></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+  $("#prepare-button").click( async function() {
+    // Wipe existing results
+    $("#prepare-output").html("")
+
+    const sender = $("#test-net-faucet-address").text() || "rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe"
+    const preparedTx = await api.prepareTransaction({
+      "TransactionType": "Payment",
+      "Account": sender,
+      "Amount": api.xrpToDrops("22"), // Same as "Amount": "22000000"
+      "Destination": "rUCzEr6jrEyMpjhs4wSdQdz4g8Y382NxfM"
+    }, {
+      // Expire this transaction if it doesn't execute within ~5 minutes:
+      "maxLedgerVersionOffset": 75
+    })
+    const maxLedgerVersion = preparedTx.instructions.maxLedgerVersion
+    $("#tx-lls").text(maxLedgerVersion) //for the table in the later step
+
+    $("#prepare-output").html(
+      "<div><strong>Prepared transaction instructions:</strong> <pre><code id='prepared-tx-json'>" +
+      JSON.stringify(JSON.parse(preparedTx.txJSON), null, 2) + "</code></pre></div>" +
+      "<div><strong>Transaction cost:</strong> " +
+      preparedTx.instructions.fee + " XRP</div>" +
+      "<div><strong>Transaction expires after ledger:</strong> " +
+      maxLedgerVersion + "</div>"
+    )
+
+    // Update breadcrumbs & active next step
+    complete_step("Prepare")
+    $("#interactive-sign button").prop("disabled", false)
+    $("#interactive-sign button").prop("title", "")
+  })
+</script>
+<h3 id="3-sign-the-transaction-instructions">3. Sign the Transaction Instructions</h3>
+<p>Use the <a href="rippleapi-reference.html#sign">sign() method</a> to sign the transaction with RippleAPI. The first argument is a string version of the JSON transaction to sign.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Continuing from the previous step...</span>
+<span class="kr">const</span> <span class="nx">response</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">sign</span><span class="p">(</span><span class="nx">txJSON</span><span class="p">,</span> <span class="s2">"s████████████████████████████"</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">txID</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">id</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Identifying hash:"</span><span class="p">,</span> <span class="nx">txID</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">txBlob</span> <span class="o">=</span> <span class="nx">response</span><span class="p">.</span><span class="nx">signedTransaction</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Signed blob:"</span><span class="p">,</span> <span class="nx">txBlob</span><span class="p">)</span>
+</code></pre></div>
+<p>The result of the signing operation is a transaction object containing a signature. Typically, XRP Ledger APIs expect a signed transaction to be the hexadecimal representation of the transaction's canonical <a href="serialization.html">binary format</a>, called a "blob".</p>
+<p>The signing API also returns the transaction's ID, or identifying hash, which you can use to look up the transaction later. This is a 64-character hexadecimal string that is unique to this transaction.</p>
+<div class="interactive-block" id="interactive-sign">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="sign" data-steplabel="Sign" id="bc-ul-sign">
+<li class="breadcrumb-item bc-generate"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-connect disabled"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-prepare disabled"><a href="#interactive-prepare">Prepare</a></li><li class="breadcrumb-item bc-sign disabled current"><a href="#interactive-sign">Sign</a></li><li class="breadcrumb-item bc-submit disabled"><a href="#interactive-submit">Submit</a></li><li class="breadcrumb-item bc-wait disabled"><a href="#interactive-wait">Wait</a></li><li class="breadcrumb-item bc-check disabled"><a href="#interactive-check">Check</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary connection-required" disabled="" id="sign-button" title="Complete all previous steps first">Sign
+  example transaction</button>
+<div id="sign-output"></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+  $("#sign-button").click( function() {
+    // Wipe previous output
+    $("#sign-output").html("")
+
+    const preparedTxJSON = $("#prepared-tx-json").text()
+    const secret = $("#test-net-faucet-secret").text()
+
+    if (!secret) {
+      alert("Can't sign transaction without a real secret. Generate credentials first.")
+      return
+    }
+
+    signResponse = api.sign(preparedTxJSON, secret)
+
+    $("#sign-output").html(
+      "<div><strong>Signed Transaction blob:</strong> <code id='signed-tx-blob' style='overflow-wrap: anywhere; word-wrap: anywhere'>" +
+      signResponse.signedTransaction + "</code></div>" +
+      "<div><strong>Identifying hash:</strong> <span id='signed-tx-hash'>" +
+      signResponse.id + "</span></div>"
+    )
+
+    // Update all breadcrumbs & activate next step
+    complete_step("Sign")
+    $("#interactive-submit button").prop("disabled", false)
+  })
+</script>
+<h3 id="4-submit-the-signed-blob">4. Submit the Signed Blob</h3>
+<p>Use the <a href="rippleapi-reference.html#submit">submit() method</a> to submit a transaction to the network. It's also a good idea to use the <a href="rippleapi-reference.html#getledgerversion"><code>getLedgerVersion()</code> method</a> to take note of the latest validated ledger index before you submit. The earliest ledger version that your transaction could get into as a result of this submission is one higher than the latest validated ledger when you submit it.</p>
+<p>Of course, if the same transaction was previously submitted, it could already be in a previous ledger. (It can't succeed a second time, but you may not realize it succeeded if you aren't looking in the right ledger versions.)</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// use txBlob from the previous example</span>
+<span class="nx">async</span> <span class="kd">function</span> <span class="nx">doSubmit</span><span class="p">(</span><span class="nx">txBlob</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kr">const</span> <span class="nx">latestLedgerVersion</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">api</span><span class="p">.</span><span class="nx">getLedgerVersion</span><span class="p">()</span>
+
+  <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">api</span><span class="p">.</span><span class="nx">submit</span><span class="p">(</span><span class="nx">txBlob</span><span class="p">)</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Tentative result code:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">resultCode</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Tentative result message:"</span><span class="p">,</span> <span class="nx">result</span><span class="p">.</span><span class="nx">resultMessage</span><span class="p">)</span>
+
+  <span class="c1">// Return the earliest ledger index this transaction could appear in</span>
+  <span class="c1">// as a result of this submission, which is the first one after the</span>
+  <span class="c1">// validated ledger at time of submission.</span>
+  <span class="k">return</span> <span class="nx">latestLedgerVersion</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="p">}</span>
+<span class="kr">const</span> <span class="nx">earliestLedgerVersion</span> <span class="o">=</span> <span class="nx">doSubmit</span><span class="p">(</span><span class="nx">txBlob</span><span class="p">)</span>
+</code></pre></div>
+<p>This method returns the <strong>tentative</strong> result of trying to apply the transaction locally. This result <em>can</em> change when the transaction is included in a validated ledger: transactions that succeed initially might ultimately fail, and transactions that fail initially might ultimately succeed. Still, the tentative result often matches the final result, so it's OK to get excited if you see <code>tesSUCCESS</code> here. 😁</p>
+<p>If you see any other result, you should check the following:</p>
+<ul>
+<li>Are you using the correct addresses for the sender and destination?</li>
+<li>Did you forget any other fields of the transaction, skip any steps, or make any other typos?</li>
+<li>Do you have enough Test Net XRP to send the transaction? The amount of XRP you can send is limited by the <a href="reserves.html">reserve requirement</a>, which is currently 20 XRP with an additional 5 XRP for each "object" you own in the ledger. (If you generated a new address with the Test Net Faucet, you don't own any objects.)</li>
+<li>Are you connected to a server on the test network?</li>
+</ul>
+<p>See the full list of <a href="transaction-results.html">transaction results</a> for more possibilities.</p>
+<div class="interactive-block" id="interactive-submit">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="submit" data-steplabel="Submit" id="bc-ul-submit">
+<li class="breadcrumb-item bc-generate"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-connect disabled"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-prepare disabled"><a href="#interactive-prepare">Prepare</a></li><li class="breadcrumb-item bc-sign disabled"><a href="#interactive-sign">Sign</a></li><li class="breadcrumb-item bc-submit disabled current"><a href="#interactive-submit">Submit</a></li><li class="breadcrumb-item bc-wait disabled"><a href="#interactive-wait">Wait</a></li><li class="breadcrumb-item bc-check disabled"><a href="#interactive-check">Check</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary connection-required" disabled="" id="submit-button" title="Connection to Test Net required">Submit
+    example transaction</button>
+<div id="loader-5" style="display: none;"><img class="throbber" src="assets/img/xrp-loader-96.png"/></div>
+<div id="submit-output"></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+  $("#submit-button").click( async function() {
+    $("#submit-output").html("") // Wipe previous output
+    $("#loader-5").show()
+
+    const txBlob = $("#signed-tx-blob").text()
+    const earliestLedgerVersion = await api.getLedgerVersion()
+    $("#earliest-ledger-version").text(earliestLedgerVersion)
+
+    try {
+      const result = await api.submit(txBlob)
+      $("#loader-5").hide()
+      $("#submit-output").html(
+        "<div><strong>Tentative result:</strong> " +
+        result.resultCode + " - " +
+        result.resultMessage +
+        "</div>"
+      )
+
+      // Update breadcrumbs & active next step
+      complete_step("Submit")
+    }
+    catch(error) {
+      $("#loader-5").hide()
+      $("#submit-output").text("Error: "+error)
+    }
+
+  })
+</script>
+<h3 id="5-wait-for-validation">5. Wait for Validation</h3>
+<p>Most transactions are accepted into the next ledger version after they're submitted, which means it may take 4-7 seconds for a transaction's outcome to be final. If the XRP Ledger is busy or poor network connectivity delays a transaction from being relayed throughout the network, a transaction may take longer to be confirmed. (For information on how to set an expiration for transactions, see <a href="reliable-transaction-submission.html">Reliable Transaction Submission</a>.)</p>
+<p>You use the <code>ledger</code> event type in RippleAPI to trigger your code to run whenever there is a new validated ledger version. For example:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'ledger'</span><span class="p">,</span> <span class="nx">ledger</span> <span class="p">=&gt;</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Ledger version"</span><span class="p">,</span> <span class="nx">ledger</span><span class="p">.</span><span class="nx">ledgerVersion</span><span class="p">,</span> <span class="s2">"was validated."</span><span class="p">)</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">ledger</span><span class="p">.</span><span class="nx">ledgerVersion</span> <span class="o">&gt;</span> <span class="nx">maxLedgerVersion</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"If the transaction hasn't succeeded by now, it's expired"</span><span class="p">)</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre></div>
+<div class="interactive-block" id="interactive-wait">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="wait" data-steplabel="Wait" id="bc-ul-wait">
+<li class="breadcrumb-item bc-generate"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-connect disabled"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-prepare disabled"><a href="#interactive-prepare">Prepare</a></li><li class="breadcrumb-item bc-sign disabled"><a href="#interactive-sign">Sign</a></li><li class="breadcrumb-item bc-submit disabled"><a href="#interactive-submit">Submit</a></li><li class="breadcrumb-item bc-wait disabled current"><a href="#interactive-wait">Wait</a></li><li class="breadcrumb-item bc-check disabled"><a href="#interactive-check">Check</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<table>
+<tr>
+<th>Latest Validated Ledger Version:</th>
+<td id="current-ledger-version">(Not connected)</td>
+</tr>
+<tr>
+<th>Ledger Version at Time of Submission:</th>
+<td id="earliest-ledger-version">(Not submitted)</td>
+</tr>
+<tr>
+<th>Transaction <code>LastLedgerSequence</code>:</th>
+<td id="tx-lls"></td>
+</tr>
+</table>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+api.on('ledger', ledger => {
+  $("#current-ledger-version").text(ledger.ledgerVersion)
+
+  if ( $(".breadcrumb-item.bc-wait").hasClass("active") ) {
+    // Advance to "Check" as soon as we see a ledger close
+    complete_step("Wait")
+    $("#get-tx-button").prop("disabled", false)
+  }
+})
+</script>
+<h3 id="6-check-transaction-status">6. Check Transaction Status</h3>
+<p>To know for sure what a transaction did, you must look up the outcome of the transaction when it appears in a validated ledger version. For example, you can use the <a href="rippleapi-reference.html#gettransaction"><code>getTransaction()</code> method</a> to check the status of a transaction:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Continues from previous examples.</span>
+<span class="c1">// earliestLedgerVersion was noted when the transaction was submitted.</span>
+<span class="c1">// txID was noted when the transaction was signed.</span>
+<span class="k">try</span> <span class="p">{</span>
+  <span class="nx">tx</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">api</span><span class="p">.</span><span class="nx">getTransaction</span><span class="p">(</span><span class="nx">txID</span><span class="p">,</span> <span class="p">{</span><span class="nx">minLedgerVersion</span><span class="o">:</span> <span class="nx">earliestLedgerVersion</span><span class="p">})</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Transaction result:"</span><span class="p">,</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">outcome</span><span class="p">.</span><span class="nx">result</span><span class="p">)</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Balance changes:"</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">tx</span><span class="p">.</span><span class="nx">outcome</span><span class="p">.</span><span class="nx">balanceChanges</span><span class="p">))</span>
+<span class="p">}</span> <span class="k">catch</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Couldn't get transaction outcome:"</span><span class="p">,</span> <span class="nx">error</span><span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>The RippleAPI <code>getTransaction()</code> method only returns success if the transaction is in a validated ledger version. Otherwise, the <code>await</code> expression raises an exception.</p>
+<p class="devportal-callout caution"><strong>Caution:</strong> Other APIs may return tentative results from ledger versions that have not yet been validated. For example, if you use the <code>rippled</code> APIs' <a href="tx.html">tx method</a>, be sure to look for <code>"validated": true</code> in the response to confirm that the data comes from a validated ledger version. Transaction results that are not from a validated ledger version are subject to change. For more information, see <a href="finality-of-results.html">Finality of Results</a>.</p>
+<div class="interactive-block" id="interactive-check">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="check" data-steplabel="Check" id="bc-ul-check">
+<li class="breadcrumb-item bc-generate"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-connect disabled"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-prepare disabled"><a href="#interactive-prepare">Prepare</a></li><li class="breadcrumb-item bc-sign disabled"><a href="#interactive-sign">Sign</a></li><li class="breadcrumb-item bc-submit disabled"><a href="#interactive-submit">Submit</a></li><li class="breadcrumb-item bc-wait disabled"><a href="#interactive-wait">Wait</a></li><li class="breadcrumb-item bc-check disabled current"><a href="#interactive-check">Check</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary connection-required" disabled="" id="get-tx-button" title="Connection to Test Net required">Check transaction status</button>
+<div id="get-tx-output"></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<!--/.interactive-block-->
+<script type="application/javascript">
+  $("#get-tx-button").click( async function() {
+    // Wipe previous output
+    $("#get-tx-output").html("")
+
+    const txID = $("#signed-tx-hash").text()
+    const earliestLedgerVersion = parseInt($("#earliest-ledger-version").text(), 10)
+
+    try {
+      const tx = await api.getTransaction(txID, {minLedgerVersion: earliestLedgerVersion})
+
+      $("#get-tx-output").html(
+        "<div><strong>Transaction result:</strong> " +
+        tx.outcome.result + "</div>" +
+        "<div><strong>Balance changes:</strong> <pre><code>" +
+        JSON.stringify(tx.outcome.balanceChanges, null, 2) +
+        "</pre></code></div>"
+      )
+
+      complete_step("Check")
+    } catch(error) {
+      $("#get-tx-output").text("Couldn't get transaction outcome:" + error)
+    }
+
+  })
+</script>
+<h2 id="differences-for-production">Differences for Production</h2>
+<p>To send an XRP payment on the production XRP Ledger, the steps you take are largely the same. However, there are some key differences in the necessary setup:</p>
+<ul>
+<li><a href="#getting-a-real-xrp-account">Getting real XRP isn't free.</a></li>
+<li><a href="#connecting-to-the-production-xrp-ledger">You must connect to a server that's synced with the production XRP Ledger network.</a></li>
+</ul>
+<h3 id="getting-a-real-xrp-account">Getting a Real XRP Account</h3>
+<p>This tutorial uses a button to get an address that's already funded with Test Net XRP, which only works because Test Net XRP is not worth anything. For actual XRP, you need to get XRP from someone who already has some. (For example, you might buy it on an exchange.) You can generate an address and secret that'll work on either production or the test net using RippleAPI's <a href="rippleapi-reference.html#generateaddress"><code>generateAddress()</code> method</a>:</p>
+<div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">generated</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">generateAddress</span><span class="p">()</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">generated</span><span class="p">.</span><span class="nx">address</span><span class="p">)</span> <span class="c1">// Example: rGCkuB7PBr5tNy68tPEABEtcdno4hE6Y7f</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">generated</span><span class="p">.</span><span class="nx">secret</span><span class="p">)</span> <span class="c1">// Example: sp6JS7f14BuwFY8Mw6bTtLKWauoUs</span>
+</code></pre></div>
+<p class="devportal-callout warning"><strong>Warning:</strong> You should only use an address and secret that you generated securely, on your local machine. If another computer generated the address and secret and sent it to you over a network, it's possible that someone else on the network may see that information. If they do, they'll have as much control over your XRP as you do. It's also recommended not to use the same address for the test net and for production, because transactions that you created for use on one network could potentially also be viable on the other network, depending on the parameters you provided.</p>
+<p>Generating an address and secret doesn't get you XRP directly; it's only choosing a random number. You must also receive XRP at that address to <a href="accounts.html#creating-accounts">fund the account</a>. A common way to acquire XRP is to buy it from an exchange, then withdraw it to your own address. For more information, see Ripple's <a class="external-link" href="https://ripple.com/xrp/buy-xrp/" target="_blank">XRP Buying Guide <i aria-hidden="true" class="fa fa-external-link"></i></a>.</p>
+<h3 id="connecting-to-the-production-xrp-ledger">Connecting to the Production XRP Ledger</h3>
+<p>When you instantiate the <code>RippleAPI</code> object, you must specify a server that's synced with the appropriate XRP Ledger. For many cases, you can use Ripple's public servers, such as in the following snippet:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">ripple</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ripple-lib'</span><span class="p">)</span>
+<span class="nx">api</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ripple</span><span class="p">.</span><span class="nx">RippleAPI</span><span class="p">({</span><span class="nx">server</span><span class="o">:</span> <span class="s1">'wss://s1.ripple.com:51233'</span><span class="p">})</span>
+<span class="nx">api</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
+</code></pre></div>
+<p>If you <a href="install-rippled.html">install <code>rippled</code></a> yourself, it connects to the production network by default. (You can also <a href="connect-your-rippled-to-the-xrp-test-net.html">configure it to connect to the test net</a> instead.) After the server has synced (typically within about 15 minutes of starting it up), you can connect RippleAPI to it locally, which has <a href="rippled-server-modes.html#reasons-to-run-a-stock-server">various benefits</a>. The following example shows how to connect RippleAPI to a server running the default configuration:</p>
+<div class="codehilite"><pre><span></span><code><span class="nx">ripple</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'ripple-lib'</span><span class="p">)</span>
+<span class="nx">api</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ripple</span><span class="p">.</span><span class="nx">RippleAPI</span><span class="p">({</span><span class="nx">server</span><span class="o">:</span> <span class="s1">'ws://localhost:6006'</span><span class="p">})</span>
+<span class="nx">api</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
+</code></pre></div>
+<p class="devportal-callout tip"><strong>Tip:</strong> The local connection uses the WebSocket protocol (<code>ws</code>) unencrypted rather than the TLS-encrypted version (<code>wss</code>). This is secure only because the communications never leave the same machine, and is easier to set up because it does not require a TLS certificate. For connections on an outside network, always use <code>wss</code>.</p>
+<h2 id="next-steps">Next Steps</h2>
+<p>After completing this tutorial, you may want to try the following:</p>
+<ul>
+<li>Build <a href="reliable-transaction-submission.html">Reliable transaction submission</a> for production systems.</li>
+<li>Consult the <a href="rippleapi-reference.html">RippleAPI JavaScript Reference</a> for the full range of XRP Ledger functionality.</li>
+<li>Customize your <a href="manage-account-settings.html">Account Settings</a>.</li>
+<li>Learn how <a href="transaction-metadata.html">Transaction Metadata</a> describes the outcome of a transaction in detail.</li>
+<li>Explore <a href="complex-payment-types.html">Complex Payment Types</a> like escrow and payment channels.</li>
+<li>Read best practices for <a href="xrp-ledger-businesses.html">XRP Ledger Businesses</a>.</li>
+</ul>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- rippled release notes links -->
+    </div>
+  </article>
+      </main>
+      <!-- Left sidebar last so it's at the end for mobile -->
+      <aside class="sidebar col-md-5 col-lg-3 order-md-1" role="complementary">
+<div class="tree-nav">
+
+  <!---->
+    <div class="sidenav_parent">
+      <a href="tutorials.html"> Tutorials</a>
+    </div>
+
+  <!---->
+
+    <!---->
+    <div id="sidenav" role="tablist" aria-multiselectable="true">
+        <!---->
+          <div class="card active">
+            <div class="card-header" role="tab" id="sidenav_cat_head_2">
+                <a class="sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_2" aria-expanded="true" aria-controls="sidenav_collapse_2"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title active-parent" href="get-started.html">Get Started</a>
+                <!-- <a class="sidenav_cat_title" href="get-started.html">Get Started</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_2" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_2">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="get-started-with-the-rippled-api.html">Get Started with XRP Ledger APIs</a></li>
+                      <li><a class="nosubcat-page" href="get-started-with-rippleapi-for-javascript.html">Get Started with RippleAPI for Node.js</a></li>
+                      <li><a class="active nosubcat-page" href="send-xrp.html">Send XRP</a></li>
+                      <li><a class="nosubcat-page" href="monitor-incoming-payments-with-websocket.html">Monitor Incoming Payments with WebSocket</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse2 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_8">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_8" aria-expanded="true" aria-controls="sidenav_collapse_8"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="production-readiness.html">Production Readiness</a>
+                <!-- <a class="sidenav_cat_title" href="production-readiness.html">Production Readiness</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_8" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_8">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="set-up-secure-signing.html">Set Up Secure Signing</a></li>
+                      <li><a class="nosubcat-page" href="look-up-transaction-results.html">Look Up Transaction Results</a></li>
+                      <li><a class="nosubcat-page" href="reliable-transaction-submission.html">Reliable Transaction Submission</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse8 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_13">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_13" aria-expanded="true" aria-controls="sidenav_collapse_13"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="manage-account-settings.html">Manage Account Settings</a>
+                <!-- <a class="sidenav_cat_title" href="manage-account-settings.html">Manage Account Settings</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_13" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_13">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="assign-a-regular-key-pair.html">Assign a Regular Key Pair</a></li>
+                      <li><a class="nosubcat-page" href="change-or-remove-a-regular-key-pair.html">Change or Remove a Regular Key Pair</a></li>
+                      <li><a class="nosubcat-page" href="disable-master-key-pair.html">Disable Master Key Pair</a></li>
+                      <li><a class="nosubcat-page" href="set-up-multi-signing.html">Set Up Multi-Signing</a></li>
+                      <li><a class="nosubcat-page" href="send-a-multi-signed-transaction.html">Send a Multi-Signed Transaction</a></li>
+                      <li><a class="nosubcat-page" href="require-destination-tags.html">Require Destination Tags</a></li>
+                      <li><a class="nosubcat-page" href="offline-account-setup.html">Offline Account Setup Tutorial</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse13 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_21">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_21" aria-expanded="true" aria-controls="sidenav_collapse_21"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="use-specialized-payment-types.html">Use Specialized Payment Types</a>
+                <!-- <a class="sidenav_cat_title" href="use-specialized-payment-types.html">Use Specialized Payment Types</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_21" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_21">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="use-escrows.html">Use Escrows</a></li>
+
+                          <li><a class="subpage" href="send-a-time-held-escrow.html">Send a Time-Held Escrow</a></li>
+                          <li><a class="subpage" href="send-a-conditionally-held-escrow.html">Send a Conditionally-Held Escrow</a></li>
+                          <li><a class="subpage" href="cancel-an-expired-escrow.html">Cancel an Expired Escrow</a></li>
+                          <li><a class="subpage" href="look-up-escrows.html">Look up escrows</a></li>
+                          <li><a class="subpage" href="use-an-escrow-as-a-smart-contract.html">Use an Escrow as a Smart Contract</a></li>
+
+                      <li><a class="subcat-title" href="use-payment-channels.html">Use Payment Channels</a></li>
+
+                          <li><a class="subpage" href="open-a-payment-channel-to-enable-an-inter-exchange-network.html">Open a Payment Channel to Enable an Inter-Exchange Network</a></li>
+
+                      <li><a class="subcat-title" href="use-checks.html">Use Checks</a></li>
+
+                          <li><a class="subpage" href="send-a-check.html">Send a Check</a></li>
+                          <li><a class="subpage" href="cash-a-check-for-an-exact-amount.html">Cash a Check for an Exact Amount</a></li>
+                          <li><a class="subpage" href="cash-a-check-for-a-flexible-amount.html">Cash a Check for a Flexible Amount</a></li>
+                          <li><a class="subpage" href="cancel-a-check.html">Cancel a Check</a></li>
+                          <li><a class="subpage" href="look-up-checks-by-sender.html">Look Up Checks by Sender</a></li>
+                          <li><a class="subpage" href="look-up-checks-by-recipient.html">Look Up Checks by Recipient</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse21 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_38">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_38" aria-expanded="true" aria-controls="sidenav_collapse_38"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="xrp-ledger-businesses.html">XRP Ledger Businesses</a>
+                <!-- <a class="sidenav_cat_title" href="xrp-ledger-businesses.html">XRP Ledger Businesses</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_38" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_38">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="nosubcat-page" href="list-xrp-as-an-exchange.html">List XRP as an Exchange</a></li>
+                      <li><a class="nosubcat-page" href="list-your-exchange-on-xrp-charts.html">List Your Exchange on XRP Charts</a></li>
+                      <li><a class="nosubcat-page" href="become-an-xrp-ledger-gateway.html">Become an XRP Ledger Gateway</a></li>
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse38 -->
+
+          </div><!-- /.card -->
+
+        <!---->
+          <div class="card">
+            <div class="card-header" role="tab" id="sidenav_cat_head_42">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_42" aria-expanded="true" aria-controls="sidenav_collapse_42"></a>
+              <h5 class="card-title">
+                  <a class="sidenav_cat_title" href="manage-the-rippled-server.html">Manage the rippled Server</a>
+                <!-- <a class="sidenav_cat_title" href="manage-the-rippled-server.html">Manage the rippled Server</a> -->
+              </h5>
+            </div><!-- /.card-header -->
+
+            <div id="sidenav_collapse_42" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_42">
+              <div class="card-body">
+                <ul class="sidebar_pagelist">
+                      <li><a class="subcat-title" href="install-rippled.html">Install rippled</a></li>
+
+                          <li><a class="subpage" href="system-requirements.html">System Requirements</a></li>
+                          <li><a class="subpage" href="install-rippled-on-centos-rhel-with-yum.html">Install on CentOS/Red Hat with yum</a></li>
+                          <li><a class="subpage" href="install-rippled-on-ubuntu.html">Install on Ubuntu or Debian Linux</a></li>
+                          <li><a class="subpage" href="update-rippled-automatically-on-linux.html">Update Automatically on Linux</a></li>
+                          <li><a class="subpage" href="update-rippled-manually-on-centos-rhel.html">Update Manually on CentOS/Red Hat</a></li>
+                          <li><a class="subpage" href="update-rippled-manually-on-ubuntu.html">Update Manually on Ubuntu or Debian</a></li>
+                          <li><a class="subpage" href="build-run-rippled-ubuntu.html">Build and Run rippled on Ubuntu</a></li>
+                          <li><a class="subpage" href="build-run-rippled-macos.html">Build and Run rippled on macOS</a></li>
+                          <li><a class="subpage" href="capacity-planning.html">Capacity Planning</a></li>
+                          <li><a class="subpage" href="rippled-1-3-migration-instructions.html">rippled v1.3.x Migration Instructions</a></li>
+
+                      <li><a class="subcat-title" href="configure-rippled.html">Configure rippled</a></li>
+
+                          <li><a class="subpage" href="run-rippled-as-a-validator.html">Run rippled as a Validator</a></li>
+                          <li><a class="subpage" href="run-rippled-as-a-wallet-server.html">Run rippled as a Wallet Server</a></li>
+                          <li><a class="subpage" href="configure-statsd.html">Configure StatsD</a></li>
+                          <li><a class="subpage" href="connect-your-rippled-to-the-xrp-test-net.html">Connect Your rippled to a Parallel Network</a></li>
+                          <li><a class="subpage" href="configure-online-deletion.html">Configure Online Deletion</a></li>
+                          <li><a class="subpage" href="configure-advisory-deletion.html">Configure Advisory Deletion</a></li>
+                          <li><a class="subpage" href="configure-history-sharding.html">Configure History Sharding</a></li>
+                          <li><a class="subpage" href="configure-full-history.html">Configure Full History</a></li>
+                          <li><a class="subpage" href="configure-grpc.html">Configure gRPC</a></li>
+                          <li><a class="subpage" href="enable-public-signing.html">Enable Public Signing</a></li>
+
+                      <li><a class="subcat-title" href="configure-peering.html">Configure Peering</a></li>
+
+                          <li><a class="subpage" href="cluster-rippled-servers.html">Cluster rippled Servers</a></li>
+                          <li><a class="subpage" href="configure-a-private-server.html">Configure a Private Server</a></li>
+                          <li><a class="subpage" href="configure-the-peer-crawler.html">Configure the Peer Crawler</a></li>
+                          <li><a class="subpage" href="enable-link-compression.html">Enable Link Compression</a></li>
+                          <li><a class="subpage" href="forward-ports-for-peering.html">Forward Ports for Peering</a></li>
+                          <li><a class="subpage" href="manually-connect-to-a-specific-peer.html">Manually Connect to a Specific Peer</a></li>
+                          <li><a class="subpage" href="set-max-number-of-peers.html">Set Maximum Number of Peers</a></li>
+                          <li><a class="subpage" href="use-a-peer-reservation.html">Use a Peer Reservation</a></li>
+
+                      <li><a class="subcat-title" href="use-stand-alone-mode.html">Test rippled Functionality in Stand-Alone Mode</a></li>
+
+                          <li><a class="subpage" href="start-a-new-genesis-ledger-in-stand-alone-mode.html">Start a New Genesis Ledger in Stand-Alone Mode</a></li>
+                          <li><a class="subpage" href="load-a-saved-ledger-in-stand-alone-mode.html">Load a Saved Ledger in Stand-Alone Mode</a></li>
+                          <li><a class="subpage" href="advance-the-ledger-in-stand-alone-mode.html">Advance the Ledger in Stand-Alone Mode</a></li>
+
+                      <li><a class="subcat-title" href="troubleshoot-the-rippled-server.html">Troubleshooting rippled</a></li>
+
+                          <li><a class="subpage" href="diagnosing-problems.html">Diagnosing Problems with rippled</a></li>
+                          <li><a class="subpage" href="health-check-interventions.html">Health Check Interventions</a></li>
+                          <li><a class="subpage" href="understanding-log-messages.html">Understanding Log Messages</a></li>
+                          <li><a class="subpage" href="server-doesnt-sync.html">rippled Server Doesn't Sync</a></li>
+                          <li><a class="subpage" href="server-wont-start.html">rippled Server Won't Start</a></li>
+                          <li><a class="subpage" href="fix-sqlite-tx-db-page-size-issue.html">Fix SQLite Transaction Database Page Size Issue</a></li>
+
+
+                </ul>
+              </div><!-- /.card-body -->
+            </div><!-- /#sidenav_collapse42 -->
+
+          </div><!-- /.card -->
+
+    </div><!-- /#sidenav -->
+</div><!-- /.tree_nav -->      </aside>
+    </div><!--/.row (main layout)-->
+  </div>
+
+<footer class="xrpl-footer" role="contentinfo">
+  <section class="container card-grid card-grid-Nx1">
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="overview.html">Learn</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="uses.html">Uses</a></li>
+
+        <li class="level-1"><a href="history.html">History</a></li>
+
+        <li class="level-1"><a href="impact.html">Impact</a></li>
+
+        <li class="level-1"><a href="carbon-calculator.html">Carbon Calculator</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="explore.html">Explore</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="wallets.html">Wallets</a></li>
+
+        <li class="level-1"><a href="exchanges.html">Exchanges</a></li>
+
+        <li class="level-1"><a href="businesses.html">Businesses</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="docs.html">Build</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+              <li class="level-1"><a href="concepts.html">Concepts</a></li>
+          <li class="level-1"><a href="tutorials.html">Tutorials</a></li>
+          <li class="level-1"><a href="references.html">References</a></li>
+          <li class="level-1"><a href="dev-tools.html">Dev Tools</a></li>
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+
+        <div class="card">
+          <div class="card-header">
+            <h5><a href="contribute.html">Contribute</a></h5>
+          </div><!--/.card-header-->
+          <div class="card-body">
+
+
+
+
+<div class="children-display">
+  <ul>
+            <li class="level-1"><a href="contribute-code.html">Contribute Code to the XRP Ledger</a></li>
+
+
+
+  </ul>
+</div>          </div><!--/.card-body-->
+        </div><!--/.card -->
+
+  </section>
+
+  <section class="container">
+
+    <div class="absolute_bottom_footer">
+      <span>&copy; XRP Ledger Project 2020</span>
+      <span><a href="https://raw.githubusercontent.com/ripple/ripple-dev-portal/master/LICENSE">License</a></span>
+    </div><!-- /.absolute_bottom_footer -->
+
+  </section>
+</footer>
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="Jump to top of page">Top</a>
+<script type="text/javascript" src="assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- Algolia DocSearch -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+<script type="text/javascript"> docsearch({
+apiKey: '70de5b9b8ef95460f3c6e04054b325b2',
+indexName: 'xrpl',
+inputSelector: '#topsearchbox',
+algoliaOptions: { 'facetFilters': ["lang:en"] },
+debug: false
+});
+</script>
+
+<script type="application/javascript">
+  gtag('config', 'UA-157720658-3', {'content_group1': 'Content Docs'});
+</script>
+</body>
+</html>
