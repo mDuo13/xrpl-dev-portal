@@ -10,5 +10,5 @@ then
   shift 2
 fi
 
-dactyl_build --vars "$dactyl_vars"
-dactyl_build -t ja -o out/ja --vars "$dactyl_vars"
+dactyl_build --vars "$dactyl_vars" -S -o .
+dactyl_build -t ja -o ./ja --vars "$dactyl_vars"

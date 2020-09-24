@@ -55,10 +55,10 @@ cover_page:
 languages:
     -   code: en
         display_name: Eng
-        prefix: "/"
+        prefix: "/xrpl-dev-portal/"
     -   code: ja
         display_name: 日本語
-        prefix: "/ja/"
+        prefix: "/xrpl-dev-portal/ja/"
 
 targets:
     # First member is the default that gets built when target not specified
@@ -68,8 +68,8 @@ targets:
         # These github_ fields are used by the template's "Edit on GitHub" link.
         #  Override them with --vars to change which fork/branch to edit.
         github_forkurl: https://github.com/ripple/xrpl-dev-portal
-        github_branch: master
-        prefix: ""
+        github_branch: 2020refresh
+        prefix: "/xrpl-dev-portal/"
         link_subs:
             "./src/api-v3/paths/preparations/payments.ts": "https://github.com/xpring-eng/xrp-api/blob/master/src/api-v3/paths/preparations/payments.ts"
         readability_goals:
@@ -79,8 +79,8 @@ targets:
         lang: ja
         display_name: XRP Ledger Dev Portal (日本語)
         github_forkurl: https://github.com/ripple/xrpl-dev-portal
-        github_branch: master
-        prefix: "/ja/"
+        github_branch: 2020refresh
+        prefix: "/xrpl-dev-portal/ja/"
         locale_file: locale/ja/LC_MESSAGES/messages.mo
         link_subs:
             # Adjust XRP-API readme link to point to the right place in the repo
