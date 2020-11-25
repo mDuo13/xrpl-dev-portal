@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>Send XRP - XRP Ledger Dev Portal</title>
+    <title>Send XRP - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="Send XRP | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/send-xrp.html" />
+    <meta property="og:description" content="Learn how to send test payments right from your browser." />
+    <meta name="description" content="Learn how to send test payments right from your browser." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/send-xrp.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/send-xrp.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/send-xrp.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -59,9 +78,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -219,8 +243,7 @@
 </div><!--/.interactive-block-ui-->
 </div><!--/.interactive-block-inner-->
 </div>
-<!--/.interactive-block-->
-<script type="application/javascript">
+<!--/.interactive-block--><script type="application/javascript">
 $(document).ready( () => {
 
   $("#generate-creds-button").click( () => {
@@ -310,8 +333,7 @@ $(document).ready( () => {
 </div><!--/.interactive-block-ui-->
 </div><!--/.interactive-block-inner-->
 </div>
-<!--/.interactive-block-->
-<script type="application/javascript">
+<!--/.interactive-block--><script type="application/javascript">
 api = new ripple.RippleAPI({server: 'wss://s.altnet.rippletest.net:51233'})
 api.on('connected', () => {
   $("#connection-status").text("Connected")
@@ -362,7 +384,7 @@ $("#connect-button").click(() => {
     <span class="s2">"Destination"</span><span class="o">:</span> <span class="s2">"rUCzEr6jrEyMpjhs4wSdQdz4g8Y382NxfM"</span>
   <span class="p">},</span> <span class="p">{</span>
     <span class="c1">// Expire this transaction if it doesn't execute within ~5 minutes:</span>
-    <span class="s2">"maxLedgerVersionOffset"</span><span class="o">:</span> <span class="mi">75</span>
+    <span class="s2">"maxLedgerVersionOffset"</span><span class="o">:</span> <span class="mf">75</span>
   <span class="p">})</span>
   <span class="kr">const</span> <span class="nx">maxLedgerVersion</span> <span class="o">=</span> <span class="nx">preparedTx</span><span class="p">.</span><span class="nx">instructions</span><span class="p">.</span><span class="nx">maxLedgerVersion</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Prepared transaction instructions:"</span><span class="p">,</span> <span class="nx">preparedTx</span><span class="p">.</span><span class="nx">txJSON</span><span class="p">)</span>
@@ -385,8 +407,7 @@ $("#connect-button").click(() => {
 </div><!--/.interactive-block-ui-->
 </div><!--/.interactive-block-inner-->
 </div>
-<!--/.interactive-block-->
-<script type="application/javascript">
+<!--/.interactive-block--><script type="application/javascript">
   $("#prepare-button").click( async function() {
     // Wipe existing results
     $("#prepare-output").html("")
@@ -443,8 +464,7 @@ $("#connect-button").click(() => {
 </div><!--/.interactive-block-ui-->
 </div><!--/.interactive-block-inner-->
 </div>
-<!--/.interactive-block-->
-<script type="application/javascript">
+<!--/.interactive-block--><script type="application/javascript">
   $("#sign-button").click( function() {
     // Wipe previous output
     $("#sign-output").html("")
@@ -486,7 +506,7 @@ $("#connect-button").click(() => {
   <span class="c1">// Return the earliest ledger index this transaction could appear in</span>
   <span class="c1">// as a result of this submission, which is the first one after the</span>
   <span class="c1">// validated ledger at time of submission.</span>
-  <span class="k">return</span> <span class="nx">latestLedgerVersion</span> <span class="o">+</span> <span class="mi">1</span>
+  <span class="k">return</span> <span class="nx">latestLedgerVersion</span> <span class="o">+</span> <span class="mf">1</span>
 <span class="p">}</span>
 <span class="kr">const</span> <span class="nx">earliestLedgerVersion</span> <span class="o">=</span> <span class="nx">doSubmit</span><span class="p">(</span><span class="nx">txBlob</span><span class="p">)</span>
 </code></pre></div>
@@ -513,8 +533,7 @@ $("#connect-button").click(() => {
 </div><!--/.interactive-block-ui-->
 </div><!--/.interactive-block-inner-->
 </div>
-<!--/.interactive-block-->
-<script type="application/javascript">
+<!--/.interactive-block--><script type="application/javascript">
   $("#submit-button").click( async function() {
     $("#submit-output").html("") // Wipe previous output
     $("#loader-5").show()
@@ -577,8 +596,7 @@ $("#connect-button").click(() => {
 </div><!--/.interactive-block-ui-->
 </div><!--/.interactive-block-inner-->
 </div>
-<!--/.interactive-block-->
-<script type="application/javascript">
+<!--/.interactive-block--><script type="application/javascript">
 api.on('ledger', ledger => {
   $("#current-ledger-version").text(ledger.ledgerVersion)
 
@@ -616,8 +634,7 @@ api.on('ledger', ledger => {
 </div><!--/.interactive-block-ui-->
 </div><!--/.interactive-block-inner-->
 </div>
-<!--/.interactive-block-->
-<script type="application/javascript">
+<!--/.interactive-block--><script type="application/javascript">
   $("#get-tx-button").click( async function() {
     // Wipe previous output
     $("#get-tx-output").html("")

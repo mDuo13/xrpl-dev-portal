@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>Monitor Incoming Payments with WebSocket - XRP Ledger Dev Portal</title>
+    <title>Monitor Incoming Payments with WebSocket - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="Monitor Incoming Payments with WebSocket | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/monitor-incoming-payments-with-websocket.html" />
+    <meta property="og:description" content="Use the WebSocket API to actively monitor for new XRP payments (and more)." />
+    <meta name="description" content="Use the WebSocket API to actively monitor for new XRP payments (and more)." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/monitor-incoming-payments-with-websocket.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/monitor-incoming-payments-with-websocket.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/monitor-incoming-payments-with-websocket.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -59,9 +78,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -251,8 +275,7 @@ function writeToConsole(console_selector, message) {
 </div><!--/.interactive-block-ui-->
 </div><!--/.interactive-block-inner-->
 </div>
-<!--/.interactive-block-->
-<script type="application/javascript">
+<!--/.interactive-block--><script type="application/javascript">
 let socket;
 $("#connect-button").click((event) => {
   socket = new WebSocket('wss://s.altnet.rippletest.net:51233')
@@ -314,7 +337,7 @@ $("#connect-button").click((event) => {
   <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="kd">let</span> <span class="nx">autoid_n</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="kd">let</span> <span class="nx">autoid_n</span> <span class="o">=</span> <span class="mf">0</span>
 <span class="kd">function</span> <span class="nx">api_request</span><span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">options</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s2">"id"</span><span class="p">))</span> <span class="p">{</span>
     <span class="nx">options</span><span class="p">.</span><span class="nx">id</span> <span class="o">=</span> <span class="s2">"autoid_"</span> <span class="o">+</span> <span class="p">(</span><span class="nx">autoid_n</span><span class="o">++</span><span class="p">)</span>
@@ -372,8 +395,7 @@ $("#connect-button").click((event) => {
 </div><!--/.interactive-block-ui-->
 </div><!--/.interactive-block-inner-->
 </div>
-<!--/.interactive-block-->
-<script type="application/javascript">
+<!--/.interactive-block--><script type="application/javascript">
 const AWAITING = {}
 const handleResponse = function(data) {
   if (!data.hasOwnProperty("id")) {
@@ -476,8 +498,7 @@ $("#dispatch_ping").click((event) => {
 </div><!--/.interactive-block-ui-->
 </div><!--/.interactive-block-inner-->
 </div>
-<!--/.interactive-block-->
-<script type="application/javascript">
+<!--/.interactive-block--><script type="application/javascript">
 async function do_subscribe() {
   const sub_address = $("#subscribe_address").val()
   const sub_response = await api_request({
@@ -550,7 +571,7 @@ WS_HANDLERS["transaction"] = log_tx
   <span class="c1">// Note: this reports the net balance change. If the address is the sender,</span>
   <span class="c1">// the transaction cost is deducted and combined with XRP sent/received</span>
 
-  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">affected_nodes</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">for</span> <span class="p">(</span><span class="kd">let</span> <span class="nx">i</span><span class="o">=</span><span class="mf">0</span><span class="p">;</span> <span class="nx">i</span><span class="o">&lt;</span><span class="nx">affected_nodes</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="p">((</span><span class="nx">affected_nodes</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="s2">"ModifiedNode"</span><span class="p">)))</span> <span class="p">{</span>
       <span class="c1">// modifies an existing ledger entry</span>
       <span class="kd">let</span> <span class="nx">ledger_entry</span> <span class="o">=</span> <span class="nx">affected_nodes</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">ModifiedNode</span>
@@ -564,8 +585,8 @@ WS_HANDLERS["transaction"] = log_tx
         <span class="kr">const</span> <span class="nx">old_balance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Big</span><span class="p">(</span><span class="nx">ledger_entry</span><span class="p">.</span><span class="nx">PreviousFields</span><span class="p">.</span><span class="nx">Balance</span><span class="p">)</span>
         <span class="kr">const</span> <span class="nx">new_balance</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Big</span><span class="p">(</span><span class="nx">ledger_entry</span><span class="p">.</span><span class="nx">FinalFields</span><span class="p">.</span><span class="nx">Balance</span><span class="p">)</span>
         <span class="kr">const</span> <span class="nx">diff_in_drops</span> <span class="o">=</span> <span class="nx">new_balance</span><span class="p">.</span><span class="nx">minus</span><span class="p">(</span><span class="nx">old_balance</span><span class="p">)</span>
-        <span class="kr">const</span> <span class="nx">xrp_amount</span> <span class="o">=</span> <span class="nx">diff_in_drops</span><span class="p">.</span><span class="nx">div</span><span class="p">(</span><span class="mi">1</span><span class="nx">e6</span><span class="p">)</span>
-        <span class="k">if</span> <span class="p">(</span><span class="nx">xrp_amount</span><span class="p">.</span><span class="nx">gte</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span> <span class="p">{</span>
+        <span class="kr">const</span> <span class="nx">xrp_amount</span> <span class="o">=</span> <span class="nx">diff_in_drops</span><span class="p">.</span><span class="nx">div</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">xrp_amount</span><span class="p">.</span><span class="nx">gte</span><span class="p">(</span><span class="mf">0</span><span class="p">))</span> <span class="p">{</span>
           <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Received "</span> <span class="o">+</span> <span class="nx">xrp_amount</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">" XRP."</span><span class="p">)</span>
           <span class="k">return</span>
         <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -579,7 +600,7 @@ WS_HANDLERS["transaction"] = log_tx
       <span class="k">if</span> <span class="p">(</span><span class="nx">ledger_entry</span><span class="p">.</span><span class="nx">LedgerEntryType</span> <span class="o">===</span> <span class="s2">"AccountRoot"</span> <span class="o">&amp;&amp;</span>
           <span class="nx">ledger_entry</span><span class="p">.</span><span class="nx">NewFields</span><span class="p">.</span><span class="nx">Account</span> <span class="o">===</span> <span class="nx">address</span><span class="p">)</span> <span class="p">{</span>
         <span class="kr">const</span> <span class="nx">balance_drops</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Big</span><span class="p">(</span><span class="nx">ledger_entry</span><span class="p">.</span><span class="nx">NewFields</span><span class="p">.</span><span class="nx">Balance</span><span class="p">)</span>
-        <span class="kr">const</span> <span class="nx">xrp_amount</span> <span class="o">=</span> <span class="nx">balance_drops</span><span class="p">.</span><span class="nx">div</span><span class="p">(</span><span class="mi">1</span><span class="nx">e6</span><span class="p">)</span>
+        <span class="kr">const</span> <span class="nx">xrp_amount</span> <span class="o">=</span> <span class="nx">balance_drops</span><span class="p">.</span><span class="nx">div</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)</span>
         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Received "</span> <span class="o">+</span> <span class="nx">xrp_amount</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">" XRP (account funded)."</span><span class="p">)</span>
         <span class="k">return</span>
       <span class="p">}</span>
@@ -602,7 +623,7 @@ WS_HANDLERS["transaction"] = log_tx
     <span class="p">}</span>
     <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">tx</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">delivered_amount</span> <span class="o">===</span> <span class="s2">"string"</span><span class="p">)</span> <span class="p">{</span>
       <span class="kr">const</span> <span class="nx">amount_in_drops</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Big</span><span class="p">(</span><span class="nx">tx</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">delivered_amount</span><span class="p">)</span>
-      <span class="kr">const</span> <span class="nx">xrp_amount</span> <span class="o">=</span> <span class="nx">amount_in_drops</span><span class="p">.</span><span class="nx">div</span><span class="p">(</span><span class="mi">1</span><span class="nx">e6</span><span class="p">)</span>
+      <span class="kr">const</span> <span class="nx">xrp_amount</span> <span class="o">=</span> <span class="nx">amount_in_drops</span><span class="p">.</span><span class="nx">div</span><span class="p">(</span><span class="mf">1e6</span><span class="p">)</span>
       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Received "</span> <span class="o">+</span> <span class="nx">xrp_amount</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span> <span class="o">+</span> <span class="s2">" XRP."</span><span class="p">)</span>
       <span class="k">return</span>
     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
@@ -632,8 +653,7 @@ WS_HANDLERS["transaction"] = log_tx
 </div><!--/.interactive-block-ui-->
 </div><!--/.interactive-block-inner-->
 </div>
-<!--/.interactive-block-->
-<script type="application/javascript">
+<!--/.interactive-block--><script type="application/javascript">
 function CountXRPDifference(affected_nodes, address) {
   // Helper to find an account in an AffectedNodes array and see how much
   // its balance changed, if at all. Fortunately, each account appears at most
@@ -731,9 +751,9 @@ $("#tx_read").click((event) => {
 <ul>
 <li><a href="look-up-transaction-results.html">Look Up Transaction Results</a> to see exactly what a transaction did, and build your software to react appropriately.</li>
 <li>Try <a href="send-xrp.html">Sending XRP</a> from your own address.</li>
-<li>Try monitoring for transactions of advanced types like <a href="escrow.html">Escrows</a>, <a href="checks.html">Checks</a>, or <a href="payment-channels.html">Payment Channels</a>, and responding to incoming notifications.
-<!-- --></li>
+<li>Try monitoring for transactions of advanced types like <a href="escrow.html">Escrows</a>, <a href="checks.html">Checks</a>, or <a href="payment-channels.html">Payment Channels</a>, and responding to incoming notifications.</li>
 </ul>
+<!-- -->
 <h2 id="other-programming-languages">Other Programming Languages</h2>
 <p>Many programming languages have libraries for sending and receiving data over a WebSocket connection. If you want a head-start on communicating with <code>rippled</code>'s WebSocket API in a language other than JavaScript, the following examples demonstrate similar functionality:</p>
 <div class="multicode" id="code-0"><ul class="codetabs"><li><a href="#code-0-0">Go</a></li></ul>

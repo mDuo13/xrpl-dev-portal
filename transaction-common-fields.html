@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>Transaction Common Fields - XRP Ledger Dev Portal</title>
+    <title>Transaction Common Fields - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="Transaction Common Fields | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/transaction-common-fields.html" />
+    <meta property="og:description" content="These common fields can be provided on any XRP Ledger transaction." />
+    <meta name="description" content="These common fields can be provided on any XRP Ledger transaction." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/transaction-common-fields.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/transaction-common-fields.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/transaction-common-fields.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -59,9 +78,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -217,7 +241,7 @@
 <td align="left"><code>Sequence</code></td>
 <td align="left">Number</td>
 <td align="left">UInt32</td>
-<td align="left"><em>(Required; <a href="#auto-fillable-fields">auto-fillable</a>)</em> The <a href="basic-data-types.html#account-sequence">sequence number</a> of the account sending the transaction. A transaction is only valid if the <code>Sequence</code> number is exactly 1 greater than the previous transaction from the same account.</td>
+<td align="left"><em>(Required; <a href="#auto-fillable-fields">auto-fillable</a>)</em> The <a href="basic-data-types.html#account-sequence">sequence number</a> of the account sending the transaction. A transaction is only valid if the <code>Sequence</code> number is exactly 1 greater than the previous transaction from the same account. The special case <code>0</code> means the transaction is using a <a href="tickets.html">Ticket</a> instead <em>(Requires the <a href="known-amendments.html#ticketbatch">TicketBatch amendment</a> <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span>)</em>.</td>
 </tr>
 <tr>
 <td align="left"><a href="#accounttxnid"><code>AccountTxnID</code></a></td>
@@ -262,6 +286,12 @@
 <td align="left"><em>(Automatically added when signing)</em> Hex representation of the public key that corresponds to the private key used to sign this transaction. If an empty string, indicates a multi-signature is present in the <code>Signers</code> field instead.</td>
 </tr>
 <tr>
+<td align="left"><code>TicketSequence</code></td>
+<td align="left">Number</td>
+<td align="left">UInt32</td>
+<td align="left"><em>(Optional)</em> The sequence number of the <a href="tickets.html">ticket</a> to use in place of a <code>Sequence</code> number. If this is provided, <code>Sequence</code> must be <code>0</code>. Cannot be used with <code>AccountTxnID</code>.</td>
+</tr>
+<tr>
 <td align="left"><code>TxnSignature</code></td>
 <td align="left">String</td>
 <td align="left">Blob</td>
@@ -272,9 +302,10 @@
 <p><a class="external-link" href="https://github.com/ripple/rippled/releases/tag/0.28.0" target="_blank" title="Removed in: rippled 0.28.0"><img alt="Removed in: rippled 0.28.0" class="dactyl_badge" src="https://img.shields.io/badge/Removed%20in-rippled%200.28.0-red.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a>: The <code>PreviousTxnID</code> field of transactions was replaced by the <a href="#accounttxnid"><code>AccountTxnID</code></a> field. This String / Hash256 field is present in some historical transactions. This is unrelated to the field also named <code>PreviousTxnID</code> in some <a href="ledger-data-formats.html">ledger objects</a>.</p>
 <h2 id="accounttxnid">AccountTxnID</h2>
 <!-- SPELLING_IGNORE: AccountTxnID -->
-<p>The <code>AccountTxnID</code> field lets you chain your transactions together, so that a current transaction is not valid unless the previous one (by Sequence Number) is also valid and matches the transaction you expected.</p>
-<p>Unlike the <code>PreviousTxnID</code> field, which tracks the last transaction to <em>modify</em> an account (regardless of sender), the <code>AccountTxnID</code> tracks the last transaction <em>sent by</em> an account. To use <code>AccountTxnID</code>, you must first set the <a href="accountset.html#accountset-flags"><code>asfAccountTxnID</code></a> flag, so that the ledger keeps track of the ID for the account's previous transaction. (<code>PreviousTxnID</code>, by comparison, is always tracked.)</p>
+<p>The <code>AccountTxnID</code> field lets you chain your transactions together, so that a current transaction is not valid unless the previous transaction sent from the same account has a specific <a href="transaction-basics.html#identifying-transactions">transaction hash</a>.</p>
+<p>Unlike the <code>PreviousTxnID</code> field, which tracks the last transaction to <em>modify</em> an account (regardless of sender), the <code>AccountTxnID</code> tracks the last transaction <em>sent by</em> an account. To use <code>AccountTxnID</code>, you must first enable the <a href="accountset.html#accountset-flags"><code>asfAccountTxnID</code></a> flag, so that the ledger keeps track of the ID for the account's previous transaction. (<code>PreviousTxnID</code>, by comparison, is always tracked.)</p>
 <p>One situation in which this is useful is if you have a primary system for submitting transactions and a passive backup system. If the passive backup system becomes disconnected from the primary, but the primary is not fully dead, and they both begin operating at the same time, you could potentially have serious problems like some transactions sending twice and others not at all. Chaining your transactions together with <code>AccountTxnID</code> ensures that, even if both systems are active, only one of them can submit valid transactions at a time.</p>
+<p>The <code>AccountTxnID</code> field cannot be used on transactions that use <a href="tickets.html">Tickets</a> <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span>. Transactions that use <code>AccountTxnID</code> cannot be placed in the <a href="transaction-queue.html">transaction queue</a>.</p>
 <h2 id="auto-fillable-fields">Auto-fillable Fields</h2>
 <p>Some fields can be automatically filled in before a transaction is signed, either by a <code>rippled</code> server or by a library used for signing such as <a class="external-link" href="https://github.com/ripple/ripple-lib" target="_blank">ripple-lib <i aria-hidden="true" class="fa fa-external-link"></i></a>. Auto-filling values requires an active connection to the XRP Ledger to get the latest state, so it cannot be done offline. Both <a class="external-link" href="https://github.com/ripple/ripple-lib" target="_blank">ripple-lib <i aria-hidden="true" class="fa fa-external-link"></i></a> and <code>rippled</code> can automatically provide the following values:</p>
 <ul>
@@ -309,12 +340,12 @@
 <td align="left"><code>tfFullyCanonicalSig</code></td>
 <td align="left"><code>0x80000000</code></td>
 <td align="left">2147483648</td>
-<td align="left"><em>(Strongly recommended)</em> Require a fully-canonical signature.</td>
+<td align="left"><strong>DEPRECATED</strong> No effect. (If the <a href="known-amendments.html#requirefullycanonicalsig">RequireFullyCanonicalSig amendment</a> is not enabled, this flag enforces a <a href="transaction-malleability.html#alternate-secp256k1-signatures">fully-canonical signature</a>.)</td>
 </tr>
 </tbody>
 </table>
-<p>When using the <a href="sign.html">sign method</a> (or <a href="submit.html">submit method</a> in "sign-and-submit" mode), <code>rippled</code> adds a <code>Flags</code> field with <code>tfFullyCanonicalSig</code> enabled unless the <code>Flags</code> field is already present. The <code>tfFullyCanonicalSig</code> flag <strong><em>is not</em></strong> automatically enabled if <code>Flags</code> is explicitly specified. The flag <strong><em>is not</em></strong> automatically enabled when using the <a href="sign_for.html">sign_for method</a> to add a signature to a multi-signed transaction.</p>
-<p class="devportal-callout warning"><strong>Warning:</strong> If you do not enable <code>tfFullyCanonicalSig</code>, it is theoretically possible for a malicious actor to modify your transaction signature so that the transaction may succeed with a different hash than expected. In the worst case, this could <a href="transaction-malleability.html#exploit-with-malleable-transactions">trick your integration into submitting the same payment multiple times</a>. To avoid this problem, enable the <code>tfFullyCanonicalSig</code> flag on all transactions you sign. If the <a href="known-amendments.html#requirefullycanonicalsig">RequireFullyCanonicalSig amendment</a> <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span> is enabled, all single-signed transactions are protected regardless of the <code>tfFullyCanonicalSig</code> flag.</p>
+<p>When using the <a href="sign.html">sign method</a> (or <a href="submit.html">submit method</a> in "sign-and-submit" mode), <code>rippled</code> adds a <code>Flags</code> field with <code>tfFullyCanonicalSig</code> enabled unless the <code>Flags</code> field is already present. The <code>tfFullyCanonicalSig</code> flag is not automatically enabled if <code>Flags</code> is explicitly specified. The flag is not automatically enabled when using the <a href="sign_for.html">sign_for method</a> to add a signature to a multi-signed transaction.</p>
+<p class="devportal-callout note"><strong>Note:</strong> The <code>tfFullyCanonicalSig</code> flag was used from 2014 until 2020 to protect against <a href="transaction-malleability.html">transaction malleability</a> while maintaining compatibility with legacy signing software. The <a href="known-amendments.html#requirefullycanonicalsig">RequireFullyCanonicalSig amendment</a> ended compatibility with such legacy software and made the protections the default for all transactions. If you are using a <a href="parallel-networks.html">parallel network</a> that does not have RequireFullyCanonicalSig enabled, you should always enable the <code>tfFullyCanonicalSig</code> flag to protect against transaction malleability.</p>
 <h3 id="flag-ranges">Flag Ranges</h3>
 <p>A transaction's <code>Flags</code> field can contain flags that apply at different levels or contexts. Flags for each context are limited to the following ranges:</p>
 <table>
@@ -636,10 +667,12 @@
                             <li><a class="subpage" href="escrow-object.html">Escrow</a></li>
                             <li><a class="subpage" href="feesettings.html">FeeSettings</a></li>
                             <li><a class="subpage" href="ledgerhashes.html">LedgerHashes</a></li>
+                            <li><a class="subpage" href="negativeunl.html">NegativeUNL <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
                             <li><a class="subpage" href="offer.html">Offer</a></li>
                             <li><a class="subpage" href="paychannel.html">PayChannel</a></li>
                             <li><a class="subpage" href="ripplestate.html">RippleState</a></li>
                             <li><a class="subpage" href="signerlist.html">SignerList</a></li>
+                            <li><a class="subpage" href="ticket.html">Ticket</a></li>
 
 
                   </ul>
@@ -678,12 +711,14 @@
                             <li><a class="subpage" href="paymentchannelfund.html">PaymentChannelFund</a></li>
                             <li><a class="subpage" href="setregularkey.html">SetRegularKey</a></li>
                             <li><a class="subpage" href="signerlistset.html">SignerListSet</a></li>
+                            <li><a class="subpage" href="ticketcreate.html">TicketCreate</a></li>
                             <li><a class="subpage" href="trustset.html">TrustSet</a></li>
 
                         <li><a class="subcat-title" href="pseudo-transaction-types.html">Pseudo-Transactions</a></li>
 
                             <li><a class="subpage" href="enableamendment.html">EnableAmendment</a></li>
                             <li><a class="subpage" href="setfee.html">SetFee</a></li>
+                            <li><a class="subpage" href="unlmodify.html">UNLModify <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
 
                         <li><a class="subcat-title" href="transaction-results.html">Transaction Results</a></li>
 

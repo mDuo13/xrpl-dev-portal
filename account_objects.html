@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>account_objects - XRP Ledger Dev Portal</title>
+    <title>account_objects - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="account_objects | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/account_objects.html" />
+    <meta property="og:description" content="Get all ledger objects owned by an account." />
+    <meta name="description" content="Get all ledger objects owned by an account." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/account_objects.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/account_objects.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/account_objects.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -59,9 +78,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -182,7 +206,7 @@
     <div class="content">
         <h1 id="account_objects">account_objects</h1>
 <p><a class="external-link" href="https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/AccountObjects.cpp" target="_blank" title="Source">[Source] <i aria-hidden="true" class="fa fa-external-link"></i></a></p>
-<p>The <code>account_objects</code> command returns the raw <a href="ledger-data-formats.html">ledger format</a> for all objects owned by an account. For a higher-level view of an account's trust lines and balances, see the <a href="account_lines.html">account_lines method</a> instead.</p>
+<p>The <code>account_objects</code> command returns the raw <a href="ledger-object-types.html">ledger format</a> for all objects owned by an account. For a higher-level view of an account's trust lines and balances, see the <a href="account_lines.html">account_lines method</a> instead.</p>
 <p>The types of objects that may appear in the <code>account_objects</code> response for an account include:</p>
 <ul>
 <li><a href="offer.html">Offer objects</a> for orders that are currently live, unfunded, or expired but not yet removed. (See <a href="offers.html#lifecycle-of-an-offer">Lifecycle of an Offer</a> for more information.)</li>
@@ -192,7 +216,7 @@
 <li><a href="paychannel.html">PayChannel objects</a> for open payment channels.</li>
 <li><a href="check.html">Check objects</a> for pending Checks.</li>
 <li><a href="depositpreauth-object.html">DepositPreauth objects</a> for deposit preauthorizations. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/1.1.0" target="_blank" title="New in: rippled 1.1.0"><img alt="New in: rippled 1.1.0" class="dactyl_badge" src="https://img.shields.io/badge/New%20in-rippled%201.1.0-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></li>
-<li><a href="known-amendments.html#tickets">Ticket objects</a> <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span> for tickets.</li>
+<li><a href="known-amendments.html#tickets">Ticket objects</a> <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span> for Tickets.</li>
 </ul>
 <h2 id="request-format">Request Format</h2>
 <p>An example of the request format:</p>
@@ -1398,7 +1422,7 @@ rippled account_objects r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59 validated
 <tr>
 <td align="left"><code>account_objects</code></td>
 <td align="left">Array</td>
-<td align="left">Array of objects owned by this account. Each object is in its raw <a href="ledger-data-formats.html">ledger format</a>.</td>
+<td align="left">Array of objects owned by this account. Each object is in its raw <a href="ledger-object-types.html">ledger format</a>.</td>
 </tr>
 <tr>
 <td align="left"><code>ledger_hash</code></td>
@@ -1647,10 +1671,12 @@ rippled account_objects r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59 validated
                             <li><a class="subpage" href="escrow-object.html">Escrow</a></li>
                             <li><a class="subpage" href="feesettings.html">FeeSettings</a></li>
                             <li><a class="subpage" href="ledgerhashes.html">LedgerHashes</a></li>
+                            <li><a class="subpage" href="negativeunl.html">NegativeUNL <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
                             <li><a class="subpage" href="offer.html">Offer</a></li>
                             <li><a class="subpage" href="paychannel.html">PayChannel</a></li>
                             <li><a class="subpage" href="ripplestate.html">RippleState</a></li>
                             <li><a class="subpage" href="signerlist.html">SignerList</a></li>
+                            <li><a class="subpage" href="ticket.html">Ticket</a></li>
 
 
                   </ul>
@@ -1689,12 +1715,14 @@ rippled account_objects r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59 validated
                             <li><a class="subpage" href="paymentchannelfund.html">PaymentChannelFund</a></li>
                             <li><a class="subpage" href="setregularkey.html">SetRegularKey</a></li>
                             <li><a class="subpage" href="signerlistset.html">SignerListSet</a></li>
+                            <li><a class="subpage" href="ticketcreate.html">TicketCreate</a></li>
                             <li><a class="subpage" href="trustset.html">TrustSet</a></li>
 
                         <li><a class="subcat-title" href="pseudo-transaction-types.html">Pseudo-Transactions</a></li>
 
                             <li><a class="subpage" href="enableamendment.html">EnableAmendment</a></li>
                             <li><a class="subpage" href="setfee.html">SetFee</a></li>
+                            <li><a class="subpage" href="unlmodify.html">UNLModify <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
 
                         <li><a class="subcat-title" href="transaction-results.html">Transaction Results</a></li>
 

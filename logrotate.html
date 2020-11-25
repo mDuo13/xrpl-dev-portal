@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>logrotate - XRP Ledger Dev Portal</title>
+    <title>logrotate - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="logrotate | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/logrotate.html" />
+    <meta property="og:description" content="Reopen the log file." />
+    <meta name="description" content="Reopen the log file." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/logrotate.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/logrotate.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/logrotate.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -59,9 +78,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -185,21 +209,21 @@
 <p>The <code>logrotate</code> command closes and reopens the log file. This is intended to help with log rotation on Linux file systems.</p>
 <p>Most Linux systems come pre-installed with a <a class="external-link" href="https://linux.die.net/man/8/logrotate" target="_blank"><code>logrotate</code> <i aria-hidden="true" class="fa fa-external-link"></i></a> program, which is separate from this command. Application specific log rotation scripts are placed in <code>/etc/logrotate.d</code></p>
 <p>The following script is a sample that can be created as <code>/etc/logrotate.d/rippled</code></p>
-<div class="codehilite"><pre><span></span><code><span class="err">/var/log/rippled/*.log {</span>
-<span class="err">  daily</span>
-<span class="err">  minsize 200M</span>
-<span class="err">  rotate 7</span>
-<span class="err">  nocreate</span>
-<span class="err">  missingok</span>
-<span class="err">  notifempty</span>
-<span class="err">  compress</span>
-<span class="err">  compresscmd /usr/bin/nice</span>
-<span class="err">  compressoptions -n19 ionice -c3 gzip</span>
-<span class="err">  compressext .gz</span>
-<span class="err">  postrotate</span>
-<span class="err">    /opt/ripple/bin/rippled --conf /opt/ripple/etc/rippled.cfg logrotate</span>
-<span class="err">  endscript</span>
-<span class="err">}</span>
+<div class="codehilite"><pre><span></span><code><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">rippled</span><span class="o">/*.</span><span class="n">log</span> <span class="p">{</span>
+  <span class="n">daily</span>
+  <span class="n">minsize</span> <span class="mi">200</span><span class="n">M</span>
+  <span class="n">rotate</span> <span class="mi">7</span>
+  <span class="n">nocreate</span>
+  <span class="n">missingok</span>
+  <span class="n">notifempty</span>
+  <span class="n">compress</span>
+  <span class="n">compresscmd</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">nice</span>
+  <span class="n">compressoptions</span> <span class="o">-</span><span class="n">n19</span> <span class="n">ionice</span> <span class="o">-</span><span class="n">c3</span> <span class="n">gzip</span>
+  <span class="n">compressext</span> <span class="o">.</span><span class="n">gz</span>
+  <span class="n">postrotate</span>
+    <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ripple</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">rippled</span> <span class="o">--</span><span class="n">conf</span> <span class="o">/</span><span class="n">opt</span><span class="o">/</span><span class="n">ripple</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">rippled</span><span class="o">.</span><span class="n">cfg</span> <span class="n">logrotate</span>
+  <span class="n">endscript</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>You can configure parameters such as <code>minsize</code> and <code>rotate</code> depending on the amount of logs you keep. Use the <code>log_level</code> setting in your <code>rippled.cfg</code> file to configure how verbose your server's logs are. This sample script is based on standard <code>log_level</code> and will store approximately 2 weeks worth of logs in a compressed format.</p>
 <p>Starting with <code>rippled</code> 1.3, the script <code>/etc/logrotate.d/rippled</code> will be automatically installed by the DEB and RPM packages. You can make modifications to this as required. Your modifications will not be overwritten on package upgrades.</p>
@@ -474,10 +498,12 @@ rippled logrotate
                             <li><a class="subpage" href="escrow-object.html">Escrow</a></li>
                             <li><a class="subpage" href="feesettings.html">FeeSettings</a></li>
                             <li><a class="subpage" href="ledgerhashes.html">LedgerHashes</a></li>
+                            <li><a class="subpage" href="negativeunl.html">NegativeUNL <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
                             <li><a class="subpage" href="offer.html">Offer</a></li>
                             <li><a class="subpage" href="paychannel.html">PayChannel</a></li>
                             <li><a class="subpage" href="ripplestate.html">RippleState</a></li>
                             <li><a class="subpage" href="signerlist.html">SignerList</a></li>
+                            <li><a class="subpage" href="ticket.html">Ticket</a></li>
 
 
                   </ul>
@@ -516,12 +542,14 @@ rippled logrotate
                             <li><a class="subpage" href="paymentchannelfund.html">PaymentChannelFund</a></li>
                             <li><a class="subpage" href="setregularkey.html">SetRegularKey</a></li>
                             <li><a class="subpage" href="signerlistset.html">SignerListSet</a></li>
+                            <li><a class="subpage" href="ticketcreate.html">TicketCreate</a></li>
                             <li><a class="subpage" href="trustset.html">TrustSet</a></li>
 
                         <li><a class="subcat-title" href="pseudo-transaction-types.html">Pseudo-Transactions</a></li>
 
                             <li><a class="subpage" href="enableamendment.html">EnableAmendment</a></li>
                             <li><a class="subpage" href="setfee.html">SetFee</a></li>
+                            <li><a class="subpage" href="unlmodify.html">UNLModify <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
 
                         <li><a class="subcat-title" href="transaction-results.html">Transaction Results</a></li>
 

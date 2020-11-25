@@ -21,6 +21,7 @@ https://xrpl.org/accounts.html
 https://xrpl.org/cryptographic-keys.html
 https://xrpl.org/multi-signing.html
 https://xrpl.org/reserves.html
+https://xrpl.org/tickets.html
 https://xrpl.org/depositauth.html
 https://xrpl.org/fees.html
 https://xrpl.org/ledgers.html
@@ -55,6 +56,7 @@ https://xrpl.org/consensus.html
 https://xrpl.org/consensus-principles-and-rules.html
 https://xrpl.org/consensus-protections.html
 https://xrpl.org/invariant-checking.html
+https://xrpl.org/negative-unl.html
 https://xrpl.org/transaction-queue.html
 https://xrpl.org/about-canceling-a-transaction.html
 https://xrpl.org/transaction-malleability.html
@@ -259,10 +261,12 @@ https://xrpl.org/directorynode.html
 https://xrpl.org/escrow-object.html
 https://xrpl.org/feesettings.html
 https://xrpl.org/ledgerhashes.html
+https://xrpl.org/negativeunl.html
 https://xrpl.org/offer.html
 https://xrpl.org/paychannel.html
 https://xrpl.org/ripplestate.html
 https://xrpl.org/signerlist.html
+https://xrpl.org/ticket.html
 https://xrpl.org/transaction-formats.html
 https://xrpl.org/transaction-common-fields.html
 https://xrpl.org/transaction-types.html
@@ -283,10 +287,12 @@ https://xrpl.org/paymentchannelcreate.html
 https://xrpl.org/paymentchannelfund.html
 https://xrpl.org/setregularkey.html
 https://xrpl.org/signerlistset.html
+https://xrpl.org/ticketcreate.html
 https://xrpl.org/trustset.html
 https://xrpl.org/pseudo-transaction-types.html
 https://xrpl.org/enableamendment.html
 https://xrpl.org/setfee.html
+https://xrpl.org/unlmodify.html
 https://xrpl.org/transaction-results.html
 https://xrpl.org/tec-codes.html
 https://xrpl.org/tef-codes.html

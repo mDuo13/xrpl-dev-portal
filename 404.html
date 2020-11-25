@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>404 Not Found - XRP Ledger Dev Portal</title>
+    <title>404 Not Found - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="404 Not Found | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/404.html" />
+    <meta property="og:description" content="XRPL.org is a community-driven resource for all things XRP and the XRP Ledger—your source for technical information, reference materials and tools." />
+    <meta name="description" content="XRPL.org is a community-driven resource for all things XRP and the XRP Ledger—your source for technical information, reference materials and tools." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/404.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/404.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/404.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -47,9 +66,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -192,6 +216,7 @@
             <li><a class="nosubcat-page" href="/cryptographic-keys.html">Cryptographic Keys</a></li>
             <li><a class="nosubcat-page" href="/multi-signing.html">Multi-Signing</a></li>
             <li><a class="nosubcat-page" href="/reserves.html">Reserves</a></li>
+            <li><a class="nosubcat-page" href="/tickets.html">Tickets <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
             <li><a class="nosubcat-page" href="/depositauth.html">Deposit Authorization</a></li>
             <li><a class="nosubcat-page" href="/fees.html">Fees (Disambiguation)</a></li>
             <li><a class="nosubcat-page" href="/ledgers.html">Ledgers</a></li>
@@ -225,6 +250,7 @@
             <li><a class="nosubcat-page" href="/consensus-principles-and-rules.html">Consensus Principles and Rules</a></li>
             <li><a class="nosubcat-page" href="/consensus-protections.html">Consensus Protections Against Attacks and Failure Modes</a></li>
             <li><a class="nosubcat-page" href="/invariant-checking.html">Invariant Checking</a></li>
+            <li><a class="nosubcat-page" href="/negative-unl.html">Negative UNL <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
             <li><a class="nosubcat-page" href="/transaction-queue.html">Transaction Queue</a></li>
             <li><a class="nosubcat-page" href="/about-canceling-a-transaction.html">About Canceling a Transaction</a></li>
             <li><a class="nosubcat-page" href="/transaction-malleability.html">Transaction Malleability</a></li>
@@ -424,10 +450,12 @@
             <li><a class="nosubcat-page" href="/escrow-object.html">Escrow</a></li>
             <li><a class="nosubcat-page" href="/feesettings.html">FeeSettings</a></li>
             <li><a class="nosubcat-page" href="/ledgerhashes.html">LedgerHashes</a></li>
+            <li><a class="nosubcat-page" href="/negativeunl.html">NegativeUNL <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
             <li><a class="nosubcat-page" href="/offer.html">Offer</a></li>
             <li><a class="nosubcat-page" href="/paychannel.html">PayChannel</a></li>
             <li><a class="nosubcat-page" href="/ripplestate.html">RippleState</a></li>
             <li><a class="nosubcat-page" href="/signerlist.html">SignerList</a></li>
+            <li><a class="nosubcat-page" href="/ticket.html">Ticket</a></li>
             <li><a class="nosubcat-page" href="/transaction-formats.html">Transaction Formats</a></li>
             <li><a class="nosubcat-page" href="/transaction-common-fields.html">Transaction Common Fields</a></li>
             <li><a class="nosubcat-page" href="/transaction-types.html">Transaction Types</a></li>
@@ -448,10 +476,12 @@
             <li><a class="nosubcat-page" href="/paymentchannelfund.html">PaymentChannelFund</a></li>
             <li><a class="nosubcat-page" href="/setregularkey.html">SetRegularKey</a></li>
             <li><a class="nosubcat-page" href="/signerlistset.html">SignerListSet</a></li>
+            <li><a class="nosubcat-page" href="/ticketcreate.html">TicketCreate</a></li>
             <li><a class="nosubcat-page" href="/trustset.html">TrustSet</a></li>
             <li><a class="nosubcat-page" href="/pseudo-transaction-types.html">Pseudo-Transactions</a></li>
             <li><a class="nosubcat-page" href="/enableamendment.html">EnableAmendment</a></li>
             <li><a class="nosubcat-page" href="/setfee.html">SetFee</a></li>
+            <li><a class="nosubcat-page" href="/unlmodify.html">UNLModify <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
             <li><a class="nosubcat-page" href="/transaction-results.html">Transaction Results</a></li>
             <li><a class="nosubcat-page" href="/tec-codes.html">tec Codes</a></li>
             <li><a class="nosubcat-page" href="/tef-codes.html">tef Codes</a></li>

@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>Send a Check - XRP Ledger Dev Portal</title>
+    <title>Send a Check - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="Send a Check | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/send-a-check.html" />
+    <meta property="og:description" content="XRPL.org is a community-driven resource for all things XRP and the XRP Ledger—your source for technical information, reference materials and tools." />
+    <meta name="description" content="XRPL.org is a community-driven resource for all things XRP and the XRP Ledger—your source for technical information, reference materials and tools." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/send-a-check.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/send-a-check.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/send-a-check.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -59,9 +78,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -260,7 +284,7 @@
   <span class="kr">const</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1">// Allow up to 60 ledger versions (~5 min) instead of the default 3 versions</span>
     <span class="c1">// before this transaction fails permanently.</span>
-    <span class="s2">"maxLedgerVersionOffset"</span><span class="o">:</span> <span class="mi">60</span>
+    <span class="s2">"maxLedgerVersionOffset"</span><span class="o">:</span> <span class="mf">60</span>
   <span class="p">}</span>
   <span class="k">return</span> <span class="nx">api</span><span class="p">.</span><span class="nx">prepareCheckCreate</span><span class="p">(</span><span class="nx">sender</span><span class="p">,</span> <span class="p">{</span>
     <span class="s2">"destination"</span><span class="o">:</span> <span class="nx">receiver</span><span class="p">,</span>
@@ -307,8 +331,8 @@
 </div>
 <h2 id="2-sign-the-checkcreate-transaction">2. Sign the CheckCreate transaction</h2>
 <p>The most secure way to sign a transaction is to do it locally with a signing library, such as <a href="rippleapi-reference.html">RippleAPI</a>. Alternatively, you can sign the transaction using the <a href="sign.html">sign method</a>, but this must be done through a trusted and encrypted connection, or through a local connection, and only to a server you control.</p>
-<p>In all cases, note the signed transaction's identifying hash for later.
-<!-- --></p>
+<p>In all cases, note the signed transaction's identifying hash for later.</p>
+<!-- -->
 <h3 id="example-request">Example Request</h3>
 <div class="multicode" id="code-1"><ul class="codetabs"><li><a href="#code-1-0">RippleAPI</a></li><li><a href="#code-1-1">WebSocket</a></li><li><a href="#code-1-2">Commandline</a></li></ul>
 
@@ -367,7 +391,7 @@
 <h4 id="example-response">Example Response</h4>
 <div class="multicode" id="code-2"><ul class="codetabs"><li><a href="#code-2-0">RippleAPI</a></li><li><a href="#code-2-1">WebSocket</a></li><li><a href="#code-2-2">Commandline</a></li></ul>
 
-<div class="code_sample" id="code-2-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="nx">tx_blob</span> <span class="nx">is</span><span class="o">:</span> <span class="mi">12001022800000002400000002201</span><span class="nx">B0077911368400000000000000C694000000005F5E100732103B6FCD7FAC4F665FE92415DD6E8450AD90F7D6B3D45A6CFCF2E359045FF4BB400744630440220181FE2F945EBEE632966D5FB03114611E3047ACD155AA1BDB9DF8545C7A2431502201E873A4B0D177AB250AF790CE80621E16F141506CF507586038FC4A8E95887358114735FF88E5269C80CD7F7AF10530DAB840BBF6FDF8314A8B6B9FF3246856CADC4A0106198C066EA1F9C39</span>
+<div class="code_sample" id="code-2-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="nx">tx_blob</span> <span class="nx">is</span><span class="o">:</span> <span class="mf">12001022800000002400000002201</span><span class="nx">B0077911368400000000000000C694000000005F5E100732103B6FCD7FAC4F665FE92415DD6E8450AD90F7D6B3D45A6CFCF2E359045FF4BB400744630440220181FE2F945EBEE632966D5FB03114611E3047ACD155AA1BDB9DF8545C7A2431502201E873A4B0D177AB250AF790CE80621E16F141506CF507586038FC4A8E95887358114735FF88E5269C80CD7F7AF10530DAB840BBF6FDF8314A8B6B9FF3246856CADC4A0106198C066EA1F9C39</span>
 <span class="nx">tx</span> <span class="nx">hash</span> <span class="nx">is</span><span class="o">:</span> <span class="nx">C0B27D20669BAB837B3CDF4B8148B988F17CE1EF8EDF48C806AE9BF69E16F441</span>
 </code></pre></div></div>
 
@@ -423,8 +447,8 @@
 </div>
 <h2 id="3-submit-the-signed-transaction">3. Submit the signed transaction</h2>
 <p>Take the signed transaction blob from the previous step and submit it to a <code>rippled</code> server. You can do this safely even if you do not run the <code>rippled</code> server. The response contains a provisional result, which should be <code>tesSUCCESS</code>, but this result is <a href="finality-of-results.html">usually not final</a>. A provisional response of <code>terQUEUED</code> is also OK, since <a href="transaction-cost.html#queued-transactions">queued transactions</a> are generally included in the next open ledger version (usually about 10 seconds after submission).</p>
-<p class="devportal-callout tip"><strong>Tip:</strong> If the preliminary result is <code>tefMAX_LEDGER</code>, the transaction has failed permanently because its <code>LastLedgerSequence</code> parameter is lower than the current ledger. This happens when you take longer than the expected number of ledger versions between preparing and submitting the transaction. If this occurs, <a href="#1-prepare-the-checkcreate-transaction">start over from step 1</a> with a higher <code>LastLedgerSequence</code> value.
-<!-- --></p>
+<p class="devportal-callout tip"><strong>Tip:</strong> If the preliminary result is <code>tefMAX_LEDGER</code>, the transaction has failed permanently because its <code>LastLedgerSequence</code> parameter is lower than the current ledger. This happens when you take longer than the expected number of ledger versions between preparing and submitting the transaction. If this occurs, <a href="#1-prepare-the-checkcreate-transaction">start over from step 1</a> with a higher <code>LastLedgerSequence</code> value.</p>
+<!-- -->
 <h3 id="example-request-1">Example Request</h3>
 <div class="multicode" id="code-3"><ul class="codetabs"><li><a href="#code-3-0">RippleAPI</a></li><li><a href="#code-3-1">WebSocket</a></li><li><a href="#code-3-2">Commandline</a></li></ul>
 
@@ -532,8 +556,8 @@
 </div>
 <h2 id="4-wait-for-validation">4. Wait for validation</h2>
 <p>On the live network or the Ripple Test Net, you can wait 4-7 seconds for the ledger to close automatically.</p>
-<p>If you're running <code>rippled</code> in stand-alone mode, use the <a href="ledger_accept.html">ledger_accept method</a> to manually close the ledger.
-<!-- --></p>
+<p>If you're running <code>rippled</code> in stand-alone mode, use the <a href="ledger_accept.html">ledger_accept method</a> to manually close the ledger.</p>
+<!-- -->
 <h2 id="5-confirm-final-result">5. Confirm final result</h2>
 <p>Use the <a href="tx.html">tx method</a> with the CheckCreate transaction's identifying hash to check its status. Look for a <code>"TransactionResult": "tesSUCCESS"</code> field in the transaction's metadata, indicating that the transaction succeeded, and the field <code>"validated": true</code> in the result, indicating that this result is final.</p>
 <p>Look for a <code>CreatedNode</code> object in the transaction metadata with a <code>LedgerEntryType</code> of <code>"Check"</code>. This indicates that the transaction created a <a href="check.html">Check ledger object</a>. The <code>LedgerIndex</code> of this object is the ID of the Check. In the following example, the Check's ID is <code>84C61BE9B39B2C4A2267F67504404F1EC76678806C1B901EA781D1E3B4CE0CD9</code>.</p>
@@ -542,38 +566,38 @@
 <div class="multicode" id="code-5"><ul class="codetabs"><li><a href="#code-5-0">RippleAPI</a></li><li><a href="#code-5-1">WebSocket</a></li><li><a href="#code-5-2">Commandline</a></li></ul>
 
 <div class="code_sample" id="code-5-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="s1">'use strict'</span>
-<span class="n">const</span> <span class="n">RippleAPI</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">'ripple-lib'</span><span class="p">).</span><span class="n">RippleAPI</span>
-<span class="n">const</span> <span class="n">decodeAddress</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">'ripple-address-codec'</span><span class="p">).</span><span class="n">decodeAddress</span><span class="p">;</span>
-<span class="n">const</span> <span class="n">createHash</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">'crypto'</span><span class="p">).</span><span class="n">createHash</span><span class="p">;</span>
+<span class="k">const</span> <span class="n">RippleAPI</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">'ripple-lib'</span><span class="p">)</span><span class="o">.</span><span class="n">RippleAPI</span>
+<span class="k">const</span> <span class="n">decodeAddress</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">'ripple-address-codec'</span><span class="p">)</span><span class="o">.</span><span class="n">decodeAddress</span><span class="p">;</span>
+<span class="k">const</span> <span class="n">createHash</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">'crypto'</span><span class="p">)</span><span class="o">.</span><span class="n">createHash</span><span class="p">;</span>
 
-<span class="o">//</span> <span class="n">This</span> <span class="n">example</span> <span class="n">connects</span> <span class="k">to</span> <span class="n">a</span> <span class="k">public</span> <span class="n">Test</span> <span class="n">Net</span> <span class="n">server</span>
-<span class="n">const</span> <span class="n">api</span> <span class="o">=</span> <span class="k">new</span> <span class="n">RippleAPI</span><span class="p">(</span><span class="err">{</span><span class="n">server</span><span class="p">:</span> <span class="s1">'wss://s.altnet.rippletest.net:51233'</span><span class="err">}</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="k">connect</span><span class="p">().</span><span class="k">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="err">{</span>
-  <span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s1">'Connected'</span><span class="p">)</span>
+<span class="o">//</span> <span class="n">This</span> <span class="n">example</span> <span class="n">connects</span> <span class="n">to</span> <span class="n">a</span> <span class="n">public</span> <span class="n">Test</span> <span class="n">Net</span> <span class="n">server</span>
+<span class="k">const</span> <span class="n">api</span> <span class="o">=</span> <span class="n">new</span> <span class="n">RippleAPI</span><span class="p">({</span><span class="n">server</span><span class="p">:</span> <span class="s1">'wss://s.altnet.rippletest.net:51233'</span><span class="p">})</span>
+<span class="n">api</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span><span class="o">.</span><span class="n">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">'Connected'</span><span class="p">)</span>
 
-  <span class="n">const</span> <span class="n">tx_hash</span> <span class="o">=</span> <span class="ss">"C0B27D20669BAB837B3CDF4B8148B988F17CE1EF8EDF48C806AE9BF69E16F441"</span>
+  <span class="k">const</span> <span class="n">tx_hash</span> <span class="o">=</span> <span class="s2">"C0B27D20669BAB837B3CDF4B8148B988F17CE1EF8EDF48C806AE9BF69E16F441"</span>
 
-  <span class="k">return</span> <span class="n">api</span><span class="p">.</span><span class="n">getTransaction</span><span class="p">(</span><span class="n">tx_hash</span><span class="p">)</span>
-<span class="err">}</span><span class="p">).</span><span class="k">then</span><span class="p">(</span><span class="n">response</span> <span class="o">=&gt;</span> <span class="err">{</span>
-  <span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="ss">"Final transaction result:"</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">api</span><span class="o">.</span><span class="n">getTransaction</span><span class="p">(</span><span class="n">tx_hash</span><span class="p">)</span>
+<span class="p">})</span><span class="o">.</span><span class="n">then</span><span class="p">(</span><span class="n">response</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"Final transaction result:"</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
 
-  <span class="o">//</span> <span class="n">Re</span><span class="o">-</span><span class="n">calculate</span> <span class="n">checkID</span> <span class="k">to</span> <span class="k">work</span> <span class="n">around</span> <span class="n">issue</span> <span class="n">ripple</span><span class="o">-</span><span class="n">lib</span><span class="o">#</span><span class="mi">876</span>
-  <span class="n">const</span> <span class="n">checkIDhasher</span> <span class="o">=</span> <span class="n">createHash</span><span class="p">(</span><span class="s1">'sha512'</span><span class="p">)</span>
-  <span class="n">checkIDhasher</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="n">Buffer</span><span class="p">.</span><span class="k">from</span><span class="p">(</span><span class="s1">'0043'</span><span class="p">,</span> <span class="s1">'hex'</span><span class="p">))</span>
-  <span class="n">checkIDhasher</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="k">new</span> <span class="n">Buffer</span><span class="p">(</span><span class="n">decodeAddress</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">address</span><span class="p">)))</span>
-  <span class="n">const</span> <span class="n">seqBuf</span> <span class="o">=</span> <span class="n">Buffer</span><span class="p">.</span><span class="n">alloc</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
-  <span class="n">seqBuf</span><span class="p">.</span><span class="n">writeUInt32BE</span><span class="p">(</span><span class="n">response</span><span class="p">.</span><span class="n">sequence</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
-  <span class="n">checkIDhasher</span><span class="p">.</span><span class="k">update</span><span class="p">(</span><span class="n">seqBuf</span><span class="p">)</span>
-  <span class="n">const</span> <span class="n">checkID</span> <span class="o">=</span> <span class="n">checkIDhasher</span><span class="p">.</span><span class="n">digest</span><span class="p">(</span><span class="s1">'hex'</span><span class="p">).</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">64</span><span class="p">).</span><span class="n">toUpperCase</span><span class="p">()</span>
-  <span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="ss">"Calculated checkID:"</span><span class="p">,</span> <span class="n">checkID</span><span class="p">)</span>
+  <span class="o">//</span> <span class="n">Re</span><span class="o">-</span><span class="n">calculate</span> <span class="n">checkID</span> <span class="n">to</span> <span class="n">work</span> <span class="n">around</span> <span class="n">issue</span> <span class="n">ripple</span><span class="o">-</span><span class="n">lib</span><span class="c1">#876</span>
+  <span class="k">const</span> <span class="n">checkIDhasher</span> <span class="o">=</span> <span class="n">createHash</span><span class="p">(</span><span class="s1">'sha512'</span><span class="p">)</span>
+  <span class="n">checkIDhasher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">Buffer</span><span class="o">.</span><span class="n">from</span><span class="p">(</span><span class="s1">'0043'</span><span class="p">,</span> <span class="s1">'hex'</span><span class="p">))</span>
+  <span class="n">checkIDhasher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">new</span> <span class="n">Buffer</span><span class="p">(</span><span class="n">decodeAddress</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">address</span><span class="p">)))</span>
+  <span class="k">const</span> <span class="n">seqBuf</span> <span class="o">=</span> <span class="n">Buffer</span><span class="o">.</span><span class="n">alloc</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+  <span class="n">seqBuf</span><span class="o">.</span><span class="n">writeUInt32BE</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">sequence</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+  <span class="n">checkIDhasher</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">seqBuf</span><span class="p">)</span>
+  <span class="k">const</span> <span class="n">checkID</span> <span class="o">=</span> <span class="n">checkIDhasher</span><span class="o">.</span><span class="n">digest</span><span class="p">(</span><span class="s1">'hex'</span><span class="p">)</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">64</span><span class="p">)</span><span class="o">.</span><span class="n">toUpperCase</span><span class="p">()</span>
+  <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s2">"Calculated checkID:"</span><span class="p">,</span> <span class="n">checkID</span><span class="p">)</span>
 
-<span class="o">//</span> <span class="k">Disconnect</span> <span class="k">and</span> <span class="k">return</span>
-<span class="err">}</span><span class="p">).</span><span class="k">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="err">{</span>
-  <span class="n">api</span><span class="p">.</span><span class="k">disconnect</span><span class="p">().</span><span class="k">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="err">{</span>
-    <span class="n">console</span><span class="p">.</span><span class="n">log</span><span class="p">(</span><span class="s1">'Disconnected'</span><span class="p">)</span>
-    <span class="n">process</span><span class="p">.</span><span class="n">exit</span><span class="p">()</span>
-  <span class="err">}</span><span class="p">)</span>
-<span class="err">}</span><span class="p">).</span><span class="n">catch</span><span class="p">(</span><span class="n">console</span><span class="p">.</span><span class="n">error</span><span class="p">)</span>
+<span class="o">//</span> <span class="n">Disconnect</span> <span class="ow">and</span> <span class="k">return</span>
+<span class="p">})</span><span class="o">.</span><span class="n">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+  <span class="n">api</span><span class="o">.</span><span class="n">disconnect</span><span class="p">()</span><span class="o">.</span><span class="n">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="s1">'Disconnected'</span><span class="p">)</span>
+    <span class="n">process</span><span class="o">.</span><span class="n">exit</span><span class="p">()</span>
+  <span class="p">})</span>
+<span class="p">})</span><span class="o">.</span><span class="n">catch</span><span class="p">(</span><span class="n">console</span><span class="o">.</span><span class="n">error</span><span class="p">)</span>
 </code></pre></div></div>
 
 <div class="code_sample" id="code-5-1" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="p">{</span>

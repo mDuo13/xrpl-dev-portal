@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>Ripple Data API v2 - XRP Ledger Dev Portal</title>
+    <title>Ripple Data API v2 - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="Ripple Data API v2 | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/data-api.html" />
+    <meta property="og:description" content="RESTful interface to XRP Ledger analytics and historical data." />
+    <meta name="description" content="RESTful interface to XRP Ledger analytics and historical data." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/data-api.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/data-api.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/data-api.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -59,9 +78,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -697,17 +721,17 @@
 <div class="codehilite"><pre><span></span><code><span class="err">GET /v2/transactions/03EDF724397D2DEE70E49D512AECD619E9EA536BE6CFD48ED167AE2596055C9A</span>
 </code></pre></div>
 <p>Response (trimmed for size):</p>
-<div class="codehilite"><pre><span></span><code><span class="mi">200</span> <span class="nx">OK</span>
+<div class="codehilite"><pre><span></span><code><span class="mf">200</span> <span class="nx">OK</span>
 <span class="p">{</span>
     <span class="s2">"result"</span><span class="o">:</span> <span class="s2">"success"</span><span class="p">,</span>
     <span class="s2">"transaction"</span><span class="o">:</span> <span class="p">{</span>
-        <span class="s2">"ledger_index"</span><span class="o">:</span> <span class="mi">8317037</span><span class="p">,</span>
+        <span class="s2">"ledger_index"</span><span class="o">:</span> <span class="mf">8317037</span><span class="p">,</span>
         <span class="s2">"date"</span><span class="o">:</span> <span class="s2">"2014-08-14T20:22:20+00:00"</span><span class="p">,</span>
         <span class="s2">"hash"</span><span class="o">:</span> <span class="s2">"03EDF724397D2DEE70E49D512AECD619E9EA536BE6CFD48ED167AE2596055C9A"</span><span class="p">,</span>
         <span class="s2">"tx"</span><span class="o">:</span> <span class="p">{</span>
             <span class="s2">"TransactionType"</span><span class="o">:</span> <span class="s2">"OfferCreate"</span><span class="p">,</span>
-            <span class="s2">"Flags"</span><span class="o">:</span> <span class="mi">131072</span><span class="p">,</span>
-            <span class="s2">"Sequence"</span><span class="o">:</span> <span class="mi">159244</span><span class="p">,</span>
+            <span class="s2">"Flags"</span><span class="o">:</span> <span class="mf">131072</span><span class="p">,</span>
+            <span class="s2">"Sequence"</span><span class="o">:</span> <span class="mf">159244</span><span class="p">,</span>
             <span class="s2">"TakerPays"</span><span class="o">:</span> <span class="p">{</span>
                 <span class="s2">"value"</span><span class="o">:</span> <span class="s2">"0.001567373"</span><span class="p">,</span>
                 <span class="s2">"currency"</span><span class="o">:</span> <span class="s2">"BTC"</span><span class="p">,</span>
@@ -720,21 +744,21 @@
             <span class="s2">"Account"</span><span class="o">:</span> <span class="s2">"r2d2iZiCcJmNL6vhUGFjs8U8BuUq6BnmT"</span>
         <span class="p">},</span>
         <span class="s2">"meta"</span><span class="o">:</span> <span class="p">{</span>
-            <span class="s2">"TransactionIndex"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+            <span class="s2">"TransactionIndex"</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
             <span class="s2">"AffectedNodes"</span><span class="o">:</span> <span class="p">[</span>
                 <span class="p">{</span>
                     <span class="s2">"ModifiedNode"</span><span class="o">:</span> <span class="p">{</span>
                         <span class="s2">"LedgerEntryType"</span><span class="o">:</span> <span class="s2">"AccountRoot"</span><span class="p">,</span>
-                        <span class="s2">"PreviousTxnLgrSeq"</span><span class="o">:</span> <span class="mi">8317036</span><span class="p">,</span>
+                        <span class="s2">"PreviousTxnLgrSeq"</span><span class="o">:</span> <span class="mf">8317036</span><span class="p">,</span>
                         <span class="s2">"PreviousTxnID"</span><span class="o">:</span> <span class="s2">"A56793D47925BED682BFF754806121E3C0281E63C24B62ADF7078EF86CC2AA53"</span><span class="p">,</span>
                         <span class="s2">"LedgerIndex"</span><span class="o">:</span> <span class="s2">"2880A9B4FB90A306B576C2D532BFE390AB3904642647DCF739492AA244EF46D1"</span><span class="p">,</span>
                         <span class="s2">"PreviousFields"</span><span class="o">:</span> <span class="p">{</span>
                             <span class="s2">"Balance"</span><span class="o">:</span> <span class="s2">"275716601760"</span>
                         <span class="p">},</span>
                         <span class="s2">"FinalFields"</span><span class="o">:</span> <span class="p">{</span>
-                            <span class="s2">"Flags"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-                            <span class="s2">"Sequence"</span><span class="o">:</span> <span class="mi">326323</span><span class="p">,</span>
-                            <span class="s2">"OwnerCount"</span><span class="o">:</span> <span class="mi">27</span><span class="p">,</span>
+                            <span class="s2">"Flags"</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+                            <span class="s2">"Sequence"</span><span class="o">:</span> <span class="mf">326323</span><span class="p">,</span>
+                            <span class="s2">"OwnerCount"</span><span class="o">:</span> <span class="mf">27</span><span class="p">,</span>
                             <span class="s2">"Balance"</span><span class="o">:</span> <span class="s2">"275862935331"</span><span class="p">,</span>
                             <span class="s2">"Account"</span><span class="o">:</span> <span class="s2">"rfCFLzNJYvvnoGHWQYACmJpTgkLUaugLEw"</span><span class="p">,</span>
                             <span class="s2">"RegularKey"</span><span class="o">:</span> <span class="s2">"rfYqosNivHQFJ6KpArouxoci3QE3huKNYe"</span>
@@ -3635,56 +3659,56 @@
 <div class="codehilite"><pre><span></span><code><span class="err">GET /v2/network/topology</span>
 </code></pre></div>
 <p>Response:</p>
-<div class="codehilite"><pre><span></span><code><span class="mi">200</span> <span class="n">OK</span>
-<span class="err">{</span>
-  <span class="ss">"result"</span><span class="p">:</span> <span class="ss">"success"</span><span class="p">,</span>
-  <span class="ss">"date"</span><span class="p">:</span> <span class="ss">"2016-06-06T23:51:04Z"</span><span class="p">,</span>
-  <span class="ss">"node_count"</span><span class="p">:</span> <span class="mi">115</span><span class="p">,</span>
-  <span class="ss">"link_count"</span><span class="p">:</span> <span class="mi">1913</span><span class="p">,</span>
-  <span class="ss">"nodes"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="err">{</span>
-      <span class="ss">"node_public_key"</span><span class="p">:</span> <span class="ss">"n94fDXS3ta92gRSi7DKngh47S7Rg4z1FuNsahvbiakFEg51dLeVa"</span><span class="p">,</span>
-      <span class="ss">"version"</span><span class="p">:</span> <span class="ss">"rippled-0.31.0-rc1"</span><span class="p">,</span>
-      <span class="ss">"uptime"</span><span class="p">:</span> <span class="mi">266431</span><span class="p">,</span>
-      <span class="ss">"inbound_count"</span><span class="p">:</span> <span class="mi">24</span><span class="p">,</span>
-      <span class="ss">"last_updated"</span><span class="p">:</span> <span class="ss">"2016-06-03T21:50:57Z"</span>
-    <span class="err">}</span><span class="p">,</span>
-    <span class="err">{</span>
-      <span class="ss">"node_public_key"</span><span class="p">:</span> <span class="ss">"n94h5KNspwUGLaGcdHGxruYNmExWHjPkLcMvwsNrivR9czRp6Lor"</span><span class="p">,</span>
-      <span class="ss">"ip"</span><span class="p">:</span> <span class="ss">"104.247.221.178"</span><span class="p">,</span>
-      <span class="ss">"port"</span><span class="p">:</span> <span class="mi">51235</span><span class="p">,</span>
-      <span class="ss">"version"</span><span class="p">:</span> <span class="ss">"rippled-0.31.0"</span><span class="p">,</span>
-      <span class="ss">"uptime"</span><span class="p">:</span> <span class="mi">608382</span><span class="p">,</span>
-      <span class="ss">"inbound_count"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-      <span class="ss">"outbound_count"</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
-      <span class="ss">"city"</span><span class="p">:</span> <span class="ss">"Atlanta"</span><span class="p">,</span>
-      <span class="ss">"country"</span><span class="p">:</span> <span class="ss">"United States"</span><span class="p">,</span>
-      <span class="ss">"country_code"</span><span class="p">:</span> <span class="ss">"US"</span><span class="p">,</span>
-      <span class="ss">"isp"</span><span class="p">:</span> <span class="ss">"QuickPacket, LLC"</span><span class="p">,</span>
-      <span class="ss">"last_updated"</span><span class="p">:</span> <span class="ss">"2016-05-28T06:29:43Z"</span><span class="p">,</span>
-      <span class="ss">"lat"</span><span class="p">:</span> <span class="ss">"-84.3846"</span><span class="p">,</span>
-      <span class="ss">"long"</span><span class="p">:</span> <span class="ss">"33.8379"</span><span class="p">,</span>
-      <span class="ss">"postal_code"</span><span class="p">:</span> <span class="ss">"30305"</span><span class="p">,</span>
-      <span class="ss">"region"</span><span class="p">:</span> <span class="ss">"Georgia"</span><span class="p">,</span>
-      <span class="ss">"region_code"</span><span class="p">:</span> <span class="ss">"GA"</span><span class="p">,</span>
-      <span class="ss">"timezone"</span><span class="p">:</span> <span class="ss">"America/New_York"</span>
-    <span class="err">}</span><span class="p">,</span>
+<div class="codehilite"><pre><span></span><code><span class="mh">200</span> <span class="n">OK</span>
+<span class="p">{</span>
+  <span class="s">"result"</span><span class="o">:</span> <span class="s">"success"</span><span class="p">,</span>
+  <span class="s">"date"</span><span class="o">:</span> <span class="s">"2016-06-06T23:51:04Z"</span><span class="p">,</span>
+  <span class="s">"node_count"</span><span class="o">:</span> <span class="mh">115</span><span class="p">,</span>
+  <span class="s">"link_count"</span><span class="o">:</span> <span class="mh">1913</span><span class="p">,</span>
+  <span class="s">"nodes"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s">"node_public_key"</span><span class="o">:</span> <span class="s">"n94fDXS3ta92gRSi7DKngh47S7Rg4z1FuNsahvbiakFEg51dLeVa"</span><span class="p">,</span>
+      <span class="s">"version"</span><span class="o">:</span> <span class="s">"rippled-0.31.0-rc1"</span><span class="p">,</span>
+      <span class="s">"uptime"</span><span class="o">:</span> <span class="mh">266431</span><span class="p">,</span>
+      <span class="s">"inbound_count"</span><span class="o">:</span> <span class="mh">24</span><span class="p">,</span>
+      <span class="s">"last_updated"</span><span class="o">:</span> <span class="s">"2016-06-03T21:50:57Z"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s">"node_public_key"</span><span class="o">:</span> <span class="s">"n94h5KNspwUGLaGcdHGxruYNmExWHjPkLcMvwsNrivR9czRp6Lor"</span><span class="p">,</span>
+      <span class="s">"ip"</span><span class="o">:</span> <span class="s">"104.247.221.178"</span><span class="p">,</span>
+      <span class="s">"port"</span><span class="o">:</span> <span class="mh">51235</span><span class="p">,</span>
+      <span class="s">"version"</span><span class="o">:</span> <span class="s">"rippled-0.31.0"</span><span class="p">,</span>
+      <span class="s">"uptime"</span><span class="o">:</span> <span class="mh">608382</span><span class="p">,</span>
+      <span class="s">"inbound_count"</span><span class="o">:</span> <span class="mh">10</span><span class="p">,</span>
+      <span class="s">"outbound_count"</span><span class="o">:</span> <span class="mh">11</span><span class="p">,</span>
+      <span class="s">"city"</span><span class="o">:</span> <span class="s">"Atlanta"</span><span class="p">,</span>
+      <span class="s">"country"</span><span class="o">:</span> <span class="s">"United States"</span><span class="p">,</span>
+      <span class="s">"country_code"</span><span class="o">:</span> <span class="s">"US"</span><span class="p">,</span>
+      <span class="s">"isp"</span><span class="o">:</span> <span class="s">"QuickPacket, LLC"</span><span class="p">,</span>
+      <span class="s">"last_updated"</span><span class="o">:</span> <span class="s">"2016-05-28T06:29:43Z"</span><span class="p">,</span>
+      <span class="s">"lat"</span><span class="o">:</span> <span class="s">"-84.3846"</span><span class="p">,</span>
+      <span class="s">"long"</span><span class="o">:</span> <span class="s">"33.8379"</span><span class="p">,</span>
+      <span class="s">"postal_code"</span><span class="o">:</span> <span class="s">"30305"</span><span class="p">,</span>
+      <span class="s">"region"</span><span class="o">:</span> <span class="s">"Georgia"</span><span class="p">,</span>
+      <span class="s">"region_code"</span><span class="o">:</span> <span class="s">"GA"</span><span class="p">,</span>
+      <span class="s">"timezone"</span><span class="o">:</span> <span class="s">"America/New_York"</span>
+    <span class="p">},</span>
 
     <span class="p">...</span>
   <span class="p">],</span>
-  <span class="ss">"links"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="err">{</span>
-      <span class="ss">"source"</span><span class="p">:</span> <span class="ss">"n94Extku8HiQVY8fcgxeot4bY7JqK2pNYfmdnhgf6UbcmgucHFY8"</span><span class="p">,</span>
-      <span class="ss">"target"</span><span class="p">:</span> <span class="ss">"n9KcFAX2bCuwF4vGF8gZZcpQQ6nyqm44e5TUygb3zvdZEpiJE5As"</span>
-    <span class="err">}</span><span class="p">,</span>
-    <span class="err">{</span>
-      <span class="ss">"source"</span><span class="p">:</span> <span class="ss">"n94Extku8HiQVY8fcgxeot4bY7JqK2pNYfmdnhgf6UbcmgucHFY8"</span><span class="p">,</span>
-      <span class="ss">"target"</span><span class="p">:</span> <span class="ss">"n9LGAj7PjvfTmEGQ75JaRKba6GQmVwFCnJTSHgX2HDXzxm6d2JpM"</span>
-    <span class="err">}</span><span class="p">,</span>
+  <span class="s">"links"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s">"source"</span><span class="o">:</span> <span class="s">"n94Extku8HiQVY8fcgxeot4bY7JqK2pNYfmdnhgf6UbcmgucHFY8"</span><span class="p">,</span>
+      <span class="s">"target"</span><span class="o">:</span> <span class="s">"n9KcFAX2bCuwF4vGF8gZZcpQQ6nyqm44e5TUygb3zvdZEpiJE5As"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s">"source"</span><span class="o">:</span> <span class="s">"n94Extku8HiQVY8fcgxeot4bY7JqK2pNYfmdnhgf6UbcmgucHFY8"</span><span class="p">,</span>
+      <span class="s">"target"</span><span class="o">:</span> <span class="s">"n9LGAj7PjvfTmEGQ75JaRKba6GQmVwFCnJTSHgX2HDXzxm6d2JpM"</span>
+    <span class="p">},</span>
 
     <span class="p">...</span>
   <span class="p">]</span>
-<span class="err">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <h2 id="get-topology-nodes">Get Topology Nodes</h2>
 <p><a class="external-link" href="https://github.com/ripple/rippled-historical-database/blob/master/api/routes/network/getNodes.js" target="_blank" title="Source">[Source] <i aria-hidden="true" class="fa fa-external-link"></i></a></p>
@@ -3761,44 +3785,44 @@
 <div class="codehilite"><pre><span></span><code><span class="err">GET /v2/network/topology/nodes</span>
 </code></pre></div>
 <p>Response:</p>
-<div class="codehilite"><pre><span></span><code><span class="mi">200</span> <span class="n">OK</span>
-<span class="err">{</span>
-  <span class="ss">"result"</span><span class="p">:</span> <span class="ss">"success"</span><span class="p">,</span>
-  <span class="ss">"date"</span><span class="p">:</span> <span class="ss">"2016-06-08T00:36:53Z"</span><span class="p">,</span>
-  <span class="ss">"count"</span><span class="p">:</span> <span class="mi">116</span><span class="p">,</span>
-  <span class="ss">"nodes"</span><span class="p">:</span> <span class="p">[</span>
-    <span class="err">{</span>
-      <span class="ss">"node_public_key"</span><span class="p">:</span> <span class="ss">"n94BuARkPiYLrMuAVZqMQFhTAGpo12dqUPiH3yrzEnhaEcXfLAnV"</span><span class="p">,</span>
-      <span class="ss">"version"</span><span class="p">:</span> <span class="ss">"rippled-0.30.1"</span><span class="p">,</span>
-      <span class="ss">"uptime"</span><span class="p">:</span> <span class="mi">122424</span><span class="p">,</span>
-      <span class="ss">"inbound_count"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-      <span class="ss">"last_updated"</span><span class="p">:</span> <span class="ss">"2016-06-06T14:36:52Z"</span>
-    <span class="err">}</span><span class="p">,</span>
-    <span class="err">{</span>
-      <span class="ss">"node_public_key"</span><span class="p">:</span> <span class="ss">"n94h5KNspwUGLaGcdHGxruYNmExWHjPkLcMvwsNrivR9czRp6Lor"</span><span class="p">,</span>
-      <span class="ss">"ip"</span><span class="p">:</span> <span class="ss">"104.247.221.178"</span><span class="p">,</span>
-      <span class="ss">"port"</span><span class="p">:</span> <span class="mi">51235</span><span class="p">,</span>
-      <span class="ss">"version"</span><span class="p">:</span> <span class="ss">"rippled-0.31.2"</span><span class="p">,</span>
-      <span class="ss">"uptime"</span><span class="p">:</span> <span class="mi">38649</span><span class="p">,</span>
-      <span class="ss">"inbound_count"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
-      <span class="ss">"outbound_count"</span><span class="p">:</span> <span class="mi">11</span><span class="p">,</span>
-      <span class="ss">"city"</span><span class="p">:</span> <span class="ss">"Atlanta"</span><span class="p">,</span>
-      <span class="ss">"country"</span><span class="p">:</span> <span class="ss">"United States"</span><span class="p">,</span>
-      <span class="ss">"country_code"</span><span class="p">:</span> <span class="ss">"US"</span><span class="p">,</span>
-      <span class="ss">"isp"</span><span class="p">:</span> <span class="ss">"QuickPacket, LLC"</span><span class="p">,</span>
-      <span class="ss">"last_updated"</span><span class="p">:</span> <span class="ss">"2016-06-07T13:53:12Z"</span><span class="p">,</span>
-      <span class="ss">"lat"</span><span class="p">:</span> <span class="ss">"-84.3846"</span><span class="p">,</span>
-      <span class="ss">"long"</span><span class="p">:</span> <span class="ss">"33.8379"</span><span class="p">,</span>
-      <span class="ss">"postal_code"</span><span class="p">:</span> <span class="ss">"30305"</span><span class="p">,</span>
-      <span class="ss">"region"</span><span class="p">:</span> <span class="ss">"Georgia"</span><span class="p">,</span>
-      <span class="ss">"region_code"</span><span class="p">:</span> <span class="ss">"GA"</span><span class="p">,</span>
-      <span class="ss">"timezone"</span><span class="p">:</span> <span class="ss">"America/New_York"</span>
-    <span class="err">}</span><span class="p">,</span>
+<div class="codehilite"><pre><span></span><code><span class="mh">200</span> <span class="n">OK</span>
+<span class="p">{</span>
+  <span class="s">"result"</span><span class="o">:</span> <span class="s">"success"</span><span class="p">,</span>
+  <span class="s">"date"</span><span class="o">:</span> <span class="s">"2016-06-08T00:36:53Z"</span><span class="p">,</span>
+  <span class="s">"count"</span><span class="o">:</span> <span class="mh">116</span><span class="p">,</span>
+  <span class="s">"nodes"</span><span class="o">:</span> <span class="p">[</span>
+    <span class="p">{</span>
+      <span class="s">"node_public_key"</span><span class="o">:</span> <span class="s">"n94BuARkPiYLrMuAVZqMQFhTAGpo12dqUPiH3yrzEnhaEcXfLAnV"</span><span class="p">,</span>
+      <span class="s">"version"</span><span class="o">:</span> <span class="s">"rippled-0.30.1"</span><span class="p">,</span>
+      <span class="s">"uptime"</span><span class="o">:</span> <span class="mh">122424</span><span class="p">,</span>
+      <span class="s">"inbound_count"</span><span class="o">:</span> <span class="mh">10</span><span class="p">,</span>
+      <span class="s">"last_updated"</span><span class="o">:</span> <span class="s">"2016-06-06T14:36:52Z"</span>
+    <span class="p">},</span>
+    <span class="p">{</span>
+      <span class="s">"node_public_key"</span><span class="o">:</span> <span class="s">"n94h5KNspwUGLaGcdHGxruYNmExWHjPkLcMvwsNrivR9czRp6Lor"</span><span class="p">,</span>
+      <span class="s">"ip"</span><span class="o">:</span> <span class="s">"104.247.221.178"</span><span class="p">,</span>
+      <span class="s">"port"</span><span class="o">:</span> <span class="mh">51235</span><span class="p">,</span>
+      <span class="s">"version"</span><span class="o">:</span> <span class="s">"rippled-0.31.2"</span><span class="p">,</span>
+      <span class="s">"uptime"</span><span class="o">:</span> <span class="mh">38649</span><span class="p">,</span>
+      <span class="s">"inbound_count"</span><span class="o">:</span> <span class="mh">10</span><span class="p">,</span>
+      <span class="s">"outbound_count"</span><span class="o">:</span> <span class="mh">11</span><span class="p">,</span>
+      <span class="s">"city"</span><span class="o">:</span> <span class="s">"Atlanta"</span><span class="p">,</span>
+      <span class="s">"country"</span><span class="o">:</span> <span class="s">"United States"</span><span class="p">,</span>
+      <span class="s">"country_code"</span><span class="o">:</span> <span class="s">"US"</span><span class="p">,</span>
+      <span class="s">"isp"</span><span class="o">:</span> <span class="s">"QuickPacket, LLC"</span><span class="p">,</span>
+      <span class="s">"last_updated"</span><span class="o">:</span> <span class="s">"2016-06-07T13:53:12Z"</span><span class="p">,</span>
+      <span class="s">"lat"</span><span class="o">:</span> <span class="s">"-84.3846"</span><span class="p">,</span>
+      <span class="s">"long"</span><span class="o">:</span> <span class="s">"33.8379"</span><span class="p">,</span>
+      <span class="s">"postal_code"</span><span class="o">:</span> <span class="s">"30305"</span><span class="p">,</span>
+      <span class="s">"region"</span><span class="o">:</span> <span class="s">"Georgia"</span><span class="p">,</span>
+      <span class="s">"region_code"</span><span class="o">:</span> <span class="s">"GA"</span><span class="p">,</span>
+      <span class="s">"timezone"</span><span class="o">:</span> <span class="s">"America/New_York"</span>
+    <span class="p">},</span>
 
     <span class="p">...</span>
 
   <span class="p">]</span>
-<span class="err">}</span>
+<span class="p">}</span>
 </code></pre></div>
 <h2 id="get-topology-node">Get Topology Node</h2>
 <p><a class="external-link" href="https://github.com/ripple/rippled-historical-database/blob/master/api/routes/network/getNodes.js" target="_blank" title="Source">[Source] <i aria-hidden="true" class="fa fa-external-link"></i></a></p>
@@ -7395,7 +7419,7 @@
 </ul>
 <blockquote class="devportal-callout note">
 <p><strong>Note:</strong> The XRP community has <a class="external-link" href="https://github.com/xrp-community/standards-drafts/issues/6" target="_blank">proposed <i aria-hidden="true" class="fa fa-external-link"></i></a> an <strong>X</strong>-address format that "packs" a <a href="source-and-destination-tags.html">destination tag</a> into the address. These addresses start with an <code>X</code> (for the mainnet) or a <code>T</code> (for the <a href="parallel-networks.html">testnet</a>). Exchanges and wallets can use X-addresses to represent all the data a customer needs to know in one value. For more information, see the <a class="external-link" href="https://xrpaddress.info/" target="_blank">X-address format site <i aria-hidden="true" class="fa fa-external-link"></i></a> and <a class="external-link" href="https://github.com/xrp-community/xrpl-tagged-address-codec" target="_blank">codec <i aria-hidden="true" class="fa fa-external-link"></i></a>.</p>
-<p>The XRP Ledger protocol only supports "classic" addresses natively, but <a href="rippleapi-reference.html">ripple-lib</a>, <a class="external-link" href="https://xpring.io/docs" target="_blank">Xpring SDK <i aria-hidden="true" class="fa fa-external-link"></i></a>, and many other tools support X-addresses too.</p>
+<p>The XRP Ledger protocol only supports "classic" addresses natively, but <a href="rippleapi-reference.html">ripple-lib</a>, <a class="external-link" href="https://ripplex.io/docs" target="_blank">RippleX Dev Kit <i aria-hidden="true" class="fa fa-external-link"></i></a>, and many other tools support X-addresses too.</p>
 </blockquote>
 <p>For more information, see <a href="accounts.html">Accounts</a> and <a href="base58-encodings.html">base58 Encodings</a>.</p>
 <h3 id="public-keys">Public Keys</h3>
@@ -7442,8 +7466,9 @@
 <h3 id="account-sequence">Account Sequence</h3>
 <p>A sequence number is a 32-bit unsigned integer that is used to make sure transactions from a given sender execute only once each, and in the correct order.</p>
 <p>Every <a href="accounts.html">account in the XRP Ledger</a> has a sequence number in its <code>Sequence</code> field, which increases by 1 whenever that account sends a transaction and that transaction gets included in a <a href="ledgers.html">validated ledger</a>. Each <a href="transaction-basics.html">transaction</a> also has a sequence number in its <code>Sequence</code> field, which must match the account's current sequence number when the transaction executes. For each account, each sequence number can only be used once, in numerical order.</p>
+<p><a href="tickets.html">Tickets</a> <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span> make some exceptions from these rules so that it is possible to send transactions out of the normal order. Tickets represent sequence numbers reserved for later use; a transaction can use a Ticket instead of a normal sequence number.</p>
 <p>With the <a href="known-amendments.html#deletableaccounts">DeletableAccounts amendment</a>, the starting <code>Sequence</code> number for an account matches the <a href="basic-data-types.html#ledger-index">Ledger Index</a> of the ledger version where the account was created. Before DeletableAccounts, every account started with <code>Sequence</code> number 1.</p>
-<p>Whenever a transaction is included in a ledger, it uses up a sequence number regardless of whether the transaction executed successfully or failed with a <a href="tec-codes.html"><code>tec</code>-class error code</a>. Other transaction failures don't get included in ledgers, so they don't change the sender's sequence number (or have any other effects).</p>
+<p>Whenever a transaction is included in a ledger, it uses up a sequence number (or Ticket) regardless of whether the transaction executed successfully or failed with a <a href="tec-codes.html"><code>tec</code>-class error code</a>. Other transaction failures don't get included in ledgers, so they don't change the sender's sequence number (or have any other effects).</p>
 <p>Within the ledger, an <a href="basic-data-types.html#addresses">Address</a> and a sequence number are sometimes used together to identify an object that was created by the validated transaction with that sender and sequence number. <a href="escrow.html">Escrows</a> and <a href="offers.html">Offers</a> are examples of objects identified this way.</p>
 <p>It is possible for multiple unconfirmed transactions to have the same sender and sequence number. Such transactions are mutually exclusive, and at most one of them can be included in a validated ledger. (Any others ultimately have no effect.)</p>
 <h3 id="currency-code">Currency Code</h3>
@@ -8492,6 +8517,8 @@
 
 
 
+
+
                         <li><a class="subcat-title" href="transaction-formats.html">Transaction Formats</a></li>
 
                             <li><a class="subpage" href="transaction-common-fields.html">Transaction Common Fields</a></li>
@@ -8499,6 +8526,8 @@
                             <li><a class="subpage" href="pseudo-transaction-types.html">Pseudo-Transactions</a></li>
                             <li><a class="subpage" href="transaction-results.html">Transaction Results</a></li>
                             <li><a class="subpage" href="transaction-metadata.html">Transaction Metadata</a></li>
+
+
 
 
 
@@ -9117,16 +9146,32 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <!---->
             <div class="card">
-              <div class="card-header" role="tab" id="sidenav_cat_head_144">
-                  <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_144" aria-expanded="true" aria-controls="sidenav_collapse_144"></a>
+              <div class="card-header" role="tab" id="sidenav_cat_head_148">
+                  <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_148" aria-expanded="true" aria-controls="sidenav_collapse_148"></a>
                 <h5 class="card-title">
                   <a class="sidenav_cat_title" href="xrp-api.html">XRP-API</a>
                 </h5>
               </div><!-- /.card-header -->
 
-              <div id="sidenav_collapse_144" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_144">
+              <div id="sidenav_collapse_148" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_148">
                 <div class="card-body">
                   <ul class="sidebar_pagelist">
                         <li><a class="subcat-title" href="xrp-api-methods.html">All XRP-API Methods</a></li>
@@ -9220,7 +9265,7 @@
 
                   </ul>
                 </div><!-- /.card-body -->
-              </div><!-- /#sidenav_collapse144 -->
+              </div><!-- /#sidenav_collapse148 -->
 
             </div><!-- /.card -->
 
@@ -9398,58 +9443,58 @@
 
         <!---->
           <div class="card">
-            <div class="card-header" role="tab" id="sidenav_cat_head_187">
+            <div class="card-header" role="tab" id="sidenav_cat_head_191">
               <h5 class="card-title">
                   <a class="sidenav_cat_title" href="rippleapi-reference.html">RippleAPI Reference</a>
                 <!-- <a class="sidenav_cat_title" href="rippleapi-reference.html">RippleAPI for JavaScript</a> -->
               </h5>
             </div><!-- /.card-header -->
 
-            <div id="sidenav_collapse_187" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_187">
+            <div id="sidenav_collapse_191" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_191">
               <div class="card-body">
                 <ul class="sidebar_pagelist">
 
                 </ul>
               </div><!-- /.card-body -->
-            </div><!-- /#sidenav_collapse187 -->
+            </div><!-- /#sidenav_collapse191 -->
 
           </div><!-- /.card -->
 
         <!---->
           <div class="card active">
-            <div class="card-header" role="tab" id="sidenav_cat_head_188">
+            <div class="card-header" role="tab" id="sidenav_cat_head_192">
               <h5 class="card-title">
                   <a class="sidenav_cat_title active" href="data-api.html">Ripple Data API v2</a>
                 <!-- <a class="sidenav_cat_title" href="data-api.html">Data API</a> -->
               </h5>
             </div><!-- /.card-header -->
 
-            <div id="sidenav_collapse_188" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_188">
+            <div id="sidenav_collapse_192" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_192">
               <div class="card-body">
                 <ul class="sidebar_pagelist">
 
                 </ul>
               </div><!-- /.card-body -->
-            </div><!-- /#sidenav_collapse188 -->
+            </div><!-- /#sidenav_collapse192 -->
 
           </div><!-- /.card -->
 
         <!---->
           <div class="card">
-            <div class="card-header" role="tab" id="sidenav_cat_head_189">
+            <div class="card-header" role="tab" id="sidenav_cat_head_193">
               <h5 class="card-title">
                   <a class="sidenav_cat_title" href="xrp-ledger-toml.html">xrp-ledger.toml File</a>
                 <!-- <a class="sidenav_cat_title" href="xrp-ledger-toml.html">XRP Ledger TOML File</a> -->
               </h5>
             </div><!-- /.card-header -->
 
-            <div id="sidenav_collapse_189" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_189">
+            <div id="sidenav_collapse_193" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_193">
               <div class="card-body">
                 <ul class="sidebar_pagelist">
 
                 </ul>
               </div><!-- /.card-body -->
-            </div><!-- /#sidenav_collapse189 -->
+            </div><!-- /#sidenav_collapse193 -->
 
           </div><!-- /.card -->
 

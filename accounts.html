@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>Accounts - XRP Ledger Dev Portal</title>
+    <title>Accounts - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="Accounts | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/accounts.html" />
+    <meta property="og:description" content="Learn about accounts in the XRP Ledger. Accounts can send transactions and hold XRP." />
+    <meta name="description" content="Learn about accounts in the XRP Ledger. Accounts can send transactions and hold XRP." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/accounts.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/accounts.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/accounts.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -59,9 +78,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -227,7 +251,7 @@
 </ul>
 <blockquote class="devportal-callout note">
 <p><strong>Note:</strong> The XRP community has <a class="external-link" href="https://github.com/xrp-community/standards-drafts/issues/6" target="_blank">proposed <i aria-hidden="true" class="fa fa-external-link"></i></a> an <strong>X</strong>-address format that "packs" a <a href="source-and-destination-tags.html">destination tag</a> into the address. These addresses start with an <code>X</code> (for the mainnet) or a <code>T</code> (for the <a href="parallel-networks.html">testnet</a>). Exchanges and wallets can use X-addresses to represent all the data a customer needs to know in one value. For more information, see the <a class="external-link" href="https://xrpaddress.info/" target="_blank">X-address format site <i aria-hidden="true" class="fa fa-external-link"></i></a> and <a class="external-link" href="https://github.com/xrp-community/xrpl-tagged-address-codec" target="_blank">codec <i aria-hidden="true" class="fa fa-external-link"></i></a>.</p>
-<p>The XRP Ledger protocol only supports "classic" addresses natively, but <a href="rippleapi-reference.html">ripple-lib</a>, <a class="external-link" href="https://xpring.io/docs" target="_blank">Xpring SDK <i aria-hidden="true" class="fa fa-external-link"></i></a>, and many other tools support X-addresses too.</p>
+<p>The XRP Ledger protocol only supports "classic" addresses natively, but <a href="rippleapi-reference.html">ripple-lib</a>, <a class="external-link" href="https://ripplex.io/docs" target="_blank">RippleX Dev Kit <i aria-hidden="true" class="fa fa-external-link"></i></a>, and many other tools support X-addresses too.</p>
 </blockquote>
 <p>For more information, see <a href="accounts.html">Accounts</a> and <a href="base58-encodings.html">base58 Encodings</a>.</p>
 <p>Any valid address can <a href="#creating-accounts">become an account in the XRP Ledger</a> by being funded. You can also use an address that has not been funded to represent a <a href="setregularkey.html">regular key</a> or a member of a <a href="multi-signing.html">signer list</a>. Only a funded account can be the sender of a transaction.</p>
@@ -323,46 +347,46 @@
 <li>
 <p>Import required algorithms: SHA-256, RIPEMD160, and base58. Set the dictionary for base58.</p>
 <div class="codehilite"><pre><span></span><code><span class="s1">'use strict'</span><span class="p">;</span>
-<span class="n">const</span> <span class="n">assert</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">'assert'</span><span class="p">);</span>
-<span class="n">const</span> <span class="n">crypto</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">'crypto'</span><span class="p">);</span>
-<span class="n">const</span> <span class="n">R_B58_DICT</span> <span class="o">=</span> <span class="s1">'rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz'</span><span class="p">;</span>
-<span class="n">const</span> <span class="n">base58</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">'base-x'</span><span class="p">)(</span><span class="n">R_B58_DICT</span><span class="p">);</span>
+<span class="k">const</span> <span class="nb">assert</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">'assert'</span><span class="p">);</span>
+<span class="k">const</span> <span class="n">crypto</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">'crypto'</span><span class="p">);</span>
+<span class="k">const</span> <span class="n">R_B58_DICT</span> <span class="o">=</span> <span class="s1">'rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz'</span><span class="p">;</span>
+<span class="k">const</span> <span class="n">base58</span> <span class="o">=</span> <span class="n">require</span><span class="p">(</span><span class="s1">'base-x'</span><span class="p">)(</span><span class="n">R_B58_DICT</span><span class="p">);</span>
 
-<span class="n">assert</span><span class="p">(</span><span class="n">crypto</span><span class="p">.</span><span class="n">getHashes</span><span class="p">().</span><span class="n">includes</span><span class="p">(</span><span class="s1">'sha256'</span><span class="p">));</span>
-<span class="n">assert</span><span class="p">(</span><span class="n">crypto</span><span class="p">.</span><span class="n">getHashes</span><span class="p">().</span><span class="n">includes</span><span class="p">(</span><span class="s1">'ripemd160'</span><span class="p">));</span>
+<span class="nb">assert</span><span class="p">(</span><span class="n">crypto</span><span class="o">.</span><span class="n">getHashes</span><span class="p">()</span><span class="o">.</span><span class="n">includes</span><span class="p">(</span><span class="s1">'sha256'</span><span class="p">));</span>
+<span class="nb">assert</span><span class="p">(</span><span class="n">crypto</span><span class="o">.</span><span class="n">getHashes</span><span class="p">()</span><span class="o">.</span><span class="n">includes</span><span class="p">(</span><span class="s1">'ripemd160'</span><span class="p">));</span>
 </code></pre></div>
 </li>
 <li>
 <p>Start with a 33-byte ECDSA secp256k1 public key, or a 32-byte Ed25519 public key. For Ed25519 keys, prefix the key with the byte <code>0xED</code>.</p>
-<div class="codehilite"><pre><span></span><code><span class="err">const pubkey_hex =</span>
-<span class="err">  'ED9434799226374926EDA3B54B1B461B4ABF7237962EAE18528FEA67595397FA32';</span>
-<span class="err">const pubkey = Buffer.from(pubkey_hex, 'hex');</span>
-<span class="err">assert(pubkey.length == 33);</span>
+<div class="codehilite"><pre><span></span><code><span class="k">const</span> <span class="n">pubkey_hex</span> <span class="o">=</span>
+  <span class="s1">'ED9434799226374926EDA3B54B1B461B4ABF7237962EAE18528FEA67595397FA32'</span><span class="p">;</span>
+<span class="k">const</span> <span class="n">pubkey</span> <span class="o">=</span> <span class="n">Buffer</span><span class="o">.</span><span class="n">from</span><span class="p">(</span><span class="n">pubkey_hex</span><span class="p">,</span> <span class="s1">'hex'</span><span class="p">);</span>
+<span class="nb">assert</span><span class="p">(</span><span class="n">pubkey</span><span class="o">.</span><span class="n">length</span> <span class="o">==</span> <span class="mi">33</span><span class="p">);</span>
 </code></pre></div>
 </li>
 <li>
 <p>Calculate the <a class="external-link" href="https://en.wikipedia.org/wiki/RIPEMD" target="_blank">RIPEMD160 <i aria-hidden="true" class="fa fa-external-link"></i></a> hash of the SHA-256 hash of the public key. This value is the "Account ID".</p>
-<div class="codehilite"><pre><span></span><code><span class="err">const pubkey_inner_hash = crypto.createHash('sha256').update(pubkey);</span>
-<span class="err">const pubkey_outer_hash = crypto.createHash('ripemd160');</span>
-<span class="err">pubkey_outer_hash.update(pubkey_inner_hash.digest());</span>
-<span class="err">const account_id = pubkey_outer_hash.digest();</span>
+<div class="codehilite"><pre><span></span><code><span class="k">const</span> <span class="n">pubkey_inner_hash</span> <span class="o">=</span> <span class="n">crypto</span><span class="o">.</span><span class="n">createHash</span><span class="p">(</span><span class="s1">'sha256'</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pubkey</span><span class="p">);</span>
+<span class="k">const</span> <span class="n">pubkey_outer_hash</span> <span class="o">=</span> <span class="n">crypto</span><span class="o">.</span><span class="n">createHash</span><span class="p">(</span><span class="s1">'ripemd160'</span><span class="p">);</span>
+<span class="n">pubkey_outer_hash</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">pubkey_inner_hash</span><span class="o">.</span><span class="n">digest</span><span class="p">());</span>
+<span class="k">const</span> <span class="n">account_id</span> <span class="o">=</span> <span class="n">pubkey_outer_hash</span><span class="o">.</span><span class="n">digest</span><span class="p">();</span>
 </code></pre></div>
 </li>
 <li>
 <p>Calculate the SHA-256 hash of the SHA-256 hash of the Account ID; take the first 4 bytes. This value is the "checksum".</p>
-<div class="codehilite"><pre><span></span><code><span class="err">const address_type_prefix = Buffer.from([0x00]);</span>
-<span class="err">const payload = Buffer.concat([address_type_prefix, account_id]);</span>
-<span class="err">const chksum_hash1 = crypto.createHash('sha256').update(payload).digest();</span>
-<span class="err">const chksum_hash2 = crypto.createHash('sha256').update(chksum_hash1).digest();</span>
-<span class="err">const checksum =  chksum_hash2.slice(0,4);</span>
+<div class="codehilite"><pre><span></span><code><span class="k">const</span> <span class="n">address_type_prefix</span> <span class="o">=</span> <span class="n">Buffer</span><span class="o">.</span><span class="n">from</span><span class="p">([</span><span class="mh">0x00</span><span class="p">]);</span>
+<span class="k">const</span> <span class="n">payload</span> <span class="o">=</span> <span class="n">Buffer</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">address_type_prefix</span><span class="p">,</span> <span class="n">account_id</span><span class="p">]);</span>
+<span class="k">const</span> <span class="n">chksum_hash1</span> <span class="o">=</span> <span class="n">crypto</span><span class="o">.</span><span class="n">createHash</span><span class="p">(</span><span class="s1">'sha256'</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">();</span>
+<span class="k">const</span> <span class="n">chksum_hash2</span> <span class="o">=</span> <span class="n">crypto</span><span class="o">.</span><span class="n">createHash</span><span class="p">(</span><span class="s1">'sha256'</span><span class="p">)</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chksum_hash1</span><span class="p">)</span><span class="o">.</span><span class="n">digest</span><span class="p">();</span>
+<span class="k">const</span> <span class="n">checksum</span> <span class="o">=</span>  <span class="n">chksum_hash2</span><span class="o">.</span><span class="n">slice</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">4</span><span class="p">);</span>
 </code></pre></div>
 </li>
 <li>
 <p>Concatenate the payload and the checksum. Calculate the base58 value of the concatenated buffer. The result is the address.</p>
-<div class="codehilite"><pre><span></span><code><span class="err">const dataToEncode = Buffer.concat([payload, checksum]);</span>
-<span class="err">const address = base58.encode(dataToEncode);</span>
-<span class="err">console.log(address);</span>
-<span class="err">// rDTXLQ7ZKZVKz33zJbHjgVShjsBnqMBhmN</span>
+<div class="codehilite"><pre><span></span><code><span class="k">const</span> <span class="n">dataToEncode</span> <span class="o">=</span> <span class="n">Buffer</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">payload</span><span class="p">,</span> <span class="n">checksum</span><span class="p">]);</span>
+<span class="k">const</span> <span class="n">address</span> <span class="o">=</span> <span class="n">base58</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">dataToEncode</span><span class="p">);</span>
+<span class="n">console</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">address</span><span class="p">);</span>
+<span class="o">//</span> <span class="n">rDTXLQ7ZKZVKz33zJbHjgVShjsBnqMBhmN</span>
 </code></pre></div>
 </li>
 </ol>
@@ -454,6 +478,7 @@
                           <li><a class="subpage" href="cryptographic-keys.html">Cryptographic Keys</a></li>
                           <li><a class="subpage" href="multi-signing.html">Multi-Signing</a></li>
                           <li><a class="subpage" href="reserves.html">Reserves</a></li>
+                          <li><a class="subpage" href="tickets.html">Tickets <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
                           <li><a class="subpage" href="depositauth.html">Deposit Authorization</a></li>
 
                       <li><a class="nosubcat-page" href="fees.html">Fees (Disambiguation)</a></li>
@@ -473,15 +498,15 @@
 
         <!---->
           <div class="card">
-            <div class="card-header" role="tab" id="sidenav_cat_head_20">
-                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_20" aria-expanded="true" aria-controls="sidenav_collapse_20"></a>
+            <div class="card-header" role="tab" id="sidenav_cat_head_21">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_21" aria-expanded="true" aria-controls="sidenav_collapse_21"></a>
               <h5 class="card-title">
                   <a class="sidenav_cat_title" href="payment-types.html">Payment Types</a>
                 <!-- <a class="sidenav_cat_title" href="payment-types.html">Payment Types</a> -->
               </h5>
             </div><!-- /.card-header -->
 
-            <div id="sidenav_collapse_20" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_20">
+            <div id="sidenav_collapse_21" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_21">
               <div class="card-body">
                 <ul class="sidebar_pagelist">
                       <li><a class="nosubcat-page" href="direct-xrp-payments.html">Direct XRP Payments</a></li>
@@ -493,21 +518,21 @@
 
                 </ul>
               </div><!-- /.card-body -->
-            </div><!-- /#sidenav_collapse20 -->
+            </div><!-- /#sidenav_collapse21 -->
 
           </div><!-- /.card -->
 
         <!---->
           <div class="card">
-            <div class="card-header" role="tab" id="sidenav_cat_head_28">
-                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_28" aria-expanded="true" aria-controls="sidenav_collapse_28"></a>
+            <div class="card-header" role="tab" id="sidenav_cat_head_29">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_29" aria-expanded="true" aria-controls="sidenav_collapse_29"></a>
               <h5 class="card-title">
                   <a class="sidenav_cat_title" href="issued-currencies.html">Issued Currencies</a>
                 <!-- <a class="sidenav_cat_title" href="issued-currencies.html">Issued Currencies</a> -->
               </h5>
             </div><!-- /.card-header -->
 
-            <div id="sidenav_collapse_28" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_28">
+            <div id="sidenav_collapse_29" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_29">
               <div class="card-body">
                 <ul class="sidebar_pagelist">
                       <li><a class="nosubcat-page" href="issued-currencies-overview.html">Issued Currencies Overview</a></li>
@@ -522,21 +547,21 @@
 
                 </ul>
               </div><!-- /.card-body -->
-            </div><!-- /#sidenav_collapse28 -->
+            </div><!-- /#sidenav_collapse29 -->
 
           </div><!-- /.card -->
 
         <!---->
           <div class="card">
-            <div class="card-header" role="tab" id="sidenav_cat_head_38">
-                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_38" aria-expanded="true" aria-controls="sidenav_collapse_38"></a>
+            <div class="card-header" role="tab" id="sidenav_cat_head_39">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_39" aria-expanded="true" aria-controls="sidenav_collapse_39"></a>
               <h5 class="card-title">
                   <a class="sidenav_cat_title" href="decentralized-exchange.html">Decentralized Exchange</a>
                 <!-- <a class="sidenav_cat_title" href="decentralized-exchange.html">Decentralized Exchange</a> -->
               </h5>
             </div><!-- /.card-header -->
 
-            <div id="sidenav_collapse_38" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_38">
+            <div id="sidenav_collapse_39" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_39">
               <div class="card-body">
                 <ul class="sidebar_pagelist">
                       <li><a class="nosubcat-page" href="offers.html">Offers</a></li>
@@ -545,27 +570,28 @@
 
                 </ul>
               </div><!-- /.card-body -->
-            </div><!-- /#sidenav_collapse38 -->
+            </div><!-- /#sidenav_collapse39 -->
 
           </div><!-- /.card -->
 
         <!---->
           <div class="card">
-            <div class="card-header" role="tab" id="sidenav_cat_head_42">
-                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_42" aria-expanded="true" aria-controls="sidenav_collapse_42"></a>
+            <div class="card-header" role="tab" id="sidenav_cat_head_43">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_43" aria-expanded="true" aria-controls="sidenav_collapse_43"></a>
               <h5 class="card-title">
                   <a class="sidenav_cat_title" href="consensus-network.html">Consensus Network</a>
                 <!-- <a class="sidenav_cat_title" href="consensus-network.html">Consensus Network</a> -->
               </h5>
             </div><!-- /.card-header -->
 
-            <div id="sidenav_collapse_42" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_42">
+            <div id="sidenav_collapse_43" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_43">
               <div class="card-body">
                 <ul class="sidebar_pagelist">
                       <li><a class="nosubcat-page" href="consensus.html">Consensus</a></li>
                       <li><a class="nosubcat-page" href="consensus-principles-and-rules.html">Consensus Principles and Rules</a></li>
                       <li><a class="nosubcat-page" href="consensus-protections.html">Consensus Protections Against Attacks and Failure Modes</a></li>
                       <li><a class="nosubcat-page" href="invariant-checking.html">Invariant Checking</a></li>
+                      <li><a class="nosubcat-page" href="negative-unl.html">Negative UNL <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
                       <li><a class="nosubcat-page" href="transaction-queue.html">Transaction Queue</a></li>
                       <li><a class="nosubcat-page" href="about-canceling-a-transaction.html">About Canceling a Transaction</a></li>
                       <li><a class="nosubcat-page" href="transaction-malleability.html">Transaction Malleability</a></li>
@@ -579,21 +605,21 @@
 
                 </ul>
               </div><!-- /.card-body -->
-            </div><!-- /#sidenav_collapse42 -->
+            </div><!-- /#sidenav_collapse43 -->
 
           </div><!-- /.card -->
 
         <!---->
           <div class="card">
-            <div class="card-header" role="tab" id="sidenav_cat_head_55">
-                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_55" aria-expanded="true" aria-controls="sidenav_collapse_55"></a>
+            <div class="card-header" role="tab" id="sidenav_cat_head_57">
+                <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_57" aria-expanded="true" aria-controls="sidenav_collapse_57"></a>
               <h5 class="card-title">
                   <a class="sidenav_cat_title" href="the-rippled-server.html">The rippled Server</a>
                 <!-- <a class="sidenav_cat_title" href="the-rippled-server.html">The rippled Server</a> -->
               </h5>
             </div><!-- /.card-header -->
 
-            <div id="sidenav_collapse_55" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_55">
+            <div id="sidenav_collapse_57" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_57">
               <div class="card-body">
                 <ul class="sidebar_pagelist">
                       <li><a class="nosubcat-page" href="rippled-server-modes.html">rippled Server Modes</a></li>
@@ -608,7 +634,7 @@
 
                 </ul>
               </div><!-- /.card-body -->
-            </div><!-- /#sidenav_collapse55 -->
+            </div><!-- /#sidenav_collapse57 -->
 
           </div><!-- /.card -->
 

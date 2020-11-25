@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>Connect Your rippled to a Parallel Network - XRP Ledger Dev Portal</title>
+    <title>Connect Your rippled to a Parallel Network - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="Connect Your rippled to a Parallel Network | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/connect-your-rippled-to-the-xrp-test-net.html" />
+    <meta property="og:description" content="Connect your rippled server to the test net to try out new features or test functionality with fake money." />
+    <meta name="description" content="Connect your rippled server to the test net to try out new features or test functionality with fake money." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/connect-your-rippled-to-the-xrp-test-net.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/connect-your-rippled-to-the-xrp-test-net.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/connect-your-rippled-to-the-xrp-test-net.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -59,9 +78,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -161,8 +185,9 @@
 <li class="level-2"><a href="#steps">Steps</a></li>
 <li class="level-2"><a href="#1-configure-your-server-to-connect-to-the-right-hub">1. Configure your server to connect to the right hub.</a></li>
 <li class="level-2"><a href="#2-set-your-trusted-validator-list">2. Set your trusted validator list.</a></li>
-<li class="level-2"><a href="#3-restart-the-server">3. Restart the server.</a></li>
-<li class="level-2"><a href="#4-verify-that-your-server-syncs">4. Verify that your server syncs.</a></li>
+<li class="level-2"><a href="#3-devnet-only-enable-features">3. (Devnet Only) Enable Features</a></li>
+<li class="level-2"><a href="#4-restart-the-server">4. Restart the server.</a></li>
+<li class="level-2"><a href="#5-verify-that-your-server-syncs">5. Verify that your server syncs.</a></li>
 <li class="level-2"><a href="#see-also">See Also</a></li>
 
     </ul>
@@ -189,8 +214,8 @@
 <p>To connect your <code>rippled</code> server to the XRP Testnet or Devnet, complete these steps. You can also use these steps to switch back to the production Mainnet after being on the Testnet or Devnet.</p>
 <h2 id="1-configure-your-server-to-connect-to-the-right-hub">1. Configure your server to connect to the right hub.</h2>
 <p>Edit your <code>rippled.cfg</code> file.</p>
-<p>The <a href="install-rippled.html">recommended installation</a> uses the config file <code>/etc/opt/ripple/rippled.cfg</code> by default. Other places you can put a config file include <code>$HOME/.config/ripple/rippled.cfg</code> (where <code>$HOME</code> is the home directory of the user running <code>rippled</code>), <code>$HOME/.local/ripple/rippled.cfg</code>, or the current working directory from where you start <code>rippled</code>.
-<!--{_ }--></p>
+<p>The <a href="install-rippled.html">recommended installation</a> uses the config file <code>/etc/opt/ripple/rippled.cfg</code> by default. Other places you can put a config file include <code>$HOME/.config/ripple/rippled.cfg</code> (where <code>$HOME</code> is the home directory of the user running <code>rippled</code>), <code>$HOME/.local/ripple/rippled.cfg</code>, or the current working directory from where you start <code>rippled</code>.</p>
+<!--{_ }-->
 <ol>
 <li>
 <p>Set an <code>[ips]</code> stanza with the hub for the network you want to connect to:</p>
@@ -266,10 +291,16 @@
 </code></pre></div>
 </li>
 </ol>
-<h2 id="3-restart-the-server">3. Restart the server.</h2>
+<h2 id="3-devnet-only-enable-features">3. (Devnet Only) Enable Features</h2>
+<p>To connect to Devnet, you must also forcefully enable any experimental features that are currently in testing on Devnet. Add or modify the <code>[features]</code> stanza of your config file as follows:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">[features]</span>
+<span class="na">NegativeUNL</span>
+</code></pre></div>
+<p class="devportal-callout warning"><strong>Warning:</strong> Do not use the <code>[features]</code> stanza when connecting to Mainnet or Testnet. Forcefully enabling different features than the rest of the network could cause your server to diverge from the network.</p>
+<h2 id="4-restart-the-server">4. Restart the server.</h2>
 <div class="codehilite"><pre><span></span><code>$ sudo systemctl restart rippled
 </code></pre></div>
-<h2 id="4-verify-that-your-server-syncs">4. Verify that your server syncs.</h2>
+<h2 id="5-verify-that-your-server-syncs">5. Verify that your server syncs.</h2>
 <p>It takes about 5 to 15 minutes to sync to the network after a restart. After your server is synced, the <a href="server_info.html">server_info method</a> shows the a <code>validated_ledger</code> object based on the network you are connected to.</p>
 <p>To verify that your <code>rippled</code> is connected to the XRP Testnet or Devnet, compare the results from your server to <a href="get-started-with-the-rippled-api.html#public-servers">a public server</a> on the Testnet or Devnet. The <code>seq</code> field of the <code>validated_ledger</code> object should be the same on both servers (possibly off by one or two, if it changed as you were checking).</p>
 <p>The following example shows how to check the latest validated ledger from the commandline:</p>

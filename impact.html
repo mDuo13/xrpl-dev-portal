@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>Impact - XRP Ledger Dev Portal</title>
+    <title>Impact - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="Impact | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/impact.html" />
+    <meta property="og:description" content="XRPL.org is a community-driven resource for all things XRP and the XRP Ledger—your source for technical information, reference materials and tools." />
+    <meta name="description" content="XRPL.org is a community-driven resource for all things XRP and the XRP Ledger—your source for technical information, reference materials and tools." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/impact.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/impact.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/impact.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -54,9 +73,14 @@
 
 <body class="xrp-ledger-dev-portal lang-en no-sidebar">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -153,11 +177,11 @@
     <div class="container mt-20">
       <section class="row">
         <div class="col-md-4 d-flex flex-column-reverse justify-content-end">
-        <h1 class="mb-10">Faster, Cheaper, Green Money</h1>
+          <h1 class="mb-10">Faster, Cheaper, Green Money</h1>
           <h6 class="text-primary mb-4">Impact</h6>
         </div>
         <div class="col-md-6 offset-md-1">
-          <h2 class="mt-12 mb-10">The digital asset XRP is a truly global currency—ideally suited to enable today’s global economy.</h2>
+          <h2 class="mt-12 mb-10">The digital asset XRP is a truly global currency—ideally suited to enable today’s growing digital economy.</h2>
           <p>As an optimal medium of exchange, XRP and the XRP Ledger on which it operates help to move money around the world faster, cheaper and more sustainably than any other currency available today.</p>
           <p class="mb-10">It was designed this way, and it’s proving its impact in global payments and beyond.</p>
           <a href="carbon-calculator.html" class="arrow-link text-white bold">How Green Is Your Currency?</a>
@@ -168,7 +192,7 @@
     <img class="mb-30" src="./img/impact/hero-impact.png" id="hero-impact" />
 
     <div class="container mb-20">
-      <section class="row mb-50">
+      <section class="row mb-30 mb-50-until-sm">
         <h6 class="section-marker">Global Payments</h6>
         <div class="col-md-4 offset-md-1 mb-10 text-center d-flex-md justify-content-md-center align-self-md-center">
           <img class="mw-100" src="./img/impact/impact-democratizing-payments@2x.png">
@@ -176,7 +200,7 @@
         <div class="col-md-6 offset-md-1">
           <h2 class="mb-10">Creating Economic Opportunity</h2>
           <h5 class="mb-10 normal">For the more than <a href="https://www.un.org/sites/un2.un.org/files/wmr_2020.pdf">272 million migrants</a> worldwide, sending and receiving money across borders is expensive, unreliable and complex.</h5>
-          <div class="mb-10 row">
+          <div class="row">
             <div class="col-md">
               <p>XRP and the XRP Ledger are changing that.</p>
               <p>The technology has been adopted by financial institutions around the world. They use it to source liquidity for international transactions, and because of the unprecedented efficiency it offers, they’re able to both bring down costs and improve services.</p>
@@ -186,23 +210,23 @@
         </div>
       </section>
 
-      <section class="row mb-50">
+      <section class="row mb-30 mb-50-until-sm">
         <h6 class="section-marker">Future of Finance</h6>
-        <div class="col-md-4 offset-md-1 order-1 order-md-2 mb-10 text-center">
+        <div class="col-md-4 offset-md-1 order-1 order-md-2 mb-10">
           <img class="mw-100" src="./img/impact/impact-building-future@2x.png">
+          <p class="text-smaller grey-700 mb-3 mt-3 ml-4">*NUS Research on Blockchain Adoption and Sustainability</p>
         </div>
         <div class="col-md-6 offset-md-1 order-2 order-md-1">
           <h2 class="mb-10">Building for the Future</h2>
           <h5 class="mb-10 normal">Digital assets and blockchain technology are the future of finance. Open and decentralized, they offer the first-ever global standards for value exchange broadly—whether it’s money, stocks, loyalty points, intellectual property or more.</h5>
-          <div class="row mb-10">
+          <div class="row">
             <p class="col-md">This has spawned increasing adoption of the technology across the financial services industry, from retail and institutional investment to commercial use cases like cross-border payments.</p>
             <p class="col-md">With usage growing, it’s critical that measures are taken today to ensure that the technology is environmentally sustainable tomorrow.</p>
           </div>
-          <a href="#" class="btn btn-outline-secondary">Learn More</a>
         </div>
       </section>
 
-      <section class="row mb-50">
+      <section class="row mb-30 mb-50-until-sm">
         <h6 class="section-marker">Digital Assets</h6>
           <div class="col-md-4 offset-md-1 mb-10 text-center d-flex-md justify-content-md-center align-self-md-center">
             <img class="mw-100" src="./img/impact/impact-crypto-strengths@2x.png">
@@ -210,7 +234,7 @@
           <div class="col-md-6 offset-md-1">
             <h2 class="mb-10">Are All Digital Assets Alike?</h2>
             <h5 class="mb-10 normal">Each digital asset has different strengths that make it ideal for various use cases today.</h5>
-            <div class="row mb-10">
+            <div class="row">
               <div class="col-md">
                 <p>Bitcoin is recognized broadly as a store of value and ether (ETH) for use in smart contracts.</p>
                 <p>XRP is optimal for transacting—it’s fast, cheap, scalable and energy-efficient. It was designed for use in global payments.</p>
@@ -224,11 +248,11 @@
       <section class="row last-section">
         <h6 class="section-marker">Future of Finance</h6>
         <div class="col-md-4 mb-10 text-center">
-          <img class="mw-100 mt-20" src="./img/green/green-graphic@2x.png">
+          <img class="mw-100 mt-20-until-sm green-graphic" src="./img/green/green-graphic@2x.png">
         </div>
         <div class="col-md-8">
           <h2 class="mb-10">What Makes XRP and the XRP Ledger Green?</h2>
-          <h5 class="mb-10 normal">Most currency today—whether digital or physical—is not environmentally friendly. The potential for long-term impact on our planet could hold startling consequences.</h5>
+          <h5 class="mb-10 normal">Most currency today—whether digital or physical—is not environmentally friendly. The potential long-term impact on our planet could hold startling consequences.</h5>
           <div class="row mb-10">
             <div class="col-md">
               <p>The digital asset XRP was designed with sustainability in mind. The XRP Ledger processes transactions through a unique “consensus” mechanism that consumes negligible energy and all XRP currency is already in circulation.</p>

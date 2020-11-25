@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>Pseudo-Transactions - XRP Ledger Dev Portal</title>
+    <title>Pseudo-Transactions - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="Pseudo-Transactions | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/pseudo-transaction-types.html" />
+    <meta property="og:description" content="Formats of pseudo-transactions that validators sometimes apply to the XRP Ledger." />
+    <meta name="description" content="Formats of pseudo-transactions that validators sometimes apply to the XRP Ledger." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/pseudo-transaction-types.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/pseudo-transaction-types.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/pseudo-transaction-types.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -47,9 +66,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -157,38 +181,87 @@
   <section class="pt-3 p-md-3">
     <article class="content">
       <h1 id="pseudo-transactions">Pseudo-Transactions</h1>
-<p>Pseudo-Transactions are never submitted by users, nor propagated through the network. Instead, a server may choose to inject them in a proposed ledger directly. If enough servers inject an equivalent pseudo-transaction for it to pass consensus, then it becomes included in the ledger, and appears in ledger data thereafter.</p>
-<p>Some of the fields that are mandatory for normal transactions do not make sense for pseudo-transactions. In those cases, the pseudo-transaction has the following default values:</p>
+<p>Pseudo-transactions are never submitted by users, nor <a href="peer-protocol.html">propagated through the network</a>. Instead, a server may choose to inject pseudo-transactions in a proposed ledger directly according to specific protocol rules. If enough servers inject an identical pseudo-transaction for it to be approved by the <a href="consensus.html">consensus process</a>, then the pseudo-transaction becomes included in the ledger, and appears in ledger data thereafter.</p>
+<h2 id="special-values-for-common-fields">Special Values for Common Fields</h2>
+<p>Some of the required <a href="transaction-common-fields.html">common fields</a> for normal transactions do not make sense for pseudo-transactions. Pseudo-transactions use following special values for these common fields:</p>
 <table>
 <thead>
 <tr>
 <th align="left">Field</th>
-<th align="left">Default Value</th>
+<th align="left">JSON Type</th>
+<th align="left"><a href="serialization.html">Internal Type</a></th>
+<th align="left">Value</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td align="left"><code>Account</code></td>
+<td align="left">String</td>
+<td align="left">AccountID</td>
 <td align="left"><a href="accounts.html#special-addresses">ACCOUNT_ZERO</a></td>
 </tr>
 <tr>
-<td align="left"><code>Sequence</code></td>
+<td align="left"><code>Fee</code></td>
+<td align="left">String</td>
+<td align="left">Amount</td>
 <td align="left"><code>0</code></td>
 </tr>
 <tr>
-<td align="left"><code>Fee</code></td>
+<td align="left"><code>Sequence</code></td>
+<td align="left">Number</td>
+<td align="left">UInt32</td>
 <td align="left"><code>0</code></td>
 </tr>
 <tr>
 <td align="left"><code>SigningPubKey</code></td>
-<td align="left"><code>""</code></td>
+<td align="left">String</td>
+<td align="left">Blob</td>
+<td align="left"><code>""</code> (Empty string)</td>
 </tr>
 <tr>
-<td align="left"><code>Signature</code></td>
-<td align="left"><code>""</code></td>
+<td align="left"><code>SigningPubKey</code></td>
+<td align="left">String</td>
+<td align="left">Blob</td>
+<td align="left"><code>""</code> (Empty string)</td>
 </tr>
 </tbody>
 </table>
+<p>Pseudo-transactions use the following common fields as normal:</p>
+<ul>
+<li><code>TransactionType</code></li>
+<li><code>Flags</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th align="left">Field</th>
+<th align="left">JSON Type</th>
+<th align="left"><a href="serialization.html">Internal Type</a></th>
+<th align="left">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>TransactionType</code></td>
+<td align="left">String</td>
+<td align="left">UInt16</td>
+<td align="left"><em>(Required)</em> The type of transaction.</td>
+</tr>
+<tr>
+<td align="left"><code>Flags</code></td>
+<td align="left">Number</td>
+<td align="left">UInt32</td>
+<td align="left"><em>(Optional)</em> A set of bit-flags for this transaction. The meaning of specific flags varies based on the transaction type.</td>
+</tr>
+</tbody>
+</table>
+<!-- -->
+<!-- -->
+<!-- API object types -->
+<!-- -->
+<!-- -->
+<!-- -->
+<!-- rippled release notes links -->
 
 
 
@@ -199,6 +272,8 @@
             <li class="level-1"><a href="enableamendment.html">EnableAmendment</a><p class="blurb child-blurb">Enable a change in transaction processing.</p></li>
 
         <li class="level-1"><a href="setfee.html">SetFee</a><p class="blurb child-blurb">Change global reserve and transaction cost settings.</p></li>
+
+        <li class="level-1"><a href="unlmodify.html">UNLModify</a><p class="blurb child-blurb">Change the list of trusted validators currently considered offline.</p></li>
 
 
 
@@ -405,10 +480,12 @@
                             <li><a class="subpage" href="escrow-object.html">Escrow</a></li>
                             <li><a class="subpage" href="feesettings.html">FeeSettings</a></li>
                             <li><a class="subpage" href="ledgerhashes.html">LedgerHashes</a></li>
+                            <li><a class="subpage" href="negativeunl.html">NegativeUNL <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
                             <li><a class="subpage" href="offer.html">Offer</a></li>
                             <li><a class="subpage" href="paychannel.html">PayChannel</a></li>
                             <li><a class="subpage" href="ripplestate.html">RippleState</a></li>
                             <li><a class="subpage" href="signerlist.html">SignerList</a></li>
+                            <li><a class="subpage" href="ticket.html">Ticket</a></li>
 
 
                   </ul>
@@ -447,12 +524,14 @@
                             <li><a class="subpage" href="paymentchannelfund.html">PaymentChannelFund</a></li>
                             <li><a class="subpage" href="setregularkey.html">SetRegularKey</a></li>
                             <li><a class="subpage" href="signerlistset.html">SignerListSet</a></li>
+                            <li><a class="subpage" href="ticketcreate.html">TicketCreate</a></li>
                             <li><a class="subpage" href="trustset.html">TrustSet</a></li>
 
                         <li><a class="subcat-title active" href="#main_content_body">Pseudo-Transactions</a></li>
 
                             <li><a class="subpage" href="enableamendment.html">EnableAmendment</a></li>
                             <li><a class="subpage" href="setfee.html">SetFee</a></li>
+                            <li><a class="subpage" href="unlmodify.html">UNLModify <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
 
                         <li><a class="subcat-title" href="transaction-results.html">Transaction Results</a></li>
 

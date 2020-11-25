@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>Configure Full History - XRP Ledger Dev Portal</title>
+    <title>Configure Full History - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="Configure Full History | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/configure-full-history.html" />
+    <meta property="og:description" content="Full history servers provide a record of every transaction ever to occur in the XRP Ledger, although they are expensive to run." />
+    <meta name="description" content="Full history servers provide a record of every transaction ever to occur in the XRP Ledger, although they are expensive to run." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/configure-full-history.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/configure-full-history.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/configure-full-history.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -59,9 +78,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -182,7 +206,7 @@
         <h1 id="configure-full-history">Configure Full History</h1>
 <p>In its default configuration, the <code>rippled</code> server automatically deletes outdated history of XRP Ledger state and transactions as new ledger versions become available. This is sufficient for most servers, which do not need older history to know the current state and process transactions. However, it can be useful for the network if some servers provide as much history of the XRP Ledger as possible.</p>
 <h2 id="warnings">Warnings</h2>
-<p>Storing full history is expensive. As of 2018-12-11, the full history of the XRP Ledger occupies approximately <strong>9 terabytes</strong> of disk space, which must be entirely stored on fast solid state disk drives for proper server performance. Such a large amount of solid state storage is not cheap, and the total amount of history you must store increases by approximately 12 GB per day.</p>
+<p>Storing full history is expensive. As of 2020-11-10, the full history of the XRP Ledger occupies approximately <strong>14 terabytes</strong> of disk space, which must be entirely stored on fast solid state disk drives for proper server performance. Such a large amount of solid state storage is not cheap, and the total amount of history you must store increases by approximately 12 GB per day.</p>
 <p>Acquiring full history from the peer-to-peer network takes a long time (several months) and requires that your server has sufficient system and network resources to acquire older history while keeping up with new ledger progress. To get a faster start on acquiring ledger history, you may want to find another server operator who has a large amount of history already downloaded, who can give you a database dump or at least allow your server to explicitly peer with theirs for a long time to acquire history. The server can load ledger history from a file and verify the integrity of the historical ledgers it imports.</p>
 <p>You do not need a full history server to participate in the network, validate transactions, or know the current state of the network. Full history is only useful for knowing the outcome of transactions that occurred in the past, or the state of the ledger at a given time in the past. To get such information, you must rely on other servers having the history you need.</p>
 <p>If you want to contribute to storing the history of the XRP Ledger network without storing the full history, you can <a href="configure-history-sharding.html">configure history sharding</a> to store randomly-selected chunks of ledger history instead.</p>
@@ -231,7 +255,7 @@
 <li>
 <p>Remove your server's existing database files, if you have any from previously running <code>rippled</code>.</p>
 <p>After disabling online deletion, the server ignores any data that was downloaded while online deletion was enabled, so you may as well clear up the disk space. For example:</p>
-<div class="codehilite"><pre><span></span><code><span class="err">rm -r /var/lib/rippled/db/*</span>
+<div class="codehilite"><pre><span></span><code><span class="n">rm</span> <span class="o">-</span><span class="n">r</span> <span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">rippled</span><span class="o">/</span><span class="n">db</span><span class="o">/*</span>
 </code></pre></div>
 <p class="devportal-callout warning"><strong>Warning:</strong> Be sure that you have not put any files you want to keep in the folder before you delete it. It is generally safe to delete all of a <code>rippled</code> server's database files, but you should only do this if the configured database folder is not used for anything other than <code>rippled</code>'s databases.</p>
 </li>

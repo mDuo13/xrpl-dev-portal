@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>Become an XRP Ledger Gateway - XRP Ledger Dev Portal</title>
+    <title>Become an XRP Ledger Gateway - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="Become an XRP Ledger Gateway | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/become-an-xrp-ledger-gateway.html" />
+    <meta property="og:description" content="Gateways are the businesses that link the XRP Ledger to the rest of the world. This tutorial demonstrates how an existing online financial institution can expand to act as a gateway in the the XRP Ledger." />
+    <meta name="description" content="Gateways are the businesses that link the XRP Ledger to the rest of the world. This tutorial demonstrates how an existing online financial institution can expand to act as a gateway in the the XRP Ledger." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/become-an-xrp-ledger-gateway.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/become-an-xrp-ledger-gateway.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/become-an-xrp-ledger-gateway.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -59,9 +78,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -241,9 +265,9 @@
 <ul>
 <li>An <strong>Issuing Gateway</strong> receives money (or other assets of value) outside of the XRP Ledger, and issues currency in the XRP Ledger. This provides a direct way for customers to get money in and out of the XRP Ledger. All currencies in the XRP Ledger, except for XRP, are tied to a specific issuing gateway.</li>
 <li>A <strong>Private Exchange</strong> holds XRP and lets its customers buy and sell that XRP in its own system. Most cryptocurrencies rely on private exchanges to provide a market for the cryptocurrency, but the XRP Ledger has a currency exchange built into the protocol itself.</li>
-<li><strong>Merchants</strong> accept payment within the XRP Ledger in exchange for goods and services in the outside world. Currently, Ripple (the company) does not provide support for merchant operations using the XRP Ledger.
-<!--_ --></li>
+<li><strong>Merchants</strong> accept payment within the XRP Ledger in exchange for goods and services in the outside world. Currently, Ripple (the company) does not provide support for merchant operations using the XRP Ledger.</li>
 </ul>
+<!--_ -->
 <p>This guide focuses on running an <strong>issuing gateway</strong>.</p>
 <h3 id="trust-lines-and-issued-currencies">Trust Lines and Issued Currencies</h3>
 <p>All assets in the XRP Ledger, except for the native cryptocurrency XRP, are represented as <em>issued currencies</em>, which are digital balances that represent currency or assets of value held by an issuer. The XRP Ledger has a system of directional accounting relationships, called <em>trust lines</em>, to make sure that users only hold issued currencies from counterparties they trust.</p>
@@ -270,9 +294,9 @@
 <ul>
 <li>One <strong>issuing address</strong>, also known as a "cold wallet." This address is the hub of the financial institution's accounting relationships in the ledger, but sends as few transactions as possible. <!-- STYLE_OVERRIDE: cold wallet, wallet --></li>
 <li>One or more <strong>operational addresses</strong>, also known as "hot wallets." Automated, internet-connected systems use the secret keys to these addresses to conduct day-to-day business like transfers to customers and partners. <!-- STYLE_OVERRIDE: hot wallet, wallet --></li>
-<li>Optional <strong>standby addresses</strong>, also known as "warm wallets." Trusted human operators use these addresses to transfer money to the operational addresses. <!-- STYLE_OVERRIDE: warm wallet, wallet -->
-<!-- --></li>
+<li>Optional <strong>standby addresses</strong>, also known as "warm wallets." Trusted human operators use these addresses to transfer money to the operational addresses. <!-- STYLE_OVERRIDE: warm wallet, wallet --></li>
 </ul>
+<!-- -->
 <p>Main article: <a href="issuing-and-operational-addresses.html">Issuing and Operational Addresses</a></p>
 <h2 id="fees-and-revenue-sources">Fees and Revenue Sources</h2>
 <p>There are several ways in which a gateway can seek to profit from XRP Ledger integration. These can include:</p>
@@ -583,8 +607,8 @@
     <span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
-<p class="devportal-callout caution"><strong>Caution:</strong> Never submit a secret key to a server you do not control. Do not send a secret key unencrypted over the network.
-<!-- --></p>
+<p class="devportal-callout caution"><strong>Caution:</strong> Never submit a secret key to a server you do not control. Do not send a secret key unencrypted over the network.</p>
+<!-- -->
 <p>Response:</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="nt">"result"</span><span class="p">:</span> <span class="p">{</span>
@@ -631,8 +655,8 @@
     <span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
-<p class="devportal-callout caution"><strong>Caution:</strong> Never submit a secret key to a server you do not control. Do not send a secret key unencrypted over the network.
-<!-- --></p>
+<p class="devportal-callout caution"><strong>Caution:</strong> Never submit a secret key to a server you do not control. Do not send a secret key unencrypted over the network.</p>
+<!-- -->
 <p>Response:</p>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
     <span class="nt">"result"</span><span class="p">:</span> <span class="p">{</span>
@@ -678,8 +702,8 @@
     <span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
-<p class="devportal-callout caution"><strong>Caution:</strong> Never submit a secret key to a server you do not control. Do not send a secret key unencrypted over the network.
-<!-- --></p>
+<p class="devportal-callout caution"><strong>Caution:</strong> Never submit a secret key to a server you do not control. Do not send a secret key unencrypted over the network.</p>
+<!-- -->
 <h3 id="authorizing-trust-lines">Authorizing Trust Lines</h3>
 <p>If you are using the <a href="authorized-trust-lines.html">Authorized Trust Lines</a> feature, customers cannot hold balances you issue unless you first authorize their accounting relationships to you in the XRP Ledger.</p>
 <p>To authorize an accounting relationship, submit a TrustSet transaction from your issuing address, with the user to trust as the <code>issuer</code> of the <code>LimitAmount</code>. Leave the <code>value</code> (the amount to trust them for) as <strong>0</strong>, and enable the <a href="trustset.html#trustset-flags"><code>tfSetfAuth</code> flag</a> for the transaction.</p>
@@ -707,8 +731,8 @@
     <span class="p">]</span>
 <span class="p">}</span>
 </code></pre></div>
-<p class="devportal-callout caution"><strong>Caution:</strong> Never submit a secret key to a server you do not control. Do not send a secret key unencrypted over the network.
-<!-- --></p>
+<p class="devportal-callout caution"><strong>Caution:</strong> Never submit a secret key to a server you do not control. Do not send a secret key unencrypted over the network.</p>
+<!-- -->
 <h2 id="robustly-monitoring-for-payments">Robustly Monitoring for Payments</h2>
 <p>To robustly check for incoming payments, gateways should do the following:</p>
 <ul>

@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>Set Up Multi-Signing - XRP Ledger Dev Portal</title>
+    <title>Set Up Multi-Signing - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="Set Up Multi-Signing | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/set-up-multi-signing.html" />
+    <meta property="og:description" content="Add a signer list to your account to enable multi-signing." />
+    <meta name="description" content="Add a signer list to your account to enable multi-signing." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/set-up-multi-signing.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/set-up-multi-signing.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/set-up-multi-signing.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -59,9 +78,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -234,8 +258,8 @@ Connecting to <span class="m">127</span>.0.0.1:5005
 <h2 id="3-send-signerlistset-transaction">3. Send SignerListSet transaction</h2>
 <p><a href="transaction-basics.html#signing-and-submitting-transactions">Sign and submit</a> a <a href="signerlistset.html">SignerListSet transaction</a> in the normal (single-signature) way. This associates a signer list with your XRP Ledger address, so that a combination of signatures from the members of that signer list can multi-sign later transactions on your behalf.</p>
 <p>In this example, the signer list has 3 members, with the weights and quorum set up such that multi-signed transactions need a signature from <code>rsA2LpzuawewSBQXkiju3YQTMzW13pAAdW</code> plus at least one signature from the other two members of the list.</p>
-<p class="devportal-callout caution"><strong>Caution:</strong> Never submit a secret key to a server you do not control. Do not send a secret key unencrypted over the network.
-<!-- --></p>
+<p class="devportal-callout caution"><strong>Caution:</strong> Never submit a secret key to a server you do not control. Do not send a secret key unencrypted over the network.</p>
+<!-- -->
 <div class="codehilite"><pre><span></span><code>$ rippled submit shqZZy2Rzs9ZqWTCQAdqc3bKgxnYq <span class="s1">'{</span>
 <span class="s1">&gt;     "Flags": 0,</span>
 <span class="s1">&gt;     "TransactionType": "SignerListSet",</span>

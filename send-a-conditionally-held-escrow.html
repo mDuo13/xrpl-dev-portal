@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>Send a Conditionally-Held Escrow - XRP Ledger Dev Portal</title>
+    <title>Send a Conditionally-Held Escrow - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="Send a Conditionally-Held Escrow | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/send-a-conditionally-held-escrow.html" />
+    <meta property="og:description" content="Create an escrow whose release is based on a condition being fulfilled." />
+    <meta name="description" content="Create an escrow whose release is based on a condition being fulfilled." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/send-a-conditionally-held-escrow.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/send-a-conditionally-held-escrow.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/send-a-conditionally-held-escrow.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -59,9 +78,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -196,7 +220,7 @@
 <div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">cc</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'five-bells-condition'</span><span class="p">)</span>
 <span class="kr">const</span> <span class="nx">crypto</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'crypto'</span><span class="p">)</span>
 
-<span class="kr">const</span> <span class="nx">preimageData</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">randomBytes</span><span class="p">(</span><span class="mi">32</span><span class="p">)</span>
+<span class="kr">const</span> <span class="nx">preimageData</span> <span class="o">=</span> <span class="nx">crypto</span><span class="p">.</span><span class="nx">randomBytes</span><span class="p">(</span><span class="mf">32</span><span class="p">)</span>
 <span class="kr">const</span> <span class="nx">myFulfillment</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">cc</span><span class="p">.</span><span class="nx">PreimageSha256</span><span class="p">()</span>
 <span class="nx">myFulfillment</span><span class="p">.</span><span class="nx">setPreimage</span><span class="p">(</span><span class="nx">preimageData</span><span class="p">)</span>
 
@@ -215,8 +239,8 @@
 <p>Example for setting a <code>CancelAfter</code> time of 24 hours in the future:</p>
 <div class="multicode" id="code-0"><ul class="codetabs"><li><a href="#code-0-0">JavaScript</a></li></ul>
 
-<div class="code_sample" id="code-0-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">rippleOffset</span> <span class="o">=</span> <span class="mi">946684800</span>
-<span class="kr">const</span> <span class="nx">CancelAfter</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">/</span> <span class="mi">1000</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mi">24</span><span class="o">*</span><span class="mi">60</span><span class="o">*</span><span class="mi">60</span><span class="p">)</span> <span class="o">-</span> <span class="nx">rippleOffset</span>
+<div class="code_sample" id="code-0-0" style="position: static;"><div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">rippleOffset</span> <span class="o">=</span> <span class="mf">946684800</span>
+<span class="kr">const</span> <span class="nx">CancelAfter</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">()</span> <span class="o">/</span> <span class="mf">1000</span><span class="p">)</span> <span class="o">+</span> <span class="p">(</span><span class="mf">24</span><span class="o">*</span><span class="mf">60</span><span class="o">*</span><span class="mf">60</span><span class="p">)</span> <span class="o">-</span> <span class="nx">rippleOffset</span>
 <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">CancelAfter</span><span class="p">)</span>
 <span class="c1">// Example: 556927412</span>
 </code></pre></div></div>

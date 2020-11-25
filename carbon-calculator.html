@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>Carbon Calculator - XRP Ledger Dev Portal</title>
+    <title>Carbon Calculator - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="Carbon Calculator | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/carbon-calculator.html" />
+    <meta property="og:description" content="Whether it&#39;s cash, credit, or crypto, every transaction you make consumes energy. Use the green currency calculator to compare." />
+    <meta name="description" content="Whether it&#39;s cash, credit, or crypto, every transaction you make consumes energy. Use the green currency calculator to compare." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/currency-calculator-card-fb.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/currency-calculator-card-tw.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/carbon-calculator.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/carbon-calculator.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/carbon-calculator.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -54,9 +73,14 @@
 
 <body class="xrp-ledger-dev-portal lang-en no-sidebar page-calculator">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -153,12 +177,12 @@
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v8.0" nonce="IhVJTgzU"></script> -->
 
 <div class="fullwidth-bg">
-  <div class="container mt-30">
+  <div class="container mt-20 mt-30-until-sm">
 
-    <section class="row mb-49">
+    <section class="row mb-30 mb-50-until-sm">
       <h6 class="section-marker">Sustainability</h6>
-      <div class="col-sm-4 d-sm-none d-md-block">
-        <img class="mw-100" src="./img/green/green-graphic.png" alt="Sustainability icon">
+      <div class="col-sm-4 d-block text-center">
+        <img class="mw-100 green-graphic" src="./img/green/green-graphic.png" alt="Sustainability icon">
       </div>
       <div class="col-sm-8">
         <h3 class="h1 mb-4 mt-4">How Green Is Your Currency?</h3>
@@ -181,12 +205,12 @@
   <div class="container" id="calculator">
     <div class="col-sm-5 mt-20 mb-30 offset-sm-4">
       <h3 class="mb-4">How Does XRP Compare to Other Currencies?</h3>
-      <a href="#" class="text-green arrow-link bold">Learn more about the methodology</a>
+      <a href="./assets/pdf/xrpl-sustainability-methodology-2020.pdf" target="_blank" class="text-green arrow-link bold">Learn more about the methodology</a>
     </div>
   </div>
 
   <div class="container my-20">
-    <section class="row mb-50">
+    <section class="row mb-30 mb-50-until-sm">
       <a href="#" class="btn btn-outline-primary d-lg-none" id="calculator-mobile-toggle">Change Inputs</a>
       <div id="calculator-inputs-offset"></div>
       <div class="col-lg-4" >
@@ -198,14 +222,15 @@
                 <li class="d-block d-xl-inline-flex text-center"><a class="tab-link d-block d-xl-flex fs-base va-middle" href="#" data-currencytype="d-credit">Credit Cards</a></li>
                 <li class="d-block d-xl-inline-flex text-center"><a class="tab-link d-block d-xl-flex fs-base va-middle" href="#" data-currencytype="d-cash">Cash</a></li>
               </ul>
+              <p class="grey-500 mb-0 mt-4 text-smaller">Number of Transactions:</p>
               <div class="slidecontainer mb-10">
                 <input type="range" min="20" max="100" value="60" class="slider w-100" id="myRange" step="20">
                 <ul class="d-flex p-0 ls-none justify-content-between position-relative mr-neg-8 ml-neg-8 mt-1" style="z-index: -1;">
-                  <li class="dash text-center text-smaller grey-50">20M</li>
-                  <li class="dash text-center text-smaller grey-50">40M</li>
-                  <li class="dash text-center text-smaller grey-50">60M</li>
-                  <li class="dash text-center text-smaller grey-50">80M</li>
-                  <li class="dash text-center text-smaller grey-50">100M</li>
+                  <li class="dash text-center text-smaller grey-500" data-num="20">20M</li>
+                  <li class="dash text-center text-smaller grey-500" data-num="40">40M</li>
+                  <li class="dash text-center text-smaller grey-500 active" data-num="60">60M</li>
+                  <li class="dash text-center text-smaller grey-500" data-num="80">80M</li>
+                  <li class="dash text-center text-smaller grey-500" data-num="100">100M</li>
                 </ul>
               </div>
               <div class="d-flex mb-3 ml-3">
@@ -215,17 +240,17 @@
                 </a>
               </div>
           </div>
-          <a href="#" class="text-white arrow-link bold mt-4 d-block">Learn more about the methodology</a>
+          <a href="./assets/pdf/xrpl-sustainability-methodology-2020.pdf" target="_blank" class="text-white arrow-link bold mt-4 d-block">Learn more about the methodology</a>
         </div>
       </div>
 
-      <div class="col-lg-7 offset-lg-1 scroll-container h-100" id="calculator-outputs">
+      <div class="col-lg-7 offset-lg-1 scroll-container h-100 mt-20-sm" id="calculator-outputs">
         <section class="min-vh100 mb-40 section1 clearfix">
           <h4>Energy Consumption of Portugal</h4>
 
           <p class="grey-400 text-small my-4">Comparing <span class="slider-amt"></span> Million Transactions in 2019</p>
 
-          <p class="calculator-section-description">The country of Portugal consumes ~50twh (1 billion) Kilowatt hours (KWH) of energy annually. Explore how much energy today’s various currencies consume in relation to Portugal.</p>
+          <p class="calculator-section-description">The country of Portugal consumes ~50twh (1 billion Kilowatt hours [kWh]) of energy annually. Explore how much energy today’s various currencies consume in relation to Portugal.</p>
 
           <div class="d-viz d-viz-1 mt-10">
             <ul class="d-sm-flex  p-0">
@@ -238,7 +263,7 @@
                   <img src="assets/img/icons/bw-bitcoin.png" class="mw-100 mt-3">
                   <p class="h6 mt-2 mb-1">Bitcoin</p>
                   <h5 class="h4 normal mb-0" id="kWh-btc"></h5>
-                  <p class="text-small black-90">KWh</p>
+                  <p class="text-small black-90">kWh</p>
                 </div>
               </li>
               <li class="d-output d-crypto active" data-comp="kWh" data-type="eth">
@@ -250,7 +275,7 @@
                   <img src="assets/img/icons/bw-ethereum.png" class="mw-100 mt-3">
                   <p class="h6 mt-2 mb-1">Ethereum</p>
                   <h5 class="h4 normal mb-0" id="kWh-eth"></h5>
-                  <p class="text-small black-90">KWh</p>
+                  <p class="text-small black-90">kWh</p>
                 </div>
               </li>
               <li class="d-output d-cash" data-comp="kWh" data-type="pap">
@@ -259,10 +284,10 @@
                   <div class="dot" id="kWh-pap-dot"></div>
                 </div>
                 <div class="num-wrapper">
-                  <img src="assets/img/icons/bw-cash.png" class="mw-100 mt-3">
+                  <img src="assets/img/icons/bw-cash.png" class="mw-100 mt-3 mb-2">
                   <p class="h6 mt-2 mb-1">Cash</p>
                   <h5 class="h4 normal mb-0" id="kWh-pap"></h5>
-                  <p class="text-small black-90">KWh</p>
+                  <p class="text-small black-90">kWh</p>
                 </div>
               </li>
               <li class="d-output d-crypto d-credit d-cash active" data-comp="kWh" data-type="xrp">
@@ -274,7 +299,7 @@
                   <img src="assets/img/icons/xrp.png" class="mw-100 mt-3">
                   <p class="h6 mt-2 mb-1">XRP</p>
                   <h5 class="h4 normal mb-0" id="kWh-xrp"></h5>
-                  <p class="text-small black-90">KWh</p>
+                  <p class="text-small black-90">kWh</p>
                 </div>
               </li>
               <li class="d-output d-credit" data-comp="kWh" data-type="vsa">
@@ -283,10 +308,10 @@
                   <div class="dot" id="kWh-vsa-dot"></div>
                 </div>
                 <div class="num-wrapper">
-                  <img src="assets/img/icons/bw-visa.png" alt="Visa" class="mw-100 mt-3">
+                  <img src="assets/img/icons/bw-visa.png" alt="Visa" class="mw-100 mb-2" style="margin-top: 1.85rem;">
                   <p class="h6 mt-2 mb-1">Visa</p>
                   <h5 class="h4 normal mb-0" id="kWh-vsa"></h5>
-                  <p class="text-small black-90">KWh</p>
+                  <p class="text-small black-90">kWh</p>
                 </div>
               </li>
               <li class="d-output d-credit" data-comp="kWh" data-type="mst">
@@ -295,10 +320,10 @@
                   <div class="dot" id="kWh-mst-dot"></div>
                 </div>
                 <div class="num-wrapper">
-                  <img src="assets/img/icons/bw-mastercard.png" alt="Mastercard" class="mw-100 mt-3">
+                  <img src="assets/img/icons/bw-mastercard.png" alt="Mastercard" class="mw-100 mb-1" style="margin-top: 1.65rem;">
                   <p class="h6 mt-2 mb-1">Mastercard</p>
                   <h5 class="h4 normal mb-0" id="kWh-mst"></h5>
-                  <p class="text-small black-90">KWh</p>
+                  <p class="text-small black-90">kWh</p>
                 </div>
               </li>
 
@@ -348,7 +373,7 @@
 
           </ul>
         </section>
-        <section class="min-vh100 mb-40 section3 clearfix">
+        <section class="min-vh100 section3 clearfix">
           <h4>Gas Consumption by the Gallon</h4>
 
           <p class="grey-400 text-small my-4">Comparing <span class="slider-amt"></span> Million Transactions in 2019</p>
@@ -399,54 +424,54 @@
     <section class="row last-section">
       <div class="col-sm-7 col-sm-offset-5">
         <h4>Breaking Down Individual Transactions</h4>
-        <p>Looking at individual transactions below, compare how a single transaction across each form of currency equates to KWh, gallons of gas and CO<sub>2</sub> emissions.</p>
+        <p>Looking at individual transactions below, compare how a single transaction across each form of currency equates to kWh, CO<sub>2</sub> emissions, and gallons of gas.</p>
       </div>
-      <div class="col-sm-12 mt-14 overflow-xs">
+      <div class="col-sm-12 mt-14 overflow-x-xs">
         <table id="calculator-table">
           <thead>
             <tr>
               <td></td>
               <td class="bold text-right">Kilowatt Hour</td>
-              <td class="bold text-right">Gallons of Gas</td>
               <td class="bold text-right">CO<sub>2</sub> Emissions*</td>
+              <td class="bold text-right">Gallons of Gas</td>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td class="fs-5-5 bold"><div class="w48 mr-3 text-center d-inline-block"><img class="h36" src="assets/img/icons/bitcoin@2x.png"></div>Bitcoin</td>
-              <td class="fs-6 text-right">487.3688<span class="ratio"> KWh/tx</span></td>
-              <td class="fs-6 text-right">38.7744<span class="ratio"> gal/tx</span></td>
-              <td class="fs-6 text-right">0.4103<span class="ratio"> Mt/tx</span></td>
+              <td class="fs-6 text-right">487.3688<span class="ratio"> kWh/tx</span></td>
+              <td class="fs-6 text-right">2.42<sup>-7</sup><span class="ratio"> Mt/tx</span></td>
+              <td class="fs-6 text-right">38.7745<span class="ratio"> gal/tx</span></td>
             </tr>
             <tr>
               <td class="fs-5-5 bold"><div class="w48 mr-3 text-center d-inline-block"><img class="h36" src="assets/img/icons/ethereum@2x.png"></div>Ethereum</td>
-              <td class="fs-6 text-right">42.8633<span class="ratio"> KWh/tx</span></td>
-              <td class="fs-6 text-right">1.1311<span class="ratio"> gal/tx</span></td>
-              <td class="fs-6 text-right">0.0273<span class="ratio"> Mt/tx</span></td>
+              <td class="fs-6 text-right">42.8633<span class="ratio"> kWh/tx</span></td>
+              <td class="fs-6 text-right">2.73<sup>-8</sup><span class="ratio"> Mt/tx</span></td>
+              <td class="fs-6 text-right">2.3867<span class="ratio"> gal/tx</span></td>
             </tr>
             <tr>
               <td class="fs-5-5 bold"><div class="w48 mr-3 text-center d-inline-block"><img class="h36" src="assets/img/icons/xrp@2x.png"></div>XRP</td>
-              <td class="fs-6 text-right">0.0079<span class="ratio"> KWh/tx</span></td>
-              <td class="fs-6 text-right">0.0006<span class="dblue">0</span><span class="ratio"> gal/tx</span></td>
-              <td class="fs-6 text-right">3.7<sup>-12</sup><span class="ratio"> Mt/tx</span></td>
+              <td class="fs-6 text-right">0.0079<span class="ratio"> kWh/tx</span></td>
+              <td class="fs-6 text-right">4.5<sup>-12</sup><span class="ratio"> Mt/tx</span></td>
+              <td class="fs-6 text-right">0.00063<span class="ratio"> gal/tx</span></td>
             </tr>
             <tr>
               <td class="fs-5-5 bold"><div class="w48 mr-3 text-center d-inline-block"><img class="w40" src="assets/img/icons/visa@2x.png"></div>Visa</td>
-              <td class="fs-6 text-right">0.0008<span class="ratio"> KWh/tx</span></td>
+              <td class="fs-6 text-right">0.0008<span class="ratio"> kWh/tx</span></td>
+              <td class="fs-6 text-right">4.6<sup>-13</sup><span class="ratio"> Mt/tx</span></td>
               <td class="fs-6 text-right">0.00006<span class="ratio"> gal/tx</span></td>
-              <td class="fs-6 text-right">5.0<sup>-13</sup><span class="ratio"> Mt/tx</span></td>
             </tr>
             <tr>
               <td class="fs-5-5 bold"><div class="w48 mr-3 text-center d-inline-block"><img class="w40" src="assets/img/icons/mastercard@2x.png"></div>Mastercard</td>
-              <td class="fs-6 text-right">0.0006<span class="ratio"> KWh/tx</span></td>
+              <td class="fs-6 text-right">0.0006<span class="ratio"> kWh/tx</span></td>
+              <td class="fs-6 text-right">5.1<sup>-13</sup><span class="ratio"> Mt/tx</span></td>
               <td class="fs-6 text-right">0.00005<span class="ratio"> gal/tx</span></td>
-              <td class="fs-6 text-right">5.0<sup>-13</sup><span class="ratio"> Mt/tx</span></td>
             </tr>
             <tr>
               <td class="fs-5-5 bold"><div class="w48 mr-3 text-center d-inline-block"><img class="w40" src="assets/img/icons/paper-money@2x.png"></div>Paper Currency</td>
-              <td class="fs-6 text-right">0.044<span class="dblue">0</span><span class="ratio"> KWh/tx</span></td>
-              <td class="fs-6 text-right">0.0035<span class="dblue">0</span><span class="ratio"> gal/tx</span></td>
+              <td class="fs-6 text-right">0.044<span class="dblue">0</span><span class="ratio"> kWh/tx</span></td>
               <td class="fs-6 text-right">2.32<sup>-11</sup><span class="ratio"> Mt/tx</span></td>
+              <td class="fs-6 text-right">0.0035<span class="dblue">0</span><span class="ratio"> gal/tx</span></td>
             </tr>
           </tbody>
         </table>
@@ -605,7 +630,6 @@ debug: false
       animationData: coCash
     });
   };
-
   function co2CreditAnimation() {
     bodymovin.loadAnimation({
       container: document.getElementById('co2Animation'),
@@ -615,7 +639,6 @@ debug: false
       animationData: coCredit
     });
   };
-
   function co2CryptoAnimation() {
     bodymovin.loadAnimation({
       container: document.getElementById('co2Animation'),
@@ -625,7 +648,6 @@ debug: false
       animationData: coCrypto
     });
   };
-
   function gasCryptoAnimation() {
     bodymovin.loadAnimation({
       container: document.getElementById('gasAnimation'),
@@ -635,7 +657,6 @@ debug: false
       animationData: gasCrypto
     });
   };
-
   function gasCashAnimation() {
     bodymovin.loadAnimation({
       container: document.getElementById('gasAnimation'),
@@ -645,7 +666,6 @@ debug: false
       animationData: gasCash
     });
   };
-
   function gasCreditAnimation() {
     bodymovin.loadAnimation({
       container: document.getElementById('gasAnimation'),
@@ -655,16 +675,12 @@ debug: false
       animationData: gasCredit
     });
   };
-
-
 </script>
 
 
 <script type="application/javascript">
   gtag('config', 'UA-157720658-3', {'content_group1': 'Hub Pages'});
 </script>
-
-
 
 </body>
 </html>

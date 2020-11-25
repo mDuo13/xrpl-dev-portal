@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>RippleAPI Reference - XRP Ledger Dev Portal</title>
+    <title>RippleAPI Reference - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="RippleAPI Reference | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/rippleapi-reference.html" />
+    <meta property="og:description" content="Official client library to the XRP Ledger. Available for JavaScript only." />
+    <meta name="description" content="Official client library to the XRP Ledger. Available for JavaScript only." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/rippleapi-reference.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/rippleapi-reference.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/rippleapi-reference.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -59,9 +78,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -1791,22 +1815,22 @@ The "error" event is emitted whenever an error occurs that cannot be associated 
 </table>
 <p>To register your listener function, use <code>connection.on(type, handler)</code>.</p>
 <p>Here is an example of listening for transactions on given account(s):</p>
-<div class="codehilite"><pre><span></span><code><span class="n">const</span> <span class="n">account</span> <span class="o">=</span> <span class="s1">'rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn'</span> <span class="o">//</span> <span class="k">Replace</span> <span class="k">with</span> <span class="n">the</span> <span class="n">account</span> <span class="n">you</span> <span class="n">want</span> <span class="n">notifications</span> <span class="k">for</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">connect</span><span class="p">().</span><span class="k">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="err">{</span>
+<div class="codehilite"><pre><span></span><code><span class="n">const</span> <span class="k">account</span> <span class="o">=</span> <span class="s1">'rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn'</span> <span class="o">//</span> <span class="k">Replace</span> <span class="k">with</span> <span class="n">the</span> <span class="k">account</span> <span class="n">you</span> <span class="n">want</span> <span class="n">notifications</span> <span class="k">for</span>
+<span class="n">api</span><span class="p">.</span><span class="n">connect</span><span class="p">().</span><span class="k">then</span><span class="p">(()</span> <span class="o">=&gt;</span> <span class="err">{</span>
 
-  <span class="o">//</span> <span class="s1">'transaction'</span> <span class="n">can</span> <span class="n">be</span> <span class="n">replaced</span> <span class="k">with</span> <span class="n">the</span> <span class="n">relevant</span> <span class="ss">`type`</span> <span class="k">from</span> <span class="n">the</span> <span class="k">table</span> <span class="n">above</span>
-  <span class="n">api</span><span class="p">.</span><span class="n">connection</span><span class="p">.</span><span class="k">on</span><span class="p">(</span><span class="s1">'transaction'</span><span class="p">,</span> <span class="p">(</span><span class="n">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="err">{</span>
+  <span class="o">//</span> <span class="s1">'transaction'</span> <span class="n">can</span> <span class="n">be</span> <span class="n">replaced</span> <span class="k">with</span> <span class="n">the</span> <span class="n">relevant</span> <span class="n">`type`</span> <span class="k">from</span> <span class="n">the</span> <span class="k">table</span> <span class="n">above</span>
+  <span class="n">api</span><span class="p">.</span><span class="k">connection</span><span class="p">.</span><span class="k">on</span><span class="p">(</span><span class="s1">'transaction'</span><span class="p">,</span> <span class="p">(</span><span class="k">event</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="err">{</span>
 
-      <span class="o">//</span> <span class="n">Do</span> <span class="n">something</span> <span class="n">useful</span> <span class="k">with</span> <span class="ss">`event`</span>
-      <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="n">JSON</span><span class="p">.</span><span class="nf">stringify</span><span class="p">(</span><span class="n">event</span><span class="p">,</span> <span class="no">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+      <span class="o">//</span> <span class="k">Do</span> <span class="n">something</span> <span class="n">useful</span> <span class="k">with</span> <span class="n">`event`</span>
+      <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="kt">JSON</span><span class="p">.</span><span class="n">stringify</span><span class="p">(</span><span class="k">event</span><span class="p">,</span> <span class="no">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
   <span class="err">}</span><span class="p">)</span>
 
-  <span class="n">api</span><span class="p">.</span><span class="nf">request</span><span class="p">(</span><span class="s1">'subscribe'</span><span class="p">,</span> <span class="err">{</span>
-      <span class="n">accounts</span><span class="p">:</span> <span class="p">[</span> <span class="n">account</span> <span class="p">]</span>
+  <span class="n">api</span><span class="p">.</span><span class="n">request</span><span class="p">(</span><span class="s1">'subscribe'</span><span class="p">,</span> <span class="err">{</span>
+      <span class="n">accounts</span><span class="o">:</span> <span class="err">[</span> <span class="k">account</span> <span class="err">]</span>
   <span class="err">}</span><span class="p">).</span><span class="k">then</span><span class="p">(</span><span class="n">response</span> <span class="o">=&gt;</span> <span class="err">{</span>
       <span class="n">console</span><span class="p">.</span><span class="nf">log</span><span class="p">(</span><span class="s1">'Successfully subscribed'</span><span class="p">)</span>
-  <span class="err">}</span><span class="p">).</span><span class="nf">catch</span><span class="p">(</span><span class="n">error</span> <span class="o">=&gt;</span> <span class="err">{</span>
-      <span class="o">//</span> <span class="n">Handle</span> <span class="ss">`error`</span>
+  <span class="err">}</span><span class="p">).</span><span class="n">catch</span><span class="p">(</span><span class="k">error</span> <span class="o">=&gt;</span> <span class="err">{</span>
+      <span class="o">//</span> <span class="n">Handle</span> <span class="n">`error`</span>
   <span class="err">}</span><span class="p">)</span>
 <span class="err">}</span><span class="p">)</span>
 </code></pre></div>
@@ -1825,7 +1849,7 @@ The "error" event is emitted whenever an error occurs that cannot be associated 
   <span class="nx">ledger_index</span><span class="o">:</span> <span class="s1">'validated'</span>
 <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
   <span class="cm">/* Do something useful with response */</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">response</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mf">2</span><span class="p">))</span>
 <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">);</span>
 </code></pre></div>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
@@ -2090,14 +2114,14 @@ The "error" event is emitted whenever an error occurs that cannot be associated 
       <span class="nx">taker_gets</span><span class="o">:</span> <span class="nx">RippleAPI</span><span class="p">.</span><span class="nx">renameCounterpartyToIssuer</span><span class="p">(</span><span class="nx">orderbookInfo</span><span class="p">.</span><span class="nx">base</span><span class="p">),</span>
       <span class="nx">taker_pays</span><span class="o">:</span> <span class="nx">RippleAPI</span><span class="p">.</span><span class="nx">renameCounterpartyToIssuer</span><span class="p">(</span><span class="nx">orderbookInfo</span><span class="p">.</span><span class="nx">counter</span><span class="p">),</span>
       <span class="nx">ledger_index</span><span class="o">:</span> <span class="s1">'validated'</span><span class="p">,</span>
-      <span class="nx">limit</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
+      <span class="nx">limit</span><span class="o">:</span> <span class="mf">20</span><span class="p">,</span>
       <span class="nx">taker</span><span class="o">:</span> <span class="nx">address</span>
     <span class="p">}),</span>
     <span class="k">this</span><span class="p">.</span><span class="nx">api</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="s1">'book_offers'</span><span class="p">,</span> <span class="p">{</span>
       <span class="nx">taker_gets</span><span class="o">:</span> <span class="nx">RippleAPI</span><span class="p">.</span><span class="nx">renameCounterpartyToIssuer</span><span class="p">(</span><span class="nx">orderbookInfo</span><span class="p">.</span><span class="nx">counter</span><span class="p">),</span>
       <span class="nx">taker_pays</span><span class="o">:</span> <span class="nx">RippleAPI</span><span class="p">.</span><span class="nx">renameCounterpartyToIssuer</span><span class="p">(</span><span class="nx">orderbookInfo</span><span class="p">.</span><span class="nx">base</span><span class="p">),</span>
       <span class="nx">ledger_index</span><span class="o">:</span> <span class="s1">'validated'</span><span class="p">,</span>
-      <span class="nx">limit</span><span class="o">:</span> <span class="mi">20</span><span class="p">,</span>
+      <span class="nx">limit</span><span class="o">:</span> <span class="mf">20</span><span class="p">,</span>
       <span class="nx">taker</span><span class="o">:</span> <span class="nx">address</span>
     <span class="p">})</span>
   <span class="p">]</span>
@@ -2105,7 +2129,7 @@ The "error" event is emitted whenever an error occurs that cannot be associated 
   <span class="kr">const</span> <span class="nx">directOffers</span> <span class="o">=</span> <span class="p">(</span><span class="nx">directOfferResults</span> <span class="o">?</span> <span class="nx">directOfferResults</span> <span class="o">:</span> <span class="p">[]).</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">acc</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">offers</span><span class="p">),</span> <span class="p">[])</span>
   <span class="kr">const</span> <span class="nx">reverseOffers</span> <span class="o">=</span> <span class="p">(</span><span class="nx">reverseOfferResults</span> <span class="o">?</span> <span class="nx">reverseOfferResults</span> <span class="o">:</span> <span class="p">[]).</span><span class="nx">reduce</span><span class="p">((</span><span class="nx">acc</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="nx">acc</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">res</span><span class="p">.</span><span class="nx">offers</span><span class="p">),</span> <span class="p">[])</span>
   <span class="kr">const</span> <span class="nx">orderbook</span> <span class="o">=</span> <span class="nx">RippleAPI</span><span class="p">.</span><span class="nx">formatBidsAndAsks</span><span class="p">(</span><span class="nx">orderbookInfo</span><span class="p">,</span> <span class="p">[...</span><span class="nx">directOffers</span><span class="p">,</span> <span class="p">...</span><span class="nx">reverseOffers</span><span class="p">]);</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">orderbook</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">));</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">orderbook</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mf">2</span><span class="p">));</span>
 <span class="p">});</span>
 </code></pre></div>
 <div class="codehilite"><pre><span></span><code><span class="err">{</span>
@@ -6486,7 +6510,7 @@ The "error" event is emitted whenever an error occurs that cannot be associated 
 <h3 id="example-39">Example</h3>
 <div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">account_info</span> <span class="o">=</span> <span class="nx">await</span> <span class="nx">api</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="s1">'account_info'</span><span class="p">,</span> <span class="p">{</span><span class="nx">account</span><span class="o">:</span> <span class="s1">'rKsdkGhyZH6b2Zzd5hNnEqSv2wpznn4n6N'</span><span class="p">})</span>
 <span class="kr">const</span> <span class="nx">flags</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">parseAccountFlags</span><span class="p">(</span><span class="nx">account_info</span><span class="p">.</span><span class="nx">account_data</span><span class="p">.</span><span class="nx">Flags</span><span class="p">)</span>
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">flags</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">flags</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mf">2</span><span class="p">))</span>
 </code></pre></div>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
   <span class="nt">"passwordSpent"</span><span class="p">:</span> <span class="kc">false</span><span class="p">,</span>
@@ -6587,8 +6611,8 @@ All "prepare*" methods have the same return type.
   <span class="nx">txJSON</span><span class="o">:</span> <span class="s1">'{"TransactionType":"DepositPreauth","Account":"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59","Authorize":"rMyVso4p83khNyHdV1m1PggV9QNadCj8wM","Flags":2147483648,"LastLedgerSequence":13561714,"Fee":"12","Sequence":1}'</span><span class="p">,</span>
   <span class="nx">instructions</span><span class="o">:</span> <span class="p">{</span>
     <span class="nx">fee</span><span class="o">:</span> <span class="s1">'0.000012'</span><span class="p">,</span>
-    <span class="nx">sequence</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="nx">maxLedgerVersion</span><span class="o">:</span> <span class="mi">13561714</span>
+    <span class="nx">sequence</span><span class="o">:</span> <span class="mf">1</span><span class="p">,</span>
+    <span class="nx">maxLedgerVersion</span><span class="o">:</span> <span class="mf">13561714</span>
   <span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
@@ -6993,7 +7017,7 @@ All "prepare*" methods have the same return type.
 </table>
 <h3 id="example-44">Example</h3>
 <div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">address</span> <span class="o">=</span> <span class="s1">'r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59'</span><span class="p">;</span>
-<span class="kr">const</span> <span class="nx">orderCancellation</span> <span class="o">=</span> <span class="p">{</span><span class="nx">orderSequence</span><span class="o">:</span> <span class="mi">123</span><span class="p">};</span>
+<span class="kr">const</span> <span class="nx">orderCancellation</span> <span class="o">=</span> <span class="p">{</span><span class="nx">orderSequence</span><span class="o">:</span> <span class="mf">123</span><span class="p">};</span>
 <span class="k">return</span> <span class="nx">api</span><span class="p">.</span><span class="nx">prepareOrderCancellation</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="nx">orderCancellation</span><span class="p">)</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">prepared</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="cm">/* ... */</span><span class="p">});</span>
 </code></pre></div>
@@ -7287,7 +7311,7 @@ All "prepare*" methods have the same return type.
 <div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">address</span> <span class="o">=</span> <span class="s1">'r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">escrowCancellation</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">"owner"</span><span class="o">:</span> <span class="s2">"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59"</span><span class="p">,</span>
-  <span class="s2">"escrowSequence"</span><span class="o">:</span> <span class="mi">1234</span>
+  <span class="s2">"escrowSequence"</span><span class="o">:</span> <span class="mf">1234</span>
 <span class="p">};</span>
 <span class="k">return</span> <span class="nx">api</span><span class="p">.</span><span class="nx">prepareEscrowCancellation</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="nx">escrowCancellation</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">prepared</span> <span class="p">=&gt;</span>
   <span class="p">{</span><span class="cm">/* ... */</span><span class="p">});</span>
@@ -7381,7 +7405,7 @@ All "prepare*" methods have the same return type.
 <div class="codehilite"><pre><span></span><code><span class="kr">const</span> <span class="nx">address</span> <span class="o">=</span> <span class="s1">'r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59'</span><span class="p">;</span>
 <span class="kr">const</span> <span class="nx">escrowExecution</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">"owner"</span><span class="o">:</span> <span class="s2">"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59"</span><span class="p">,</span>
-  <span class="s2">"escrowSequence"</span><span class="o">:</span> <span class="mi">1234</span><span class="p">,</span>
+  <span class="s2">"escrowSequence"</span><span class="o">:</span> <span class="mf">1234</span><span class="p">,</span>
   <span class="s2">"condition"</span><span class="o">:</span> <span class="s2">"A0258020E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855810100"</span><span class="p">,</span>
   <span class="s2">"fulfillment"</span><span class="o">:</span> <span class="s2">"A0028000"</span>
 <span class="p">};</span>
@@ -7478,7 +7502,7 @@ All "prepare*" methods have the same return type.
 <span class="kr">const</span> <span class="nx">paymentChannelCreate</span> <span class="o">=</span> <span class="p">{</span>
   <span class="s2">"amount"</span><span class="o">:</span> <span class="s2">"1"</span><span class="p">,</span>
   <span class="s2">"destination"</span><span class="o">:</span> <span class="s2">"rsA2LpzuawewSBQXkiju3YQTMzW13pAAdW"</span><span class="p">,</span>
-  <span class="s2">"settleDelay"</span><span class="o">:</span> <span class="mi">86400</span><span class="p">,</span>
+  <span class="s2">"settleDelay"</span><span class="o">:</span> <span class="mf">86400</span><span class="p">,</span>
   <span class="s2">"publicKey"</span><span class="o">:</span> <span class="s2">"32D2471DB72B27E3310F355BB33E339BF26F8392D5A93D3BC0FC3B566612DA0F0A"</span>
 <span class="p">};</span>
 <span class="k">return</span> <span class="nx">api</span><span class="p">.</span><span class="nx">preparePaymentChannelCreate</span><span class="p">(</span><span class="nx">address</span><span class="p">,</span> <span class="nx">paymentChannelCreate</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="nx">prepared</span> <span class="p">=&gt;</span>
@@ -8075,22 +8099,22 @@ All "prepare*" methods have the same return type.
 
 <span class="c1">// Setup the signers list with a quorum of 2</span>
 <span class="kr">const</span> <span class="nx">multiSignSetupTransaction</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">"Flags"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s2">"Flags"</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
     <span class="s2">"TransactionType"</span><span class="o">:</span> <span class="s2">"SignerListSet"</span><span class="p">,</span>
     <span class="s2">"Account"</span><span class="o">:</span> <span class="s2">"rJKpme4m2zBQceBuU89d7vLMzgoUw2Ptj"</span><span class="p">,</span>
     <span class="s2">"Fee"</span><span class="o">:</span> <span class="s2">"120"</span><span class="p">,</span>
-    <span class="s2">"SignerQuorum"</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
+    <span class="s2">"SignerQuorum"</span><span class="o">:</span> <span class="mf">2</span><span class="p">,</span>
     <span class="s2">"SignerEntries"</span><span class="o">:</span> <span class="p">[</span>
         <span class="p">{</span>
             <span class="s2">"SignerEntry"</span><span class="o">:</span> <span class="p">{</span>
                 <span class="s2">"Account"</span><span class="o">:</span> <span class="s2">"rnrPdBjs98fFFfmRpL6hM7exT788SWQPFN"</span><span class="p">,</span>
-                <span class="s2">"SignerWeight"</span><span class="o">:</span> <span class="mi">2</span>
+                <span class="s2">"SignerWeight"</span><span class="o">:</span> <span class="mf">2</span>
             <span class="p">}</span>
         <span class="p">},</span>
         <span class="p">{</span>
             <span class="s2">"SignerEntry"</span><span class="o">:</span> <span class="p">{</span>
                 <span class="s2">"Account"</span><span class="o">:</span> <span class="s2">"rJ93RLnT1t5A8fCr7HTScw7WtfKJMRXodH"</span><span class="p">,</span>
-                <span class="s2">"SignerWeight"</span><span class="o">:</span> <span class="mi">1</span>
+                <span class="s2">"SignerWeight"</span><span class="o">:</span> <span class="mf">1</span>
             <span class="p">}</span>
         <span class="p">},</span>
     <span class="p">]</span>
@@ -8719,9 +8743,9 @@ The parameter to this method has the same structure as the return value of getLe
   <span class="s2">"stateHash"</span><span class="o">:</span> <span class="s2">"D9ABF622DA26EEEE48203085D4BC23B0F77DC6F8724AC33D975DA3CA492D2E44"</span><span class="p">,</span>
   <span class="s2">"closeTime"</span><span class="o">:</span> <span class="s2">"2015-08-12T01:01:10.000Z"</span><span class="p">,</span>
   <span class="s2">"parentCloseTime"</span><span class="o">:</span> <span class="s2">"2015-08-12T01:01:00.000Z"</span><span class="p">,</span>
-  <span class="s2">"closeFlags"</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
-  <span class="s2">"closeTimeResolution"</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
-  <span class="s2">"ledgerVersion"</span><span class="o">:</span> <span class="mi">15202439</span><span class="p">,</span>
+  <span class="s2">"closeFlags"</span><span class="o">:</span> <span class="mf">0</span><span class="p">,</span>
+  <span class="s2">"closeTimeResolution"</span><span class="o">:</span> <span class="mf">10</span><span class="p">,</span>
+  <span class="s2">"ledgerVersion"</span><span class="o">:</span> <span class="mf">15202439</span><span class="p">,</span>
   <span class="s2">"parentLedgerHash"</span><span class="o">:</span> <span class="s2">"12724A65B030C15A1573AA28B1BBB5DF3DA4589AA3623675A31CAE69B23B1C4E"</span><span class="p">,</span>
   <span class="s2">"totalDrops"</span><span class="o">:</span> <span class="s2">"99998831688050493"</span><span class="p">,</span>
   <span class="s2">"transactionHash"</span><span class="o">:</span> <span class="s2">"325EACC5271322539EEEC2D6A5292471EF1B3E72AE7180533EFC3B8F0AD435C8"</span>
@@ -8778,7 +8802,7 @@ The parameter to this method has the same structure as the return value of getLe
 <h3 id="return-value-56">Return Value</h3>
 <p>A string representing a date and time, created by calling a <code>Date</code> object's <code>toISOString()</code> method.</p>
 <h3 id="example-70">Example</h3>
-<div class="codehilite"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">rippleTimeToISO8601</span><span class="p">(</span><span class="mi">540659097</span><span class="p">);</span>
+<div class="codehilite"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">rippleTimeToISO8601</span><span class="p">(</span><span class="mf">540659097</span><span class="p">);</span>
 </code></pre></div>
 <div class="codehilite"><pre><span></span><code><span class="err">'</span><span class="mi">2017-02-17</span><span class="err">T</span><span class="mi">15</span><span class="err">:</span><span class="mi">04</span><span class="err">:</span><span class="mf">57.000</span><span class="err">Z'</span>
 </code></pre></div>
@@ -8916,7 +8940,7 @@ The parameter to this method has the same structure as the return value of getLe
 </table>
 <h3 id="example-72">Example</h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'ledger'</span><span class="p">,</span> <span class="nx">ledger</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">ledger</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">));</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">ledger</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mf">2</span><span class="p">));</span>
 <span class="p">});</span>
 </code></pre></div>
 <div class="codehilite"><pre><span></span><code><span class="p">{</span>
@@ -8962,7 +8986,7 @@ The parameter to this method has the same structure as the return value of getLe
 <p>The only parameter is a number containing the <a class="external-link" href="https://developer.mozilla.org/en-US/docs/Web/API/CloseEvent" target="_blank">close code <i aria-hidden="true" class="fa fa-external-link"></i></a> send by the server.</p>
 <h3 id="example-75">Example</h3>
 <div class="codehilite"><pre><span></span><code><span class="nx">api</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'disconnected'</span><span class="p">,</span> <span class="p">(</span><span class="nx">code</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">code</span> <span class="o">!==</span> <span class="mi">1000</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">code</span> <span class="o">!==</span> <span class="mf">1000</span><span class="p">)</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Connection is closed due to error.'</span><span class="p">);</span>
   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">'Connection is closed normally.'</span><span class="p">);</span>
@@ -9136,6 +9160,8 @@ The parameter to this method has the same structure as the return value of getLe
 
 
 
+
+
                         <li><a class="subcat-title" href="transaction-formats.html">Transaction Formats</a></li>
 
                             <li><a class="subpage" href="transaction-common-fields.html">Transaction Common Fields</a></li>
@@ -9143,6 +9169,8 @@ The parameter to this method has the same structure as the return value of getLe
                             <li><a class="subpage" href="pseudo-transaction-types.html">Pseudo-Transactions</a></li>
                             <li><a class="subpage" href="transaction-results.html">Transaction Results</a></li>
                             <li><a class="subpage" href="transaction-metadata.html">Transaction Metadata</a></li>
+
+
 
 
 
@@ -9761,16 +9789,32 @@ The parameter to this method has the same structure as the return value of getLe
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <!---->
             <div class="card">
-              <div class="card-header" role="tab" id="sidenav_cat_head_144">
-                  <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_144" aria-expanded="true" aria-controls="sidenav_collapse_144"></a>
+              <div class="card-header" role="tab" id="sidenav_cat_head_148">
+                  <a class="collapsed sidenav_cat_toggler" role="button" data-toggle="collapse" href="#sidenav_collapse_148" aria-expanded="true" aria-controls="sidenav_collapse_148"></a>
                 <h5 class="card-title">
                   <a class="sidenav_cat_title" href="xrp-api.html">XRP-API</a>
                 </h5>
               </div><!-- /.card-header -->
 
-              <div id="sidenav_collapse_144" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_144">
+              <div id="sidenav_collapse_148" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_148">
                 <div class="card-body">
                   <ul class="sidebar_pagelist">
                         <li><a class="subcat-title" href="xrp-api-methods.html">All XRP-API Methods</a></li>
@@ -9864,7 +9908,7 @@ The parameter to this method has the same structure as the return value of getLe
 
                   </ul>
                 </div><!-- /.card-body -->
-              </div><!-- /#sidenav_collapse144 -->
+              </div><!-- /#sidenav_collapse148 -->
 
             </div><!-- /.card -->
 
@@ -10042,58 +10086,58 @@ The parameter to this method has the same structure as the return value of getLe
 
         <!---->
           <div class="card active">
-            <div class="card-header" role="tab" id="sidenav_cat_head_187">
+            <div class="card-header" role="tab" id="sidenav_cat_head_191">
               <h5 class="card-title">
                   <a class="sidenav_cat_title active" href="rippleapi-reference.html">RippleAPI Reference</a>
                 <!-- <a class="sidenav_cat_title" href="rippleapi-reference.html">RippleAPI for JavaScript</a> -->
               </h5>
             </div><!-- /.card-header -->
 
-            <div id="sidenav_collapse_187" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_187">
+            <div id="sidenav_collapse_191" class="collapse show" role="tabpanel" aria-labelledby="sidenav_cat_head_191">
               <div class="card-body">
                 <ul class="sidebar_pagelist">
 
                 </ul>
               </div><!-- /.card-body -->
-            </div><!-- /#sidenav_collapse187 -->
+            </div><!-- /#sidenav_collapse191 -->
 
           </div><!-- /.card -->
 
         <!---->
           <div class="card">
-            <div class="card-header" role="tab" id="sidenav_cat_head_188">
+            <div class="card-header" role="tab" id="sidenav_cat_head_192">
               <h5 class="card-title">
                   <a class="sidenav_cat_title" href="data-api.html">Ripple Data API v2</a>
                 <!-- <a class="sidenav_cat_title" href="data-api.html">Data API</a> -->
               </h5>
             </div><!-- /.card-header -->
 
-            <div id="sidenav_collapse_188" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_188">
+            <div id="sidenav_collapse_192" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_192">
               <div class="card-body">
                 <ul class="sidebar_pagelist">
 
                 </ul>
               </div><!-- /.card-body -->
-            </div><!-- /#sidenav_collapse188 -->
+            </div><!-- /#sidenav_collapse192 -->
 
           </div><!-- /.card -->
 
         <!---->
           <div class="card">
-            <div class="card-header" role="tab" id="sidenav_cat_head_189">
+            <div class="card-header" role="tab" id="sidenav_cat_head_193">
               <h5 class="card-title">
                   <a class="sidenav_cat_title" href="xrp-ledger-toml.html">xrp-ledger.toml File</a>
                 <!-- <a class="sidenav_cat_title" href="xrp-ledger-toml.html">XRP Ledger TOML File</a> -->
               </h5>
             </div><!-- /.card-header -->
 
-            <div id="sidenav_collapse_189" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_189">
+            <div id="sidenav_collapse_193" class="collapse" role="tabpanel" aria-labelledby="sidenav_cat_head_193">
               <div class="card-body">
                 <ul class="sidebar_pagelist">
 
                 </ul>
               </div><!-- /.card-body -->
-            </div><!-- /#sidenav_collapse189 -->
+            </div><!-- /#sidenav_collapse193 -->
 
           </div><!-- /.card -->
 

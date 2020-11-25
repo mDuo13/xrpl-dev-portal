@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>SetFee - XRP Ledger Dev Portal</title>
+    <title>SetFee - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="SetFee | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/setfee.html" />
+    <meta property="og:description" content="Change global reserve and transaction cost settings." />
+    <meta name="description" content="Change global reserve and transaction cost settings." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/setfee.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/setfee.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/setfee.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -59,9 +78,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -158,6 +182,8 @@
     </div>
     <ul class="card-body page-toc">
       <li class="level-1"><a href="#setfee">SetFee</a></li>
+<li class="level-2"><a href="#example-setfee-json">Example SetFee JSON</a></li>
+<li class="level-2"><a href="#setfee-fields">SetFee Fields</a></li>
 
     </ul>
   </div>
@@ -178,23 +204,27 @@
 </nav><!--/.breadcrumbs-wrap-->  <article class="pt-3 p-md-3">
     <div class="content">
         <h1 id="setfee">SetFee</h1>
-<p>A change in <a href="transaction-cost.html">transaction cost</a> or <a href="reserves.html">account reserve</a> requirements as a result of <a href="fee-voting.html">Fee Voting</a>.</p>
+<p>A <code>SetFee</code> <a href="pseudo-transaction-types.html">pseudo-transaction</a> marks a change in <a href="transaction-cost.html">transaction cost</a> or <a href="reserves.html">reserve requirements</a> as a result of <a href="fee-voting.html">Fee Voting</a>.</p>
 <p class="devportal-callout note"><strong>Note:</strong> You cannot send a pseudo-transaction, but you may find one when processing ledgers.</p>
-<div class="codehilite"><pre><span></span><code><span class="err">{</span>
-<span class="err">    "Account": "rrrrrrrrrrrrrrrrrrrrrhoLvTp",</span>
-<span class="err">    "BaseFee": "000000000000000A",</span>
-<span class="err">    "Fee": "0",</span>
-<span class="err">    "ReferenceFeeUnits": 10,</span>
-<span class="err">    "ReserveBase": 20000000,</span>
-<span class="err">    "ReserveIncrement": 5000000,</span>
-<span class="err">    "Sequence": 0,</span>
-<span class="err">    "SigningPubKey": "",</span>
-<span class="err">    "TransactionType": "SetFee",</span>
-<span class="err">    "date": 439578860,</span>
-<span class="err">    "hash": "1C15FEA3E1D50F96B6598607FC773FF1F6E0125F30160144BE0C5CBC52F5151B",</span>
-<span class="err">    "ledger_index": 3721729,</span>
-<span class="err">  }</span>
+<h2 id="example-setfee-json">Example SetFee JSON</h2>
+<div class="codehilite"><pre><span></span><code><span class="p">{</span>
+    <span class="nt">"Account"</span><span class="p">:</span> <span class="s2">"rrrrrrrrrrrrrrrrrrrrrhoLvTp"</span><span class="p">,</span>
+    <span class="nt">"BaseFee"</span><span class="p">:</span> <span class="s2">"000000000000000A"</span><span class="p">,</span>
+    <span class="nt">"Fee"</span><span class="p">:</span> <span class="s2">"0"</span><span class="p">,</span>
+    <span class="nt">"ReferenceFeeUnits"</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="nt">"ReserveBase"</span><span class="p">:</span> <span class="mi">20000000</span><span class="p">,</span>
+    <span class="nt">"ReserveIncrement"</span><span class="p">:</span> <span class="mi">5000000</span><span class="p">,</span>
+    <span class="nt">"Sequence"</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="nt">"SigningPubKey"</span><span class="p">:</span> <span class="s2">""</span><span class="p">,</span>
+    <span class="nt">"TransactionType"</span><span class="p">:</span> <span class="s2">"SetFee"</span><span class="p">,</span>
+    <span class="nt">"date"</span><span class="p">:</span> <span class="mi">439578860</span><span class="p">,</span>
+    <span class="nt">"hash"</span><span class="p">:</span> <span class="s2">"1C15FEA3E1D50F96B6598607FC773FF1F6E0125F30160144BE0C5CBC52F5151B"</span><span class="p">,</span>
+    <span class="nt">"ledger_index"</span><span class="p">:</span> <span class="mi">3721729</span><span class="p">,</span>
+<span class="p">}</span>
 </code></pre></div>
+<h2 id="setfee-fields">SetFee Fields</h2>
+<p>In addition to the <a href="pseudo-transaction-types.html">common fields</a>, a SetFee pseudo-transaction uses the following fields:</p>
+<!-- -->
 <table>
 <thead>
 <tr>
@@ -446,10 +476,12 @@
                             <li><a class="subpage" href="escrow-object.html">Escrow</a></li>
                             <li><a class="subpage" href="feesettings.html">FeeSettings</a></li>
                             <li><a class="subpage" href="ledgerhashes.html">LedgerHashes</a></li>
+                            <li><a class="subpage" href="negativeunl.html">NegativeUNL <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
                             <li><a class="subpage" href="offer.html">Offer</a></li>
                             <li><a class="subpage" href="paychannel.html">PayChannel</a></li>
                             <li><a class="subpage" href="ripplestate.html">RippleState</a></li>
                             <li><a class="subpage" href="signerlist.html">SignerList</a></li>
+                            <li><a class="subpage" href="ticket.html">Ticket</a></li>
 
 
                   </ul>
@@ -488,12 +520,14 @@
                             <li><a class="subpage" href="paymentchannelfund.html">PaymentChannelFund</a></li>
                             <li><a class="subpage" href="setregularkey.html">SetRegularKey</a></li>
                             <li><a class="subpage" href="signerlistset.html">SignerListSet</a></li>
+                            <li><a class="subpage" href="ticketcreate.html">TicketCreate</a></li>
                             <li><a class="subpage" href="trustset.html">TrustSet</a></li>
 
                         <li><a class="subcat-title active-parent" href="pseudo-transaction-types.html">Pseudo-Transactions</a></li>
 
                             <li><a class="subpage" href="enableamendment.html">EnableAmendment</a></li>
                             <li><a class="active subpage" href="#main_content_body">SetFee</a></li>
+                            <li><a class="subpage" href="unlmodify.html">UNLModify <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
 
                         <li><a class="subcat-title" href="transaction-results.html">Transaction Results</a></li>
 

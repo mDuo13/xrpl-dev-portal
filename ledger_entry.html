@@ -3,9 +3,23 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width">
 
-    <title>ledger_entry - XRP Ledger Dev Portal</title>
+    <title>ledger_entry - XRPL.org</title>
+
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="ledger_entry | XRPL.org">
+    <meta property="og:url" content="https://xrpl.org/ledger_entry.html" />
+    <meta property="og:description" content="Get one element from a ledger version." />
+    <meta name="description" content="Get one element from a ledger version." />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ledger_entry.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/xrpl-dev-portal/ja/ledger_entry.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/ledger_entry.html" hreflang="x-default" /><!-- Default: US english -->
+
 
     <!-- favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/apple-touch-icon.png">
@@ -20,11 +34,12 @@
     <!-- jQuery -->
     <script src="/xrpl-dev-portal/assets/vendor/jquery-1.11.1.min.js"></script>
 
-    <!-- Stylesheet -->
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
-    <link href="/xrpl-dev-portal/assets/css/devportal.css" rel="stylesheet" />
-
-    <!-- Google Analytics -->
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCQZ3L8');</script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-45576805-2"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -33,10 +48,14 @@
       gtag('config', 'UA-45576805-2');
       gtag('config', 'UA-157720658-3', { 'linker': {
         'domains': ['blog.xpring.io', 'forum.xpring.io', 'xpring.io',
+                    'blog.ripplex.io', 'forum.ripplex.io', 'ripplex.io',
                     'xrpl.org', 'explorer.xrpl.org', 'testnet.xrpl.org']
         } }
       );
     </script>
+
+    <!-- Stylesheet -->
+    <link href="/xrpl-dev-portal/assets/css/devportal2020.css" rel="stylesheet" />
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" />
 
@@ -59,9 +78,14 @@
 
 <body class="xrp-ledger-dev-portal sidebar-primary lang-en ">
 
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCQZ3L8"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
 <div class="container-fluid">
 <nav class="top-nav navbar navbar-expand-lg navbar-dark row">
-  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRP Ledger Dev Portal" /></a>
+  <a href="/xrpl-dev-portal/" class="navbar-brand"><img src="/xrpl-dev-portal/assets/img/XRPLedger_DevPortal-white.svg" class="logo"  height="44" alt="XRPL.org" /></a>
   <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarHolder" aria-controls="navbarHolder" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -182,7 +206,7 @@
     <div class="content">
         <h1 id="ledger_entry">ledger_entry</h1>
 <p><a class="external-link" href="https://github.com/ripple/rippled/blob/master/src/ripple/rpc/handlers/LedgerEntry.cpp" target="_blank" title="Source">[Source] <i aria-hidden="true" class="fa fa-external-link"></i></a></p>
-<p>The <code>ledger_entry</code> method returns a single ledger object from the XRP Ledger in its raw format. See <a href="ledger-data-formats.html">ledger format</a> for information on the different types of objects you can retrieve.</p>
+<p>The <code>ledger_entry</code> method returns a single ledger object from the XRP Ledger in its raw format. See <a href="ledger-object-types.html">ledger format</a> for information on the different types of objects you can retrieve.</p>
 <h2 id="request-format">Request Format</h2>
 <p>An example of the request format:</p>
 <p class="devportal-callout note"><strong>Note:</strong> There is no commandline syntax for this method. You can use the <a href="json.html">json method</a> to access this method from the commandline instead.</p>
@@ -224,6 +248,7 @@
 <li><code>escrow</code> - Retrieve an <a href="escrow-object.html">Escrow object</a>, which holds XRP until a specific time or condition is met. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/1.0.0" target="_blank" title="New in: rippled 1.0.0"><img alt="New in: rippled 1.0.0" class="dactyl_badge" src="https://img.shields.io/badge/New%20in-rippled%201.0.0-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></li>
 <li><code>payment_channel</code> - Retrieve a <a href="paychannel.html">PayChannel object</a>, which holds XRP for asynchronous payments. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/1.0.0" target="_blank" title="New in: rippled 1.0.0"><img alt="New in: rippled 1.0.0" class="dactyl_badge" src="https://img.shields.io/badge/New%20in-rippled%201.0.0-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></li>
 <li><code>deposit_preauth</code> - Retrieve a <a href="depositpreauth-object.html">DepositPreauth object</a>, which tracks preauthorization for payments to accounts requiring <a href="depositauth.html">Deposit Authorization</a>. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/1.1.0" target="_blank" title="New in: rippled 1.1.0"><img alt="New in: rippled 1.1.0" class="dactyl_badge" src="https://img.shields.io/badge/New%20in-rippled%201.1.0-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></li>
+<li><code>ticket</code> - Retrieve a <a href="ticket.html">Ticket object</a>, which records a <a href="basic-data-types.html#account-sequence">sequence number</a> set aside for future use. <em>(Requires the <a href="known-amendments.html#ticketbatch">TicketBatch amendment</a>)</em></li>
 </ol>
 <p>If you specify more than one of the above items, the server retrieves only one of them; it is undefined which it chooses.</p>
 <p>The full list of parameters recognized by this method is as follows:</p>
@@ -337,6 +362,21 @@
 <td align="left"><em>(Required if <code>ripple_state</code> is specified)</em> <a href="currency-formats.html#currency-codes">Currency Code</a> of the <a href="ripplestate.html">RippleState object</a> to retrieve.</td>
 </tr>
 <tr>
+<td align="left"><code>ticket</code></td>
+<td align="left">Object or String</td>
+<td align="left"><em>(Optional)</em> Object specifying the <a href="ticket.html">Ticket object</a> to retrieve. If a string, the must be the <a href="ledger-object-ids.html">object ID</a> of the Ticket, as hexadecimal. If an object, the <code>owner</code> and <code>ticket_sequence</code> sub-fields are required to uniquely specify the Ticket entry to retrieve.</td>
+</tr>
+<tr>
+<td align="left"><code>ticket.owner</code></td>
+<td align="left">String - <a href="basic-data-types.html#addresses">Address</a></td>
+<td align="left"><em>(Required if <code>ticket</code> is specified as an object)</em> The owner of the Ticket object.</td>
+</tr>
+<tr>
+<td align="left"><code>ticket.ticket_sequence</code></td>
+<td align="left">Unsigned Integer</td>
+<td align="left"><em>(Required if <code>ticket</code> is specified as an object)</em> The Ticket Sequence number of the Ticket entry to retrieve.</td>
+</tr>
+<tr>
 <td align="left"><code>binary</code></td>
 <td align="left">Boolean</td>
 <td align="left"><em>(Optional)</em> If true, return the requested ledger object's contents as a hex string. Otherwise, return data in JSON format. The default is <code>false</code>. <a class="external-link" href="https://github.com/ripple/rippled/releases/tag/1.2.0" target="_blank" title="Updated in: rippled 1.2.0"><img alt="Updated in: rippled 1.2.0" class="dactyl_badge" src="https://img.shields.io/badge/Updated%20in-rippled%201.2.0-blue.svg"/> <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
@@ -448,7 +488,7 @@
 <tr>
 <td align="left"><code>node</code></td>
 <td align="left">Object</td>
-<td align="left"><em>(Omitted if <code>"binary": true</code> specified.)</em> Object containing the data of this ledger object, according to the <a href="ledger-data-formats.html">ledger format</a>.</td>
+<td align="left"><em>(Omitted if <code>"binary": true</code> specified.)</em> Object containing the data of this ledger object, according to the <a href="ledger-object-types.html">ledger format</a>.</td>
 </tr>
 <tr>
 <td align="left"><code>node_binary</code></td>
@@ -678,10 +718,12 @@
                             <li><a class="subpage" href="escrow-object.html">Escrow</a></li>
                             <li><a class="subpage" href="feesettings.html">FeeSettings</a></li>
                             <li><a class="subpage" href="ledgerhashes.html">LedgerHashes</a></li>
+                            <li><a class="subpage" href="negativeunl.html">NegativeUNL <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
                             <li><a class="subpage" href="offer.html">Offer</a></li>
                             <li><a class="subpage" href="paychannel.html">PayChannel</a></li>
                             <li><a class="subpage" href="ripplestate.html">RippleState</a></li>
                             <li><a class="subpage" href="signerlist.html">SignerList</a></li>
+                            <li><a class="subpage" href="ticket.html">Ticket</a></li>
 
 
                   </ul>
@@ -720,12 +762,14 @@
                             <li><a class="subpage" href="paymentchannelfund.html">PaymentChannelFund</a></li>
                             <li><a class="subpage" href="setregularkey.html">SetRegularKey</a></li>
                             <li><a class="subpage" href="signerlistset.html">SignerListSet</a></li>
+                            <li><a class="subpage" href="ticketcreate.html">TicketCreate</a></li>
                             <li><a class="subpage" href="trustset.html">TrustSet</a></li>
 
                         <li><a class="subcat-title" href="pseudo-transaction-types.html">Pseudo-Transactions</a></li>
 
                             <li><a class="subpage" href="enableamendment.html">EnableAmendment</a></li>
                             <li><a class="subpage" href="setfee.html">SetFee</a></li>
+                            <li><a class="subpage" href="unlmodify.html">UNLModify <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span></a></li>
 
                         <li><a class="subcat-title" href="transaction-results.html">Transaction Results</a></li>
 
