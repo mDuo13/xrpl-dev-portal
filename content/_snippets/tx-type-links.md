@@ -16,11 +16,13 @@
     "PaymentChannelFund",
     "SetRegularKey",
     "SignerListSet",
+    "TicketCreate",
     "TrustSet"
 ] %}
 {% set pstxtypes = [
   "EnableAmendment",
-  "SetFee"
+  "SetFee",
+  "UNLModify"
 ] %}
 
 

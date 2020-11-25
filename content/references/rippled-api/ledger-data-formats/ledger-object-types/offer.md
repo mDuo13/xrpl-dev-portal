@@ -1,3 +1,13 @@
+---
+html: offer.html
+funnel: Build
+doc_type: References
+supercategory: rippled API
+category: Ledger Data Formats
+subcategory: Ledger Object Types
+blurb: An order to make a currency trade.
+parent: ledger-object-types.html
+---
 # Offer
 [[Source]](https://github.com/ripple/rippled/blob/5d2d88209f1732a0f8d592012094e345cbe3e675/src/ripple/protocol/impl/LedgerFormats.cpp#L57 "Source")
 
@@ -67,6 +77,7 @@ The ID of an `Offer` object is the [SHA-512Half][] of the following values, conc
 * The Offer space key (`0x006F`)
 * The AccountID of the account placing the offer
 * The Sequence number of the [OfferCreate transaction][] that created the offer
+    If the OfferCreate transaction used a [Ticket](tickets.html), use the `TicketSequence` value instead.
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}			

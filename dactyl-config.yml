@@ -51,6 +51,7 @@ cover_page:
     html: index.html
     template: template-home.html
     sidebar: disabled
+    canonical_url: https://xrpl.org/
 
 languages:
     -   code: en
@@ -64,7 +65,7 @@ targets:
     # First member is the default that gets built when target not specified
     -   name: en
         lang: en
-        display_name: XRP Ledger Dev Portal
+        display_name: XRPL.org
         # These github_ fields are used by the template's "Edit on GitHub" link.
         #  Override them with --vars to change which fork/branch to edit.
         github_forkurl: https://github.com/ripple/xrpl-dev-portal
@@ -74,14 +75,16 @@ targets:
             "./src/api-v3/paths/preparations/payments.ts": "https://github.com/xpring-eng/xrp-api/blob/master/src/api-v3/paths/preparations/payments.ts"
         readability_goals:
             flesch_reading_ease: 50 # or higher
+        blurb: XRPL.org is a community-driven resource for all things XRP and the XRP Ledger—your source for technical information, reference materials and tools.
 
     -   name: ja
         lang: ja
-        display_name: XRP Ledger Dev Portal (日本語)
+        display_name: XRPL.org (日本語)
         github_forkurl: https://github.com/ripple/xrpl-dev-portal
         github_branch: 2020refresh
         prefix: "/xrpl-dev-portal/ja/"
         locale_file: locale/ja/LC_MESSAGES/messages.mo
+        blurb: XRPとXRP Ledgerの全てに対してのコミュニティーリーソース
         link_subs:
             # Adjust XRP-API readme link to point to the right place in the repo
             "./src/api-v3/paths/preparations/payments.ts": "https://github.com/xpring-eng/xrp-api/blob/master/src/api-v3/paths/preparations/payments.ts"
@@ -140,6 +143,8 @@ targets:
             # Fix links from untranslated health-check.html:
             "rippled-server-modes.html#reasons-to-run-a-rippled-server-in-stand-alone-mode": "rippled-server-modes.html#rippledサーバーをスタンドアロンモードで実行する理由"
             "server-doesnt-sync.html#normal-syncing-behavior": "server-doesnt-sync.html#通常の同期動作"
+            # Fix link from untranslated negativeunl.html:
+            "consensus.html#validation": "consensus.html#検証"
 
 
     -   name: xrp-api-only
@@ -196,6 +201,15 @@ pages:
         sidebar: disabled
         targets:
             - en
+
+    -   name: 使用
+        funnel: Learn
+        category: Uses
+        template: template-learn-uses.html
+        html: uses.html
+        top_nav_level: 1
+        sidebar: disabled
+        targets:
             - ja
 
     -   name: History
@@ -207,6 +221,15 @@ pages:
         sidebar: disabled
         targets:
             - en
+
+    -   name: 沿革
+        funnel: Learn
+        category: History
+        template: template-learn-history.html
+        html: history.html
+        top_nav_level: 1
+        sidebar: disabled
+        targets:
             - ja
 
     -   name: Impact
@@ -218,6 +241,15 @@ pages:
         sidebar: disabled
         targets:
             - en
+
+    -   name: インパクト
+        funnel: Learn
+        category: Impact
+        template: template-learn-impact.html
+        html: impact.html
+        top_nav_level: 1
+        sidebar: disabled
+        targets:
             - ja
 
     -   name: Carbon Calculator
@@ -227,8 +259,23 @@ pages:
         html: carbon-calculator.html
         top_nav_level: 1
         sidebar: disabled
+        blurb: Whether it's cash, credit, or crypto, every transaction you make consumes energy. Use the green currency calculator to compare.
+        fb_card: currency-calculator-card-fb.png
+        twitter_card: currency-calculator-card-tw.png
         targets:
             - en
+
+    -   name: 二酸化炭素電卓
+        funnel: Learn
+        category: Carbon Calculator
+        template: template-calculator.html
+        html: carbon-calculator.html
+        top_nav_level: 1
+        sidebar: disabled
+        blurb: 現金、クレジットカード、暗号資産でもエネルギー消費する。インタラクティブツールで消費量を比較しましょう。
+        fb_card: currency-calculator-card-fb.png
+        twitter_card: currency-calculator-card-tw.png
+        targets:
             - ja
 
 # "Explore" funnel -------------------------------------------------------------
@@ -257,6 +304,15 @@ pages:
         sidebar: disabled
         targets:
             - en
+
+    -   name: ウォレット
+        funnel: Explore
+        category: Wallets
+        template: template-explore-wallets.html
+        html: wallets.html
+        top_nav_level: 1
+        sidebar: disabled
+        targets:
             - ja
 
     -   name: Exchanges
@@ -268,6 +324,15 @@ pages:
         sidebar: disabled
         targets:
             - en
+
+    -   name: 取引所
+        funnel: Explore
+        category: Exchanges
+        template: template-explore-exchanges.html
+        html: exchanges.html
+        top_nav_level: 1
+        sidebar: disabled
+        targets:
             - ja
 
     -   name: Businesses
@@ -279,6 +344,15 @@ pages:
         sidebar: disabled
         targets:
             - en
+
+    -   name: 企業
+        funnel: Explore
+        category: Businesses
+        template: template-explore-businesses.html
+        html: businesses.html
+        top_nav_level: 1
+        sidebar: disabled
+        targets:
             - ja
 
 # "Build" funnel ---------------------------------------------------------------
@@ -532,6 +606,11 @@ pages:
         subcategory: Accounts
         blurb: XRP Ledgerアカウントでは、レジャーデータ内のスパムを減らすためにXRPの準備金が必要です。
         targets:
+            - ja
+
+    -   md: concepts/payment-system-basics/accounts/tickets.md
+        targets:
+            - en
             - ja
 
     -   md: concepts/payment-system-basics/accounts/depositauth.md
@@ -1141,6 +1220,12 @@ pages:
         doc_type: Concepts
         category: Consensus Network
         blurb: Understand what Invariant Checking is, why it exists, how it works, and what invariant checks are active.
+        targets:
+            - en
+            - ja
+
+        # TODO: translate this page and blurb
+    -   md: concepts/consensus-network/negative-unl.md
         targets:
             - en
             - ja
@@ -2523,12 +2608,6 @@ pages:
             - ja
 
     -   md: tutorials/manage-the-rippled-server/configuration/connect-your-rippled-to-the-xrp-test-net.md
-        html: connect-your-rippled-to-the-xrp-test-net.html
-        funnel: Build
-        doc_type: Tutorials
-        category: Manage the rippled Server
-        subcategory: Configuration
-        blurb: Connect your rippled server to the test net to try out new features or test functionality with fake money.
         targets:
             - en
 
@@ -4965,25 +5044,11 @@ pages:
         targets:
             - ja
 
-    -   name: Ledger Data Formats
-        html: ledger-data-formats.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        blurb: Learn about individual data objects that comprise the XRP Ledger's shared state.
-        template: template-landing-children.html
+    -   md: references/rippled-api/ledger-data-formats/ledger-data-formats.md
         targets:
             - en
 
-    -   name: レジャーのデータ型
-        html: ledger-data-formats.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        blurb: XRP Ledgerの共有状態を構成する個別のデータオブジェクトについて説明します。
-        template: template-landing-children.html
+    -   md: references/rippled-api/ledger-data-formats/ledger-data-formats.ja.md
         targets:
             - ja
 
@@ -5027,292 +5092,118 @@ pages:
         targets:
             - ja
 
-    -   name: Ledger Object Types
-        html: ledger-object-types.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        template: template-landing-children.html
-        blurb: Each ledger's state tree consists of a set of ledger objects, which collectively represent all settings, balances, and relationships in the shared ledger. In the peer protocol that rippled servers use to communicate with each other, ledger objects are represented in their raw binary format. In the rippled API, ledger objects are represented as JSON objects. #TODO:translate
+    -   md: references/rippled-api/ledger-data-formats/ledger-object-types/ledger-object-types.md
         targets:
             - en
 
-    -   name: レジャーオブジェクトのタイプ
-        html: ledger-object-types.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        template: template-landing-children.html
-        blurb: 各レジャーの状態ツリーはレジャーオブジェクトのセットで構成されており、それらが総合して共有レジャーのすべての設定、残高、関係を表します。rippledサーバーが互いに通信するために使用するピアプロトコルでは、レジャーオブジェクトは生バイナリーフォーマットで表されます。rippled APIでは、レジャーオブジェクトはJSONオブジェクトとして表されます。
+    -   md: references/rippled-api/ledger-data-formats/ledger-object-types/ledger-object-types.ja.md
         targets:
             - ja
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/accountroot.md
-        html: accountroot.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: The settings, XRP balance, and other metadata for one account.
         targets:
             - en
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/accountroot.ja.md
-        html: accountroot.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: あるアカウントの設定、XRP残高、その他のメタデータです。
         targets:
             - ja
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/amendments.md
-        html: amendments-object.html #amendments.html is taken by the concept page
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: Singleton object with status of enabled and pending amendments.
         targets:
             - en
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/amendments.ja.md
-        html: amendments-object.html #amendments.html is taken by the concept page
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: 有効化されているAmendmentと保留中のAmendmentのステータスを持つシングルトンオブジェクトです。
         targets:
             - ja
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/check.md
-        html: check.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: A check that can be redeemed for money by its destination.
         targets:
             - en
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/check.ja.md
-        html: check.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: 送信先が清算して資金にできるCheckです。
         targets:
             - ja
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/depositpreauth.md
-        html: depositpreauth-object.html #depositpreauth.html is taken by the tx type
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: A record of preauthorization for sending payments to an account that requires authorization.
         targets:
             - en
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/depositpreauth.ja.md
-        html: depositpreauth-object.html #depositpreauth.html is taken by the tx type
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: 承認を必要とするアカウントへの送金ペイメントの事前承認の記録です。
         targets:
             - ja
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/directorynode.md
-        html: directorynode.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: Contains links to other objects.
         targets:
             - en
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/directorynode.ja.md
-        html: directorynode.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: 他のオブジェクトへのリンクを含みます。
         targets:
             - ja
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/escrow.md
-        html: escrow-object.html #escrow.html is taken by the concept page
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: Contains XRP held for a conditional payment.
         targets:
             - en
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/escrow.ja.md
-        html: escrow-object.html #escrow.html is taken by the concept page
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: 条件付き決済のために保有されているXRPを含みます。
         targets:
             - ja
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/feesettings.md
-        html: feesettings.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: Singleton object with consensus-approved base transaction cost and reserve requirements.
         targets:
             - en
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/feesettings.ja.md
-        html: feesettings.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: コンセンサスで承認された基本トランザクションコストと必要準備金があるシングルトンオブジェクトです。
         targets:
             - ja
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/ledgerhashes.md
-        html: ledgerhashes.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: Lists of prior ledger versions' hashes for history lookup.
         targets:
             - en
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/ledgerhashes.ja.md
-        html: ledgerhashes.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: 履歴検索用に以前のレジャーバージョンのハッシュをリスト表示します。
         targets:
             - ja
 
+    -   md: references/rippled-api/ledger-data-formats/ledger-object-types/negativeunl.md
+        targets:
+            - en
+            - ja
+
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/offer.md
-        html: offer.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: An order to make a currency trade.
         targets:
             - en
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/offer.ja.md
-        html: offer.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: 通貨取引を行うためのオーダーです。
         targets:
             - ja
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/paychannel.md
-        html: paychannel.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: A channel for asynchronous XRP payments.
         targets:
             - en
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/paychannel.ja.md
-        html: paychannel.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: 非同期XRP支払い用のチャネルです。
         targets:
             - ja
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/ripplestate.md
-        html: ripplestate.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: Links two accounts, tracking the balance of one currency between them. The concept of a trust line is an abstraction of this object type.
         targets:
             - en
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/ripplestate.ja.md
-        html: ripplestate.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: 2つのアカウントをリンクし、それらのアカウント間の特定の通貨の残高を追跡します。トラストラインのコンセプトは、このオブジェクトタイプを抽象化することです。
         targets:
             - ja
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/signerlist.md
-        html: signerlist.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: A list of addresses for multi-signing transactions.
         targets:
             - en
 
     -   md: references/rippled-api/ledger-data-formats/ledger-object-types/signerlist.ja.md
-        html: signerlist.html
-        funnel: Build
-        doc_type: References
-        supercategory: rippled API
-        category: Ledger Data Formats
-        subcategory: Ledger Object Types
-        blurb: マルチ署名トランザクションのアドレスのリストです。
         targets:
+            - ja
+
+    -   md: references/rippled-api/ledger-data-formats/ledger-object-types/ticket.md
+        targets:
+            - en
             - ja
 
     -   md: references/rippled-api/transaction-formats/transaction-formats.md
@@ -5755,6 +5646,11 @@ pages:
         targets:
             - ja
 
+    -   md: references/rippled-api/transaction-formats/transaction-types/ticketcreate.md
+        targets:
+            - en
+            - ja
+
     -   md: references/rippled-api/transaction-formats/transaction-types/trustset.md
         html: trustset.html
         funnel: Build
@@ -5843,6 +5739,11 @@ pages:
         subcategory: Pseudo-Transaction Types
         blurb: 手数料投票の結果としてトランザクションコストまたはアカウント準備金の要件が変更されます。
         targets:
+            - ja
+
+    -   md: references/rippled-api/transaction-formats/pseudo-transaction-types/unlmodify.md
+        targets:
+            - en
             - ja
 
     -   md: references/rippled-api/transaction-formats/transaction-results/transaction-results.md
@@ -6358,6 +6259,7 @@ pages:
         doc_type: Dev Tools
         template: template-websocket-api-tool.html
         html: websocket-api-tool.html
+        canonical_url: https://xrpl.org/websocket-api-tool.html
         targets:
             - en
             - ja
@@ -6439,6 +6341,13 @@ pages:
         sidebar: disabled
         targets:
             - en
+
+    -   name: 貢献する
+        funnel: Contribute
+        html: contribute.html
+        template: template-contribute.html
+        sidebar: disabled
+        targets:
             - ja
 
     -   md: contributing/contribute-code.md
@@ -6481,13 +6390,15 @@ known_broken_links:
     - /blog/label/amendments.html
     - /blog/label/features.html
     # For various reasons these links break from the Python requests client,
-    #  but they work in browser. (Might be a protection against bots.)
+    #  but they work in browser. (Often a protection against bots, like
+    #  Cloudflare.)
     - https://web.archive.org/web/20161007113240/https://wiki.ripple.com/Ripple.txt
     - http://web.archive.org/web/20171211225452/https://forum.ripple.com/viewtopic.php?f=2&t=3613
     - https://bitcoinexchangeguide.com/cryptographic-puzzle-creator-xrpuzzler-offers-137-xrp-reward-to-anyone-who-can-solve-it/
     - https://www.coinbase.com/
     - https://www.forte.io/
     - https://www.kraken.com/
+    - https://xrpscan.com/amendments
 
 # Style Checker Config ------------------------------------------------------ #
 

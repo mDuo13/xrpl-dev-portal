@@ -1,3 +1,13 @@
+---
+html: check.html
+funnel: Build
+doc_type: References
+supercategory: rippled API
+category: Ledger Data Formats
+subcategory: Ledger Object Types
+blurb: A check that can be redeemed for money by its destination.
+parent: ledger-object-types.html
+---
 # Check
 [[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/protocol/impl/LedgerFormats.cpp#L157-L170 "Source")
 
@@ -55,7 +65,8 @@ The ID of a `Check` object is the [SHA-512Half][] of the following values, conca
 
 * The Check space key (`0x0043`)
 * The AccountID of the sender of the [CheckCreate transaction][] that created the `Check` object
-* The Sequence number of the [CheckCreate transaction][] that created the `Check` object
+* The `Sequence` number of the [CheckCreate transaction][] that created the `Check` object.
+    If the CheckCreate transaction used a [Ticket](tickets.html), use the `TicketSequence` value instead.
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}			

@@ -1,3 +1,13 @@
+---
+html: paychannel.html
+funnel: Build
+doc_type: References
+supercategory: rippled API
+category: Ledger Data Formats
+subcategory: Ledger Object Types
+blurb: A channel for asynchronous XRP payments.
+parent: ledger-object-types.html
+---
 # PayChannel
 [[Source]](https://github.com/ripple/rippled/blob/master/src/ripple/protocol/impl/LedgerFormats.cpp#L141-L155 "Source")
 
@@ -93,7 +103,8 @@ The ID of a `PayChannel` object is the [SHA-512Half][] of the following values, 
 * The PayChannel space key (`0x0078`)
 * The AccountID of the source account
 * The AccountID of the destination account
-* The Sequence number of the transaction that created the channel
+* The Sequence number of the [PaymentChannelCreate transaction][] that created the channel
+    If the PaymentChannelCreate transaction used a [Ticket](tickets.html), use the `TicketSequence` value instead.
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}			

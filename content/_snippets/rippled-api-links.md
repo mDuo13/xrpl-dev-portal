@@ -21,7 +21,7 @@
 [Ledger Index]: basic-data-types.html#ledger-index
 [ledger index]: basic-data-types.html#ledger-index
 [レジャーインデックス]: basic-data-types.html#レジャーインデックス
-[ledger format]: ledger-data-formats.html
+[ledger format]: ledger-object-types.html
 [レジャーフォーマット]: ledger-data-formats.html
 [Marker]: markers-and-pagination.html
 [マーカー]: markers-and-pagination.html
@@ -57,6 +57,7 @@
 <!-- API object types -->
 [AccountRoot object]: accountroot.html
 [AccountRootオブジェクト]: accountroot.html
+[Ticket object]: ticket.html
 
 <!--{# Links to external sites #}-->
 [crypto-condition]: https://tools.ietf.org/html/draft-thomas-crypto-conditions-04
@@ -173,12 +174,14 @@
   "FlowV2",
   "MultiSign",
   "MultiSignReserve",
+  "NegativeUNL",
   "OwnerPaysFee",
   "PayChan",
   "RequireFullyCanonicalSig",
   "SHAMapV2",
   "SortedDirectories",
   "SusPay",
+  "TicketBatch",
   "Tickets",
   "TickSize",
   "TrustSetAuth"

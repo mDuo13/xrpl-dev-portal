@@ -1,7 +1,16 @@
 /* HOME STYLINGS */
 #home-hero-marker {
   top: unset;
-  bottom: 64px;
+  bottom: 88px;
+}
+#home-hero-graphic {
+  max-width: 100%;
+  @include media-breakpoint-down(sm) {
+    width: 200%;
+    margin-left: -50%;
+    margin-right: -50%;
+    max-width: none;
+  }
 }
 #home-hero-marker:after {
   position: absolute;
@@ -56,10 +65,18 @@
 
 #hero-impact {
   width: calc(100vw - 16px);
-}
-@include media-breakpoint-up(md) {
-  #hero-impact {
+  @include media-breakpoint-up(md) {
     margin-top: -120px;
+  }
+  @include media-breakpoint-down(sm) {
+    width: calc(200vw);
+    margin-left: -30vw;
+  }
+}
+
+#page-uses-top {
+  @include media-breakpoint-down(sm) {
+    margin-left: -5rem;
   }
 }
 #page-impact-bg {
@@ -148,6 +165,13 @@
   }
 }
 
+.green-graphic {
+  @include media-breakpoint-down(xs) {
+    width: 184px;
+    margin-bottom: 32px;
+  }
+}
+
 
 .page-calculator {
   .calculator-section-description {
@@ -190,6 +214,10 @@
     animation: fadeIn 1s ease-in-out;
     @include media-breakpoint-down(md) {
       display: inline-block;
+      margin-bottom: 32px;
+    }
+    @include media-breakpoint-down(xs) {
+      display: block
     }
   }
 
@@ -200,8 +228,14 @@
       max-width: 100%;
     }
     .viz-wrapper {
-      margin-bottom: 2.5rem;
       margin-right: 1rem;
+      min-width: 184px;
+    }
+    .num-wrapper {
+      h5 {
+        font-size: 1.3rem;
+        word-break: break-word;
+      }
     }
     .d-output[data-comp="kWh"].active {
       display: inline-flex;
@@ -215,7 +249,7 @@
   }
   @include media-breakpoint-down(md) {
     #calculator-inputs-offset.offset {
-      height: 248px;
+      height: 404px;
       width: 100%;
     }
     #calculator-inputs-offset {
@@ -223,13 +257,14 @@
       width: 100%;
     }
     .d-output {
-      margin: 16px;
+      margin: 2rem 0;
     }
     #calculator-mobile-toggle.show {
       position: fixed;
       top: 15px;
       right: 15px;
       z-index: 9999999;
+      background: $black;
     }
     #calculator-mobile-toggle.hide {
       display: none;
@@ -251,6 +286,12 @@
       display: block;
     }
   }
+  @include media-breakpoint-down(sm) {
+    #calculator-inputs-offset.offset {
+      height: 486px;
+      width: 100%;
+    }
+  }
   @include media-breakpoint-up(xl){
     #data-selector li:first-child a {
       border-top-left-radius: 8px;
@@ -259,6 +300,12 @@
     #data-selector li:last-child a {
       border-top-right-radius: 8px;
       border-bottom-right-radius: 8px;
+    }
+  }
+  @include media-breakpoint-down(lg) {
+    #data-selector li:nth-child(2) {
+      margin-left: 0;
+      margin-right: 0;
     }
   }
   .viz-wrapper {
@@ -299,10 +346,21 @@
   #kWh-pap-dot {
   }
 
+  .dash {
+    &.active {
+      font-weight: bold;
+      color: $primary;
+    }
+  }
+
   .dash:before {
-    content: url(../img/icons/dash-line.png);
+    // content: url(../img/icons/dash-line.png);
+    content: '|';
+    font-size: 7px;
+    font-weight: bold;
+    color: $gray-500;
     position: absolute;
-    top: -12px;
+    top: -10px;
     margin-left: 13px;
   }
 
