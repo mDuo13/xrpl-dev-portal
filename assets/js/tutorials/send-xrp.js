@@ -106,9 +106,10 @@ api.on('ledger', ledger => {
 })
 
 // 6. Check transaction status -------------------------------------------------
-$("#get-tx-button").click( async function() {
+$("#get-tx-button").click( async function(event) {
+  const block = $(event.target).closest(".interactive-block")
   // Wipe previous output
-  $("#get-tx-output").html("")
+  block.find(".output-area").html("")
 
   const txID = $("#signed-tx-hash").text()
   const earliestLedgerVersion = parseInt($("#earliest-ledger-version").text(), 10)
@@ -116,17 +117,17 @@ $("#get-tx-button").click( async function() {
   try {
     const tx = await api.getTransaction(txID, {minLedgerVersion: earliestLedgerVersion})
 
-    $("#get-tx-output").html(
+    block.find(".output-area").html(
       "<div><strong>Transaction result:</strong> " +
       tx.outcome.result + "</div>" +
       "<div><strong>Balance changes:</strong> <pre><code>" +
-      JSON.stringify(tx.outcome.balanceChanges, null, 2) +
+      pretty_print(tx.outcome.balanceChanges) +
       "</pre></code></div>"
     )
 
     complete_step("Check")
   } catch(error) {
-    $("#get-tx-output").text("Couldn't get transaction outcome:" + error)
+    block.find(".output-area").text("Couldn't get transaction outcome:" + error)
   }
 
 })

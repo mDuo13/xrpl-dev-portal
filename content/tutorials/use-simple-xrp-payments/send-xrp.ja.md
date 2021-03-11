@@ -48,7 +48,7 @@ api.connect()
 <div>
   <strong>Connection status:</strong>
   <span id="connection-status">Not connected</span>
-  <div id='loader-{{n.current}}' style="display: none;"><img class='throbber' src="assets/img/xrp-loader-96.png"></div>
+  <div id='loader-{{n.current}}' style="display: none;"><img class="throbber" src="assets/img/xrp-loader-96.png"></div>
 </div>
 {{ end_step() }}
 
@@ -252,7 +252,7 @@ const earliestLedgerVersion = doSubmit(txBlob)
 {{ start_step("Submit") }}
   <button id="submit-button" class="btn btn-primary connection-required"
     title="Connection to Test Net required" disabled>サンプルトランザクションを送信する</button>
-    <div id='loader-{{n.current}}' style="display: none;"><img class='throbber' src="assets/img/xrp-loader-96.png"></div>
+    <div id='loader-{{n.current}}' style="display: none;"><img class="throbber" src="assets/img/xrp-loader-96.png"></div>
     <div id="submit-output"></div>
 {{ end_step() }}
 

@@ -4,21 +4,24 @@
 $(document).ready(() => {
 
 // 3. Check Sequence Number
-$("#check-sequence").click( async function() {
+$("#check-sequence").click( async function(event) {
+  const block = $(event.target).closest(".interactive-block")
   const address = $("#use-address").text()
 
   if (!address) {
-    $("#check-sequence-output").html(
+    block.find(".output-area").html(
       `<p class="devportal-callout warning"><strong>Error:</strong>
       No address. Make sure you <a href="#1-get-credentials">Get Credentials</a> first.</p>`)
     return;
   }
 
   // Wipe previous output
-  $("#check-sequence-output").html("")
+  block.find(".output-area").html("")
+  block.find(".loader").show()
   const account_info = await api.request("account_info", {"account": address})
+  block.find(".loader").hide()
 
-  $("#check-sequence-output").append(
+  block.find(".output-area").append(
     `<p>Current sequence:
     <code id="current_sequence">${account_info.account_data.Sequence}</code>
     </p>`)
@@ -27,7 +30,8 @@ $("#check-sequence").click( async function() {
 })
 
 // 4. Prepare and Sign TicketCreate --------------------------------------------
-$("#prepare-and-sign").click( async function() {
+$("#prepare-and-sign").click( function(event) {
+  const block = $(event.target).closest(".interactive-block")
   const address = $("#use-address").text()
   const secret = $("#use-secret").text()
   let current_sequence;
@@ -38,10 +42,10 @@ $("#prepare-and-sign").click( async function() {
   }
 
   // Wipe previous output
-  $("#prepare-and-sign-output").html("")
+  block.find(".output-area").html("")
 
   if (!address || !secret || !current_sequence) {
-    $("#prepare-and-sign-output").html(
+    block.find(".output-area").html(
       `<p class="devportal-callout warning"><strong>Error:</strong>
       Couldn't get a valid address/secret/sequence value. Check that the
       previous steps were completed successfully.</p>`)
@@ -57,14 +61,14 @@ $("#prepare-and-sign").click( async function() {
     maxLedgerVersionOffset: 20
   })
 
-  $("#prepare-and-sign-output").append(
+  block.find(".output-area").append(
     `<p>Prepared transaction:</p>
     <pre><code>${pretty_print(prepared.txJSON)}</code></pre>`)
   $("#lastledgersequence").html(
     `<code>${prepared.instructions.maxLedgerVersion}</code>`)
 
   let signed = api.sign(prepared.txJSON, secret)
-  $("#prepare-and-sign-output").append(
+  block.find(".output-area").append(
     `<p>Transaction hash: <code id="tx_id">${signed.id}</code></p>`)
   $("#waiting-for-tx").text(signed.id)
 
@@ -73,7 +77,7 @@ $("#prepare-and-sign").click( async function() {
   $("#tx-validation-status").html("<th>Final Result:</th><td></td>")
 
   let tx_blob = signed.signedTransaction
-  $("#prepare-and-sign-output").append(
+  block.find(".output-area").append(
     `<pre style="visibility: none"><code id="tx_blob">${tx_blob}</code></pre>`)
 
   complete_step("Prepare & Sign")
@@ -81,14 +85,15 @@ $("#prepare-and-sign").click( async function() {
 })
 
 // 5. Submit TicketCreate ------------------------------------------------------
-$("#ticketcreate-submit").click( async function() {
+$("#ticketcreate-submit").click( async function(event) {
+  const block = $(event.target).closest(".interactive-block")
   const tx_blob = $("#tx_blob").text()
   // Wipe previous output
-  $("#ticketcreate-submit-output").html("")
+  block.find(".output-area").html("")
 
   waiting_for_tx = $("#tx_id").text() // next step uses this
   let prelim_result = await api.request("submit", {"tx_blob": tx_blob})
-  $("#ticketcreate-submit-output").append(
+  block.find(".output-area").append(
     `<p>Preliminary result:</p>
     <pre><code>${pretty_print(prelim_result)}</code></pre>`)
 
@@ -200,7 +205,8 @@ $("#intermission-accountset").click( async function() {
 })
 
 // 7. Check Available Tickets --------------------------------------------------
-$("#check-tickets").click( async function() {
+$("#check-tickets").click( async function(event) {
+  const block = $(event.target).closest(".interactive-block")
   const address = $("#use-address").text()
   // Wipe previous output
   $("#check-tickets-output").html("")
@@ -227,10 +233,12 @@ $("#check-tickets").click( async function() {
 })
 
 // 8. Prepare Ticketed Transaction ---------------------------------------------
-$("#prepare-ticketed-tx").click(async function() {
+$("#prepare-ticketed-tx").click(async function(event) {
+  const block = $(event.target).closest(".interactive-block")
+  block.find(".output-area").html("")
   const use_ticket = parseInt($('input[name="ticket-radio-set"]:checked').val())
   if (!use_ticket) {
-    $("#prepare-ticketed-tx-output").append(
+    block.find(".output-area").append(
       `<p class="devportal-callout warning"><strong>Error</strong>
       You must choose a ticket first.</p>`)
     return
@@ -247,20 +255,19 @@ $("#prepare-ticketed-tx").click(async function() {
   }, {
     maxLedgerVersionOffset: 20
   })
-  $("#prepare-ticketed-tx-output").html("")
 
-  $("#prepare-ticketed-tx-output").append(
+  block.find(".output-area").append(
     `<p>Prepared transaction:</p>
     <pre><code>${pretty_print(prepared_t.txJSON)}</code></pre>`)
   $("#lastledgersequence_t").html( //REMEMBER
     `<code>${prepared_t.instructions.maxLedgerVersion}</code>`)
 
   let signed_t = api.sign(prepared_t.txJSON, secret)
-  $("#prepare-ticketed-tx-output").append(
+  block.find(".output-area").append(
     `<p>Transaction hash: <code id="tx_id_t">${signed_t.id}</code></p>`)
 
   let tx_blob_t = signed_t.signedTransaction
-  $("#prepare-ticketed-tx-output").append(
+  block.find(".output-area").append(
     `<pre style="visibility: none">
     <code id="tx_blob_t">${tx_blob_t}</code></pre>`)
 
@@ -269,14 +276,15 @@ $("#prepare-ticketed-tx").click(async function() {
 })
 
 // 9. Submit Ticketed Transaction ----------------------------------------------
-$("#ticketedtx-submit").click( async function() {
+$("#ticketedtx-submit").click( async function(event) {
+  const block = $(event.target).closest(".interactive-block")
   const tx_blob = $("#tx_blob_t").text()
   // Wipe previous output
-  $("#ticketedtx-submit-output").html("")
+  block.find(".output-area").html("")
 
   waiting_for_tx_t = $("#tx_id_t").text() // next step uses this
   let prelim_result = await api.request("submit", {"tx_blob": tx_blob})
-  $("#ticketedtx-submit-output").append(
+  block.find(".output-area").append(
     `<p>Preliminary result:</p>
     <pre><code>${pretty_print(prelim_result)}</code></pre>`)
   $("#earliest-ledger-version_t").text(prelim_result.validated_ledger_index)

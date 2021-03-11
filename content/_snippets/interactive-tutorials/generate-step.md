@@ -7,8 +7,8 @@
 
 {{ start_step("Generate") }}
 <button id="generate-creds-button" class="btn btn-primary" data-fauceturl="{{faucet_url}}">Generate credentials</button>
-<div id='loader-generate' style="display: none;"><img class='throbber' src="assets/img/xrp-loader-96.png"> Generating Keys...</div>
-<div id='generate-output-area"></div>
+<div class="loader" id="loader-generate" style="display: none;"><img class="throbber" src="assets/img/xrp-loader-96.png">Generating Keys...</div>
+<div class="output-area"></div>
 {{ end_step() }}
 
 **Caution:** Ripple provides the [Testnet and Devnet](parallel-networks.html) for testing purposes only, and sometimes resets the state of these test networks along with all balances. As a precaution, Ripple recommends **not** using the same addresses on Testnet/Devnet and Mainnet.

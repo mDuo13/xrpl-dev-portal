@@ -4,7 +4,7 @@
 
 {{ start_step("Generate") }}
 <button id="generate-creds-button" class="btn btn-primary">暗号鍵を作成する</button>
-<div id='loader-0' style="display: none;"><img class='throbber' src="assets/img/xrp-loader-96.png">暗号鍵を作成しています…</div>
+<div id='loader-0' style="display: none;"><img class="throbber" src="assets/img/xrp-loader-96.png">暗号鍵を作成しています…</div>
 <div id='address'></div>
 <div id='secret'></div>
 <div id='balance'></div>

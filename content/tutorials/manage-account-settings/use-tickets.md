@@ -46,7 +46,7 @@ This tutorial is divided into a few phases:
 
 To transact on the XRP Ledger, you need an address and secret key, and some XRP. For development purposes, you can get these on the [{{use_network}}](parallel-networks.html) using the following interface:
 
-{% include '_snippets/generate-step.md' %}
+{% include '_snippets/interactive-tutorials/generate-step.md' %}
 
 When you're [building actual production-ready software](production-readiness.html), you'll instead use an existing account, and manage your keys using a [secure signing configuration](set-up-secure-signing.html).
 
@@ -95,7 +95,8 @@ let current_sequence = await get_sequence()
 
 {{ start_step("Check Sequence") }}
 <button id="check-sequence" class="btn btn-primary previous-steps-required">Check Sequence Number</button>
-<div id="check-sequence-output"></div>
+<div class="loader" style="display: none;"><img class="throbber" src="assets/img/xrp-loader-96.png">Querying...</div>
+<div class="output-area"></div>
 {{ end_step() }}
 
 

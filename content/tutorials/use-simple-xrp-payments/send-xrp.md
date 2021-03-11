@@ -25,7 +25,7 @@ This tutorial explains how to send a simple XRP Payment using RippleAPI for Java
 
 - To send transactions in the XRP Ledger, you first need an address and secret key, and some XRP. You can get an address in the XRP Testnet with a supply of Test Net XRP using the following interface:
 
-{% include '_snippets/generate-step.md' %}
+{% include '_snippets/interactive-tutorials/generate-step.md' %}
 
 
 ## Send a Payment on the Test Net
@@ -162,7 +162,7 @@ See the full list of [transaction results](transaction-results.html) for more po
 {{ start_step("Submit") }}
   <button id="submit-button" class="btn btn-primary previous-steps-required">Submit
     example transaction</button>
-    <div id='loader-{{n.current}}' style="display: none;"><img class='throbber' src="assets/img/xrp-loader-96.png"></div>
+    <div class="loader" style="display: none;"><img class="throbber" src="assets/img/xrp-loader-96.png"></div>
     <div id="submit-output"></div>
 {{ end_step() }}
 
