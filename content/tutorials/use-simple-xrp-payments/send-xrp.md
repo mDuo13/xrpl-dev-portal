@@ -19,6 +19,7 @@ This tutorial explains how to send a simple XRP Payment using RippleAPI for Java
 {{currentpage.ripple_lib_tag}}
 <!-- Helper for interactive tutorial breadcrumbs -->
 <script type="application/javascript" src="assets/js/interactive-tutorial.js"></script>
+{% set use_network = "Testnet" %}
 
 - This page provides JavaScript examples that use the ripple-lib (RippleAPI) library. The [RippleAPI Beginners Guide](get-started-with-rippleapi-for-javascript.html) describes how to get started using RippleAPI to access XRP Ledger data from JavaScript.
 
@@ -34,7 +35,7 @@ This tutorial explains how to send a simple XRP Payment using RippleAPI for Java
 
 To provide the necessary auto-fillable fields, ripple-lib must be connected to a server where it can get the current status of your account and the shared ledger itself. (For more security, you should sign transactions while being offline, but you must provide the auto-fillable fields manually if you do so.) You must be connected to the network to submit transactions to it.
 
-The following code sample instantiates a new RippleAPI instance and connects to one of the public XRP Test Net servers that Ripple runs:
+The following code sample instantiates a new RippleAPI instance and connects to one of the public XRP Testnet servers that Ripple runs:
 
 ```js
 ripple = require('ripple-lib')
@@ -44,39 +45,7 @@ api.connect()
 
 For this tutorial, you can connect directly from your browser by pressing the following button:
 
-{{ start_step("Connect") }}
-<button id="connect-button" class="btn btn-primary">Connect to TestNet</button>
-<div>
-  <strong>Connection status:</strong>
-  <span id="connection-status">Not connected</span>
-  <div id='loader-{{n.current}}' style="display: none;"><img class='throbber' src="assets/img/xrp-loader-96.png"></div>
-</div>
-{{ end_step() }}
-
-<script type="application/javascript">
-api = new ripple.RippleAPI({server: 'wss://s.altnet.rippletest.net:51233'})
-api.on('connected', () => {
-  $("#connection-status").text("Connected")
-  $("#connect-button").prop("disabled", true)
-  $("#loader-{{n.current}}").hide()
-
-  // Update breadcrumbs & active next step
-  complete_step("Connect")
-  $("#interactive-prepare button").prop("disabled", false)
-  $("#interactive-prepare button").prop("title", "")
-})
-api.on('disconnected', (code) => {
-  $("#connection-status").text( "Disconnected ("+code+")" )
-  $("#connect-button").prop("disabled", false)
-  $(".connection-required").prop("disabled", true)
-  $(".connection-required").prop("title", "Connection to Test Net required")
-})
-$("#connect-button").click(() => {
-  $("#connection-status").text( "Connecting..." )
-  $("#loader-{{n.current}}").show()
-  api.connect()
-})
-</script>
+{% include '_snippets/interactive-tutorials/connect-step.md' %}
 
 
 ### {{n.next()}}. Prepare Transaction
@@ -124,45 +93,10 @@ txJSON = JSON.stringify(doPrepare())
 ```
 
 {{ start_step("Prepare") }}
-  <button id="prepare-button" class="btn btn-primary connection-required"
-    title="Connect to Test Net first" disabled>Prepare
+  <button id="prepare-button" class="btn btn-primary previous-steps-required">Prepare
     example transaction</button>
   <div id="prepare-output"></div>
 {{ end_step() }}
-
-<script type="application/javascript">
-  $("#prepare-button").click( async function() {
-    // Wipe existing results
-    $("#prepare-output").html("")
-
-    const sender = $("#use-address").text() || "rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe"
-    const preparedTx = await api.prepareTransaction({
-      "TransactionType": "Payment",
-      "Account": sender,
-      "Amount": api.xrpToDrops("22"), // Same as "Amount": "22000000"
-      "Destination": "rUCzEr6jrEyMpjhs4wSdQdz4g8Y382NxfM"
-    }, {
-      // Expire this transaction if it doesn't execute within ~5 minutes:
-      "maxLedgerVersionOffset": 75
-    })
-    const maxLedgerVersion = preparedTx.instructions.maxLedgerVersion
-    $("#tx-lls").text(maxLedgerVersion) //for the table in the later step
-
-    $("#prepare-output").html(
-      "<div><strong>Prepared transaction instructions:</strong> <pre><code id='prepared-tx-json'>" +
-      JSON.stringify(JSON.parse(preparedTx.txJSON), null, 2) + "</code></pre></div>" +
-      "<div><strong>Transaction cost:</strong> " +
-      preparedTx.instructions.fee + " XRP</div>" +
-      "<div><strong>Transaction expires after ledger:</strong> " +
-      maxLedgerVersion + "</div>"
-    )
-
-    // Update breadcrumbs & active next step
-    complete_step("Prepare")
-    $("#interactive-sign button").prop("disabled", false)
-    $("#interactive-sign button").prop("title", "")
-  })
-</script>
 
 
 ### {{n.next()}}. Sign the Transaction Instructions
@@ -183,39 +117,10 @@ The result of the signing operation is a transaction object containing a signatu
 The signing API also returns the transaction's ID, or identifying hash, which you can use to look up the transaction later. This is a 64-character hexadecimal string that is unique to this transaction.
 
 {{ start_step("Sign") }}
-<button id="sign-button" class="btn btn-primary connection-required"
-  title="Complete all previous steps first" disabled>Sign
+<button id="sign-button" class="btn btn-primary previous-steps-required">Sign
   example transaction</button>
 <div id="sign-output"></div>
 {{ end_step() }}
-
-<script type="application/javascript">
-  $("#sign-button").click( function() {
-    // Wipe previous output
-    $("#sign-output").html("")
-
-    const preparedTxJSON = $("#prepared-tx-json").text()
-    const secret = $("#use-secret").text()
-
-    if (!secret) {
-      alert("Can't sign transaction without a real secret. Generate credentials first.")
-      return
-    }
-
-    signResponse = api.sign(preparedTxJSON, secret)
-
-    $("#sign-output").html(
-      "<div><strong>Signed Transaction blob:</strong> <code id='signed-tx-blob' style='overflow-wrap: anywhere; word-wrap: anywhere'>" +
-      signResponse.signedTransaction + "</code></div>" +
-      "<div><strong>Identifying hash:</strong> <span id='signed-tx-hash'>" +
-      signResponse.id + "</span></div>"
-    )
-
-    // Update all breadcrumbs & activate next step
-    complete_step("Sign")
-    $("#interactive-submit button").prop("disabled", false)
-  })
-</script>
 
 
 ### {{n.next()}}. Submit the Signed Blob
@@ -255,42 +160,11 @@ See the full list of [transaction results](transaction-results.html) for more po
 
 
 {{ start_step("Submit") }}
-  <button id="submit-button" class="btn btn-primary connection-required"
-    title="Connection to Test Net required" disabled>Submit
+  <button id="submit-button" class="btn btn-primary previous-steps-required">Submit
     example transaction</button>
     <div id='loader-{{n.current}}' style="display: none;"><img class='throbber' src="assets/img/xrp-loader-96.png"></div>
     <div id="submit-output"></div>
 {{ end_step() }}
-
-<script type="application/javascript">
-  $("#submit-button").click( async function() {
-    $("#submit-output").html("") // Wipe previous output
-    $("#loader-{{n.current}}").show()
-
-    const txBlob = $("#signed-tx-blob").text()
-    const earliestLedgerVersion = await api.getLedgerVersion()
-    $("#earliest-ledger-version").text(earliestLedgerVersion)
-
-    try {
-      const result = await api.submit(txBlob)
-      $("#loader-{{n.current}}").hide()
-      $("#submit-output").html(
-        "<div><strong>Tentative result:</strong> " +
-        result.resultCode + " - " +
-        result.resultMessage +
-        "</div>"
-      )
-
-      // Update breadcrumbs & active next step
-      complete_step("Submit")
-    }
-    catch(error) {
-      $("#loader-{{n.current}}").hide()
-      $("#submit-output").text("Error: "+error)
-    }
-
-  })
-</script>
 
 ### {{n.next()}}. Wait for Validation
 
@@ -325,15 +199,7 @@ api.on('ledger', ledger => {
 {{ end_step() }}
 
 <script type="application/javascript">
-api.on('ledger', ledger => {
-  $("#current-ledger-version").text(ledger.ledgerVersion)
 
-  if ( $(".breadcrumb-item.bc-wait").hasClass("active") ) {
-    // Advance to "Check" as soon as we see a ledger close
-    complete_step("Wait")
-    $("#get-tx-button").prop("disabled", false)
-  }
-})
 </script>
 
 
@@ -360,37 +226,10 @@ The RippleAPI `getTransaction()` method only returns success if the transaction 
 **Caution:** Other APIs may return tentative results from ledger versions that have not yet been validated. For example, if you use the `rippled` APIs' [tx method][], be sure to look for `"validated": true` in the response to confirm that the data comes from a validated ledger version. Transaction results that are not from a validated ledger version are subject to change. For more information, see [Finality of Results](finality-of-results.html).
 
 {{ start_step("Check") }}
-<button id="get-tx-button" class="btn btn-primary connection-required"
-  title="Connection to Test Net required" disabled>Check transaction status</button>
+<button id="get-tx-button" class="btn btn-primary previous-steps-required">Check transaction status</button>
 <div id="get-tx-output"></div>
 {{ end_step() }}
 
-<script type="application/javascript">
-  $("#get-tx-button").click( async function() {
-    // Wipe previous output
-    $("#get-tx-output").html("")
-
-    const txID = $("#signed-tx-hash").text()
-    const earliestLedgerVersion = parseInt($("#earliest-ledger-version").text(), 10)
-
-    try {
-      const tx = await api.getTransaction(txID, {minLedgerVersion: earliestLedgerVersion})
-
-      $("#get-tx-output").html(
-        "<div><strong>Transaction result:</strong> " +
-        tx.outcome.result + "</div>" +
-        "<div><strong>Balance changes:</strong> <pre><code>" +
-        JSON.stringify(tx.outcome.balanceChanges, null, 2) +
-        "</pre></code></div>"
-      )
-
-      complete_step("Check")
-    } catch(error) {
-      $("#get-tx-output").text("Couldn't get transaction outcome:" + error)
-    }
-
-  })
-</script>
 
 ## Differences for Production
 

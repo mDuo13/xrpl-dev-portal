@@ -1,31 +1,7 @@
-// 1. Generate -----------------------------------------------------------------
-// The code for this step is provided by the "generate-step.md" snippet
-
+// 1. Generate
+// 2. Connect
+// The code for these steps is handled by interactive-tutorial.js
 $(document).ready(() => {
-// 2. Connect ------------------------------------------------------------------
-                          // TODO: switch to Testnet when Tickets enabled there
-api = new ripple.RippleAPI({server: 'wss://s.devnet.rippletest.net:51233'})
-api.on('connected', async function() {
-  $("#connection-status").text("Connected")
-  $("#connect-button").prop("disabled", true)
-  $("#loader-connect").hide()
-
-  // Update breadcrumbs & activate next step
-  complete_step("Connect")
-  $("#check-sequence").prop("disabled", false)
-  $("#check-sequence").prop("title", "")
-})
-api.on('disconnected', (code) => {
-  $("#connection-status").text( "Disconnected ("+code+")" )
-  $("#connect-button").prop("disabled", false)
-  $(".connection-required").prop("disabled", true)
-  $(".connection-required").prop("title", "Connection to Devnet required")
-})
-$("#connect-button").click(() => {
-  $("#connection-status").text( "Connecting..." )
-  $("#loader-connect").show()
-  api.connect()
-})
 
 // 3. Check Sequence Number
 $("#check-sequence").click( async function() {
@@ -47,11 +23,7 @@ $("#check-sequence").click( async function() {
     <code id="current_sequence">${account_info.account_data.Sequence}</code>
     </p>`)
 
-
-  // Update breadcrumbs & activate next step
   complete_step("Check Sequence")
-  $("#prepare-and-sign").prop("disabled", false)
-  $("#prepare-and-sign").prop("title", "")
 })
 
 // 4. Prepare and Sign TicketCreate --------------------------------------------
@@ -104,10 +76,7 @@ $("#prepare-and-sign").click( async function() {
   $("#prepare-and-sign-output").append(
     `<pre style="visibility: none"><code id="tx_blob">${tx_blob}</code></pre>`)
 
-  // Update breadcrumbs & activate next step
   complete_step("Prepare & Sign")
-  $("#ticketcreate-submit").prop("disabled", false)
-  $("#ticketcreate-submit").prop("title", "")
 
 })
 
@@ -130,7 +99,6 @@ $("#ticketcreate-submit").click( async function() {
     $("#earliest-ledger-version").text(prelim_result.validated_ledger_index)
   }
 
-  // Update breadcrumbs
   complete_step("Submit")
 })
 
@@ -163,14 +131,6 @@ api.on('ledger', async (ledger) => {
 
         if ( $(".breadcrumb-item.bc-wait").hasClass("active") ) {
           complete_step("Wait")
-          $("#check-tickets").prop("disabled", false)
-          $("#check-tickets").prop("title", "")
-          $("#intermission-payment").prop("disabled", false)
-          $("#intermission-payment").prop("title", "")
-          $("#intermission-escrowcreate").prop("disabled", false)
-          $("#intermission-escrowcreate").prop("title", "")
-          $("#intermission-accountset").prop("disabled", false)
-          $("#intermission-accountset").prop("title", "")
         }
       }
     } catch(e) {
@@ -211,8 +171,6 @@ $("#intermission-payment").click( async function() {
     "Amount": api.xrpToDrops("201")
   })
 
-  // Update breadcrumbs; though, this step is optional,
-  // so the previous step already enabled the step after this.
   complete_step("Intermission")
 })
 
@@ -227,8 +185,6 @@ $("#intermission-escrowcreate").click( async function() {
     "FinishAfter": api.iso8601ToRippleTime(Date()) + 30 // 30 seconds from now
   })
 
-  // Update breadcrumbs; though this step is optional,
-  // so the previous step already enabled the step after this.
   complete_step("Intermission")
 })
 
@@ -240,8 +196,6 @@ $("#intermission-accountset").click( async function() {
     "Account": address
   })
 
-  // Update breadcrumbs; though this step is optional,
-  // so the previous step already enabled the step after this.
   complete_step("Intermission")
 })
 
@@ -269,11 +223,7 @@ $("#check-tickets").click( async function() {
         for="ticket${i}">${ticket.TicketSequence}</label></div>`)
     })
 
-
-  // Update breadcrumbs & activate next step
   complete_step("Check Tickets")
-  $("#prepare-ticketed-tx").prop("disabled", false)
-  $("#prepare-ticketed-tx").prop("title", "")
 })
 
 // 8. Prepare Ticketed Transaction ---------------------------------------------
@@ -316,8 +266,6 @@ $("#prepare-ticketed-tx").click(async function() {
 
   // Update breadcrumbs & activate next step
   complete_step("Prepare Ticketed Tx")
-  $("#ticketedtx-submit").prop("disabled", false)
-  $("#ticketedtx-submit").prop("title", "")
 })
 
 // 9. Submit Ticketed Transaction ----------------------------------------------
@@ -333,7 +281,6 @@ $("#ticketedtx-submit").click( async function() {
     <pre><code>${pretty_print(prelim_result)}</code></pre>`)
   $("#earliest-ledger-version_t").text(prelim_result.validated_ledger_index)
 
-  // Update breadcrumbs
   complete_step("Submit Ticketed Tx")
 })
 
