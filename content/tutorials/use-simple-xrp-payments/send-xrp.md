@@ -17,8 +17,10 @@ This tutorial explains how to send a simple XRP Payment using RippleAPI for Java
 <!-- ripple-lib & prerequisites -->
 {{currentpage.lodash_tag}}
 {{currentpage.ripple_lib_tag}}
-<!-- Helper for interactive tutorial breadcrumbs -->
+<!-- Helper for interactive tutorials -->
 <script type="application/javascript" src="assets/js/interactive-tutorial.js"></script>
+<!-- Source for this specific tutorial's interactive bits: -->
+<script type="application/javascript" src="assets/js/tutorials/send-xrp.js"></script>
 {% set use_network = "Testnet" %}
 
 - This page provides JavaScript examples that use the ripple-lib (RippleAPI) library. The [RippleAPI Beginners Guide](get-started-with-rippleapi-for-javascript.html) describes how to get started using RippleAPI to access XRP Ledger data from JavaScript.
@@ -93,9 +95,20 @@ txJSON = JSON.stringify(doPrepare())
 ```
 
 {{ start_step("Prepare") }}
-  <button id="prepare-button" class="btn btn-primary previous-steps-required">Prepare
-    example transaction</button>
-  <div id="prepare-output"></div>
+<div class="input-group mb-3">
+  <div class="input-group-prepend">
+    <span class="input-group-text">Send: </span>
+  </div>
+  <input type="number" class="form-control" value="22" id="xrp-amount"
+  aria-label="Amount of XRP, as a decimal" aria-describedby="xrp-amount-label"
+  min=".000001" max="100000000000" step="any">
+  <div class="input-group-append">
+    <span class="input-group-text" id="xrp-amount-label"> XRP</span>
+  </div>
+</div>
+<button id="prepare-button" class="btn btn-primary previous-steps-required">Prepare
+  example transaction</button>
+<div class="output-area"></div>
 {{ end_step() }}
 
 
@@ -119,7 +132,7 @@ The signing API also returns the transaction's ID, or identifying hash, which yo
 {{ start_step("Sign") }}
 <button id="sign-button" class="btn btn-primary previous-steps-required">Sign
   example transaction</button>
-<div id="sign-output"></div>
+<div class="output-area"></div>
 {{ end_step() }}
 
 
@@ -160,17 +173,17 @@ See the full list of [transaction results](transaction-results.html) for more po
 
 
 {{ start_step("Submit") }}
-  <button id="submit-button" class="btn btn-primary previous-steps-required">Submit
-    example transaction</button>
-    <div class="loader" style="display: none;"><img class="throbber" src="assets/img/xrp-loader-96.png"></div>
-    <div id="submit-output"></div>
+<button id="submit-button" class="btn btn-primary previous-steps-required" data-tx-blob-from="#signed-tx-blob" data-wait-step-name="Wait">Submit
+example transaction</button>
+<div class="loader collapse"><img class="throbber" src="assets/img/xrp-loader-96.png"> Sending...</div>
+<div class="output-area"></div>
 {{ end_step() }}
 
 ### {{n.next()}}. Wait for Validation
 
 Most transactions are accepted into the next ledger version after they're submitted, which means it may take 4-7 seconds for a transaction's outcome to be final. If the XRP Ledger is busy or poor network connectivity delays a transaction from being relayed throughout the network, a transaction may take longer to be confirmed. (For information on how to set an expiration for transactions, see [Reliable Transaction Submission](reliable-transaction-submission.html).)
 
-You use the `ledger` event type in RippleAPI to trigger your code to run whenever there is a new validated ledger version. For example:
+Use the `ledger` event type to trigger your code to run whenever there is a new validated ledger version. For example:
 
 ```js
 api.on('ledger', ledger => {
@@ -182,25 +195,8 @@ api.on('ledger', ledger => {
 ```
 
 {{ start_step("Wait") }}
-<table>
-  <tr>
-    <th>Latest Validated Ledger Version:</th>
-    <td id="current-ledger-version">(Not connected)</td>
-  </tr>
-    <tr>
-      <th>Ledger Version at Time of Submission:</th>
-      <td id="earliest-ledger-version">(Not submitted)</td>
-    </tr>
-  <tr>
-    <th>Transaction <code>LastLedgerSequence</code>:</th>
-    <td id="tx-lls"></td>
-  </tr>
-</table>
+{% include '_snippets/interactive-tutorials/wait-step.md' %}
 {{ end_step() }}
-
-<script type="application/javascript">
-
-</script>
 
 
 ### {{n.next()}}. Check Transaction Status
@@ -218,7 +214,6 @@ try {
 } catch(error) {
   console.log("Couldn't get transaction outcome:", error)
 }
-
 ```
 
 The RippleAPI `getTransaction()` method only returns success if the transaction is in a validated ledger version. Otherwise, the `await` expression raises an exception.
@@ -227,7 +222,7 @@ The RippleAPI `getTransaction()` method only returns success if the transaction 
 
 {{ start_step("Check") }}
 <button id="get-tx-button" class="btn btn-primary previous-steps-required">Check transaction status</button>
-<div id="get-tx-output"></div>
+<div class="output-area"></div>
 {{ end_step() }}
 
 
@@ -248,9 +243,9 @@ console.log(generated.address) // Example: rGCkuB7PBr5tNy68tPEABEtcdno4hE6Y7f
 console.log(generated.secret) // Example: sp6JS7f14BuwFY8Mw6bTtLKWauoUs
 ```
 
-**Warning:** You should only use an address and secret that you generated securely, on your local machine. If another computer generated the address and secret and sent it to you over a network, it's possible that someone else on the network may see that information. If they do, they'll have as much control over your XRP as you do. It's also recommended not to use the same address for the test net and for production, because transactions that you created for use on one network could potentially also be viable on the other network, depending on the parameters you provided.
+**Warning:** You should only use an address and secret that you generated securely, on your local machine. If another computer generated the address and secret and sent it to you over a network, it's possible that someone else on the network may see that information. If they do, they'll have as much control over your XRP as you do. It's also recommended not to use the same address for the Testnet and Mainnet, because transactions that you created for use on one network could potentially also be viable on the other network, depending on the parameters you provided.
 
-Generating an address and secret doesn't get you XRP directly; it's only choosing a random number. You must also receive XRP at that address to [fund the account](accounts.html#creating-accounts). A common way to acquire XRP is to buy it from an exchange, then withdraw it to your own address. For more information, see Ripple's [XRP Buying Guide](https://ripple.com/xrp/buy-xrp/).
+Generating an address and secret doesn't get you XRP directly; you're only choosing a random number. You must also receive XRP at that address to [fund the account](accounts.html#creating-accounts). A common way to acquire XRP is to buy it from an [exchange](exchanges.html), then withdraw it to your own address.
 
 ### Connecting to the Production XRP Ledger
 

@@ -7,7 +7,7 @@
 
 {{ start_step("Generate") }}
 <button id="generate-creds-button" class="btn btn-primary" data-fauceturl="{{faucet_url}}">Generate credentials</button>
-<div class="loader" id="loader-generate" style="display: none;"><img class="throbber" src="assets/img/xrp-loader-96.png">Generating Keys...</div>
+<div class="loader collapse"><img class="throbber" src="assets/img/xrp-loader-96.png">Generating Keys...</div>
 <div class="output-area"></div>
 {{ end_step() }}
 

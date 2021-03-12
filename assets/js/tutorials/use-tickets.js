@@ -9,9 +9,7 @@ $("#check-sequence").click( async function(event) {
   const address = $("#use-address").text()
 
   if (!address) {
-    block.find(".output-area").html(
-      `<p class="devportal-callout warning"><strong>Error:</strong>
-      No address. Make sure you <a href="#1-get-credentials">Get Credentials</a> first.</p>`)
+    show_error(block, `No address. Make sure you <a href="#1-get-credentials">Get Credentials</a> first.</p>`)
     return;
   }
 
@@ -30,7 +28,7 @@ $("#check-sequence").click( async function(event) {
 })
 
 // 4. Prepare and Sign TicketCreate --------------------------------------------
-$("#prepare-and-sign").click( function(event) {
+$("#prepare-and-sign").click( async function(event) {
   const block = $(event.target).closest(".interactive-block")
   const address = $("#use-address").text()
   const secret = $("#use-secret").text()
@@ -45,10 +43,9 @@ $("#prepare-and-sign").click( function(event) {
   block.find(".output-area").html("")
 
   if (!address || !secret || !current_sequence) {
-    block.find(".output-area").html(
-      `<p class="devportal-callout warning"><strong>Error:</strong>
-      Couldn't get a valid address/secret/sequence value. Check that the
-      previous steps were completed successfully.</p>`)
+    show_error(block,
+      `Couldn't get a valid address/secret/sequence value. Check that the
+      previous steps were completed successfully.`)
     return;
   }
 
@@ -85,72 +82,10 @@ $("#prepare-and-sign").click( function(event) {
 })
 
 // 5. Submit TicketCreate ------------------------------------------------------
-$("#ticketcreate-submit").click( async function(event) {
-  const block = $(event.target).closest(".interactive-block")
-  const tx_blob = $("#tx_blob").text()
-  // Wipe previous output
-  block.find(".output-area").html("")
+$("#ticketcreate-submit").click( make_submit_handler() )
 
-  waiting_for_tx = $("#tx_id").text() // next step uses this
-  let prelim_result = await api.request("submit", {"tx_blob": tx_blob})
-  block.find(".output-area").append(
-    `<p>Preliminary result:</p>
-    <pre><code>${pretty_print(prelim_result)}</code></pre>`)
-
-  if ( $("#earliest-ledger-version").text() == "(Not submitted)" ) {
-    // This is the first time we've submitted this transaction, so set the
-    // minimum ledger index for this transaction. Don't overwrite this if this
-    // isn't the first time the transaction has been submitted!
-    $("#earliest-ledger-version").text(prelim_result.validated_ledger_index)
-  }
-
-  complete_step("Submit")
-})
-
-
-// 6. Wait for Validation
-let waiting_for_tx = null;
-api.on('ledger', async (ledger) => {
-  $("#current-ledger-version").text(ledger.ledgerVersion)
-
-  let tx_result;
-  let min_ledger = parseInt($("#earliest-ledger-version").text())
-  let max_ledger = parseInt($("#lastledgersequence").text())
-  if (min_ledger > max_ledger) {
-    console.warn("min_ledger > max_ledger")
-    min_ledger = 1
-  }
-  if (waiting_for_tx) {
-    try {
-      tx_result = await api.request("tx", {
-          "transaction": waiting_for_tx,
-          "min_ledger": min_ledger,
-          "max_ledger": max_ledger
-      })
-      if (tx_result.validated) {
-        $("#tx-validation-status").html(
-          `<th>Final Result:</th><td>${tx_result.meta.TransactionResult}
-          (<a href="https://devnet.xrpl.org/transactions/${waiting_for_tx}"
-          target="_blank">Validated</a>)</td>`)
-        waiting_for_tx = null;
-
-        if ( $(".breadcrumb-item.bc-wait").hasClass("active") ) {
-          complete_step("Wait")
-        }
-      }
-    } catch(e) {
-      if (e.data.error == "txnNotFound" && e.data.searched_all) {
-        $("#tx-validation-status").html(
-          `<th>Final Result:</th><td>Failed to achieve consensus (final)</td>`)
-        waiting_for_tx = null;
-      } else {
-        $("#tx-validation-status").html(
-          `<th>Final Result:</th><td>Unknown</td>`)
-      }
-    }
-  }
-
-})
+// 6. Wait for Validation: handled by interactive-tutorial.js and by the
+// generic submit handler in the previous step. --------------------------------
 
 // Intermission ----------------------------------------------------------------
 async function intermission_submit(tx_json) {
@@ -209,13 +144,13 @@ $("#check-tickets").click( async function(event) {
   const block = $(event.target).closest(".interactive-block")
   const address = $("#use-address").text()
   // Wipe previous output
-  $("#check-tickets-output").html("")
+  block.find(".output-area").html("")
 
   let response = await api.request("account_objects", {
       "account": address,
       "type": "ticket"
     })
-  $("#check-tickets-output").html(
+  block.find(".output-area").html(
     `<pre><code>${pretty_print(response)}</code></pre>`)
 
   // Reset the next step's form & add these tickets
@@ -238,9 +173,7 @@ $("#prepare-ticketed-tx").click(async function(event) {
   block.find(".output-area").html("")
   const use_ticket = parseInt($('input[name="ticket-radio-set"]:checked').val())
   if (!use_ticket) {
-    block.find(".output-area").append(
-      `<p class="devportal-callout warning"><strong>Error</strong>
-      You must choose a ticket first.</p>`)
+    show_error(block, "You must choose a ticket first.")
     return
   }
 
@@ -276,57 +209,9 @@ $("#prepare-ticketed-tx").click(async function(event) {
 })
 
 // 9. Submit Ticketed Transaction ----------------------------------------------
-$("#ticketedtx-submit").click( async function(event) {
-  const block = $(event.target).closest(".interactive-block")
-  const tx_blob = $("#tx_blob_t").text()
-  // Wipe previous output
-  block.find(".output-area").html("")
+$("#ticketedtx-submit").click( make_submit_handler() )
 
-  waiting_for_tx_t = $("#tx_id_t").text() // next step uses this
-  let prelim_result = await api.request("submit", {"tx_blob": tx_blob})
-  block.find(".output-area").append(
-    `<p>Preliminary result:</p>
-    <pre><code>${pretty_print(prelim_result)}</code></pre>`)
-  $("#earliest-ledger-version_t").text(prelim_result.validated_ledger_index)
+// 10. Wait for Validation (Again): handled by interactive-tutorial.js and by
+// the generic submit handler in the previous step. --------------------------------
 
-  complete_step("Submit Ticketed Tx")
-})
-
-// 10. Wait for Validation (again) ---------------------------------------------
-let waiting_for_tx_t = null;
-api.on('ledger', async (ledger) => {
-  $("#current-ledger-version_t").text(ledger.ledgerVersion)
-
-  let tx_result;
-  if (waiting_for_tx_t) {
-    try {
-      tx_result = await api.request("tx", {
-          "transaction": waiting_for_tx_t,
-          "min_ledger": parseInt($("#earliest-ledger-version_t").text()),
-          "max_ledger": parseInt($("#lastledgersequence_t").text())
-      })
-      console.log(tx_result)
-      if (tx_result.validated) {
-        $("#tx-validation-status_t").html(
-          `<th>Final Result:</th><td>${tx_result.meta.TransactionResult}
-          (<a href="https://devnet.xrpl.org/transactions/${waiting_for_tx_t}"
-          target="_blank">Validated</a>)</td>`)
-        waiting_for_tx_t = null;
-
-        if ( $(".breadcrumb-item.bc-wait_again").hasClass("active") ) {
-          complete_step("Wait Again")
-        }
-      }
-    } catch(e) {
-      if (e.data.error == "txnNotFound" && e.data.searched_all) {
-        $("#tx-validation-status_t").html(
-          `<th>Final Result:</th><td>Failed to achieve consensus (final)</td>`)
-        waiting_for_tx_t = null;
-      } else {
-        $("#tx-validation-status_t").html(
-          `<th>Final Result:</th><td>Unknown</td>`)
-      }
-    }
-  }
-})
 })

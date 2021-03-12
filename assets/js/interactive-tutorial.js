@@ -1,5 +1,14 @@
 // Helper functions for interactive tutorials
 
+/**
+ * Convert a string of text into a "slug" form that is appropriate for use in
+ * URLs, HTML id and class attributes, and similar. This matches the equivalent
+ * function in filter_interactive_steps.py so that each step's ID is derived
+ * from the given step_name in a consistent way.
+ * @param {String} s The text (step_name or similar) to convert into a
+ * @return {String} The "slug" version of the text, lowercase with no whitespace
+ *                  and with most non-alphanumeric characters removed.
+ */
 function slugify(s) {
   const unacceptable_chars = /[^A-Za-z0-9._ ]+/g
   const whitespace_regex = /\s+/g
@@ -12,8 +21,44 @@ function slugify(s) {
   return s
 }
 
+
+/**
+ * Check whether a given step has been marked completed already.
+ * @param {String} step_name The exact name of the step, as defined in the
+ *                           start_step(step_name) function in the MD file.
+ * @return {Boolean}         Whether or not this step has been marked complete.
+ */
+function is_complete(step_name) {
+  return is_complete_by_id(slugify(step_name))
+}
+
+/**
+ * Helper for is_complete. Also called directly in cases where we only have
+ * the step_id and not the step_name (since that's a one-way conversion).
+ * @param {String} step_id The slugified name of the step.
+ * @return {Boolean}       Whether or not this step has been marked complete.
+ */
+function is_complete_by_id(step_id) {
+  return $(".bc-"+step_id).hasClass("done")
+}
+
+/**
+ * Mark a step as done in the breadcrumbs, mark the following step as active,
+ * and enable buttons and such in the following step that have the
+ * "previous-steps-required" class.
+ * @param {String} step_name The exact name of the step, as defined in the
+ *                           start_step(step_name) function in the MD file.
+ */
 function complete_step(step_name) {
-  const step_id = slugify(step_name)
+  complete_step_by_id(slugify(step_name))
+}
+
+/**
+ * Helper for complete_step. Also called directly in cases where we only have
+ * the step_id and not the step_name (since that's a one-way conversion).
+ * @param {String} step_id The slugified name of the step.
+ */
+function complete_step_by_id(step_id) {
   $(".bc-"+step_id).removeClass("active").addClass("done")
   $(".bc-"+step_id).next().removeClass("disabled").addClass("active")
 
@@ -24,6 +69,22 @@ function complete_step(step_name) {
   next_ui.prop("disabled", false)
 }
 
+/**
+ * Get the step_id of the interactive block that contains a given element.
+ * @param {jQuery} jEl The jQuery result representing a single HTML element in
+ *                     an interactive block.
+ * @return {String}    The step_id of the block that contains jEl.
+ */
+function get_block_id(jEl) {
+  // Traverse up, then slice "interactive-" off the block's HTML ID
+  return jEl.closest(".interactive-block").prop("id").slice(12)
+}
+
+/**
+ * Pretty-print JSON with standard indentation.
+ * @param {String, Object} j Either a JSON/JSON-like object, or a string
+                             containing JSON.
+ */
 function pretty_print(j) {
   try {
     return JSON.stringify(JSON.parse(j),null,2)
@@ -33,11 +94,36 @@ function pretty_print(j) {
   }
 }
 
+/**
+ * Disable buttons and such with the "previous-steps-required" class, and give
+ * them an appropriate tooltip message.
+ */
 function disable_followup_steps() {
   $(".previous-steps-required").prop("title", "Complete all previous steps first")
   $(".previous-steps-required").prop("disabled", true)
 }
 
+/**
+ * Output an error message in the given area.
+ * @param {jQuery} block The block where this error message should go. This
+ *                       should be a parent element containing an element with
+ *                       the "output-area" class.
+ * @param {String} message The HTML contents to put inside the message.
+ */
+function show_error(block, message) {
+  block.find(".output-area").html(
+    `<p class="devportal-callout warning"><strong>Error:</strong>
+    ${message}</p>`)
+}
+
+/**
+ * To be used with _snippets/interactive/tutorials/generate-step.md.
+ * Adds an event to the "Generate" button to call the appropriate faucet
+ * (Testnet or Devnet) and write the credentials to elements that later steps
+ * can use in their examples. Also updates code samples in the current page to
+ * use the generated credentials instead of the placeholder EXAMPLE_ADDR and
+ * EXAMPLE_SECRET.
+ */
 function handle_generate_step() {
   const EXAMPLE_ADDR = "rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe"
   const EXAMPLE_SECRET = "s████████████████████████████"
@@ -89,8 +175,14 @@ function handle_generate_step() {
   })
 }
 
+/**
+ * To be used with _snippets/interactive-tutorials/connect-step.md
+ * Adds an event to the "Connect" button to connect to the appropriate
+ * WebSocket server (Testnet, Devnet, maybe Mainnet for some cases).
+ * Also adds an event to re-disable following steps if we get disconnected.
+ */
 function handle_connect_step() {
-  // Handle the "Connect" step (_snippets/interactive-tutorials/connect-step.md)
+  // Handle the "Connect" step ()
   const ws_url = $("#connect-button").data("wsurl")
   if (!ws_url) {
     console.error("Interactive Tutorial: WS URL not found. Did you set use_network?")
@@ -102,10 +194,7 @@ function handle_connect_step() {
     $("#connect-button").prop("disabled", true)
     $("#loader-connect").hide()
 
-    // Update breadcrumbs & activate next step
     complete_step("Connect")
-    $("#check-sequence").prop("disabled", false)
-    $("#check-sequence").prop("title", "")
   })
   api.on('disconnected', (code) => {
     $("#connection-status").text( "Disconnected ("+code+")" )
@@ -122,8 +211,150 @@ function handle_connect_step() {
   })
 }
 
+/**
+ * To be used with _snippets/interactive-tutorials/wait-step.md
+ * For each wait step in the page, set up a listener that checks for the
+ * transaction shown in that step's "waiting-for-tx" field, as long as that
+ * step's "tx-validation-status" field doesn't have a final result set.
+ * These listeners do very little (just updating the latest validated ledger
+ * index) until you activate one with activate_wait_step(step_name).
+ */
+function setup_wait_steps() {
+  const wait_steps = $(".wait-step")
+
+  wait_steps.each(async (i, el) => {
+    const wait_step = $(el)
+    const explorer_url = wait_step.data("explorerurl")
+    const status_box = wait_step.find(".tx-validation-status")
+    api.on('ledger', async (ledger) => {// TODO: Do we have access to "api" here???
+      // Update the latest validated ledger index in this step's table
+      wait_step.find(".validated-ledger-version").text(ledger.ledgerVersion)
+      if (!status_box.data("status_pending")) {
+        // Before submission or after a final result.
+        // Either way, nothing more to do here.
+        return
+      }
+
+      const transaction = wait_step.find(".waiting-for-tx").text().trim()
+      const min_ledger = parseInt(wait_step.find(".earliest-ledger-version").text())
+      const max_ledger = parseInt(wait_step.find(".lastledgersequence").text())
+      let tx_result
+      try {
+        tx_result = await api.request("tx", {
+          transaction,
+          min_ledger,
+          max_ledger
+        })
+        console.log(tx_result)
+
+        if (tx_result.validated) {
+          status_box.html(
+          `<th>Final Result:</th><td>${tx_result.meta.TransactionResult}
+          (<a href="${explorer_url}/transactions/${transaction}"
+          target="_blank">Validated</a>)</td>`)
+
+          const step_id = get_block_id(wait_step)
+          if (!is_complete_by_id(step_id)) {
+            status_box.data("status_pending", false)
+            complete_step_by_id(step_id)
+          }
+        } else {
+          status_box.html(
+            `<th>Final Result:</th>
+            <td><img class="throbber" src="assets/img/xrp-loader-96.png">
+            (Still pending...)</td>`)
+        }
+
+      } catch(e) {
+        if (e.data.error == "txnNotFound" && e.data.searched_all) {
+          status_box.html(
+            `<th>Final Result:</th><td>Failed to achieve consensus (final)</td>`)
+        } else {
+          status_box.html(
+            `<th>Final Result:</th><td>Unknown</td>`)
+        }
+      }
+    }) // end 'ledger' event handler
+  }) // end "each" wait_step
+}
+
+/**
+ * To be used with _snippets/interactive-tutorials/wait-step.md
+ * Populate the table of the wait step with the relevant transaction details
+ * and signal this step's listener to look up the relevant transaction.
+ * This function is called by the generic submit handlers that
+ * make_submit_handler() creates.
+ * @param {String} step_name The exact name of the "Wait" step to activate, as
+ *                           defined in the start_step(step_name) function in
+ *                           the MD file.
+ * @param {Object} prelim_result The (resolved) return value of submitting a
+ *                           transaction blob via api.request("submit", {opts})
+ */
+async function activate_wait_step(step_name, prelim_result) {
+  const step_id = slugify(step_name)
+  const wait_step = $(`#interactive-${step_id} .wait-step`)
+  const status_box = wait_step.find(".tx-validation-status")
+  const tx_id = prelim_result.tx_json.hash
+  const lls = prelim_result.tx_json.LastLedgerSequence || "(None)"
+
+  if (wait_step.find(".waiting-for-tx").text() == tx_id) {
+    // Re-submitting the same transaction? Don't update min-ledger.
+  } else {
+    wait_step.find(".waiting-for-tx").text(tx_id)
+    wait_step.find(".earliest-ledger-version").text(
+      prelim_result.validated_ledger_index
+    )
+  }
+  wait_step.find(".lastledgersequence").text(lls)
+  status_box.html("")
+  status_box.data("status_pending", true)
+}
+
+/**
+ * Creates a generic event handler for transaction submission buttons. Assumes
+ * you are also using _snippets/interactive-tutorials/wait-step.md to report
+ * the transaction's final results.
+ * @param {String} blob_selector A jQuery selector that can be used to find the
+ *                               HTML element whose text contents are the binary
+ *                               transaction blob to submit. Example: "#tx_blob"
+ * @param {String} submit_step_name The exact name of the "Submit" step this
+ *                                  handler is for, as defined in the
+ *                                  start_step(step_name) function in the MD
+ *                                  file.
+ * @param {String} wait_step_name The exact name of the "Wait" step where this
+ *                                transaction's final results should be
+ *                                reported.
+ * @return {Function} A handler that you can bind to the submit button's
+ *                    click() event.
+ */
+function make_submit_handler() {
+  return async function(event) {
+    const block = $(event.target).closest(".interactive-block")
+    const blob_selector = $(event.target).data("txBlobFrom")
+    const wait_step_name = $(event.target).data("waitStepName")
+    const tx_blob = $(blob_selector).text()
+    block.find(".loader").show()
+    try {
+      // Future feature: support passing in options like fail_hard here.
+      const prelim_result = await api.request("submit", {"tx_blob": tx_blob})
+      block.find(".output-area").append(
+        `<p>Preliminary result:</p>
+        <pre><code>${pretty_print(prelim_result)}</code></pre>`)
+
+      block.find(".loader").hide()
+      submit_step_id = get_block_id(block)
+      complete_step_by_id(submit_step_id)
+      activate_wait_step(wait_step_name, prelim_result)
+    } catch(error) {
+      block.find(".loader").hide()
+      show_error(block, error)
+    }
+  }
+}
+
 $(document).ready(() => {
   disable_followup_steps()
   handle_generate_step()
   handle_connect_step()
+  setup_wait_steps()
 })

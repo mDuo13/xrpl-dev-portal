@@ -2,6 +2,8 @@
   {% set ws_url = "wss://s.altnet.rippletest.net:51233" %}
 {% elif use_network == "Devnet" %}
   {% set ws_url = "wss://s.devnet.rippletest.net:51233" %}
+{% elif use_network == "Mainnet" %}
+  {% set ws_url = "wss://xrplcluster.com" %}
 {% endif %}
 
 {{ start_step("Connect") }}
@@ -9,6 +11,6 @@
 <div>
   <strong>Connection status:</strong>
   <span id="connection-status">Not connected</span>
-  <div class="loader" id="loader-connect" style="display: none;"><img class="throbber" src="assets/img/xrp-loader-96.png"></div>
+  <div class="loader collapse" id="loader-connect"><img class="throbber" src="assets/img/xrp-loader-96.png"></div>
 </div>
 {{ end_step() }}
