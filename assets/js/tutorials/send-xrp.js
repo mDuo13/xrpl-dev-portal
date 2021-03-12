@@ -20,8 +20,6 @@ $("#prepare-button").click( async function(event) {
     // Expire this transaction if it doesn't execute within ~5 minutes:
     "maxLedgerVersionOffset": 75
   })
-  const maxLedgerVersion = prepared.instructions.maxLedgerVersion
-  // $("#tx-lls").text(maxLedgerVersion) //for the table in the later step
 
   block.find(".output-area").append(
     `<div><strong>Prepared transaction instructions:</strong>

@@ -67,15 +67,10 @@ $("#prepare-and-sign").click( async function(event) {
   let signed = api.sign(prepared.txJSON, secret)
   block.find(".output-area").append(
     `<p>Transaction hash: <code id="tx_id">${signed.id}</code></p>`)
-  $("#waiting-for-tx").text(signed.id)
-
-  // Reset the "Wait" step to prevent mixups
-  $("#earliest-ledger-version").text("(Not submitted)")
-  $("#tx-validation-status").html("<th>Final Result:</th><td></td>")
 
   let tx_blob = signed.signedTransaction
   block.find(".output-area").append(
-    `<pre style="visibility: none"><code id="tx_blob">${tx_blob}</code></pre>`)
+    `<p>Signed blob:</p><pre class="tx-blob"><code id="tx_blob">${tx_blob}</code></pre>`)
 
   complete_step("Prepare & Sign")
 
