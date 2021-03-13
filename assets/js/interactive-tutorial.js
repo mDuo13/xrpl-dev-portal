@@ -124,7 +124,7 @@ function show_error(block, message) {
  * use the generated credentials instead of the placeholder EXAMPLE_ADDR and
  * EXAMPLE_SECRET.
  */
-function handle_generate_step() {
+function setup_generate_step() {
   const EXAMPLE_ADDR = "rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe"
   const EXAMPLE_SECRET = "s████████████████████████████"
 
@@ -181,7 +181,7 @@ function handle_generate_step() {
  * WebSocket server (Testnet, Devnet, maybe Mainnet for some cases).
  * Also adds an event to re-disable following steps if we get disconnected.
  */
-function handle_connect_step() {
+function setup_connect_step() {
   // Handle the "Connect" step ()
   const ws_url = $("#connect-button").data("wsurl")
   if (!ws_url) {
@@ -298,7 +298,7 @@ async function activate_wait_step(step_name, prelim_result) {
   const lls = prelim_result.tx_json.LastLedgerSequence || "(None)"
 
   if (wait_step.find(".waiting-for-tx").text() == tx_id) {
-    // Re-submitting the same transaction? Don't update min-ledger.
+    // Re-submitting the same transaction? Don't update min_ledger.
   } else {
     wait_step.find(".waiting-for-tx").text(tx_id)
     wait_step.find(".earliest-ledger-version").text(
@@ -310,51 +310,86 @@ async function activate_wait_step(step_name, prelim_result) {
   status_box.data("status_pending", true)
 }
 
-/**
- * Creates a generic event handler for transaction submission buttons. Assumes
- * you are also using _snippets/interactive-tutorials/wait-step.md to report
- * the transaction's final results.
- * @param {String} blob_selector A jQuery selector that can be used to find the
- *                               HTML element whose text contents are the binary
- *                               transaction blob to submit. Example: "#tx_blob"
- * @param {String} submit_step_name The exact name of the "Submit" step this
- *                                  handler is for, as defined in the
- *                                  start_step(step_name) function in the MD
- *                                  file.
- * @param {String} wait_step_name The exact name of the "Wait" step where this
- *                                transaction's final results should be
- *                                reported.
- * @return {Function} A handler that you can bind to the submit button's
- *                    click() event.
- */
-function make_submit_handler() {
-  return async function(event) {
-    const block = $(event.target).closest(".interactive-block")
-    const blob_selector = $(event.target).data("txBlobFrom")
-    const wait_step_name = $(event.target).data("waitStepName")
-    const tx_blob = $(blob_selector).text()
-    block.find(".loader").show()
-    try {
-      // Future feature: support passing in options like fail_hard here.
-      const prelim_result = await api.request("submit", {"tx_blob": tx_blob})
-      block.find(".output-area").append(
-        `<p>Preliminary result:</p>
-        <pre><code>${pretty_print(prelim_result)}</code></pre>`)
+async function generic_full_send(block, tx_json, wait_step_name) {
+  const address = $("#use-address").text()
+  const secret = $("#use-secret").text()
 
-      block.find(".loader").hide()
-      submit_step_id = get_block_id(block)
-      complete_step_by_id(submit_step_id)
+  block.find(".output-area").html("")
+  if (!address || !secret) {
+    show_error(block,
+      `Couldn't get a valid address/secret value. Check that the
+       previous steps were completed successfully.`)
+    return
+  }
+
+  block.find(".loader").show()
+  const prepared = await api.prepareTransaction(tx_json, {
+    maxLedgerVersionOffset: 20
+  })
+  block.find(".output-area").append(
+    `<p>Prepared transaction:</p>
+    <pre><code>${pretty_print(prepared.txJSON)}</code></pre>`)
+
+  const signed = api.sign(prepared.txJSON, secret)
+  block.find(".output-area").append(
+    `<p>Transaction hash: <code id="tx_id">${signed.id}</code></p>`)
+
+  await do_submit(block, {"tx_blob":  signed.signedTransaction}, wait_step_name)
+}
+
+/**
+ * Generic event handler for transaction submission buttons. Assumes
+ * you are also using _snippets/interactive-tutorials/wait-step.md to report
+ * the transaction's final results. Gets important information from data
+ * attributes defined on the button that triggers the event:
+ * data-tx-blob-from="{jQuery selector}" A selector for an element whose .text()
+ *                                       is the blob to submt.
+ * data-wait-step-name="{String}" The exact name of the wait step where this
+ *                                transaction's results should be reported, as
+ *                                defined in start_step(step_name) as the MD
+ */
+async function submit_handler(event) {
+  const block = $(event.target).closest(".interactive-block")
+  const blob_selector = $(event.target).data("txBlobFrom")
+  const wait_step_name = $(event.target).data("waitStepName")
+  const tx_blob = $(blob_selector).text()
+  do_submit(block, {tx_blob}, wait_step_name)
+}
+
+/**
+ * General-purpose transaction submission helper.
+ * @param {jQuery} block Output preliminary results inside this wrapping
+ *                       .interactive-block's .output-area.
+ * @param {Object} submit_opts The JSON object to be passed to the rippled
+ *                             submit command. At a minimum, needs "tx_blob"
+ * @param {String} wait_step_name The name of a wait step. Report the final
+ *                                results of the transaction there. Must be a
+ *                                _snippets/interactive-tutorials/wait-step.md
+ */
+async function do_submit(block, submit_opts, wait_step_name) {
+  block.find(".loader").show()
+  try {
+    // Future feature: support passing in options like fail_hard here.
+    const prelim_result = await api.request("submit", submit_opts)
+    block.find(".output-area").append(
+      `<p>Preliminary result:</p>
+      <pre><code>${pretty_print(prelim_result)}</code></pre>`)
+
+    block.find(".loader").hide()
+    submit_step_id = get_block_id(block)
+    complete_step_by_id(submit_step_id)
+    if (wait_step_name){
       activate_wait_step(wait_step_name, prelim_result)
-    } catch(error) {
-      block.find(".loader").hide()
-      show_error(block, error)
     }
+  } catch(error) {
+    block.find(".loader").hide()
+    show_error(block, error)
   }
 }
 
 $(document).ready(() => {
   disable_followup_steps()
-  handle_generate_step()
-  handle_connect_step()
+  setup_generate_step()
+  setup_connect_step()
   setup_wait_steps()
 })

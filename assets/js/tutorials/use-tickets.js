@@ -61,8 +61,6 @@ $("#prepare-and-sign").click( async function(event) {
   block.find(".output-area").append(
     `<p>Prepared transaction:</p>
     <pre><code>${pretty_print(prepared.txJSON)}</code></pre>`)
-  $("#lastledgersequence").html(
-    `<code>${prepared.instructions.maxLedgerVersion}</code>`)
 
   let signed = api.sign(prepared.txJSON, secret)
   block.find(".output-area").append(
@@ -187,8 +185,6 @@ $("#prepare-ticketed-tx").click(async function(event) {
   block.find(".output-area").append(
     `<p>Prepared transaction:</p>
     <pre><code>${pretty_print(prepared_t.txJSON)}</code></pre>`)
-  $("#lastledgersequence_t").html( //REMEMBER
-    `<code>${prepared_t.instructions.maxLedgerVersion}</code>`)
 
   let signed_t = api.sign(prepared_t.txJSON, secret)
   block.find(".output-area").append(
