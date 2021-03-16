@@ -1831,11 +1831,6 @@ pages:
             - ja
 
     -   md: tutorials/manage-account-settings/require-destination-tags.md
-        html: require-destination-tags.html
-        funnel: Build
-        doc_type: Tutorials
-        category: Manage Account Settings
-        blurb: Require users to specify a destination tag when sending to your address.
         targets:
             - en
 

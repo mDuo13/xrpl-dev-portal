@@ -60,7 +60,7 @@ $("#sign-button").click( function(event) {
 })
 
 // 4. Submit the signed transaction --------------------------------------------
-$("#submit-button").click( make_submit_handler() )
+$("#submit-button").click( submit_handler )
 
 // 5. Wait for Validation: handled by interactive-tutorial.js and by the
 // generic submit handler in the previous step. --------------------------------

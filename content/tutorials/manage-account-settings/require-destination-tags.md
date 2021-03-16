@@ -1,3 +1,12 @@
+---
+html: require-destination-tags.html
+funnel: Build
+doc_type: Tutorials
+category: Manage Account Settings
+blurb: Require users to specify a destination tag when sending to your address.
+filters:
+    - interactive_steps
+---
 # Require Destination Tags
 
 The Require Destination Tag setting is designed for addresses that host balances for multiple people or purposes, to prevent people from sending money and forgetting to use a [destination tag](source-and-destination-tags.html) to identify whom to credit. When this setting is enabled on your address, the XRP Ledger rejects [any payment](payment-types.html) to your address if it does not specify a destination tag.
@@ -108,7 +117,8 @@ After the transaction is validated, you can check your account's settings to con
 
 ```js
 let account_info = await api.request("account_info", {
-    "account": "rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe"
+    "account": "rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe",
+    "ledger_index": "validated"
 })
 const flags = api.parseAccountFlags(account_info.account_data.Flags)
 console.log(JSON.stringify(flags, null, 2))
@@ -116,16 +126,16 @@ console.log(JSON.stringify(flags, null, 2))
 ```
 
 {{ start_step("Confirm Settings") }}
-<button id="confirm-settings" class="btn btn-primary" data-wait-step-name="Wait">Confirm Settings</button>
+<button id="confirm-settings" class="btn btn-primary previous-steps-required" data-wait-step-name="Wait">Confirm Settings</button>
 <div class="loader collapse"><img class="throbber" src="assets/img/xrp-loader-96.png">Sending...</div>
 <div class="output-area"></div>
 {{ end_step() }}
 
-Additionally, you can send test transactions to confirm that the setting is working as you expect it to. You can [send XRP](send-xrp.html) without a destination tag and confirm that it fails as expected, or send _with_ a destination tag and confirm that it succeeds.
+For further confirmation, you can send test transactions (from a different address) to confirm that the setting is working as you expect it to. If you a payment with a destination tag, it should succeed, and if you send one _without_ a destination tag, it should fail with the error code [`tecDST_TAG_NEEDED`](tec-codes.html).
 
 {{ start_step("Test Payments") }}
-<button id="test-with-dtag" class="btn btn-primary">Send XRP (with Destination Tag)</button>
-<button id="test-no-dtag" class="btn btn-primary">Send XRP (without Destination Tag)</button>
+<button class="test-payment btn btn-primary" data-dt="10">Send XRP (with Destination Tag)</button>
+<button class="test-payment btn btn-primary" data-dt="">Send XRP (without Destination Tag)</button>
 <div class="loader collapse"><img class="throbber" src="assets/img/xrp-loader-96.png">Sending...</div>
 <div class="output-area"></div>
 {{ end_step() }}

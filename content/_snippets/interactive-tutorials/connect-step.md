@@ -1,5 +1,6 @@
 {% if use_network is undefined or use_network == "Testnet" %}
   {% set ws_url = "wss://s.altnet.rippletest.net:51233" %}
+  {% set use_network = "Testnet" %}
 {% elif use_network == "Devnet" %}
   {% set ws_url = "wss://s.devnet.rippletest.net:51233" %}
 {% elif use_network == "Mainnet" %}

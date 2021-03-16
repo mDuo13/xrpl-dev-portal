@@ -128,51 +128,74 @@ function setup_generate_step() {
   const EXAMPLE_ADDR = "rPT1Sjq2YGrBMTttX4GZHjKu9dyfzbpAYe"
   const EXAMPLE_SECRET = "s████████████████████████████"
 
-  $("#generate-creds-button").click( (event) => {
+  $("#generate-creds-button").click( async (event) => {
     const block = $(event.target).closest(".interactive-block")
     block.find(".output-area").html("")
     block.find(".loader").show()
     // Get faucet URL (Testnet/Devnet/etc.)
     const faucet_url = $("#generate-creds-button").data("fauceturl")
 
-    $.ajax({
-      url: faucet_url,
-      type: 'POST',
-      dataType: 'json',
-      success: function(data) {
-        block.find(".loader").hide()
-        block.find(".output-area").html(`<div><strong>Address:</strong>
-            <span id="use-address">${data.account.address}</span></div>
-            <div><strong>Secret:</strong>
-            <span id="use-secret">${data.account.secret}</span></div>
-            <strong>Balance:</strong>
-            ${Number(data.balance).toLocaleString('en')} XRP`)
+    try {
+      const data = await call_faucet(faucet_url)
 
-        // Automatically populate all examples in the page with the
-        // generated credentials...
-        $("code span:contains('"+EXAMPLE_ADDR+"')").each( function() {
-          let eltext = $(this).text()
-          $(this).text( eltext.replace(EXAMPLE_ADDR, data.account.address) )
-        })
-        $("code span:contains('"+EXAMPLE_SECRET+"')").each( function() {
-          let eltext = $(this).text()
-          $(this).text( eltext.replace(EXAMPLE_SECRET, data.account.secret) )
-        })
+      block.find(".loader").hide()
+      block.find(".output-area").html(`<div><strong>Address:</strong>
+          <span id="use-address">${data.account.address}</span></div>
+          <div><strong>Secret:</strong>
+          <span id="use-secret">${data.account.secret}</span></div>
+          <strong>Balance:</strong>
+          ${Number(data.balance).toLocaleString('en')} XRP`)
 
-        block.find(".output-area").append("<p>Populated this page's examples with these credentials.</p>")
+      // Automatically populate all examples in the page with the
+      // generated credentials...
+      $("code span:contains('"+EXAMPLE_ADDR+"')").each( function() {
+        let eltext = $(this).text()
+        $(this).text( eltext.replace(EXAMPLE_ADDR, data.account.address) )
+      })
+      $("code span:contains('"+EXAMPLE_SECRET+"')").each( function() {
+        let eltext = $(this).text()
+        $(this).text( eltext.replace(EXAMPLE_SECRET, data.account.secret) )
+      })
 
-        complete_step("Generate")
-      },
-      error: function() {
-        block.find(".loader").hide()
-        block.find(".output-area").html(
-          `<p class="devportal-callout warning"><strong>Error:</strong>
-          There was an error connecting to the Faucet. Please
-          try again.</p>`)
-        return;
-      }
-    })
+      block.find(".output-area").append("<p>Populated this page's examples with these credentials.</p>")
+
+      complete_step("Generate")
+
+    } catch(err) {
+      block.find(".loader").hide()
+      block.find(".output-area").html(
+        `<p class="devportal-callout warning"><strong>Error:</strong>
+        There was an error connecting to the Faucet. Please
+        try again.</p>`)
+      return
+    }
   })
+}
+
+/**
+ * Helper for calling the Testnet/Devnet faucet.
+ * @param {String} faucet_url The URL of the faucet to call, for example:
+ *                            https://faucet.altnet.rippletest.net/accounts
+ */
+async function call_faucet(faucet_url, destination) {
+  // Future feature: support the Faucet's optional xrpAmount param
+  const body = {}
+  if (typeof destination != "undefined") {
+    body["destination"] = destination
+  }
+  const response = await fetch(faucet_url, {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  })
+  const data = await response.json()
+
+  if (!response.ok) {
+    throw `Faucet returned an error: ${data.error}`
+  }
+  return data
 }
 
 /**
@@ -310,12 +333,31 @@ async function activate_wait_step(step_name, prelim_result) {
   status_box.data("status_pending", true)
 }
 
-async function generic_full_send(block, tx_json, wait_step_name) {
-  const address = $("#use-address").text()
+/**
+ * Helper for "Send Transaction" buttons to handle the full process of
+ * Prepare → Sign → Submit in one step with appropriate outputs. Assumes you are
+ * also using _snippets/interactive-tutorials/wait-step.md to report the
+ * transaction's final results. Gets important information from data
+ * attributes defined on the button that triggers the event:
+ * data-tx-blob-from="{jQuery selector}" A selector for an element whose .text()
+ *                                       is the blob to submt.
+ * data-wait-step-name="{String}" The exact name of the wait step where this
+ *                                transaction's results should be reported, as
+ *                                defined in start_step(step_name) as the MD
+ * This function is meant to be called from within a .click(event) handler, not
+ * directly bound as the click handler.
+ * @param {Event} event The (click) event that this is helping to handle.
+ * @param {Object} tx_json JSON object of transaction instructions to finish
+ *                         preparing and send.
+ */
+async function generic_full_send(event, tx_json) {
+  const block = $(event.target).closest(".interactive-block")
+  const blob_selector = $(event.target).data("txBlobFrom")
+  const wait_step_name = $(event.target).data("waitStepName")
   const secret = $("#use-secret").text()
 
   block.find(".output-area").html("")
-  if (!address || !secret) {
+  if (!secret) {
     show_error(block,
       `Couldn't get a valid address/secret value. Check that the
        previous steps were completed successfully.`)
@@ -347,6 +389,8 @@ async function generic_full_send(block, tx_json, wait_step_name) {
  * data-wait-step-name="{String}" The exact name of the wait step where this
  *                                transaction's results should be reported, as
  *                                defined in start_step(step_name) as the MD
+ * This function is intended to be bound directly on a submit button as the
+ * click event handler.
  */
 async function submit_handler(event) {
   const block = $(event.target).closest(".interactive-block")

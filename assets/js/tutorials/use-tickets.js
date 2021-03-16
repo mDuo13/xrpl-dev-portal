@@ -75,7 +75,7 @@ $("#prepare-and-sign").click( async function(event) {
 })
 
 // 5. Submit TicketCreate ------------------------------------------------------
-$("#ticketcreate-submit").click( make_submit_handler() )
+$("#ticketcreate-submit").click( submit_handler )
 
 // 6. Wait for Validation: handled by interactive-tutorial.js and by the
 // generic submit handler in the previous step. --------------------------------
@@ -200,7 +200,7 @@ $("#prepare-ticketed-tx").click(async function(event) {
 })
 
 // 9. Submit Ticketed Transaction ----------------------------------------------
-$("#ticketedtx-submit").click( make_submit_handler() )
+$("#ticketedtx-submit").click( submit_handler )
 
 // 10. Wait for Validation (Again): handled by interactive-tutorial.js and by
 // the generic submit handler in the previous step. --------------------------------
