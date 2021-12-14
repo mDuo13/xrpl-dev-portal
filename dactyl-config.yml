@@ -916,7 +916,7 @@ pages:
     -   md: concepts/consensus-network/federated-sidechains.md
         targets:
             - en
-            - ja            
+            - ja
 
     -   md: concepts/the-rippled-server/the-rippled-server.md
         targets:
@@ -1090,14 +1090,6 @@ pages:
         targets:
             - ja
 
-    -   md: tutorials/get-started/monitor-incoming-payments-with-websocket.md
-        targets:
-            - en
-
-    -   md: tutorials/get-started/monitor-incoming-payments-with-websocket.ja.md
-        targets:
-            - ja
-
         # Send old "Use Direct XRP Payments" landing to "Get Started" instead
     -   name: Use Direct XRP Payments
         html: use-simple-xrp-payments.html
@@ -1131,14 +1123,6 @@ pages:
             - en
 
     -   md: tutorials/production-readiness/look-up-transaction-results.ja.md
-        targets:
-            - ja
-
-    -   md: tutorials/production-readiness/reliable-transaction-submission.md
-        targets:
-            - en
-
-    -   md: tutorials/production-readiness/reliable-transaction-submission.ja.md
         targets:
             - ja
 
@@ -1202,14 +1186,6 @@ pages:
         targets:
             - ja
 
-    -   md: tutorials/manage-account-settings/send-a-multi-signed-transaction.md
-        targets:
-            - en
-
-    -   md: tutorials/manage-account-settings/send-a-multi-signed-transaction.ja.md
-        targets:
-            - ja
-
     -   md: tutorials/manage-account-settings/require-destination-tags.md
         targets:
             - en
@@ -1226,7 +1202,47 @@ pages:
         targets:
             - ja
 
-    -   md: tutorials/manage-account-settings/use-tickets.md
+        # TODO: translate page name & blurb
+    -   name: Advanced Transaction Sending
+        html: advanced-transaction-sending.html
+        template: pagetype-category.html.jinja
+        parent: tutorials.html
+        blurb: Send transactions robustly, in a variety of special cases.
+        targets:
+            - en
+            - ja
+
+    -   md: tutorials/advanced-transaction-sending/reliable-transaction-submission.md
+        targets:
+            - en
+
+    -   md: tutorials/advanced-transaction-sending/reliable-transaction-submission.ja.md
+        targets:
+            - ja
+
+        # TODO: translate
+    -   md: tutorials/advanced-transaction-sending/calculate-transaction-cost.md
+        targets:
+            - en
+            - ja
+
+    -   md: tutorials/advanced-transaction-sending/monitor-incoming-payments-with-websocket.md
+        targets:
+            - en
+
+    -   md: tutorials/advanced-transaction-sending/monitor-incoming-payments-with-websocket.ja.md
+        targets:
+            - ja
+
+    -   md: tutorials/advanced-transaction-sending/send-a-multi-signed-transaction.md
+        targets:
+            - en
+
+    -   md: tutorials/advanced-transaction-sending/send-a-multi-signed-transaction.ja.md
+        targets:
+            - ja
+
+    -   md: tutorials/advanced-transaction-sending/use-tickets.md
         targets:
             - en
             - ja

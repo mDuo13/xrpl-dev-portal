@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "xrpl": "^2.0.4",
+    "xrpl-client": "^1.9.3"
+  }
+}

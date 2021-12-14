@@ -1,6 +1,6 @@
 ---
 html: send-a-multi-signed-transaction.html
-parent: manage-account-settings.html
+parent: advanced-transaction-sending.html
 blurb: マルチ署名済みトランザクションを作成、署名、送信する。
 labels:
   - セキュリティ

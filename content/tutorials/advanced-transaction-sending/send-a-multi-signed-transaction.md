@@ -1,6 +1,6 @@
 ---
 html: send-a-multi-signed-transaction.html
-parent: manage-account-settings.html
+parent: advanced-transaction-sending.html
 blurb: Send a transaction authorized with multiple signatures.
 labels:
   - Security
