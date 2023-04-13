@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Create an Automated Market Maker - AMM Interactive Tutorials</title>
+    <meta name="viewport" content="width=device-width">
+    <meta property="og:title" content="Create an Automated Market Maker | AMM Interactive Tutorials">
+    <meta property="og:url" content="https://xrpl.org/create-an-automated-market-maker.html" />
+    <meta property="og:description" content="Set up an Automated Market Maker (AMM)" />
+    <meta name="description" content="Set up an Automated Market Maker (AMM)" />
+    <meta property="og:image" content="https://xrpl.org/assets/img/xrpl-fb-li-card.png" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:image" content="https://xrpl.org/assets/img/xrpl-twitter-card.png" />
+    <meta name="robots" content="index, follow" />
+    <meta name="docsearch:language" content="en" />
+    <link rel="alternate" href="https://xrpl.org/create-an-automated-market-maker.html" hreflang="en" />
+    <link rel="alternate" href="https://xrpl.org/ja/create-an-automated-market-maker.html" hreflang="ja" />
+    <link rel="alternate" href="https://xrpl.org/create-an-automated-market-maker.html" hreflang="x-default" /><!-- Default: US english -->
+
+
+    <!-- favicon -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/amm/assets/favicons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/amm/assets/favicons/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/amm/assets/favicons/favicon-32x32.png">
+    <link rel="manifest" href="/amm/assets/favicons/site.webmanifest">
+    <link rel="shortcut icon" href="favicon.ico">
+    <meta name="msapplication-TileColor" content="#25A768">
+    <meta name="msapplication-config" content="/amm/assets/favicons/browserconfig.xml">
+    <meta name="theme-color" content="#25A768">
+    <!-- The page supports both dark and light color schemes, and the page author prefers dark. -->
+    <meta name="color-scheme" content="dark light">
+
+    <!-- jQuery -->
+    <script src="/amm/assets/vendor/jquery-3.6.0.min.js"></script>
+  
+
+    <!-- Stylesheet -->
+    <link href="/amm/assets/css/devportal2022-v15.css" rel="stylesheet" />
+
+
+
+    <!-- Theme switch -->
+    <script src="/amm/assets/js/theme-switch.js"></script>
+
+
+
+    <!-- expandable code samples -->
+    <script src="/amm/assets/js/expandcode.js"></script>
+    <!-- multi-code selection tabs -->
+    <script src="/amm/assets/js/multicodetab.js"></script>
+    <!-- copy code button -->
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".multicode").minitabs();
+            make_code_expandable();
+            new ClipboardJS('.clipboard-btn');
+        });
+    </script>
+
+
+</head>
+
+<body class="xrp-ledger-dev-portal sidebar-primary lang-en " data-spy="scroll" data-target=".page-toc" data-offset="0" id="xrp-ledger-dev-portal">
+
+  <div class="container-fluid" role="document" id="main_content_wrapper">
+    <div class="row">
+      <!-- Right sidebar first so it's at the beginning for mobile layouts -->
+      <aside class="right-sidebar col-lg-3 order-lg-4" role="complementary">
+  <a class="with-caret expander collapsed d-lg-none" id="toc-expander" role="button" data-toggle="collapse" data-target="#page-toc-wrapper" aria-expanded="false">
+    Page Toolbar
+    <span class="chevron"><span></span><span></span></span>
+  </a>
+  <div id="page-toc-wrapper" class="collapse d-lg-block">
+<div class="github-edit-wrap">
+    <a href="https://github.com/mDuo13/xrpl-dev-portal//edit/amm_create_tutorial/content/tutorials/use-tokens/create-an-automated-market-maker.md" target="_blank" class="btn btn-primary github-edit">Edit page</a>
+</div><!-- /.github-edit -->    <div class="nav-item" id="topnav-theme">
+      <form class="form-inline">
+        <div class="custom-control custom-theme-toggle form-inline-item" title="" data-toggle="tooltip" data-placement="left" data-original-title="Toggle Dark Mode">
+          <input type="checkbox" class="custom-control-input" id="css-toggle-btn">
+          <label class="custom-control-label" for="css-toggle-btn"><span class="d-lg-none">Light/Dark Theme</span></label>
+        </div>
+      </form>
+    </div><!--/#topnav-theme-->
+    <div class="toc-header">
+      <h4>In this document</h4>
+    </div>
+    <ul class="page-toc nav flex-column" role="directory">
+        <li class="nav-item level-1"><a class="nav-link" href="#create-an-automated-market-maker">Create an Automated Market Maker</a></li>
+        <li class="nav-item level-2"><a class="nav-link" href="#prerequisites">Prerequisites</a></li>
+        <li class="nav-item level-2"><a class="nav-link" href="#example-code">Example Code</a></li>
+        <li class="nav-item level-2"><a class="nav-link" href="#steps">Steps</a></li>
+        <li class="nav-item level-3"><a class="nav-link" href="#1-connect-to-the-network">1. Connect to the network</a></li>
+        <li class="nav-item level-3"><a class="nav-link" href="#2-get-credentials">2. Get credentials</a></li>
+        <li class="nav-item level-3"><a class="nav-link" href="#3-select-and-acquire-assets">3. Select and acquire assets</a></li>
+        <li class="nav-item level-3"><a class="nav-link" href="#4-check-if-the-amm-exists">4. Check if the AMM exists</a></li>
+        <li class="nav-item level-3"><a class="nav-link" href="#5-send-ammcreate-transaction">5. Send AMMCreate transaction</a></li>
+        <li class="nav-item level-3"><a class="nav-link" href="#6-check-amm-info">6. Check AMM info</a></li>
+        <li class="nav-item level-3"><a class="nav-link" href="#7-check-trust-lines">7. Check trust lines</a></li>
+        <li class="nav-item level-2"><a class="nav-link" href="#next-steps">Next Steps</a></li>
+      </ul>
+  </div>
+      </aside>
+
+      <!-- main column -->
+      <main class="main col-md-7 col-lg-9 order-md-3  " role="main" id="main_content_body">
+  <article class="pt-3 p-md-3">
+    <div class="content">
+        <h1 id="create-an-automated-market-maker">Create an Automated Market Maker<a aria-hidden="true" class="hover_anchor" href="#create-an-automated-market-maker"><i class="fa fa-link"></i></a></h1>
+<p>An <a class="external-link" href="https://xrpl.org/automated-market-makers.html" target="_blank">Automated Market Maker (AMM) <i aria-hidden="true" class="fa fa-external-link"></i></a> can be an efficient way to facilitate exchanges between two assets, while earning its liquidity providers passive income. This tutorial shows how to create the AMM for a given asset pair.</p>
+<p><em>Automated Market Maker (AMM) functionality is part of the proposed <a class="external-link" href="https://github.com/XRPLF/XRPL-Standards/discussions/78" target="_blank">XLS-30d <i aria-hidden="true" class="fa fa-external-link"></i></a> extension <span class="status not_enabled" title="This feature is not currently enabled on the production XRP Ledger."><i class="fa fa-flask"></i></span> to the XRP Ledger protocol. You can use these functions on AMM test networks, but there isn't an official amendment and they aren't available on the production Mainnet. Until there is an amendment, the details documented on these pages are subject to change.</em> <!-- SPELLING_IGNORE: 30d --></p>
+<!-- stuff for the debranded page -->
+<style type="text/css">
+#main_content_wrapper::before {
+  display: none;
+}
+#main_content_wrapper {
+  margin-top: 0 !important;
+}
+body {
+  padding-top: 0 !important;
+}
+.content h1:first-child::before {
+  display: none;
+}
+.right-sidebar, .left-sidebar {
+    top: 0 !important;
+}
+
+.github-edit-wrap, #topnav-theme {
+  display: inline-block;
+}
+</style>
+<!-- Source for this specific tutorial's interactive bits: -->
+<script src="assets/js/tutorials/create-amm.js" type="application/javascript"></script>
+<h2 id="prerequisites">Prerequisites<a aria-hidden="true" class="hover_anchor" href="#prerequisites"><i class="fa fa-link"></i></a></h2>
+<ul>
+<li>You must have an XRP Ledger address and some XRP.</li>
+<li>You should be familiar with the Getting Started instructions for your preferred client library. This page provides examples for the following:<ul>
+<li><strong>JavaScript</strong> with the <a class="external-link" href="https://github.com/XRPLF/xrpl.js/" target="_blank">xrpl.js library <i aria-hidden="true" class="fa fa-external-link"></i></a> <strong>version 2.8.0-beta.0 or later</strong>. See <a class="external-link" href="https://xrpl.org/get-started-using-javascript.html" target="_blank">Get Started Using JavaScript <i aria-hidden="true" class="fa fa-external-link"></i></a> for setup steps.</li>
+<li>You can also read along and use the interactive steps in your browser without any setup.</li>
+</ul>
+</li>
+<li>You should have a basic understanding of how <a class="external-link" href="https://xrpl.org/tokens.html" target="_blank">tokens <i aria-hidden="true" class="fa fa-external-link"></i></a> work in the XRP Ledger.</li>
+</ul>
+<h2 id="example-code">Example Code<a aria-hidden="true" class="hover_anchor" href="#example-code"><i class="fa fa-link"></i></a></h2>
+<p>Complete sample code for all of the steps of these tutorials is available under the <a class="external-link" href="https://github.com/XRPLF/xrpl-dev-portal/blob/master/LICENSE" target="_blank">MIT license <i aria-hidden="true" class="fa fa-external-link"></i></a>.</p>
+<ul>
+<li>See <a class="external-link" href="https://github.com/XRPLF/xrpl-dev-portal/tree/master/content/_code-samples/create-an-amm/" target="_blank">Code Samples: Create an AMM <i aria-hidden="true" class="fa fa-external-link"></i></a> in the source repository for this website.</li>
+</ul>
+<h2 id="steps">Steps<a aria-hidden="true" class="hover_anchor" href="#steps"><i class="fa fa-link"></i></a></h2>
+<h3 id="1-connect-to-the-network">1. Connect to the network<a aria-hidden="true" class="hover_anchor" href="#1-connect-to-the-network"><i class="fa fa-link"></i></a></h3>
+<p>You must be connected to the network to query it and submit transactions. The following code shows how to connect to a public AMM-Devnet server using a supported <a class="external-link" href="https://xrpl.org/client-libraries.html" target="_blank">client library <i aria-hidden="true" class="fa fa-external-link"></i></a>:</p>
+<div class="multicode" id="code-0"><ul class="codetabs"><li><a class="javascript" href="#code-0-0">JavaScript</a></li></ul>
+
+<div class="code_sample javascript" id="code-0-0" style="position: static;"><div class="codehilite"><div aria-label="Code Buttons" class="btn-group" role="group"><button alt="Copy to clipboard" class="btn btn-outline-secondary clipboard-btn" data-clipboard-target="#codeblock-0" id="codeblock-0button"><i class="fa fa-clipboard"></i></button></div><pre><span></span><code id="codeblock-0"><span class="c1">// In browsers, use a &lt;script&gt; tag. In Node.js, uncomment the following line:</span>
+<span class="c1">// const xrpl = require('xrpl')</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">WS_URL</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'wss://amm.devnet.rippletest.net:51233/'</span>
+<span class="kd">const</span><span class="w"> </span><span class="nx">EXPLORER</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'amm-devnet.xrpl.org'</span><span class="w"> </span><span class="c1">// Optional, for linking</span>
+
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Define the network client</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">client</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">xrpl</span><span class="p">.</span><span class="nx">Client</span><span class="p">(</span><span class="nx">WS_URL</span><span class="p">)</span>
+<span class="w">  </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">connect</span><span class="p">()</span>
+
+<span class="w">  </span><span class="c1">// ... custom code goes here</span>
+
+<span class="w">  </span><span class="c1">// Disconnect when done (If you omit this, Node.js won't end the process)</span>
+<span class="w">  </span><span class="nx">client</span><span class="p">.</span><span class="nx">disconnect</span><span class="p">()</span>
+<span class="p">}</span>
+
+<span class="nx">main</span><span class="p">()</span>
+</code></pre></div></div>
+</div>
+<p>For this tutorial, click the following button to connect:</p>
+<div class="interactive-block" data-stepnumber="1" data-totalsteps="7" id="interactive-connect">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="connect" data-steplabel="Connect" id="bc-ul-connect">
+<li class="breadcrumb-item bc-connect current"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-generate disabled"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-acquire_tokens disabled"><a href="#interactive-acquire_tokens">Acquire tokens</a></li><li class="breadcrumb-item bc-check_for_amm disabled"><a href="#interactive-check_for_amm">Check for AMM</a></li><li class="breadcrumb-item bc-create_amm disabled"><a href="#interactive-create_amm">Create AMM</a></li><li class="breadcrumb-item bc-check_amm_info disabled"><a href="#interactive-check_amm_info">Check AMM info</a></li><li class="breadcrumb-item bc-check_trust_lines disabled"><a href="#interactive-check_trust_lines">Check trust lines</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary" data-explorer="https://amm-devnet.xrpl.org" data-wsurl="wss://amm.devnet.rippletest.net:51233" id="connect-button">Connect to AMM-Devnet</button>
+<div>
+<strong>Connection status:</strong>
+<span id="connection-status">Not connected</span>
+<div class="loader collapse" id="loader-connect"><img class="throbber" src="assets/img/xrp-loader-96.png"/></div>
+</div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<h3 id="2-get-credentials">2. Get credentials<a aria-hidden="true" class="hover_anchor" href="#2-get-credentials"><i class="fa fa-link"></i></a></h3>
+<p>To transact on the XRP Ledger, you need an address and secret key, and some XRP. For development purposes, you can get these on the <a class="external-link" href="https://xrpl.org/parallel-networks.html" target="_blank">AMM-Devnet <i aria-hidden="true" class="fa fa-external-link"></i></a> using the following interface:</p>
+<!--/.interactive-block--><div class="interactive-block" data-stepnumber="2" data-totalsteps="7" id="interactive-generate">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="generate" data-steplabel="Generate" id="bc-ul-generate">
+<li class="breadcrumb-item bc-connect"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-generate disabled current"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-acquire_tokens disabled"><a href="#interactive-acquire_tokens">Acquire tokens</a></li><li class="breadcrumb-item bc-check_for_amm disabled"><a href="#interactive-check_for_amm">Check for AMM</a></li><li class="breadcrumb-item bc-create_amm disabled"><a href="#interactive-create_amm">Create AMM</a></li><li class="breadcrumb-item bc-check_amm_info disabled"><a href="#interactive-check_amm_info">Check AMM info</a></li><li class="breadcrumb-item bc-check_trust_lines disabled"><a href="#interactive-check_trust_lines">Check trust lines</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary" data-fauceturl="https://ammfaucet.devnet.rippletest.net/accounts" id="generate-creds-button">Get AMM-Devnet credentials</button>
+<div class="loader collapse"><img class="throbber" src="assets/img/xrp-loader-96.png"/>Generating Keys...</div>
+<div class="output-area"></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<p class="devportal-callout caution"><strong>Caution:</strong> Ripple provides the <a class="external-link" href="https://xrpl.org/parallel-networks.html" target="_blank">Testnet and Devnet <i aria-hidden="true" class="fa fa-external-link"></i></a> for testing purposes only, and sometimes resets the state of these test networks along with all balances. As a precaution, <strong>do not</strong> use the same addresses on Testnet/Devnet and Mainnet.</p>
+<p>When you're <a class="external-link" href="https://xrpl.org/production-readiness.html" target="_blank">building production-ready software <i aria-hidden="true" class="fa fa-external-link"></i></a>, you should use an existing account, and manage your keys using a <a class="external-link" href="https://xrpl.org/set-up-secure-signing.html" target="_blank">secure signing configuration <i aria-hidden="true" class="fa fa-external-link"></i></a>. The following code shows how to get a <code>Wallet</code> instance using either the faucet or a seed provided by environment variable:</p>
+<div class="multicode" id="code-1"><ul class="codetabs"><li><a class="javascript" href="#code-1-0">JavaScript</a></li></ul>
+
+<div class="code_sample javascript" id="code-1-0" style="position: static;"><div class="codehilite"><div aria-label="Code Buttons" class="btn-group" role="group"><button alt="Copy to clipboard" class="btn btn-outline-secondary clipboard-btn" data-clipboard-target="#codeblock-1" id="codeblock-1button"><i class="fa fa-clipboard"></i></button></div><pre><span></span><code id="codeblock-1"><span class="c1">// Get credentials from the Faucet -------------------------------------------</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Requesting address from the faucet..."</span><span class="p">)</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">wallet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">fundWallet</span><span class="p">()).</span><span class="nx">wallet</span>
+
+<span class="w">  </span><span class="c1">// To use an existing account, use code such as the following:</span>
+<span class="w">  </span><span class="c1">// const wallet = xrpl.Wallet.fromSeed(process.env['USE_SEED'])</span>
+</code></pre></div></div>
+</div>
+<h3 id="3-select-and-acquire-assets">3. Select and acquire assets<a aria-hidden="true" class="hover_anchor" href="#3-select-and-acquire-assets"><i class="fa fa-link"></i></a></h3>
+<p>As the creator of an AMM, you are also the first liquidity provider and you have to supply it with a starting pool of assets. Other users of the XRP Ledger can also become liquidity providers by supplying assets after the AMM exists. It's important to choose assets especially carefully because, as a liquidity provider for an AMM, you are supplying some amounts of both for users to swap between. If one of the AMM's assets becomes worthless, other users can use the AMM to trade for the other asset, leaving the AMM (and thus, its liquidity providers including you) holding only the worthless one. Technically, the AMM always holds some positive amount of both assets, but the amounts can be very small.</p>
+<p>You can choose any pair of fungible assets in the XRP Ledger, including XRP or tokens, including LP Tokens from another AMM. If you use a token, you must hold some amount of that token. (If a token's issuer uses, <a class="external-link" href="https://xrpl.org/authorized-trust-lines.html" target="_blank">authorized trust lines <i aria-hidden="true" class="fa fa-external-link"></i></a>, that means you have to be authorized first.)</p>
+<p>For each of the two assets, you need to know its currency code and issuer; as an exception, XRP has no issuer. For each of the assets, you must hold a balance of the asset (or <em>be</em> the issuer). The following sample code acquires two assets, "TST" (which it buys using XRP) and "FOO" (which it receives from the issuer).</p>
+<div class="multicode" id="code-2"><ul class="codetabs"><li><a class="javascript" href="#code-2-0">JavaScript</a></li></ul>
+
+<div class="code_sample javascript" id="code-2-0" style="position: static;"><div class="codehilite"><div aria-label="Code Buttons" class="btn-group" role="group"><button alt="Copy to clipboard" class="btn btn-outline-secondary clipboard-btn" data-clipboard-target="#codeblock-2" id="codeblock-2button"><i class="fa fa-clipboard"></i></button></div><pre><span></span><code id="codeblock-2"><span class="c1">// Acquire tokens ------------------------------------------------------------</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">offer_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">submitAndWait</span><span class="p">({</span>
+<span class="w">    </span><span class="s2">"TransactionType"</span><span class="o">:</span><span class="w"> </span><span class="s2">"OfferCreate"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"Account"</span><span class="o">:</span><span class="w"> </span><span class="nx">wallet</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"TakerPays"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">currency</span><span class="o">:</span><span class="w"> </span><span class="s2">"TST"</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">issuer</span><span class="o">:</span><span class="w"> </span><span class="s2">"rP9jPyP5kyvFRb6ZiRghAGw5u8SGAmU4bd"</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="s2">"25"</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">"TakerGets"</span><span class="o">:</span><span class="w"> </span><span class="nx">xrpl</span><span class="p">.</span><span class="nx">xrpToDrops</span><span class="p">(</span><span class="mf">25</span><span class="o">*</span><span class="mf">10</span><span class="o">*</span><span class="mf">1.16</span><span class="p">)</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nx">autofill</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">wallet</span><span class="o">:</span><span class="w"> </span><span class="nx">wallet</span><span class="p">})</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">offer_result</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">TransactionResult</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"tesSUCCESS"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`TST offer placed: </span><span class="si">${</span><span class="nx">EXPLORER</span><span class="si">}</span><span class="sb">/transactions/</span><span class="si">${</span><span class="nx">offer_result</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">hash</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">balance_changes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">xrpl</span><span class="p">.</span><span class="nx">getBalanceChanges</span><span class="p">(</span><span class="nx">offer_result</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">meta</span><span class="p">)</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">bc</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">balance_changes</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">bc</span><span class="p">.</span><span class="nx">account</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nx">wallet</span><span class="p">.</span><span class="nx">address</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="k">continue</span><span class="p">}</span>
+<span class="w">      </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">bal</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">bc</span><span class="p">.</span><span class="nx">balances</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">bal</span><span class="p">.</span><span class="nx">currency</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"TST"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Got </span><span class="si">${</span><span class="nx">bal</span><span class="p">.</span><span class="nx">value</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">bal</span><span class="p">.</span><span class="nx">currency</span><span class="si">}</span><span class="sb">.</span><span class="si">${</span><span class="nx">bal</span><span class="p">.</span><span class="nx">issuer</span><span class="si">}</span><span class="sb">.`</span><span class="p">)</span>
+<span class="w">          </span><span class="k">break</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">      </span><span class="k">break</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="sb">`Error sending transaction: </span><span class="si">${</span><span class="nx">offer_result</span><span class="si">}</span><span class="sb">`</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="c1">// Successfully placing the offer doesn't necessarily mean that you have TST,</span>
+<span class="w">  </span><span class="c1">// but for now, let's assume it matched existing Offers on ledger so you do.</span>
+
+<span class="w">  </span><span class="c1">// Call helper function to set up a new "FOO" issuer, create a trust line to them, </span>
+<span class="w">  </span><span class="c1">// and receive 1000 FOO from them.</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">foo_amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">get_new_token</span><span class="p">(</span><span class="nx">client</span><span class="p">,</span><span class="w"> </span><span class="nx">wallet</span><span class="p">,</span><span class="w"> </span><span class="s2">"FOO"</span><span class="p">,</span><span class="w"> </span><span class="s2">"1000"</span><span class="p">)</span>
+</code></pre></div></div>
+</div>
+<p>This tutorial includes some example code to issue FOO tokens from a second test address. This is not realistic for a production scenario, because tokens do not inherently have value, but it makes it possible to demonstrate creating a new AMM for a unique currency pair. In production, you would acquire a second token in some other way, such as making an off-ledger deposit with the stablecoin issuer, or buying it in the decentralized exchange.</p>
+<p>The helper function for issuing follows an abbreviated version of the steps in the <a class="external-link" href="https://xrpl.org/issue-a-fungible-token.html" target="_blank">Issue a Fungible Token <i aria-hidden="true" class="fa fa-external-link"></i></a> tutorial:</p>
+<div class="multicode" id="code-3"><ul class="codetabs"><li><a class="javascript" href="#code-3-0">JavaScript</a></li></ul>
+
+<div class="code_sample javascript" id="code-3-0" style="position: static;"><div class="codehilite"><div aria-label="Code Buttons" class="btn-group" role="group"><button alt="Copy to clipboard" class="btn btn-outline-secondary clipboard-btn" data-clipboard-target="#codeblock-3" id="codeblock-3button"><i class="fa fa-clipboard"></i></button></div><pre><span></span><code id="codeblock-3"><span class="cm">/* Issue tokens ---------------------------------------------------------------</span>
+<span class="cm"> * Fund a new issuer using the faucet, and issue some fungible tokens </span>
+<span class="cm"> * to the specified address. In production, you would not do this; instead,</span>
+<span class="cm"> * you would acquire tokens from an existing issuer (for example, you might </span>
+<span class="cm"> * buy them in the DEX, or make an off-ledger deposit at a stablecoin issuer).</span>
+<span class="cm"> * For a more thorough explanation of this process, see</span>
+<span class="cm"> * "Issue a Fungible Token": https://xrpl.org/issue-a-fungible-token.html</span>
+<span class="cm"> * Params:</span>
+<span class="cm"> * client: an xrpl.Client instance that is already connected to the network</span>
+<span class="cm"> * wallet: an xrpl.Wallet instance that should hold the new tokens</span>
+<span class="cm"> * currency_code: string currency code (3-char ISO-like or hex code)</span>
+<span class="cm"> * issue_quantity: string number of tokens to issue. Arbitrarily capped </span>
+<span class="cm"> *                 at "10000000000"</span>
+<span class="cm"> * Resolves to: an "Amount"-type JSON object, such as:</span>
+<span class="cm"> * {</span>
+<span class="cm"> *   "currency": "TST",</span>
+<span class="cm"> *   "issuer": "rP9jPyP5kyvFRb6ZiRghAGw5u8SGAmU4bd",</span>
+<span class="cm"> *   "value": "123.456"</span>
+<span class="cm"> * }</span>
+<span class="cm"> */</span>
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">get_new_token</span><span class="p">(</span><span class="nx">client</span><span class="p">,</span><span class="w"> </span><span class="nx">wallet</span><span class="p">,</span><span class="w"> </span><span class="nx">currency_code</span><span class="p">,</span><span class="w"> </span><span class="nx">issue_quantity</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="c1">// Get credentials from the Testnet Faucet -----------------------------------</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">"Funding an issuer address with the faucet..."</span><span class="p">)</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">issuer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">fundWallet</span><span class="p">()).</span><span class="nx">wallet</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Got issuer address </span><span class="si">${</span><span class="nx">issuer</span><span class="p">.</span><span class="nx">address</span><span class="si">}</span><span class="sb">.`</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1">// Enable issuer DefaultRipple ----------------------------------------------</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">issuer_setup_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">submitAndWait</span><span class="p">({</span>
+<span class="w">    </span><span class="s2">"TransactionType"</span><span class="o">:</span><span class="w"> </span><span class="s2">"AccountSet"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"Account"</span><span class="o">:</span><span class="w"> </span><span class="nx">issuer</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"SetFlag"</span><span class="o">:</span><span class="w"> </span><span class="nx">xrpl</span><span class="p">.</span><span class="nx">AccountSetAsfFlags</span><span class="p">.</span><span class="nx">asfDefaultRipple</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nx">autofill</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">wallet</span><span class="o">:</span><span class="w"> </span><span class="nx">issuer</span><span class="p">}</span><span class="w"> </span><span class="p">)</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">issuer_setup_result</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">TransactionResult</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"tesSUCCESS"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Issuer DefaultRipple enabled: </span><span class="si">${</span><span class="nx">EXPLORER</span><span class="si">}</span><span class="sb">/transactions/</span><span class="si">${</span><span class="nx">issuer_setup_result</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">hash</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="sb">`Error sending transaction: </span><span class="si">${</span><span class="nx">issuer_setup_result</span><span class="si">}</span><span class="sb">`</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Create trust line to issuer ----------------------------------------------</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">trust_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">submitAndWait</span><span class="p">({</span>
+<span class="w">    </span><span class="s2">"TransactionType"</span><span class="o">:</span><span class="w"> </span><span class="s2">"TrustSet"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"Account"</span><span class="o">:</span><span class="w"> </span><span class="nx">wallet</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"LimitAmount"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">"currency"</span><span class="o">:</span><span class="w"> </span><span class="nx">currency_code</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"issuer"</span><span class="o">:</span><span class="w"> </span><span class="nx">issuer</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"value"</span><span class="o">:</span><span class="w"> </span><span class="s2">"10000000000"</span><span class="w"> </span><span class="c1">// Large limit, arbitrarily chosen</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nx">autofill</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">wallet</span><span class="o">:</span><span class="w"> </span><span class="nx">wallet</span><span class="p">})</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">trust_result</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">TransactionResult</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"tesSUCCESS"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Trust line created: </span><span class="si">${</span><span class="nx">EXPLORER</span><span class="si">}</span><span class="sb">/transactions/</span><span class="si">${</span><span class="nx">trust_result</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">hash</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="sb">`Error sending transaction: </span><span class="si">${</span><span class="nx">trust_result</span><span class="si">}</span><span class="sb">`</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="c1">// Issue tokens -------------------------------------------------------------</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">issue_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">submitAndWait</span><span class="p">({</span>
+<span class="w">    </span><span class="s2">"TransactionType"</span><span class="o">:</span><span class="w"> </span><span class="s2">"Payment"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"Account"</span><span class="o">:</span><span class="w"> </span><span class="nx">issuer</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"Amount"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">"currency"</span><span class="o">:</span><span class="w"> </span><span class="nx">currency_code</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"value"</span><span class="o">:</span><span class="w"> </span><span class="nx">issue_quantity</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"issuer"</span><span class="o">:</span><span class="w"> </span><span class="nx">issuer</span><span class="p">.</span><span class="nx">address</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">"Destination"</span><span class="o">:</span><span class="w"> </span><span class="nx">wallet</span><span class="p">.</span><span class="nx">address</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nx">autofill</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">wallet</span><span class="o">:</span><span class="w"> </span><span class="nx">issuer</span><span class="p">})</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">issue_result</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">TransactionResult</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"tesSUCCESS"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Tokens issued: </span><span class="si">${</span><span class="nx">EXPLORER</span><span class="si">}</span><span class="sb">/transactions/</span><span class="si">${</span><span class="nx">issue_result</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">hash</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="sb">`Error sending transaction: </span><span class="si">${</span><span class="nx">issue_result</span><span class="si">}</span><span class="sb">`</span>
+<span class="w">  </span><span class="p">}</span>
+
+<span class="w">  </span><span class="k">return</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">"currency"</span><span class="o">:</span><span class="w"> </span><span class="nx">currency_code</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"value"</span><span class="o">:</span><span class="w"> </span><span class="nx">issue_quantity</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"issuer"</span><span class="o">:</span><span class="w"> </span><span class="nx">issuer</span><span class="p">.</span><span class="nx">address</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
+</div>
+<!--/.interactive-block--><div class="interactive-block" data-stepnumber="3" data-totalsteps="7" id="interactive-acquire_tokens">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="acquire_tokens" data-steplabel="Acquire tokens" id="bc-ul-acquire_tokens">
+<li class="breadcrumb-item bc-connect"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-generate disabled"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-acquire_tokens disabled current"><a href="#interactive-acquire_tokens">Acquire tokens</a></li><li class="breadcrumb-item bc-check_for_amm disabled"><a href="#interactive-check_for_amm">Check for AMM</a></li><li class="breadcrumb-item bc-create_amm disabled"><a href="#interactive-create_amm">Create AMM</a></li><li class="breadcrumb-item bc-check_amm_info disabled"><a href="#interactive-check_amm_info">Check AMM info</a></li><li class="breadcrumb-item bc-check_trust_lines disabled"><a href="#interactive-check_trust_lines">Check trust lines</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary previous-steps-required" id="buy-tst">Buy TST</button>
+<button class="btn btn-primary previous-steps-required" id="get-foo">Get FOO</button>
+<div class="loader collapse"><img class="throbber" src="assets/img/xrp-loader-96.png"/>Working...</div>
+<div class="output-area"></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<h3 id="4-check-if-the-amm-exists">4. Check if the AMM exists<a aria-hidden="true" class="hover_anchor" href="#4-check-if-the-amm-exists"><i class="fa fa-link"></i></a></h3>
+<p>Use the <a class="external-link" href="https://xrpl.org/amm_info.html" target="_blank">amm_info method <i aria-hidden="true" class="fa fa-external-link"></i></a> to check whether the AMM already exists. For the request, you specify the two assets. The response should be an <code>actNotFound</code> error if the AMM does not exist.</p>
+<div class="multicode" id="code-4"><ul class="codetabs"><li><a class="javascript" href="#code-4-0">JavaScript</a></li></ul>
+
+<div class="code_sample javascript" id="code-4-0" style="position: static;"><div class="codehilite"><div aria-label="Code Buttons" class="btn-group" role="group"><button alt="Copy to clipboard" class="btn btn-outline-secondary clipboard-btn" data-clipboard-target="#codeblock-4" id="codeblock-4button"><i class="fa fa-clipboard"></i></button></div><pre><span></span><code id="codeblock-4"><span class="c1">// Check if AMM already exists ----------------------------------------------</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">amm_info_request</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">"command"</span><span class="o">:</span><span class="w"> </span><span class="s2">"amm_info"</span><span class="p">,</span><span class="w"> </span>
+<span class="w">    </span><span class="s2">"asset"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">"currency"</span><span class="o">:</span><span class="w"> </span><span class="s2">"TST"</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"issuer"</span><span class="o">:</span><span class="w"> </span><span class="s2">"rP9jPyP5kyvFRb6ZiRghAGw5u8SGAmU4bd"</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">"asset2"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">"currency"</span><span class="o">:</span><span class="w"> </span><span class="nx">foo_amount</span><span class="p">.</span><span class="nx">currency</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"issuer"</span><span class="o">:</span><span class="w"> </span><span class="nx">foo_amount</span><span class="p">.</span><span class="nx">issuer</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">"ledger_index"</span><span class="o">:</span><span class="w"> </span><span class="s2">"validated"</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="k">try</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">amm_info_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">amm_info_request</span><span class="p">)</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">amm_info_result</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">catch</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">error</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="s1">'actNotFound'</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`No AMM exists yet for the pair </span>
+<span class="sb">                   </span><span class="si">${</span><span class="nx">foo_amount</span><span class="p">.</span><span class="nx">currency</span><span class="si">}</span><span class="sb">.</span><span class="si">${</span><span class="nx">foo_amount</span><span class="p">.</span><span class="nx">issuer</span><span class="si">}</span><span class="sb"> / </span>
+<span class="sb">                   TST.rP9jPyP5kyvFRb6ZiRghAGw5u8SGAmU4bd.</span>
+<span class="sb">                   (This is probably as expected.)`</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="k">throw</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+</code></pre></div></div>
+</div>
+<p>If the AMM does already exist, you should double-check that you specified the right pair of assets; if so, someone else has already created this AMM, but you can still deposit to it instead. <!-- TODO: link to a tutorial about depositing to and withdrawing from an AMM when one exists --></p>
+<!--/.interactive-block--><div class="interactive-block" data-stepnumber="4" data-totalsteps="7" id="interactive-check_for_amm">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="check_for_amm" data-steplabel="Check for AMM" id="bc-ul-check_for_amm">
+<li class="breadcrumb-item bc-connect"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-generate disabled"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-acquire_tokens disabled"><a href="#interactive-acquire_tokens">Acquire tokens</a></li><li class="breadcrumb-item bc-check_for_amm disabled current"><a href="#interactive-check_for_amm">Check for AMM</a></li><li class="breadcrumb-item bc-create_amm disabled"><a href="#interactive-create_amm">Create AMM</a></li><li class="breadcrumb-item bc-check_amm_info disabled"><a href="#interactive-check_amm_info">Check AMM info</a></li><li class="breadcrumb-item bc-check_trust_lines disabled"><a href="#interactive-check_trust_lines">Check trust lines</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary previous-steps-required" id="check-for-amm">Check AMM</button>
+<div class="loader collapse"><img class="throbber" src="assets/img/xrp-loader-96.png"/>Sending...</div>
+<div class="output-area"></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<h3 id="5-send-ammcreate-transaction">5. Send AMMCreate transaction<a aria-hidden="true" class="hover_anchor" href="#5-send-ammcreate-transaction"><i class="fa fa-link"></i></a></h3>
+<p>Send an <a class="external-link" href="https://xrpl.org/ammcreate.html" target="_blank">AMMCreate transaction <i aria-hidden="true" class="fa fa-external-link"></i></a> to create the AMM. Important aspects of this transaction include:</p>
+<table class="table-responsive">
+<thead>
+<tr>
+<th>Field</th>
+<th>Value</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Asset</code></td>
+<td><a class="external-link" href="https://xrpl.org/basic-data-types.html#specifying-currency-amounts" target="_blank">Currency Amount <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+<td>Starting amount of one asset to deposit in the AMM.</td>
+</tr>
+<tr>
+<td><code>Asset2</code></td>
+<td><a class="external-link" href="https://xrpl.org/basic-data-types.html#specifying-currency-amounts" target="_blank">Currency Amount <i aria-hidden="true" class="fa fa-external-link"></i></a></td>
+<td>Starting amount of the other asset to deposit in the AMM.</td>
+</tr>
+<tr>
+<td><code>TradingFee</code></td>
+<td>Number</td>
+<td>The fee to charge when trading against this AMM instance. The maximum value is <code>1000</code>, meaning a 1% fee; the minimum value is <code>0</code>. If you set this too high, it may be too expensive for users to trade against the AMM; but the lower you set it, the more you expose yourself to currency risk from the AMM's assets changing in value relative to one another.</td>
+</tr>
+<tr>
+<td><code>Fee</code></td>
+<td>String - XRP Amount</td>
+<td>AMMCreate is a special case: for the <a class="external-link" href="https://xrpl.org/transaction-cost.html" target="_blank">transaction cost <i aria-hidden="true" class="fa fa-external-link"></i></a>, you must burn at least one <a class="external-link" href="https://xrpl.org/reserves.html" target="_blank">owner reserve increment <i aria-hidden="true" class="fa fa-external-link"></i></a> of XRP. (Currently, on AMM-Devnet, this is 2 XRP.) Client libraries may require that you add a special exception or reconfigure a setting to specify a <code>Fee</code> value this high.</td>
+</tr>
+</tbody>
+</table>
+<p>For the two starting assets, it does not matter which is <code>Asset</code> and which is <code>Asset2</code>, but you should specify amounts that are about equal in total value, because otherwise other users can profit at your expense by trading against the AMM.</p>
+<p class="devportal-callout tip"><strong>Tip:</strong> Use <code>fail_hard</code> when submitting this transaction, so you don't have to pay the high transaction cost if the transaction initially fails. (It's still <em>possible</em> that the transaction could tentatively succeed, and then fail and still burn the transaction cost, but this protects you from burning XRP on many of types of failures.)</p>
+<div class="multicode" id="code-5"><ul class="codetabs"><li><a class="javascript" href="#code-5-0">JavaScript</a></li></ul>
+
+<div class="code_sample javascript" id="code-5-0" style="position: static;"><div class="codehilite"><div aria-label="Code Buttons" class="btn-group" role="group"><button alt="Copy to clipboard" class="btn btn-outline-secondary clipboard-btn" data-clipboard-target="#codeblock-5" id="codeblock-5button"><i class="fa fa-clipboard"></i></button></div><pre><span></span><code id="codeblock-5"><span class="c1">// Create AMM ---------------------------------------------------------------</span>
+<span class="w">  </span><span class="c1">// AMMCreate requires burning one owner reserve. We can look up that amount</span>
+<span class="w">  </span><span class="c1">// (in drops) on the current network using server_state:</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">ss</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">request</span><span class="p">({</span><span class="s2">"command"</span><span class="o">:</span><span class="w"> </span><span class="s2">"server_state"</span><span class="p">})</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">amm_fee_drops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">ss</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">state</span><span class="p">.</span><span class="nx">validated_ledger</span><span class="p">.</span><span class="nx">reserve_inc</span><span class="p">.</span><span class="nx">toString</span><span class="p">()</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`Current AMMCreate transaction cost: </span><span class="si">${</span><span class="nx">xrpl</span><span class="p">.</span><span class="nx">dropsToXrp</span><span class="p">(</span><span class="nx">amm_fee_drops</span><span class="p">)</span><span class="si">}</span><span class="sb"> XRP`</span><span class="p">)</span>
+
+<span class="w">  </span><span class="c1">// This example assumes that 15 TST ≈ 100 FOO in value.</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">ammcreate_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">submitAndWait</span><span class="p">({</span>
+<span class="w">    </span><span class="s2">"TransactionType"</span><span class="o">:</span><span class="w"> </span><span class="s2">"AMMCreate"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"Account"</span><span class="o">:</span><span class="w"> </span><span class="nx">wallet</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"Amount"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">currency</span><span class="o">:</span><span class="w"> </span><span class="s2">"TST"</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">issuer</span><span class="o">:</span><span class="w"> </span><span class="s2">"rP9jPyP5kyvFRb6ZiRghAGw5u8SGAmU4bd"</span><span class="p">,</span>
+<span class="w">      </span><span class="nx">value</span><span class="o">:</span><span class="w"> </span><span class="s2">"15"</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">"Amount2"</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">"currency"</span><span class="o">:</span><span class="w"> </span><span class="nx">foo_amount</span><span class="p">.</span><span class="nx">currency</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"issuer"</span><span class="o">:</span><span class="w"> </span><span class="nx">foo_amount</span><span class="p">.</span><span class="nx">issuer</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">"value"</span><span class="o">:</span><span class="w"> </span><span class="s2">"100"</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">"TradingFee"</span><span class="o">:</span><span class="w"> </span><span class="mf">500</span><span class="p">,</span><span class="w"> </span><span class="c1">// 0.5%</span>
+<span class="w">    </span><span class="s2">"Fee"</span><span class="o">:</span><span class="w"> </span><span class="nx">amm_fee_drops</span>
+<span class="w">  </span><span class="p">},</span><span class="w"> </span><span class="p">{</span><span class="nx">autofill</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w"> </span><span class="nx">wallet</span><span class="o">:</span><span class="w"> </span><span class="nx">wallet</span><span class="p">,</span><span class="w"> </span><span class="nx">fail_hard</span><span class="o">:</span><span class="w"> </span><span class="kc">true</span><span class="p">})</span>
+<span class="w">  </span><span class="c1">// Use fail_hard so you don't waste the tx cost if you mess up</span>
+<span class="w">  </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">ammcreate_result</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">meta</span><span class="p">.</span><span class="nx">TransactionResult</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="s2">"tesSUCCESS"</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`AMM created: </span><span class="si">${</span><span class="nx">EXPLORER</span><span class="si">}</span><span class="sb">/transactions/</span><span class="si">${</span><span class="nx">ammcreate_result</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">hash</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+<span class="w">  </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">throw</span><span class="w"> </span><span class="sb">`Error sending transaction: </span><span class="si">${</span><span class="nx">ammcreate_result</span><span class="si">}</span><span class="sb">`</span>
+<span class="w">  </span><span class="p">}</span>
+</code></pre></div></div>
+</div>
+<!--/.interactive-block--><div class="interactive-block" data-stepnumber="5" data-totalsteps="7" id="interactive-create_amm">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="create_amm" data-steplabel="Create AMM" id="bc-ul-create_amm">
+<li class="breadcrumb-item bc-connect"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-generate disabled"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-acquire_tokens disabled"><a href="#interactive-acquire_tokens">Acquire tokens</a></li><li class="breadcrumb-item bc-check_for_amm disabled"><a href="#interactive-check_for_amm">Check for AMM</a></li><li class="breadcrumb-item bc-create_amm disabled current"><a href="#interactive-create_amm">Create AMM</a></li><li class="breadcrumb-item bc-check_amm_info disabled"><a href="#interactive-check_amm_info">Check AMM info</a></li><li class="breadcrumb-item bc-check_trust_lines disabled"><a href="#interactive-check_trust_lines">Check trust lines</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<form>
+<div class="form-group row">
+<label class="col-form-label col-sm-3" for="trading-fee">Trading Fee</label>
+<div class="input-group col">
+<input class="form-control" id="trading-fee" max="1" min="0" step="0.001" type="number" value="0.5"/>
+<div class="input-group-append">
+<div class="input-group-text">%</div>
+</div>
+</div>
+</div>
+<div class="form-group row">
+<label class="col-form-label col-sm-3" for="asset-amount">Amount</label>
+<div class="input-group col">
+<input class="form-control" id="asset-amount" min="0" step="any" type="number" value="15"/>
+<div class="input-group-append">
+<div class="input-group-text">TST.rP9jPyP5kyvFRb6ZiRghAGw5u8SGAmU4bd</div>
+</div>
+</div>
+</div>
+<div class="form-group row">
+<label class="col-form-label col-sm-3" for="asset2-amount">Amount2</label>
+<div class="input-group col">
+<input class="form-control" id="asset2-amount" min="0" step="any" type="number" value="100"/>
+<div class="input-group-append">
+<div class="input-group-text">FOO.<span class="foo-issuer">(issuer)</span></div>
+</div>
+</div>
+</div>
+</form>
+<button class="btn btn-primary previous-steps-required" id="create-amm">Create AMM</button>
+<div class="loader collapse"><img class="throbber" src="assets/img/xrp-loader-96.png"/>Sending...</div>
+<div class="output-area"></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<h3 id="6-check-amm-info">6. Check AMM info<a aria-hidden="true" class="hover_anchor" href="#6-check-amm-info"><i class="fa fa-link"></i></a></h3>
+<p>If the AMMCreate transaction succeeded, it creates the AMM and related objects in the ledger. You <em>could</em> check the metadata of the AMMCreate transaction, but it is often easier to call the <a class="external-link" href="https://xrpl.org/amm_info.html" target="_blank">amm_info method <i aria-hidden="true" class="fa fa-external-link"></i></a> again to get the status of the newly-created AMM. </p>
+<div class="multicode" id="code-6"><ul class="codetabs"><li><a class="javascript" href="#code-6-0">JavaScript</a></li></ul>
+
+<div class="code_sample javascript" id="code-6-0" style="position: static;"><div class="codehilite"><div aria-label="Code Buttons" class="btn-group" role="group"><button alt="Copy to clipboard" class="btn btn-outline-secondary clipboard-btn" data-clipboard-target="#codeblock-6" id="codeblock-6button"><i class="fa fa-clipboard"></i></button></div><pre><span></span><code id="codeblock-6"><span class="c1">// Confirm that AMM exists --------------------------------------------------</span>
+<span class="w">  </span><span class="c1">// Make the same amm_info request as earlier, but this time it should succeed</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">amm_info_result2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">request</span><span class="p">(</span><span class="nx">amm_info_request</span><span class="p">)</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">amm_info_result2</span><span class="p">)</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">lp_token</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">amm_info_result2</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">amm</span><span class="p">.</span><span class="nx">lp_token</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">amount</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">amm_info_result2</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">amm</span><span class="p">.</span><span class="nx">amount</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">amount2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">amm_info_result2</span><span class="p">.</span><span class="nx">result</span><span class="p">.</span><span class="nx">amm</span><span class="p">.</span><span class="nx">amount2</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`The AMM account </span><span class="si">${</span><span class="nx">lp_token</span><span class="p">.</span><span class="nx">issuer</span><span class="si">}</span><span class="sb"> has </span><span class="si">${</span><span class="nx">lp_token</span><span class="p">.</span><span class="nx">value</span><span class="si">}</span><span class="sb"> total</span>
+<span class="sb">               LP tokens outstanding, and uses the currency code </span><span class="si">${</span><span class="nx">lp_token</span><span class="p">.</span><span class="nx">currency</span><span class="si">}</span><span class="sb">.`</span><span class="p">)</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="sb">`In its pool, the AMM holds </span><span class="si">${</span><span class="nx">amount</span><span class="p">.</span><span class="nx">value</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">amount</span><span class="p">.</span><span class="nx">currency</span><span class="si">}</span><span class="sb">.</span><span class="si">${</span><span class="nx">amount</span><span class="p">.</span><span class="nx">issuer</span><span class="si">}</span>
+<span class="sb">               and </span><span class="si">${</span><span class="nx">amount2</span><span class="p">.</span><span class="nx">value</span><span class="si">}</span><span class="sb"> </span><span class="si">${</span><span class="nx">amount2</span><span class="p">.</span><span class="nx">currency</span><span class="si">}</span><span class="sb">.</span><span class="si">${</span><span class="nx">amount2</span><span class="p">.</span><span class="nx">issuer</span><span class="si">}</span><span class="sb">`</span><span class="p">)</span>
+</code></pre></div></div>
+</div>
+<p>In the result, the <code>amm</code> object's <code>lp_token</code> field is particularly useful because it includes the issuer and currency code of the AMM's LP Tokens, which you need to know for many other AMM-related transactions. LP Tokens always have a hex currency code starting with <code>03</code>, which is derived from the issuers and currency codes of the tokens in the AMM's pool, but the issuer of the LP Tokens is the AMM address, which is randomly chosen when you create an AMM.</p>
+<p>Initially, the AMM's total outstanding LP Tokens, reported in the <code>lp_token</code> field of the <code>amm_info</code> response, match the tokens you hold as its first liquidity provider. However, after other accounts deposit liquidity to the same AMM, the amount shown in <code>amm_info</code> updates to reflect the total issued to all liquidity providers. Since others can deposit at any time, even potentially in the same ledger version where the AMM was created, you shouldn't assume that this amount represents your personal LP Tokens balance.</p>
+<!--/.interactive-block--><div class="interactive-block" data-stepnumber="6" data-totalsteps="7" id="interactive-check_amm_info">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="check_amm_info" data-steplabel="Check AMM info" id="bc-ul-check_amm_info">
+<li class="breadcrumb-item bc-connect"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-generate disabled"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-acquire_tokens disabled"><a href="#interactive-acquire_tokens">Acquire tokens</a></li><li class="breadcrumb-item bc-check_for_amm disabled"><a href="#interactive-check_for_amm">Check for AMM</a></li><li class="breadcrumb-item bc-create_amm disabled"><a href="#interactive-create_amm">Create AMM</a></li><li class="breadcrumb-item bc-check_amm_info disabled current"><a href="#interactive-check_amm_info">Check AMM info</a></li><li class="breadcrumb-item bc-check_trust_lines disabled"><a href="#interactive-check_trust_lines">Check trust lines</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary previous-steps-required" id="check-amm-info">Check AMM</button>
+<div class="loader collapse"><img class="throbber" src="assets/img/xrp-loader-96.png"/>Sending...</div>
+<div class="output-area"></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<h3 id="7-check-trust-lines">7. Check trust lines<a aria-hidden="true" class="hover_anchor" href="#7-check-trust-lines"><i class="fa fa-link"></i></a></h3>
+<p>You can also use the <a class="external-link" href="https://xrpl.org/account_lines.html" target="_blank">account_lines method <i aria-hidden="true" class="fa fa-external-link"></i></a> to get an updated view of your token balances. Your balances should be decreased by the amounts you deposited, but you now have a balance of LP Tokens that you received from the AMM.</p>
+<div class="multicode" id="code-7"><ul class="codetabs"><li><a class="javascript" href="#code-7-0">JavaScript</a></li></ul>
+
+<div class="code_sample javascript" id="code-7-0" style="position: static;"><div class="codehilite"><div aria-label="Code Buttons" class="btn-group" role="group"><button alt="Copy to clipboard" class="btn btn-outline-secondary clipboard-btn" data-clipboard-target="#codeblock-7" id="codeblock-7button"><i class="fa fa-clipboard"></i></button></div><pre><span></span><code id="codeblock-7"><span class="c1">// Check token balances</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">account_lines_result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">client</span><span class="p">.</span><span class="nx">request</span><span class="p">({</span>
+<span class="w">    </span><span class="s2">"command"</span><span class="o">:</span><span class="w"> </span><span class="s2">"account_lines"</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">"account"</span><span class="o">:</span><span class="w"> </span><span class="nx">wallet</span><span class="p">.</span><span class="nx">address</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// Tip: To look up only the new AMM's LP Tokens, uncomment:</span>
+<span class="w">    </span><span class="c1">// "peer": lp_token.issuer,</span>
+<span class="w">    </span><span class="s2">"ledger_index"</span><span class="o">:</span><span class="w"> </span><span class="s2">"validated"</span>
+<span class="w">  </span><span class="p">})</span>
+<span class="w">  </span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">account_lines_result</span><span class="p">)</span>
+</code></pre></div></div>
+</div>
+<p>The <code>account_lines</code> response shows only the tokens held by the account you looked up (probably yours). If you have a lot of tokens, you may want to specify the AMM address as the <code>peer</code> in the request so you don't have to <a class="external-link" href="https://xrpl.org/markers-and-pagination.html" target="_blank">paginate <i aria-hidden="true" class="fa fa-external-link"></i></a> over multiple requests to find the AMM's LP Tokens. In this tutorial, your account probably only holds the three different tokens, so you can see all three in the same response.</p>
+<p class="devportal-callout tip"><strong>Tip:</strong> If one of the assets in the AMM's pool is XRP, you need to call the <a class="external-link" href="https://xrpl.org/account_info.html" target="_blank">account_info method <i aria-hidden="true" class="fa fa-external-link"></i></a> on your account to see the difference in your balance (the <code>Balance</code> field of the account object).</p>
+<!--/.interactive-block--><div class="interactive-block" data-stepnumber="7" data-totalsteps="7" id="interactive-check_trust_lines">
+<div class="interactive-block-inner">
+<div class="breadcrumbs-wrap">
+<ul class="breadcrumb tutorial-step-crumbs" data-stepid="check_trust_lines" data-steplabel="Check trust lines" id="bc-ul-check_trust_lines">
+<li class="breadcrumb-item bc-connect"><a href="#interactive-connect">Connect</a></li><li class="breadcrumb-item bc-generate disabled"><a href="#interactive-generate">Generate</a></li><li class="breadcrumb-item bc-acquire_tokens disabled"><a href="#interactive-acquire_tokens">Acquire tokens</a></li><li class="breadcrumb-item bc-check_for_amm disabled"><a href="#interactive-check_for_amm">Check for AMM</a></li><li class="breadcrumb-item bc-create_amm disabled"><a href="#interactive-create_amm">Create AMM</a></li><li class="breadcrumb-item bc-check_amm_info disabled"><a href="#interactive-check_amm_info">Check AMM info</a></li><li class="breadcrumb-item bc-check_trust_lines disabled current"><a href="#interactive-check_trust_lines">Check trust lines</a></li></ul><!--/.breadcrumb.tutorial-step-crumbs-->
+</div><!--/.breadcrumbs-wrap-->
+<div class="interactive-block-ui">
+<button class="btn btn-primary previous-steps-required" id="check-trust-lines">Check trust lines</button>
+<div class="loader collapse"><img class="throbber" src="assets/img/xrp-loader-96.png"/>Sending...</div>
+<div class="output-area"></div>
+</div><!--/.interactive-block-ui-->
+</div><!--/.interactive-block-inner-->
+</div>
+<h2 id="next-steps">Next Steps<a aria-hidden="true" class="hover_anchor" href="#next-steps"><i class="fa fa-link"></i></a></h2>
+<p>At this point the AMM is up and running, and <a class="external-link" href="https://xrpl.org/trade-in-the-decentralized-exchange.html" target="_blank">trades in the DEX <i aria-hidden="true" class="fa fa-external-link"></i></a> automatically use this AMM in combination with Offers to achieve the best exchange rate possible between the two assets in the AMM's pool. If the flow of funds between the two assets is relatively balanced and there are no major shifts in the value of one asset compared to the other, this can become a source of passive income for you and anyone else who deposits liquidity into the AMM's pool.</p>
+<p>When you want to withdraw liquidity from the AMM, you can use <a class="external-link" href="https://xrpl.org/ammdeposit.html" target="_blank">AMMDeposit <i aria-hidden="true" class="fa fa-external-link"></i></a> to cash in your LP Tokens to receive a share of the AMM's assets. You can also use LP Tokens like any other tokens in the XRP Ledger, which means you can trade them, use them in payments, or even deposit them in another AMM.</p>
+<p>However, you should keep an eye on market conditions, and use tools like <a class="external-link" href="https://xrpl.org/ammbid.html" target="_blank">AMMBid <i aria-hidden="true" class="fa fa-external-link"></i></a> and <a class="external-link" href="https://xrpl.org/ammvote.html" target="_blank">AMMVote <i aria-hidden="true" class="fa fa-external-link"></i></a> to insulate yourself from losses due to changes in the relative value of the two assets in the pool.</p>
+<!-- MD: reusable link definitions: -->
+<!--/.interactive-block-->
+    </div>
+  </article>
+      </main>
+    </div><!--/.row (main layout)-->
+  </div>
+
+
+<!-- Jump to top button -->
+<a href="#main_content_wrapper" class="jump-to-top btn btn-primary" role="button" title="Jump to top of page"><i class="fa fa-arrow-up"></i></a>
+<script type="text/javascript" src="/amm/assets/js/jump-to-top.js"></script>
+
+<!-- Non-blocking resources -->
+<!-- Bootstrap JS -->
+<script src="/amm/assets/vendor/bootstrap.min.js"></script>
+<!-- fontawesome icons -->
+<link rel="stylesheet" href="/amm/assets/vendor/fontawesome/css/font-awesome.min.css" />
+
+<!-- ripple-lib & prerequisites -->
+<script type="application/javascript" src="assets/js/xrpl-2.8.0-beta.0.min.js"></script>
+
+<!-- Helper for interactive tutorials -->
+<script type="application/javascript" src="/amm/assets/js/interactive-tutorial.js"></script>
+
+</body>
+</html>
