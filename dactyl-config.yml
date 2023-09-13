@@ -2427,7 +2427,7 @@ pages:
     -   md: references/protocol-reference/transactions/transaction-types/clawback.md
         targets:
             - en
-            - ja            
+            - ja
 
     -   md: references/protocol-reference/ledger-data/ledger-object-types/depositpreauth.md
         targets:
@@ -5565,6 +5565,13 @@ pages:
         targets:
             - en
 
+# Page mapping (temp: assist w/ Redocly migration)
+    -   name: Page Mapping
+        html: page_mapping.txt
+        template: page_mapping.txt.jinja
+        nav_omit: true
+        targets:
+            - en
 
 ignore_anchors_in:
     - data-api-v2-tool.html

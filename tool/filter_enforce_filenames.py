@@ -87,7 +87,6 @@ def compare_nav_and_fs_hierarchy(page, pages, logger):
     Expected: {expected_path}
       Actual: {actual_path}""".format(expected_path=expected_path, actual_path=actual_path))
 
-
 def filter_soup(soup, currentpage={}, config={}, pages=[], logger=None, **kwargs):
     if "md" not in currentpage.keys() or currentpage.get("lang") != "en":
         return
@@ -114,3 +113,27 @@ def filter_soup(soup, currentpage={}, config={}, pages=[], logger=None, **kwargs
     # TODO: allow configuration of loose/strict matching
     if not normalized_match(page_filename, page_h1, loose=True):
         logger.warning("Filename/Title Mismatch: '{page_filename}' vs '{page_h1}'".format(page_filename=page_filename, page_h1=page_h1))
+
+def page_mapping(pages):
+    mapping = {}
+    no_md_pages = []
+    for page in pages:
+        if page.get("template", "") == "pagetype-redirect.html.jinja":
+            continue
+        if page["html"][:8] == "https://":
+            continue
+        if "md" in page.keys():
+            mapping[page["html"]] = page["md"]
+        else:
+            no_md_pages.append(page["html"])
+    s = ""
+    for html, md in mapping.items():
+        s += html + "\t" + md + "\n"
+    s += "\n"
+    for html in no_md_pages:
+        s += html + "\n"
+    return s
+
+export = {
+    "page_mapping": page_mapping
+}
