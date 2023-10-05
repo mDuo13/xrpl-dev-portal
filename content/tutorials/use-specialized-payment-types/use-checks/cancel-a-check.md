@@ -7,9 +7,9 @@ labels:
 ---
 # Cancel a Check
 
-This tutorial shows how to cancel a [Check](checks.html), which removes the [Check object from the ledger](check.html) without sending money.
+This tutorial shows how to cancel a [Check](../../../concepts/payment-types/checks.md), which removes the [Check object from the ledger](../../../references/protocol-reference/ledger-data/ledger-entry-types/check.md) without sending money.
 
-You may want to cancel an incoming Check if you do not want it. You might cancel an outgoing Check if you made a mistake when sending it or if circumstances have changed. If a Check expires, it's also necessary to cancel it to remove it from the ledger so the sender gets their [owner reserve](reserves.html#owner-reserves) back.
+You may want to cancel an incoming Check if you do not want it. You might cancel an outgoing Check if you made a mistake when sending it or if circumstances have changed. If a Check expires, it's also necessary to cancel it to remove it from the ledger so the sender gets their [owner reserve](../../../concepts/accounts/reserves.md#owner-reserves) back.
 
 {% set cancel_n = cycler(* range(1,99)) %}
 
@@ -20,19 +20,19 @@ To cancel a Check with this tutorial, you need the following:
 - You need the ID of a Check object currently in the ledger.
     - For example, this tutorial includes examples that cancel a Check with the ID `49647F0D748DC3FE26BDACBC57F251AADEFFF391403EC9BF87C97F67E9977FB0`, although you must use a different ID to go through these steps yourself.
 - The **address** and **secret key** of a funded account to send the CheckCancel transaction. This address must be either the sender or the recipient of the Check, unless the Check is expired.
-- A [secure way to sign transactions](secure-signing.html).
-- A [client library](client-libraries.html) or any HTTP or WebSocket library.
+- A [secure way to sign transactions](../../../concepts/transactions/set-up-secure-signing.md).
+- A [client library](../../../references/client-libraries.md) or any HTTP or WebSocket library.
 
 
 ## {{cancel_n.next()}}. Prepare the CheckCancel transaction
 
-Figure out the values of the [CheckCancel transaction][] fields. The following fields are the bare minimum; everything else is either optional or can be [auto-filled](transaction-common-fields.html#auto-fillable-fields) when signing:
+Figure out the values of the [CheckCancel transaction](../../../references/protocol-reference/transactions/transaction-types/checkcancel.md) fields. The following fields are the bare minimum; everything else is either optional or can be [auto-filled](../../../references/protocol-reference/transactions/transaction-common-fields.md#auto-fillable-fields) when signing:
 
 | Field             | Value            | Description                           |
 |:------------------|:-----------------|:--------------------------------------|
 | `TransactionType` | String           | Use the string `CheckCancel` when canceling a Check. |
 | `Account`         | String (Address) | The address of the sender who is canceling the Check. (In other words, your address.) |
-| `CheckID`         | String           | The ID of the Check object in the ledger to cancel. You can get this information by looking up the metadata of the CheckCreate transaction using the [tx method][] or by looking for Checks using the [account_objects method][]. |
+| `CheckID`         | String           | The ID of the Check object in the ledger to cancel. You can get this information by looking up the metadata of the CheckCreate transaction using the [tx method](../../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md) or by looking for Checks using the [account_objects method](../../../references/http-websocket-apis/public-api-methods/account-methods/account_objects.md). |
 
 ### Example CheckCancel Preparation
 
@@ -149,9 +149,9 @@ The following examples show how to cancel a Check.
 
 ## {{cancel_n.next()}}. Confirm final result
 
-Use the [tx method][] with the CheckCancel transaction's identifying hash to check its status. Look for a `"TransactionResult": "tesSUCCESS"` field in the transaction's metadata, indicating that the transaction succeeded, and the field `"validated": true` in the result, indicating that this result is final.
+Use the [tx method](../../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md) with the CheckCancel transaction's identifying hash to check its status. Look for a `"TransactionResult": "tesSUCCESS"` field in the transaction's metadata, indicating that the transaction succeeded, and the field `"validated": true` in the result, indicating that this result is final.
 
-Look for a `DeletedNode` object in the transaction metadata with `"LedgerEntryType": "Check"` to indicate that the transaction removed a [Check ledger object](check.html). The `LedgerIndex` of this object should match the ID of the Check.
+Look for a `DeletedNode` object in the transaction metadata with `"LedgerEntryType": "Check"` to indicate that the transaction removed a [Check ledger object](../../../references/protocol-reference/ledger-data/ledger-entry-types/check.md). The `LedgerIndex` of this object should match the ID of the Check.
 
 ### Example Request
 

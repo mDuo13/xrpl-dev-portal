@@ -56,7 +56,7 @@ A request can include the following fields:
 | `ledger_index` | [Ledger Index][] | No        | The [ledger index][] of the ledger to use, or a shortcut string to choose a ledger automatically. (See [Specifying Ledgers][]) |
 | `binary`       | Boolean          | No        | If `true`, return ledger entries as hexadecimal strings instead of JSON. The default is `false`. |
 | `limit`        | Number           | No        | Limit the number of ledger entries to retrieve. The server may return fewer than this number of entries. Cannot be more than 2048 (when requesting binary) or 256 (when requesting JSON). Positive values outside this range are replaced with the closest valid option. The default is the maximum. |
-| `marker`       | [Marker][]       | No        | Value from a previous paginated response. Resume retrieving data where that response left off. |
+| `marker`       | [Marker](../../api-conventions/markers-and-pagination.md)       | No        | Value from a previous paginated response. Resume retrieving data where that response left off. |
 | `type`         | String           | No        | Filter results to a specific type of ledger entry. {% include '_snippets/lowercase-types.md' %} |
 
 The `ledger` field is deprecated and may be removed without further notice.
@@ -242,14 +242,14 @@ An example of a successful response:
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`        | Type                                | Description           |
 |:---------------|:------------------------------------|:----------------------|
 | `ledger_index` | Unsigned Integer - [Ledger Index][] | The ledger index of this ledger version. |
 | `ledger_hash`  | String - [Hash][]                   | Unique identifying hash of this ledger version. |
 | `state`        | Array                               | Array of JSON objects containing data from the ledger's state tree, as defined below. |
-| `marker`       | [Marker][]                          | Server-defined value indicating the response is paginated. Pass this to the next call to resume where this call left off. |
+| `marker`       | [Marker](../../api-conventions/markers-and-pagination.md)                          | Server-defined value indicating the response is paginated. Pass this to the next call to resume where this call left off. |
 
 If a `type` field is mentioned in the request, the `state` array will be empty if the first set of array objects does not match the type requested. In such cases, you can use the `marker` from this response to paginate and retrieve further data.
 

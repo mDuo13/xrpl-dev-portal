@@ -8,9 +8,9 @@ labels:
 # submit_multisigned
 [[Source]](https://github.com/XRPLF/rippled/blob/release/src/ripple/rpc/handlers/SubmitMultiSigned.cpp "Source")
 
-The `submit_multisigned` command applies a [multi-signed](multi-signing.html) transaction and sends it to the network to be included in future ledgers. (You can also submit multi-signed transactions in binary form using the [`submit` command in submit-only mode](submit.html#submit-only-mode).)
+The `submit_multisigned` command applies a [multi-signed](../../../../concepts/transactions/multi-signing.md) transaction and sends it to the network to be included in future ledgers. (You can also submit multi-signed transactions in binary form using the [`submit` command in submit-only mode](submit.md#submit-only-mode).)
 
-This command requires the [MultiSign amendment][] to be enabled. [New in: rippled 0.31.0][]
+This command requires the [MultiSign amendment][] to be enabled. [New in: rippled 0.31.0](https://github.com/XRPLF/rippled/releases/tag/0.31.0 "BADGE_BLUE")
 
 ## Request Format
 An example of the request format:
@@ -137,7 +137,7 @@ The request includes the following parameters:
 
 | `Field`     | Type    | Required? | Description                                          |
 |:------------|:--------|:----------|:-----------------------------------------------------|
-| `tx_json`   | Object  | Yes       | [Transaction in JSON format](transaction-formats.html) with an array of `Signers`. To be successful, the weights of the signatures must be equal or higher than the quorum of the [SignerList](signerlist.html). |
+| `tx_json`   | Object  | Yes       | [Transaction in JSON format](../../../protocol-reference/transactions/transaction-formats.md) with an array of `Signers`. To be successful, the weights of the signatures must be equal or higher than the quorum of the [SignerList](../../../protocol-reference/ledger-data/ledger-entry-types/signerlist.md). |
 | `fail_hard` | Boolean | No        | If `true`, and the transaction fails locally, do not retry or relay the transaction to other servers. The default is `false`. |
 
 ## Response Format
@@ -287,15 +287,15 @@ Connecting to 127.0.0.1:5005
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`                 | Type    | Description                              |
 |:------------------------|:--------|:-----------------------------------------|
 | `engine_result`         | String  | Code indicating the preliminary result of the transaction, for example `tesSUCCESS` |
 | `engine_result_code`    | Integer | Numeric code indicating the preliminary result of the transaction, directly correlated to `engine_result` |
 | `engine_result_message` | String  | Human-readable explanation of the preliminary transaction result |
-| `tx_blob`               | String  | The complete [transaction](transaction-formats.html) in hex string format |
-| `tx_json`               | Object  | The complete [transaction](transaction-formats.html) in JSON format |
+| `tx_blob`               | String  | The complete [transaction](../../../protocol-reference/transactions/transaction-formats.md) in hex string format |
+| `tx_json`               | Object  | The complete [transaction](../../../protocol-reference/transactions/transaction-formats.md) in JSON format |
 
 ## Possible Errors
 

@@ -8,7 +8,7 @@ labels:
 # transaction_entry
 [[Source]](https://github.com/XRPLF/rippled/blob/master/src/ripple/rpc/handlers/TransactionEntry.cpp "Source")
 
-The `transaction_entry` method retrieves information on a single transaction from a specific ledger version. (The [tx method][], by contrast, searches all ledgers for the specified transaction. We recommend using that method instead.)
+The `transaction_entry` method retrieves information on a single transaction from a specific ledger version. (The [tx method](tx.md), by contrast, searches all ledgers for the specified transaction. We recommend using that method instead.)
 
 ## Request Format
 
@@ -441,14 +441,14 @@ An example of a successful response:
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`        | Type                      | Description                     |
 |:---------------|:--------------------------|:--------------------------------|
 | `ledger_index` | Number - [Ledger Index][] | The ledger index of the ledger version the transaction was found in; this is the same as the one from the request. |
 | `ledger_hash`  | String - [Hash][]         | _(May be omitted)_ The identifying hash of the ledger version the transaction was found in; this is the same as the one from the request. |
-| `metadata`     | Object                    | The [transaction metadata](transaction-metadata.html), which shows the exact results of the transaction in detail. |
-| `tx_json`      | Object                    | JSON representation of the [Transaction object](transaction-formats.html) |
+| `metadata`     | Object                    | The [transaction metadata](../../../protocol-reference/transactions/transaction-metadata.md), which shows the exact results of the transaction in detail. |
+| `tx_json`      | Object                    | JSON representation of the [Transaction object](../../../protocol-reference/transactions/transaction-formats.md) |
 
 There are a couple possible reasons the server may fail to find the transaction:
 

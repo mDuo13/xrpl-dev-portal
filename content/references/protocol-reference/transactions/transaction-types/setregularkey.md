@@ -30,17 +30,17 @@ You can protect your account by assigning a regular key pair to it and using it 
 {% include '_snippets/tx-fields-intro.md' %}
 <!--{# fix md highlighting_ #}-->
 
-| Field        | JSON Type | [Internal Type][] | Description                   |
+| Field        | JSON Type | [Internal Type](../../serialization.md) | Description                   |
 |:-------------|:----------|:------------------|:------------------------------|
 | `RegularKey` | String    | AccountID         | _(Optional)_ A base-58-encoded [Address][] that indicates the regular key pair to be assigned to the account. If omitted, removes any existing regular key pair from the account. Must not match the master key pair for the address. |
 
 ## See Also
 
-For more information about regular and master key pairs, see [Cryptographic Keys](cryptographic-keys.html).
+For more information about regular and master key pairs, see [Cryptographic Keys](../../../../concepts/accounts/cryptographic-keys.md).
 
-For a tutorial on assigning a regular key pair to an account, see [Working with a Regular Key Pair](assign-a-regular-key-pair.html).
+For a tutorial on assigning a regular key pair to an account, see [Working with a Regular Key Pair](../../../../tutorials/manage-account-settings/assign-a-regular-key-pair.md).
 
-For even greater security, you can use [multi-signing](multi-signing.html), but multi-signing requires additional XRP for the [transaction cost][] and [reserve](reserves.html).
+For even greater security, you can use [multi-signing](../../../../concepts/transactions/multi-signing.md), but multi-signing requires additional XRP for the [transaction cost](../../../../concepts/transactions/transaction-cost.md) and [reserve](../../../../concepts/accounts/reserves.md).
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

@@ -10,15 +10,15 @@ top_nav_name: Join UNL
 ---
 # Run rippled as a Validator
 
-A [`rippled` server](xrpl-servers.html) running in [validator mode](rippled-server-modes.html) does everything a stock server does:
+A [`rippled` server](xrpl-servers.html) running in [validator mode](../../../concepts/networks-and-servers/rippled-server-modes.md) does everything a stock server does:
 
-- Connects to a [network of peers](peer-protocol.html)
+- Connects to a [network of peers](../../../concepts/networks-and-servers/peer-protocol.md)
 
-- Relays cryptographically signed [transactions](transactions.html)
+- Relays cryptographically signed [transactions](../../../concepts/transactions/transactions.md)
 
-- Maintains a local copy of the complete shared global [ledger](ledgers.html)
+- Maintains a local copy of the complete shared global [ledger](../../../concepts/ledgers/ledgers.md)
 
-What makes a validator _different_ is that it also issues validation messages, which are sets of candidate transactions for evaluation by the XRP Ledger network during the [consensus process](consensus-principles-and-rules.html#how-consensus-works).
+What makes a validator _different_ is that it also issues validation messages, which are sets of candidate transactions for evaluation by the XRP Ledger network during the [consensus process](../../../concepts/consensus-protocol/consensus-principles-and-rules.md#how-consensus-works).
 
 Issuing validation messages does not automatically give your validator a say in the consensus process, so the system is not vulnerable to a [Sybil attack](https://en.wikipedia.org/wiki/Sybil_attack). Other servers ignore your validation messages unless they add your validator to their Unique Node List (UNL). If your validator is included in a UNL, it is a _trusted_ validator and its proposals are considered in the consensus process by the servers that trust it.
 
@@ -42,7 +42,7 @@ Strive to have your validator embody the following properties. Being a good vali
 
 - **Issuing prompt votes**
 
-    A good validator's votes arrive quickly and not after a consensus round has already finished. To keep your votes on time, make sure your validator meets the recommended [system requirements](system-requirements.html), which include a fast internet connection.
+    A good validator's votes arrive quickly and not after a consensus round has already finished. To keep your votes on time, make sure your validator meets the recommended [system requirements](../installation/system-requirements.md), which include a fast internet connection.
 
     It is possible to submit new transactions and query data using a validator, but heavy loads of API queries may make the validator less reliable at keeping up with consensus. If your API needs are light enough, then you can use a server for both purposes. Ideally, a validator should be dedicated to participating in consensus.
 
@@ -140,12 +140,12 @@ This section describes three different configurations you can use to connect you
 
 - [Public hubs](#connect-using-public-hubs): Connect only to specific public servers with a high reputation.
 
-For a comparison of these approaches, see [Pros and Cons of Peering Configurations](peer-protocol.html#pros-and-cons-of-peering-configurations).
+For a comparison of these approaches, see [Pros and Cons of Peering Configurations](../../../concepts/networks-and-servers/peer-protocol.md#pros-and-cons-of-peering-configurations).
 
 
 ### Connect using discovered peers
 
-This configuration connects your validator to the XRP Ledger network using [discovered peers](peer-protocol.html#peer-discovery). This is the default behavior for `rippled` servers.
+This configuration connects your validator to the XRP Ledger network using [discovered peers](../../../concepts/networks-and-servers/peer-protocol.md#peer-discovery). This is the default behavior for `rippled` servers.
 
 _**To connect your validator to the XRP Ledger network using discovered peers,**_ omit the `[peer_private]` stanza or set it to `0` in your validator's `rippled.cfg` file. The [example `rippled.cfg` file](https://github.com/XRPLF/rippled/blob/develop/cfg/rippled-example.cfg) is delivered with this configuration.
 
@@ -158,9 +158,9 @@ _**To connect your validator to the XRP Ledger network using proxies:**_
 
 1. Set up stock `rippled` servers. For more information, see [Install rippled](install-rippled.html).
 
-2. Configure your validator and stock `rippled` servers to run in a [cluster](cluster-rippled-servers.html).
+2. Configure your validator and stock `rippled` servers to run in a [cluster](../configure-peering/cluster-rippled-servers.md).
 
-3. In your validator's `rippled.cfg` file, set `[peer_private]` to `1`. This prevents your validator's IP address from being forwarded. For more information, see [Private Peers](peer-protocol.html#private-peers). It also prevents your validator from connecting to servers other than those defined in the `[ips_fixed]` stanza you defined to run your validator in a cluster.
+3. In your validator's `rippled.cfg` file, set `[peer_private]` to `1`. This prevents your validator's IP address from being forwarded. For more information, see [Private Peers](../../../concepts/networks-and-servers/peer-protocol.md#private-peers). It also prevents your validator from connecting to servers other than those defined in the `[ips_fixed]` stanza you defined to run your validator in a cluster.
 
     **Warning:** Be sure that you don't publish your validator's IP address in other ways.
 
@@ -174,7 +174,7 @@ _**To connect your validator to the XRP Ledger network using proxies:**_
 
         $ sudo systemctl restart rippled.service
 
-6. Use the [Peer Crawler](peer-crawler.html) endpoint on one of your stock `rippled` servers. The response should not include your validator. This verifies that your validator's `[peer_private]` configuration is working. One of the effects of enabling `[peer_private]` on your validator is that your validator's peers do not include it in their Peer Crawler results.
+6. Use the [Peer Crawler](../../../references/http-websocket-apis/peer-port-methods/peer-crawler.md) endpoint on one of your stock `rippled` servers. The response should not include your validator. This verifies that your validator's `[peer_private]` configuration is working. One of the effects of enabling `[peer_private]` on your validator is that your validator's peers do not include it in their Peer Crawler results.
 
         $ curl --insecure https://STOCK_SERVER_IP_ADDRESS_HERE:51235/crawl | python3 -m json.tool
 
@@ -183,7 +183,7 @@ _**To connect your validator to the XRP Ledger network using proxies:**_
 
 ### Connect using public hubs
 
-This configuration connects your validator to the network using three [public hubs](rippled-server-modes.html#public-hubs). This configuration is similar to [connecting using proxies you run yourself](#connect-using-proxies), but instead you connect through public hubs.
+This configuration connects your validator to the network using three [public hubs](../../../concepts/networks-and-servers/rippled-server-modes.md#public-hubs). This configuration is similar to [connecting using proxies you run yourself](#connect-using-proxies), but instead you connect through public hubs.
 
 _**To connect your validator to the network using public hubs:**_
 
@@ -223,17 +223,17 @@ _**To connect your validator to the network using public hubs:**_
 
 Here are some methods you can use to verify that your validator has a healthy connection to the XRP Ledger network:
 
-- Use the [`peers`](peers.html) command to return a list of all `rippled` servers currently connected to your validator. If the `peers` array is `null`, you don’t have a healthy connection to the network. If you've set up your validator using the instructions in this document, the `peers` array should include the same number of objects as the number of peers defined in your `[ips_fixed]` stanza.
+- Use the [`peers`](../../../references/http-websocket-apis/admin-api-methods/peer-management-methods/peers.md) command to return a list of all `rippled` servers currently connected to your validator. If the `peers` array is `null`, you don’t have a healthy connection to the network. If you've set up your validator using the instructions in this document, the `peers` array should include the same number of objects as the number of peers defined in your `[ips_fixed]` stanza.
 
     If you listed a public hub in your `[ips_fixed]` stanza and it is busy, it may reject your validator's connection. In this case, you may end up with fewer connections than configured in your `[ips_fixed]` stanza. Your validator retries the connection if it's initially rejected.
 
     If you are having trouble maintaining a reliable and safe connection to the network and haven't set up connections using public hubs or proxies, see [4. Connect to the network](#4-connect-to-the-network). Using one of the methods described in the section may help your validator remain healthily connected to the network.
 
-- Use the [`server_info`](server_info.html) command to return some basic information about your validator. The `server_state` should be set to `proposing`. It may also be set to `full` or `validating`, but only for a few minutes before moving into `proposing`.
+- Use the [`server_info`](../../../references/http-websocket-apis/public-api-methods/server-info-methods/server_info.md) command to return some basic information about your validator. The `server_state` should be set to `proposing`. It may also be set to `full` or `validating`, but only for a few minutes before moving into `proposing`.
 
-    If the `server_state` does not spend the majority of its time set to `proposing`, it may be a sign that your validator is unable to fully participate in the XRP Ledger network. For more information about server states and using the `server_info` endpoint to diagnose issues with your validator, see [`rippled` Server States](rippled-server-states.html) and [Get the `server_info`](diagnosing-problems.html#get-the-server_info).
+    If the `server_state` does not spend the majority of its time set to `proposing`, it may be a sign that your validator is unable to fully participate in the XRP Ledger network. For more information about server states and using the `server_info` endpoint to diagnose issues with your validator, see [`rippled` Server States](../../../references/http-websocket-apis/api-conventions/rippled-server-states.md) and [Get the `server_info`](../troubleshooting/diagnosing-problems.md#get-the-server_info).
 
-- Use the [`validators`](validators.html) command to return the current list of published and trusted validators used by the validator. Ensure that the `validator_list_expires` value is either `never` or not expired or about to expire.
+- Use the [`validators`](../../../references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/validators.md) command to return the current list of published and trusted validators used by the validator. Ensure that the `validator_list_expires` value is either `never` or not expired or about to expire.
 
 
 
@@ -251,7 +251,7 @@ To provide domain verification:
 
 1. Choose a domain name you own that you want to be publicly associated with your validator. As a precaution against DDoS attempts, your domain name should not resolve to the ip address of your validator.
 
-2. Serve an [`xrp-ledger.toml`](xrp-ledger-toml.html) file at your domain, and complete the [domain verification](xrp-ledger-toml.html#domain-verification) steps. Once you have completed these steps, your validator should be visible to the livenet [explorer](https://livenet.xrpl.org/network/validators) or any other site that monitors the validator network and supports decetralized domain verification.
+2. Serve an [`xrp-ledger.toml`](../../../references/xrp-ledger-toml.md) file at your domain, and complete the [domain verification](../../../references/xrp-ledger-toml.md#domain-verification) steps. Once you have completed these steps, your validator should be visible to the livenet [explorer](https://livenet.xrpl.org/network/validators) or any other site that monitors the validator network and supports decetralized domain verification.
 
 3. Share your validator's public key with the public, especially other `rippled` operators. For example, you can share your validator's public key on your website, on social media, in the [XRPChat community forum](https://www.xrpchat.com/), or in a press release.
 
@@ -269,14 +269,14 @@ For information about how to revoke a master key pair you generated for your val
     - [XRP Ledger Overview](xrp-ledger-overview.html)
     - [The `rippled` Server](xrpl-servers.html)
 - **Tutorials:**
-    - [Cluster rippled Servers](cluster-rippled-servers.html)
+    - [Cluster rippled Servers](../configure-peering/cluster-rippled-servers.md)
     - [Install `rippled`](install-rippled.html)
-    - [Capacity Planning](capacity-planning.html)
+    - [Capacity Planning](../installation/capacity-planning.md)
 - **References:**
     - [Validator Keys Tool Guide](https://github.com/ripple/validator-keys-tool/blob/master/doc/validator-keys-tool-guide.md)
-    - [consensus_info method][]
-    - [validator_list_sites method][]
-    - [validators method][]
+    - [consensus_info method](../../../references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/consensus_info.md)
+    - [validator_list_sites method](../../../references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/validator_list_sites.md)
+    - [validators method](../../../references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/validators.md)
 
 
 <!--{# common link defs #}-->

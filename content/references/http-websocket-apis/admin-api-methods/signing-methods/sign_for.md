@@ -8,12 +8,12 @@ labels:
 # sign_for
 [[Source]](https://github.com/XRPLF/rippled/blob/release/src/ripple/rpc/handlers/SignFor.cpp "Source")
 
-The `sign_for` command provides one signature for a [multi-signed transaction](multi-signing.html).
+The `sign_for` command provides one signature for a [multi-signed transaction](../../../../concepts/transactions/multi-signing.md).
 
 {% include '_snippets/public-signing-note.md' %}
 <!--_ -->
 
-This command requires the [MultiSign amendment][] to be enabled. [New in: rippled 0.31.0][]
+This command requires the [MultiSign amendment][] to be enabled. [New in: rippled 0.31.0](https://github.com/XRPLF/rippled/releases/tag/0.31.0 "BADGE_BLUE")
 
 ## Request Format
 An example of the request format:
@@ -97,16 +97,16 @@ The request includes the following parameters:
 | `Field`      | Type                 | Description                            |
 |:-------------|:---------------------|:---------------------------------------|
 | `account`    | String - [Address][] | The address which is providing the signature. |
-| `tx_json`    | Object               | The [Transaction](transaction-formats.html) to sign. Unlike using the [sign method][], all fields of the transaction must be provided, including `Fee` and `Sequence`. The transaction must include the field `SigningPubKey` with an empty string as the value. The object may optionally contain a `Signers` array with previously-collected signatures. |
+| `tx_json`    | Object               | The [Transaction](../../../protocol-reference/transactions/transaction-formats.md) to sign. Unlike using the [sign method](sign.md), all fields of the transaction must be provided, including `Fee` and `Sequence`. The transaction must include the field `SigningPubKey` with an empty string as the value. The object may optionally contain a `Signers` array with previously-collected signatures. |
 | `secret`       | String  | _(Optional)_ Secret key of the account supplying the transaction, used to sign it. Do not send your secret to untrusted servers or through unsecured network connections. Cannot be used with `key_type`, `seed`, `seed_hex`, or `passphrase`. |
-| `seed`         | String  | _(Optional)_ Secret key of the account supplying the transaction, used to sign it. Must be in the XRP Ledger's [base58][] format. If provided, you must also specify the `key_type`. Cannot be used with `secret`, `seed_hex`, or `passphrase`. |
+| `seed`         | String  | _(Optional)_ Secret key of the account supplying the transaction, used to sign it. Must be in the XRP Ledger's [base58](base58-encodings.html) format. If provided, you must also specify the `key_type`. Cannot be used with `secret`, `seed_hex`, or `passphrase`. |
 | `seed_hex`     | String  | _(Optional)_ Secret key of the account supplying the transaction, used to sign it. Must be in hexadecimal format. If provided, you must also specify the `key_type`. Cannot be used with `secret`, `seed`, or `passphrase`. |
 | `passphrase`   | String  | _(Optional)_ Secret key of the account supplying the transaction, used to sign it, as a string passphrase. If provided, you must also specify the `key_type`. Cannot be used with `secret`, `seed`, or `seed_hex`. |
 | `key_type`     | String  | _(Optional)_ Type of cryptographic key provided in this request. Valid types are `secp256k1` or `ed25519`. Defaults to `secp256k1`. Cannot be used with `secret`. **Caution:** Ed25519 support is experimental. |
 
 You must provide **exactly 1 field** with the secret key, which can be either of the following:
 
-* Provide a `secret` value and omit the `key_type` field. This value can be formatted as an XRP Ledger [base58][] seed, RFC-1751, hexadecimal, or as a string passphrase. (secp256k1 keys only)
+* Provide a `secret` value and omit the `key_type` field. This value can be formatted as an XRP Ledger [base58](base58-encodings.html) seed, RFC-1751, hexadecimal, or as a string passphrase. (secp256k1 keys only)
 * Provide a `key_type` value and exactly one of `seed`, `seed_hex`, or `passphrase`. Omit the `secret` field. (Not supported by the commandline syntax.)
 
 ## Response Format
@@ -226,12 +226,12 @@ Connecting to 127.0.0.1:5005
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`   | Type   | Description                                             |
 |:----------|:-------|:--------------------------------------------------------|
-| `tx_blob` | String | Hexadecimal representation of the signed transaction, including the newly-added signature. If it has enough signatures, you can [submit this string using the `submit` method](submit.html#submit-only-mode). |
-| `tx_json` | Object | The [transaction specification](transaction-formats.html) in JSON format, with the newly-added signature in the `Signers` array. If it has enough signatures, you can submit this object using the [submit_multisigned method][]. |
+| `tx_blob` | String | Hexadecimal representation of the signed transaction, including the newly-added signature. If it has enough signatures, you can [submit this string using the `submit` method](../../public-api-methods/transaction-methods/submit.md#submit-only-mode). |
+| `tx_json` | Object | The [transaction specification](../../../protocol-reference/transactions/transaction-formats.md) in JSON format, with the newly-added signature in the `Signers` array. If it has enough signatures, you can submit this object using the [submit_multisigned method](../../public-api-methods/transaction-methods/submit_multisigned.md). |
 
 ## Possible Errors
 

@@ -10,7 +10,7 @@ labels:
 ---
 # Use Tickets
 
-[Tickets](tickets.html) provide a way to send transactions out of the normal order. This tutorial walks through the steps of creating a Ticket, then using it to send another transaction.
+[Tickets](../../concepts/transactions/tickets.md) provide a way to send transactions out of the normal order. This tutorial walks through the steps of creating a Ticket, then using it to send another transaction.
 
 ## Prerequisites
 
@@ -18,7 +18,7 @@ labels:
 <script type="application/javascript" src="assets/js/tutorials/use-tickets.js"></script>
 {% set use_network = "Testnet" %}
 
-This page provides JavaScript examples that use the [xrpl.js](https://js.xrpl.org/) library. See [Get Started Using JavaScript](get-started-using-javascript.html) for setup instructions.
+This page provides JavaScript examples that use the [xrpl.js](https://js.xrpl.org/) library. See [Get Started Using JavaScript](../get-started/get-started-using-javascript.md) for setup instructions.
 
 Since JavaScript works in the web browser, you can read along and use the interactive steps without any setup.
 
@@ -36,11 +36,11 @@ This tutorial is divided into a few phases:
 
 ### {{n.next()}}. Get Credentials
 
-To transact on the XRP Ledger, you need an address and secret key, and some XRP. For development purposes, you can get these on the [{{use_network}}](parallel-networks.html) using the following interface:
+To transact on the XRP Ledger, you need an address and secret key, and some XRP. For development purposes, you can get these on the [{{use_network}}](../../concepts/networks-and-servers/parallel-networks.md) using the following interface:
 
 {% include '_snippets/interactive-tutorials/generate-step.md' %}
 
-When you're [building production-ready software](production-readiness.html), you should use an existing account, and manage your keys using a [secure signing configuration](secure-signing.html).
+When you're [building production-ready software](production-readiness.html), you should use an existing account, and manage your keys using a [secure signing configuration](../../concepts/transactions/set-up-secure-signing.md).
 
 
 ### {{n.next()}}. Connect to Network
@@ -84,7 +84,7 @@ _JavaScript_
 
 ### {{n.next()}}. Prepare and Sign TicketCreate
 
-Construct a [TicketCreate transaction][] using the sequence number you determined in the previous step. Use the `TicketCount` field to specify how many Tickets to create. For example, to prepare a transaction that would make 10 Tickets:
+Construct a [TicketCreate transaction](../../references/protocol-reference/transactions/transaction-types/ticketcreate.md) using the sequence number you determined in the previous step. Use the `TicketCount` field to specify how many Tickets to create. For example, to prepare a transaction that would make 10 Tickets:
 
 <!-- MULTICODE_BLOCK_START -->
 
@@ -94,7 +94,7 @@ _JavaScript_
 
 <!-- MULTICODE_BLOCK_END -->
 
-Record the transaction's hash and `LastLedgerSequence` value so you can [be sure whether or not it got validated](reliable-transaction-submission.html) later.
+Record the transaction's hash and `LastLedgerSequence` value so you can [be sure whether or not it got validated](../../concepts/transactions/reliable-transaction-submission.md) later.
 
 
 {{ start_step("Prepare & Sign") }}
@@ -125,7 +125,7 @@ _JavaScript_
 
 ### {{n.next()}}. Wait for Validation
 
-Most transactions are accepted into the next ledger version after they're submitted, which means it may take 4-7 seconds for a transaction's outcome to be final. If the XRP Ledger is busy or poor network connectivity delays a transaction from being relayed throughout the network, a transaction may take longer to be confirmed. (For information on how to set an expiration for transactions, see [Reliable Transaction Submission](reliable-transaction-submission.html).)
+Most transactions are accepted into the next ledger version after they're submitted, which means it may take 4-7 seconds for a transaction's outcome to be final. If the XRP Ledger is busy or poor network connectivity delays a transaction from being relayed throughout the network, a transaction may take longer to be confirmed. (For information on how to set an expiration for transactions, see [Reliable Transaction Submission](../../concepts/transactions/reliable-transaction-submission.md).)
 
 <!-- MULTICODE_BLOCK_START -->
 
@@ -157,7 +157,7 @@ The power of Tickets is that you can carry on with your account's business as us
 
 ### {{n.next()}}. Check Available Tickets
 
-When you want to send a Ticketed transaction, you need to know what Ticket Sequence number to use for it. If you've been keeping careful track of your account, you already know which Tickets you have, but if you're not sure, you can use the [account_objects method][] to look up your available tickets. For example:
+When you want to send a Ticketed transaction, you need to know what Ticket Sequence number to use for it. If you've been keeping careful track of your account, you already know which Tickets you have, but if you're not sure, you can use the [account_objects method](../../references/http-websocket-apis/public-api-methods/account-methods/account_objects.md) to look up your available tickets. For example:
 
 <!-- MULTICODE_BLOCK_START -->
 
@@ -179,7 +179,7 @@ _JavaScript_
 
 Now that you have a Ticket available, you can prepare a transaction that uses it.
 
-This can be any [type of transaction](transaction-types.html) you like. The following example uses a no-op [AccountSet transaction][] since that doesn't require any other setup in the ledger. Set the `Sequence` field to `0` and include a `TicketSequence` field with the Ticket Sequence number of one of your available Tickets.
+This can be any [type of transaction](../../references/protocol-reference/transactions/transaction-types/transaction-types.md) you like. The following example uses a no-op [AccountSet transaction](../../references/protocol-reference/transactions/transaction-types/accountset.md) since that doesn't require any other setup in the ledger. Set the `Sequence` field to `0` and include a `TicketSequence` field with the Ticket Sequence number of one of your available Tickets.
 
 <!-- MULTICODE_BLOCK_START -->
 
@@ -232,9 +232,9 @@ Ticketed transactions go through the consensus process the same way that Sequenc
 
 ## With Multi-Signing
 
-One of the main use cases for Tickets is to be able to collect signatures for several [multi-signed transactions](multi-signing.html) in parallel. By using a Ticket, you can send a multi-signed transaction as soon as it is fully signed and ready to go, without worrying about which one will be ready first. <!-- STYLE_OVERRIDE: will -->
+One of the main use cases for Tickets is to be able to collect signatures for several [multi-signed transactions](../../concepts/transactions/multi-signing.md) in parallel. By using a Ticket, you can send a multi-signed transaction as soon as it is fully signed and ready to go, without worrying about which one will be ready first. <!-- STYLE_OVERRIDE: will -->
 
-In this scenario, [step 8, "Prepare Ticketed Transaction"](#8-prepare-ticketed-transaction) is slightly different. Instead of preparing and signing all at once, you would follow the steps for [sending any multi-signed transaction](send-a-multi-signed-transaction.html): first prepare the transaction, then circulate it among trusted signers to collect their signatures, and finally combine the signatures into the final multi-signed transaction.
+In this scenario, [step 8, "Prepare Ticketed Transaction"](#8-prepare-ticketed-transaction) is slightly different. Instead of preparing and signing all at once, you would follow the steps for [sending any multi-signed transaction](send-a-multi-signed-transaction.md): first prepare the transaction, then circulate it among trusted signers to collect their signatures, and finally combine the signatures into the final multi-signed transaction.
 
 You could do this in parallel for several different potential transactions as long as each one uses a different Ticket.
 
@@ -242,17 +242,17 @@ You could do this in parallel for several different potential transactions as lo
 ## See Also
 
 - **Concepts:**
-    - [Tickets](tickets.html)
-    - [Multi-Signing](multi-signing.html)
+    - [Tickets](../../concepts/transactions/tickets.md)
+    - [Multi-Signing](../../concepts/transactions/multi-signing.md)
 - **Tutorials:**
-    - [Set Up Multi-Signing](set-up-multi-signing.html)
-    - [Reliable Transaction Submission](reliable-transaction-submission.html)
+    - [Set Up Multi-Signing](set-up-multi-signing.md)
+    - [Reliable Transaction Submission](../../concepts/transactions/reliable-transaction-submission.md)
 - **References:**
-    - [account_objects method][]
-    - [sign_for method][]
-    - [submit_multisigned method][]
-    - [TicketCreate transaction][]
-    - [Transaction Common Fields](transaction-common-fields.html)
+    - [account_objects method](../../references/http-websocket-apis/public-api-methods/account-methods/account_objects.md)
+    - [sign_for method](../../references/http-websocket-apis/admin-api-methods/signing-methods/sign_for.md)
+    - [submit_multisigned method](../../references/http-websocket-apis/public-api-methods/transaction-methods/submit_multisigned.md)
+    - [TicketCreate transaction](../../references/protocol-reference/transactions/transaction-types/ticketcreate.md)
+    - [Transaction Common Fields](../../references/protocol-reference/transactions/transaction-common-fields.md)
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}			

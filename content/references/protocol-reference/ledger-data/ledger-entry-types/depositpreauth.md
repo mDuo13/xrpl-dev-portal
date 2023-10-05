@@ -8,9 +8,9 @@ labels:
 # DepositPreauth
 [[Source]](https://github.com/XRPLF/rippled/blob/master/src/ripple/protocol/impl/LedgerFormats.cpp#L172-L178 "Source")
 
-A `DepositPreauth` entry tracks a preauthorization from one account to another. [DepositPreauth transactions][] create these entries.
+A `DepositPreauth` entry tracks a preauthorization from one account to another. [DepositPreauth transactions](../../transactions/transaction-types/depositpreauth.md) create these entries.
 
-This has no effect on processing of transactions unless the account that provided the preauthorization requires [Deposit Authorization](depositauth.html). In that case, the account that was preauthorized can send payments and other transactions directly to the account that provided the preauthorization. Preauthorizations are one-directional, and have no effect on payments going the opposite direction.
+This has no effect on processing of transactions unless the account that provided the preauthorization requires [Deposit Authorization](../../../../concepts/accounts/depositauth.md). In that case, the account that was preauthorized can send payments and other transactions directly to the account that provided the preauthorization. Preauthorizations are one-directional, and have no effect on payments going the opposite direction.
 
 ## Example {{currentpage.name}} JSON
 
@@ -29,9 +29,9 @@ This has no effect on processing of transactions unless the account that provide
 
 ## {{currentpage.name}} Fields
 
-In addition to the [common fields](ledger-entry-common-fields.html), `{{currentpage.name}}` entries have the following fields:
+In addition to the [common fields](../ledger-entry-common-fields.md), `{{currentpage.name}}` entries have the following fields:
 
-| Field               | JSON Type        | [Internal Type][] | Required? | Description     |
+| Field               | JSON Type        | [Internal Type](../../serialization.md) | Required? | Description     |
 |:--------------------|:-----------------|:------------------|:----------|:----------------|
 | `Account`           | String           | Account           | Yes       | The account that granted the preauthorization. (The destination of the preauthorized payments.) |
 | `Authorize`         | String           | Account           | Yes       | The account that received the preauthorization. (The sender of the preauthorized payments.) |
@@ -54,8 +54,8 @@ There are no flags defined for `{{currentpage.name}}` entries.
 The ID of a `DepositPreauth` object is the [SHA-512Half][] of the following values, concatenated in order:
 
 * The DepositPreauth space key (`0x0070`)
-* The AccountID of the owner of this object (the sender of the [DepositPreauth transaction][] that created this object; in other words, the one that granted the preauthorization)
-* The AccountID of the preauthorized account (the `Authorized` field of the [DepositPreauth transaction][] that created this object; in other words, the one that received the preauthorization)
+* The AccountID of the owner of this object (the sender of the [DepositPreauth transaction](../../transactions/transaction-types/depositpreauth.md) that created this object; in other words, the one that granted the preauthorization)
+* The AccountID of the preauthorized account (the `Authorized` field of the [DepositPreauth transaction](../../transactions/transaction-types/depositpreauth.md) that created this object; in other words, the one that received the preauthorization)
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

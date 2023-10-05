@@ -1,4 +1,4 @@
-<!-- rippled release notes links -->
+{#<!-- rippled release notes links -->
 
 {% set rippled_versions = [
     "0.26.0",
@@ -56,3 +56,4 @@
 [更新: rippled {{v}}]: https://github.com/XRPLF/rippled/releases/tag/{{v}} "BADGE_BLUE"
 [削除: rippled {{v}}]: https://github.com/XRPLF/rippled/releases/tag/{{v}} "BADGE_RED"
 {% endfor %}
+#}

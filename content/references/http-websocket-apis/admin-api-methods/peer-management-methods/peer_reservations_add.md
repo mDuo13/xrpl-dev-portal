@@ -8,9 +8,9 @@ labels:
 # peer_reservations_add
 [[Source]](https://github.com/XRPLF/rippled/blob/4a1148eb2849513dd1e7ae080288fd47ab57a376/src/ripple/rpc/handlers/Reservations.cpp#L36 "Source")
 
-The `{{currentpage.name}}` method adds or updates a reserved slot for a specific peer server in the XRP Ledger [peer-to-peer network](peer-protocol.html). [New in: rippled 1.4.0][]
+The `{{currentpage.name}}` method adds or updates a reserved slot for a specific peer server in the XRP Ledger [peer-to-peer network](../../../../concepts/networks-and-servers/peer-protocol.md). [New in: rippled 1.4.0](https://github.com/XRPLF/rippled/releases/tag/1.4.0 "BADGE_BLUE")
 
-_The `{{currentpage.name}}` method is an [admin method](admin-api-methods.html) that cannot be run by unprivileged users._
+_The `{{currentpage.name}}` method is an [admin method](../admin-api-methods.md) that cannot be run by unprivileged users._
 
 
 ### Request Format
@@ -55,7 +55,7 @@ The request includes the following parameters:
 
 | `Field`       | Type   | Description                                         |
 |:--------------|:-------|:----------------------------------------------------|
-| `public_key`  | String | The [node public key][] of the peer reservation to add a reservation for, in [base58][]. |
+| `public_key`  | String | The [node public key][] of the peer reservation to add a reservation for, in [base58](base58-encodings.html). |
 | `description` | String | _(Optional)_ A custom description for the peer reservation. The server truncates descriptions longer than 64 characters when it restarts. |
 
 
@@ -115,7 +115,7 @@ Connecting to 127.0.0.1:5005
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`    | Type   | Description                                            |
 |:-----------|:-------|:-------------------------------------------------------|
@@ -135,7 +135,7 @@ If the `previous` field is provided, it shows the previous status of this peer r
 
 - Any of the [universal error types][].
 - `invalidParams` - One or more fields are specified incorrectly, or one or more required fields are missing.
-- `publicMalformed` - The `public_key` field of the request is not valid. It must be a valid node public key in [base58][] format.
+- `publicMalformed` - The `public_key` field of the request is not valid. It must be a valid node public key in [base58](base58-encodings.html) format.
 - `reportingUnsupported` - ([Reporting Mode][] servers only) This method is not available in Reporting Mode.
 
 <!--{# common link defs #}-->

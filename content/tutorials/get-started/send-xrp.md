@@ -13,7 +13,7 @@ top_nav_grouping: Popular Pages
 ---
 # Send XRP
 
-This tutorial explains how to send a direct XRP Payment using `xrpl.js` for JavaScript, `xrpl-py` for Python, or xrpl4j for Java. First, we step through the process with the [XRP Ledger Testnet](parallel-networks.html). Then, we compare that to the additional requirements for doing the equivalent in production.
+This tutorial explains how to send a direct XRP Payment using `xrpl.js` for JavaScript, `xrpl-py` for Python, or xrpl4j for Java. First, we step through the process with the [XRP Ledger Testnet](../../concepts/networks-and-servers/parallel-networks.md). Then, we compare that to the additional requirements for doing the equivalent in production.
 
 **Tip:** Check out the [Code Samples](https://github.com/XRPLF/xrpl-dev-portal/tree/master/content/_code-samples) for a complete version of the code used in this tutorial.
 
@@ -25,9 +25,9 @@ This tutorial explains how to send a direct XRP Payment using `xrpl.js` for Java
 
 To interact with the XRP Ledger, you need to set up a dev environment with the necessary tools. This tutorial provides examples using the following options:
 
-- **JavaScript** with the [xrpl.js library](https://github.com/XRPLF/xrpl.js/). See [Get Started Using JavaScript](get-started-using-javascript.html) for setup steps.
-- **Python** with the [`xrpl-py` library](https://xrpl-py.readthedocs.io/). See [Get Started using Python](get-started-using-python.html) for setup steps.
-- **Java** with the [xrpl4j library](https://github.com/XRPLF/xrpl4j). See [Get Started Using Java](get-started-using-java.html) for setup steps.
+- **JavaScript** with the [xrpl.js library](https://github.com/XRPLF/xrpl.js/). See [Get Started Using JavaScript](get-started-using-javascript.md) for setup steps.
+- **Python** with the [`xrpl-py` library](https://xrpl-py.readthedocs.io/). See [Get Started using Python](get-started-using-python.md) for setup steps.
+- **Java** with the [xrpl4j library](https://github.com/XRPLF/xrpl4j). See [Get Started Using Java](get-started-using-java.md) for setup steps.
 
 
 ## Send a Payment on the Test Net
@@ -57,12 +57,12 @@ The secret key shown here is for example only. For development purposes, you can
 
 {% include '_snippets/interactive-tutorials/generate-step.md' %}
 
-When you're [building production-ready software](production-readiness.html), you should use an existing account, and manage your keys using a [secure signing configuration](secure-signing.html).
+When you're [building production-ready software](production-readiness.html), you should use an existing account, and manage your keys using a [secure signing configuration](../../concepts/transactions/set-up-secure-signing.md).
 
 
 ### {{n.next()}}. Connect to a Testnet Server
 
-First, you must connect to an XRP Ledger server so you can get the current status of your account and the shared ledger. You can use this information to [automatically fill in some required fields of a transaction](transaction-common-fields.html#auto-fillable-fields). You also must be connected to the network to submit transactions to it.
+First, you must connect to an XRP Ledger server so you can get the current status of your account and the shared ledger. You can use this information to [automatically fill in some required fields of a transaction](../../references/protocol-reference/transactions/transaction-common-fields.md#auto-fillable-fields). You also must be connected to the network to submit transactions to it.
 
 The following code connects to a public Testnet servers:
 
@@ -89,7 +89,7 @@ For this tutorial, click the following button to connect:
 
 ### {{n.next()}}. Prepare Transaction
 
-Typically, we create XRP Ledger transactions as objects in the JSON [transaction format](transaction-formats.html). The following example shows a minimal Payment specification:
+Typically, we create XRP Ledger transactions as objects in the JSON [transaction format](../../references/protocol-reference/transactions/transaction-formats.md). The following example shows a minimal Payment specification:
 
 ```json
 {
@@ -178,7 +178,7 @@ _Java_
 
 <!-- MULTICODE_BLOCK_END -->
 
-The result of the signing operation is a transaction object containing a signature. Typically, XRP Ledger APIs expect a signed transaction to be the hexadecimal representation of the transaction's canonical [binary format](serialization.html), called a "blob".
+The result of the signing operation is a transaction object containing a signature. Typically, XRP Ledger APIs expect a signed transaction to be the hexadecimal representation of the transaction's canonical [binary format](../../references/protocol-reference/serialization.md), called a "blob".
 
 - In `xrpl.js`, the signing API also returns the transaction's ID, or identifying hash, which you can use to look up the transaction later. This is a 64-character hexadecimal string that is unique to this transaction.
 - In `xrpl-py`, you can get the transaction's hash in the response to submitting it in the next step.
@@ -220,10 +220,10 @@ If you see any other result, you should check the following:
 
 - Are you using the correct addresses for the sender and destination?
 - Did you forget any other fields of the transaction, skip any steps, or make any other typos?
-- Do you have enough Test XRP to send the transaction? The amount of XRP you can send is limited by the [reserve requirement](reserves.html), which is currently 10 XRP with an additional 2 XRP for each "object" you own in the ledger. (If you generated a new address with the Testnet Faucet, you don't own any objects.)
+- Do you have enough Test XRP to send the transaction? The amount of XRP you can send is limited by the [reserve requirement](../../concepts/accounts/reserves.md), which is currently 10 XRP with an additional 2 XRP for each "object" you own in the ledger. (If you generated a new address with the Testnet Faucet, you don't own any objects.)
 - Are you connected to a server on the test network?
 
-See the full list of [transaction results](transaction-results.html) for more possibilities.
+See the full list of [transaction results](../../references/protocol-reference/transactions/transaction-results/transaction-results.md) for more possibilities.
 
 {{ start_step("Submit") }}
 <button id="submit-button" class="btn btn-primary previous-steps-required" data-tx-blob-from="#signed-tx-blob" data-wait-step-name="Wait">Submit
@@ -235,7 +235,7 @@ example transaction</button>
 
 ### {{n.next()}}. Wait for Validation
 
-Most transactions are accepted into the next ledger version after they're submitted, which means it may take 4-7 seconds for a transaction's outcome to be final. If the XRP Ledger is busy or poor network connectivity delays a transaction from being relayed throughout the network, a transaction may take longer to be confirmed. (For more information on expiration of unconfirmed transactions, see [Reliable Transaction Submission](reliable-transaction-submission.html).)
+Most transactions are accepted into the next ledger version after they're submitted, which means it may take 4-7 seconds for a transaction's outcome to be final. If the XRP Ledger is busy or poor network connectivity delays a transaction from being relayed throughout the network, a transaction may take longer to be confirmed. (For more information on expiration of unconfirmed transactions, see [Reliable Transaction Submission](../../concepts/transactions/reliable-transaction-submission.md).)
 
 - **JavaScript:**  If you used the [`.submitAndWait()` method](https://js.xrpl.org/classes/Client.html#submitAndWait), you can wait until the returned Promise resolves. Other, more asynchronous approaches are also possible.
 
@@ -268,11 +268,11 @@ _Java_
 
 To know for sure what a transaction did, you must look up the outcome of the transaction when it appears in a validated ledger version.
 
-- **JavaScript:** Use the response from `submitAndWait()` or call the [tx method][] using [`Client.request()`](https://js.xrpl.org/classes/Client.html#request).
+- **JavaScript:** Use the response from `submitAndWait()` or call the [tx method](../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md) using [`Client.request()`](https://js.xrpl.org/classes/Client.html#request).
 
     **Tip:** In **TypeScript** you can pass a [`TxRequest`](https://js.xrpl.org/interfaces/TxRequest.html) to the [`Client.request()`](https://js.xrpl.org/classes/Client.html#request) method.
 
-- **Python:** Use the response from [`submit_and_wait()`](https://xrpl-py.readthedocs.io/en/stable/source/xrpl.transaction.html#xrpl.transaction.submit_and_wait) or call the [`xrpl.transaction.get_transaction_from_hash()` method](https://xrpl-py.readthedocs.io/en/latest/source/xrpl.transaction.html#xrpl.transaction.get_transaction_from_hash). (See the [tx method response format](tx.html#response-format) for a detailed reference of the fields this can contain.)
+- **Python:** Use the response from [`submit_and_wait()`](https://xrpl-py.readthedocs.io/en/stable/source/xrpl.transaction.html#xrpl.transaction.submit_and_wait) or call the [`xrpl.transaction.get_transaction_from_hash()` method](https://xrpl-py.readthedocs.io/en/latest/source/xrpl.transaction.html#xrpl.transaction.get_transaction_from_hash). (See the [tx method response format](../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md#response-format) for a detailed reference of the fields this can contain.)
 
 - **Java:** Use the [`XrplClient.transaction()`](https://javadoc.io/doc/org.xrpl/xrpl4j-client/latest/org/xrpl/xrpl4j/client/XrplClient.html#transaction(org.xrpl.xrpl4j.model.client.transactions.TransactionRequestParams,java.lang.Class)) method to check the status of a transaction.
 
@@ -292,7 +292,7 @@ _Java_
 
 <!-- MULTICODE_BLOCK_END -->
 
-**Caution:** XRP Ledger APIs may return tentative results from ledger versions that have not yet been validated. For example, in [tx method][] response, be sure to look for `"validated": true` to confirm that the data comes from a validated ledger version. Transaction results that are not from a validated ledger version are subject to change. For more information, see [Finality of Results](finality-of-results.html).
+**Caution:** XRP Ledger APIs may return tentative results from ledger versions that have not yet been validated. For example, in [tx method](../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md) response, be sure to look for `"validated": true` to confirm that the data comes from a validated ledger version. Transaction results that are not from a validated ledger version are subject to change. For more information, see [Finality of Results](../../concepts/transactions/finality-of-results.md).
 
 {{ start_step("Check") }}
 <button id="get-tx-button" class="btn btn-primary previous-steps-required">Check transaction status</button>
@@ -344,11 +344,11 @@ System.out.println(generationResult.seed()); // Example: sp6JS7f14BuwFY8Mw6bTtLK
 
 **Warning:** You should only use an address and secret that you generated securely, on your local machine. If another computer generated the address and secret and sent it to you over a network, it's possible that someone else on the network may see that information. If they do, they'll have as much control over your XRP as you do. It's also recommended not to use the same address for the Testnet and Mainnet, because transactions that you created for use on one network could also be valid to execute on the other network, depending on the parameters you provided.
 
-Generating an address and secret doesn't get you XRP directly; you're only choosing a random number. You must also receive XRP at that address to [fund the account](accounts.html#creating-accounts). A common way to acquire XRP is to buy it from an [exchange](exchanges.html), then withdraw it to your own address.
+Generating an address and secret doesn't get you XRP directly; you're only choosing a random number. You must also receive XRP at that address to [fund the account](../../concepts/accounts/accounts.md#creating-accounts). A common way to acquire XRP is to buy it from an [exchange](exchanges.html), then withdraw it to your own address.
 
 ### Connecting to the Production XRP Ledger
 
-When you instantiate your client's connect to the XRP Ledger, you must specify a server that's synced with the appropriate [network](parallel-networks.html). For many cases, you can use [public servers](public-servers.html), such as in the following example:
+When you instantiate your client's connect to the XRP Ledger, you must specify a server that's synced with the appropriate [network](../../concepts/networks-and-servers/parallel-networks.md). For many cases, you can use [public servers](public-servers.md), such as in the following example:
 
 <!-- MULTICODE_BLOCK_START -->
 
@@ -376,7 +376,7 @@ XrplClient xrplClient = new XrplClient(rippledUrl);
 
 <!-- MULTICODE_BLOCK_END -->
 
-If you [install `rippled`](install-rippled.html) yourself, it connects to the production network by default. (You can also [configure it to connect to the test net](connect-your-rippled-to-the-xrp-test-net.html) instead.) After the server has synced (typically within about 15 minutes of starting it up), you can connect to it locally, which has [various benefits](xrpl-servers.html). The following example shows how to connect to a server running the default configuration:
+If you [install `rippled`](install-rippled.html) yourself, it connects to the production network by default. (You can also [configure it to connect to the test net](../../infrastructure/rippled/configuration/connect-your-rippled-to-the-xrp-test-net.md) instead.) After the server has synced (typically within about 15 minutes of starting it up), you can connect to it locally, which has [various benefits](xrpl-servers.html). The following example shows how to connect to a server running the default configuration:
 
 <!-- MULTICODE_BLOCK_START -->
 
@@ -410,12 +410,12 @@ XrplClient xrplClient = new XrplClient(rippledUrl);
 
 After completing this tutorial, you may want to try the following:
 
-- [Issue a token](issue-a-fungible-token.html) on the XRP Ledger Testnet.
-- [Trade in the Decentralized Exchange](trade-in-the-decentralized-exchange.html).
-- Build [Reliable transaction submission](reliable-transaction-submission.html) for production systems.
-- Check your [client library](client-libraries.html)'s API reference for the full range of XRP Ledger functionality.
+- [Issue a token](../use-tokens/issue-a-fungible-token.md) on the XRP Ledger Testnet.
+- [Trade in the Decentralized Exchange](../use-tokens/trade-in-the-decentralized-exchange.md).
+- Build [Reliable transaction submission](../../concepts/transactions/reliable-transaction-submission.md) for production systems.
+- Check your [client library](../../references/client-libraries.md)'s API reference for the full range of XRP Ledger functionality.
 - Customize your [Account Settings](manage-account-settings.html).
-- Learn how [Transaction Metadata](transaction-metadata.html) describes the outcome of a transaction in detail.
+- Learn how [Transaction Metadata](../../references/protocol-reference/transactions/transaction-metadata.md) describes the outcome of a transaction in detail.
 - Explore more [Payment Types](payment-types.html) such as Escrows and Payment Channels.
 
 

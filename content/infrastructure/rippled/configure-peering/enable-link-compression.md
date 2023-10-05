@@ -7,7 +7,7 @@ labels:
 ---
 # Enable Link Compression
 
-The `rippled` server can save bandwidth by compressing its [peer-to-peer communications](peer-protocol.html), at a cost of greater CPU usage. If you enable link compression, the server automatically compresses communications with peer servers that also have link compression enabled.
+The `rippled` server can save bandwidth by compressing its [peer-to-peer communications](../../../concepts/networks-and-servers/peer-protocol.md), at a cost of greater CPU usage. If you enable link compression, the server automatically compresses communications with peer servers that also have link compression enabled.
 
 ## Steps
 
@@ -42,8 +42,8 @@ After the restart, your server automatically uses link compression with other pe
 
 ## See Also
 
-- [Capacity Planning](capacity-planning.html)
-- [Peer Protocol](peer-protocol.html)
+- [Capacity Planning](../installation/capacity-planning.md)
+- [Peer Protocol](../../../concepts/networks-and-servers/peer-protocol.md)
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

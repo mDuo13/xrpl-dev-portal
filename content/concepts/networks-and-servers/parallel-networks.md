@@ -13,8 +13,8 @@ To help members of the XRP Ledger community interact with XRP Ledger technology 
 
 | Network | Upgrade Cadence | Description                                      |
 |:--------|:----------------|:-------------------------------------------------|
-| Mainnet | Stable releases | _The_ [XRP Ledger](xrp-ledger-overview.html), a  decentralized cryptographic ledger powered by a network of peer-to-peer servers and the home of [XRP](what-is-xrp.html). |
-| Testnet | Stable releases | An "alternate universe" network that acts as a testing ground for software built on the XRP Ledger, without impacting production XRP Ledger users and without risking real money. The [amendment status](known-amendments.html) of the Testnet is intended to closely mirror the Mainnet, although slight variations in timing may occur due to the unpredictable nature of decentralized systems. |
+| Mainnet | Stable releases | _The_ [XRP Ledger](xrp-ledger-overview.html), a  decentralized cryptographic ledger powered by a network of peer-to-peer servers and the home of [XRP](../introduction/what-is-xrp.md). |
+| Testnet | Stable releases | An "alternate universe" network that acts as a testing ground for software built on the XRP Ledger, without impacting production XRP Ledger users and without risking real money. The [amendment status](../../resources/known-amendments.md) of the Testnet is intended to closely mirror the Mainnet, although slight variations in timing may occur due to the unpredictable nature of decentralized systems. |
 | Devnet  | Beta releases   | A preview of coming attractions, where unstable changes to the core XRP Ledger software may be tested out. Developers can use this altnet to interact with and learn about planned new XRP Ledger features and amendments that are not yet enabled on the Mainnet. |
 | [Hooks V3 Testnet](https://hooks-testnet-v3.xrpl-labs.com/) | [Hooks server](https://github.com/XRPL-Labs/xrpld-hooks) | A preview of on-chain smart contract functionality using [hooks](https://xrpl-hooks.readme.io/). |
 | AMM-Devnet | [XLS-30d pre-release](https://github.com/gregtatcam/rippled/tree/amm-core-functionality/) | A preview of the [XLS-30d](https://github.com/XRPLF/XRPL-Standards/discussions/78) standard for Automated Market Makers on the XRP Ledger. <!-- SPELLING_IGNORE: 30d --> [Binary builds for testing](https://github.com/legleux/scheduled/releases) are also available. Library support: [xrpl.js 2.6.0-beta.0](https://www.npmjs.com/package/xrpl/v/2.6.0-beta.0), [xrpl-py 1.8.0b0](https://pypi.org/project/xrpl-py/1.8.0b0/) |
@@ -28,7 +28,7 @@ Each altnet has its own separate supply of test XRP, which is [given away for fr
 
 The main factor in determining which network a server follows is its configured UNL—the list of validators it trusts not to collude. Each server uses its configured UNL to know which ledger to accept as the truth. When different consensus groups of `rippled` instances only trust other members of the same group, each group continues as a parallel network. Even if malicious or misbehaving computers connect to both networks, the consensus process avoids confusion as long as the members of each network are not configured to trust members of another network in excess of their quorum settings.
 
-Ripple runs the main servers in the Testnet and Devnet; you can also [connect your own `rippled` server to these networks](connect-your-rippled-to-the-xrp-test-net.html). The Testnet and Devnet do not use diverse, censorship-resistant sets of validators. This makes it possible for Ripple to reset the Testnet or Devnet at any time.
+Ripple runs the main servers in the Testnet and Devnet; you can also [connect your own `rippled` server to these networks](../../infrastructure/rippled/configuration/connect-your-rippled-to-the-xrp-test-net.md). The Testnet and Devnet do not use diverse, censorship-resistant sets of validators. This makes it possible for Ripple to reset the Testnet or Devnet at any time.
 
 
 ## See Also
@@ -36,17 +36,17 @@ Ripple runs the main servers in the Testnet and Devnet; you can also [connect yo
 - **Tools:**
     - [XRP Testnet Faucet](xrp-test-net-faucet.html)
 - **Concepts:**
-    - [Consensus](consensus.html)
-    - [Amendments](amendments.html)
+    - [Consensus](../consensus-protocol/consensus.md)
+    - [Amendments](amendments.md)
 - **Tutorials:**
-    - [Connect Your `rippled` to the XRP Testnet](connect-your-rippled-to-the-xrp-test-net.html)
+    - [Connect Your `rippled` to the XRP Testnet](../../infrastructure/rippled/configuration/connect-your-rippled-to-the-xrp-test-net.md)
     - [Use rippled in Stand-Alone Mode](use-stand-alone-mode.html)
 - **References:**
-    - [server_info method][]
-    - [consensus_info method][]
-    - [validator_list_sites method][]
-    - [validators method][]
-    - [Daemon Mode Options](commandline-usage.html#daemon-mode-options)
+    - [server_info method](../../references/http-websocket-apis/public-api-methods/server-info-methods/server_info.md)
+    - [consensus_info method](../../references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/consensus_info.md)
+    - [validator_list_sites method](../../references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/validator_list_sites.md)
+    - [validators method](../../references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/validators.md)
+    - [Daemon Mode Options](../../infrastructure/rippled/commandline-usage.md#daemon-mode-options)
 
 
 <!--{# common link defs #}-->

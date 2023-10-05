@@ -9,9 +9,9 @@ labels:
 # validators
 [[Source]](https://github.com/XRPLF/rippled/blob/master/src/ripple/rpc/handlers/Validators.cpp "Source")
 
-The `validators` command returns human readable information about the current list of published and [trusted validators](consensus.html#trust-based-validation) used by the server.
+The `validators` command returns human readable information about the current list of published and [trusted validators](../../../../concepts/consensus-protocol/consensus.md#trust-based-validation) used by the server.
 
-*The `validators` method is an [admin method](admin-api-methods.html) that cannot be run by unprivileged users!*
+*The `validators` method is an [admin method](../admin-api-methods.md) that cannot be run by unprivileged users!*
 
 ### Request Format
 An example of the request format:
@@ -475,7 +475,7 @@ Connecting to 127.0.0.1:5005
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`                  | Type   | Description                              |
 |:-------------------------|:-------|:-----------------------------------------|

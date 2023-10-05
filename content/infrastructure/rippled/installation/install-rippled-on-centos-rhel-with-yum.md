@@ -14,7 +14,7 @@ These instructions install a binary that has been compiled by Ripple.
 
 ## Prerequisites
 
-Before you install `rippled`, you must meet the [System Requirements](system-requirements.html).
+Before you install `rippled`, you must meet the [System Requirements](system-requirements.md).
 
 
 ## Installation Steps
@@ -97,15 +97,15 @@ Before you install `rippled`, you must meet the [System Requirements](system-req
 
 - **Concepts:**
     - [The `rippled` Server](xrpl-servers.html)
-    - [Consensus](consensus.html)
+    - [Consensus](../../../concepts/consensus-protocol/consensus.md)
 - **Tutorials:**
     - [Configure rippled](configure-rippled.html)
     - [Troubleshoot rippled](troubleshoot-the-rippled-server.html)
-    - [Get Started with the rippled API](get-started-using-http-websocket-apis.html)
+    - [Get Started with the rippled API](../../../tutorials/get-started/get-started-using-http-websocket-apis.md)
 - **References:**
     - [rippled API Reference](http-websocket-apis.html)
-        - [`rippled` Commandline Usage](commandline-usage.html)
-        - [server_info method][]
+        - [`rippled` Commandline Usage](../commandline-usage.md)
+        - [server_info method](../../../references/http-websocket-apis/public-api-methods/server-info-methods/server_info.md)
 
 
 <!--{# common link defs #}-->

@@ -9,9 +9,9 @@ labels:
 # Ledger Header
 [[Source]](https://github.com/XRPLF/rippled/blob/master/src/ripple/ledger/ReadView.h#L71 "Source")
 
-Every [ledger version](ledgers.html) has a unique header that describes the contents. You can look up a ledger's header information with the [ledger method][]. The contents of the ledger header are as follows:
+Every [ledger version](../../../concepts/ledgers/ledgers.md) has a unique header that describes the contents. You can look up a ledger's header information with the [ledger method](../../http-websocket-apis/public-api-methods/ledger-methods/ledger.md). The contents of the ledger header are as follows:
 
-| Field                        | JSON Type | [Internal Type][] | Description   |
+| Field                        | JSON Type | [Internal Type](../serialization.md) | Description   |
 |:-----------------------------|:----------|:------------------|:--------------|
 | `ledger_index`               | String    | UInt32            | The [ledger index][Ledger Index] of the ledger. Some API methods display this as a quoted integer; some display it as a native JSON number. |
 | `ledger_hash`                | String    | Hash256           | The [SHA-512Half][] of this ledger version. This serves as a unique identifier for this ledger and all its contents. |
@@ -32,14 +32,14 @@ Every [ledger version](ledgers.html) has a unique header that describes the cont
 
 ## Close Flags
 
-The ledger has only one flag defined for `closeFlags`: **`sLCF_NoConsensusTime`** (value `1`). If this flag is enabled, it means that validators had different [close times for the ledger](ledger-close-times.html), but built otherwise the same ledger, so they declared consensus while "agreeing to disagree" on the close time. In this case, official `close_time` value of the ledger is 1 second after that of the parent ledger.
+The ledger has only one flag defined for `closeFlags`: **`sLCF_NoConsensusTime`** (value `1`). If this flag is enabled, it means that validators had different [close times for the ledger](../../../concepts/ledgers/ledger-close-times.md), but built otherwise the same ledger, so they declared consensus while "agreeing to disagree" on the close time. In this case, official `close_time` value of the ledger is 1 second after that of the parent ledger.
 
 The `closeFlags` field is not included in any JSON representations of a ledger, but is included in the binary representation of a ledger, and is one of the fields that determine the ledger's hash.
 
 
 ## See Also
 
-For ledger basics, see [Ledgers](ledgers.html).
+For ledger basics, see [Ledgers](../../../concepts/ledgers/ledgers.md).
 
 
 <!--{# common link defs #}-->

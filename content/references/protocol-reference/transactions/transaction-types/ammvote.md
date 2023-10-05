@@ -11,7 +11,7 @@ status: not_enabled
 
 _(Requires the [AMM amendment][] :not_enabled:)_
 
-Vote on the trading fee for an [Automated Market Maker](automated-market-makers.html) instance. Up to 8 accounts can vote in proportion to the amount of the AMM's LP Tokens they hold. Each new vote re-calculates the AMM's trading fee based on a weighted average of the votes.
+Vote on the trading fee for an [Automated Market Maker](../../../../concepts/tokens/automated-market-makers.md) instance. Up to 8 accounts can vote in proportion to the amount of the AMM's LP Tokens they hold. Each new vote re-calculates the AMM's trading fee based on a weighted average of the votes.
 
 ## Example {{currentpage.name}} JSON
 
@@ -35,7 +35,7 @@ Vote on the trading fee for an [Automated Market Maker](automated-market-makers.
 
 {% include '_snippets/tx-fields-intro.md' %}
 
-| Field        | JSON Type | [Internal Type][] | Required? | Description |
+| Field        | JSON Type | [Internal Type](../../serialization.md) | Required? | Description |
 |:-------------|:----------|:------------------|:----------|:------------|
 | `Asset`      | Object    | STIssue           | Yes       | The definition for one of the assets in the AMM's pool. In JSON, this is an object with `currency` and `issuer` fields (omit `issuer` for XRP). |
 | `Asset2`     | Object    | STIssue           | Yes       | The definition for the other asset in the AMM's pool. In JSON, this is an object with `currency` and `issuer` fields (omit `issuer` for XRP). |
@@ -43,7 +43,7 @@ Vote on the trading fee for an [Automated Market Maker](automated-market-makers.
 
 ## Error Cases
 
-Besides errors that can occur for all transactions, {{currentpage.name}} transactions can result in the following [transaction result codes](transaction-results.html):
+Besides errors that can occur for all transactions, {{currentpage.name}} transactions can result in the following [transaction result codes](../transaction-results/transaction-results.md):
 
 | Error Code              | Description                                  |
 |:------------------------|:---------------------------------------------|

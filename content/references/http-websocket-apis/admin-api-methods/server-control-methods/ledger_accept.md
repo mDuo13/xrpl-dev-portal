@@ -10,7 +10,7 @@ labels:
 
 The `ledger_accept` method forces the server to close the current-working ledger and move to the next ledger number. This method is intended for testing purposes only, and is only available when the `rippled` server is running stand-alone mode.
 
-*The `ledger_accept` method is an [admin method](admin-api-methods.html) that cannot be run by unprivileged users!*
+*The `ledger_accept` method is an [admin method](../admin-api-methods.md) that cannot be run by unprivileged users!*
 
 ### Request Format
 
@@ -52,7 +52,7 @@ An example of a successful response:
 }
 ```
 
-The response follows the [standard format][], with a successful result containing the following field:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following field:
 
 | `Field`                | Type             | Description                      |
 |:-----------------------|:-----------------|:---------------------------------|

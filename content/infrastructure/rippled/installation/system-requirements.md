@@ -20,7 +20,7 @@ For reliable performance in production environments, it is recommended to run an
 
 ## Minimum Specifications
 
-For testing purposes or occasional use, you can run an XRP Ledger server on commodity hardware. The following minimum requirements should work for most cases, but may not always [stay synced with the network](server-doesnt-sync.html):
+For testing purposes or occasional use, you can run an XRP Ledger server on commodity hardware. The following minimum requirements should work for most cases, but may not always [stay synced with the network](../troubleshooting/server-doesnt-sync.md):
 
 - Operating System: macOS, Windows (64-bit), or most Linux distributions (Red Hat, Ubuntu, and Debian supported).
 - CPU: 64-bit x86_64, 4+ cores.
@@ -43,15 +43,15 @@ A `rippled` server relies on maintaining the correct time. It is recommended tha
 
 - **Concepts:**
     - [The `rippled` Server](xrpl-servers.html)
-    - [Consensus](consensus.html)
+    - [Consensus](../../../concepts/consensus-protocol/consensus.md)
 - **Tutorials:**
-    - [Capacity Planning](capacity-planning.html) - More information on the recommended specifications and planning for production needs
+    - [Capacity Planning](capacity-planning.md) - More information on the recommended specifications and planning for production needs
     - [Install `rippled`](install-rippled.html)
     - [Troubleshoot rippled](troubleshoot-the-rippled-server.html)
 - **References:**
     - [rippled API Reference](http-websocket-apis.html)
-        - [`rippled` Commandline Usage](commandline-usage.html)
-        - [server_info method][]
+        - [`rippled` Commandline Usage](../commandline-usage.md)
+        - [server_info method](../../../references/http-websocket-apis/public-api-methods/server-info-methods/server_info.md)
 
 
 <!--{# common link defs #}-->

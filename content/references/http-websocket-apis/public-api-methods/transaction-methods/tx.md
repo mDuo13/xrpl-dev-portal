@@ -9,7 +9,7 @@ labels:
 # tx
 [[Source]](https://github.com/XRPLF/rippled/blob/master/src/ripple/rpc/handlers/Tx.cpp "Source")
 
-The `tx` method retrieves information on a single [transaction](transaction-formats.html), by its [identifying hash][].
+The `tx` method retrieves information on a single [transaction](../../../protocol-reference/transactions/transaction-formats.md), by its [identifying hash][].
 
 ## Request Format
 
@@ -56,9 +56,9 @@ The request includes the following parameters:
 | `Field`       | Type    | Description                                        |
 |:--------------|:--------|:---------------------------------------------------|
 | `transaction` | String  | The 256-bit hash of the transaction, as hex.       |
-| `binary`      | Boolean | _(Optional)_ If `true`, return transaction data and metadata as binary [serialized](serialization.html) to hexadecimal strings. If `false`, return transaction data and metadata as JSON. The default is `false`. |
-| `min_ledger`  | Number  | _(Optional)_ Use this with `max_ledger` to specify a range of up to 1000 [ledger indexes][ledger index], starting with this ledger (inclusive). If the server [cannot find the transaction](#not-found-response), it confirms whether it was able to search all the ledgers in this range. [New in: rippled 1.5.0][] |
-| `max_ledger`  | Number  | _(Optional)_ Use this with `min_ledger` to specify a range of up to 1000 [ledger indexes][ledger index], ending with this ledger (inclusive). If the server [cannot find the transaction](#not-found-response), it confirms whether it was able to search all the ledgers in the requested range. [New in: rippled 1.5.0][] |
+| `binary`      | Boolean | _(Optional)_ If `true`, return transaction data and metadata as binary [serialized](../../../protocol-reference/serialization.md) to hexadecimal strings. If `false`, return transaction data and metadata as JSON. The default is `false`. |
+| `min_ledger`  | Number  | _(Optional)_ Use this with `max_ledger` to specify a range of up to 1000 [ledger indexes][ledger index], starting with this ledger (inclusive). If the server [cannot find the transaction](#not-found-response), it confirms whether it was able to search all the ledgers in this range. [New in: rippled 1.5.0](https://github.com/XRPLF/rippled/releases/tag/1.5.0 "BADGE_BLUE") |
+| `max_ledger`  | Number  | _(Optional)_ Use this with `min_ledger` to specify a range of up to 1000 [ledger indexes][ledger index], ending with this ledger (inclusive). If the server [cannot find the transaction](#not-found-response), it confirms whether it was able to search all the ledgers in the requested range. [New in: rippled 1.5.0](https://github.com/XRPLF/rippled/releases/tag/1.5.0 "BADGE_BLUE") |
 
 **Caution:** This command may successfully find the transaction even if it is included in a ledger _outside_ the range of `min_ledger` to `max_ledger`.
 
@@ -438,17 +438,17 @@ An example of a successful response:
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the fields of the [Transaction object](transaction-formats.html) as well as the following additional fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the fields of the [Transaction object](../../../protocol-reference/transactions/transaction-formats.md) as well as the following additional fields:
 
 | `Field`        | Type                             | Description              |
 |:---------------|:---------------------------------|:-------------------------|
-| `date`         | Number                           | A [number of seconds](basic-data-types.html#specifying-time) since January 1, 2000 (00:00 UTC) indicating the [close time](ledger-close-times.html) of the ledger in which the transaction was applied. This value does not have a precise relationship with physical time, and is dependent on the close time resolution. |
+| `date`         | Number                           | A [number of seconds](../../../protocol-reference/data-types/basic-data-types.md#specifying-time) since January 1, 2000 (00:00 UTC) indicating the [close time](../../../../concepts/ledgers/ledger-close-times.md) of the ledger in which the transaction was applied. This value does not have a precise relationship with physical time, and is dependent on the close time resolution. |
 | `hash`         | String                           | The SHA-512 hash of the transaction |
 | `inLedger`     | Number                           | _(Deprecated)_ Alias for `ledger_index`. |
 | `ledger_index` | Number                           | The [ledger index][] of the ledger that includes this transaction. |
-| `meta`         | Object (JSON) or String (binary) | [Transaction metadata](transaction-metadata.html), which describes the results of the transaction. |
+| `meta`         | Object (JSON) or String (binary) | [Transaction metadata](../../../protocol-reference/transactions/transaction-metadata.md), which describes the results of the transaction. |
 | `validated`    | Boolean                          | If `true`, this data comes from a validated ledger version; if omitted or set to `false`, this data is not final. |
-| (Various)      | (Various)                        | Other fields from the [Transaction object](transaction-formats.html) |
+| (Various)      | (Various)                        | Other fields from the [Transaction object](../../../protocol-reference/transactions/transaction-formats.md) |
 
 **Note:** `rippled` 1.7.0 has a known issue where the `meta` field contains JSON even if the request asked for binary. ([#3791](https://github.com/XRPLF/rippled/pull/3791))
 
@@ -459,13 +459,13 @@ If the server does not find the transaction, it returns a `txnNotFound` error, w
 - The transaction has not been included in any ledger version, and has not been executed.
 - The transaction was included in a ledger version that the server does not have available.
 
-This means that a `txnNotFound` on its own is not enough to know the [final outcome of a transaction](finality-of-results.html).
+This means that a `txnNotFound` on its own is not enough to know the [final outcome of a transaction](../../../../concepts/transactions/finality-of-results.md).
 
 To further narrow down the possibilities, you can provide a range of ledgers to search using the `min_ledger` and `max_ledger` fields in the request. If you provide **both** of those fields, the `txnNotFound` response includes the following field:
 
 | `Field`        | Type      | Description                              |
 |:---------------|:----------|:-----------------------------------------|
-| `searched_all` | Boolean   | _(Omitted unless the request provided `min_ledger` and `max_ledger`)_ If `true`, the server was able to search all of the specified ledger versions, and the transaction was in none of them. If `false`, the server did not have all of the specified ledger versions available, so it is not sure if one of them might contain the transaction. [New in: rippled 1.5.0][] |
+| `searched_all` | Boolean   | _(Omitted unless the request provided `min_ledger` and `max_ledger`)_ If `true`, the server was able to search all of the specified ledger versions, and the transaction was in none of them. If `false`, the server did not have all of the specified ledger versions available, so it is not sure if one of them might contain the transaction. [New in: rippled 1.5.0](https://github.com/XRPLF/rippled/releases/tag/1.5.0 "BADGE_BLUE") |
 
 An example of a `txnNotFound` response that fully searched a requested range of ledgers:
 

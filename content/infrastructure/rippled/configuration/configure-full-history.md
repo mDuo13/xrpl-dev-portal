@@ -20,7 +20,7 @@ Acquiring full history from the peer-to-peer network takes a long time (several 
 
 You do not need a full history server to participate in the network, validate transactions, or know the current state of the network. Full history is only useful for knowing the outcome of transactions that occurred in the past, or the state of the ledger at a given time in the past. To get such information, you must rely on other servers having the history you need.
 
-If you want to contribute to storing the history of the XRP Ledger network without storing the full history, you can [configure history sharding](configure-history-sharding.html) to store randomly-selected chunks of ledger history instead.
+If you want to contribute to storing the history of the XRP Ledger network without storing the full history, you can [configure history sharding](configure-history-sharding.md) to store randomly-selected chunks of ledger history instead.
 
 ## Configuration Steps
 
@@ -38,9 +38,9 @@ To configure your server to acquire and store full history, complete the followi
       	#online_delete=2000
       	#advisory_delete=0
 
-    On a full-history server, you should use NuDB for the ledger store, because RocksDB requires too much RAM when the database is that large. For more information, see [Capacity Planning](capacity-planning.html). You can remove the following performance-related configuration options from the default `[node_db]` stanza, because they only apply to RocksDB: `open_files`, `filter_bits`, `cache_mb`, `file_size_mb`, and `file_size_mult.`
+    On a full-history server, you should use NuDB for the ledger store, because RocksDB requires too much RAM when the database is that large. For more information, see [Capacity Planning](../installation/capacity-planning.md). You can remove the following performance-related configuration options from the default `[node_db]` stanza, because they only apply to RocksDB: `open_files`, `filter_bits`, `cache_mb`, `file_size_mb`, and `file_size_mult.`
 
-    **Caution:** If you have any history already downloaded with RocksDB, you must either delete that data or change the paths to the databases in the config file when you switch to NuDB. You must change both the `path` field of the `[node_db]` stanza **and** the `[database_path]` (SQLite database) setting. Otherwise, the server may [fail to start](server-wont-start.html#state-db-error).
+    **Caution:** If you have any history already downloaded with RocksDB, you must either delete that data or change the paths to the databases in the config file when you switch to NuDB. You must change both the `path` field of the `[node_db]` stanza **and** the `[database_path]` (SQLite database) setting. Otherwise, the server may [fail to start](../troubleshooting/server-wont-start.md#state-db-error).
 
     {% include '_snippets/conf-file-location.md' %}<!--_ -->
 
@@ -75,7 +75,7 @@ To configure your server to acquire and store full history, complete the followi
 
 0. Start the `rippled` server, importing the database dump if you have one available:
 
-    If you have a database dump to load configured in `[import_db]`, start the server explicitly and include the `--import` [commandline option](commandline-usage.html#daemon-mode-options):
+    If you have a database dump to load configured in `[import_db]`, start the server explicitly and include the `--import` [commandline option](../commandline-usage.md#daemon-mode-options):
 
         $ /opt/ripple/bin/rippled --conf /etc/opt/ripple/rippled.cfg --import
 
@@ -89,27 +89,27 @@ To configure your server to acquire and store full history, complete the followi
 
     Otherwise, your server may try to import the same data again the next time it is restarted.
 
-0. Monitor your server's available history with the [server_info method][].
+0. Monitor your server's available history with the [server_info method](../../../references/http-websocket-apis/public-api-methods/server-info-methods/server_info.md).
 
     The range of available ledgers reported in the `complete_ledgers` field should increase over time.
 
-    The earliest available ledger version in the production XRP Ledger's history is ledger index **32570**. The first two weeks or so of ledger history was lost due to a bug in the server at the time. [Test nets and other chains](parallel-networks.html) generally have history going back to ledger index **1**.
+    The earliest available ledger version in the production XRP Ledger's history is ledger index **32570**. The first two weeks or so of ledger history was lost due to a bug in the server at the time. [Test nets and other chains](../../../concepts/networks-and-servers/parallel-networks.md) generally have history going back to ledger index **1**.
 
 ## See Also
 
 - **Concepts:**
-    - [Ledger History](ledger-history.html)
-    - [rippled Server Modes](rippled-server-modes.html)
+    - [Ledger History](../../../concepts/networks-and-servers/ledger-history/ledger-history.md)
+    - [rippled Server Modes](../../../concepts/networks-and-servers/rippled-server-modes.md)
 - **Tutorials:**
-    - [Capacity Planning](capacity-planning.html), particularly [Disk Space](capacity-planning.html#disk-space)
-    - [Configure Online Deletion](configure-online-deletion.html)
-    - [Diagnosing Problems with rippled](diagnosing-problems.html)
-    - [Understanding Log Messages](understanding-log-messages.html)
+    - [Capacity Planning](../installation/capacity-planning.md), particularly [Disk Space](../installation/capacity-planning.md#disk-space)
+    - [Configure Online Deletion](configure-online-deletion.md)
+    - [Diagnosing Problems with rippled](../troubleshooting/diagnosing-problems.md)
+    - [Understanding Log Messages](../troubleshooting/understanding-log-messages.md)
 - **References:**
-    - [server_info method][]
-    - [can_delete method][]
-    - [Ledger Data Formats](ledger-data-formats.html)
-    - [rippled Commandline Usage Reference](commandline-usage.html)
+    - [server_info method](../../../references/http-websocket-apis/public-api-methods/server-info-methods/server_info.md)
+    - [can_delete method](../../../references/http-websocket-apis/admin-api-methods/logging-and-data-management-methods/can_delete.md)
+    - [Ledger Data Formats](../../../references/protocol-reference/ledger-data/ledger-data-formats.md)
+    - [rippled Commandline Usage Reference](../commandline-usage.md)
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

@@ -6,7 +6,7 @@ status: removed
 ---
 # Fix SQLite Transaction Database Page Size Issue
 
-`rippled` servers with full [ledger history](ledger-history.html) (or a very large amount of transaction history) and a database that was initially created with a `rippled` version earlier than 0.40.0 (released January 2017) may encounter a problem with their SQLite database page size that stops the server from operating properly. Servers that store only recent transaction history (the default configuration) and servers whose database files were created with `rippled` version 0.40.0 and later are not likely to have this problem. <!-- STYLE_OVERRIDE: encounter -->
+`rippled` servers with full [ledger history](../../../concepts/networks-and-servers/ledger-history/ledger-history.md) (or a very large amount of transaction history) and a database that was initially created with a `rippled` version earlier than 0.40.0 (released January 2017) may encounter a problem with their SQLite database page size that stops the server from operating properly. Servers that store only recent transaction history (the default configuration) and servers whose database files were created with `rippled` version 0.40.0 and later are not likely to have this problem. <!-- STYLE_OVERRIDE: encounter -->
 
 This document describes steps to detect and correct this problem if it occurs.
 
@@ -16,7 +16,7 @@ This document describes steps to detect and correct this problem if it occurs.
 
 The capacity of the SQLite database is a result of the database's _page size_ parameter, which cannot be easily changed after the database is created. (For more information on SQLite's internals, see [the official SQLite documentation](https://www.sqlite.org/fileformat.html).) The database can reach its capacity even if there is still free space on the disk and filesystem where it is stored. As described in the [Fix](#fix) below, reconfiguring the page size to avoid this problem requires a somewhat time-consuming migration process. <!-- STYLE_OVERRIDE: easily -->
 
-**Tip:** Full history is not necessary for most use cases. Servers with full transaction history may be useful for long-term analysis and archive purposes or as a precaution against disasters. For a less resource-intense way to contribute to the storage of transaction history, see [History Sharding](history-sharding.html).
+**Tip:** Full history is not necessary for most use cases. Servers with full transaction history may be useful for long-term analysis and archive purposes or as a precaution against disasters. For a less resource-intense way to contribute to the storage of transaction history, see [History Sharding](../../../concepts/networks-and-servers/ledger-history/history-sharding.md).
 
 
 ## Detection
@@ -154,11 +154,11 @@ To migrate your transaction database to a larger page size, perform the followin
 
 11. Confirm that the `rippled` service started successfully.
 
-    You can use the [commandline interface](get-started-using-http-websocket-apis.html#commandline) to check the server status (unless you have configured your server not to accept JSON-RPC requests). For example:
+    You can use the [commandline interface](../../../tutorials/get-started/get-started-using-http-websocket-apis.md#commandline) to check the server status (unless you have configured your server not to accept JSON-RPC requests). For example:
 
         /opt/ripple/bin/rippled server_info
 
-    For a description of the expected response from this command, see the [server_info method][] documentation.
+    For a description of the expected response from this command, see the [server_info method](../../../references/http-websocket-apis/public-api-methods/server-info-methods/server_info.md) documentation.
 
 12. Watch the server's debug log to confirm that the `SQLite page size` is now 4096:
 
@@ -177,14 +177,14 @@ To migrate your transaction database to a larger page size, perform the followin
 
 - **Concepts:**
     - [The `rippled` Server](xrpl-servers.html)
-    - [Ledger History](ledger-history.html)
+    - [Ledger History](../../../concepts/networks-and-servers/ledger-history/ledger-history.md)
 - **Tutorials:**
-    - [Understanding Log Messages](understanding-log-messages.html)
-    - [Configure Full History](configure-full-history.html)
+    - [Understanding Log Messages](understanding-log-messages.md)
+    - [Configure Full History](../configuration/configure-full-history.md)
 - **References:**
     - [rippled API Reference](http-websocket-apis.html)
-        - [`rippled` Commandline Usage](commandline-usage.html)
-        - [server_info method][]
+        - [`rippled` Commandline Usage](../commandline-usage.md)
+        - [server_info method](../../../references/http-websocket-apis/public-api-methods/server-info-methods/server_info.md)
 
 
 <!--{# common link defs #}-->

@@ -35,7 +35,7 @@ Sequester XRP until the escrow process either finishes or is canceled.
 <!--{# fix md highlighting_ #}-->
 
 
-| Field            | JSON Type | [Internal Type][] | Description               |
+| Field            | JSON Type | [Internal Type](../../serialization.md) | Description               |
 |:-----------------|:----------|:------------------|:--------------------------|
 | `Amount`         | String    | Amount            | Amount of [XRP, in drops][Currency Amount], to deduct from the sender's balance and escrow. Once escrowed, the XRP can either go to the `Destination` address (after the `FinishAfter` time) or returned to the sender (after the `CancelAfter` time). |
 | `Destination`    | String    | AccountID         | Address to receive escrowed XRP. |
@@ -56,7 +56,7 @@ You must specify one of the following combinations of fields:
 
 It is not possible to create a conditional escrow with no expiration, but you can specify an expiration that is very far in the future.
 
-**Note:** Before the [fix1571 amendment][] became enabled on 2018-06-19, it was possible to create an escrow with `CancelAfter` only. These escrows could be finished by anyone at any time before the specified expiration.
+**Note:** Before the [fix1571 amendment](known-amendments.html#fix1571) became enabled on 2018-06-19, it was possible to create an escrow with `CancelAfter` only. These escrows could be finished by anyone at any time before the specified expiration.
 
 
 <!--{# common link defs #}-->

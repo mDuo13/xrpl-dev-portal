@@ -8,9 +8,9 @@ labels:
 # nft_sell_offers
 [[Source]](https://github.com/XRPLF/rippled/blob/master/src/ripple/rpc/handlers/NFTOffers.cpp "Source")
 
-The `nft_sell_offers` method returns a list of sell offers for a given [NFToken][] object.
+The `nft_sell_offers` method returns a list of sell offers for a given [NFToken](../../../protocol-reference/data-types/nftoken.md) object.
 
-_(Added by the [NonFungibleTokensV1_1 amendment][].)_
+_(Added by the [NonFungibleTokensV1_1 amendment](known-amendments.html#nonfungibletokensv1_1).)_
 
 ## Request Format
 An example of the request format:
@@ -99,23 +99,23 @@ An example of a successful response:
 <!-- MULTICODE_BLOCK_END -->
 
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`  | Type       | Description                                          |
 |:---------|:-----------|:-----------------------------------------------------|
 | `nft_id` | String     | The NFToken these offers are for, as specified in the request. |
 | `offers` | Array      | A list of buy offers for the token. Each of these is formatted as a **Sell Offer** (see below). |
 | `limit`  | Number     | _(May be omitted)_ The `limit`, as specified in the request. |
-| `marker` | [Marker][] | _(May be omitted)_ Server-defined value indicating the response is paginated. Pass this to the next call to resume where this call left off. Omitted when there are no pages of information after this one. |
+| `marker` | [Marker](../../api-conventions/markers-and-pagination.md) | _(May be omitted)_ Server-defined value indicating the response is paginated. Pass this to the next call to resume where this call left off. Omitted when there are no pages of information after this one. |
 
 ### Sell Offers
 
-Each member of the `offers` array represents one [NFTokenOffer object][] to buy the NFT in question and has the following fields:
+Each member of the `offers` array represents one [NFTokenOffer object](../../../protocol-reference/ledger-data/ledger-entry-types/nftokenoffer.md) to buy the NFT in question and has the following fields:
 
 | `Field`           | Type             | Description                           |
 |:------------------|:-----------------|:--------------------------------------|
 | `amount`          | String or Object | The amount offered to sell the NFT for, as a String representing an amount in drops of XRP, or an object representing an amount of a fungible token. (See [Specifying Currency Amounts][Currency Amount]) |
-| `flags`           | Number           | A set of bit-flags for this offer. See [NFTokenOffer flags](nftokenoffer.html#nftokenoffer-flags) for possible values. |
+| `flags`           | Number           | A set of bit-flags for this offer. See [NFTokenOffer flags](../../../protocol-reference/ledger-data/ledger-entry-types/nftokenoffer.md#nftokenoffer-flags) for possible values. |
 | `nft_offer_index` | String           | The [ledger object ID](ledger-object-ids.html) of this offer. |
 | `owner`           | String           | The account that placed this offer.   |
 

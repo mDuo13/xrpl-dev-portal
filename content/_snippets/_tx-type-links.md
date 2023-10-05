@@ -1,4 +1,4 @@
-{% set txtypes = [
+{#{% set txtypes = [
     "AccountDelete",
     "AccountSet",
     "AMMBid",
@@ -53,3 +53,4 @@
 [{{tx}} pseudo-transactions]: {{tx|lower}}.html
 [{{tx}}疑似トランザクション]: {{tx|lower}}.html
 {% endfor %}
+#}

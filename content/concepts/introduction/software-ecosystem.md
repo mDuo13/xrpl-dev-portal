@@ -27,7 +27,7 @@ The peer-to-peer network at the heart of the XRP Ledger requires a highly-reliab
 
 ![Core Servers](img/ecosystem-peer-to-peer.svg)
 
-Every core server syncs to the same network (unless it's configured to follow a [test network](parallel-networks.html)) and has access to all communications across the network. Every server on the network keeps a complete copy of the latest state data for the entire XRP Ledger, along with recent transactions and a record of the changes those transactions made, and every server processes every transaction independently while verifying that its outcome matches the rest of the network. Servers can be configured to keep more [ledger history](ledger-history.html) and to participate in the consensus process as a [validator](rippled-server-modes.html#validators).
+Every core server syncs to the same network (unless it's configured to follow a [test network](../networks-and-servers/parallel-networks.md)) and has access to all communications across the network. Every server on the network keeps a complete copy of the latest state data for the entire XRP Ledger, along with recent transactions and a record of the changes those transactions made, and every server processes every transaction independently while verifying that its outcome matches the rest of the network. Servers can be configured to keep more [ledger history](../networks-and-servers/ledger-history/ledger-history.md) and to participate in the consensus process as a [validator](../networks-and-servers/rippled-server-modes.md#validators).
 
 Core servers expose [HTTP / WebSocket APIs](http-websocket-apis.html) for users to look up data, administer the server, and submit transactions. Some servers also serve HTTP / WebSocket APIs but don't connect directly to the peer-to-peer network and don't process transactions or participate in consensus. These servers, such as `rippled` servers running in Reporting Mode and Clio servers, rely on a core server in P2P mode to process transactions.
 
@@ -42,7 +42,7 @@ One core feature of most client libraries is signing transactions locally, so us
 
 Many middleware services use client libraries internally.
 
-See [Client Libraries](client-libraries.html) for some information about currently available client libraries.
+See [Client Libraries](../../references/client-libraries.md) for some information about currently available client libraries.
 
 
 ### Middleware

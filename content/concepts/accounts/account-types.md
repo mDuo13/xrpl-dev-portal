@@ -40,7 +40,7 @@ If a malicious actor learns the secret key behind a institution's issuing addres
 
 ### Multiple Issuing Addresses
 
-A financial institution can issue more than one type of token in the XRP Ledger from a single issuing address. However, there are some settings that apply equally to all (fungible) tokens issued from an address, including the percentage for [transfer fees](transfer-fees.html) and the [global freeze](freezes.html) status. If the financial institution wants the flexibility to manage settings differently for each type of token, the institution must multiple issuing addresses.
+A financial institution can issue more than one type of token in the XRP Ledger from a single issuing address. However, there are some settings that apply equally to all (fungible) tokens issued from an address, including the percentage for [transfer fees](../tokens/transfer-fees.md) and the [global freeze](../tokens/freezes.md) status. If the financial institution wants the flexibility to manage settings differently for each type of token, the institution must multiple issuing addresses.
 
 
 ## Operational Addresses
@@ -70,15 +70,15 @@ If a standby address is compromised, the consequences are like an operational ad
 ## See Also
 
 - **Concepts:**
-    - [Accounts](accounts.html)
-    - [Cryptographic Keys](cryptographic-keys.html)
+    - [Accounts](accounts.md)
+    - [Cryptographic Keys](cryptographic-keys.md)
 - **Tutorials:**
-    - [Assign a Regular Key Pair](assign-a-regular-key-pair.html)
-    - [Change or Remove a Regular Key Pair](change-or-remove-a-regular-key-pair.html)
+    - [Assign a Regular Key Pair](../../tutorials/manage-account-settings/assign-a-regular-key-pair.md)
+    - [Change or Remove a Regular Key Pair](../../tutorials/manage-account-settings/change-or-remove-a-regular-key-pair.md)
 - **References:**
-    - [account_info method][]
-    - [SetRegularKey transaction][]
-    - [AccountRoot object](accountroot.html)
+    - [account_info method](../../references/http-websocket-apis/public-api-methods/account-methods/account_info.md)
+    - [SetRegularKey transaction](../../references/protocol-reference/transactions/transaction-types/setregularkey.md)
+    - [AccountRoot object](../../references/protocol-reference/ledger-data/ledger-entry-types/accountroot.md)
 
 
 <!--{# common link defs #}-->

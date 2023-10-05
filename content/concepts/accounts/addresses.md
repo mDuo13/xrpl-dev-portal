@@ -9,7 +9,7 @@ labels:
 
 {% include '_snippets/data_types/address.md' %}
 
-Any valid address can [become an account in the XRP Ledger](accounts.html#creating-accounts) by being funded. You can also use an address that has not been funded to represent a [regular key](cryptographic-keys.html) or a member of a [signer list](multi-signing.html). Only a funded account can be the sender of a transaction.
+Any valid address can [become an account in the XRP Ledger](accounts.md#creating-accounts) by being funded. You can also use an address that has not been funded to represent a [regular key](cryptographic-keys.md) or a member of a [signer list](../transactions/multi-signing.md). Only a funded account can be the sender of a transaction.
 
 Creating a valid address is a strictly mathematical task starting with a key pair. You can generate a key pair and calculate its address entirely offline without communicating to the XRP Ledger or any other party. The conversion from a public key to an address involves a one-way hash function, so it is possible to confirm that a public key matches an address but it is impossible to derive the public key from the address alone. (This is part of the reason why signed transactions include the public key _and_ the address of the sender.)
 
@@ -21,11 +21,11 @@ Some addresses have special meaning, or historical uses, in the XRP Ledger. In m
 
 | Address                       | Name | Meaning | Black Hole? |
 |-------------------------------|------|---------|-------------|
-| `rrrrrrrrrrrrrrrrrrrrrhoLvTp` | ACCOUNT\_ZERO | An address that is the XRP Ledger's [base58][] encoding of the value `0`. In peer-to-peer communications, `rippled` uses this address as the issuer for XRP. | Yes |
-| `rrrrrrrrrrrrrrrrrrrrBZbvji`  | ACCOUNT\_ONE | An address that is the XRP Ledger's [base58][] encoding of the value `1`. In the ledger, [RippleState entries](ripplestate.html) use this address as a placeholder for the issuer of a trust line balance. | Yes |
+| `rrrrrrrrrrrrrrrrrrrrrhoLvTp` | ACCOUNT\_ZERO | An address that is the XRP Ledger's [base58](base58-encodings.html) encoding of the value `0`. In peer-to-peer communications, `rippled` uses this address as the issuer for XRP. | Yes |
+| `rrrrrrrrrrrrrrrrrrrrBZbvji`  | ACCOUNT\_ONE | An address that is the XRP Ledger's [base58](base58-encodings.html) encoding of the value `1`. In the ledger, [RippleState entries](../../references/protocol-reference/ledger-data/ledger-entry-types/ripplestate.md) use this address as a placeholder for the issuer of a trust line balance. | Yes |
 | `rHb9CJAWyB4rj91VRWn96DkukG4bwdtyTh` | The genesis account | When `rippled` starts a new genesis ledger from scratch (for example, in stand-alone mode), this account holds all the XRP. This address is generated from the seed value `masterpassphrase` which is [hard-coded](https://github.com/XRPLF/rippled/blob/94ed5b3a53077d815ad0dd65d490c8d37a147361/src/ripple/app/ledger/Ledger.cpp#L184). | No |
 | `rrrrrrrrrrrrrrrrrNAMEtxvNvQ` | Ripple Name reservation black-hole | In the past, Ripple asked users to send XRP to this account to reserve Ripple Names.| Yes |
-| `rrrrrrrrrrrrrrrrrrrn5RM1rHd` | NaN Address | Previous versions of [ripple-lib](https://github.com/XRPLF/xrpl.js) generated this address when encoding the value [NaN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN) using the XRP Ledger's [base58][] string encoding format. | Yes |
+| `rrrrrrrrrrrrrrrrrrrn5RM1rHd` | NaN Address | Previous versions of [ripple-lib](https://github.com/XRPLF/xrpl.js) generated this address when encoding the value [NaN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN) using the XRP Ledger's [base58](base58-encodings.html) string encoding format. | Yes |
 
 
 ## Address Encoding
@@ -34,13 +34,13 @@ Some addresses have special meaning, or historical uses, in the XRP Ledger. In m
 
 [[Source]](https://github.com/XRPLF/rippled/blob/35fa20a110e3d43ffc1e9e664fc9017b6f2747ae/src/ripple/protocol/impl/AccountID.cpp#L109-L140 "Source")
 
-XRP Ledger addresses are encoded using [base58][] with the _dictionary_ `rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz`. Since the XRP Ledger encodes several types of keys with base58, it prefixes the encoded data with a one-byte "type prefix" (also called a "version prefix") to distinguish them. The type prefix causes addresses to usually start with different letters in base58 format.
+XRP Ledger addresses are encoded using [base58](base58-encodings.html) with the _dictionary_ `rpshnaf39wBUDNEGHJKLM4PQRST7VWXYZ2bcdeCg65jkm8oFqi1tuvAxyz`. Since the XRP Ledger encodes several types of keys with base58, it prefixes the encoded data with a one-byte "type prefix" (also called a "version prefix") to distinguish them. The type prefix causes addresses to usually start with different letters in base58 format.
 
 The following diagram shows the relationship between keys and addresses:
 
 {{ include_svg("img/address-encoding.svg", "Master Public Key + Type Prefix → Account ID + Checksum → Address") }}
 
-The formula for calculating an XRP Ledger address from a public key is as follows. For the complete example code, see [`encode_address.js`](https://github.com/XRPLF/xrpl-dev-portal/blob/master/content/_code-samples/address_encoding/js/encode_address.js). For the process of deriving a public key from a passphrase or seed value, see [Key Derivation](cryptographic-keys.html#key-derivation).
+The formula for calculating an XRP Ledger address from a public key is as follows. For the complete example code, see [`encode_address.js`](https://github.com/XRPLF/xrpl-dev-portal/blob/master/content/_code-samples/address_encoding/js/encode_address.js). For the process of deriving a public key from a passphrase or seed value, see [Key Derivation](cryptographic-keys.md#key-derivation).
 
 1. Import required algorithms: SHA-256, RIPEMD160, and base58. Set the dictionary for base58.
 

@@ -36,12 +36,12 @@ Much of this is “brute force” code that sacrifices conciseness for readabili
 
 In this quickstart, you can:
 
-1. [Create Accounts and Send XRP](py-create-accounts-send-xrp.html)
-2. [Create Trust Line and Send Currency](py-create-trustline-send-currency.html).
-3. [Mint and Burn NFTs](py-mint-and-burn-nfts.html).
-4. [Transfer NFTs](py-transfer-nfts.html).
+1. [Create Accounts and Send XRP](py-create-accounts-send-xrp.md)
+2. [Create Trust Line and Send Currency](py-create-trustline-send-currency.md).
+3. [Mint and Burn NFTs](py-mint-and-burn-nfts.md).
+4. [Transfer NFTs](py-transfer-nfts.md).
 
-There are also expanded lessons demonstrating how to [Broker an NFT Sale](py-broker-sale.html) and [Assign an Authorized Minter](py-authorize-minter.html).
+There are also expanded lessons demonstrating how to [Broker an NFT Sale](py-broker-sale.md) and [Assign an Authorized Minter](py-authorize-minter.md).
 
 
 ## Prerequisites

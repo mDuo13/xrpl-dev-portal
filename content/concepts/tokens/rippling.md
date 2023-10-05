@@ -8,9 +8,9 @@ labels:
 ---
 # Rippling
 
-In the XRP Ledger, "rippling" describes a process of atomic net settlement between multiple connected parties who have [trust lines](trust-lines-and-issuing.html) for the same token. Rippling is essential, because it allows users who hold tokens to send those to each other with the issuer as a passive intermediary. In a sense, rippling is like a passive, two-way [exchange order](offers.html) with no limit and a 1:1 exchange rate for two tokens with the same currency code but different issuers.
+In the XRP Ledger, "rippling" describes a process of atomic net settlement between multiple connected parties who have [trust lines](trust-lines-and-issuing.md) for the same token. Rippling is essential, because it allows users who hold tokens to send those to each other with the issuer as a passive intermediary. In a sense, rippling is like a passive, two-way [exchange order](offers.md) with no limit and a 1:1 exchange rate for two tokens with the same currency code but different issuers.
 
-Rippling only occurs along the [paths](paths.html) of a payment. [Direct XRP-to-XRP payments](direct-xrp-payments.html) do not involve rippling.
+Rippling only occurs along the [paths](paths.md) of a payment. [Direct XRP-to-XRP payments](../payment-types/direct-xrp-payments.md) do not involve rippling.
 
 For non-issuing accounts, rippling can be undesirable because it lets other users shift obligations between tokens with the same currency code but different issuers. The [No Ripple Flag](#the-no-ripple-flag) disables rippling by default when others open trust lines to your account, unless you enable rippling by default using the [Default Ripple flag](#the-default-ripple-flag).
 
@@ -63,7 +63,7 @@ The No Ripple flag makes certain paths invalid, so that they cannot be used to m
 
 The **Default Ripple** flag is an account setting that enables rippling on all _incoming_ trust lines by default. Issuers MUST enable this flag for their customers to be able to send tokens to each other.
 
-The Default Ripple setting of your account does not affect trust lines that you create; only trust lines that others open to you. If you change the Default Ripple setting of your account, trust lines that were created before the change keep their existing No Ripple settings. You can use a [TrustSet transaction][] to change the No Ripple setting of a trust line to match your address's new default.
+The Default Ripple setting of your account does not affect trust lines that you create; only trust lines that others open to you. If you change the Default Ripple setting of your account, trust lines that were created before the change keep their existing No Ripple settings. You can use a [TrustSet transaction](../../references/protocol-reference/transactions/transaction-types/trustset.md) to change the No Ripple setting of a trust line to match your address's new default.
 
 
 ## Using No Ripple
@@ -73,28 +73,28 @@ The Default Ripple setting of your account does not affect trust lines that you 
 
 The No Ripple flag can only be enabled on a trust line if the address has a positive or zero balance on that trust line. This is so that the feature cannot be abused to default on the obligation the trust line balance represents. (Of course, you can still default by abandoning the address.)
 
-To enable the No Ripple flag, send a [TrustSet transaction][] with the `tfSetNoRipple` flag. You can disable the No Ripple flag (that is, allow rippling) with the `tfClearNoRipple` flag instead.
+To enable the No Ripple flag, send a [TrustSet transaction](../../references/protocol-reference/transactions/transaction-types/trustset.md) with the `tfSetNoRipple` flag. You can disable the No Ripple flag (that is, allow rippling) with the `tfClearNoRipple` flag instead.
 
 
 ### Looking Up No Ripple Status
 
 In the case of two accounts that mutually trust each other, the No Ripple flag is tracked separately for each account.
 
-Using the [HTTP / WebSocket APIs](http-websocket-apis.html) or your preferred [client library](client-libraries.html), look up trust lines with the [account_lines method][]. For each trust line, the `no_ripple` field shows whether the current address has enabled the No Ripple flag on that trust line, and the `no_ripple_peer` field shows whether the counterparty has enabled the No Ripple flag.
+Using the [HTTP / WebSocket APIs](http-websocket-apis.html) or your preferred [client library](../../references/client-libraries.md), look up trust lines with the [account_lines method](../../references/http-websocket-apis/public-api-methods/account-methods/account_lines.md). For each trust line, the `no_ripple` field shows whether the current address has enabled the No Ripple flag on that trust line, and the `no_ripple_peer` field shows whether the counterparty has enabled the No Ripple flag.
 
 ## See Also
 
 - **Concepts:**
-    - [Paths](paths.html)
+    - [Paths](paths.md)
 - **Tutorials:**
-    - [Stablecoin Issuer](stablecoin-issuer.html)
+    - [Stablecoin Issuer](../../use-cases/tokenization/stablecoin-issuer.md)
 - **References:**
-    - [account_lines method][]
-    - [account_info method][]
-    - [AccountSet transaction][]
-    - [TrustSet transaction][]
-    - [AccountRoot Flags](accountroot.html#accountroot-flags)
-    - [RippleState (trust line) Flags](ripplestate.html#ripplestate-flags)
+    - [account_lines method](../../references/http-websocket-apis/public-api-methods/account-methods/account_lines.md)
+    - [account_info method](../../references/http-websocket-apis/public-api-methods/account-methods/account_info.md)
+    - [AccountSet transaction](../../references/protocol-reference/transactions/transaction-types/accountset.md)
+    - [TrustSet transaction](../../references/protocol-reference/transactions/transaction-types/trustset.md)
+    - [AccountRoot Flags](../../references/protocol-reference/ledger-data/ledger-entry-types/accountroot.md#accountroot-flags)
+    - [RippleState (trust line) Flags](../../references/protocol-reference/ledger-data/ledger-entry-types/ripplestate.md#ripplestate-flags)
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

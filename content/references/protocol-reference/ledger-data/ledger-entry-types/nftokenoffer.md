@@ -7,9 +7,9 @@ labels:
 ---
 # NFTokenOffer
 
-An `NFTokenOffer` entry represents an offer to buy, sell or transfer an [NFT](non-fungible-tokens.html).
+An `NFTokenOffer` entry represents an offer to buy, sell or transfer an [NFT](../../../../concepts/tokens/non-fungible-tokens.md).
 
-_(Added by the [NonFungibleTokensV1_1 amendment][].)_
+_(Added by the [NonFungibleTokensV1_1 amendment](known-amendments.html#nonfungibletokensv1_1).)_
 
 ## Example {{currentpage.name}} JSON
 
@@ -31,7 +31,7 @@ _(Added by the [NonFungibleTokensV1_1 amendment][].)_
 
 ### {{currentpage.name}} Fields
 
-| Name                |JSON Type         | [Internal Type][] | Required?   | Description |
+| Name                |JSON Type         | [Internal Type](../../serialization.md) | Required?   | Description |
 |:--------------------|:-----------------|:------------------|:------------|:-----------|
 | `Amount`            | [Currency Amount][] | AMOUNT            | Yes         | Amount expected or offered for the NFToken. If the token has the `lsfOnlyXRP` flag set, the amount must be specified in XRP. Sell offers that specify assets other than XRP must specify a non-zero amount. Sell offers that specify XRP can be 'free' (that is, the Amount field can be equal to `"0"`). |
 | `Destination`       | string           | AccountID         | No          | The AccountID for which this offer is intended. If present, only that account can accept the offer. |
@@ -56,18 +56,18 @@ _(Added by the [NonFungibleTokensV1_1 amendment][].)_
 
 ## NFTokenOffer Transactions
 
-Unlike [Offers for fungible tokens](offers.html), a `NFTokenOffer` is not stored in an order book and is never automatically matched or executed. A buyer must _explicitly_ choose to accept an `NFTokenOffer` that offers to buy a `NFToken`. Similarly, a seller must _explicitly_ choose to accept a specific `NFTokenOffer` that offers to buy a `NFToken` object that they own.
+Unlike [Offers for fungible tokens](../../../../concepts/tokens/offers.md), a `NFTokenOffer` is not stored in an order book and is never automatically matched or executed. A buyer must _explicitly_ choose to accept an `NFTokenOffer` that offers to buy a `NFToken`. Similarly, a seller must _explicitly_ choose to accept a specific `NFTokenOffer` that offers to buy a `NFToken` object that they own.
 
 The transactions for `NFToken` trading are:
 
-- [NFTokenCreateOffer][]
-- [NFTokenCancelOffer][]
-- [NFTokenAcceptOffer][]
+- [NFTokenCreateOffer](../../transactions/transaction-types/nftokencreateoffer.md)
+- [NFTokenCancelOffer](../../transactions/transaction-types/nftokencanceloffer.md)
+- [NFTokenAcceptOffer](../../transactions/transaction-types/nftokenacceptoffer.md)
 
 
 ## Locating NFTokenOffer entries
 
-Each unique NFT has up to two [directories](directorynode.html): one contains offers to buy the token and the other contains offers to sell the token. (These two directories are created as necessary and deleted if empty.) Marketplaces or other client applications can use these directories to find and display offers to trade `NFToken` objects to users or even automatically match them and accept them.
+Each unique NFT has up to two [directories](directorynode.md): one contains offers to buy the token and the other contains offers to sell the token. (These two directories are created as necessary and deleted if empty.) Marketplaces or other client applications can use these directories to find and display offers to trade `NFToken` objects to users or even automatically match them and accept them.
 
 
 ### NFTokenOffer Reserve

@@ -16,7 +16,7 @@ These instructions install a binary that has been compiled by Ripple. For instru
 
 Before you install Clio, you must meet the following requirements.
 
-- Ensure that your system meets the [system requirements](system-requirements.html).
+- Ensure that your system meets the [system requirements](../rippled/installation/system-requirements.md).
 
     **Note:** Clio has the same system requirements as the `rippled` server, except Clio needs less disk space to store the same amount of ledger history.
 
@@ -151,4 +151,4 @@ Before you install Clio, you must meet the following requirements.
 ## See Also
 
 - **Concepts:**
-    - [The Clio Server](the-clio-server.html)
+    - [The Clio Server](../../concepts/networks-and-servers/the-clio-server.md)

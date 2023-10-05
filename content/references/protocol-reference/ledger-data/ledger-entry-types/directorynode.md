@@ -13,8 +13,8 @@ The `DirectoryNode` ledger entry type provides a list of links to other entries 
 
 There are two kinds of Directories:
 
-* **Owner directories** list other entries owned by an account, such as [`RippleState` (trust line)](ripplestate.html) or [`Offer`](offer.html) entries.
-* **Offer directories** list the offers available in the [decentralized exchange](decentralized-exchange.html). A single Offer directory contains all the offers that have the same exchange rate for the same token (currency code and issuer).
+* **Owner directories** list other entries owned by an account, such as [`RippleState` (trust line)](ripplestate.md) or [`Offer`](offer.md) entries.
+* **Offer directories** list the offers available in the [decentralized exchange](../../../../concepts/tokens/decentralized-exchange.md). A single Offer directory contains all the offers that have the same exchange rate for the same token (currency code and issuer).
 
 ## Example {{currentpage.name}} JSON
 
@@ -59,7 +59,7 @@ There are two kinds of Directories:
 
 ## {{currentpage.name}} Fields
 
-| Name                | JSON Type | [Internal Type][] | Required? | Description |
+| Name                | JSON Type | [Internal Type](../../serialization.md) | Required? | Description |
 |:--------------------|:----------|:------------------|:----------|:------------|
 | `ExchangeRate`      | String    | UInt64            | No        | (Offer Directories only) **DEPRECATED**. Do not use. |
 | `Flags`             | Number    | UInt32            | Yes       | A bit-map of boolean flags enabled for this object. Currently, the protocol defines no flags for `DirectoryNode` objects. The value is always `0`. |

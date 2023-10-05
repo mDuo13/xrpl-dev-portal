@@ -11,7 +11,7 @@ labels:
 
 _(Added by the [TicketBatch amendment][].)_
 
-A `Ticket` entry type represents a [Ticket](tickets.html), which tracks an account [sequence number][Sequence Number] that has been set aside for future use. You can create new tickets with a [TicketCreate transaction][].
+A `Ticket` entry type represents a [Ticket](../../../../concepts/transactions/tickets.md), which tracks an account [sequence number][Sequence Number] that has been set aside for future use. You can create new tickets with a [TicketCreate transaction](../../transactions/transaction-types/ticketcreate.md).
 
 ## Example {{currentpage.name}} JSON
 
@@ -29,14 +29,14 @@ A `Ticket` entry type represents a [Ticket](tickets.html), which tracks an accou
 
 ## {{currentpage.name}} Fields
 
-In addition to the [common fields](ledger-entry-common-fields.html), `{{currentpage.name}}` entries have the following fields:
+In addition to the [common fields](../ledger-entry-common-fields.md), `{{currentpage.name}}` entries have the following fields:
 
 | Name                | JSON Type | Internal Type | Required? | Description                |
 |:--------------------|:----------|:--------------|:----------|:---------------------------|
-| `Account`           | String    | AccountID     | Yes       | The [account](accounts.html) that owns this Ticket. |
+| `Account`           | String    | AccountID     | Yes       | The [account](../../../../concepts/accounts/accounts.md) that owns this Ticket. |
 | `LedgerEntryType`   | String    | UInt16        | Yes       | The value `0x0054`, mapped to the string `Ticket`, indicates that this is a {{currentpage.name}} entry. |
 | `OwnerNode`         | String    | UInt64        | Yes       | A hint indicating which page of the owner directory links to this entry, in case the directory consists of multiple pages. |
-| `PreviousTxnID`     | String    | Hash256       | Yes       | The identifying hash of the [transaction](transactions.html) that most recently modified this entry. |
+| `PreviousTxnID`     | String    | Hash256       | Yes       | The identifying hash of the [transaction](../../../../concepts/transactions/transactions.md) that most recently modified this entry. |
 | `PreviousTxnLgrSeq` | Number    | UInt32        | Yes       | The [index of the ledger][Ledger Index] that contains the transaction that most recently modified this entry. |
 | `TicketSequence`    | Number    | UInt32        | Yes       | The [Sequence Number][] this Ticket sets aside. |
 

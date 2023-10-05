@@ -8,7 +8,7 @@ labels:
 ---
 # Send a Time-Held Escrow
 
-The [EscrowCreate transaction][] type can create an escrow whose only condition for release is that a specific time has passed. To do this, use the `FinishAfter` field and omit the `Condition` field.
+The [EscrowCreate transaction](../../../references/protocol-reference/transactions/transaction-types/escrowcreate.md) type can create an escrow whose only condition for release is that a specific time has passed. To do this, use the `FinishAfter` field and omit the `Condition` field.
 
 ## 1. Calculate release time
 
@@ -45,7 +45,7 @@ print(release_date_ripple)
 
 ## 2. Submit EscrowCreate transaction
 
-[Sign and submit](transactions.html#signing-and-submitting-transactions) an [EscrowCreate transaction][]. Set the `FinishAfter` field of the transaction to the time when the held payment should be released. Omit the `Condition` field to make time the only condition for releasing the held payment. Set the `Destination` to the recipient, which may be the same address as the sender. Set the `Amount` to the total amount of [XRP, in drops][], to escrow.
+[Sign and submit](../../../concepts/transactions/transactions.md#signing-and-submitting-transactions) an [EscrowCreate transaction](../../../references/protocol-reference/transactions/transaction-types/escrowcreate.md). Set the `FinishAfter` field of the transaction to the time when the held payment should be released. Omit the `Condition` field to make time the only condition for releasing the held payment. Set the `Destination` to the recipient, which may be the same address as the sender. Set the `Amount` to the total amount of [XRP, in drops][], to escrow.
 
 {% include '_snippets/secret-key-warning.md' %} <!--#{ fix md highlighting_ #}-->
 
@@ -82,7 +82,7 @@ Take note of the transaction's identifying `hash` value so you can check its fin
 
 ## 4. Confirm that the escrow was created
 
-Use the [tx method][] with the transaction's identifying hash to check its final status. Look for a `CreatedNode` in the transaction metadata to indicate that it created an [Escrow ledger object](escrow.html).
+Use the [tx method](../../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md) with the transaction's identifying hash to check its final status. Look for a `CreatedNode` in the transaction metadata to indicate that it created an [Escrow ledger object](../../../concepts/payment-types/escrow.md).
 
 Request:
 
@@ -110,9 +110,9 @@ Response:
 
 ## 5. Wait for the release time
 
-Held payments with a `FinishAfter` time cannot be finished until a ledger has already closed with a [`close_time` header field](ledger-header.html) that is later than the Escrow node's `FinishAfter` time.
+Held payments with a `FinishAfter` time cannot be finished until a ledger has already closed with a [`close_time` header field](../../../references/protocol-reference/ledger-data/ledger-header.md) that is later than the Escrow node's `FinishAfter` time.
 
-You can check the close time of the most recently-validated ledger with the [ledger method][]:
+You can check the close time of the most recently-validated ledger with the [ledger method](../../../references/http-websocket-apis/public-api-methods/ledger-methods/ledger.md):
 
 Request:
 
@@ -141,12 +141,12 @@ Response:
 
 ## 6. Submit EscrowFinish transaction
 
-[Sign and submit](transactions.html#signing-and-submitting-transactions) an [EscrowFinish transaction][] to execute the release of the funds after the `FinishAfter` time has passed. Set the `Owner` field of the transaction to the `Account` address from the EscrowCreate transaction, and the `OfferSequence` to the `Sequence` number from the EscrowCreate transaction. For an escrow held only by time, omit the `Condition` and `Fulfillment` fields.
+[Sign and submit](../../../concepts/transactions/transactions.md#signing-and-submitting-transactions) an [EscrowFinish transaction](../../../references/protocol-reference/transactions/transaction-types/escrowfinish.md) to execute the release of the funds after the `FinishAfter` time has passed. Set the `Owner` field of the transaction to the `Account` address from the EscrowCreate transaction, and the `OfferSequence` to the `Sequence` number from the EscrowCreate transaction. For an escrow held only by time, omit the `Condition` and `Fulfillment` fields.
 
 ***TODO: First half of this statement is covered by concept info already. It's also reiterated in escrow.md. The second portion about potential recipients should remain.***
 **Tip:** The EscrowFinish transaction is necessary because the XRP Ledger's state can only be modified by transactions. The sender of this transaction may be the recipient of the escrow, the original sender of the escrow, or any other XRP Ledger address.
 
-If the escrow has expired, you can only [cancel the escrow](cancel-an-expired-escrow.html) instead.
+If the escrow has expired, you can only [cancel the escrow](cancel-an-expired-escrow.md) instead.
 
 {% include '_snippets/secret-key-warning.md' %} <!--#{ fix md highlighting_ #}-->
 
@@ -182,7 +182,7 @@ Take note of the transaction's identifying `hash` value so you can check its fin
 
 ## 8. Confirm final result
 
-Use the [tx method][] with the EscrowFinish transaction's identifying hash to check its final status. In particular, look in the transaction metadata for a `ModifiedNode` of type `AccountRoot` for the destination of the escrowed payment. The `FinalFields` of the object should show the increase in XRP in the `Balance` field.
+Use the [tx method](../../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md) with the EscrowFinish transaction's identifying hash to check its final status. In particular, look in the transaction metadata for a `ModifiedNode` of type `AccountRoot` for the destination of the escrowed payment. The `FinalFields` of the object should show the increase in XRP in the `Balance` field.
 
 Request:
 
@@ -212,20 +212,20 @@ Response:
 ## See Also
 
 - **Concepts:**
-    - [What is XRP?](what-is-xrp.html)
+    - [What is XRP?](../../../concepts/introduction/what-is-xrp.md)
     - [Payment Types](payment-types.html)
-        - [Escrow](escrow.html)
+        - [Escrow](../../../concepts/payment-types/escrow.md)
 - **Tutorials:**
-    - [Send XRP](send-xrp.html)
-    - [Look Up Transaction Results](look-up-transaction-results.html)
-    - [Reliable Transaction Submission](reliable-transaction-submission.html)
+    - [Send XRP](../../get-started/send-xrp.md)
+    - [Look Up Transaction Results](../../../concepts/transactions/look-up-transaction-results.md)
+    - [Reliable Transaction Submission](../../../concepts/transactions/reliable-transaction-submission.md)
 - **References:**
-    - [EscrowCancel transaction][]
-    - [EscrowCreate transaction][]
-    - [EscrowFinish transaction][]
-    - [account_objects method][]
-    - [tx method][]
-    - [Escrow ledger object](escrow-object.html)
+    - [EscrowCancel transaction](../../../references/protocol-reference/transactions/transaction-types/escrowcancel.md)
+    - [EscrowCreate transaction](../../../references/protocol-reference/transactions/transaction-types/escrowcreate.md)
+    - [EscrowFinish transaction](../../../references/protocol-reference/transactions/transaction-types/escrowfinish.md)
+    - [account_objects method](../../../references/http-websocket-apis/public-api-methods/account-methods/account_objects.md)
+    - [tx method](../../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md)
+    - [Escrow ledger object](../../../references/protocol-reference/ledger-data/ledger-entry-types/escrow.md)
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}			

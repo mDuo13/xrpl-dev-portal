@@ -10,7 +10,7 @@ labels:
 
 _Added by the [DepositPreauth amendment][]._
 
-A DepositPreauth transaction gives another account pre-approval to deliver payments to the sender of this transaction. This is only useful if the sender of this transaction is using (or plans to use) [Deposit Authorization](depositauth.html).
+A DepositPreauth transaction gives another account pre-approval to deliver payments to the sender of this transaction. This is only useful if the sender of this transaction is using (or plans to use) [Deposit Authorization](../../../../concepts/accounts/depositauth.md).
 
 **Tip:** You can use this transaction to preauthorize certain counterparties before you enable Deposit Authorization. This may be useful to ensure a smooth transition from not requiring deposit authorization to requiring it.
 
@@ -33,7 +33,7 @@ A DepositPreauth transaction gives another account pre-approval to deliver payme
 <!--{# fix md highlighting_ #}-->
 
 
-| Field         | JSON Type | [Internal Type][] | Description |
+| Field         | JSON Type | [Internal Type](../../serialization.md) | Description |
 |:--------------|:----------|:------------------|:-----|
 | `Authorize`   | String    | AccountID         | _(Optional)_ The XRP Ledger address of the sender to preauthorize. |
 | `Unauthorize` | String    | AccountID         | _(Optional)_ The XRP Ledger address of a sender whose preauthorization should be revoked. |
@@ -42,11 +42,11 @@ You must provide _either_ `Authorize` or `Unauthorize`, but not both.
 
 This transaction has the following limitations:
 
-- An account cannot preauthorize (or unauthorize) its own address. Attempting to do so fails with the result [`temCANNOT_PREAUTH_SELF`](tem-codes.html).
-- Attempting to preauthorize an account which is already preauthorized fails with the result [`tecDUPLICATE`](tec-codes.html).
-- Attempting to unauthorize an account which is not preauthorized fails with the result [`tecNO_ENTRY`](tec-codes.html).
-- Attempting to preauthorize an address that is not funded in the ledger fails with the result [`tecNO_TARGET`](tec-codes.html).
-- Adding authorization adds a [DepositPreauth object](depositpreauth-object.html) to the ledger, which counts toward the [owner reserve requirement](reserves.html#owner-reserves). If the sender of the transaction does not have enough XRP to pay for the increased reserve, the transaction fails with the result [`tecINSUFFICIENT_RESERVE`](tec-codes.html). If the sender of the account is already at the maximum number of owned objects, the transaction fails with the result [`tecDIR_FULL`](tec-codes.html).
+- An account cannot preauthorize (or unauthorize) its own address. Attempting to do so fails with the result [`temCANNOT_PREAUTH_SELF`](../transaction-results/tem-codes.md).
+- Attempting to preauthorize an account which is already preauthorized fails with the result [`tecDUPLICATE`](../transaction-results/tec-codes.md).
+- Attempting to unauthorize an account which is not preauthorized fails with the result [`tecNO_ENTRY`](../transaction-results/tec-codes.md).
+- Attempting to preauthorize an address that is not funded in the ledger fails with the result [`tecNO_TARGET`](../transaction-results/tec-codes.md).
+- Adding authorization adds a [DepositPreauth object](../../ledger-data/ledger-entry-types/depositpreauth.md) to the ledger, which counts toward the [owner reserve requirement](../../../../concepts/accounts/reserves.md#owner-reserves). If the sender of the transaction does not have enough XRP to pay for the increased reserve, the transaction fails with the result [`tecINSUFFICIENT_RESERVE`](../transaction-results/tec-codes.md). If the sender of the account is already at the maximum number of owned objects, the transaction fails with the result [`tecDIR_FULL`](../transaction-results/tec-codes.md).
 
 
 <!--{# common link defs #}-->

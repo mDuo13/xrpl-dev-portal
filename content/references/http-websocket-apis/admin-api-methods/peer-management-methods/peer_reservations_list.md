@@ -8,9 +8,9 @@ labels:
 # peer_reservations_list
 [[Source]](https://github.com/XRPLF/rippled/blob/4a1148eb2849513dd1e7ae080288fd47ab57a376/src/ripple/rpc/handlers/Reservations.cpp#L116 "Source")
 
-The `{{currentpage.name}}` method lists [peer reservations][]. [New in: rippled 1.4.0][]
+The `{{currentpage.name}}` method lists [peer reservations][]. [New in: rippled 1.4.0](https://github.com/XRPLF/rippled/releases/tag/1.4.0 "BADGE_BLUE")
 
-_The `{{currentpage.name}}` method is an [admin method](admin-api-methods.html) that cannot be run by unprivileged users._
+_The `{{currentpage.name}}` method is an [admin method](../admin-api-methods.md) that cannot be run by unprivileged users._
 
 
 ### Request Format
@@ -118,7 +118,7 @@ Loading: "/etc/rippled.cfg"
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`        | Type  | Description                                         |
 |:---------------|:------|:----------------------------------------------------|

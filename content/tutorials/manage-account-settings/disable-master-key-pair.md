@@ -8,9 +8,9 @@ labels:
 ---
 # Disable Master Key Pair
 
-This page describes how to disable the [master key pair](cryptographic-keys.html) that is mathematically associated with an [account](accounts.html)'s address. You should do this if your account's master key pair may have been compromised, or if you want to make [multi-signing](multi-signing.html) the _only_ way to submit transactions from your account.
+This page describes how to disable the [master key pair](../../concepts/accounts/cryptographic-keys.md) that is mathematically associated with an [account](../../concepts/accounts/accounts.md)'s address. You should do this if your account's master key pair may have been compromised, or if you want to make [multi-signing](../../concepts/transactions/multi-signing.md) the _only_ way to submit transactions from your account.
 
-**Warning:** Disabling the master key pair removes one method of [authorizing transactions](transactions.html#authorizing-transactions). You should be sure you can use one of the other ways of authorizing transactions, such as with a regular key or by multi-signing, before you disable the master key pair. (For example, if you [assigned a regular key pair](assign-a-regular-key-pair.html), make sure that you can successfully submit transactions with that regular key.) Due to the decentralized nature of the XRP Ledger, no one can restore access to your account if you cannot use the remaining ways of authorizing transactions.
+**Warning:** Disabling the master key pair removes one method of [authorizing transactions](../../concepts/transactions/transactions.md#authorizing-transactions). You should be sure you can use one of the other ways of authorizing transactions, such as with a regular key or by multi-signing, before you disable the master key pair. (For example, if you [assigned a regular key pair](assign-a-regular-key-pair.md), make sure that you can successfully submit transactions with that regular key.) Due to the decentralized nature of the XRP Ledger, no one can restore access to your account if you cannot use the remaining ways of authorizing transactions.
 
 **To disable the master key pair, you must use the master key pair.** However, you can _re-enable_ the master key pair using any other method of authorizing transactions.
 
@@ -18,12 +18,12 @@ This page describes how to disable the [master key pair](cryptographic-keys.html
 
 To disable the master key pair for an account, you must meet the following prerequisites:
 
-- You must have an XRP Ledger [account](accounts.html) and you must be able to sign and submit transactions from that account using the master key pair. See also: [Set Up Secure Signing](secure-signing.html). Two common ways this can work are:
-    - You know the account's master seed value. A seed value is commonly represented as a [base58][] value starting with "s", such as `sn3nxiW7v8KXzPzAqzyHXbSSKNuN9`.
-    - Or, you use a [dedicated signing device](secure-signing.html#use-a-dedicated-signing-device) that stores the seed value securely, so you don't need to know it.
+- You must have an XRP Ledger [account](../../concepts/accounts/accounts.md) and you must be able to sign and submit transactions from that account using the master key pair. See also: [Set Up Secure Signing](../../concepts/transactions/set-up-secure-signing.md). Two common ways this can work are:
+    - You know the account's master seed value. A seed value is commonly represented as a [base58](base58-encodings.html) value starting with "s", such as `sn3nxiW7v8KXzPzAqzyHXbSSKNuN9`.
+    - Or, you use a [dedicated signing device](../../concepts/transactions/set-up-secure-signing.md#use-a-dedicated-signing-device) that stores the seed value securely, so you don't need to know it.
 - Your account must have at least one method of authorizing transactions other than the master key pair. In other words, you must do one or both of the following:
-    - [Assign a Regular Key Pair](assign-a-regular-key-pair.html).
-    - [Set Up Multi-Signing](set-up-multi-signing.html).
+    - [Assign a Regular Key Pair](assign-a-regular-key-pair.md).
+    - [Set Up Multi-Signing](set-up-multi-signing.md).
 
 ## Steps
 
@@ -31,7 +31,7 @@ To disable the master key pair for an account, you must meet the following prere
 
 ### {{n.next()}}. Construct Transaction JSON
 
-Prepare an [AccountSet transaction][] from your account with the field `"SetValue": 4`. This is the value for the AccountSet flag "Disable Master" (`asfDisableMaster`). The only other required fields for this transaction are the required [common fields](transaction-common-fields.html). For example, if you leave off the [auto-fillable fields](transaction-common-fields.html#auto-fillable-fields), the following transaction instructions are enough:
+Prepare an [AccountSet transaction](../../references/protocol-reference/transactions/transaction-types/accountset.md) from your account with the field `"SetValue": 4`. This is the value for the AccountSet flag "Disable Master" (`asfDisableMaster`). The only other required fields for this transaction are the required [common fields](../../references/protocol-reference/transactions/transaction-common-fields.md). For example, if you leave off the [auto-fillable fields](../../references/protocol-reference/transactions/transaction-common-fields.md#auto-fillable-fields), the following transaction instructions are enough:
 
 ```json
 {
@@ -41,13 +41,13 @@ Prepare an [AccountSet transaction][] from your account with the field `"SetValu
 }
 ```
 
-**Tip:** It is strongly recommended to also provide the `LastLedgerSequence` field so that you can [reliably get the outcome of the transaction in a predictable amount of time](reliable-transaction-submission.html).
+**Tip:** It is strongly recommended to also provide the `LastLedgerSequence` field so that you can [reliably get the outcome of the transaction in a predictable amount of time](../../concepts/transactions/reliable-transaction-submission.md).
 
 ### {{n.next()}}. Sign Transaction
 
 You must use the **master key pair** to sign the transaction.
 
-**Warning:** Do not submit your secret to a server you don't control, and do not send it over the network unencrypted. These examples assume you are using a [local `rippled` server](secure-signing.html#run-rippled-locally). You should adapt these instructions if you are using another [secure signing configuration](secure-signing.html).
+**Warning:** Do not submit your secret to a server you don't control, and do not send it over the network unencrypted. These examples assume you are using a [local `rippled` server](../../concepts/transactions/set-up-secure-signing.md#run-rippled-locally). You should adapt these instructions if you are using another [secure signing configuration](../../concepts/transactions/set-up-secure-signing.md).
 
 #### Example Request
 
@@ -304,7 +304,7 @@ Loading: "/etc/opt/ripple/rippled.cfg"
 
 <!-- MULTICODE_BLOCK_END -->
 
-If the transaction fails with the result `tecNO_ALTERNATIVE_KEY`, your account does not have another method of authorizing transactions currently enabled. You must [assign a regular key pair](assign-a-regular-key-pair.html) or [set up multi-signing](set-up-multi-signing.html), then try again to disable the master key pair.
+If the transaction fails with the result `tecNO_ALTERNATIVE_KEY`, your account does not have another method of authorizing transactions currently enabled. You must [assign a regular key pair](assign-a-regular-key-pair.md) or [set up multi-signing](set-up-multi-signing.md), then try again to disable the master key pair.
 
 
 ### {{n.next()}}. Wait for validation
@@ -313,7 +313,7 @@ If the transaction fails with the result `tecNO_ALTERNATIVE_KEY`, your account d
 
 ### {{n.next()}}. Confirm Account Flags
 
-Confirm that your account's master key is disabled using the [account_info method][]. Be sure to specify the following parameters:
+Confirm that your account's master key is disabled using the [account_info method](../../references/http-websocket-apis/public-api-methods/account-methods/account_info.md). Be sure to specify the following parameters:
 
 | Field          | Value                                                       |
 |:---------------|:------------------------------------------------------------|
@@ -498,7 +498,7 @@ This operation has only two possible outcomes:
 - A nonzero result, equal to the `lsfDisableMaster` value, indicates **the master key has been successfully disabled**.
 - A zero result indicates the account's master key is not disabled.
 
-If the result does not match your expectations, check whether the transaction you sent in the previous steps has executed successfully. It should be the most recent entry in the account's transaction history ([account_tx method][]) and it should have the result code `tesSUCCESS`. If you see any other [result code](transaction-results.html), the transaction was not executed successfully. Depending on the cause of the error, you may want to restart these steps from the beginning.
+If the result does not match your expectations, check whether the transaction you sent in the previous steps has executed successfully. It should be the most recent entry in the account's transaction history ([account_tx method](../../references/http-websocket-apis/public-api-methods/account-methods/account_tx.md)) and it should have the result code `tesSUCCESS`. If you see any other [result code](../../references/protocol-reference/transactions/transaction-results/transaction-results.md), the transaction was not executed successfully. Depending on the cause of the error, you may want to restart these steps from the beginning.
 
 
 

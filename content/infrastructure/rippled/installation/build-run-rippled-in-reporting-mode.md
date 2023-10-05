@@ -9,7 +9,7 @@ top_nav_grouping: Popular Pages
 ---
 # Build and Run `rippled` in Reporting Mode
 
-[Reporting mode](rippled-server-modes.html) is a mode of the XRP Ledger core server specialized for serving [HTTP and WebSocket APIs](http-websocket-apis.html).
+[Reporting mode](../../../concepts/networks-and-servers/rippled-server-modes.md) is a mode of the XRP Ledger core server specialized for serving [HTTP and WebSocket APIs](http-websocket-apis.html).
 
 In reporting mode, the server does not connect to the peer-to-peer network. Instead, it uses gRPC to get validated data from one or more trusted servers that are connected to the P2P network. 
 
@@ -21,7 +21,7 @@ The reporting mode of `rippled` uses two datastores:
 
 * The primary persistent datastore for `rippled` that includes transaction metadata, account states, and ledger headers. You can use NuDB (included with the source) or [Cassandra](https://cassandra.apache.org/) as the primary persistent datastore. If you use Cassandra, multiple reporting mode servers can share access to data in a single Cassandra instance or cluster.
 
-* [PostgreSQL](https://www.postgresql.org/) database to hold relational data, which is used mainly by [tx method][] and [account_tx method][]. 
+* [PostgreSQL](https://www.postgresql.org/) database to hold relational data, which is used mainly by [tx method](../../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md) and [account_tx method](../../../references/http-websocket-apis/public-api-methods/account-methods/account_tx.md). 
 
 When a reporting mode server receives an API request, it loads the data from these data stores if possible. For requests that require data from the P2P network, the reporting mode forwards the request to a P2P server, and then passes the response back to the client.
 
@@ -31,7 +31,7 @@ Multiple reporting mode servers can share access to the same network accessible 
 
 ### Prerequisites
 
-1. Ensure that your system meets the [system requirements](system-requirements.html).
+1. Ensure that your system meets the [system requirements](system-requirements.md).
 
     **Note:** If you choose to use Cassandra as the database, the disk requirements for `rippled` will be lower as the data will not be stored on your local disk.  
 
@@ -332,7 +332,7 @@ The answer depends on the location of your primary data store. If you use Cassan
 
 Lastly, the P2P mode server only needs to keep very recent history, while the reporting mode server keeps long term history.
 
-For more information on system requirements to run `rippled`, see the [`rippled` system requirements](system-requirements.html). 
+For more information on system requirements to run `rippled`, see the [`rippled` system requirements](system-requirements.md). 
 
 **How can I confirm the validity of the data that comes from the PostgreSQL or Cassandra database?**
 

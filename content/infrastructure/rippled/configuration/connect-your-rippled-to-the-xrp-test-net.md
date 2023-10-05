@@ -9,9 +9,9 @@ labels:
 ---
 # Connect Your rippled to a Parallel Network
 
-Various [alternative test and development networks](parallel-networks.html) exist for developers to test their apps or experiment with features without risking real money. **The funds used on these networks are not real funds and are intended for testing only.** You can connect your [`rippled` server](xrpl-servers.html) to any of these test networks.
+Various [alternative test and development networks](../../../concepts/networks-and-servers/parallel-networks.md) exist for developers to test their apps or experiment with features without risking real money. **The funds used on these networks are not real funds and are intended for testing only.** You can connect your [`rippled` server](xrpl-servers.html) to any of these test networks.
 
-**Caution:** On test networks with new and experimental features, you may need to run a pre-production release of the server to sync with the network. See the [Parallel Networks Page](parallel-networks.html) for information on what code version each network needs.
+**Caution:** On test networks with new and experimental features, you may need to run a pre-production release of the server to sync with the network. See the [Parallel Networks Page](../../../concepts/networks-and-servers/parallel-networks.md) for information on what code version each network needs.
 
 ## Steps
 
@@ -197,7 +197,7 @@ $ sudo systemctl restart rippled
 
 ## 5. Verify that your server syncs.
 
-It takes about 5 to 15 minutes to sync to the network after a restart. After your server is synced, the [server_info method][] shows a `validated_ledger` object based on the network you are connected to.
+It takes about 5 to 15 minutes to sync to the network after a restart. After your server is synced, the [server_info method](../../../references/http-websocket-apis/public-api-methods/server-info-methods/server_info.md) shows a `validated_ledger` object based on the network you are connected to.
 
 To confirm that your `rippled` is connected to the right network, compare the results from your server to [a public server][public servers] on the Testnet or Devnet. The `seq` field of the `validated_ledger` object should be the same on both servers (possibly off by one or two, if it changed as you were checking).
 
@@ -217,14 +217,14 @@ You can use [server_info in the WebSocket Tool](websocket-api-tool.html#server_i
     - [XRP Faucets](xrp-testnet-faucet.html)
     - [WebSocket API Tool](websocket-api-tool.html) - Select 'Testnet Public Server' or 'Devnet Public Server' in the connection options.
 - **Concepts:**
-    - [Parallel Networks](parallel-networks.html)
-    - [Consensus](consensus.html)
+    - [Parallel Networks](../../../concepts/networks-and-servers/parallel-networks.md)
+    - [Consensus](../../../concepts/consensus-protocol/consensus.md)
 - **Tutorials:**
-    - [Run rippled as a Validator](run-rippled-as-a-validator.html)
+    - [Run rippled as a Validator](run-rippled-as-a-validator.md)
     - [Test `rippled` Offline in Stand-Alone Mode](use-stand-alone-mode.html)
     - [Troubleshooting `rippled`](troubleshoot-the-rippled-server.html)
 - **References:**
-    - [server_info method][]
+    - [server_info method](../../../references/http-websocket-apis/public-api-methods/server-info-methods/server_info.md)
 
 
 

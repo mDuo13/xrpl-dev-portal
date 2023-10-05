@@ -8,9 +8,9 @@ labels:
 # crawl_shards
 [[Source]](https://github.com/XRPLF/rippled/blob/master/src/ripple/rpc/handlers/CrawlShards.cpp "Source")
 
-Requests information from peer servers about which [shards of historical ledger data](history-sharding.html) they have available. [New in: rippled 1.2.0][]
+Requests information from peer servers about which [shards of historical ledger data](../../../../concepts/networks-and-servers/ledger-history/history-sharding.md) they have available. [New in: rippled 1.2.0](https://github.com/XRPLF/rippled/releases/tag/1.2.0 "BADGE_BLUE")
 
-_The `crawl_shards` method is an [admin method](admin-api-methods.html) that cannot be run by unprivileged users._
+_The `crawl_shards` method is an [admin method](../admin-api-methods.md) that cannot be run by unprivileged users._
 
 ### Request Format
 
@@ -44,7 +44,7 @@ An example of the request format:
 
 <!-- MULTICODE_BLOCK_END -->
 
-**Note:** There is no command-line syntax for this method. Use the [json method][] to access this from the command line.
+**Note:** There is no command-line syntax for this method. Use the [json method](../../public-api-methods/utility-methods/json.md) to access this from the command line.
 
 The request includes the following fields:
 
@@ -113,24 +113,24 @@ An example of a successful response:
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`           | Type   | Description                                     |
 |:------------------|:-------|:------------------------------------------------|
-| `complete_shards` | String | _(May be omitted)_ The range of [history shards](history-sharding.html) that are available on the local server. This may be an empty string, or a disjointed range. For example, `1-2,5,7-9` indicates that shards 1, 2, 5, 7, 8, and 9 are available. Omitted if this server does not have history sharding enabled. |
+| `complete_shards` | String | _(May be omitted)_ The range of [history shards](../../../../concepts/networks-and-servers/ledger-history/history-sharding.md) that are available on the local server. This may be an empty string, or a disjointed range. For example, `1-2,5,7-9` indicates that shards 1, 2, 5, 7, 8, and 9 are available. Omitted if this server does not have history sharding enabled. |
 | `peers`           | Array  | _(May be omitted)_ List of **Peer Shard Objects** (see below) describing which history shards each peer has available. The response omits this field if no peers within the number of hops specified by `limit` have any shards. |
 
 #### Peer Shard Objects
 
-Each member of the `peers` array of the response is an object that describes one server in the peer-to-peer network. The list only includes peers that have at least one complete [history shard](history-sharding.html) available. Each object in the array has the following fields:
+Each member of the `peers` array of the response is an object that describes one server in the peer-to-peer network. The list only includes peers that have at least one complete [history shard](../../../../concepts/networks-and-servers/ledger-history/history-sharding.md) available. Each object in the array has the following fields:
 
 | `Field`   | Type   | Description                                             |
 |:----------|:-------|:--------------------------------------------------------|
 | `complete_shards` | String | The range of complete history shards this peer has available. This may be disjointed. For example, `1-2,5,7-9` indicates that shards 1, 2, 5, 7, 8, and 9 are available. |
-| `incomplete_shards` | String | _(May be omitted)_ A comma-separated list of history shards this peer has partially downloaded, and percent completion for each. For example, `1:50,2:25` indicates that shard 1 is 50% downloaded and shard 2 is 25% downloaded. [New in: rippled 1.8.1][] |
+| `incomplete_shards` | String | _(May be omitted)_ A comma-separated list of history shards this peer has partially downloaded, and percent completion for each. For example, `1:50,2:25` indicates that shard 1 is 50% downloaded and shard 2 is 25% downloaded. [New in: rippled 1.8.1](https://github.com/XRPLF/rippled/releases/tag/1.8.1 "BADGE_BLUE") |
 | `public_key` | String | _(Omitted unless the request specified `"public_key": true`)_ The public key this peer uses for peer-to-peer communications, in the XRP Ledger's [base58 format](base58-encodings.html). |
 
-The `ip` field is no longer provided. [Removed in: rippled 1.8.1][]
+The `ip` field is no longer provided. [Removed in: rippled 1.8.1](https://github.com/XRPLF/rippled/releases/tag/1.8.1 "BADGE_RED")
 
 
 ### Possible Errors

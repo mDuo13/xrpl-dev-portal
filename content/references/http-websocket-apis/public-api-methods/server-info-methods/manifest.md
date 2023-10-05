@@ -8,7 +8,7 @@ labels:
 # manifest
 [[Source]](https://github.com/XRPLF/rippled/blob/master/src/ripple/rpc/handlers/Manifest.cpp "Source")
 
-The `{{currentpage.name}}` method reports the current "manifest" information for a given validator public key. The "manifest" is a block of data that authorizes an ephemeral signing key with a signature from the validator's master key pair. [Updated in: rippled 1.7.0][]
+The `{{currentpage.name}}` method reports the current "manifest" information for a given validator public key. The "manifest" is a block of data that authorizes an ephemeral signing key with a signature from the validator's master key pair. [Updated in: rippled 1.7.0](https://github.com/XRPLF/rippled/releases/tag/1.7.0 "BADGE_BLUE")
 
 
 ### Request Format
@@ -50,7 +50,7 @@ The request includes the following parameters:
 
 | `Field`      | Type   | Description                        |
 |:-------------|:-------|:-----------------------------------|
-| `public_key` | String | The [base58][]-encoded public key of the validator to look up. This can be the master public key or ephemeral public key. |
+| `public_key` | String | The [base58](base58-encodings.html)-encoded public key of the validator to look up. This can be the master public key or ephemeral public key. |
 
 **Note:** The commandline format for this method does not work in rippled v1.5.0. See [issue #3317](https://github.com/XRPLF/rippled/issues/3317) for details.
 
@@ -124,12 +124,12 @@ Connecting to 127.0.0.1:5005
 
 <!-- Note, the CLI response above is mocked up to compensate for https://github.com/XRPLF/rippled/issues/3317 -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`     | Type   | Description                                           |
 |:------------|:-------|:------------------------------------------------------|
 | `details`   | Object | _(May be omitted)_ The data contained in this manifest. Omitted if the server does not have a manifest for the `public_key` from the request. See **Details Object** below for a full description of its contents. |
-| `manifest`  | String | _(May be omitted)_ The full manifest data in base64 format. This data is [serialized](serialization.html) to binary before being base64-encoded. Omitted if the server does not have a manifest for the `public_key` from the request. |
+| `manifest`  | String | _(May be omitted)_ The full manifest data in base64 format. This data is [serialized](../../../protocol-reference/serialization.md) to binary before being base64-encoded. Omitted if the server does not have a manifest for the `public_key` from the request. |
 | `requested` | String | The `public_key` from the request.                    |
 
 #### Details Object
@@ -139,8 +139,8 @@ If provided, the `details` object contains the following fields:
 | `Field`         | Type   | Description                                       |
 |:----------------|:-------|:--------------------------------------------------|
 | `domain`        | String | The domain name this validator claims to be associated with. If the manifest does not contain a domain, this is an empty string. |
-| `ephemeral_key` | String | The ephemeral public key for this validator, in [base58][]. |
-| `master_key`    | String | The master public key for this validator, in [base58][]. |
+| `ephemeral_key` | String | The ephemeral public key for this validator, in [base58](base58-encodings.html). |
+| `master_key`    | String | The master public key for this validator, in [base58](base58-encodings.html). |
 | `seq`           | Number | The sequence number of this manifest. This number increases whenever the validator operator updates the validator's token to rotate ephemeral keys or change settings. |
 
 

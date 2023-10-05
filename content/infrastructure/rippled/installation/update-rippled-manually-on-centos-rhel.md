@@ -8,9 +8,9 @@ labels:
 ---
 # Update Manually on CentOS/Red Hat
 
-This page describes how to update manually to the latest release of `rippled` on CentOS or Red Hat Enterprise Linux. Ripple recommends setting up [automatic updates](update-rippled-automatically-on-linux.html) instead, where possible.
+This page describes how to update manually to the latest release of `rippled` on CentOS or Red Hat Enterprise Linux. Ripple recommends setting up [automatic updates](update-rippled-automatically-on-linux.md) instead, where possible.
 
-These instructions assume you have already [installed `rippled` from the `yum` repository](install-rippled-on-centos-rhel-with-yum.html).
+These instructions assume you have already [installed `rippled` from the `yum` repository](install-rippled-on-centos-rhel-with-yum.md).
 
 **Tip:** To perform these steps all at once, you can run the `/opt/ripple/bin/update-rippled.sh` script, which is included with the `rippled` package. This script should be run as a `sudo` user.
 
@@ -47,14 +47,14 @@ To update manually, complete the following steps:
 
 - **Concepts:**
     - [The `rippled` Server](xrpl-servers.html)
-    - [Consensus](consensus.html)
+    - [Consensus](../../../concepts/consensus-protocol/consensus.md)
 - **Tutorials:**
     - [`rippled` v1.3.x Migration Instructions](rippled-1-3-migration-instructions.html) <!-- Note: remove when versions older than v1.3 are basically extinct -->
     - [Troubleshoot rippled](troubleshoot-the-rippled-server.html)
 - **References:**
     - [rippled API Reference](http-websocket-apis.html)
-        - [`rippled` Commandline Usage](commandline-usage.html)
-        - [server_info method][]
+        - [`rippled` Commandline Usage](../commandline-usage.md)
+        - [server_info method](../../../references/http-websocket-apis/public-api-methods/server-info-methods/server_info.md)
 
 
 <!--{# common link defs #}-->

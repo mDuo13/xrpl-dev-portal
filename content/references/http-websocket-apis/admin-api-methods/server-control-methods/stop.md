@@ -10,7 +10,7 @@ labels:
 
 Gracefully shuts down the server.
 
-*The `stop` method is an [admin method](admin-api-methods.html) that cannot be run by unprivileged users!*
+*The `stop` method is an [admin method](../admin-api-methods.md) that cannot be run by unprivileged users!*
 
 ### Request Format
 An example of the request format:
@@ -81,7 +81,7 @@ Connecting to 127.0.0.1:5005
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`   | Type   | Description                          |
 |:----------|:-------|:-------------------------------------|

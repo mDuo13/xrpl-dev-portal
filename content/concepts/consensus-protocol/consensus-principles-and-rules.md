@@ -113,19 +113,19 @@ The XRP Ledger's consensus algorithm provides a robust alternative to proof of w
 ## See Also
 
 - **Concepts:**
-    - [Consensus](consensus.html)
-    - [Consensus Research](consensus-research.html)
+    - [Consensus](consensus.md)
+    - [Consensus Research](consensus-research.md)
     - [XRPL Consensus Mechanism Video](https://www.youtube.com/watch?v=k6VqEkqRTmk&list=PLJQ55Tj1hIVZtJ_JdTvSum2qMTsedWkNi&index=2)
 - **Tutorials:**
-    - [Reliable Transaction Submission](reliable-transaction-submission.html)
-    - [Run `rippled` as a Validator](run-rippled-as-a-validator.html)
+    - [Reliable Transaction Submission](../transactions/reliable-transaction-submission.md)
+    - [Run `rippled` as a Validator](../../infrastructure/rippled/configuration/run-rippled-as-a-validator.md)
 - **References:**
-    - [Ledger Format Reference](ledger-data-formats.html)
-    - [Transaction Format Reference](transaction-formats.html)
-    - [consensus_info method][]
-    - [validator_list_sites method][]
-    - [validators method][]
-    - [consensus_info method][]
+    - [Ledger Format Reference](../../references/protocol-reference/ledger-data/ledger-data-formats.md)
+    - [Transaction Format Reference](../../references/protocol-reference/transactions/transaction-formats.md)
+    - [consensus_info method](../../references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/consensus_info.md)
+    - [validator_list_sites method](../../references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/validator_list_sites.md)
+    - [validators method](../../references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/validators.md)
+    - [consensus_info method](../../references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/consensus_info.md)
 
 
 <!--{# common link defs #}-->

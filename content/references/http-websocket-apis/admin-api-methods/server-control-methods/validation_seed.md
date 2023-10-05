@@ -11,7 +11,7 @@ labels:
 
 The `validation_seed` command temporarily sets the secret value that rippled uses to sign validations. This value resets based on the config file when you restart the server. [Disabled since: rippled 0.29.1](https://github.com/XRPLF/rippled/releases/tag/0.29.1-rc1 "BADGE_RED")
 
-*The `validation_seed` method is an [admin method](admin-api-methods.html) that cannot be run by unprivileged users!*
+*The `validation_seed` method is an [admin method](../admin-api-methods.md) that cannot be run by unprivileged users!*
 
 ### Request Format
 An example of the request format:
@@ -41,7 +41,7 @@ The request includes the following parameters:
 
 | `Field`  | Type   | Description                                              |
 |:---------|:-------|:---------------------------------------------------------|
-| `secret` | String | _(Optional)_ If present, use this value as the secret value for the validating key pair. Valid formats include the XRP Ledger's [base58][] format, [RFC-1751](https://tools.ietf.org/html/rfc1751), or as a passphrase. If omitted, disables proposing validations to the network. |
+| `secret` | String | _(Optional)_ If present, use this value as the secret value for the validating key pair. Valid formats include the XRP Ledger's [base58](base58-encodings.html) format, [RFC-1751](https://tools.ietf.org/html/rfc1751), or as a passphrase. If omitted, disables proposing validations to the network. |
 
 ### Response Format
 
@@ -82,13 +82,13 @@ Connecting to 127.0.0.1:5005
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`                 | Type   | Description                               |
 |:------------------------|:-------|:------------------------------------------|
 | `validation_key`        | String | (Omitted if proposing disabled) The secret key for these validation credentials, in [RFC-1751](https://tools.ietf.org/html/rfc1751) format. |
-| `validation_public_key` | String | (Omitted if proposing disabled) The public key for these validation credentials, in the XRP Ledger's [base58][] encoded string format. |
-| `validation_seed`       | String | (Omitted if proposing disabled) The secret key for these validation credentials, in the XRP Ledger's [base58][] encoded string format. |
+| `validation_public_key` | String | (Omitted if proposing disabled) The public key for these validation credentials, in the XRP Ledger's [base58](base58-encodings.html) encoded string format. |
+| `validation_seed`       | String | (Omitted if proposing disabled) The secret key for these validation credentials, in the XRP Ledger's [base58](base58-encodings.html) encoded string format. |
 
 ### Possible Errors
 

@@ -8,7 +8,7 @@ labels:
 # channel_verify
 [[Source]](https://github.com/XRPLF/rippled/blob/d4a56f223a3b80f64ff70b4e90ab6792806929ca/src/ripple/rpc/handlers/PayChanClaim.cpp#L89 "Source")
 
-_(Added by the [PayChan amendment][] to be enabled. [New in: rippled 0.33.0][])_
+_(Added by the [PayChan amendment][] to be enabled. [New in: rippled 0.33.0](https://github.com/XRPLF/rippled/releases/tag/0.33.0 "BADGE_BLUE"))_
 
 The `channel_verify` method checks the validity of a signature that can be used to redeem a specific amount of XRP from a payment channel.
 
@@ -59,7 +59,7 @@ The request includes the following parameters:
 |-------|------|-------------|
 | `amount` | String | The amount of [XRP, in drops][], the provided `signature` authorizes. |
 | `channel_id` | String | The Channel ID of the channel that provides the XRP. This is a 64-character hexadecimal string. |
-| `public_key` | String | The public key of the channel and the key pair that was used to create the signature, in hexadecimal or the XRP Ledger's [base58][] format. [Updated in: rippled 0.90.0][] |
+| `public_key` | String | The public key of the channel and the key pair that was used to create the signature, in hexadecimal or the XRP Ledger's [base58](base58-encodings.html) format. [Updated in: rippled 0.90.0](https://github.com/XRPLF/rippled/releases/tag/0.90.0 "BADGE_BLUE") |
 | `signature` | String | The signature to verify, in hexadecimal. |
 
 ## Response Format
@@ -107,13 +107,13 @@ An example of a successful response:
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | Field | Type | Description |
 |-------|------|-------------|
 | `signature_verified` | Boolean | If `true`, the signature is valid for the stated amount, channel, and public key. |
 
-**Caution:** This does not indicate check that the channel has enough XRP allocated to it. Before considering a claim valid, you should look up the channel in the latest validated ledger and confirm that the channel is open and its `amount` value is equal or greater than the `amount` of the claim. To do so, use the [account_channels method][].
+**Caution:** This does not indicate check that the channel has enough XRP allocated to it. Before considering a claim valid, you should look up the channel in the latest validated ledger and confirm that the channel is open and its `amount` value is equal or greater than the `amount` of the claim. To do so, use the [account_channels method](../account-methods/account_channels.md).
 
 ## Possible Errors
 

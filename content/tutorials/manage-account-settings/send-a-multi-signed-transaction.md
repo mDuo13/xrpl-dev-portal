@@ -11,16 +11,16 @@ The following procedure demonstrates how to create, sign, and submit a multi-sig
 
 ## Prerequisites
 
-- You must have already [set up multi-signing](set-up-multi-signing.html) for your address.
+- You must have already [set up multi-signing](set-up-multi-signing.md) for your address.
 
-- Multi-signing must be available. Multi-signing has been enabled by an [**Amendment**](amendments.html) to the XRP Ledger Consensus Protocol since 2016-06-27.
+- Multi-signing must be available. Multi-signing has been enabled by an [**Amendment**](../../concepts/networks-and-servers/amendments.md) to the XRP Ledger Consensus Protocol since 2016-06-27.
 
 
 ## 1. Create the transaction
 
 Create a JSON object that represents the transaction you want to submit. You have to specify _everything_ about this transaction, including `Fee` and `Sequence`. Also include the field `SigningPubKey` as an empty string, to indicate that the transaction is multi-signed.
 
-Keep in mind that the `Fee` for multi-signed transactions is significantly higher than for regularly-signed transactions. It should be at least (N+1) times the normal [transaction cost](transaction-cost.html), where N is the number of signatures you plan to provide. Since it sometimes takes a while to collect signatures from multiple sources, you may want to specify more than the current minimum, in case the [transaction cost](transaction-cost.html) increases in that time.
+Keep in mind that the `Fee` for multi-signed transactions is significantly higher than for regularly-signed transactions. It should be at least (N+1) times the normal [transaction cost](../../concepts/transactions/transaction-cost.md), where N is the number of signatures you plan to provide. Since it sometimes takes a while to collect signatures from multiple sources, you may want to specify more than the current minimum, in case the [transaction cost](../../concepts/transactions/transaction-cost.md) increases in that time.
 
 Here's an example transaction ready to be multi-signed:
 
@@ -45,7 +45,7 @@ Here's an example transaction ready to be multi-signed:
 
 ## 2. Get one signature
 
-Use the [sign_for method][] with the secret key and address of one of the members of your SignerList to get a signature for that member.
+Use the [sign_for method](../../references/http-websocket-apis/admin-api-methods/signing-methods/sign_for.md) with the secret key and address of one of the members of your SignerList to get a signature for that member.
 
 {% include '_snippets/secret-key-warning.md' %}
 <!--{#_ #}-->
@@ -97,7 +97,7 @@ Use the [sign_for method][] with the secret key and address of one of the member
 
 Save the `tx_json` field of the response: it has the new signature in the `Signers` field. You can discard the value of the `tx_blob` field.
 
-If you have a problem in stand-alone mode or a non-production network, check that [multi-sign is enabled](start-a-new-genesis-ledger-in-stand-alone-mode.html#settings-in-new-genesis-ledgers).
+If you have a problem in stand-alone mode or a non-production network, check that [multi-sign is enabled](../../infrastructure/rippled/stand-alone-mode/start-a-new-genesis-ledger-in-stand-alone-mode.md#settings-in-new-genesis-ledgers).
 
 ## 3. Get additional signatures
 
@@ -176,9 +176,9 @@ Depending on the SignerList you configured, you may need to repeat this step sev
 
 ## 4. Combine signatures and submit
 
-If you collected the signatures in serial, the `tx_json` from the last `sign_for` response has all the signatures assembled, so you can use that as the argument to the [submit_multisigned method][].
+If you collected the signatures in serial, the `tx_json` from the last `sign_for` response has all the signatures assembled, so you can use that as the argument to the [submit_multisigned method](../../references/http-websocket-apis/public-api-methods/transaction-methods/submit_multisigned.md).
 
-If you collected the signatures in parallel, you must manually construct a `tx_json` object with all the signatures included. Take the `Signers` arrays from all the `sign_for` responses, and combine their contents into a single `Signers` array that has each signature. Add the combined `Signers` array to the original transaction JSON value, and use that as the argument to the [submit_multisigned method][].
+If you collected the signatures in parallel, you must manually construct a `tx_json` object with all the signatures included. Take the `Signers` arrays from all the `sign_for` responses, and combine their contents into a single `Signers` array that has each signature. Add the combined `Signers` array to the original transaction JSON value, and use that as the argument to the [submit_multisigned method](../../references/http-websocket-apis/public-api-methods/transaction-methods/submit_multisigned.md).
 
     $ rippled submit_multisigned '{
     >              "Account" : "rEuLyBCvcw4CFmzv8RepSiAoNgF8tTGJQC",
@@ -257,7 +257,7 @@ Take note of the `hash` value from the response so you can check the results of 
 
 If you are using the live network, you can wait 4-7 seconds for the ledger to close automatically.
 
-If you're running `rippled` in stand-alone mode, use the [ledger_accept method][] to manually close the ledger:
+If you're running `rippled` in stand-alone mode, use the [ledger_accept method](../../references/http-websocket-apis/admin-api-methods/server-control-methods/ledger_accept.md) to manually close the ledger:
 
     $ rippled ledger_accept
     Loading: "/etc/opt/ripple/rippled.cfg"
@@ -272,7 +272,7 @@ If you're running `rippled` in stand-alone mode, use the [ledger_accept method][
 
 ## 6. Confirm transaction results
 
-Use the hash value from the response to the `submit_multisigned` command to look up the transaction using the [tx method][]. In particular, check that the `TransactionResult` is the string `tesSUCCESS`.
+Use the hash value from the response to the `submit_multisigned` command to look up the transaction using the [tx method](../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md). In particular, check that the `TransactionResult` is the string `tesSUCCESS`.
 
 On the live network, you must also confirm that the `validated` field is set to the boolean `true`. If the field is not `true`, you might need to wait longer for the consensus process to finish; or your transaction may be unable to be included in a ledger for some reason.
 

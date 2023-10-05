@@ -13,7 +13,7 @@ The `ledger_entry` method returns a single ledger entry from the XRP Ledger in i
 
 ## Request Format
 
-This method can retrieve several different types of data. You can select which type of item to retrieve by passing the appropriate parameters, comprised of the general and type-specific fields listed below, and following the standard [request formatting](request-formatting.html). (For example, a WebSocket request always has the `command` field and optionally an `id` field, and a JSON-RPC request uses the `method` and `params` fields.)
+This method can retrieve several different types of data. You can select which type of item to retrieve by passing the appropriate parameters, comprised of the general and type-specific fields listed below, and following the standard [request formatting](../../api-conventions/request-formatting.md). (For example, a WebSocket request always has the `command` field and optionally an `id` field, and a JSON-RPC request uses the `method` and `params` fields.)
 
 {% include '_snippets/no-cli-syntax.md' %}
 
@@ -21,7 +21,7 @@ This method can retrieve several different types of data. You can select which t
 
 | Field                   | Type                       | Description           |
 |:------------------------|:---------------------------|:----------------------|
-| `binary`                | Boolean                    | _(Optional)_ If `true`, return the requested ledger entry's contents as a hex string in the XRP Ledger's [binary format](serialization.html). Otherwise, return data in JSON format. The default is `false`. [Updated in: rippled 1.2.0][] |
+| `binary`                | Boolean                    | _(Optional)_ If `true`, return the requested ledger entry's contents as a hex string in the XRP Ledger's [binary format](../../../protocol-reference/serialization.md). Otherwise, return data in JSON format. The default is `false`. [Updated in: rippled 1.2.0](https://github.com/XRPLF/rippled/releases/tag/1.2.0 "BADGE_BLUE") |
 | `ledger_hash`           | String                     | _(Optional)_ A 20-byte hex string for the ledger version to use. (See [Specifying Ledgers][]) |
 | `ledger_index`          | String or Unsigned Integer | _(Optional)_ The [ledger index][] of the ledger to use, or a shortcut string (e.g. "validated" or "closed" or "current") to choose a ledger automatically. (See [Specifying Ledgers][]) |
 
@@ -91,20 +91,20 @@ rippled json ledger_entry '{ "index": "7DB0788C020F02780A673DC74757F23823FA3014C
 
 > **Tip:** You can use this type of request to get any singleton ledger entry, if it exists in the ledger data, because its ID is always the same. For example:
 >
-> - [`Amendments`](amendments-object.html) - `7DB0788C020F02780A673DC74757F23823FA3014C1866E72CC4CD8B226CD6EF4`
-> - [`FeeSettings`](feesettings.html) - `4BC50C9B0D8515D3EAAE1E74B29A95804346C491EE1A95BF25E4AAB854A6A651`
-> - [Recent History `LedgerHashes`](ledgerhashes.html) - `B4979A36CDC7F3D3D5C31A4EAE2AC7D7209DDA877588B9AFC66799692AB0D66B`
-> - [`NegativeUNL`](negativeunl.html) - `2E8A59AA9D3B5B186B0B9E0F62E6C02587CA74A4D778938E957B6357D364B244`
+> - [`Amendments`](../../../protocol-reference/ledger-data/ledger-entry-types/amendments.md) - `7DB0788C020F02780A673DC74757F23823FA3014C1866E72CC4CD8B226CD6EF4`
+> - [`FeeSettings`](../../../protocol-reference/ledger-data/ledger-entry-types/feesettings.md) - `4BC50C9B0D8515D3EAAE1E74B29A95804346C491EE1A95BF25E4AAB854A6A651`
+> - [Recent History `LedgerHashes`](../../../protocol-reference/ledger-data/ledger-entry-types/ledgerhashes.md) - `B4979A36CDC7F3D3D5C31A4EAE2AC7D7209DDA877588B9AFC66799692AB0D66B`
+> - [`NegativeUNL`](../../../protocol-reference/ledger-data/ledger-entry-types/negativeunl.md) - `2E8A59AA9D3B5B186B0B9E0F62E6C02587CA74A4D778938E957B6357D364B244`
 
 
 
 ### Get AccountRoot Object
 
-Retrieve an [AccountRoot entry](accountroot.html) by its address. This is roughly equivalent to the [account_info method][].
+Retrieve an [AccountRoot entry](../../../protocol-reference/ledger-data/ledger-entry-types/accountroot.md) by its address. This is roughly equivalent to the [account_info method](../account-methods/account_info.md).
 
 | Field                   | Type                       | Description           |
 |:------------------------|:---------------------------|:----------------------|
-| `account_root`          | String - [Address][]       | The classic address of the [AccountRoot entry](accountroot.html) to retrieve. |
+| `account_root`          | String - [Address][]       | The classic address of the [AccountRoot entry](../../../protocol-reference/ledger-data/ledger-entry-types/accountroot.md) to retrieve. |
 
 <!-- MULTICODE_BLOCK_START -->
 
@@ -149,13 +149,13 @@ rippled json ledger_entry '{ "account_root": "r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59
 
 _(Requires the [AMM amendment][] :not_enabled:)_
 
-Retrieve an Automated Market-Maker (AMM) object from the ledger. This is similar to [amm_info method][], but the `ledger_entry` version returns only the ledger entry as stored.
+Retrieve an Automated Market-Maker (AMM) object from the ledger. This is similar to [amm_info method](../path-and-order-book-methods/amm_info.md), but the `ledger_entry` version returns only the ledger entry as stored.
 
 | Field        | Type             | Description           |
 |:-------------|:-----------------|:----------------------|
-| `amm`        | Object or String | The [AMM](amm.html) to retrieve. If you specify a string, it must be the [object ID](ledger-object-ids.html) of the AMM, as hexadecimal. If you specify an object, it must contain `asset` and `asset2` sub-fields. |
-| `amm.asset`  | Object           | One of the two assets in this AMM's pool, as a [currency object without an amount](currency-formats.html#specifying-without-amounts). |
-| `amm.asset2` | Object           | The other of the two assets in this AMM's pool, as a [currency object without an amount](currency-formats.html#specifying-without-amounts). |
+| `amm`        | Object or String | The [AMM](../../../protocol-reference/ledger-data/ledger-entry-types/amm.md) to retrieve. If you specify a string, it must be the [object ID](ledger-object-ids.html) of the AMM, as hexadecimal. If you specify an object, it must contain `asset` and `asset2` sub-fields. |
+| `amm.asset`  | Object           | One of the two assets in this AMM's pool, as a [currency object without an amount](../../../protocol-reference/data-types/currency-formats.md#specifying-without-amounts). |
+| `amm.asset2` | Object           | The other of the two assets in this AMM's pool, as a [currency object without an amount](../../../protocol-reference/data-types/currency-formats.md#specifying-without-amounts). |
 
 <!-- MULTICODE_BLOCK_START -->
 
@@ -214,12 +214,12 @@ rippled json ledger_entry '{ "amm": { "asset": { "currency": "XRP" }, "asset2": 
 
 ### Get DirectoryNode Object
 
-Retrieve a [DirectoryNode](directorynode.html), which contains a list of other ledger objects. Can be provided as string (object ID of the Directory) or as an object.
+Retrieve a [DirectoryNode](../../../protocol-reference/ledger-data/ledger-entry-types/directorynode.md), which contains a list of other ledger objects. Can be provided as string (object ID of the Directory) or as an object.
 
 | Field                   | Type                       | Description           |
 |:------------------------|:---------------------------|:----------------------|
-| `directory`             | Object or String           | The [DirectoryNode](directorynode.html) to retrieve. If a string, must be the [object ID](ledger-object-ids.html) of the directory, as hexadecimal. If an object, requires either `dir_root` or `owner` as a sub-field, plus optionally a `sub_index` sub-field. |
-| `directory.sub_index`   | Unsigned Integer           | _(Optional)_ If provided, jumps to a later "page" of the [DirectoryNode](directorynode.html). |
+| `directory`             | Object or String           | The [DirectoryNode](../../../protocol-reference/ledger-data/ledger-entry-types/directorynode.md) to retrieve. If a string, must be the [object ID](ledger-object-ids.html) of the directory, as hexadecimal. If an object, requires either `dir_root` or `owner` as a sub-field, plus optionally a `sub_index` sub-field. |
+| `directory.sub_index`   | Unsigned Integer           | _(Optional)_ If provided, jumps to a later "page" of the [DirectoryNode](../../../protocol-reference/ledger-data/ledger-entry-types/directorynode.md). |
 | `directory.dir_root`    | String                     | _(Optional)_ Unique index identifying the directory to retrieve, as a hex string. |
 | `directory.owner`       | String                     | _(Optional)_ Unique address of the account associated with this directory. |
 
@@ -270,7 +270,7 @@ rippled json ledger_entry '{ "directory": { "owner": "rf1BiGeXwwQoi8Z2ueFYTEXSwu
 
 ### Get Offer Object
 
-Retrieve an [Offer entry](offer.html), which defines an offer to exchange currency. Can be provided as string (unique index of the Offer) or as an object.
+Retrieve an [Offer entry](../../../protocol-reference/ledger-data/ledger-entry-types/offer.md), which defines an offer to exchange currency. Can be provided as string (unique index of the Offer) or as an object.
 
 | Field                   | Type                       | Description           |
 |:------------------------|:---------------------------|:----------------------|
@@ -325,7 +325,7 @@ rippled json ledger_entry '{ "offer": { "account": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJY
 
 ### Get RippleState Object
 
-Retrieve a [RippleState entry][], which tracks a (non-XRP) currency balance between two accounts.
+Retrieve a [RippleState entry](../../../protocol-reference/ledger-data/ledger-entry-types/ripplestate.md), which tracks a (non-XRP) currency balance between two accounts.
 
 | Field                   | Type                       | Description           |
 |:------------------------|:---------------------------|:----------------------|
@@ -384,11 +384,11 @@ rippled json ledger_entry '{ "ripple_state": { "accounts": ["rf1BiGeXwwQoi8Z2ueF
 
 ### Get Check Object
 
-Retrieve a [Check entry](check.html), which is a potential payment that can be cashed by its recipient. [New in: rippled 1.0.0][]
+Retrieve a [Check entry](../../../protocol-reference/ledger-data/ledger-entry-types/check.md), which is a potential payment that can be cashed by its recipient. [New in: rippled 1.0.0](https://github.com/XRPLF/rippled/releases/tag/1.0.0 "BADGE_BLUE")
 
 | Field   | Type   | Description                                               |
 |:--------|:-------|:----------------------------------------------------------|
-| `check` | String | The [object ID](ledger-object-ids.html) of a [Check entry](check.html) to retrieve. |
+| `check` | String | The [object ID](ledger-object-ids.html) of a [Check entry](../../../protocol-reference/ledger-data/ledger-entry-types/check.md) to retrieve. |
 
 <!-- MULTICODE_BLOCK_START -->
 
@@ -429,7 +429,7 @@ rippled json ledger_entry '{ "check": "C4A46CCD8F096E994C4B0DEAB6CE98E722FC17D79
 
 ### Get Escrow Object
 
-Retrieve an [Escrow entry](escrow-object.html), which holds XRP until a specific time or condition is met. Can be provided as string (object ID of the Escrow) or as an object. [New in: rippled 1.0.0][]
+Retrieve an [Escrow entry](../../../protocol-reference/ledger-data/ledger-entry-types/escrow.md), which holds XRP until a specific time or condition is met. Can be provided as string (object ID of the Escrow) or as an object. [New in: rippled 1.0.0](https://github.com/XRPLF/rippled/releases/tag/1.0.0 "BADGE_BLUE")
 
 | Field                   | Type                       | Description           |
 |:------------------------|:---------------------------|:----------------------|
@@ -482,7 +482,7 @@ rippled json ledger_entry '{ "escrow": { "owner": "rL4fPHi2FWGwRGRQSH7gBcxkuo2b9
 
 ### Get PayChannel Object
 
-Retrieve a [PayChannel entry](paychannel.html), which holds XRP for asynchronous payments. [New in: rippled 1.0.0][]
+Retrieve a [PayChannel entry](../../../protocol-reference/ledger-data/ledger-entry-types/paychannel.md), which holds XRP for asynchronous payments. [New in: rippled 1.0.0](https://github.com/XRPLF/rippled/releases/tag/1.0.0 "BADGE_BLUE")
 
 | Field             | Type   | Description                                     |
 |:------------------|:-------|:------------------------------------------------|
@@ -526,7 +526,7 @@ rippled json ledger_entry '{ "payment_channel": "C7F634794B79DB40E87179A9D1BF05D
 
 ### Get DepositPreauth Object
 
-Retrieve a [DepositPreauth entry](depositpreauth-object.html), which tracks preauthorization for payments to accounts requiring [Deposit Authorization](depositauth.html). [New in: rippled 1.1.0][]
+Retrieve a [DepositPreauth entry](../../../protocol-reference/ledger-data/ledger-entry-types/depositpreauth.md), which tracks preauthorization for payments to accounts requiring [Deposit Authorization](../../../../concepts/accounts/depositauth.md). [New in: rippled 1.1.0](https://github.com/XRPLF/rippled/releases/tag/1.1.0 "BADGE_BLUE")
 
 | Field                        | Type                 | Description            |
 |:-----------------------------|:---------------------|:-----------------------|
@@ -578,7 +578,7 @@ rippled json ledger_entry '{ "deposit_preauth": { "owner": "rf1BiGeXwwQoi8Z2ueFY
 
 ### Get Ticket Object
 
-Retrieve a [Ticket entry](ticket.html), which represents a [sequence number][] set aside for future use. _(Added by the [TicketBatch amendment][])_
+Retrieve a [Ticket entry](../../../protocol-reference/ledger-data/ledger-entry-types/ticket.md), which represents a [sequence number][] set aside for future use. _(Added by the [TicketBatch amendment][])_
 
 | Field               | Type                 | Description           |
 |:--------------------|:---------------------|:----------------------|
@@ -634,7 +634,7 @@ Return an NFT Page in its raw ledger format.
 
 | Field                   | Type                       | Description           |
 |:------------------------|:---------------------------|:----------------------|
-| `nft_page`              | String | The [ledger entry ID](ledger-object-ids.html) of an [NFT Page](nftokenpage.html) to retrieve. |
+| `nft_page`              | String | The [ledger entry ID](ledger-object-ids.html) of an [NFT Page](../../../protocol-reference/ledger-data/ledger-entry-types/nftokenpage.md) to retrieve. |
 
 <!-- MULTICODE_BLOCK_START -->
 
@@ -673,14 +673,14 @@ rippled json ledger_entry '{ "nft_page": "255DD86DDF59D778081A06D02701E9B2C9F4F0
 
 ## Response Format
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | Field          | Type             | Description                              |
 |:---------------|:-----------------|:-----------------------------------------|
 | `index`        | String           | The unique ID of this [ledger entry](ledger-object-types.html). |
 | `ledger_index` | Unsigned Integer | The [ledger index][] of the ledger that was used when retrieving this data. |
 | `node`         | Object           | _(Omitted if `"binary": true` specified.)_ Object containing the data of this ledger entry, according to the [ledger format][]. |
-| `node_binary`  | String           | _(Omitted unless `"binary":true` specified)_ The [binary representation](serialization.html) of the ledger object, as hexadecimal. |
+| `node_binary`  | String           | _(Omitted unless `"binary":true` specified)_ The [binary representation](../../../protocol-reference/serialization.md) of the ledger object, as hexadecimal. |
 
 An example of a successful response:
 

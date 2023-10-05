@@ -9,9 +9,9 @@ labels:
 # validator_list_sites
 [[Source]](https://github.com/XRPLF/rippled/blob/master/src/ripple/rpc/handlers/ValidatorListSites.cpp "Source")
 
-The `validator_list_sites` command returns status information of sites serving validator lists. [New in: rippled 0.80.1][]
+The `validator_list_sites` command returns status information of sites serving validator lists. [New in: rippled 0.80.1](https://github.com/XRPLF/rippled/releases/tag/0.80.1 "BADGE_BLUE")
 
-*The `validator_list_sites` method is an [admin method](admin-api-methods.html) that cannot be run by unprivileged users!*
+*The `validator_list_sites` method is an [admin method](../admin-api-methods.md) that cannot be run by unprivileged users!*
 
 ### Request Format
 An example of the request format:
@@ -119,7 +119,7 @@ Connecting to 127.0.0.1:5005
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following field:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following field:
 
 | `Field`           | Type  | Description                      |
 |:------------------|:------|----------------------------------|

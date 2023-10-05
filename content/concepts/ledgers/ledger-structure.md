@@ -48,7 +48,7 @@ The _ledger header_ is a block of data that summarizes a ledger version. Like th
 - {{include_svg("img/ledger-tx-set-hash-icon.svg", "", classes="floating-diagram")}} A _transaction set hash_ which acts as a checksum on this ledger's transaction set data.
 - {{include_svg("img/ledger-notes-icon.svg", "", classes="floating-diagram")}} A few other notes like the total amount of XRP in existence and the amount the close time was rounded by.
 
-A ledger's transaction set and state data are unlimited in size, but the ledger header is always a fixed size. For the exact data and binary format of a ledger header, see [Ledger Header](ledger-header.html).
+A ledger's transaction set and state data are unlimited in size, but the ledger header is always a fixed size. For the exact data and binary format of a ledger header, see [Ledger Header](../../references/protocol-reference/ledger-data/ledger-header.md).
 
 
 ## Validation Status
@@ -57,7 +57,7 @@ A ledger's transaction set and state data are unlimited in size, but the ledger 
 
 When a consensus of validators in a server's Unique Node List agree on the contents of a ledger version, that ledger version is marked as validated and immutable. The ledger's contents can only change by subsequent transactions making a new ledger version, continuing the chain.
 
-When a ledger version is first created, it is not yet validated. Due to differences in when candidate transactions arrive at different servers, the network may build and propose multiple different ledger versions to be the next step in the chain. The [consensus protocol](consensus.html) decides which one of them becomes validated. (Any candidate transactions that weren't in the validated ledger version can typically be included in the next ledger version's transaction set instead.)
+When a ledger version is first created, it is not yet validated. Due to differences in when candidate transactions arrive at different servers, the network may build and propose multiple different ledger versions to be the next step in the chain. The [consensus protocol](../consensus-protocol/consensus.md) decides which one of them becomes validated. (Any candidate transactions that weren't in the validated ledger version can typically be included in the next ledger version's transaction set instead.)
 
 
 ## Ledger Index or Ledger Hash?

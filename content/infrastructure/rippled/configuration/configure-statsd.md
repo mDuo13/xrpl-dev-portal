@@ -60,7 +60,7 @@ For descriptions of each StatsD metric, see the [`rippledmon` repository](https:
     - [The `rippled` Server](xrpl-servers.html)
 - **Tutorials:**
     - [Install `rippled`](install-rippled.html)
-    - [Capacity Planning](capacity-planning.html)
+    - [Capacity Planning](../installation/capacity-planning.md)
 - **References:**
-    - [server_info method](server_info.html)
-    - [print method](print.html)
+    - [server_info method](../../../references/http-websocket-apis/public-api-methods/server-info-methods/server_info.md)
+    - [print method](../../../references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/print.md)

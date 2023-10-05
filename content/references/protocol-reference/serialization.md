@@ -16,15 +16,15 @@ curated_anchors:
 # Serialization Format
 [[Source]](https://github.com/XRPLF/rippled/blob/develop/src/ripple/protocol/impl/STObject.cpp#L696-L718 "Source")
 
-This page describes the XRP Ledger's canonical binary format for transactions and other data. This binary format is necessary to create and verify digital signatures of those transactions' contents, and is also used in other places including in the [peer-to-peer communications between servers](peer-protocol.html). The [`rippled` APIs](http-websocket-apis.html) typically use JSON to communicate with client applications. However, JSON is unsuitable as a format for serializing transactions for being digitally signed, because JSON can represent the same data in many different but equivalent ways.
+This page describes the XRP Ledger's canonical binary format for transactions and other data. This binary format is necessary to create and verify digital signatures of those transactions' contents, and is also used in other places including in the [peer-to-peer communications between servers](../../concepts/networks-and-servers/peer-protocol.md). The [`rippled` APIs](http-websocket-apis.html) typically use JSON to communicate with client applications. However, JSON is unsuitable as a format for serializing transactions for being digitally signed, because JSON can represent the same data in many different but equivalent ways.
 
 The process of serializing a transaction from JSON or any other representation into their canonical binary format can be summarized with these steps:
 
-1. Make sure all required fields are provided, including any required but ["auto-fillable" fields](transaction-common-fields.html#auto-fillable-fields).
+1. Make sure all required fields are provided, including any required but ["auto-fillable" fields](transactions/transaction-common-fields.md#auto-fillable-fields).
 
-    The [Transaction Formats Reference](transaction-formats.html) defines the required and optional fields for XRP Ledger transactions.
+    The [Transaction Formats Reference](transactions/transaction-formats.md) defines the required and optional fields for XRP Ledger transactions.
 
-    **Note:** The `SigningPubKey` must also be provided at this step. When signing, you can [derive this key](cryptographic-keys.html#key-derivation) from the secret key that is provided for signing.
+    **Note:** The `SigningPubKey` must also be provided at this step. When signing, you can [derive this key](../../concepts/accounts/cryptographic-keys.md#key-derivation) from the secret key that is provided for signing.
 
 2. Convert each field's data into its ["internal" binary format](#internal-format).
 
@@ -62,15 +62,15 @@ The serialization processes described here are implemented in multiple places an
 - In JavaScript in [this repository's code samples section]({{target.github_forkurl}}/blob/{{target.github_branch}}/content/_code-samples/tx-serialization/).
 - In Python 3 in [this repository's code samples section]({{target.github_forkurl}}/blob/{{target.github_branch}}/content/_code-samples/tx-serialization/).
 
-Additionally, many [client libraries](client-libraries.html) provide serialization support under permissive open-source licenses, so you can import, use, or adapt the code for your needs.
+Additionally, many [client libraries](../client-libraries.md) provide serialization support under permissive open-source licenses, so you can import, use, or adapt the code for your needs.
 
 
 
 ## Internal Format
 
-Each field has an "internal" binary format used in the `rippled` source code to represent that field when signing (and in most other cases). The internal formats for all fields are defined in the source code of [`SField.cpp`](https://github.com/XRPLF/rippled/blob/master/src/ripple/protocol/impl/SField.cpp). (This file also includes fields other than transaction fields.) The [Transaction Format Reference](transaction-formats.html) also lists the internal formats for all transaction fields.
+Each field has an "internal" binary format used in the `rippled` source code to represent that field when signing (and in most other cases). The internal formats for all fields are defined in the source code of [`SField.cpp`](https://github.com/XRPLF/rippled/blob/master/src/ripple/protocol/impl/SField.cpp). (This file also includes fields other than transaction fields.) The [Transaction Format Reference](transactions/transaction-formats.md) also lists the internal formats for all transaction fields.
 
-For example, the `Flags` [common transaction field](transaction-common-fields.html) becomes a UInt32 (32-bit unsigned integer).
+For example, the `Flags` [common transaction field](transactions/transaction-common-fields.md) becomes a UInt32 (32-bit unsigned integer).
 
 ### Definitions File
 
@@ -83,10 +83,10 @@ The following table defines the top-level fields from the definitions file:
 | Field                 | Contents                                             |
 |:----------------------|:-----------------------------------------------------|
 | `TYPES`               | Map of data types to their ["type code"](#type-codes) for constructing field IDs and sorting fields in canonical order. Codes below 1 should not appear in actual data; codes above 10000 represent special "high-level" object types such as "Transaction" that cannot be serialized inside other objects. See the [Type List](#type-list) for details of how to serialize each type. |
-| `LEDGER_ENTRY_TYPES`  | Map of [ledger objects](ledger-object-types.html) to their data type. These appear in ledger state data, and in the "affected nodes" section of processed transactions' [metadata](transaction-metadata.html). |
+| `LEDGER_ENTRY_TYPES`  | Map of [ledger objects](ledger-object-types.html) to their data type. These appear in ledger state data, and in the "affected nodes" section of processed transactions' [metadata](transactions/transaction-metadata.md). |
 | `FIELDS`              | A sorted array of tuples representing all fields that may appear in transactions, ledger objects, or other data. The first member of each tuple is the string name of the field and the second member is an object with that field's properties. (See the "Field properties" table below for definitions of those fields.) |
-| `TRANSACTION_RESULTS` | Map of [transaction result codes](transaction-results.html) to their numeric values. Result types not included in ledgers have negative values; `tesSUCCESS` has numeric value 0; [`tec`-class codes](tec-codes.html) represent failures that are included in ledgers. |
-| `TRANSACTION_TYPES`   | Map of all [transaction types](transaction-types.html) to their numeric values. |
+| `TRANSACTION_RESULTS` | Map of [transaction result codes](transactions/transaction-results/transaction-results.md) to their numeric values. Result types not included in ledgers have negative values; `tesSUCCESS` has numeric value 0; [`tec`-class codes](transactions/transaction-results/tec-codes.md) represent failures that are included in ledgers. |
+| `TRANSACTION_TYPES`   | Map of all [transaction types](transactions/transaction-types/transaction-types.md) to their numeric values. |
 
 For purposes of serializing transactions for signing and submitting, the `FIELDS`, `TYPES`, and `TRANSACTION_TYPES` fields are necessary.
 
@@ -164,7 +164,7 @@ The [definitions file](#definitions-file) lists the type codes for each type in 
 
 Each field has a field code, which is used to sort fields that have the same type as one another, with lower codes sorting first. These fields are defined in [`SField.cpp`](https://github.com/XRPLF/rippled/blob/72e6005f562a8f0818bc94803d222ac9345e1e40/src/ripple/protocol/impl/SField.cpp#L72-L266).
 
-For example, the `Account` field of a [Payment transaction][] [has sort code 1](https://github.com/XRPLF/rippled/blob/72e6005f562a8f0818bc94803d222ac9345e1e40/src/ripple/protocol/impl/SField.cpp#L219), so it comes before the `Destination` field which [has sort code 3](https://github.com/XRPLF/rippled/blob/72e6005f562a8f0818bc94803d222ac9345e1e40/src/ripple/protocol/impl/SField.cpp#L221).
+For example, the `Account` field of a [Payment transaction](transactions/transaction-types/payment.md) [has sort code 1](https://github.com/XRPLF/rippled/blob/72e6005f562a8f0818bc94803d222ac9345e1e40/src/ripple/protocol/impl/SField.cpp#L219), so it comes before the `Destination` field which [has sort code 3](https://github.com/XRPLF/rippled/blob/72e6005f562a8f0818bc94803d222ac9345e1e40/src/ripple/protocol/impl/SField.cpp#L221).
 
 Field codes are reused for fields of different field types, but fields of the same type never have the same field code. When you combine the type code with the field code, you get the field's unique [Field ID](#field-ids).
 
@@ -176,14 +176,14 @@ Transaction instructions may contain fields of any of the following types:
 
 | Type Name     | Type Code | Bit Length | [Length-prefixed][]? | Description    |
 |:--------------|:----------|:-----------|:---------------------|----------------|
-| [AccountID][] | 8         | 160        | Yes                  | The unique identifier for an [account](accounts.html). |
+| [AccountID][] | 8         | 160        | Yes                  | The unique identifier for an [account](../../concepts/accounts/accounts.md). |
 | [Amount][]    | 6         | 64 or 384  | No                   | An amount of XRP or tokens. The length of the field is 64 bits for XRP or 384 bits (64+160+160) for tokens. |
 | [Blob][]      | 7         | Variable   | Yes                  | Arbitrary binary data. One important such field is `TxnSignature`, the signature that authorizes a transaction. |
 | [Hash128][]   | 4         | 128        | No                   | A 128-bit arbitrary binary value. The only such field is `EmailHash`, which is intended to store the MD-5 hash of an account owner's email for purposes of fetching a [Gravatar](https://www.gravatar.com/). |
 | [Hash160][]   | 17        | 160        | No                   | A 160-bit arbitrary binary value. This may define a currency code or issuer. |
 | [Hash256][]   | 5         | 256        | No                   | A 256-bit arbitrary binary value. This usually represents the "SHA-512Half" hash of a transaction, ledger version, or ledger data object. |
-| [PathSet][]   | 18        | Variable   | No                   | A set of possible [payment paths](paths.html) for a [cross-currency payment](cross-currency-payments.html). |
-| [STArray][]   | 15        | Variable   | No                   | An array containing a variable number of members, which can be different types depending on the field. Two cases of this include [memos](transaction-common-fields.html#memos-field) and lists of signers used in [multi-signing](multi-signing.html). |
+| [PathSet][]   | 18        | Variable   | No                   | A set of possible [payment paths](../../concepts/tokens/paths.md) for a [cross-currency payment](../../concepts/payment-types/cross-currency-payments.md). |
+| [STArray][]   | 15        | Variable   | No                   | An array containing a variable number of members, which can be different types depending on the field. Two cases of this include [memos](transactions/transaction-common-fields.md#memos-field) and lists of signers used in [multi-signing](../../concepts/transactions/multi-signing.md). |
 | [STIssue][]   | 24        | 160 or 320 | No                   | An asset definition, XRP or a token, with no quantity. |
 | [STObject][]  | 14        | Variable   | No                   | An object containing one or more nested fields. |
 | [UInt8][]     | 16        | 8          | No                   | An 8-bit unsigned integer. |
@@ -193,22 +193,22 @@ Transaction instructions may contain fields of any of the following types:
 [Length-prefixed]: #length-prefixing
 
 
-In addition to all of the above field types, the following types may appear in other contexts, such as [ledger objects](ledger-object-types.html) and [transaction metadata](transaction-metadata.html):
+In addition to all of the above field types, the following types may appear in other contexts, such as [ledger objects](ledger-object-types.html) and [transaction metadata](transactions/transaction-metadata.md):
 
 | Type Name   | Type Code | [Length-prefixed]? | Description                   |
 |:------------|:----------|:-------------------|:------------------------------|
-| Transaction | 10001     | No                 | A "high-level" type containing an entire [transaction](transaction-formats.html). |
+| Transaction | 10001     | No                 | A "high-level" type containing an entire [transaction](transactions/transaction-formats.md). |
 | LedgerEntry | 10002     | No                 | A "high-level" type containing an entire [ledger object](ledger-object-types.html). |
-| Validation  | 10003     | No                 | A "high-level" type used in peer-to-peer communications to represent a validation vote in the [consensus process](consensus.html). |
-| Metadata    | 10004     | No                 | A "high-level" type containing [metadata for one transaction](transaction-metadata.html). |
+| Validation  | 10003     | No                 | A "high-level" type used in peer-to-peer communications to represent a validation vote in the [consensus process](../../concepts/consensus-protocol/consensus.md). |
+| Metadata    | 10004     | No                 | A "high-level" type containing [metadata for one transaction](transactions/transaction-metadata.md). |
 | [UInt64][]  | 3         | No                 | A 64-bit unsigned integer. This type does not appear in transaction instructions, but several ledger objects use fields of this type. |
-| Vector256   | 19        | Yes                | This type does not appear in transaction instructions, but the [Amendments ledger object](amendments-object.html)'s `Amendments` field uses this to represent which [amendments](amendments.html) are currently enabled. |
+| Vector256   | 19        | Yes                | This type does not appear in transaction instructions, but the [Amendments ledger object](ledger-data/ledger-entry-types/amendments.md)'s `Amendments` field uses this to represent which [amendments](../../concepts/networks-and-servers/amendments.md) are currently enabled. |
 
 
 ### AccountID Fields
 [AccountID]: #accountid-fields
 
-Fields of this type contain the 160-bit identifier for an XRP Ledger [account](accounts.html). In JSON, these fields are represented as [base58][] XRP Ledger "addresses", with additional checksum data so that typos are unlikely to result in valid addresses. (This encoding, sometimes called "Base58Check", prevents accidentally sending money to the wrong address.) The binary format for these fields does not contain any checksum data nor does it include the `0x00` "type prefix" used in [address base58 encoding](addresses.html#address-encoding). (However, since the binary format is used mostly for signed transactions, a typo or other error in transcribing a signed transaction would invalidate the signature, preventing it from sending money.)
+Fields of this type contain the 160-bit identifier for an XRP Ledger [account](../../concepts/accounts/accounts.md). In JSON, these fields are represented as [base58](base58-encodings.html) XRP Ledger "addresses", with additional checksum data so that typos are unlikely to result in valid addresses. (This encoding, sometimes called "Base58Check", prevents accidentally sending money to the wrong address.) The binary format for these fields does not contain any checksum data nor does it include the `0x00` "type prefix" used in [address base58 encoding](../../concepts/accounts/addresses.md#address-encoding). (However, since the binary format is used mostly for signed transactions, a typo or other error in transcribing a signed transaction would invalidate the signature, preventing it from sending money.)
 
 AccountIDs that appear as stand-alone fields (such as `Account` and `Destination`) are [length-prefixed](#length-prefixing) despite being a fixed 160 bits in length. As a result, the length indicator for these fields is always the byte `0x14`. AccountIDs that appear as children of special fields ([Amount `issuer`][Amount] and [PathSet `account`][PathSet]) are _not_ length-prefixed.
 
@@ -227,8 +227,8 @@ The "Amount" type is a special field type that represents an amount of currency,
     Tokens consist of three segments in order:
 
     1. 64 bits indicating the amount in the [token amount format](#token-amount-format). The first bit is `1` to indicate that this is not XRP.
-    2. 160 bits indicating the [currency code](currency-formats.html#currency-codes). The standard API converts 3-character codes such as "USD" into 160-bit codes using the [standard currency code format](currency-formats.html#standard-currency-codes), but custom 160-bit codes are also possible.
-    3. 160 bits indicating the issuer's Account ID. (See also: [Account Address Encoding](addresses.html#address-encoding))
+    2. 160 bits indicating the [currency code](data-types/currency-formats.md#currency-codes). The standard API converts 3-character codes such as "USD" into 160-bit codes using the [standard currency code format](data-types/currency-formats.md#standard-currency-codes), but custom 160-bit codes are also possible.
+    3. 160 bits indicating the issuer's Account ID. (See also: [Account Address Encoding](../../concepts/accounts/addresses.md#address-encoding))
 
 You can tell which of the two sub-types it is based on the first bit: `0` for XRP; `1` for tokens.
 
@@ -273,7 +273,7 @@ The **nonstandard format** is any 160 bits of data as long as the first 8 bits a
 ### Array Fields
 [STArray]: #array-fields
 
-Some transaction fields, such as `SignerEntries` (in [SignerListSet transactions][]) and [`Memos`](transaction-common-fields.html#memos-field), are arrays of objects (called the "STArray" type).
+Some transaction fields, such as `SignerEntries` (in [SignerListSet transactions](transactions/transaction-types/signerlistset.md)) and [`Memos`](transactions/transaction-common-fields.md#memos-field), are arrays of objects (called the "STArray" type).
 
 Arrays contain several [object fields](#object-fields) in their native binary format in a specific order. In JSON, each array member is a JSON "wrapper" object with a single field, which is the name of the member object field. The value of that field is the ("inner") object itself.
 
@@ -305,7 +305,7 @@ All such fields are serialized as the specific number of bits, with no length in
 ### Issue Fields
 [STIssue]: #issue-fields
 
-Some fields specify a _type_ of asset, which could be XRP or a fungible [token](tokens.html), without an amount. These fields have consist of one or two 160-bit segments in order:
+Some fields specify a _type_ of asset, which could be XRP or a fungible [token](../../concepts/tokens/tokens.md), without an amount. These fields have consist of one or two 160-bit segments in order:
 
 1. The first 160 bits are the [currency code](#currency-codes) of the asset. For XRP, this is all 0's.
 2. If the first 160 bits are all 0's (the asset is XRP), the field ends there. Otherwise, the asset is a token and the next 160 bits are the [AccountID of the token issuer](#accountid-fields).
@@ -314,7 +314,7 @@ Some fields specify a _type_ of asset, which could be XRP or a fungible [token](
 ### Object Fields
 [STObject]: #object-fields
 
-Some fields, such as `SignerEntry` (in [SignerListSet transactions][]), and `Memo` (in `Memos` arrays) are objects (called the "STObject" type). The serialization of objects is very similar to that of arrays, with one difference: **object members must be placed in canonical order** within the object field, where array fields have an explicit order already.
+Some fields, such as `SignerEntry` (in [SignerListSet transactions](transactions/transaction-types/signerlistset.md)), and `Memo` (in `Memos` arrays) are objects (called the "STObject" type). The serialization of objects is very similar to that of arrays, with one difference: **object members must be placed in canonical order** within the object field, where array fields have an explicit order already.
 
 The [canonical field order](#canonical-field-order) of object fields is the same as the canonical field order for all top-level fields, but the members of the object must be sorted within the object. After the last member, there is an "Object end" Field ID of `0xe1` with no contents.
 
@@ -326,7 +326,7 @@ The following example shows the serialization format for an object (a single `Me
 ### PathSet Fields
 [PathSet]: #pathset-fields
 
-The `Paths` field of a cross-currency [Payment transaction][] is a "PathSet", represented in JSON as an array of arrays. For more information on what paths are used for, see [Paths](paths.html).
+The `Paths` field of a cross-currency [Payment transaction](transactions/transaction-types/payment.md) is a "PathSet", represented in JSON as an array of arrays. For more information on what paths are used for, see [Paths](../../concepts/tokens/paths.md).
 
 A PathSet is serialized as **1 to 6** individual paths in sequence[[Source]](https://github.com/XRPLF/rippled/blob/4cff94f7a4a05302bdf1a248515379da99c5bcd4/src/ripple/app/tx/impl/Payment.h#L35-L36 "Source"). Each complete path is followed by a byte that indicates what comes next:
 
@@ -345,7 +345,7 @@ The following table describes the possible fields and the bitwise flags to set i
 
 [Currency Code]: currency-formats.html#standard-currency-codes
 
-Some combinations are invalid; see [Path Specifications](paths.html#path-specifications) for details.
+Some combinations are invalid; see [Path Specifications](../../concepts/tokens/paths.md#path-specifications) for details.
 
 The AccountIDs in the `account` and `issuer` fields are presented _without_ a length prefix. When the `currency` is XRP, the currency code is represented as 160 bits of zeroes.
 

@@ -8,7 +8,7 @@ labels:
 ---
 # Ledgers
 
-The XRP Ledger is a shared, global ledger that is open to all. Individual participants can trust the integrity of the ledger without having to trust any single institution to manage it. The XRP Ledger protocol accomplishes this by managing a ledger database that can only be updated according to very specific rules. Each server in the peer-to-peer network keeps a full copy of the ledger database, and the network distributes candidate transactions, which are applied in blocks according to the [consensus process](consensus.html).
+The XRP Ledger is a shared, global ledger that is open to all. Individual participants can trust the integrity of the ledger without having to trust any single institution to manage it. The XRP Ledger protocol accomplishes this by managing a ledger database that can only be updated according to very specific rules. Each server in the peer-to-peer network keeps a full copy of the ledger database, and the network distributes candidate transactions, which are applied in blocks according to the [consensus process](../consensus-protocol/consensus.md).
 
 {{ include_svg("img/ledger-changes.svg", "Diagram: Each ledger is the result of applying transactions to the previous ledger version.") }}
 
@@ -21,15 +21,15 @@ A single ledger version consists of several parts:
 {{ include_svg("img/anatomy-of-a-ledger-simplified.svg", "Diagram: A ledger has transactions, a state tree, and a header with the close time and validation info") }}
 
 * A **header** - The [Ledger Index][], hashes of its other contents, and other metadata.
-* A **transaction tree** - The [transactions](transaction-formats.html) that were applied to the previous ledger to make this one.
+* A **transaction tree** - The [transactions](../../references/protocol-reference/transactions/transaction-formats.md) that were applied to the previous ledger to make this one.
 * A **state tree** - All the data in the ledger, as [ledger entries](ledger-object-types.html): balances, settings, and so on.
 
 
 
 ## See Also
 
-- For more information about ledger headers, ledger object IDs, and ledger object types, see [Ledger Data Formats](ledger-data-formats.html)
-- For information on how servers track the history of changes to ledger state, see [Ledger History](ledger-history.html)
+- For more information about ledger headers, ledger object IDs, and ledger object types, see [Ledger Data Formats](../../references/protocol-reference/ledger-data/ledger-data-formats.md)
+- For information on how servers track the history of changes to ledger state, see [Ledger History](../networks-and-servers/ledger-history/ledger-history.md)
 
 
 <!--{# common link defs #}-->

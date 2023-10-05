@@ -30,14 +30,14 @@ Return escrowed XRP to the sender.
 <!--{# fix md highlighting_ #}-->
 
 
-| Field           | JSON Type | [Internal Type][] | Description                |
+| Field           | JSON Type | [Internal Type](../../serialization.md) | Description                |
 |:----------------|:----------|:------------------|:---------------------------|
 | `Owner`         | String    | AccountID         | Address of the source account that funded the escrow payment. |
-| `OfferSequence` | Number    | UInt32            | Transaction sequence (or [Ticket](tickets.html) number) of [EscrowCreate transaction][] that created the escrow to cancel. |
+| `OfferSequence` | Number    | UInt32            | Transaction sequence (or [Ticket](../../../../concepts/transactions/tickets.md) number) of [EscrowCreate transaction](escrowcreate.md) that created the escrow to cancel. |
 
 Any account may submit an EscrowCancel transaction.
 
-* If the corresponding [EscrowCreate transaction][] did not specify a `CancelAfter` time, the EscrowCancel transaction fails.
+* If the corresponding [EscrowCreate transaction](escrowcreate.md) did not specify a `CancelAfter` time, the EscrowCancel transaction fails.
 * Otherwise the EscrowCancel transaction fails if the `CancelAfter` time is after the close time of the most recently-closed ledger.
 
 <!--{# common link defs #}-->

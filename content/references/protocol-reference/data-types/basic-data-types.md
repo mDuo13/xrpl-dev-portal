@@ -7,11 +7,11 @@ blurb: Format and meaning of fundamental data types like addresses, ledger index
 
 Different types of objects are uniquely identified in different ways:
 
-[Accounts](accounts.html) are identified by their [Address][], for example `"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59"`. Addresses always start with "r". Many `rippled` methods also accept a hexadecimal representation.
+[Accounts](../../../concepts/accounts/accounts.md) are identified by their [Address][], for example `"r9cZA1mLK5R5Am25ArfXFmqgNwjZgnfk59"`. Addresses always start with "r". Many `rippled` methods also accept a hexadecimal representation.
 
-[Transactions](transaction-formats.html) are identified by a [Hash][] of the transaction's binary format. You can also identify a transaction by its sending account and [Sequence Number][].
+[Transactions](../transactions/transaction-formats.md) are identified by a [Hash][] of the transaction's binary format. You can also identify a transaction by its sending account and [Sequence Number][].
 
-Each closed [Ledger](ledger-data-formats.html) has a [Ledger Index][] and a [Hash][] value. When [Specifying Ledgers][] you can use either one.
+Each closed [Ledger](../ledger-data/ledger-data-formats.md) has a [Ledger Index][] and a [Hash][] value. When [Specifying Ledgers][] you can use either one.
 
 ## Addresses
 [Address]: #addresses
@@ -82,7 +82,7 @@ Many API methods require you to specify an instance of the ledger, with the data
 
 3. Specify a ledger by one of the following shortcuts, in the `ledger_index` parameter:
 
-    * `validated` for the most recent ledger that has been [validated by consensus](consensus-structure.html#validation)
+    * `validated` for the most recent ledger that has been [validated by consensus](../../../concepts/consensus-protocol/consensus-structure.md#validation)
 
             "ledger_index": "validated"
 
@@ -92,7 +92,7 @@ Many API methods require you to specify an instance of the ledger, with the data
 
 There is also a deprecated `ledger` parameter which accepts any of the above three formats. *Do not* use this parameter; it may be removed without further notice.
 
-If you do not specify a ledger, the server decides which ledger to use to serve the request. By default, the server chooses the `current` (in-progress) ledger. In [Reporting Mode](rippled-server-modes.html#reporting-mode), the server uses the most recent validated ledger instead. Do not provide more than one field specifying ledgers.
+If you do not specify a ledger, the server decides which ledger to use to serve the request. By default, the server chooses the `current` (in-progress) ledger. In [Reporting Mode](../../../concepts/networks-and-servers/rippled-server-modes.md#reporting-mode), the server uses the most recent validated ledger instead. Do not provide more than one field specifying ledgers.
 
 **Note:** Do not rely on the default behavior for specifying a ledger; it is subject to change. Always specify a ledger version in the request if you can.
 
@@ -103,7 +103,7 @@ Reporting Mode does not record ledger data until it has been validated. If you m
 
 There are two kinds of currencies in the XRP Ledger: XRP and tokens. These two types of currencies are specified in different formats, with different precision and rounding behavior.
 
-Some fields, such as the destination `Amount` of a [Payment transaction][], can be either type. Some fields only accept XRP specifically, such as the `Fee` field ([transaction cost](transaction-cost.html)).
+Some fields, such as the destination `Amount` of a [Payment transaction](../transactions/transaction-types/payment.md), can be either type. Some fields only accept XRP specifically, such as the `Fee` field ([transaction cost](../../../concepts/transactions/transaction-cost.md)).
 
 XRP is specified as a string containing an integer number of "drops" of XRP, where 1 million drops equals 1 XRP. Tokens are instead specified as an object with fields for the decimal amount, currency code, and issuer. For example:
 
@@ -119,7 +119,7 @@ XRP is specified as a string containing an integer number of "drops" of XRP, whe
             "issuer": "rf1BiGeXwwQoi8Z2ueFYTEXSwuJYfV2Jpn"
         }
 
-For more information, see [Currency Formats](currency-formats.html).
+For more information, see [Currency Formats](currency-formats.md).
 
 
 ## Specifying Time

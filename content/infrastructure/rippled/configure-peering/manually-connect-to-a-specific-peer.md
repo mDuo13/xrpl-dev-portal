@@ -7,21 +7,21 @@ labels:
 ---
 # Manually Connect to a Specific Peer
 
-Use these steps to manually connect your server to a specific [peer](peer-protocol.html) in the XRP Ledger network.
+Use these steps to manually connect your server to a specific [peer](../../../concepts/networks-and-servers/peer-protocol.md) in the XRP Ledger network.
 
-**Tip:** If you want to make sure your server automatically connects to this server on startup and remains connected later, you may want to configure a [peer reservation](use-a-peer-reservation.html) for that peer.
+**Tip:** If you want to make sure your server automatically connects to this server on startup and remains connected later, you may want to configure a [peer reservation](use-a-peer-reservation.md) for that peer.
 
 
 ## Prerequisites
 
 - You must know the IP address of the peer you want to connect to.
-- You must know what port the peer you want to connect to uses for the XRP Ledger [peer protocol](peer-protocol.html). The default config file uses port 51235.
-- You must have a network connection from your server to the peer. For example, the peer server must [forward the appropriate port through its firewall](forward-ports-for-peering.html).
-- The peer server must have available peer slots. If the peer is already at its maximum number of peers, you can ask the peer server's operator to add a [peer reservation](use-a-peer-reservation.html) for your server.
+- You must know what port the peer you want to connect to uses for the XRP Ledger [peer protocol](../../../concepts/networks-and-servers/peer-protocol.md). The default config file uses port 51235.
+- You must have a network connection from your server to the peer. For example, the peer server must [forward the appropriate port through its firewall](forward-ports-for-peering.md).
+- The peer server must have available peer slots. If the peer is already at its maximum number of peers, you can ask the peer server's operator to add a [peer reservation](use-a-peer-reservation.md) for your server.
 
 ## Steps
 
-To connect, use the [connect method][]. For example:
+To connect, use the [connect method](../../../references/http-websocket-apis/admin-api-methods/peer-management-methods/connect.md). For example:
 
 <!-- MULTICODE_BLOCK_START -->
 
@@ -62,16 +62,16 @@ rippled connect 169.54.2.151 51235
 ## See Also
 
 - **Concepts:**
-    - [Peer Protocol](peer-protocol.html)
+    - [Peer Protocol](../../../concepts/networks-and-servers/peer-protocol.md)
     - [The `rippled` Server](xrpl-servers.html)
 - **Tutorials:**
-    - [Capacity Planning](capacity-planning.html)
+    - [Capacity Planning](../installation/capacity-planning.md)
     - [Troubleshoot the `rippled` Server](troubleshoot-the-rippled-server.html)
 - **References:**
-    - [connect method][]
-    - [peers method][]
-    - [print method][]
-    - [server_info method][]
+    - [connect method](../../../references/http-websocket-apis/admin-api-methods/peer-management-methods/connect.md)
+    - [peers method](../../../references/http-websocket-apis/admin-api-methods/peer-management-methods/peers.md)
+    - [print method](../../../references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/print.md)
+    - [server_info method](../../../references/http-websocket-apis/public-api-methods/server-info-methods/server_info.md)
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

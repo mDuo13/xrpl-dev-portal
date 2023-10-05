@@ -10,7 +10,7 @@ labels:
 
 The `connect` command forces the `rippled` server to connect to a specific peer `rippled` server.
 
-*The `connect` method is an [admin method](admin-api-methods.html) that cannot be run by unprivileged users!*
+*The `connect` method is an [admin method](../admin-api-methods.md) that cannot be run by unprivileged users!*
 
 ### Request Format
 An example of the request format:
@@ -56,7 +56,7 @@ The request includes the following parameters:
 | `Field` | Type   | Description                                               |
 |:--------|:-------|:----------------------------------------------------------|
 | `ip`    | String | IP address of the server to connect to                    |
-| `port`  | Number | _(Optional)_ Port number to use when connecting. The default is **2459**. [Updated in: rippled 1.6.0][] |
+| `port`  | Number | _(Optional)_ Port number to use when connecting. The default is **2459**. [Updated in: rippled 1.6.0](https://github.com/XRPLF/rippled/releases/tag/1.6.0 "BADGE_BLUE") |
 
 ### Response Format
 
@@ -91,7 +91,7 @@ Connecting to 127.0.0.1:5005
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`   | Type   | Description                                            |
 |:----------|:-------|:-------------------------------------------------------|

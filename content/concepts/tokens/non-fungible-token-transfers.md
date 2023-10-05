@@ -8,21 +8,21 @@ labels:
 
 # Trading NFTokens on the XRP Ledger
 
-You can transfer `NFToken` objects between accounts on the XRP Ledger. You can offer to buy or sell a `NFToken`, or accept offers from other accounts to buy a `NFToken` you own. You can even give away a `NFToken` by offering to sell it at a price of 0.  All offers are created using [NFTokenCreateOffer transaction][].
+You can transfer `NFToken` objects between accounts on the XRP Ledger. You can offer to buy or sell a `NFToken`, or accept offers from other accounts to buy a `NFToken` you own. You can even give away a `NFToken` by offering to sell it at a price of 0.  All offers are created using [NFTokenCreateOffer transaction](../../references/protocol-reference/transactions/transaction-types/nftokencreateoffer.md).
 
-_(Added by the [NonFungibleTokensV1_1 amendment][].)_
+_(Added by the [NonFungibleTokensV1_1 amendment](known-amendments.html#nonfungibletokensv1_1).)_
 
 ## Reserve Requirements
 
 Every NFTokenOffer object requires that your account increase its owner reserve, currently 2 XRP per `NFTokenSellOffer` and 2 XRP per `NFTokenBuyOffer`. This is to prevent accounts from spamming the ledger with offers they don't intend to complete.
 
-See [NFT Reserve Requirements](nft-reserve-requirements.html).
+See [NFT Reserve Requirements](nft-reserve-requirements.md).
 
 ## Sell Offers
 
 ### Create a Sell Offer
 
-As the owner of a `NFToken` object, you can create a sell offer using a [NFTokenCreateOffer transaction][] with the `tfSellToken` flag. You provide the `NFTokenID` and the `Amount` you are willing to accept in payment. You can optionally specify an `Expiration` date, after which the offer is no longer valid, and a `Destination` account, which is the only account that is allowed to buy the `NFToken`.
+As the owner of a `NFToken` object, you can create a sell offer using a [NFTokenCreateOffer transaction](../../references/protocol-reference/transactions/transaction-types/nftokencreateoffer.md) with the `tfSellToken` flag. You provide the `NFTokenID` and the `Amount` you are willing to accept in payment. You can optionally specify an `Expiration` date, after which the offer is no longer valid, and a `Destination` account, which is the only account that is allowed to buy the `NFToken`.
 
 ### Accept a Sell Offer
 
@@ -32,7 +32,7 @@ To buy a `NFToken` that is offered for sale, you use a `NFTokenAcceptOffer` tran
 
 ### Create a Buy Offer
 
-Any account can offer to buy a `NFToken`. You can create a buy offer using [NFTokenCreateOffer][] _without_ the `tfSellToken` flag. You provide the `Owner` account, `NFTokenID`, and the `Amount` of your offer.
+Any account can offer to buy a `NFToken`. You can create a buy offer using [NFTokenCreateOffer](../../references/protocol-reference/transactions/transaction-types/nftokencreateoffer.md) _without_ the `tfSellToken` flag. You provide the `Owner` account, `NFTokenID`, and the `Amount` of your offer.
 
 ### Accept a Buy Offer
 

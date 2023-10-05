@@ -8,7 +8,7 @@ labels:
 # ledger_current
 [[Source]](https://github.com/XRPLF/rippled/blob/master/src/ripple/rpc/handlers/LedgerCurrent.cpp "Source")
 
-The `ledger_current` method returns the unique identifiers of the current in-progress [ledger](ledgers.html). This command is mostly useful for testing, because the ledger returned is still in flux.
+The `ledger_current` method returns the unique identifiers of the current in-progress [ledger](../../../../concepts/ledgers/ledgers.md). This command is mostly useful for testing, because the ledger returned is still in flux.
 
 ## Request Format
 
@@ -94,7 +94,7 @@ An example of a successful response:
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following field:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following field:
 
 | `Field`                | Type                                | Description   |
 |:-----------------------|:------------------------------------|:--------------|

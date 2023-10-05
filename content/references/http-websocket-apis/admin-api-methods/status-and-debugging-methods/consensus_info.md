@@ -9,9 +9,9 @@ labels:
 # consensus_info
 [[Source]](https://github.com/XRPLF/rippled/blob/a61ffab3f9010d8accfaa98aa3cacc7d38e74121/src/ripple/rpc/handlers/ConsensusInfo.cpp "Source")
 
-The `consensus_info` command provides information about the [consensus process](consensus.html) for debugging purposes.
+The `consensus_info` command provides information about the [consensus process](../../../../concepts/consensus-protocol/consensus.md) for debugging purposes.
 
-_The `consensus_info` method is an [admin method](admin-api-methods.html) that cannot be run by unprivileged users._
+_The `consensus_info` method is an [admin method](../admin-api-methods.md) that cannot be run by unprivileged users._
 
 ### Request Format
 An example of the request format:
@@ -210,7 +210,7 @@ Connecting to 127.0.0.1:5005
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field` | Type   | Description                                               |
 |:--------|:-------|:----------------------------------------------------------|
@@ -220,7 +220,7 @@ The following is an incomplete summary of fields that may be contained in the `i
 
 | `Field`          | Type    | Description                                     |
 |:-----------------|:--------|:------------------------------------------------|
-| `ledger_seq`     | Number  | The [ledger index][Ledger Index] of the [ledger](ledgers.html) currently in the consensus process |
+| `ledger_seq`     | Number  | The [ledger index][Ledger Index] of the [ledger](../../../../concepts/ledgers/ledgers.md) currently in the consensus process |
 | `our_position`   | Object  | This server's expectation for the ledger in the consensus process. |
 | `peer_positions` | Object  | Map of peers and their proposed versions of the ledger in the consensus process. |
 | `proposers`      | Number  | The number of trusted validators participating in this consensus process. Which validators are trusted depends on this server's configuration. |

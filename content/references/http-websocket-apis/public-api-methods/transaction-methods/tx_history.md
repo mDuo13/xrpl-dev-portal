@@ -1434,14 +1434,14 @@ An example of a successful response:
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field` | Type             | Description                               |
 |:--------|:-----------------|:------------------------------------------|
 | `index` | Unsigned Integer | The value of `start` used in the request. |
 | `txs`   | Array            | Array of transaction objects.             |
 
-The fields included in each transaction object vary slightly depending on the type of transaction. See [Transaction Format](transaction-formats.html) for details.
+The fields included in each transaction object vary slightly depending on the type of transaction. See [Transaction Format](../../../protocol-reference/transactions/transaction-formats.md) for details.
 
 ## Possible Errors
 

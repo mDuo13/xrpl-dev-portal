@@ -8,7 +8,7 @@ labels:
 # nft_info
 [[Source]](https://github.com/XRPLF/clio/blob/4a5cb962b6971872d150777881801ce27ae9ed1a/src/rpc/handlers/NFTInfo.cpp "Source")
 
-The `nft_info` command asks the Clio server for information about the [NFT](non-fungible-tokens.html) being queried. [New in: Clio v1.1.0](https://github.com/XRPLF/clio/releases/tag/1.1.0 "BADGE_BLUE")
+The `nft_info` command asks the Clio server for information about the [NFT](../../../../concepts/tokens/non-fungible-tokens.md) being queried. [New in: Clio v1.1.0](https://github.com/XRPLF/clio/releases/tag/1.1.0 "BADGE_BLUE")
 
 ## Request Format
 An example of the request format:
@@ -124,7 +124,7 @@ An example of a successful response:
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing an `nft_info` response object with some arrangement of the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing an `nft_info` response object with some arrangement of the following fields:
 
 | `Field`                           | Type            | Description          |
 |:----------------------------------|:----------------|:---------------------|
@@ -133,7 +133,7 @@ The response follows the [standard format][], with a successful result containin
 | `owner`                           | String          | The account ID of this NFT's owner at this ledger index. |
 | `is_burned`                       | Boolean         | Returns `true` if the NFT is burned at this ledger, or `false` otherwise. |
 | `flags `                          | Integer         | The flag set of this NFT. |
-| `transfer_fee`                    | Integer         | The transfer fee of this NFT. See [NFTokenMint Fields](nftokenmint.html#nftokenmint-fields) for more information on transfer fees. |
+| `transfer_fee`                    | Integer         | The transfer fee of this NFT. See [NFTokenMint Fields](../../../protocol-reference/transactions/transaction-types/nftokenmint.md#nftokenmint-fields) for more information on transfer fees. |
 | `issuer`                          | String          | The account ID which denotes the issuer of this NFT. |
 | `nft_taxon`                       | Integer         | The NFT’s taxon. |
 | `nft_sequence`                    | Integer         | The NFT’s sequence number. |

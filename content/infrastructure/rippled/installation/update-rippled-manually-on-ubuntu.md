@@ -8,7 +8,7 @@ labels:
 ---
 # Update Manually on Ubuntu or Debian
 
-This page describes how to update manually to the latest release of `rippled` on Ubuntu Linux. These instructions assume you have already [installed `rippled` using the native package](install-rippled-on-ubuntu.html). Ripple recommends setting up [automatic updates](update-rippled-automatically-on-linux.html) instead, where possible.
+This page describes how to update manually to the latest release of `rippled` on Ubuntu Linux. These instructions assume you have already [installed `rippled` using the native package](install-rippled-on-ubuntu.md). Ripple recommends setting up [automatic updates](update-rippled-automatically-on-linux.md) instead, where possible.
 
 > **Caution:** Ripple renewed the GPG key used to sign binary packages shortly before the release of v1.7.0. If you are upgrading from a version earlier than 1.7.0, you must first download and manually trust the updated public key as follows:
 >
@@ -42,14 +42,14 @@ To update manually, complete the following steps:
 
 - **Concepts:**
     - [The `rippled` Server](xrpl-servers.html)
-    - [Consensus](consensus.html)
+    - [Consensus](../../../concepts/consensus-protocol/consensus.md)
 - **Tutorials:**
     - [`rippled` v1.3.x Migration Instructions](rippled-1-3-migration-instructions.html) <!-- Note: remove when versions older than v1.3 are basically extinct -->
     - [Troubleshoot rippled](troubleshoot-the-rippled-server.html)
 - **References:**
     - [rippled API Reference](http-websocket-apis.html)
-        - [`rippled` Commandline Usage](commandline-usage.html)
-        - [server_info method][]
+        - [`rippled` Commandline Usage](../commandline-usage.md)
+        - [server_info method](../../../references/http-websocket-apis/public-api-methods/server-info-methods/server_info.md)
 
 
 <!--{# common link defs #}-->

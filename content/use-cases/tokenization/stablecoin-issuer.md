@@ -7,7 +7,7 @@ labels:
 ---
 # Stablecoin Issuer
 
-**Stablecoin** are [tokens](tokens.html) that are backed by assets in the outside world. Stablecoins allow users to transact in familiar currencies, and provide a convenient way to get funds into and out of the blockchain. In exchange for providing these services, stablecoin issuers can earn revenue in various ways, such as fees on withdrawals or transfers of the stablecoin.
+**Stablecoin** are [tokens](../../concepts/tokens/tokens.md) that are backed by assets in the outside world. Stablecoins allow users to transact in familiar currencies, and provide a convenient way to get funds into and out of the blockchain. In exchange for providing these services, stablecoin issuers can earn revenue in various ways, such as fees on withdrawals or transfers of the stablecoin.
 
 While anyone can issue a token with any currency code in the XRP Ledger, stablecoins' value comes from the promise that they can be redeemed for the corresponding assets. Issuing a stablecoin may also involve regulatory obligations, which vary by jurisdiction. For these reasons, issuing a stablecoin generally requires a reputable business.
 
@@ -24,7 +24,7 @@ All assets in the XRP Ledger, except for the native cryptocurrency XRP, are repr
 
 Tokens that are backed by funds in some outside system are sometimes called _stablecoins_. This includes tokens backed by fiat currency in a bank account, by cryptocurrencies on another blockchain, or other types of assets and forms of value. The term "stablecoin" comes from the idea that the exchange rate between the token and the asset it represents should be "stable" at 1:1 (minus fees).
 
-For more information, see [Trust Lines and Issuing](trust-lines-and-issuing.html).
+For more information, see [Trust Lines and Issuing](../../concepts/tokens/trust-lines-and-issuing.md).
 
 
 ### XRP
@@ -33,34 +33,34 @@ For more information, see [Trust Lines and Issuing](trust-lines-and-issuing.html
 
 Token issuers do not need to accumulate or exchange XRP. They must only hold a small balance of XRP to meet the reserve requirement and pay the cost of sending transactions through the network. The XRP equivalent of $10 USD should be enough for at least one year of transaction costs for a busy issuer.
 
-For more information, see [What is XRP?](what-is-xrp.html), [Reserves](reserves.html), and [Transaction Cost](transaction-cost.html)
+For more information, see [What is XRP?](../../concepts/introduction/what-is-xrp.md), [Reserves](../../concepts/accounts/reserves.md), and [Transaction Cost](../../concepts/transactions/transaction-cost.md)
 
 
 ### Liquidity and Trading
 
-The XRP Ledger contains a decentralized exchange, where any user can place and fulfill bids to exchange XRP and tokens in any combination. The decentralized exchange also provides the liquidity that makes atomic [cross-currency payments](cross-currency-payments.html) possible.
+The XRP Ledger contains a decentralized exchange, where any user can place and fulfill bids to exchange XRP and tokens in any combination. The decentralized exchange also provides the liquidity that makes atomic [cross-currency payments](../../concepts/payment-types/cross-currency-payments.md) possible.
 
 Stablecoin issuers aren't required to use the decentralized exchange directly, but all tokens are automatically available for trading. If a token is widely used, users should naturally trade it among themselves, creating liquidity to other popular assets. An issuer _may_ want to provide liquidity to XRP or other popular tokens at a baseline rate, especially when their token is new. If a stablecoin issuer does provide liquidity, a best practice is to **use different addresses for trading and for issuing.**
 
-For more information on the decentralized exchange, see [Decentralized Exchange](decentralized-exchange.html).
+For more information on the decentralized exchange, see [Decentralized Exchange](../../concepts/tokens/decentralized-exchange.md).
 
 
 ## Suggested Business Practices
 
 The value of a stablecoin issuer's tokens in the XRP Ledger comes directly from the trust that customers can redeem the tokens when needed. To reduce the risk of business interruptions, you should follow these best practices:
 
-* Use separate [Issuing and Operational Addresses](account-types.html) to limit your risk profile on the network.
+* Use separate [Issuing and Operational Addresses](../../concepts/accounts/account-types.md) to limit your risk profile on the network.
 * Follow anti-money-laundering regulations for your jurisdiction, such as the [Bank Secrecy Act](http://en.wikipedia.org/wiki/Bank_Secrecy_Act). This usually includes requirements to collect ["Know-Your-Customer" (KYC) information](http://en.wikipedia.org/wiki/Know_your_customer).
 * Complete the XRP Ledger Foundation's [token issuer self-assessment](https://foundation.xrpl.org/token-assessment-framework/).
 * Publicize all your policies and fees.
-* Provide an [`xrp-ledger.toml` file](xrp-ledger-toml.html) with domain verification so client applications can display relevant details about you.
+* Provide an [`xrp-ledger.toml` file](../../references/xrp-ledger-toml.md) with domain verification so client applications can display relevant details about you.
 
 
 ### Hot and Cold Wallets
 
 {% include '_snippets/issuing-and-operational-addresses-intro.md' %}
 
-Main article: [Issuing and Operational Addresses](account-types.html)
+Main article: [Issuing and Operational Addresses](../../concepts/accounts/account-types.md)
 
 
 ## Fees and Revenue Sources
@@ -247,10 +247,10 @@ There are several prerequisites that ACME must meet for this to happen:
     - ACME may create a XRP Ledger collateral account in ACME's system of record.
     - ACME can store the funds allocated to the XRP Ledger in a separate bank account.
     - If the stablecoin is backed by cryptocurrency, ACME can create a separate wallet to hold the funds allocated to the XRP Ledger, as publicly-verifiable proof of its reserves.
-- ACME should control two separate XRP Ledger addresses. See [Issuing and Operational Addresses](account-types.html) for details.
+- ACME should control two separate XRP Ledger addresses. See [Issuing and Operational Addresses](../../concepts/accounts/account-types.md) for details.
     - ACME must enable the Default Ripple flag on its issuing address for customers to send and receive its tokens.
 - Alice must create an accounting relationship (trust line) from her XRP Ledger address to ACME's issuing address. She can do this from any XRP Ledger client application as long as she knows ACME's issuing address.
-    - ACME should publicize its issuing address on its website where customers can find it. It can also use an [`xrp-ledger.toml` file](xrp-ledger-toml.html) to publish the issuing address to automated systems.
+    - ACME should publicize its issuing address on its website where customers can find it. It can also use an [`xrp-ledger.toml` file](../../references/xrp-ledger-toml.md) to publish the issuing address to automated systems.
 	- Alternatively, instead of sending a Payment, ACME can write Alice as a Check in the XRP Ledger. This does not move any money right away, but creates both the trust line and the tokens together when Alice cashes the Check.
 - ACME must create a user interface for Alice to request for her funds from ACME to be sent into the XRP Ledger.
     - ACME needs to know Alice's XRP Ledger address. ACME can have Alice input her XRP Ledger address as part of the interface, or ACME can require Alice to input and verify her XRP Ledger address in advance.
@@ -276,7 +276,7 @@ In addition to the requirements for sending into the XRP Ledger, there are sever
 - ACME must monitor its XRP Ledger addresses for incoming payments.
 - ACME must know which user to credit in its system of record for the incoming payments.
     - ACME should bounce unrecognized incoming payments back to their sender.
-    - Typically, the preferred method of recognizing incoming payments is through [destination tags](source-and-destination-tags.html).
+    - Typically, the preferred method of recognizing incoming payments is through [destination tags](../../concepts/transactions/source-and-destination-tags.md).
 
 
 ## Precautions
@@ -288,11 +288,11 @@ Processing payments to and from the XRP Ledger naturally comes with some risks, 
 - Before sending a payment into the XRP Ledger, double check the cost of the payment. A payment from your operational address to a customer should not cost more than the destination amount plus any transfer fee you have set.
 - Before processing a payment out of the XRP Ledger, make sure you know the customer's identity. This makes it harder for anonymous attackers to scam you. Most anti-money-laundering regulations require this anyway. This is especially important because the users sending money from the XRP Ledger could be different than the ones that initially received the money in the XRP Ledger.
 - Follow the guidelines for [reliable transaction submission](#reliable-transaction-submission) when sending XRP Ledger transactions.
-- [Robustly monitor for incoming payments](#robustly-monitoring-for-payments), and read the correct amount. Don't mistakenly credit someone the full amount if they only sent a [partial payment](partial-payments.html).
+- [Robustly monitor for incoming payments](#robustly-monitoring-for-payments), and read the correct amount. Don't mistakenly credit someone the full amount if they only sent a [partial payment](../../concepts/payment-types/partial-payments.md).
 - Track your obligations and balances within the XRP Ledger, and compare with the assets in your collateral account. If they do not match up, stop processing withdrawals and deposits until you resolve the discrepancy.
 - Avoid ambiguous situations. We recommend the following:
     - Enable the `Disallow XRP` flag for the issuing address and all operational addresses, so customers do not accidentally send you XRP. (Private exchanges should *not* set this flag, since they trade XRP normally.)
-    - Enable the [`RequireDest` flag](require-destination-tags.html) for the issuing address and all operational addresses, so customers do not accidentally send a payment without the destination tag to indicate who should be credited.
+    - Enable the [`RequireDest` flag](../../tutorials/manage-account-settings/require-destination-tags.md) for the issuing address and all operational addresses, so customers do not accidentally send a payment without the destination tag to indicate who should be credited.
     - Enable the `RequireAuth` flag on all operational addresses so they cannot issue tokens by accident.
 - Monitor for suspicious or abusive behavior. For example, a user could repeatedly send funds into and out of the XRP Ledger, as a denial of service attack that effectively empties an operational address's balance. Suspend customers whose addresses are involved in suspicious behavior by not processing their XRP Ledger payments.
 
@@ -321,14 +321,14 @@ An issuer can freeze accounting relationships in the XRP Ledger to meet regulato
 * Issuers can freeze all tokens they issue, in case of a major security compromise or for migrating to a new issuing address.
 * Furthermore, issuers can permanently opt out of their ability to freeze accounting relationships. This allows an issuer to assure its customers that it will continue to provide "physical-money-like" services. <!-- STYLE_OVERRIDE: will -->
 
-For more information, see the [Freeze article](freezes.html).
+For more information, see the [Freeze article](../../concepts/tokens/freezes.md).
 
 
 ## Authorized Trust Lines
 
 The XRP Ledger's Authorized Trust Lines feature (formerly called "Authorized Accounts") enables an issuer to limit who can hold that issuer's tokens, so that unknown XRP Ledger addresses cannot hold the tokens.
 
-For more information, see [Authorized Trust Lines](authorized-trust-lines.html).
+For more information, see [Authorized Trust Lines](../../concepts/tokens/authorized-trust-lines.md).
 
 
 ## Source and Destination Tags
@@ -339,16 +339,16 @@ Similarly, *Source Tags* indicate the originator or source of a payment. Most co
 
 You can generate a destination tag on-demand when a customer intends to send money to you. For greater customer privacy, you should consider that destination tag valid only for that payment with the expected amount, and bounce or ignore any other transactions that reuse the same destination tag.
 
-[Enable the Require Destination Tag setting](require-destination-tags.html) on your issuing and operational addresses so that customers must use a destination tag to indicate where funds should be credited when they send payments to you.
+[Enable the Require Destination Tag setting](../../tutorials/manage-account-settings/require-destination-tags.md) on your issuing and operational addresses so that customers must use a destination tag to indicate where funds should be credited when they send payments to you.
 
-For more information, see [Source and Destination Tags](source-and-destination-tags.html).
+For more information, see [Source and Destination Tags](../../concepts/transactions/source-and-destination-tags.md).
 
 
 # Technical Details
 
 ## Infrastructure
 
-For your own security as well as the stability of the network, each XRP Ledger business should [run its own XRP Ledger servers](install-rippled.html) including one [validator](rippled-server-modes.html#validators).
+For your own security as well as the stability of the network, each XRP Ledger business should [run its own XRP Ledger servers](install-rippled.html) including one [validator](../../concepts/networks-and-servers/rippled-server-modes.md#validators).
 
 
 ### APIs and Middleware
@@ -356,7 +356,7 @@ For your own security as well as the stability of the network, each XRP Ledger b
 There are several interfaces you can use to connect to the XRP Ledger, depending on your needs and your existing software:
 
 - [HTTP / WebSocket APIs](http-websocket-apis.html) can be used as a low-level interface to all core XRP Ledger functionality.
-- [Client Libraries](client-libraries.html) are available in several programming languages to provide convenient utilities for accessing the XRP Ledger.
+- [Client Libraries](../../references/client-libraries.md) are available in several programming languages to provide convenient utilities for accessing the XRP Ledger.
 - Other tools such as [xApps](https://xumm.readme.io/docs/xapps) are also available.
 - Third party wallet applications may also be useful, especially for humans in charge of standby addresses.
 
@@ -365,11 +365,11 @@ There are several interfaces you can use to connect to the XRP Ledger, depending
 
 Any time you submit an XRP Ledger transaction, it must be signed using your secret key. The secret key gives full control over your XRP Ledger address. **Never** send your secret key to a server run by someone else. Either use your own server, or sign the transactions locally using a client library.
 
-For instructions and examples of secure configurations, see [Set Up Secure Signing](secure-signing.html).
+For instructions and examples of secure configurations, see [Set Up Secure Signing](../../concepts/transactions/set-up-secure-signing.md).
 
 ## Issuer Setup
 
-There are some settings you must configure on your XRP Ledger account before you start issuing tokens. For examples of how to configure these settings, see the [Issue a Fungible Token tutorial](issue-a-fungible-token.html).
+There are some settings you must configure on your XRP Ledger account before you start issuing tokens. For examples of how to configure these settings, see the [Issue a Fungible Token tutorial](../../tutorials/use-tokens/issue-a-fungible-token.md).
 
 Settings you may want to configure include:
 
@@ -384,7 +384,7 @@ Settings you may want to configure include:
 
 ### Default Ripple
 
-The Default Ripple flag controls whether the balances on a trust line are [allowed to ripple](rippling.html) by default. Rippling is what allows customers to send and trade tokens among themselves, so an issuer MUST allow rippling on all the trust lines to its issuing address.
+The Default Ripple flag controls whether the balances on a trust line are [allowed to ripple](../../concepts/tokens/rippling.md) by default. Rippling is what allows customers to send and trade tokens among themselves, so an issuer MUST allow rippling on all the trust lines to its issuing address.
 
 Before asking customers to create trust lines to its issuing address, an issuer should enable the Default Ripple flag on that address. Otherwise, the issuer must individually disable the No Ripple flag for each trust line that other addresses have created.
 
@@ -400,7 +400,7 @@ Deposit Authorization is most useful for blocking unwanted XRP payments, because
 
 Therefore, Deposit Authorization is not recommended for stablecoin issuers unless you need it to meet regulatory requirements about receiving money from unknown or sanctioned entities.
 
-For more information, see [Deposit Authorization](depositauth.html).
+For more information, see [Deposit Authorization](../../concepts/accounts/depositauth.md).
 
 
 ### Disallow XRP
@@ -416,18 +416,18 @@ The Require Auth setting blocks users from holding the tokens you issue unless y
 
 Also, you must use your issuing address each time you authorize a trust line; if you must authorize a lot of trust lines, this can undermine the security of your issuing address because you have to use it so often. (If you only need to use the issuing address sparingly, you can put greater protections on its secret keys. The more often you use it, the more of a burden those protections become.)
 
-For more information, see [Authorized Trust Lines](authorized-trust-lines.html).
+For more information, see [Authorized Trust Lines](../../concepts/tokens/authorized-trust-lines.md).
 
 
 ### Tick Size
 
-The Tick Size setting controls how many decimal places are used when calculating exchange rates in the [Decentralized Exchange](decentralized-exchange.html). A higher Tick Size means more precision and less rounding in the amounts of various trades. Too much precision can be inconvenient because trades are ranked primarily based on exchange rate, so a trader can offer a minuscule amount more to the top of the list. A smaller Tick Size works similar to the minimum bid increment at an auction, saving everyone the time and effort of gradually bidding up a price by irrelevantly small amounts. However, a smaller Tick Size results in more rounding, which can increase the costs of trading, and sometimes has surprising results because two Offers that seemed like an exact match before rounding no longer match after rounding.
+The Tick Size setting controls how many decimal places are used when calculating exchange rates in the [Decentralized Exchange](../../concepts/tokens/decentralized-exchange.md). A higher Tick Size means more precision and less rounding in the amounts of various trades. Too much precision can be inconvenient because trades are ranked primarily based on exchange rate, so a trader can offer a minuscule amount more to the top of the list. A smaller Tick Size works similar to the minimum bid increment at an auction, saving everyone the time and effort of gradually bidding up a price by irrelevantly small amounts. However, a smaller Tick Size results in more rounding, which can increase the costs of trading, and sometimes has surprising results because two Offers that seemed like an exact match before rounding no longer match after rounding.
 
 The Tick Size is an account-level setting and applies to all tokens issued by the same address.
 
 Tick Size only controls the precision of _exchange rates_, not the precision of the token itself. Users can send and hold very large or very small amounts regardless of the Tick Size set by the token's issuer.
 
-For more information, see [Tick Size](ticksize.html).
+For more information, see [Tick Size](../../concepts/tokens/ticksize.md).
 
 
 ### Transfer Fees
@@ -438,7 +438,7 @@ When users send a token with a transfer fee, the amount of the transfer fee is d
 
 At a protocol level, the transfer fee is defined by the `TransferRate` account setting, which is an integer from 1 billion to 2 billion.
 
-For more information, see [Transfer Fees](transfer-fees.html).
+For more information, see [Transfer Fees](../../concepts/tokens/transfer-fees.md).
 
 
 ### Transfer Fees with Operational and Standby Addresses
@@ -458,8 +458,8 @@ To robustly check for incoming payments, issuers should do the following:
 
 * Keep a record of the most-recently-processed transaction and ledger. That way, if you temporarily lose connectivity, you know how far to go back.
 * Check the result code of every incoming payment. Some payments go into the ledger to charge an anti-spam fee, even though they failed. Only transactions with the result code `tesSUCCESS` can change non-XRP balances. Only transactions from a validated ledger are final.
-* Look out for [Partial Payments](partial-payments.html). Payments with the partial payment flag enabled can be considered "successful" if any non-zero amount is delivered, even minuscule amounts.
-    * Check the transaction for a [`delivered_amount` field](partial-payments.html#the-delivered_amount-field). If present, that field indicates how much money *actually* got delivered to the `Destination` address.
+* Look out for [Partial Payments](../../concepts/payment-types/partial-payments.md). Payments with the partial payment flag enabled can be considered "successful" if any non-zero amount is delivered, even minuscule amounts.
+    * Check the transaction for a [`delivered_amount` field](../../concepts/payment-types/partial-payments.md#the-delivered_amount-field). If present, that field indicates how much money *actually* got delivered to the `Destination` address.
     * In xrpl.js, you can use the [`xrpl.getBalanceChanges()` method](https://js.xrpl.org/modules.html#getBalanceChanges) to see how much each address received. In some cases, this can be divided into multiple parts on different trust lines.
 * Some transactions change your balances without being payments directly to or from one of your addresses. For example, if ACME sets a nonzero transfer fee, then ACME's issuing address's outstanding obligations decrease each time Bob and Charlie exchange ACME's tokens.
 
@@ -470,7 +470,7 @@ As an added precaution, we recommend comparing the balances of your issuing addr
 * Use the `gateway_balances` method to check your balances.
 * If you have a Transfer Fee set, then your obligations within the XRP Ledger decrease slightly whenever other XRP Ledger addresses transfer your tokens among themselves.
 
-For more details on how to read the details of incoming transactions, see [Look Up Transaction Results](look-up-transaction-results.html).
+For more details on how to read the details of incoming transactions, see [Look Up Transaction Results](../../concepts/transactions/look-up-transaction-results.md).
 
 
 
@@ -478,25 +478,25 @@ For more details on how to read the details of incoming transactions, see [Look 
 
 When you build an automated system to send payments into the XRP Ledger for your customers, you must make sure that it constructs payments carefully. Malicious actors are constantly trying to find ways to trick a system into paying them more money than it should.
 
-Generally, when sending stablecoins, you use a [Payment transaction][]. Some of the details are different depending on whether you are issuing tokens for the first time or transferring them from a hot wallet to a customer. Things to note include:
+Generally, when sending stablecoins, you use a [Payment transaction](../../references/protocol-reference/transactions/transaction-types/payment.md). Some of the details are different depending on whether you are issuing tokens for the first time or transferring them from a hot wallet to a customer. Things to note include:
 
 - When issuing new tokens from your issuing address, you should omit the `SendMax` field. Otherwise, malicious users can arrange their settings so that you issue the full `SendMax` amount instead of just the intended destination `Amount`.
 - When sending tokens _from a hot wallet_, you must specify `SendMax` if you have a nonzero transfer fee. In this case, set the `SendMax` field to the amount specified in the `Amount` field plus the transfer fee. (You may want to round up slightly, in case the precision of your calculations doesn't exactly match the XRP Ledger's.) For example, if you send a transaction whose `Amount` field specifies 99.47 USD, and your transfer fee is 0.25%, you should set the `SendMax` field to 124.3375, or 124.34 USD if you round up.
-- Omit the `Paths` field. This field is unnecessary when sending directly from the issuer, or from a hot wallet as long as the tokens being sent and the tokens being received have the same currency code and issuer—that is, they're the same stablecoin. The `Paths` field is intended for [Cross-Currency Payments](cross-currency-payments.html) and longer multi-hop (rippling) payments. If you naively perform pathfinding and attach the paths to your transaction, your payment may take a more expensive indirect route rather than failing if the direct path is not available; malicious users can even set this up to 
+- Omit the `Paths` field. This field is unnecessary when sending directly from the issuer, or from a hot wallet as long as the tokens being sent and the tokens being received have the same currency code and issuer—that is, they're the same stablecoin. The `Paths` field is intended for [Cross-Currency Payments](../../concepts/payment-types/cross-currency-payments.md) and longer multi-hop (rippling) payments. If you naively perform pathfinding and attach the paths to your transaction, your payment may take a more expensive indirect route rather than failing if the direct path is not available; malicious users can even set this up to 
 - If you get a `tecPATH_DRY` result code, this usually indicates that either the customer doesn't have the necessary trust line set up already, or your issuer's rippling settings aren't configured correctly.
 
-For a detailed tutorial on issuing a token on the XRP Ledger, whether a stablecoin or otherwise, see [Issue a Fungible Token](issue-a-fungible-token.html).
+For a detailed tutorial on issuing a token on the XRP Ledger, whether a stablecoin or otherwise, see [Issue a Fungible Token](../../tutorials/use-tokens/issue-a-fungible-token.md).
 
 
 ## Bouncing Payments
 
 When one of your addresses receives a payment whose purpose is unclear, we recommend that you try to return the money to its sender. While this is more work than pocketing the money, it demonstrates good faith towards customers. You can have an operator bounce payments manually, or create a system to do so automatically.
 
-The first requirement to bouncing payments is [robustly monitoring for incoming payments](#robustly-monitoring-for-payments). You do not want to accidentally refund a customer for more than they sent you! (This is particularly important if your bounce process is automated.) Malicious users can take advantage of a naive integration by sending [partial payments](partial-payments.html#partial-payments-exploit).
+The first requirement to bouncing payments is [robustly monitoring for incoming payments](#robustly-monitoring-for-payments). You do not want to accidentally refund a customer for more than they sent you! (This is particularly important if your bounce process is automated.) Malicious users can take advantage of a naive integration by sending [partial payments](../../concepts/payment-types/partial-payments.md#partial-payments-exploit).
 
 Second, you should send bounced payments as Partial Payments. Since third parties can manipulate the cost of pathways between addresses, Partial Payments allow you to divest yourself of the full amount without being concerned about exchange rates within the XRP Ledger. You should publicize your bounced payments policy as part of your terms of use. Send the bounced payment from either an operational address or a standby address.
 
-To send a Partial Payment, enable the [`tfPartialPayment` flag](payment.html#payment-flags) on the transaction. Set the `Amount` field to the amount you received and omit the `SendMax` field. You should use the `SourceTag` value from the incoming payment as the `DestinationTag` value for the return payment.
+To send a Partial Payment, enable the [`tfPartialPayment` flag](../../references/protocol-reference/transactions/transaction-types/payment.md#payment-flags) on the transaction. Set the `Amount` field to the amount you received and omit the `SendMax` field. You should use the `SourceTag` value from the incoming payment as the `DestinationTag` value for the return payment.
 
 To prevent two systems from bouncing payments back and forth indefinitely, you can set a new Source Tag for the outgoing return payment. If you receive an unexpected payment whose Destination Tag matches the Source Tag of a return you sent, then do not bounce it back again.
 
@@ -511,15 +511,15 @@ The goal of reliably submitting transactions is to achieve the following two pro
 To submit transactions reliably, follow these guidelines:
 
 * Persist details of the transaction before submitting it.
-* Use the `LastLedgerSequence` parameter. (Many [client libraries](client-libraries.html) do this by default.)
+* Use the `LastLedgerSequence` parameter. (Many [client libraries](../../references/client-libraries.md) do this by default.)
 * Resubmit a transaction if it has not appeared in a validated ledger whose [ledger index][] is less than or equal to the transaction's `LastLedgerSequence` parameter.
 
-For more information, see [Reliable Transaction Submission](reliable-transaction-submission.html).
+For more information, see [Reliable Transaction Submission](../../concepts/transactions/reliable-transaction-submission.md).
 
 
 ## xrp-ledger.toml File
 
-You can publish information about what currencies you issue, and which XRP Ledger addresses you control, to protect against impostors or confusion, using an [`xrp-ledger.toml` file](xrp-ledger-toml.html). This machine-readable format is convenient for client applications to process. If you run an XRP Ledger validator, you can also publish the key in the same file.
+You can publish information about what currencies you issue, and which XRP Ledger addresses you control, to protect against impostors or confusion, using an [`xrp-ledger.toml` file](../../references/xrp-ledger-toml.md). This machine-readable format is convenient for client applications to process. If you run an XRP Ledger validator, you can also publish the key in the same file.
 
 
 <!-- STYLE_OVERRIDE: gateway, gateways -->
@@ -527,23 +527,23 @@ You can publish information about what currencies you issue, and which XRP Ledge
 ## See Also
 
 - **Concepts:**
-    - [Tokens](tokens.html)
-    - [Decentralized Exchange](decentralized-exchange.html)
-    - [Source and Destination Tags](source-and-destination-tags.html)
+    - [Tokens](../../concepts/tokens/tokens.md)
+    - [Decentralized Exchange](../../concepts/tokens/decentralized-exchange.md)
+    - [Source and Destination Tags](../../concepts/transactions/source-and-destination-tags.md)
 - **Tutorials:**
     - [Install `rippled`](install-rippled.html)
-    - [Set Up Secure Signing](secure-signing.html)
-    - [Issue a Fungible Token](issue-a-fungible-token.html)
+    - [Set Up Secure Signing](../../concepts/transactions/set-up-secure-signing.md)
+    - [Issue a Fungible Token](../../tutorials/use-tokens/issue-a-fungible-token.md)
     - [Enable No Freeze](enable-no-freeze.html)
-    - [Freeze a Trust Line](freeze-a-trust-line.html)
-    - [Enact Global Freeze](enact-global-freeze.html)
+    - [Freeze a Trust Line](../../tutorials/use-tokens/freeze-a-trust-line.md)
+    - [Enact Global Freeze](../../tutorials/use-tokens/enact-global-freeze.md)
 - **References:**
-    - [Payment transaction][]
-    - [AccountSet transaction][]
-    - [TrustSet transaction][]
-    - [RippleState object](ripplestate.html)
-    - [account_lines method][]
-    - [gateway_balances method][]
+    - [Payment transaction](../../references/protocol-reference/transactions/transaction-types/payment.md)
+    - [AccountSet transaction](../../references/protocol-reference/transactions/transaction-types/accountset.md)
+    - [TrustSet transaction](../../references/protocol-reference/transactions/transaction-types/trustset.md)
+    - [RippleState object](../../references/protocol-reference/ledger-data/ledger-entry-types/ripplestate.md)
+    - [account_lines method](../../references/http-websocket-apis/public-api-methods/account-methods/account_lines.md)
+    - [gateway_balances method](../../references/http-websocket-apis/public-api-methods/account-methods/gateway_balances.md)
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

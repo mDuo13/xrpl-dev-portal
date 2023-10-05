@@ -12,7 +12,7 @@ An escrow in the XRP Ledger is expired when its `CancelAfter` time is lower than
 
 ## 1. Get the latest validated ledger
 
-Use the [ledger method][] to look up the latest validated ledger and get the `close_time` value.
+Use the [ledger method](../../../references/http-websocket-apis/public-api-methods/ledger-methods/ledger.md) to look up the latest validated ledger and get the `close_time` value.
 
 Request:
 
@@ -40,7 +40,7 @@ _Websocket_
 
 ## 2. Look up the escrow
 
-Use the [account_objects method][] and compare `CancelAfter` to `close_time`:
+Use the [account_objects method](../../../references/http-websocket-apis/public-api-methods/account-methods/account_objects.md) and compare `CancelAfter` to `close_time`:
 
 Request:
 
@@ -68,9 +68,9 @@ _Websocket_
 
 ## 3. Submit EscrowCancel transaction
 
-***Anyone*** can cancel an expired escrow in the XRP Ledger by sending an [EscrowCancel transaction][]. Set the `Owner` field of the transaction to the `Account` of the `EscrowCreate` transaction that created this escrow. Set the `OfferSequence` field to the `Sequence` of the `EscrowCreate` transaction.
+***Anyone*** can cancel an expired escrow in the XRP Ledger by sending an [EscrowCancel transaction](../../../references/protocol-reference/transactions/transaction-types/escrowcancel.md). Set the `Owner` field of the transaction to the `Account` of the `EscrowCreate` transaction that created this escrow. Set the `OfferSequence` field to the `Sequence` of the `EscrowCreate` transaction.
 
-**Tip:** If you don't know what `OfferSequence` to use, you can look up the transaction that created the Escrow: call the [tx method][] with the value of the Escrow's `PreviousTxnID` field. In `tx` response, use the `Sequence` value of that transaction as the `OfferSequence` value of the EscrowCancel transaction.
+**Tip:** If you don't know what `OfferSequence` to use, you can look up the transaction that created the Escrow: call the [tx method](../../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md) with the value of the Escrow's `PreviousTxnID` field. In `tx` response, use the `Sequence` value of that transaction as the `OfferSequence` value of the EscrowCancel transaction.
 
 {% include '_snippets/secret-key-warning.md' %} <!--#{ fix md highlighting_ #}-->
 
@@ -106,7 +106,7 @@ Take note of the transaction's identifying `hash` value so you can check its fin
 
 ## 5. Confirm final result
 
-Use the [tx method][] with the `EscrowCancel` transaction's identifying hash to check its final status. Look in the transaction metadata for a `DeletedNode` with `LedgerEntryType` of `Escrow`. Also look for a `ModifiedNode` of type `AccountRoot` for the sender of the escrowed payment. The `FinalFields` of the object should show the increase in XRP in the `Balance` field for the returned XRP.
+Use the [tx method](../../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md) with the `EscrowCancel` transaction's identifying hash to check its final status. Look in the transaction metadata for a `DeletedNode` with `LedgerEntryType` of `Escrow`. Also look for a `ModifiedNode` of type `AccountRoot` for the sender of the escrowed payment. The `FinalFields` of the object should show the increase in XRP in the `Balance` field for the returned XRP.
 
 Request:
 
@@ -139,20 +139,20 @@ In the above example, `r3wN3v2vTUkr5qd6daqDc2xE4LSysdVjkT` is the sender of the 
 ## See Also
 
 - **Concepts:**
-    - [What is XRP?](what-is-xrp.html)
+    - [What is XRP?](../../../concepts/introduction/what-is-xrp.md)
     - [Payment Types](payment-types.html)
-        - [Escrow](escrow.html)
+        - [Escrow](../../../concepts/payment-types/escrow.md)
 - **Tutorials:**
-    - [Send XRP](send-xrp.html)
-    - [Look Up Transaction Results](look-up-transaction-results.html)
-    - [Reliable Transaction Submission](reliable-transaction-submission.html)
+    - [Send XRP](../../get-started/send-xrp.md)
+    - [Look Up Transaction Results](../../../concepts/transactions/look-up-transaction-results.md)
+    - [Reliable Transaction Submission](../../../concepts/transactions/reliable-transaction-submission.md)
 - **References:**
-    - [EscrowCancel transaction][]
-    - [EscrowCreate transaction][]
-    - [EscrowFinish transaction][]
-    - [account_objects method][]
-    - [tx method][]
-    - [Escrow ledger object](escrow-object.html)
+    - [EscrowCancel transaction](../../../references/protocol-reference/transactions/transaction-types/escrowcancel.md)
+    - [EscrowCreate transaction](../../../references/protocol-reference/transactions/transaction-types/escrowcreate.md)
+    - [EscrowFinish transaction](../../../references/protocol-reference/transactions/transaction-types/escrowfinish.md)
+    - [account_objects method](../../../references/http-websocket-apis/public-api-methods/account-methods/account_objects.md)
+    - [tx method](../../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md)
+    - [Escrow ledger object](../../../references/protocol-reference/ledger-data/ledger-entry-types/escrow.md)
 
 
 <!--{# common link defs #}-->

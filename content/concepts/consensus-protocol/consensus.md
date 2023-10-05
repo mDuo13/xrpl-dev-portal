@@ -25,11 +25,11 @@ The XRP Ledger uses a consensus protocol unlike any digital asset that came befo
 
 These properties are sometimes summarized as the following principles, in order of priority: **Correctness, Agreement, Forward Progress**.
 
-This protocol is still evolving, as is our knowledge of its limits and possible failure cases. For academic research on the protocol itself, see [Consensus Research](consensus-research.html).
+This protocol is still evolving, as is our knowledge of its limits and possible failure cases. For academic research on the protocol itself, see [Consensus Research](consensus-research.md).
 
 ## Background
 
-Consensus protocols are a solution to the _double-spend problem_: the challenge of preventing someone from successfully spending the same digital money twice. The hardest part about this problem is putting transactions in order: without a central authority, it can be difficult to resolve disputes about which transaction comes first when you have two or more mutually-exclusive transactions sent around the same time. For a detailed analysis of the double-spend problem, how the XRP Ledger Consensus Protocol solves this problem, and the tradeoffs and limitations involved, see [Consensus Principles and Rules](consensus-principles-and-rules.html).
+Consensus protocols are a solution to the _double-spend problem_: the challenge of preventing someone from successfully spending the same digital money twice. The hardest part about this problem is putting transactions in order: without a central authority, it can be difficult to resolve disputes about which transaction comes first when you have two or more mutually-exclusive transactions sent around the same time. For a detailed analysis of the double-spend problem, how the XRP Ledger Consensus Protocol solves this problem, and the tradeoffs and limitations involved, see [Consensus Principles and Rules](consensus-principles-and-rules.md).
 
 
 ## Ledger History
@@ -49,7 +49,7 @@ The main goal of the XRP Ledger Consensus Protocol is to agree on a set of trans
 
 ## Trust-Based Validation
 
-The core principle behind the XRP Ledger's consensus mechanism is that a little trust goes a long way. Each participant in the network chooses a set of _validators_, servers [specifically configured to participate actively in consensus](run-rippled-as-a-validator.html), run by different parties who are expected to behave honestly most of the time according to the protocol. More importantly, the set of chosen validators should not be likely to collude with one another to break the rules in the exact same way. This list is called a _Unique Node List_, or UNL.
+The core principle behind the XRP Ledger's consensus mechanism is that a little trust goes a long way. Each participant in the network chooses a set of _validators_, servers [specifically configured to participate actively in consensus](../../infrastructure/rippled/configuration/run-rippled-as-a-validator.md), run by different parties who are expected to behave honestly most of the time according to the protocol. More importantly, the set of chosen validators should not be likely to collude with one another to break the rules in the exact same way. This list is called a _Unique Node List_, or UNL.
 
 As the network progresses, each server listens to its trusted validators[³](#footnote-3); as long as a large enough percentage of them agree that a set of transactions should occur and that a given ledger is the result, the server declares a consensus. If they don't agree, validators modify their proposals to more closely match the other validators they trust, repeating the process in several rounds until they reach a consensus.
 
@@ -57,7 +57,7 @@ As the network progresses, each server listens to its trusted validators[³](#fo
 
 It's OK if a small proportion of validators don't work properly all the time. As long as fewer than 20% of trusted validators are faulty, consensus can continue unimpeded; and confirming an invalid transaction would require over 80% of trusted validators to collude. If more than 20% but less than 80% of trusted validators are faulty, the network stops making progress.
 
-For a longer exploration of how the XRP Ledger Consensus Protocol responds to various challenges, attacks, and failure cases, see [Consensus Protections Against Attacks and Failure Modes](consensus-protections.html).
+For a longer exploration of how the XRP Ledger Consensus Protocol responds to various challenges, attacks, and failure cases, see [Consensus Protections Against Attacks and Failure Modes](consensus-protections.md).
 
 
 ----

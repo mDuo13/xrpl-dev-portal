@@ -13,5 +13,5 @@ For example, for your first collection, you might set the `NFTokenTaxon` to `1`.
 
 While the `NFTokenTaxon` field is required, you can set the value to `0` if you don't intend to create a collection.
 
-See [NFTokenTaxon](nftoken.html#nftokentaxon).
+See [NFTokenTaxon](../../references/protocol-reference/data-types/nftoken.md#nftokentaxon).
 

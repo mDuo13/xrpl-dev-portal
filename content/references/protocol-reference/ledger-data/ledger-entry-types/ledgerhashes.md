@@ -10,7 +10,7 @@ labels:
 
 (Not to be confused with the ["ledger hash" string data type][Hash], which uniquely identifies a ledger version. This section describes the `LedgerHashes` ledger object type.)
 
-The `LedgerHashes` object type contains a history of prior ledgers that led up to this ledger version, in the form of their hashes. Objects of this ledger type are modified automatically when closing a ledger. (This is one of the only times a ledger's state data is modified without a [transaction](transactions.html) or [pseudo-transaction](pseudo-transaction-types.html).) The `LedgerHashes` objects exist to make it possible to look up a previous ledger's hash with only the current ledger version and at most one lookup of a previous ledger version.
+The `LedgerHashes` object type contains a history of prior ledgers that led up to this ledger version, in the form of their hashes. Objects of this ledger type are modified automatically when closing a ledger. (This is one of the only times a ledger's state data is modified without a [transaction](../../../../concepts/transactions/transactions.md) or [pseudo-transaction](../../transactions/pseudo-transaction-types/pseudo-transaction-types.md).) The `LedgerHashes` objects exist to make it possible to look up a previous ledger's hash with only the current ledger version and at most one lookup of a previous ledger version.
 
 There are two kinds of `LedgerHashes` object. Both types have the same fields. Each ledger version contains:
 
@@ -41,11 +41,11 @@ Example `LedgerHashes` object (trimmed for length):
 
 ## {{currentpage.name}} Fields
 
-In addition to the [common fields](ledger-entry-common-fields.html), `{{currentpage.name}}` entries have the following fields:
+In addition to the [common fields](../ledger-entry-common-fields.md), `{{currentpage.name}}` entries have the following fields:
 
-| Name                  | JSON Type        | [Internal Type][] | Required? | Description |
+| Name                  | JSON Type        | [Internal Type](../../serialization.md) | Required? | Description |
 |:----------------------|:-----------------|:------------------|:----------|:------------|
-| `FirstLedgerSequence` | Number           | UInt32            | No        | **DEPRECATED** Do not use. (The "recent hashes" object on Mainnet has the value `2` in this field as a result of an old software bug. That value gets carried forward as the "recent hashes" object is updated. New "previous history" objects do not have this field, nor do "recent hashes" objects in [parallel networks](parallel-networks.html) started with more recent versions of `rippled`.) |
+| `FirstLedgerSequence` | Number           | UInt32            | No        | **DEPRECATED** Do not use. (The "recent hashes" object on Mainnet has the value `2` in this field as a result of an old software bug. That value gets carried forward as the "recent hashes" object is updated. New "previous history" objects do not have this field, nor do "recent hashes" objects in [parallel networks](../../../../concepts/networks-and-servers/parallel-networks.md) started with more recent versions of `rippled`.) |
 | `Hashes`              | Array of Strings | Vector256         | Yes       | An array of up to 256 ledger hashes. The contents depend on which sub-type of `LedgerHashes` object this is. |
 | `LastLedgerSequence`  | Number           | UInt32            | No        | The [Ledger Index][] of the last entry in this object's `Hashes` array. |
 | `LedgerEntryType`     | String           | UInt16            | Yes       | The value `0x0068`, mapped to the string `LedgerHashes`, indicates that this object is a list of ledger hashes. |

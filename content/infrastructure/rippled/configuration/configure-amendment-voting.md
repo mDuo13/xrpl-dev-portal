@@ -8,7 +8,7 @@ labels:
 ---
 # Configure Amendment Voting
 
-Servers configured as validators can vote on [amendments](amendments.html) to the XRP Ledger protocol using the [feature method][]. (This method requires [admin access](get-started-using-http-websocket-apis.html#admin-access).)
+Servers configured as validators can vote on [amendments](../../../concepts/networks-and-servers/amendments.md) to the XRP Ledger protocol using the [feature method](../../../references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/feature.md). (This method requires [admin access](../../../tutorials/get-started/get-started-using-http-websocket-apis.md#admin-access).)
 
 For example, to vote against the "SHAMapV2" amendment, run the following command:
 
@@ -64,9 +64,9 @@ Be sure to restart your server for changes to take effect.
 
 ## See Also
 
-- [Amendments](amendments.html)
-    - [Known Amendments](known-amendments.html)
-- [feature method][]
+- [Amendments](../../../concepts/networks-and-servers/amendments.md)
+    - [Known Amendments](../../../resources/known-amendments.md)
+- [feature method](../../../references/http-websocket-apis/admin-api-methods/status-and-debugging-methods/feature.md)
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

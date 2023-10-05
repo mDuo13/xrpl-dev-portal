@@ -12,6 +12,6 @@ The type of a transaction (`TransactionType` field) is the most fundamental info
 
 All transactions have certain fields in common:
 
-* [Common Fields](transaction-common-fields.html)
+* [Common Fields](../transaction-common-fields.md)
 
 Each transaction type has additional fields relevant to the type of action it causes.

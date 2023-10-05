@@ -42,9 +42,9 @@ A server only enables amendments when these conditions are met:
 {% include '_snippets/pseudo-tx-fields-intro.md' %}
 <!--{# fix md highlighting_ #}-->
 
-| Field            | JSON Type | [Internal Type][] | Description               |
+| Field            | JSON Type | [Internal Type](../../serialization.md) | Description               |
 |:-----------------|:----------|:------------------|:--------------------------|
-| `Amendment`      | String    | Hash256           | A unique identifier for the amendment. This is not intended to be a human-readable name. See [Amendments](amendments.html) for a list of known amendments. |
+| `Amendment`      | String    | Hash256           | A unique identifier for the amendment. This is not intended to be a human-readable name. See [Amendments](../../../../concepts/networks-and-servers/amendments.md) for a list of known amendments. |
 | `LedgerSequence` | Number    | UInt32    | The [ledger index][] where this pseudo-transaction appears. This distinguishes the pseudo-transaction from other occurrences of the same change. |
 
 ## EnableAmendment Flags

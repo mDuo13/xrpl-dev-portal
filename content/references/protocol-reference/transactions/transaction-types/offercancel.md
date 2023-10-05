@@ -29,13 +29,13 @@ An OfferCancel transaction removes an Offer object from the XRP Ledger.
 
 {% include '_snippets/tx-fields-intro.md' %}
 
-| Field           | JSON Type | [Internal Type][] | Description                  |
+| Field           | JSON Type | [Internal Type](../../serialization.md) | Description                  |
 |:----------------|:----------|:------------------|:-----------------------------|
-| `OfferSequence` | Number    | UInt32            | The sequence number (or [Ticket](tickets.html) number) of a previous OfferCreate transaction. If specified, cancel any offer object in the ledger that was created by that transaction. It is not considered an error if the offer specified does not exist. |
+| `OfferSequence` | Number    | UInt32            | The sequence number (or [Ticket](../../../../concepts/transactions/tickets.md) number) of a previous OfferCreate transaction. If specified, cancel any offer object in the ledger that was created by that transaction. It is not considered an error if the offer specified does not exist. |
 
-*Tip:* To remove an old offer and replace it with a new one, you can use an [OfferCreate transaction][] with an `OfferSequence` parameter, instead of using OfferCancel and another OfferCreate.
+*Tip:* To remove an old offer and replace it with a new one, you can use an [OfferCreate transaction](offercreate.md) with an `OfferSequence` parameter, instead of using OfferCancel and another OfferCreate.
 
-The OfferCancel method returns [`tesSUCCESS`](tes-success.html) even if it did not find an offer with the matching sequence number.
+The OfferCancel method returns [`tesSUCCESS`](../transaction-results/tes-success.md) even if it did not find an offer with the matching sequence number.
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

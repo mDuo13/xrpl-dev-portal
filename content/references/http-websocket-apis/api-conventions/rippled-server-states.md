@@ -7,7 +7,7 @@ labels:
 ---
 # rippled Server States
 
-Depending on how the `rippled` server is configured, how long it has been running, and other factors, a server may be participating in the global XRP Ledger peer-to-peer network to different degrees. This is represented as the `server_state` field in the responses to the [server_info method][] and [server_state method][]. The possible responses follow a range of ascending interaction, with each later value superseding the previous one. Their definitions are as follows (in order of increasing priority):
+Depending on how the `rippled` server is configured, how long it has been running, and other factors, a server may be participating in the global XRP Ledger peer-to-peer network to different degrees. This is represented as the `server_state` field in the responses to the [server_info method](../public-api-methods/server-info-methods/server_info.md) and [server_state method](../public-api-methods/server-info-methods/server_state.md). The possible responses follow a range of ascending interaction, with each later value superseding the previous one. Their definitions are as follows (in order of increasing priority):
 
 | `Value`        | Description                                                 |
 |:---------------|:------------------------------------------------------------|

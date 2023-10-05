@@ -62,7 +62,7 @@ Possible solutions:
 
     **Tip:** The `rippled` repository contains [an example `rippled.cfg` file](https://github.com/XRPLF/rippled/blob/master/cfg/rippled-example.cfg) which is provided as the default config when you do an RPM installation. If you do not have the file, you can copy it from there.
 
-- Specify the path to your preferred config file using the `--conf` [commandline option](commandline-usage.html).
+- Specify the path to your preferred config file using the `--conf` [commandline option](../commandline-usage.md).
 
 ## Failed to open validators file
 
@@ -173,12 +173,12 @@ An error such as the following indicates that the `rippled.cfg` file has an impr
 Terminating thread rippled: main: unhandled N5beast14BadLexicalCastE 'std::bad_cast'
 ```
 
-Valid parameters for the `node_size` field are `tiny`, `small`, `medium`, `large`, or `huge`. For more information see [Node Size](capacity-planning.html#node-size).
+Valid parameters for the `node_size` field are `tiny`, `small`, `medium`, `large`, or `huge`. For more information see [Node Size](../installation/capacity-planning.md#node-size).
 
 
 ## Shard path missing
 
-An error such as the following indicates that the `rippled.cfg` has an incomplete [history sharding](history-sharding.html) configuration:
+An error such as the following indicates that the `rippled.cfg` has an incomplete [history sharding](../../../concepts/networks-and-servers/ledger-history/history-sharding.md) configuration:
 
 ```text
 Terminating thread rippled: main: unhandled St13runtime_error 'shard path missing'
@@ -188,7 +188,7 @@ If your config includes a `[shard_db]` stanza, it must contain a `path` field, w
 
 ## Unsupported shard store type: RocksDB
 
-RocksDB is no longer supported as a backend for [history sharding](history-sharding.html). If you have an existing configuration that defines a RocksDB shard store, the server fails to start. [New in: rippled 1.3.1][]
+RocksDB is no longer supported as a backend for [history sharding](../../../concepts/networks-and-servers/ledger-history/history-sharding.md). If you have an existing configuration that defines a RocksDB shard store, the server fails to start. [New in: rippled 1.3.1](https://github.com/XRPLF/rippled/releases/tag/1.3.1 "BADGE_BLUE")
 
 In this case, the process dies shortly after the log startup command, with a message such as the following appearing earlier in the output log:
 
@@ -209,12 +209,12 @@ To fix this problem, do one of the following, then restart the server:
     - [The `rippled` Server](xrpl-servers.html)
     - [Technical FAQ](technical-faq.html)
 - **Tutorials:**
-    - [Understanding Log Messages](understanding-log-messages.html)
-    - [Capacity Planning](capacity-planning.html)
+    - [Understanding Log Messages](understanding-log-messages.md)
+    - [Capacity Planning](../installation/capacity-planning.md)
 - **References:**
     - [rippled API Reference](http-websocket-apis.html)
-        - [`rippled` Commandline Usage](commandline-usage.html)
-        - [server_info method][]
+        - [`rippled` Commandline Usage](../commandline-usage.md)
+        - [server_info method](../../../references/http-websocket-apis/public-api-methods/server-info-methods/server_info.md)
 
 <!-- SPELLING_IGNORE: cfg, node_size -->
 <!--{# common link defs #}-->

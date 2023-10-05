@@ -8,9 +8,9 @@ labels:
 ---
 # Assign a Regular Key Pair
 
-The XRP Ledger allows an account to authorize a secondary key pair, called a _[regular key pair](cryptographic-keys.html)_, to sign future transactions. If the private key of a regular key pair is compromised, you can remove or replace it without changing the rest of your [account](accounts.html) and re-establishing its relationships to other accounts. You can also rotate a regular key pair proactively. (Neither of those things is possible for the master key pair of an account, which is intrinsically linked to the account's address.)
+The XRP Ledger allows an account to authorize a secondary key pair, called a _[regular key pair](../../concepts/accounts/cryptographic-keys.md)_, to sign future transactions. If the private key of a regular key pair is compromised, you can remove or replace it without changing the rest of your [account](../../concepts/accounts/accounts.md) and re-establishing its relationships to other accounts. You can also rotate a regular key pair proactively. (Neither of those things is possible for the master key pair of an account, which is intrinsically linked to the account's address.)
 
-For more information about master and regular key pairs, see [Cryptographic Keys](cryptographic-keys.html).
+For more information about master and regular key pairs, see [Cryptographic Keys](../../concepts/accounts/cryptographic-keys.md).
 
 This tutorial walks through the steps required to assign a regular key pair to your account:
 
@@ -24,7 +24,7 @@ This tutorial walks through the steps required to assign a regular key pair to y
 
 Generate a key pair that you'll assign to your account as a regular key pair.
 
-This key pair is the same data type as a master key pair, so you can generate it the same way: you can use the client library of your choice or use the [wallet_propose method][] of a server you run. This might look as follows:
+This key pair is the same data type as a master key pair, so you can generate it the same way: you can use the client library of your choice or use the [wallet_propose method](../../references/http-websocket-apis/admin-api-methods/key-generation-methods/wallet_propose.md) of a server you run. This might look as follows:
 
 
 <!-- MULTICODE_BLOCK_START -->
@@ -131,11 +131,11 @@ In the next step, you'll use the address from this response (`account_id` in the
 
 ## 2. Assign the Key Pair to Your Account as a Regular Key Pair
 
-Use a [SetRegularKey transaction][] to assign the key pair you generated in step 1 to your account as a regular key pair.
+Use a [SetRegularKey transaction](../../references/protocol-reference/transactions/transaction-types/setregularkey.md) to assign the key pair you generated in step 1 to your account as a regular key pair.
 
-When assigning a regular key pair to your account for the first time, the SetRegularKey transaction requires signing with your account's master private key (secret). There are [several ways of securely signing transactions](secure-signing.html), but this tutorial uses a local `rippled` server.
+When assigning a regular key pair to your account for the first time, the SetRegularKey transaction requires signing with your account's master private key (secret). There are [several ways of securely signing transactions](../../concepts/transactions/set-up-secure-signing.md), but this tutorial uses a local `rippled` server.
 
-When you send later SetRegularKey transactions, you can sign using the existing regular private key to replace or [remove itself](change-or-remove-a-regular-key-pair.html). Note that you should still not submit your regular private key across the network.
+When you send later SetRegularKey transactions, you can sign using the existing regular private key to replace or [remove itself](change-or-remove-a-regular-key-pair.md). Note that you should still not submit your regular private key across the network.
 
 
 ### Sign Your Transaction
@@ -282,7 +282,7 @@ Next, use the `submit` command to send the transaction blob (`tx_blob` or `signe
 
 ### Submit Your Transaction
 
-Take the `signedTransaction` value from the offline signing response or the `tx_blob` value from the `sign` command response and submit it as the `tx_blob` value using the [submit method][].
+Take the `signedTransaction` value from the offline signing response or the `tx_blob` value from the `sign` command response and submit it as the `tx_blob` value using the [submit method](../../references/http-websocket-apis/public-api-methods/transaction-methods/submit.md).
 
 #### Request Format
 
@@ -407,14 +407,14 @@ An example of a successful response:
 <!-- MULTICODE_BLOCK_END -->
 
 
-Note that the response contains a `hash` of the transaction, which you can use to [look up the transaction's final outcome](tx.html).
+Note that the response contains a `hash` of the transaction, which you can use to [look up the transaction's final outcome](../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md).
 
 
 ## 3. Verify the Regular Key Pair
 
-At this point, the regular key pair is assigned to your account and you should be able to send transactions using the regular key pair. **To avoid losing control of your account,** it is important that you test your regular key before you take any additional steps such as [disabling the master key pair](disable-master-key-pair.html). If you make a mistake and lose access to your account, no one can restore it for you.
+At this point, the regular key pair is assigned to your account and you should be able to send transactions using the regular key pair. **To avoid losing control of your account,** it is important that you test your regular key before you take any additional steps such as [disabling the master key pair](disable-master-key-pair.md). If you make a mistake and lose access to your account, no one can restore it for you.
 
-To verify that your account has the regular key pair set correctly, submit an [AccountSet transaction][] from your account, signing it with the regular private key you assigned to your account in step 2. As in step 1, this tutorial uses a local `rippled` server as a [way of securely signing transactions](secure-signing.html).
+To verify that your account has the regular key pair set correctly, submit an [AccountSet transaction](../../references/protocol-reference/transactions/transaction-types/accountset.md) from your account, signing it with the regular private key you assigned to your account in step 2. As in step 1, this tutorial uses a local `rippled` server as a [way of securely signing transactions](../../concepts/transactions/set-up-secure-signing.md).
 
 
 ### Sign Your Transaction
@@ -556,7 +556,7 @@ Next, use the `submit` command to send the transaction blob (`tx_blob` or `signe
 
 ### Submit Your Transaction
 
-Take the `signedTransaction` value from the offline signing response or the `tx_blob` value from the `sign` command response and submit it as the `tx_blob` value using the [submit method][].
+Take the `signedTransaction` value from the offline signing response or the `tx_blob` value from the `sign` command response and submit it as the `tx_blob` value using the [submit method](../../references/http-websocket-apis/public-api-methods/transaction-methods/submit.md).
 
 #### Request Format
 
@@ -677,12 +677,12 @@ An example of a successful response:
 
 <!-- MULTICODE_BLOCK_END -->
 
-If the transaction fails with the following [result codes](transaction-results.html), here are some things to check:
+If the transaction fails with the following [result codes](../../references/protocol-reference/transactions/transaction-results/transaction-results.md), here are some things to check:
 
 - **`tefBAD_AUTH`**: The regular key you signed your test transaction with doesn't match the regular key you set in the previous step. Check that the secret and address for your regular key pair match and double-check which values you used in each step.
-- **`tefBAD_AUTH_MASTER`** or **`temBAD_AUTH_MASTER`**: Your account doesn't have a regular key assigned. Check that the SetRegularKey transaction executed successfully. You can also use the [account_info method][] to confirm that your regular key is set in the `RegularKey` field as expected.
+- **`tefBAD_AUTH_MASTER`** or **`temBAD_AUTH_MASTER`**: Your account doesn't have a regular key assigned. Check that the SetRegularKey transaction executed successfully. You can also use the [account_info method](../../references/http-websocket-apis/public-api-methods/account-methods/account_info.md) to confirm that your regular key is set in the `RegularKey` field as expected.
 
-For possible causes of other result codes, see [Transaction Results](transaction-results.html).
+For possible causes of other result codes, see [Transaction Results](../../references/protocol-reference/transactions/transaction-results/transaction-results.md).
 
 
 ## See Also
@@ -690,18 +690,18 @@ For possible causes of other result codes, see [Transaction Results](transaction
 Now that you're familiar with the benefits of assigning a regular key pair to an account, consider taking a look at these related topics and tutorials:
 
 - **Concepts:**
-    - [Cryptographic Keys](cryptographic-keys.html)
-    - [Multi-Signing](multi-signing.html)
-    - [Issuing and Operational Addresses](account-types.html)
+    - [Cryptographic Keys](../../concepts/accounts/cryptographic-keys.md)
+    - [Multi-Signing](../../concepts/transactions/multi-signing.md)
+    - [Issuing and Operational Addresses](../../concepts/accounts/account-types.md)
 - **Tutorials:**
-    - [Change or Remove a Regular Key Pair](change-or-remove-a-regular-key-pair.html)
-    - [Set Up Multi-Signing](set-up-multi-signing.html)
-    - [List XRP as an Exchange](list-xrp-as-an-exchange.html)
+    - [Change or Remove a Regular Key Pair](change-or-remove-a-regular-key-pair.md)
+    - [Set Up Multi-Signing](set-up-multi-signing.md)
+    - [List XRP as an Exchange](../../use-cases/defi/list-xrp-as-an-exchange.md)
 - **References:**
-    - [wallet_propose method][]
-    - [sign method][]
-    - [SetRegularKey transaction][]
-    - [AccountRoot object](accountroot.html) where the regular key is stored in the field `RegularKey`
+    - [wallet_propose method](../../references/http-websocket-apis/admin-api-methods/key-generation-methods/wallet_propose.md)
+    - [sign method](../../references/http-websocket-apis/admin-api-methods/signing-methods/sign.md)
+    - [SetRegularKey transaction](../../references/protocol-reference/transactions/transaction-types/setregularkey.md)
+    - [AccountRoot object](../../references/protocol-reference/ledger-data/ledger-entry-types/accountroot.md) where the regular key is stored in the field `RegularKey`
 
 
 

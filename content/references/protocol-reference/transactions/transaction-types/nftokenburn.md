@@ -14,7 +14,7 @@ The sender of this transaction must be the owner of the `NFToken` to burn; or, i
 
 If this operation succeeds, the corresponding `NFToken` is removed. If this operation empties the `NFTokenPage` holding the `NFToken` or results in consolidation, thus removing a `NFTokenPage`, the owner’s reserve requirement is reduced by one.
 
-_(Added by the [NonFungibleTokensV1_1 amendment][].)_
+_(Added by the [NonFungibleTokensV1_1 amendment](known-amendments.html#nonfungibletokensv1_1).)_
 
 
 ## Example {{currentpage.name}} JSON
@@ -33,7 +33,7 @@ _(Added by the [NonFungibleTokensV1_1 amendment][].)_
 
 {% include '_snippets/tx-fields-intro.md' %}
 
-| Field             | JSON Type | [Internal Type][] | Description              |
+| Field             | JSON Type | [Internal Type](../../serialization.md) | Description              |
 |:------------------|:----------|:------------------|:-------------------------|
 | `NFTokenID`       | String    | Hash256           | The `NFToken` to be removed by this transaction. |
 | `Owner`           | String    | AccountID         | _(Optional)_ The owner of the `NFToken` to burn. Only used if that owner is different than the account sending this transaction. The issuer or authorized minter can use this field to burn NFTs that have the `lsfBurnable` flag enabled. |
@@ -41,11 +41,11 @@ _(Added by the [NonFungibleTokensV1_1 amendment][].)_
 
 ## Error Cases
 
-Besides errors that can occur for all transactions, {{currentpage.name}} transactions can result in the following [transaction result codes](transaction-results.html):
+Besides errors that can occur for all transactions, {{currentpage.name}} transactions can result in the following [transaction result codes](../transaction-results/transaction-results.md):
 
 | Error Code         | Description                                             |
 |:-------------------|:--------------------------------------------------------|
-| `temDISABLED`      | The [NonFungibleTokensV1 amendment][] is not enabled. |
+| `temDISABLED`      | The [NonFungibleTokensV1 amendment](known-amendments.html#nonfungibletokensv1) is not enabled. |
 | `tecNO_ENTRY`      | The specified `TokenID` was not found.                  |
 | `tecNO_PERMISSION` | The account does not have permission to burn the token. |
 

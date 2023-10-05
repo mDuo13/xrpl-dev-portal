@@ -8,9 +8,9 @@ labels:
 # download_shard
 [[Source]](https://github.com/XRPLF/rippled/blob/master/src/ripple/rpc/handlers/DownloadShard.cpp "Source")
 
-Instructs the server to download a specific [shard of historical ledger data](history-sharding.html) from an external source. Your `rippled` server must be [configured to store history shards](configure-history-sharding.html). [Updated in: rippled 1.6.0][]
+Instructs the server to download a specific [shard of historical ledger data](../../../../concepts/networks-and-servers/ledger-history/history-sharding.md) from an external source. Your `rippled` server must be [configured to store history shards](../../../../infrastructure/rippled/configuration/configure-history-sharding.md). [Updated in: rippled 1.6.0](https://github.com/XRPLF/rippled/releases/tag/1.6.0 "BADGE_BLUE")
 
-_The `download_shard` method is an [admin method](admin-api-methods.html) that cannot be run by unprivileged users._
+_The `download_shard` method is an [admin method](../admin-api-methods.md) that cannot be run by unprivileged users._
 
 The external source must provide the shard as an [lz4-compressed](https://lz4.github.io/lz4/) [tar archive](https://en.wikipedia.org/wiki/Tar_(computing)) served via HTTPS. The archive must contain the shard directory and data files in NuDB format.
 
@@ -68,14 +68,14 @@ The request includes the following field:
 |:-----------|:--------|:------------------------------------------------------|
 | `shards`   | Array   | List of Shard Descriptor objects (see below) describing shards to download and where to download them from. |
 
-The `validate` field is deprecated and may be removed in a future version. (The server always checks the integrity of shards when it imports them.) [Updated in: rippled 1.6.0][]
+The `validate` field is deprecated and may be removed in a future version. (The server always checks the integrity of shards when it imports them.) [Updated in: rippled 1.6.0](https://github.com/XRPLF/rippled/releases/tag/1.6.0 "BADGE_BLUE")
 
 Each **Shard Descriptor object** in the `shards` array has the following fields:
 
 | `Field` | Type   | Description                                               |
 |:--------|:-------|:----------------------------------------------------------|
 | `index` | Number | The index of the shard to retrieve. In the production XRP Ledger, the oldest shard has index 1 and contains ledgers 32750-32768. The next shard has index 2 and contains ledgers 32769-49152, and so on. |
-| `url`   | String | The URL where this shard can be downloaded. The URL must start with `http://` or `https://` and must end with `.tar.lz4` (not case-sensitive). The web server providing this download must use a valid TLS certificate signed by a trusted Certificate Authority (CA). (`rippled` uses the operating system's CA store.) [Updated in: rippled 1.7.0][] |
+| `url`   | String | The URL where this shard can be downloaded. The URL must start with `http://` or `https://` and must end with `.tar.lz4` (not case-sensitive). The web server providing this download must use a valid TLS certificate signed by a trusted Certificate Authority (CA). (`rippled` uses the operating system's CA store.) [Updated in: rippled 1.7.0](https://github.com/XRPLF/rippled/releases/tag/1.7.0 "BADGE_BLUE") |
 
 ### Response Format
 
@@ -125,13 +125,13 @@ Connecting to 127.0.0.1:5005
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`   | Type   | Description                                             |
 |:----------|:-------|:--------------------------------------------------------|
 | `message` | String | A message describing the actions taken in response to this request. |
 
-**Tip:** To see which shards your server has available, use the [crawl_shards method][]. Alternatively, you can look at the subfolders in your configured location for the shard store (the `path` parameter of `[shard_db]` in your `rippled.cfg`). The folders are named to match the numbers of the shards; up to one of those folders may contain a `control.txt` file indicating that the shard is incomplete.
+**Tip:** To see which shards your server has available, use the [crawl_shards method](crawl_shards.md). Alternatively, you can look at the subfolders in your configured location for the shard store (the `path` parameter of `[shard_db]` in your `rippled.cfg`). The folders are named to match the numbers of the shards; up to one of those folders may contain a `control.txt` file indicating that the shard is incomplete.
 
 ### Possible Errors
 

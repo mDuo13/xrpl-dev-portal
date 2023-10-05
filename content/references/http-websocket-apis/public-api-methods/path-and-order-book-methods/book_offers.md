@@ -9,7 +9,7 @@ labels:
 # book_offers
 [[Source]](https://github.com/XRPLF/rippled/blob/master/src/ripple/rpc/handlers/BookOffers.cpp "Source")
 
-The `book_offers` method retrieves a list of [Offers](offers.html) between two currencies, also known as an _order book_. The response omits [unfunded Offers](offers.html#lifecycle-of-an-offer) and reports how much of each remaining Offer's total is currently funded.
+The `book_offers` method retrieves a list of [Offers](../../../../concepts/tokens/offers.md) between two currencies, also known as an _order book_. The response omits [unfunded Offers](../../../../concepts/tokens/offers.md#lifecycle-of-an-offer) and reports how much of each remaining Offer's total is currently funded.
 
 ## Request Format
 An example of the request format:
@@ -70,8 +70,8 @@ The request includes the following parameters:
 
 | `Field`        | Type             | Required? | Description |
 |:---------------|:-----------------|:----------|-------------|
-| `taker_gets`   | Object           | Yes       | The asset the account taking the Offer would receive, as a [currency without an amount](currency-formats.html#specifying-without-amounts). |
-| `taker_pays`   | Object           | Yes       | The asset the account taking the Offer would pay, as a [currency without an amount](currency-formats.html#specifying-without-amounts). |
+| `taker_gets`   | Object           | Yes       | The asset the account taking the Offer would receive, as a [currency without an amount](../../../protocol-reference/data-types/currency-formats.md#specifying-without-amounts). |
+| `taker_pays`   | Object           | Yes       | The asset the account taking the Offer would pay, as a [currency without an amount](../../../protocol-reference/data-types/currency-formats.md#specifying-without-amounts). |
 | `ledger_hash`  | [Hash][]         | No        | A 20-byte hex string for the ledger version to use. (See [Specifying Ledgers][]) |
 | `ledger_index` | [Ledger Index][] | No        | The [ledger index][] of the ledger to use, or a shortcut string to choose a ledger automatically. (See [Specifying Ledgers][]) |
 | `limit`        | Number           | No        | The maximum number of Offers to return. The response may include fewer results. |
@@ -234,14 +234,14 @@ An example of a successful response:
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`                | Type             | Description             |
 |:-----------------------|:-----------------|:------------------------|
 | `ledger_current_index` | [Ledger Index][] | _(Omitted if `ledger_current_index` is provided)_ The [ledger index][] of the current in-progress ledger version, which was used to retrieve this information. |
 | `ledger_index`         | [Ledger Index][] | _(Omitted if `ledger_current_index` provided)_ The ledger index of the ledger version that was used when retrieving this data, as requested. |
 | `ledger_hash`          | [Hash][]         | _(May be omitted)_ The identifying hash of the ledger version that was used when retrieving this data, as requested. |
-| `offers`               | Array            | Array of offer objects, each of which has the fields of an [Offer object](offer.html) |
+| `offers`               | Array            | Array of offer objects, each of which has the fields of an [Offer object](../../../protocol-reference/ledger-data/ledger-entry-types/offer.md) |
 
 In addition to the standard Offer fields, the following fields may be included in members of the `offers` array:
 

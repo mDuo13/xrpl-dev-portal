@@ -7,9 +7,9 @@ labels:
 ---
 # NFTokenPage
 
-The `NFTokenPage` object represents a collection of [NFTs](non-fungible-tokens.html) owned by the same account. An account can have multiple `NFTokenPage` entries, which form a doubly linked list.
+The `NFTokenPage` object represents a collection of [NFTs](../../../../concepts/tokens/non-fungible-tokens.md) owned by the same account. An account can have multiple `NFTokenPage` entries, which form a doubly linked list.
 
-_(Added by the [NonFungibleTokensV1_1 amendment][].)_
+_(Added by the [NonFungibleTokensV1_1 amendment](known-amendments.html#nonfungibletokensv1_1).)_
 
 
 ## Example {{currentpage.name}} JSON
@@ -41,9 +41,9 @@ _(Added by the [NonFungibleTokensV1_1 amendment][].)_
 
 ## {{currentpage.name}} Fields
 
-In addition to the [common fields](ledger-entry-common-fields.html), `{{currentpage.name}}` entries have the following fields:
+In addition to the [common fields](../ledger-entry-common-fields.md), `{{currentpage.name}}` entries have the following fields:
 
-| Field Name          | JSON Type | [Internal Type][] | Required? | Description |
+| Field Name          | JSON Type | [Internal Type](../../serialization.md) | Required? | Description |
 |:--------------------|:----------|:------------------|:----------|:------------|
 | `LedgerEntryType`   | String    | UInt16            | Yes       | The value `0x0050`, mapped to the string `NFTokenPage`, indicates that this is a page containing `NFToken` objects.|
 | `NextPageMin`       | String    | Hash256           | No        | The locator of the next page, if any. Details about this field and how it should be used are outlined below. |
@@ -83,7 +83,7 @@ Removing `NFToken` objects works like adding them. If the number of `NFToken` ob
 
 ## {{currentpage.name}} Reserve
 
-Each `NFTokenPage` counts as one item towards its owner's [owner reserve](reserves.html#owner-reserves). Burning or trading away enough NFTs to remove the page frees up the reserve.
+Each `NFTokenPage` counts as one item towards its owner's [owner reserve](../../../../concepts/accounts/reserves.md#owner-reserves). Burning or trading away enough NFTs to remove the page frees up the reserve.
 
 Since each page can hold up to 32 entries, the _effective_ reserve cost per NFT can be as low as _R_/32 where _R_ is the incremental owner reserve for one item.
 

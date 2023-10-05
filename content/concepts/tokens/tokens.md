@@ -6,15 +6,15 @@ labels:
 ---
 # Tokens
 
-All assets other than XRP can be represented in the XRP Ledger as **tokens**. Standard tokens are tracked in relationships called [trust lines](trust-lines-and-issuing.html) between accounts. Any account can issue tokens to other recipients who are willing to hold them, but you cannot unilaterally give tokens away to users who don't want them. Tokens can represent any type of value, including "stablecoins" backed by assets that exist outside of the ledger, purely digital tokens created specifically on the XRP Ledger, community credit, and more.
+All assets other than XRP can be represented in the XRP Ledger as **tokens**. Standard tokens are tracked in relationships called [trust lines](trust-lines-and-issuing.md) between accounts. Any account can issue tokens to other recipients who are willing to hold them, but you cannot unilaterally give tokens away to users who don't want them. Tokens can represent any type of value, including "stablecoins" backed by assets that exist outside of the ledger, purely digital tokens created specifically on the XRP Ledger, community credit, and more.
 
 **Note:** Tokens on the XRP Ledger have also been called "IOUs" (as in [I-owe-you](https://en.wikipedia.org/wiki/IOU)) and "issued currencies" in the past. However, these terms are not preferred because they do not cover the full range of digital assets that XRP Ledger tokens can represent. <!-- STYLE_OVERRIDE: ious -->
 
-Standard tokens are fungible: meaning, all units of that token are interchangeable and indistinguishable. Non-fungible tokens are also possible: see [Non-Fungible Tokens](non-fungible-tokens.html) for details of the XRP Ledger's native support.
+Standard tokens are fungible: meaning, all units of that token are interchangeable and indistinguishable. Non-fungible tokens are also possible: see [Non-Fungible Tokens](non-fungible-tokens.md) for details of the XRP Ledger's native support.
 
-Tokens can used for [cross-currency payments](cross-currency-payments.html) and can be traded in the [decentralized exchange](decentralized-exchange.html).
+Tokens can used for [cross-currency payments](../payment-types/cross-currency-payments.md) and can be traded in the [decentralized exchange](decentralized-exchange.md).
 
-The balance on a trust line is negative or positive depending on which side you view it from. The side with the negative balance is called the "issuer" and can control some properties of how those tokens behave. When you send tokens to another account that isn't the issuer, those tokens "ripple" through the issuer and possibly other accounts using the same currency code. This is useful in some cases, but can cause unexpected and undesirable behavior in others. You can use the [No Ripple flag](rippling.html) on trust lines to prevent those trust lines from rippling.
+The balance on a trust line is negative or positive depending on which side you view it from. The side with the negative balance is called the "issuer" and can control some properties of how those tokens behave. When you send tokens to another account that isn't the issuer, those tokens "ripple" through the issuer and possibly other accounts using the same currency code. This is useful in some cases, but can cause unexpected and undesirable behavior in others. You can use the [No Ripple flag](rippling.md) on trust lines to prevent those trust lines from rippling.
 
 
 ## Stablecoins
@@ -25,16 +25,16 @@ A stablecoin issuer should offer _deposits_ and _withdrawals_ to exchange the to
 
 In practice, the XRP Ledger is a computer system that cannot enforce any rules outside of itself, so stablecoins on the XRP Ledger depend on their issuer's integrity. If you can't count on the stablecoin's issuer to redeem your tokens for the real thing on demand, then you shouldn't expect the stablecoin to hold its value. As a user, you should be mindful of who's issuing the tokens: are they reliable, lawful, and solvent? If not, it's probably best not to hold those tokens.
 
-For more information, see [Stablecoin Issuer](stablecoin-issuer.html).
+For more information, see [Stablecoin Issuer](../../use-cases/tokenization/stablecoin-issuer.md).
 
 
 ## Community Credit
 
-Another way you can use the XRP Ledger is for "community credit", a system where individuals who know each other can use the XRP Ledger to track who owes who else how much money. A powerful feature of the XRP Ledger is that it can automatically and atomically use these debts to settle payments through [rippling](rippling.html).
+Another way you can use the XRP Ledger is for "community credit", a system where individuals who know each other can use the XRP Ledger to track who owes who else how much money. A powerful feature of the XRP Ledger is that it can automatically and atomically use these debts to settle payments through [rippling](rippling.md).
 
 For example, if Asheesh owes Marcus $20, and Marcus owes Bharath $50, Bharath can "pay" Asheesh $20 by canceling that much of Marcus's debt to him in exchange for canceling Asheesh's debt to Marcus. The reverse is also possible: Asheesh can pay Bharath through Marcus by increasing their respective debts. The XRP Ledger can settle complex chains of exchanges like this in a single transaction without the accounts in the middle needing to do anything manually.
 
-For more on this type of usage, see [paths](paths.html). <!--{# TODO: It would be nice to be able to link to a page with more illustrative examples of community credit. #}-->
+For more on this type of usage, see [paths](paths.md). <!--{# TODO: It would be nice to be able to link to a page with more illustrative examples of community credit. #}-->
 
 
 ## Other Tokens
@@ -48,34 +48,34 @@ Be sure to research the relevant regulations before engaging in any financial se
 
 ## Token Properties
 
-Tokens in the XRP Ledger are [fundamentally different than XRP](currency-formats.html#comparison). Tokens always exist _in trust lines_, and all transfers of tokens move along trust lines. You cannot cause someone else's account to hold more of a token than the _limit_ configured on their trust line. (You _can_ cause your own trust line to go over the limit, for example by buying more of it in the [decentralized exchange](decentralized-exchange.html) or by decreasing the limit after you already have a positive balance.)
+Tokens in the XRP Ledger are [fundamentally different than XRP](../../references/protocol-reference/data-types/currency-formats.md#comparison). Tokens always exist _in trust lines_, and all transfers of tokens move along trust lines. You cannot cause someone else's account to hold more of a token than the _limit_ configured on their trust line. (You _can_ cause your own trust line to go over the limit, for example by buying more of it in the [decentralized exchange](decentralized-exchange.md) or by decreasing the limit after you already have a positive balance.)
 
 Tokens use decimal (base-10) math with 15 digits of precision and an exponent that allows them to express very large values (up to 9999999999999999 × 10<sup>80</sup>) and very small values (down to 1.0 × 10<sup>-81</sup>).
 
-Anyone can issue tokens by sending a [Payment transaction][] if the necessary trust lines are in place. You can "burn" tokens by sending them back to the issuer. In some cases, [cross-currency payments](cross-currency-payments.html) or trades can also create more tokens according to an issuer's settings.
+Anyone can issue tokens by sending a [Payment transaction](../../references/protocol-reference/transactions/transaction-types/payment.md) if the necessary trust lines are in place. You can "burn" tokens by sending them back to the issuer. In some cases, [cross-currency payments](../payment-types/cross-currency-payments.md) or trades can also create more tokens according to an issuer's settings.
 
-Issuers can charge a [transfer fee](transfer-fees.html) that is automatically deducted when users transfer their tokens. Issuers can also define a [tick size](ticksize.html) for exchanges rates involving their tokens. Both issuers and regular accounts can [freeze](freezes.html) trust lines, which limits how the tokens in those trust lines can be used. (None of these things applies to XRP.)
+Issuers can charge a [transfer fee](transfer-fees.md) that is automatically deducted when users transfer their tokens. Issuers can also define a [tick size](ticksize.md) for exchanges rates involving their tokens. Both issuers and regular accounts can [freeze](freezes.md) trust lines, which limits how the tokens in those trust lines can be used. (None of these things applies to XRP.)
 
-For a tutorial of the technical steps involved in issuing a token, see [Issue a Fungible Token](issue-a-fungible-token.html).
+For a tutorial of the technical steps involved in issuing a token, see [Issue a Fungible Token](../../tutorials/use-tokens/issue-a-fungible-token.md).
 
 
 ## See Also
 
 - **Concepts:**
-    - [What is XRP?](what-is-xrp.html)
-    - [Cross-Currency Payments](cross-currency-payments.html)
-    - [Decentralized Exchange](decentralized-exchange.html)
+    - [What is XRP?](../introduction/what-is-xrp.md)
+    - [Cross-Currency Payments](../payment-types/cross-currency-payments.md)
+    - [Decentralized Exchange](decentralized-exchange.md)
 - **Tutorials:**
-    - [Issue a Fungible Token](issue-a-fungible-token.html)
-    - [Look Up Transaction Results](look-up-transaction-results.html)
+    - [Issue a Fungible Token](../../tutorials/use-tokens/issue-a-fungible-token.md)
+    - [Look Up Transaction Results](../transactions/look-up-transaction-results.md)
     - [Use Specialized Payment Types](use-specialized-payment-types.html)
 - **References:**
-    - [Payment transaction][]
-    - [TrustSet transaction][]
-    - [RippleState object](ripplestate.html)
-    - [account_lines method][]
-    - [account_currencies method][]
-    - [gateway_balances method][]
+    - [Payment transaction](../../references/protocol-reference/transactions/transaction-types/payment.md)
+    - [TrustSet transaction](../../references/protocol-reference/transactions/transaction-types/trustset.md)
+    - [RippleState object](../../references/protocol-reference/ledger-data/ledger-entry-types/ripplestate.md)
+    - [account_lines method](../../references/http-websocket-apis/public-api-methods/account-methods/account_lines.md)
+    - [account_currencies method](../../references/http-websocket-apis/public-api-methods/account-methods/account_currencies.md)
+    - [gateway_balances method](../../references/http-websocket-apis/public-api-methods/account-methods/gateway_balances.md)
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}			

@@ -9,7 +9,7 @@ labels:
 # deposit_authorized
 [[Source]](https://github.com/XRPLF/rippled/blob/817d2339b8632cb2f97d3edd6f7af33aa7631744/src/ripple/rpc/handlers/DepositAuthorized.cpp "Source")
 
-The `deposit_authorized` command indicates whether one account is authorized to send payments directly to another. See [Deposit Authorization](depositauth.html) for information on how to require authorization to deliver money to your account. <!-- STYLE_OVERRIDE: is authorized to -->
+The `deposit_authorized` command indicates whether one account is authorized to send payments directly to another. See [Deposit Authorization](../../../../concepts/accounts/depositauth.md) for information on how to require authorization to deliver money to your account. <!-- STYLE_OVERRIDE: is authorized to -->
 
 ## Request Format
 An example of the request format:
@@ -123,11 +123,11 @@ Loading: "/etc/rippled.cfg"
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`                | Type                      | Description             |
 |:-----------------------|:--------------------------|:------------------------|
-| `deposit_authorized`   | Boolean                   | Whether the specified source account is authorized to send payments directly to the destination account. If `true`, either the destination account does not require [Deposit Authorization](depositauth.html) or the source account is preauthorized. |
+| `deposit_authorized`   | Boolean                   | Whether the specified source account is authorized to send payments directly to the destination account. If `true`, either the destination account does not require [Deposit Authorization](../../../../concepts/accounts/depositauth.md) or the source account is preauthorized. |
 | `destination_account`  | String - [Address][]      | The destination account specified in the request. |
 | `ledger_hash`          | String                    | _(May be omitted)_ The identifying hash of the ledger that was used to generate this response. |
 | `ledger_index`         | Number - [Ledger Index][] | _(May be omitted)_ The ledger index of the ledger version that was used to generate this response. |
@@ -135,7 +135,7 @@ The response follows the [standard format][], with a successful result containin
 | `source_account`       | String - [Address][]      | The source account specified in the request. |
 | `validated`            | Boolean                   | _(May be omitted)_ If `true`, the information comes from a validated ledger version. |
 
-**Note:** A `deposit_authorized` status of `true` does not guarantee that a payment can be sent from the specified source to the specified destination. For example, the destination account may not have a [trust line](trust-lines-and-issuing.html) for the specified currency, or there may not be enough liquidity to deliver a payment.
+**Note:** A `deposit_authorized` status of `true` does not guarantee that a payment can be sent from the specified source to the specified destination. For example, the destination account may not have a [trust line](../../../../concepts/tokens/trust-lines-and-issuing.md) for the specified currency, or there may not be enough liquidity to deliver a payment.
 
 ## Possible Errors
 

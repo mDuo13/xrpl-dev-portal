@@ -8,9 +8,9 @@ labels:
 # can_delete
 [[Source]](https://github.com/XRPLF/rippled/blob/master/src/ripple/rpc/handlers/CanDelete.cpp "Source")
 
-The `can_delete` method informs the `rippled` server of the latest ledger version which may be deleted when using [online deletion with advisory deletion enabled](online-deletion.html#advisory-deletion). If advisory deletion is not enabled, this method does nothing.
+The `can_delete` method informs the `rippled` server of the latest ledger version which may be deleted when using [online deletion with advisory deletion enabled](../../../../concepts/networks-and-servers/ledger-history/online-deletion.md#advisory-deletion). If advisory deletion is not enabled, this method does nothing.
 
-_The `can_delete` method is an [admin method](admin-api-methods.html) that cannot be run by unprivileged users._
+_The `can_delete` method is an [admin method](../admin-api-methods.md) that cannot be run by unprivileged users._
 
 ### Request Format
 
@@ -58,7 +58,7 @@ The request accepts the following parameter:
 
 ### Response Format
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`      | Type    | Description                                         |
 |:-------------|:--------|:----------------------------------------------------|
@@ -77,8 +77,8 @@ Use this command with no parameter to query the existing `can_delete` setting.
 
 ## See Also
 
-- [Online Deletion](online-deletion.html)
-- [Configure Advisory Deletion](configure-advisory-deletion.html)
+- [Online Deletion](../../../../concepts/networks-and-servers/ledger-history/online-deletion.md)
+- [Configure Advisory Deletion](../../../../infrastructure/rippled/configuration/configure-advisory-deletion.md)
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

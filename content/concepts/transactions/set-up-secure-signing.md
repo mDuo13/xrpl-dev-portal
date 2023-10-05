@@ -8,7 +8,7 @@ labels:
 ---
 # Secure Signing
 
-To submit [transactions](transactions.html) to the XRP Ledger, you need a way to digitally sign them without compromising the security of your [secret keys](cryptographic-keys.html). (If others gain access to your secret keys, they have as much control over your accounts as you do, and can steal or destroy all your money.) This page summarizes how to set up such an environment so you can sign transactions securely.
+To submit [transactions](transactions.md) to the XRP Ledger, you need a way to digitally sign them without compromising the security of your [secret keys](../accounts/cryptographic-keys.md). (If others gain access to your secret keys, they have as much control over your accounts as you do, and can steal or destroy all your money.) This page summarizes how to set up such an environment so you can sign transactions securely.
 
 **Tip:** If you are not submitting transactions to the network, you can safely use a trustworthy public server, such as the ones run by Ripple, to monitor for incoming transactions or read other network activity. All transactions, balances, and data in the XRP Ledger are public.
 
@@ -25,7 +25,7 @@ There are several configurations with varying levels of security that may be acc
 
 {{ include_svg("img/insecure-signing-options.svg", "Diagram of insecure configurations") }}
 
-Any configuration in which outside sources may gain access to your secret key is dangerous, and is likely to result in a malicious user stealing all your XRP (and anything else your XRP Ledger address has). Examples of such configurations include ones where you use the [sign method][] of someone else's `rippled` server over the internet, or you send your secret key in plain text over the internet to your own server.
+Any configuration in which outside sources may gain access to your secret key is dangerous, and is likely to result in a malicious user stealing all your XRP (and anything else your XRP Ledger address has). Examples of such configurations include ones where you use the [sign method](../../references/http-websocket-apis/admin-api-methods/signing-methods/sign.md) of someone else's `rippled` server over the internet, or you send your secret key in plain text over the internet to your own server.
 
 You should maintain the secrecy of your secret keys at all times, which includes things like not emailing them to yourself, not typing them visibly in public, and saving them encrypted—never in plain text—when you are not using them. The balance between security and convenience depends in part on the value of your addresses' holdings, so you may want to use multiple addresses with different security configurations for different purposes.
 
@@ -40,13 +40,13 @@ In this configuration, you run `rippled` on the machine that generates the trans
 
 1. [Install `rippled`](install-rippled.html).
 
-    Be sure that your local machine meets the minimum [system requirements for `rippled`](system-requirements.html).
+    Be sure that your local machine meets the minimum [system requirements for `rippled`](../../infrastructure/rippled/installation/system-requirements.md).
 
-2. When you need to sign transactions, connect to your server on `localhost` or `127.0.0.1`. Use the [sign method][] (for single signatures) or [sign_for method][] (for multi-signatures).
+2. When you need to sign transactions, connect to your server on `localhost` or `127.0.0.1`. Use the [sign method](../../references/http-websocket-apis/admin-api-methods/signing-methods/sign.md) (for single signatures) or [sign_for method](../../references/http-websocket-apis/admin-api-methods/signing-methods/sign_for.md) (for multi-signatures).
 
     The [example config file](https://github.com/XRPLF/rippled/blob/8429dd67e60ba360da591bfa905b58a35638fda1/cfg/rippled-example.cfg#L1050-L1073) listens for connections on the local loopback network (127.0.0.1), with JSON-RPC (HTTP) on port 5005 and WebSocket (WS) on port 6006, and treats all connected clients as admin.
 
-    **Caution:** Using the [commandline API](request-formatting.html#commandline-format) for signatures is less secure than [using the Websocket or JSON-RPC APIs](get-started-using-http-websocket-apis.html) through non-commandline clients. When using the commandline syntax, your secret key may be visible to other users in the system's process listing, and your shell history may save the key in plain text.
+    **Caution:** Using the [commandline API](../../references/http-websocket-apis/api-conventions/request-formatting.md#commandline-format) for signatures is less secure than [using the Websocket or JSON-RPC APIs](../../tutorials/get-started/get-started-using-http-websocket-apis.md) through non-commandline clients. When using the commandline syntax, your secret key may be visible to other users in the system's process listing, and your shell history may save the key in plain text.
 
 3. Maintain the server to keep it running, updated, and in sync with the network while you're using it.
 
@@ -70,7 +70,7 @@ As always, follow industry-standard practices for securing your machines, such a
 
 {{ include_svg("img/secure-signing-client-library.svg", "Diagram of using a client library with local signing") }}
 
-This configuration uses a client library with built-in signing, in the programming language you use. For a list of libraries that can perform local signing, see [Client Libraries](client-libraries.html).
+This configuration uses a client library with built-in signing, in the programming language you use. For a list of libraries that can perform local signing, see [Client Libraries](../../references/client-libraries.md).
 
 
 ### Security Best Practices for Signing Libraries
@@ -140,16 +140,16 @@ To use this configuration, follow the steps for [running `rippled` on a private 
 ## See Also
 
 - **Concepts:**
-    - [Cryptographic Keys](cryptographic-keys.html)
-    - [Multi-Signing](multi-signing.html)
+    - [Cryptographic Keys](../accounts/cryptographic-keys.md)
+    - [Multi-Signing](multi-signing.md)
 - **Tutorials:**
     - [Install rippled](install-rippled.html)
-    - [Assign a Regular Key Pair](assign-a-regular-key-pair.html)
-    - [Reliable Transaction Submission](reliable-transaction-submission.html)
-    - [Enable Public Signing](enable-public-signing.html)
+    - [Assign a Regular Key Pair](../../tutorials/manage-account-settings/assign-a-regular-key-pair.md)
+    - [Reliable Transaction Submission](reliable-transaction-submission.md)
+    - [Enable Public Signing](../../infrastructure/rippled/configuration/enable-public-signing.md)
 - **References:**
-    - [sign method][]
-    - [submit method][]
+    - [sign method](../../references/http-websocket-apis/admin-api-methods/signing-methods/sign.md)
+    - [submit method](../../references/http-websocket-apis/public-api-methods/transaction-methods/submit.md)
     - [xrpl.js Reference](https://js.xrpl.org/)
     - [`xrpl-py` Reference](https://xrpl-py.readthedocs.io/en/latest/index.html)
     - [`xrpl4j` Reference](https://javadoc.io/doc/org.xrpl/)

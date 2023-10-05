@@ -7,11 +7,11 @@ labels:
 ---
 # Cluster rippled Servers
 
-If you run multiple [`rippled` servers](xrpl-servers.html) in the same data center, you can configure them in a [cluster](clustering.html) to maximize efficiency. To configure clustering:
+If you run multiple [`rippled` servers](xrpl-servers.html) in the same data center, you can configure them in a [cluster](../../../concepts/networks-and-servers/clustering.md) to maximize efficiency. To configure clustering:
 
 1. For each of your servers, note the IP address of the server.
 
-2. For each of your servers, generate a unique seed using the [validation_create method][].
+2. For each of your servers, generate a unique seed using the [validation_create method](../../../references/http-websocket-apis/admin-api-methods/key-generation-methods/validation_create.md).
 
     For example, using the commandline interface:
 
@@ -42,7 +42,7 @@ If you run multiple [`rippled` servers](xrpl-servers.html) in the same data cent
 
         **Note:** If you omit the port number, the server uses port 2459, the IANA-assigned port for the XRP Ledger protocol.
 
-    2. In the `[node_seed]` section, set the server's node seed to one of the `validation_seed` values you generated using the [validation_create method][] in step 2. Each server must use a unique node seed. For example:
+    2. In the `[node_seed]` section, set the server's node seed to one of the `validation_seed` values you generated using the [validation_create method](../../../references/http-websocket-apis/admin-api-methods/key-generation-methods/validation_create.md) in step 2. Each server must use a unique node seed. For example:
 
             [node_seed]
             ssZkdwURFMBXenJPbrpE14b6noJSu
@@ -61,7 +61,7 @@ If you run multiple [`rippled` servers](xrpl-servers.html) in the same data cent
 
         # systemctl restart rippled
 
-5. To confirm that each server is now a member of the cluster, use the [peers method][]. The `cluster` field should list the public keys and (if configured) the custom names for each server.
+5. To confirm that each server is now a member of the cluster, use the [peers method](../../../references/http-websocket-apis/admin-api-methods/peer-management-methods/peers.md). The `cluster` field should list the public keys and (if configured) the custom names for each server.
 
     For example, using the commandline interface:
 
@@ -91,12 +91,12 @@ If you run multiple [`rippled` servers](xrpl-servers.html) in the same data cent
 ## See Also
 
 - **Concepts:**
-    - [Peer Protocol](peer-protocol.html)
+    - [Peer Protocol](../../../concepts/networks-and-servers/peer-protocol.md)
 - **Tutorials:**
     - [Install rippled](install-rippled.html)
 - **References:**
-    - [validation_create method][]
-    - [peers method][]
+    - [validation_create method](../../../references/http-websocket-apis/admin-api-methods/key-generation-methods/validation_create.md)
+    - [peers method](../../../references/http-websocket-apis/admin-api-methods/peer-management-methods/peers.md)
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

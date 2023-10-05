@@ -43,7 +43,7 @@ An example of a successful response:
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with whichever fields are appropriate to the type of command made.
+The response follows the [standard format](../../api-conventions/response-formatting.md), with whichever fields are appropriate to the type of command made.
 
 
 {% include '_snippets/rippled_versions.md' %}

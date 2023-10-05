@@ -10,7 +10,7 @@ labels:
 
 ## 1. Generate condition and fulfillment
 
-XRP Ledger escrows require PREIMAGE-SHA-256 [crypto-conditions][]. To calculate a condition and fulfillment in the proper format, you should use a crypto-conditions library such as [five-bells-condition](https://github.com/interledgerjs/five-bells-condition). To generate the fulfillment:
+XRP Ledger escrows require PREIMAGE-SHA-256 [crypto-conditions](https://tools.ietf.org/html/draft-thomas-crypto-conditions-04). To calculate a condition and fulfillment in the proper format, you should use a crypto-conditions library such as [five-bells-condition](https://github.com/interledgerjs/five-bells-condition). To generate the fulfillment:
 
 - Use a cryptographically secure source of randomness to generate at least 32 random bytes.
 - Follow Interledger Protocol's [PSK specification](https://github.com/interledger/rfcs/blob/master/deprecated/0016-pre-shared-key/0016-pre-shared-key.md) and use an HMAC-SHA-256 of the ILP packet as the fulfillment. <!-- SPELLING_IGNORE: psk -->
@@ -94,7 +94,7 @@ print(cancel_after)
 
 ## 3. Submit EscrowCreate transaction
 
-[Sign and submit](transactions.html#signing-and-submitting-transactions) an [EscrowCreate transaction][]. Set the `Condition` field of the transaction to the time when the held payment should be released. Set the `Destination` to the recipient, which can be the same address as the sender. Include the `CancelAfter` or `FinishAfter` time you calculated in the previous step. Set the `Amount` to the total amount of [XRP, in drops][], to escrow.
+[Sign and submit](../../../concepts/transactions/transactions.md#signing-and-submitting-transactions) an [EscrowCreate transaction](../../../references/protocol-reference/transactions/transaction-types/escrowcreate.md). Set the `Condition` field of the transaction to the time when the held payment should be released. Set the `Destination` to the recipient, which can be the same address as the sender. Include the `CancelAfter` or `FinishAfter` time you calculated in the previous step. Set the `Amount` to the total amount of [XRP, in drops][], to escrow.
 
 {% include '_snippets/secret-key-warning.md' %} <!--#{ fix md highlighting_ #}-->
 
@@ -128,7 +128,7 @@ Response:
 
 ## 5. Confirm that the escrow was created
 
-Use the [tx method][] with the transaction's identifying hash to check its final status. In particular, look for a `CreatedNode` in the transaction metadata to indicate that it created an [Escrow ledger object](escrow.html).
+Use the [tx method](../../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md) with the transaction's identifying hash to check its final status. In particular, look for a `CreatedNode` in the transaction metadata to indicate that it created an [Escrow ledger object](../../../concepts/payment-types/escrow.md).
 
 Request:
 
@@ -156,11 +156,11 @@ Response:
 
 ## 6. Submit EscrowFinish transaction
 
-[Sign and submit](transactions.html#signing-and-submitting-transactions) an [EscrowFinish transaction][] to execute the release of the funds after the `FinishAfter` time has passed. Set the `Owner` field of the transaction to the `Account` address from the EscrowCreate transaction, and the `OfferSequence` to the `Sequence` number from the EscrowCreate transaction. Set the `Condition` and `Fulfillment` fields to the condition and fulfillment values, in hexadecimal, that you generated in step 1. Set the `Fee` ([transaction cost](transaction-cost.html)) value based on the size of the fulfillment in bytes: a conditional EscrowFinish requires at least 330 drops of XRP plus 10 drops per 16 bytes in the size of the fulfillment.
+[Sign and submit](../../../concepts/transactions/transactions.md#signing-and-submitting-transactions) an [EscrowFinish transaction](../../../references/protocol-reference/transactions/transaction-types/escrowfinish.md) to execute the release of the funds after the `FinishAfter` time has passed. Set the `Owner` field of the transaction to the `Account` address from the EscrowCreate transaction, and the `OfferSequence` to the `Sequence` number from the EscrowCreate transaction. Set the `Condition` and `Fulfillment` fields to the condition and fulfillment values, in hexadecimal, that you generated in step 1. Set the `Fee` ([transaction cost](../../../concepts/transactions/transaction-cost.md)) value based on the size of the fulfillment in bytes: a conditional EscrowFinish requires at least 330 drops of XRP plus 10 drops per 16 bytes in the size of the fulfillment.
 
-**Note:** If you included a `FinishAfter` field in the EscrowCreate transaction, you cannot execute it before that time has passed, even if you provide the correct fulfillment for the Escrow's condition. The EscrowFinish transaction fails with the [result code](transaction-results.html) `tecNO_PERMISSION` if the previously-closed ledger's close time is before the `FinishAfter` time.
+**Note:** If you included a `FinishAfter` field in the EscrowCreate transaction, you cannot execute it before that time has passed, even if you provide the correct fulfillment for the Escrow's condition. The EscrowFinish transaction fails with the [result code](../../../references/protocol-reference/transactions/transaction-results/transaction-results.md) `tecNO_PERMISSION` if the previously-closed ledger's close time is before the `FinishAfter` time.
 
-If the escrow has expired, you can only [cancel the escrow](cancel-an-expired-escrow.html) instead.
+If the escrow has expired, you can only [cancel the escrow](cancel-an-expired-escrow.md) instead.
 
 {% include '_snippets/secret-key-warning.md' %} <!--#{ fix md highlighting_ #}-->
 
@@ -194,7 +194,7 @@ Take note of the transaction's identifying `hash` value so you can check its fin
 
 ## 8. Confirm final result
 
-Use the [tx method][] with the EscrowFinish transaction's identifying hash to check its final status. In particular, look in the transaction metadata for a `ModifiedNode` of type `AccountRoot` for the destination of the escrowed payment. The `FinalFields` of the object should show the increase in XRP in the `Balance` field.
+Use the [tx method](../../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md) with the EscrowFinish transaction's identifying hash to check its final status. In particular, look in the transaction metadata for a `ModifiedNode` of type `AccountRoot` for the destination of the escrowed payment. The `FinalFields` of the object should show the increase in XRP in the `Balance` field.
 
 Request:
 
@@ -212,22 +212,22 @@ Response:
 
 ## See Also
 
-- [Crypto-Conditions Specification][]
+- [Crypto-Conditions Specification](https://tools.ietf.org/html/draft-thomas-crypto-conditions-04)
 - **Concepts:**
-    - [What is XRP?](what-is-xrp.html)
+    - [What is XRP?](../../../concepts/introduction/what-is-xrp.md)
     - [Payment Types](payment-types.html)
-        - [Escrow](escrow.html)
+        - [Escrow](../../../concepts/payment-types/escrow.md)
 - **Tutorials:**
-    - [Send XRP](send-xrp.html)
-    - [Look Up Transaction Results](look-up-transaction-results.html)
-    - [Reliable Transaction Submission](reliable-transaction-submission.html)
+    - [Send XRP](../../get-started/send-xrp.md)
+    - [Look Up Transaction Results](../../../concepts/transactions/look-up-transaction-results.md)
+    - [Reliable Transaction Submission](../../../concepts/transactions/reliable-transaction-submission.md)
 - **References:**
-    - [EscrowCancel transaction][]
-    - [EscrowCreate transaction][]
-    - [EscrowFinish transaction][]
-    - [account_objects method][]
-    - [tx method][]
-    - [Escrow ledger object](escrow-object.html)
+    - [EscrowCancel transaction](../../../references/protocol-reference/transactions/transaction-types/escrowcancel.md)
+    - [EscrowCreate transaction](../../../references/protocol-reference/transactions/transaction-types/escrowcreate.md)
+    - [EscrowFinish transaction](../../../references/protocol-reference/transactions/transaction-types/escrowfinish.md)
+    - [account_objects method](../../../references/http-websocket-apis/public-api-methods/account-methods/account_objects.md)
+    - [tx method](../../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md)
+    - [Escrow ledger object](../../../references/protocol-reference/ledger-data/ledger-entry-types/escrow.md)
 
 
 <!--{# common link defs #}-->

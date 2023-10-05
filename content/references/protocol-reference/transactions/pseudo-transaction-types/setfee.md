@@ -7,7 +7,7 @@ labels:
 ---
 # SetFee
 
-A `SetFee` [pseudo-transaction](pseudo-transaction-types.html) marks a change in [transaction cost](transaction-cost.html) or [reserve requirements](reserves.html) as a result of [Fee Voting](fee-voting.html).
+A `SetFee` [pseudo-transaction](pseudo-transaction-types.md) marks a change in [transaction cost](../../../../concepts/transactions/transaction-cost.md) or [reserve requirements](../../../../concepts/accounts/reserves.md) as a result of [Fee Voting](../../../../concepts/consensus-protocol/fee-voting.md).
 
 **Note:** You cannot send a pseudo-transaction, but you may find one when processing ledgers.
 
@@ -33,9 +33,9 @@ A `SetFee` [pseudo-transaction](pseudo-transaction-types.html) marks a change in
 {% include '_snippets/pseudo-tx-fields-intro.md' %}
 <!--{# fix md highlighting_ #}-->
 
-| Field               | JSON Type        | [Internal Type][] | Description     |
+| Field               | JSON Type        | [Internal Type](../../serialization.md) | Description     |
 |:--------------------|:-----------------|:------------------|:----------------|
-| `BaseFee`           | String           | UInt64            | The charge, in drops of XRP, for the reference transaction, as hex. (This is the [transaction cost](transaction-cost.html) before scaling for load.) |
+| `BaseFee`           | String           | UInt64            | The charge, in drops of XRP, for the reference transaction, as hex. (This is the [transaction cost](../../../../concepts/transactions/transaction-cost.md) before scaling for load.) |
 | `ReferenceFeeUnits` | Unsigned Integer | UInt32            | The cost, in fee units, of the reference transaction |
 | `ReserveBase`       | Unsigned Integer | UInt32            | The base reserve, in drops |
 | `ReserveIncrement`  | Unsigned Integer | UInt32            | The incremental reserve, in drops |
@@ -44,9 +44,9 @@ A `SetFee` [pseudo-transaction](pseudo-transaction-types.html) marks a change in
 
 If the _[XRPFees amendment][]_ is enabled, `SetFee` pseudo-transactions use these fields instead:
 
-| Field                   | JSON Type | [Internal Type][] | Description     |
+| Field                   | JSON Type | [Internal Type](../../serialization.md) | Description     |
 |:------------------------|:----------|:------------------|:----------------|
-| `BaseFeeDrops`          | String    | Amount            | The charge, in drops of XRP, for the reference transaction. (This is the [transaction cost](transaction-cost.html) before scaling for load.) |
+| `BaseFeeDrops`          | String    | Amount            | The charge, in drops of XRP, for the reference transaction. (This is the [transaction cost](../../../../concepts/transactions/transaction-cost.md) before scaling for load.) |
 | `ReserveBaseDrops`      | String    | Amount            | The base reserve, in drops |
 | `ReserveIncrementDrops` | String    | Amount            | The incremental reserve, in drops |
 | `LedgerSequence`        | Number    | UInt32            | _(Omitted for some historical `SetFee` pseudo-transactions)_ The index of the ledger version where this pseudo-transaction appears. This distinguishes the pseudo-transaction from other occurrences of the same change. |

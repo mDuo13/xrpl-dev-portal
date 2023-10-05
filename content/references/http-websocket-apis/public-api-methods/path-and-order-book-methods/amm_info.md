@@ -190,7 +190,7 @@ An example of a successful response:
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | Field                  | Type             | Description                                               |
 |:-----------------------|:-----------------|:----------------------------------------------------------|
@@ -210,8 +210,8 @@ The `amm` field is an object describing the current status of an Automated Marke
 | `amm_account`   | String              | The [Address][] of the AMM Account. |
 | `amount`        | [Currency Amount][] | The total amount of one asset in the AMM's pool. (Note: This could be `asset` _or_ `asset2` from the request.) |
 | `amount2`       | [Currency Amount][] | The total amount of the other asset in the AMM's pool. (Note: This could be `asset` _or_ `asset2` from the request.) |
-| `asset_frozen`  | Boolean             | _(Omitted for XRP)_ If `true`, the `amount` currency is currently [frozen](freezes.html). |
-| `asset2_frozen` | Boolean             | _(Omitted for XRP)_ If `true`, the `amount2` currency is currently [frozen](freezes.html). |
+| `asset_frozen`  | Boolean             | _(Omitted for XRP)_ If `true`, the `amount` currency is currently [frozen](../../../../concepts/tokens/freezes.md). |
+| `asset2_frozen` | Boolean             | _(Omitted for XRP)_ If `true`, the `amount2` currency is currently [frozen](../../../../concepts/tokens/freezes.md). |
 | `auction_slot`  | Object              | _(May be omitted)_ An [Auction Slot Object](#auction-slot-object) describing the current auction slot holder, if there is one. |
 | `lp_token`      | [Currency Amount][] | The total amount of this AMM's LP Tokens outstanding. If the request specified a liquidity provider in the `account` field, instead, this is the amount of this AMM's LP Tokens held by that liquidity provider. |
 | `trading_fee`   | Number              | The AMM's current trading fee, in units of 1/100,000; a value of 1 is equivalent to a 0.001% fee. |
@@ -252,9 +252,9 @@ Each entry in the `vote_slots` array represents one liquidity provider's vote to
 
 ## See Also
 
- - [AMM object](amm.html) - The canonical storage format of the AMM object
- - [AMMBid][] - More info on the auction slot and bidding mechanism
- - [AMMVote][] - More info on the trading fee voting mechanism
+ - [AMM object](../../../protocol-reference/ledger-data/ledger-entry-types/amm.md) - The canonical storage format of the AMM object
+ - [AMMBid](../../../protocol-reference/transactions/transaction-types/ammbid.md) - More info on the auction slot and bidding mechanism
+ - [AMMVote](../../../protocol-reference/transactions/transaction-types/ammvote.md) - More info on the trading fee voting mechanism
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

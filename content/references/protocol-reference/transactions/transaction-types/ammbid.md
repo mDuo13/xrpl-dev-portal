@@ -11,7 +11,7 @@ status: not_enabled
 
 _(Requires the [AMM amendment][] :not_enabled:)_
 
-Bid on an [Automated Market Maker](automated-market-makers.html)'s (AMM's) auction slot. If you win, you can trade against the AMM at a discounted fee until you are outbid or 24 hours have passed. If you are outbid before 24 hours have passed, you are refunded part of the cost of your bid based on how much time remains.
+Bid on an [Automated Market Maker](../../../../concepts/tokens/automated-market-makers.md)'s (AMM's) auction slot. If you win, you can trade against the AMM at a discounted fee until you are outbid or 24 hours have passed. If you are outbid before 24 hours have passed, you are refunded part of the cost of your bid based on how much time remains.
 
 You bid using the AMM's LP Tokens; the amount of a winning bid is returned to the AMM, decreasing the outstanding balance of LP Tokens.
 
@@ -54,7 +54,7 @@ You bid using the AMM's LP Tokens; the amount of a winning bid is returned to th
 
 {% include '_snippets/tx-fields-intro.md' %}
 
-| Field          | JSON Type           | [Internal Type][] | Required? | Description |
+| Field          | JSON Type           | [Internal Type](../../serialization.md) | Required? | Description |
 |:---------------|:--------------------|:------------------|:----------|:------------|
 | `Asset`        | Object              | STIssue           | Yes       | The definition for one of the assets in the AMM's pool. In JSON, this is an object with `currency` and `issuer` fields (omit `issuer` for XRP). |
 | `Asset2`       | Object              | STIssue           | Yes       | The definition for the other asset in the AMM's pool. In JSON, this is an object with `currency` and `issuer` fields (omit `issuer` for XRP). |
@@ -68,7 +68,7 @@ You cannot specify both `BidMin` and `BidMax`.
 
 Each member of the `AuthAccounts` array must be an object with the following field:
 
-| Field          | JSON Type | [Internal Type][] | Required? | Description |
+| Field          | JSON Type | [Internal Type](../../serialization.md) | Required? | Description |
 |:---------------|:----------|:------------------|:----------|:------------|
 | `Account`      | String    | AccountID         | Yes       | The address of the account to authorize. |
 
@@ -99,7 +99,7 @@ If successful, the transaction automatically outbids the previous slot owner and
 
         P = M
 
-**Note:** To make sure all servers in the network reach the same results when building a ledger, time measurements are based on the [official close time](ledger-close-times.html) of the previous ledger, which is approximate.
+**Note:** To make sure all servers in the network reach the same results when building a ledger, time measurements are based on the [official close time](../../../../concepts/ledgers/ledger-close-times.md) of the previous ledger, which is approximate.
 
 ## Bid Refunds
 
@@ -115,11 +115,11 @@ R = B × (1 - t)
 
 As a special case, during the final (20th) interval of the auction slot, the refunded amount is zero.
 
-**Note:** As with all XRP Ledger times, transaction processing uses the [official close time](ledger-close-times.html) of the _previous_ ledger, which can result in a difference of up to about 10 seconds from real time.
+**Note:** As with all XRP Ledger times, transaction processing uses the [official close time](../../../../concepts/ledgers/ledger-close-times.md) of the _previous_ ledger, which can result in a difference of up to about 10 seconds from real time.
 
 
 ## Error Cases
-Besides errors that can occur for all transactions, {{currentpage.name}} transactions can result in the following [transaction result codes](transaction-results.html):
+Besides errors that can occur for all transactions, {{currentpage.name}} transactions can result in the following [transaction result codes](../transaction-results/transaction-results.md):
 
 | Error Code              | Description                                  |
 |:------------------------|:---------------------------------------------|

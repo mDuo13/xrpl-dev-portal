@@ -42,7 +42,7 @@ npm install xrpl
 
 ## Start Building
 
-When you're working with the XRP Ledger, there are a few things you'll need to manage, whether you're adding XRP to your [account](accounts.html), integrating with the [decentralized exchange](decentralized-exchange.html), or [issuing tokens](tokens.html). This tutorial walks you through basic patterns common to getting started with all of these use cases and provides sample code for implementing them.
+When you're working with the XRP Ledger, there are a few things you'll need to manage, whether you're adding XRP to your [account](../../concepts/accounts/accounts.md), integrating with the [decentralized exchange](../../concepts/tokens/decentralized-exchange.md), or [issuing tokens](../../concepts/tokens/tokens.md). This tutorial walks you through basic patterns common to getting started with all of these use cases and provides sample code for implementing them.
 
 Here are some steps you use in many XRP Ledger projects:
 
@@ -93,9 +93,9 @@ To make queries and submit transactions, you need to connect to the XRP Ledger. 
 
 #### Connect to the XRP Ledger Mainnet
 
-The sample code in the previous section shows you how to connect to the Testnet, which is one of the available [parallel networks](parallel-networks.html). When you're ready to move to production, you'll need to connect to the XRP Ledger Mainnet. You can do that in two ways:
+The sample code in the previous section shows you how to connect to the Testnet, which is one of the available [parallel networks](../../concepts/networks-and-servers/parallel-networks.md). When you're ready to move to production, you'll need to connect to the XRP Ledger Mainnet. You can do that in two ways:
 
-* By [installing the core server](install-rippled.html) (`rippled`) and running a node yourself. The core server connects to the Mainnet by default, but you can [change the configuration to use Testnet or Devnet](connect-your-rippled-to-the-xrp-test-net.html). [There are good reasons to run your own core server](networks-and-servers.html#reasons-to-run-your-own-server). If you run your own server, you can connect to it like so:
+* By [installing the core server](install-rippled.html) (`rippled`) and running a node yourself. The core server connects to the Mainnet by default, but you can [change the configuration to use Testnet or Devnet](../../infrastructure/rippled/configuration/connect-your-rippled-to-the-xrp-test-net.md). [There are good reasons to run your own core server](../../concepts/networks-and-servers/networks-and-servers.md#reasons-to-run-your-own-server). If you run your own server, you can connect to it like so:
 
         const MY_SERVER = "ws://localhost:6006/"
         const client = new xrpl.Client(MY_SERVER)
@@ -103,7 +103,7 @@ The sample code in the previous section shows you how to connect to the Testnet,
 
     See the example [core server config file](https://github.com/XRPLF/rippled/blob/c0a0b79d2d483b318ce1d82e526bd53df83a4a2c/cfg/rippled-example.cfg#L1562) for more information about default values.
 
-* By using one of the available [public servers][]:
+* By using one of the available [public servers](public-servers.md):
 
         const PUBLIC_SERVER = "wss://xrplcluster.com/"
         const client = new xrpl.Client(PUBLIC_SERVER)
@@ -122,7 +122,7 @@ If you only want to generate keys, you can create a new `Wallet` instance like t
 const test_wallet = xrpl.Wallet.generate()
 ```
 
-Or, if you already have a seed encoded in [base58][], you can make a `Wallet` instance from it like this:
+Or, if you already have a seed encoded in [base58](base58-encodings.html), you can make a `Wallet` instance from it like this:
 
 ```js
 const test_wallet = xrpl.Wallet.fromSeed("sn3nxiW7v8KXzPzAqzyHXbSSKNuN9") // Test secret; don't use for real
@@ -130,14 +130,14 @@ const test_wallet = xrpl.Wallet.fromSeed("sn3nxiW7v8KXzPzAqzyHXbSSKNuN9") // Tes
 
 ### 4. Query the XRP Ledger
 
-Use the Client's `request()` method to access the XRP Ledger's [WebSocket API](request-formatting.html). For example:
+Use the Client's `request()` method to access the XRP Ledger's [WebSocket API](../../references/http-websocket-apis/api-conventions/request-formatting.md). For example:
 
 {{ include_code("_code-samples/get-started/js/get-acct-info.js", start_with="// Get info", end_before="// Listen to ledger close events", language="js") }}
 
 
 ### 5. Listen for Events
 
-You can set up handlers for various types of events in `xrpl.js`, such as whenever the XRP Ledger's [consensus process](consensus.html) produces a new [ledger version](ledgers.html). To do that, first call the [subscribe method][] to get the type of events you want, then attach an event handler using the `on(eventType, callback)` method of the client.
+You can set up handlers for various types of events in `xrpl.js`, such as whenever the XRP Ledger's [consensus process](../../concepts/consensus-protocol/consensus.md) produces a new [ledger version](../../concepts/ledgers/ledgers.md). To do that, first call the [subscribe method](../../references/http-websocket-apis/public-api-methods/subscription-methods/subscribe.md) to get the type of events you want, then attach an event handler using the `on(eventType, callback)` method of the client.
 
 {{ include_code("_code-samples/get-started/js/get-acct-info.js", start_with="// Listen to ledger close events", end_before="// Disconnect when done", language="js") }}
 
@@ -146,24 +146,24 @@ You can set up handlers for various types of events in `xrpl.js`, such as whenev
 
 Now that you know how to use `xrpl.js` to connect to the XRP Ledger, get an account, and look up information about it, you can also:
 
-* [Send XRP](send-xrp.html).
-* [Issue a Fungible Token](issue-a-fungible-token.html)
-* [Set up secure signing](secure-signing.html) for your account.
+* [Send XRP](send-xrp.md).
+* [Issue a Fungible Token](../use-tokens/issue-a-fungible-token.md)
+* [Set up secure signing](../../concepts/transactions/set-up-secure-signing.md) for your account.
 
 
 ## See Also
 
 - **Concepts:**
     - [XRP Ledger Overview](xrp-ledger-overview.html)
-    - [Client Libraries](client-libraries.html)
+    - [Client Libraries](../../references/client-libraries.md)
 - **Tutorials:**
-    - [Send XRP](send-xrp.html)
+    - [Send XRP](send-xrp.md)
 - **References:**
     - [`xrpl.js` Reference](https://js.xrpl.org/)
-    - [Public API Methods](public-api-methods.html)
-    - [API Conventions](api-conventions.html)
+    - [Public API Methods](../../references/http-websocket-apis/public-api-methods/public-api-methods.md)
+    - [API Conventions](../../references/http-websocket-apis/api-conventions/api-conventions.md)
         - [base58 Encodings](base58-encodings.html)
-    - [Transaction Formats](transaction-formats.html)
+    - [Transaction Formats](../../references/protocol-reference/transactions/transaction-formats.md)
 
 <!--{# common link defs #}-->
 {% include '_snippets/rippled-api-links.md' %}

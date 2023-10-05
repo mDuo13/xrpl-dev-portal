@@ -11,11 +11,11 @@ Minting, holding, and offering NFTs for sale require XRP held in reserve. The re
 
 ## Base Reserve
 
-Your account must set aside a base reserve, currently 10 XRP. The base reserve XRP amount is subject to change. See [Base Reserve and Owner Reserve](reserves.html#base-reserve-and-owner-reserve).
+Your account must set aside a base reserve, currently 10 XRP. The base reserve XRP amount is subject to change. See [Base Reserve and Owner Reserve](../accounts/reserves.md#base-reserve-and-owner-reserve).
 
 ## Owner Reserve
 
-For each object you own on the XRP Ledger, there is an owner reserve, currently 2 XRP. This is to discourage users from spamming the ledger with unnecessary data, and to encourage them to clean up any data that is no longer necessary. The owner reserve amount is subject to change. See [Base Reserve and Owner Reserve](reserves.html#base-reserve-and-owner-reserve).
+For each object you own on the XRP Ledger, there is an owner reserve, currently 2 XRP. This is to discourage users from spamming the ledger with unnecessary data, and to encourage them to clean up any data that is no longer necessary. The owner reserve amount is subject to change. See [Base Reserve and Owner Reserve](../accounts/reserves.md#base-reserve-and-owner-reserve).
 
 For NFTs, the _object_ does not refer to the individual NFTs, but to the `NFTokenPage` objects owned by the account. `NFTokenPage` objects can store up to 32 NFTs.
 
@@ -37,11 +37,11 @@ The following table provides examples of how much the total owner reserve might 
 
 Each `NFTokenOffer` object costs the account placing the offer one incremental reserve. As of this writing, the incremental reserve is 2 XRP. The reserve can be recovered by cancelling the offer. The reserve is also recovered if the offer is accepted, which removes the offer from the XRP Ledger.
 
-**Tip** After you sell an NFT, as a courtesy, cancel any stale `NFTokenOffer` objects on behalf of your bidders to give them back their reserve. You can do this with [NFTokenCancelOffer](nftokencanceloffer.html) transactions.
+**Tip** After you sell an NFT, as a courtesy, cancel any stale `NFTokenOffer` objects on behalf of your bidders to give them back their reserve. You can do this with [NFTokenCancelOffer](../../references/protocol-reference/transactions/transaction-types/nftokencanceloffer.md) transactions.
 
 ## Practical Considerations
 
-When minting, holding, and offering to buy and sell NFTs, the reserve requirements can add up quickly. This can result in your account going below the reserve requirement during a transaction. Going below the requirement can limit your ability to trade on the XRPL. See [Going Below the Reserve Requirement](reserves.html#going-below-the-reserve-requirement).
+When minting, holding, and offering to buy and sell NFTs, the reserve requirements can add up quickly. This can result in your account going below the reserve requirement during a transaction. Going below the requirement can limit your ability to trade on the XRPL. See [Going Below the Reserve Requirement](../accounts/reserves.md#going-below-the-reserve-requirement).
 
 If you create a new account, mint an NFT, and create an `NFTokenSellOffer` on the XRP Ledger, that requires a minimum reserve of 14 XRP.
 
@@ -65,4 +65,4 @@ If you were to mint 200 NFTs and create an `NFTokenSellOffer`for each, that woul
 | Total               | 436 XRP |
 |                     |         |
 
-If the required reserves exceed the amount you are comfortable setting aside, consider using the mint-on-demand model to reduce the number of NFTs and offers you hold at any one time. See [Mint on Demand](nftoken-batch-minting.html#mint-on-demand-lazy-minting).
+If the required reserves exceed the amount you are comfortable setting aside, consider using the mint-on-demand model to reduce the number of NFTs and offers you hold at any one time. See [Mint on Demand](nftoken-batch-minting.md#mint-on-demand-lazy-minting).

@@ -74,11 +74,11 @@ The request includes the following parameters:
 | `binary`           | Boolean                                    | _(Optional)_ Defaults to `false`. If set to `true`, returns transactions as hex strings instead of JSON. |
 | `forward`          | Boolean                                    | _(Optional)_ Defaults to `false`. If set to `true`, returns values indexed with the oldest ledger first. Otherwise, the results are indexed with the newest ledger first. (Each page of results may not be internally ordered, but the pages are overall ordered.) |
 | `limit`            | Integer                                    | _(Optional)_ Default varies. Limit the number of transactions to retrieve. The server is not required to honor this value. |
-| `marker`           | [Marker][] | Value from a previous paginated response. Resume retrieving data where that response left off. This value is stable even if there is a change in the server's range of available ledgers. |
+| `marker`           | [Marker](../../api-conventions/markers-and-pagination.md) | Value from a previous paginated response. Resume retrieving data where that response left off. This value is stable even if there is a change in the server's range of available ledgers. |
 
 **You must use at least one of the following fields** in your request: `ledger_index`, `ledger_hash`, `ledger_index_min`, or `ledger_index_max`.
 
-The following legacy fields are no longer supported: `offset`, `count`, `ledger_min`, `ledger_max`. [Removed in: rippled 1.7.0][]
+The following legacy fields are no longer supported: `offset`, `count`, `ledger_min`, `ledger_max`. [Removed in: rippled 1.7.0](https://github.com/XRPLF/rippled/releases/tag/1.7.0 "BADGE_RED")
 
 
 ### Iterating over queried data
@@ -428,7 +428,7 @@ An example of a successful response:
 
 <!-- MULTICODE_BLOCK_END -->
 
-The response follows the [standard format][], with a successful result containing the following fields:
+The response follows the [standard format](../../api-conventions/response-formatting.md), with a successful result containing the following fields:
 
 | `Field`            | Type                       | Description                |
 |:-------------------|:---------------------------|:---------------------------|
@@ -436,7 +436,7 @@ The response follows the [standard format][], with a successful result containin
 | `ledger_index_min` | Integer - [Ledger Index][] | The ledger index of the earliest ledger actually searched for transactions. |
 | `ledger_index_max` | Integer - [Ledger Index][] | The ledger index of the most recent ledger actually searched for transactions. |
 | `limit`            | Integer                    | The `limit` value used in the request. (This may differ from the actual limit value enforced by the server.) |
-| `marker`           | [Marker][]                 | Server-defined value indicating the response is paginated. Pass this to the next call to resume where this call left off. |
+| `marker`           | [Marker](../../api-conventions/markers-and-pagination.md)                 | Server-defined value indicating the response is paginated. Pass this to the next call to resume where this call left off. |
 | `transactions`     | Array                      | Array of transactions matching the request's criteria, as explained below. |
 | `validated`        | Boolean                    | If included and set to `true`, the information in this response comes from a validated ledger version. Otherwise, the information is subject to change. |
 
@@ -458,7 +458,7 @@ Each transaction object includes the following fields, depending on whether it w
 * `invalidParams` - One or more fields are specified incorrectly, or one or more required fields are missing.
 * `actMalformed` - The [Address][] specified in the `account` field of the request is not formatted properly.
 * `lgrIdxMalformed` - The ledger specified by the `ledger_index_min` or `ledger_index_max` does not exist, or if it does exist but the server does not have it.
-* `lgrIdxsInvalid` - Either the request specifies a `ledger_index_max` that is before the `ledger_index_min`, or the server does not have a validated ledger range because it is [not synced with the network](server-doesnt-sync.html).
+* `lgrIdxsInvalid` - Either the request specifies a `ledger_index_max` that is before the `ledger_index_min`, or the server does not have a validated ledger range because it is [not synced with the network](../../../../infrastructure/rippled/troubleshooting/server-doesnt-sync.md).
 
 
 {% include '_snippets/rippled_versions.md' %}

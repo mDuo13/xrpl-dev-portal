@@ -7,9 +7,9 @@ labels:
 ---
 # Cash a Check for an Exact Amount
 
-As long as the Check is in the ledger and not expired, the specified recipient can cash it to receive any exact amount up to the amount specified in the Check by sending a [CheckCash transaction][] with an `Amount` field. You would cash a Check this way if you want to receive a specific amount, for example to pay off an invoice or bill exactly.
+As long as the Check is in the ledger and not expired, the specified recipient can cash it to receive any exact amount up to the amount specified in the Check by sending a [CheckCash transaction](../../../references/protocol-reference/transactions/transaction-types/checkcash.md) with an `Amount` field. You would cash a Check this way if you want to receive a specific amount, for example to pay off an invoice or bill exactly.
 
-The specified recipient can also [cash the check for a flexible amount](cash-a-check-for-a-flexible-amount.html).
+The specified recipient can also [cash the check for a flexible amount](cash-a-check-for-a-flexible-amount.md).
 
 {% set cash_exact_n = cycler(* range(1,99)) %}
 
@@ -19,13 +19,13 @@ The specified recipient can also [cash the check for a flexible amount](cash-a-c
 
 ## {{cash_exact_n.next()}}. Prepare the CheckCash transaction
 
-Figure out the values of the [CheckCash transaction][] fields. To cash a check for an exact amount, the following fields are the bare minimum; everything else is either optional or can be [auto-filled](transaction-common-fields.html#auto-fillable-fields) when signing:
+Figure out the values of the [CheckCash transaction](../../../references/protocol-reference/transactions/transaction-types/checkcash.md) fields. To cash a check for an exact amount, the following fields are the bare minimum; everything else is either optional or can be [auto-filled](../../../references/protocol-reference/transactions/transaction-common-fields.md#auto-fillable-fields) when signing:
 
 | Field             | Value                     | Description                  |
 |:------------------|:--------------------------|:-----------------------------|
 | `TransactionType` | String                    | The value `CheckCash` indicates this is a CheckCash transaction. |
 | `Account`         | String (Address)          | The address of the sender who is cashing the Check. (In other words, your address.) |
-| `CheckID`         | String                    | The ID of the Check object in the ledger to cash. You can get this information by looking up the metadata of the CheckCreate transaction using the [tx method][] or by looking for Checks using the [account_objects method][]. |
+| `CheckID`         | String                    | The ID of the Check object in the ledger to cash. You can get this information by looking up the metadata of the CheckCreate transaction using the [tx method](../../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md) or by looking for Checks using the [account_objects method](../../../references/http-websocket-apis/public-api-methods/account-methods/account_objects.md). |
 | `Amount`          | String or Object (Amount) | The amount to redeem from the Check. For XRP, this must be a string specifying drops of XRP. For tokens, this is an object with `currency`, `issuer`, and `value` fields. The `currency` and `issuer` fields must match the corresponding fields in the Check object, and the `value` must be less than or equal to the amount in the Check object. (For currencies with transfer fees, you must cash the Check for less than its `SendMax` so the transfer fee can be paid by the `SendMax`.) If you cannot receive this much, cashing the Check fails, leaving the Check in the ledger so you can try again. For more information on specifying currency amounts, see [Specifying Currency Amounts][]. |
 
 
@@ -121,11 +121,11 @@ The following examples show how to prepare a transaction to cash a Check for a f
 
 ## {{cash_exact_n.next()}}. Confirm final result
 
-Use the [tx method][] with the CheckCash transaction's identifying hash to check its status. Look for a `"TransactionResult": "tesSUCCESS"` field in the transaction's metadata, indicating that the transaction succeeded, and the field `"validated": true` in the result, indicating that this result is final.
+Use the [tx method](../../../references/http-websocket-apis/public-api-methods/transaction-methods/tx.md) with the CheckCash transaction's identifying hash to check its status. Look for a `"TransactionResult": "tesSUCCESS"` field in the transaction's metadata, indicating that the transaction succeeded, and the field `"validated": true` in the result, indicating that this result is final.
 
 If the check was cashed for an exact `Amount` and succeeded, you can assume that the recipient was credited for exactly that amount (with possible rounding for very large or very small amounts of tokens).
 
-If cashing the Check failed, the Check remains in the ledger so you can try cashing again later. You may want to [cash the Check for a flexible amount](cash-a-check-for-a-flexible-amount.html) instead.
+If cashing the Check failed, the Check remains in the ledger so you can try cashing again later. You may want to [cash the Check for a flexible amount](cash-a-check-for-a-flexible-amount.md) instead.
 
 ### Example Request
 

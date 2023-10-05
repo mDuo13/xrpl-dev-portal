@@ -7,9 +7,9 @@ labels:
 ---
 # NFToken
 
-The `NFToken` object represents a single non-fungible token (NFT). It is not stored on its own, but is contained in a [NFTokenPage object][] alongside other `NFToken` objects.
+The `NFToken` object represents a single non-fungible token (NFT). It is not stored on its own, but is contained in a [NFTokenPage object](../ledger-data/ledger-entry-types/nftokenpage.md) alongside other `NFToken` objects.
 
-_(Added by the [NonFungibleTokensV1_1 amendment][].)_
+_(Added by the [NonFungibleTokensV1_1 amendment](known-amendments.html#nonfungibletokensv1_1).)_
 
 Example {{currentpage.name}} JSON
 
@@ -53,11 +53,11 @@ Flags are properties or other options associated with the `NFToken` object.
 |:------------------|:-----------|:--------------------------------------------|
 | `lsfBurnable`     | `0x0001`   | If enabled, the issuer (or an entity authorized by the issuer) can destroy this `NFToken`. The object's owner can always do so. |
 | `lsfOnlyXRP`      | `0x0002`   | If enabled, this `NFToken` can only be offered or sold for XRP. |
-| `lsfTrustLine`    | `0x0004`   | **DEPRECATED** If enabled, automatically create [trust lines](trust-lines-and-issuing.html) to hold transfer fees. Otherwise, buying or selling this `NFToken` for a fungible token amount fails if the issuer does not have a trust line for that token. The [fixRemoveNFTokenAutoTrustLine amendment][] makes it invalid to enable this flag. |
+| `lsfTrustLine`    | `0x0004`   | **DEPRECATED** If enabled, automatically create [trust lines](../../../concepts/tokens/trust-lines-and-issuing.md) to hold transfer fees. Otherwise, buying or selling this `NFToken` for a fungible token amount fails if the issuer does not have a trust line for that token. The [fixRemoveNFTokenAutoTrustLine amendment][] makes it invalid to enable this flag. |
 | `lsfTransferable` | `0x0008`   | If enabled, this `NFToken` can be transferred from one holder to another. Otherwise, it can only be transferred to or from the issuer. |
 | `lsfReservedFlag` | `0x8000`   | This flag is reserved for future use. Attempts to set this flag fail. |
 
-`NFToken` flags are immutable: they can only be set during the [NFTokenMint transaction][] and cannot be changed later.
+`NFToken` flags are immutable: they can only be set during the [NFTokenMint transaction](../transactions/transaction-types/nftokenmint.md) and cannot be changed later.
 
 ### Example
 
@@ -99,7 +99,7 @@ The fifth section is a sequence number that increases with each `NFToken` the is
 
 ![Sequence Number](img/nftokene.png "Sequence Number")
 
-The [NFTokenMint transaction][] sets this part of the `NFTokenID` automatically based on the `MintedNFTokens` field of the `Issuer` account. If the issuer's [AccountRoot object][] does not have a `MintedNFTokens` field, the field is assumed to have the value 0; the value of the field is then incremented by exactly 1.
+The [NFTokenMint transaction](../transactions/transaction-types/nftokenmint.md) sets this part of the `NFTokenID` automatically based on the `MintedNFTokens` field of the `Issuer` account. If the issuer's [AccountRoot object](../ledger-data/ledger-entry-types/accountroot.md) does not have a `MintedNFTokens` field, the field is assumed to have the value 0; the value of the field is then incremented by exactly 1.
 
 ## URI
 
