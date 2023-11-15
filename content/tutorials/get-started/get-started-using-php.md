@@ -10,7 +10,7 @@ top_nav_name: PHP
 top_nav_grouping: Get Started
 labels:
   - Development
-showcase_icon: assets/img/logos/java.svg
+showcase_icon: assets/img/logos/php.svg
 ---
 # Get Started Using PHP
 
