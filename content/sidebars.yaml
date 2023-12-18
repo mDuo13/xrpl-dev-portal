@@ -605,6 +605,7 @@
         items:
           - label: RPC Tool
           - label: WebSocket API Tool
+            page: resources/dev-tools/websocket-api-tool.page.tsx
           - label: ripple.txt Validator
           - label: xrp-ledger.toml Checker
           - label: Domain Verification Checker
