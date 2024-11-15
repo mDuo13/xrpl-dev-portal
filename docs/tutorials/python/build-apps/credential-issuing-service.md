@@ -187,3 +187,67 @@ The parameters of the JSON request body should be as follows:
 | `credential` | String | Yes | The type of credential to revoke. This must match a credential type previously issued. |
 
 A successful response from the API uses the HTTP status code `200 OK` and has a response body with the result of submitting the transaction to the XRP Ledger. You can use the `hash` or `ctid` value from the response to look up the transaction using an explorer.
+
+## Code Walkthrough
+
+The code for this tutorial is divided among the following files:
+
+| File | Purpose |
+|---|---|
+| `accept_credential.py` | Commandline interface for a credential subject to look up and accept Credentials. |
+| `credential_mode.py` | A model class for Credentials that validates user input, and maps between the microservice's simplified Credential format and the full XRPL representation of Credentials. |
+| `decode_hex.py` | A helper function for decoding hexadecimal into human-readable strings, used by both the credential issuer and holder. |
+| `issuer_service.py` | Defines the microservice as a Flask app, including API methods and error handling. |
+| `look_up_credentials.py` | A helper function for looking up Credentials tied to an account, including pagination and filtering, used by both the credential issuer and holder. |
+
+### accept_credential.py
+
+This file is meant to be run as a commandline tool so it starts with a [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)), followed by dependencies grouped by type: standard lib, then PyPI packages, and local files last:
+
+{% code-snippet file="/_code-samples/issue-credentials/py/accept_credential.py" language="py" before="XRPL_SERVER =" /%}
+
+It then defines the XRPL client and sets up a `Wallet` instance with the subject account's key pair, using a seed either passed as an environment variable or input as a password:
+
+{% code-snippet file="/_code-samples/issue-credentials/py/accept_credential.py" language="py" from="XRPL_SERVER =" before="pending_credentials = " /%}
+
+It looks up pending credentials using the `look_up_credentials(...)` function imported from `look_up_credentials.py`:
+
+{% code-snippet file="/_code-samples/issue-credentials/py/accept_credential.py" language="py" from="pending_credentials = " before="prompt = " /%}
+
+Next is a text menu that displays each of the unaccepted credentials returned by the lookup, as well as the option to quit:
+
+{% code-snippet file="/_code-samples/issue-credentials/py/accept_credential.py" language="py" from="prompt = " before="chosen_cred = " /%}
+
+Finally, if the user picked a credential, the code constructs a [CredentialAccept transaction][], signs and submits it, and waits for it to be validated by consensus before displaying the result.
+
+{% code-snippet file="/_code-samples/issue-credentials/py/accept_credential.py" language="py" from="chosen_cred = " /%}
+
+## issuer_service.py
+
+This file defines the Flask app of the issuer microservice. It opens by importing dependencies, grouped into standard lib, PyPI dependencies, and lastly local files:
+
+{% code-snippet file="/_code-samples/issue-credentials/py/issuer_service.py" language="py" before="# Set up" /%}
+
+It then defines the XRPL client and sets up a `Wallet` instance with the account holder's key pair, using a seed either passed as an environment variable or input as a password:
+
+{% code-snippet file="/_code-samples/issue-credentials/py/issuer_service.py" language="py" from="# Set up" before="# Define Flask app" /%}
+
+Next, it creates the Flask app:
+
+{% code-snippet file="/_code-samples/issue-credentials/py/issuer_service.py" language="py" from="# Define Flask app" before="# Method for users" /%}
+
+After that come the definitions for the three API methods, starting with `POST /credential` which requests a credential from the service. This method parses the request body as JSON and instantiates a `CredentialRequest` object—one of the data models defined in `credential_model.py`. If this succeeds, it uses the data to fill out a CredentialCreate transaction. Finally, it checks the transaction's [result code](../../../references/protocol/transactions/transaction-results/index.md) to decide which HTTP response code to use:
+
+{% code-snippet file="/_code-samples/issue-credentials/py/issuer_service.py" language="py" from="# Method for users to request a credential from the service" before="# Method for admins to look up all credentials issued" /%}
+
+The next API method is `GET /admin/credential`, which looks up credentials issued by the service. It uses the `look_up_credentials(...)` method defined in `look_up_credentials.py` to get a list of credentials. It uses the `Credential` data model, imported from `credential_model.py`, to transform each ledger entry from the XRP Ledger format to the simplified representation the microservice uses.
+
+{% code-snippet file="/_code-samples/issue-credentials/py/issuer_service.py" language="py" from="# Method for admins to look up all credentials issued" before="# Method for admins to revoke an issued credential" /%}
+
+The final API method, `DELETE /admin/credential`, deletes a Credential from the ledger, revoking it. This again uses the `Credential` data model to validate user inputs and translate them into XRPL format where necessary. After that, it _could_ go straight to sending a CredentialDelete transaction, but first it attempts to look up the Credential in the ledger and returns an error if it doesn't exist. This way, the issuer doesn't have to pay the cost of sending a transaction that's doomed to fail. Finally, the method checks the transaction result code and sets the HTTP response code accordingly.
+
+{% code-snippet file="/_code-samples/issue-credentials/py/issuer_service.py" language="py" from="# Method for admins to revoke an issued credential" before="# Error handling" /%}
+
+Finally, the file ends by adding error handlers for a variety of errors that can be raised by the API methods, including in the data models or by xrpl-py's API methods:
+
+{% code-snippet file="/_code-samples/issue-credentials/py/issuer_service.py" language="py" from="# Error handling" /%}
