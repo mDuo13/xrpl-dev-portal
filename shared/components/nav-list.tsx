@@ -5,6 +5,7 @@ import { Link } from "@redocly/theme/components/Link/Link";
 interface PageProps {
   description: string;
   link: string;
+  external?: boolean;
 }
 
 interface NavListProps {
@@ -26,6 +27,8 @@ export const NavList: React.FC<NavListProps> = ({
             to={useCase.link}
             className={`nav-link ${
               index === pages.length - 1 && !bottomBorder ? "border-none" : ""
+            } ${
+              useCase.external ? "external-link": ""
             }`}
           >
             {translate(useCase.description)}

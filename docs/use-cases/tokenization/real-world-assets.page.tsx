@@ -1,4 +1,5 @@
 import { useThemeHooks } from "@redocly/theme/core/hooks";
+import { NavList } from "../../../shared/components/nav-list";
 import { Link } from "@redocly/theme/components/Link/Link";
 
 export const frontmatter = {
@@ -76,16 +77,17 @@ const companies = [
 
 const features = [
   {
-    title: "Token Issuance Tutorial",
-    link: "https://xrpl.org/docs/tutorials/how-tos/use-tokens/issue-a-fungible-token",
+    description: "Token Issuance Tutorial",
+    link: "/docs/tutorials/how-tos/use-tokens/issue-a-fungible-token",
   },
   {
-    title: "DEX Integration",
-    link: "https://xrpl.org/docs/tutorials/how-tos/use-tokens/trade-in-the-decentralized-exchange",
+    description: "DEX Integration",
+    link: "/docs/tutorials/how-tos/use-tokens/trade-in-the-decentralized-exchange",
   },
   {
-    title: "Cross-chain Interoperability",
+    description: "Cross-chain Interoperability",
     link: "https://docs.xrplevm.org/docs/axelar/intro-to-axelar/",
+    external: true
   },
 ];
 const featuresToken = [
@@ -168,20 +170,6 @@ function RwaTokenizationFeatures() {
   );
 }
 
-function FeatureItem({ title, link }) {
-  const { useTranslate } = useThemeHooks();
-  const { translate } = useTranslate();
-  return (
-    <li onClick={() => window.open(link, "_blank")} className="feature-item">
-      <div className="feature-item__content">
-        <span className="feature-item__title">{translate(title)}</span>
-        <span className="right-arrow-item"> </span>
-      </div>
-      <div className="feature-item__divider"></div>
-    </li>
-  );
-}
-
 function DeveloperTools() {
   const { useTranslate } = useThemeHooks();
   const { translate } = useTranslate();
@@ -200,15 +188,7 @@ function DeveloperTools() {
                 )}
               </p>
             </header>
-            <ul className="developer-tools__list">
-              {features.map((feature, index) => (
-                <FeatureItem
-                  key={index}
-                  link={feature.link}
-                  title={feature.title}
-                />
-              ))}
-            </ul>
+            <NavList pages={features} />
           </div>
           <div className="col-lg-6 m-h-300">
             <div
@@ -269,7 +249,7 @@ export default function RwaTokenization() {
   const { useTranslate } = useThemeHooks();
   const { translate } = useTranslate();
   return (
-    <div className="page-rwa-tokenization">
+    <div className="page-rwa-tokenization landing">
       <div className="position-relative d-none-sm">
         <img
           alt="orange waves"
