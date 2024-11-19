@@ -32,7 +32,7 @@ wallet = init_wallet()
 pending_credentials = look_up_credentials(
         client, 
         subject=wallet.address, 
-        accepted="false"
+        accepted="yes"
 )
 
 prompt = """

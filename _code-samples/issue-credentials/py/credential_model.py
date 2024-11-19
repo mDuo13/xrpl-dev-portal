@@ -6,16 +6,48 @@ from xrpl.utils import ripple_time_to_datetime, datetime_to_ripple_time, str_to_
 
 from decode_hex import decode_hex
 
-# XRPL credential types can be any arbitrary data, but because this service 
-# encodes from ASCII, it only accepts these characters in credential types:
-# alphanumeric characters, underscore, period, and dash (min length 1, max 64)
-CREDENTIAL_REGEX = re.compile(r'^[A-Za-z0-9_\.\-]{1,64}$')
+def is_allowed_credential_type(credential_type: str):
+    """
+    Returns True if the specified credential type is one that this service
+    issues, or False otherwise.
+    
+    XRPL credential types can be any binary data; this service issues
+    any credential that can be encoded from the following ASCII chars:
+    alphanumeric characters, underscore, period, and dash.
+    (min length 1, max 64)
 
-# The URI field on XRPL can be arbitrary data, but because this service
-# encodes from ASCII, it only accepts these characters in URIs:
-# alphanumeric and the following symbols: -._~:/?#[]@!$&'()*+,;=%
-# with minimum length 1 and max length 256 chars
-URI_REGEX = re.compile(r"[A-Za-z0-9\-\._~:/\?#\[\]@!$&'\(\)\*\+,;=%]{1,256}")
+    You might want to further limit the credential types, depending on your 
+    use case; for example, you might only issue one specific credential type.
+    """
+    CREDENTIAL_REGEX = re.compile(r'^[A-Za-z0-9_\.\-]{1,64}$')
+    if CREDENTIAL_REGEX.match(credential_type):
+        return True
+    return False
+
+
+def is_allowed_uri(uri):
+    """
+    Returns True if the specified URI is acceptable for this service, or
+    False otherwise.
+
+    XRPL Credentials' URI values can be any binary data; this service
+    adds any user-requested URI to a Credential as long as the URI
+    can be encoded from the characters usually allowed in URIs, namely
+    the following ASCII chars:
+
+    alphanumeric characters (upper and lower case)
+    the following symbols: -._~:/?#[]@!$&'()*+,;=%
+    (minimum length 1 and max length 256 chars)
+
+    You might want to instead define your own URI and attach it to the
+    Credential regardless of user input, or you might want to verify that the
+    URI points to a valid Verifiable Credential document that matches the user.
+    """
+    URI_REGEX = re.compile(r"^[A-Za-z0-9\-\._~:/\?#\[\]@!$&'\(\)\*\+,;=%]{1,256}$")
+    if URI_REGEX.match(uri):
+        return True
+    return False
+
 
 class Credential:
     """
@@ -42,12 +74,13 @@ class Credential:
         self.credential = d.get("credential")
         if type(self.credential) != str:
             raise ValueError("Must provide a string 'credential' field")
-        if not CREDENTIAL_REGEX.match(self.credential):
+
+        if not is_allowed_credential_type(self.credential):
             raise ValueError(f"credential not allowed: '{self.credential}'.")
 
         self.uri = d.get("uri")
         if self.uri is not None and (
-                type(self.uri) != str or not URI_REGEX.match(self.uri)):
+                type(self.uri) != str or not is_allowed_uri(self.uri)):
             raise ValueError(f"URI isn't valid: {self.uri}")
 
         exp = d.get("expiration")
@@ -63,6 +96,22 @@ class Credential:
         
         self.accepted = d.get("accepted")
     
+    @classmethod
+    def from_xrpl(cls, xrpl_d: dict):
+        """
+        Instantiate from a Credential ledger entry in the XRPL format.
+        """
+        d = {
+            "subject": xrpl_d["Subject"],
+            "credential": decode_hex(xrpl_d["CredentialType"]),
+            "accepted": bool(xrpl_d["Flags"] & 0x00010000) # lsfAccepted
+        }
+        if xrpl_d.get("URI"):
+            d["uri"] = decode_hex(xrpl_d["URI"])
+        if xrpl_d.get("Expiration"):
+            d["expiration"] = ripple_time_to_datetime(xrpl_d["Expiration"])
+        return cls(d)
+
     def to_dict(self):
         d = {
             "subject": self.subject,
@@ -76,23 +125,6 @@ class Credential:
             d["accepted"] = self.accepted
         return d
     
-    @classmethod
-    def from_xrpl(cls, xrpl_d: dict):
-        """
-        Instantiate from a Credential ledger entry in the XRPL format.
-        """
-        credential_type_s = decode_hex(xrpl_d["CredentialType"])
-        d = {
-            "subject": xrpl_d["Subject"],
-            "credential": credential_type_s,
-            "accepted": bool(xrpl_d["Flags"] & 0x00010000) # lsfAccepted
-        }
-        if xrpl_d.get("URI"):
-            d["uri"] = decode_hex(xrpl_d["URI"])
-        if xrpl_d.get("Expiration"):
-            d["expiration"] = ripple_time_to_datetime(xrpl_d["Expiration"])
-        return cls(d)
-    
     def to_xrpl(self):
         """
         Return an object with parameters formatted for the XRPL
@@ -100,6 +132,11 @@ class Credential:
         return XrplCredential(self)
 
 class XrplCredential:
+    """
+    A Credential object, in a format closer to the XRP Ledger representation.
+    Credential type and URI are hexadecimal;
+    Expiration, if present, is in seconds since the Ripple Epoch.
+    """
     def __init__(self, c:Credential):
         self.subject = c.subject
         self.credential = str_to_hex(c.credential)
@@ -122,5 +159,8 @@ class CredentialRequest(Credential):
         super().__init__(cred_request)
 
         self.documents = cred_request.get("documents")
+        # This is where you would check the user's documents to see if you
+        # should issue the requested Credential to them. This API only checks
+        # that the documents field is present and does not evaluate to false.
         if not self.documents:
             raise ValueError(f"you must provide a non-empty 'documents' field")

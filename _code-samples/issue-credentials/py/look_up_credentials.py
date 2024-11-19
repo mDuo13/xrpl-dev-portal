@@ -44,9 +44,9 @@ def look_up_credentials(client:JsonRpcClient,
             # Skip credentials that don't match the specified accepted status
             cred_accepted = obj["Flags"] & lsfAccepted
             
-            if accepted == "true" and not cred_accepted:
+            if accepted == "yes" and not cred_accepted:
                 continue
-            if accepted == "false" and cred_accepted:
+            if accepted == "no" and cred_accepted:
                 continue
             credentials.append(obj)
         

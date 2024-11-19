@@ -58,7 +58,7 @@ def request_credential():
 # Method for admins to look up all credentials issued -------------------------
 @app.route("/admin/credential")
 def get_credentials():
-    # ?accepted=true|false|both query parameter
+    # ?accepted=yes|no|both query parameter
     filter_accepted=request.args.get("accepted", "both")
     filter_accepted = filter_accepted.lower()
 

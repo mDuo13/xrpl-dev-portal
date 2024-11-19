@@ -3,7 +3,7 @@ seo:
     description: Build a credential issuing microservice in Python.
 ---
 # Build a Credential Issuing Service
-_(Requires the Credentials amendment. {% not-enabled %})_
+_(Requires the Credentials amendment. {% not-enabled /%})_
 
 This tutorial demonstrates how to build and use a microservice that issues <!-- TODO: link [Credentials](../../../concepts/decentralized-storage/credentials.md) --> Credentials on the XRP Ledger, in the form of a RESTlike API, using the [Flask](https://flask.palletsprojects.com/) framework for Python.
 
@@ -47,7 +47,7 @@ The other files contain helper code that is used by one or both tools.
 
 ### 1. Get Accounts
 
-To use the credential issuing service, you need two accounts on the Devnet, where the Credentials amendment is already enabled. Go to the [XRP Faucets page](../../../../resources/dev-tools/xrp-faucets) and select **Devnet**. Then, click the button to Generate credentials, saving the key pair (address and secret), twice. You will use one of these accounts as a **credential issuer** and the other account as the **credential subject** (holder), so make a note of which is which.
+To use the credential issuing service, you need two accounts on the Devnet, where the Credentials amendment is already enabled. Go to the [XRP Faucets page](../../../../resources/dev-tools/xrp-faucets.page.tsx) and select **Devnet**. Then, click the button to Generate credentials, saving the key pair (address and secret), twice. You will use one of these accounts as a **credential issuer** and the other account as the **credential subject** (holder), so make a note of which is which.
 
 ## 2. Start Issuer Service
 
@@ -78,7 +78,8 @@ Double-check that the XRPL address displayed matches the address of the credenti
 To request a credential, make a request such as the following:
 
 {% tabs %}
-{% tab name="Summary" %}
+
+{% tab label="Summary" %}
 * HTTP method: `POST`
 * URL: `http://localhost:5000/credential`
 * Headers:
@@ -94,6 +95,13 @@ To request a credential, make a request such as the following:
     }
     ```
 {% /tab %}
+
+{% tab label="cURL" %}
+```sh
+curl -H "Content-Type: application/json" -X POST -d '{"subject": "rGtnKx7veDhV9CgYenkiCV5HMLpgU2BfcQ", "credential": "TestCredential", "documents": {"reason": "please"}}' http://localhost:5000/credential
+```
+{% /tab %}
+
 {% /tabs %}
 
 The parameters of the JSON request body should be as follows:
@@ -115,10 +123,19 @@ This microservice immediately issues any credential that the user requests. A su
 To show a list of credentials issued by the issuing account, make the following request:
 
 {% tabs %}
-{% tab name="Summary" %}
+
+{% tab label="Summary" %}
 * HTTP method: `GET`
 * URL: `http://localhost:5000/admin/credential`
+* Query parameters (optional): Use `?accepted=yes` to filter results to only credentials that the subject has accepted, or `?accepted=no` for credentials the user has not accepted.
 {% /tab %}
+
+{% tab label="cURL" %}
+```sh
+curl http://localhost:5000/admin/credential
+```
+{% /tab %}
+
 {% /tabs %}
 
 A response could look like the following:
@@ -164,7 +181,8 @@ The script signs and submits a transaction to accept the specified credential, a
 To revoke an issued credential, make a request such as the following:
 
 {% tabs %}
-{% tab name="Summary" %}
+
+{% tab label="Summary" %}
 * HTTP method: `DELETE`
 * URL: `http://localhost:5000/admin/credential`
 * Headers:
@@ -177,6 +195,13 @@ To revoke an issued credential, make a request such as the following:
     }
     ```
 {% /tab %}
+
+{% tab label="cURL" %}
+```sh
+curl -H "Content-Type: application/json" -X DELETE -d '{"subject": "rGtnKx7veDhV9CgYenkiCV5HMLpgU2BfcQ", "credential": "TestCredential"}' http://localhost:5000/admin/credential
+```
+{% /tab %}
+
 {% /tabs %}
 
 The parameters of the JSON request body should be as follows:
@@ -202,7 +227,7 @@ The code for this tutorial is divided among the following files:
 
 ### accept_credential.py
 
-This file is meant to be run as a commandline tool so it starts with a [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)), followed by dependencies grouped by type: standard lib, then PyPI packages, and local files last:
+This file is meant to be run as a commandline tool so it starts with a [shebang](https://en.wikipedia.org/wiki/Shebang_(Unix)), followed by dependencies grouped by type: standard lib, then PyPI packages, and local files last.
 
 {% code-snippet file="/_code-samples/issue-credentials/py/accept_credential.py" language="py" before="XRPL_SERVER =" /%}
 
@@ -251,3 +276,65 @@ The final API method, `DELETE /admin/credential`, deletes a Credential from the 
 Finally, the file ends by adding error handlers for a variety of errors that can be raised by the API methods, including in the data models or by xrpl-py's API methods:
 
 {% code-snippet file="/_code-samples/issue-credentials/py/issuer_service.py" language="py" from="# Error handling" /%}
+
+## look_up_credentials.py
+
+This file implements lookup of Credentials. Both the issuer code and the subject code both use this function to look up their own credentials.
+
+This code performs [pagination using markers](../../../references/http-websocket-apis/api-conventions/markers-and-pagination.md) to get all the results from the ledger. It also filters results based on the issuer/subject account, so that lookup by issuer, for example, doesn't include credentials that someone else issued _to_ the issuer account. Finally, it can optionally check the accepted status of the Credentials and only include ones that are or aren't accepted.
+
+{% code-snippet file="/_code-samples/issue-credentials/py/look_up_credentials.py" language="py" /%}
+
+## decode_hex.py
+
+This file implements conversion of hex strings to human-readable text using ASCII, where possible. Rather than throw an error if the hex can't be decoded, it returns the original text prefaced with `(BIN) ` as a graceful fallback. This is important when reading data from the XRP Ledger because other users and tools can create Credentials with arbitrary binary data which might not decode to actual text at all. Even though the microservice from this tutorial only creates Credentials that use a restricted subset of ASCII characters, it might need to read ledger data that was created with different tools and different rules. You might even want to put more restrictions or checks in place depending on how you use the data; for example, if you output the results to a webpage you should make sure to escape or strip HTML tags to avoid visual glitches or cross-site-scripting attacks.
+
+{% code-snippet file="/_code-samples/issue-credentials/py/decode_hex.py" language="py" /%}
+
+## credential_model.py
+
+This file implements the simplified "Credential" data model that the issuer microservice uses to represent credentials. It performs validation of user input and conversion between formats.
+
+The file starts with importing dependencies grouped by type:
+
+{% code-snippet file="/_code-samples/issue-credentials/py/credential_model.py" language="py" before="def is_allowed_credential_type" /%}
+
+It then has a function to validate the credential type, using a regular expression that checks the length and characters used:
+
+{% code-snippet file="/_code-samples/issue-credentials/py/credential_model.py" language="py" from="def is_allowed_credential_type" before="def is_allowed_uri" /%}
+
+It uses a similar function to validate user-provided URI values:
+
+{% code-snippet file="/_code-samples/issue-credentials/py/credential_model.py" language="py" from="def is_allowed_uri" before="class Credential" /%}
+
+The main export of this file is the `Credential` class. Most of the methods use this class, or a class derived from it, to read user input from the API.
+
+{% code-snippet file="/_code-samples/issue-credentials/py/credential_model.py" language="py" from="class Credential" before="def __init__(self, d: dict):" /%}
+
+The default constructor for the Credential class checks that user input meets various requirements. It uses the `dict.get(key)` method, which returns `None` instead of raising an error when the key doesn't exist, to set optional fields to `None`. It also parses the user-provided timestamp from a string to a native Python `datetime` object if necessary.
+
+{% code-snippet file="/_code-samples/issue-credentials/py/credential_model.py" language="py" from="    def __init__(self, d: dict):" before="@classmethod" /%}
+
+An alternate constructor for the Credential class takes a dictionary in the XRP Ledger's native format and decodes it to the native Python formats the Credential class expects (for example, converting the `credential` from hexadecimal to a native string). The API methods that read data from the XRP Ledger use this constructor so that their output is formatted the same way as user input in the other API methods.
+
+{% code-snippet file="/_code-samples/issue-credentials/py/credential_model.py" language="py" from="    @classmethod" before="def to_dict(self):" /%}
+
+The `to_dict(self)` method builds a dictionary representation for the Credential object, which can then be returned by the API as JSON. It converts from a `datetime` back to an ISO 8601 string and omits optional fields rather than including them with a `None` or `null` value.
+
+{% code-snippet file="/_code-samples/issue-credentials/py/credential_model.py" language="py" from="    def to_dict(self):" before="def to_xrpl(self):" /%}
+
+The `to_xrpl(self)` method returns a different class of object, `XrplCredential`, which is formatted for submitting to the XRP Ledger:
+
+{% code-snippet file="/_code-samples/issue-credentials/py/credential_model.py" language="py" from="    def to_xrpl(self):" before="class XrplCredential:" /%}
+
+The implementation of `XrplCredential` performs the necessary conversions in its constructor:
+
+{% code-snippet file="/_code-samples/issue-credentials/py/credential_model.py" language="py" from="class XrplCredential:" before="class CredentialRequest(Credential):" /%}
+
+Finally, the `CredentialRequest` class inherits from the `Credential` class but checks for an additional field, `documents`. For a realistic credential issuer, you might require the user to provide specific documents in the request body, like a photo of their government-issued ID or a cryptographically signed message from another business, which your code then checks. For this tutorial, the check is only a placeholder:
+
+{% code-snippet file="/_code-samples/issue-credentials/py/credential_model.py" language="py" from="class CredentialRequest(Credential):" /%}
+
+{% admonition type="success" name="Tip" %}
+Depending on the meaning of the credential, verifying the documents might require human intervention or it might take longer than the amount of time a RESTlike API can reasonably take to respond. In those situations, you would want to save the Credential request to some kind of storage like an SQL database, and change the API to have separate methods for admins to accept or reject credential requests.
+{% /admonition %}
